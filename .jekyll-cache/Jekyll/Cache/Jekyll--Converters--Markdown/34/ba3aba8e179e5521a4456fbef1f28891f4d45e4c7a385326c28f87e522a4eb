@@ -1,0 +1,467 @@
+I"��<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#프로비저닝-리소스" id="markdown-toc-프로비저닝-리소스">프로비저닝 리소스</a></li>
+  <li><a href="#oci용-테라폼-파일-다운로드" id="markdown-toc-oci용-테라폼-파일-다운로드">OCI용 테라폼 파일 다운로드</a></li>
+  <li><a href="#workspace-생성" id="markdown-toc-workspace-생성">Workspace 생성</a></li>
+  <li><a href="#환경-파일" id="markdown-toc-환경-파일">환경 파일</a></li>
+  <li><a href="#모듈-공통-구성-파일" id="markdown-toc-모듈-공통-구성-파일">모듈 공통 구성 파일</a></li>
+  <li><a href="#테라폼-초기화" id="markdown-toc-테라폼-초기화">테라폼 초기화</a></li>
+  <li><a href="#테라폼-실행" id="markdown-toc-테라폼-실행">테라폼 실행</a></li>
+  <li><a href="#run_tfsh" id="markdown-toc-run_tfsh">run_tf.sh</a></li>
+</ul>
+
+</div>
+
+<h3 id="프로비저닝-리소스">프로비저닝 리소스</h3>
+<p>이번 포스팅에서는 실제 테라폼 코드를 사용하여 Oracle Infrastructure Cloud (이하 OCI)에 리소스를 프로비저닝해보도록 합니다.<br />
+OCI에 프로비저닝 리소스들은 다음과 같습니다.</p>
+<ul>
+  <li>IAM Group</li>
+  <li>IAM Compartment</li>
+  <li>IAM Policy</li>
+  <li>Compute</li>
+  <li>Network (VCN, Private/Public Subnet, Loadbalancer, Security List, NAT Gateway, Internet Gateway)</li>
+  <li>Autonomous Database</li>
+  <li>Autonomous Data Warehouse (ADW)</li>
+  <li>Autonomous Transaction Processing (ATP)</li>
+  <li>Kubernetes Engine (OKE)</li>
+  <li>Oracle Funtions (Serverless)</li>
+</ul>
+
+<p>테라폼의 Module을 사용하여 각 리소스를 모듈화 하였고, Workspace를 사용해서 Multi Oracle Tenancy 프로비저닝이 가능하도록 구현했습니다.</p>
+
+<h3 id="oci용-테라폼-파일-다운로드">OCI용 테라폼 파일 다운로드</h3>
+<p>테라폼 프로젝트는 아래 깃헙 저장소를 통해서 제공합니다.
+<a href="https://github.com/the-team-oasis/Infrastructure-as-Code/tree/master/oci/terraform">https://github.com/the-team-oasis/Infrastructure-as-Code/tree/master/oci/terraform</a></p>
+
+<p>다운로드 받은 OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── terraform
+│   ├── evn
+│   │   ├── {tenancy}.{region}.tfvars
+│   │   └── danoci.ap-seoul-1.tfvars
+│   ├── provider.tf
+│   ├── main.tf
+│   ├── vars.tf
+│   ├── terraform.tfstate.d
+│   ├── modules
+│   │   ├── adb
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── compartment
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── compute
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── container
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── dbsystem
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── functions
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── group
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   ├── policy
+│   │   │   ├── main.tf
+│   │   │   ├── datasources.tf
+│   │   │   ├── vars.tf
+│   │   │   └── outputs.tf
+│   │   └── vcn
+│   │       ├── main.tf
+│   │       ├── datasources.tf
+│   │       ├── vars.tf
+│   │       └── outputs.tf
+│   └── run_tf.sh
+└──
+</code></pre></div></div>
+
+<p>현재 oci 프로젝트 하위 모듈들의 공통 구성 파일인 provider.tf, main.tf, vars.tf 파일이 있고, modules 하위에 생성할 리소스 별로 모듈을 구성했습니다. 각 모듈은 main.tf, datasources.tf, vars.tf, outputs.tf 파일로 구성되어 있습니다. env 폴더안에는 OCI Tenancy 및 Region별로 tfvars 환경파일을 작성했습니다. 이외 terraform.tfstate.d, workspace는 테라폼 workspace를 구성할 경우 생성되는데, terraform.tfstate.d 에는 테라폼 실행 시 각 workspace별로 상태파일(tfstate)이 저장됩니다. run_tf.sh 파일은 workspace를 각 Tenancy 혹은 Region별로 구분한 후 이를 동시에 프로비저닝하기 위해 만든 쉘 스크립트 파일입니다.</p>
+
+<h3 id="workspace-생성">Workspace 생성</h3>
+<p>먼저 workspace를 생성해보겠습니다. 여기서 workspace 이름은 환경 구성파일 (tfvars)의 이름과 동일하게 구성할 것이며, <strong>{tenancy}-{region}</strong> 형태로 구성하겠습니다. OCI에 Free Trial 계정을 하나 생성해서 진행해 봅니다. 환경은 다음과 같습니다.</p>
+<ul>
+  <li>Tenancy : myocitenancy</li>
+  <li>Region : ap-seoul-1</li>
+</ul>
+
+<blockquote>
+  <p>테라폼 설치가 되어 있어야 합니다. 테라폼 설치는 <a href="https://the-team-oasis.github.io/cloudnative/oci-terraform-1/">여기</a>를 참고합니다.</p>
+</blockquote>
+
+<p>이제 다운로드 받은 프로젝트의 oci 폴더에서 workspace를 생성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform workspace new myocitenancy-ap-seoul-1
+</code></pre></div></div>
+
+<p>생성한 workspace를 확인합니다. *가 붙은것은 현재 선택된 workspace를 의미합니다. 다른 workspace를 선택할 경우에는 terraform workspace select {workspace} 형태로 변경할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform workspace list
+
+  default
+* myocitenancy-ap-seoul-1
+</code></pre></div></div>
+
+<h3 id="환경-파일">환경 파일</h3>
+<p>env 폴더안에 workspace 이름과 동일하게 tfvars 파일을 만들었습니다. 환경 변수로 등록해서 사용할 수 있지만, 여기서는 tfvars를 사용했고, workspace 이름과 동일하게 만든 이유는 쉘 스크립트 안에서 여러개의 workspace별로 동시에 실행할 수 있도록 구성하기 위해서입니다. (이 부분은 run_tf.sh를 설명하는 곳에서 다시 설명)</p>
+
+<p>env 폴더안에 danoci.ap-seoul-1.tfvars 파일의 내용을 보면 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tenancy_ocid     = "ocid1.tenancy.oc1......"
+compartment_ocid = ""
+user_ocid        = "ocid1.user.oc1......"
+fingerprint      = "48:1a:98:8c:cd:f6:63:4b:f...."
+private_key_path = "~/.oci/oci_api_key.pem"
+region           = "ap-seoul-1"
+home_region      = "ap-seoul-1"
+ssh_public_key   = "~/.ssh/id_rsa.pub
+</code></pre></div></div>
+
+<p>tenancy_ocid, user_ocid, fingerprint, private_key, ssh_public_key, region등의 정보는 아래 포스트를 참고합니다.</p>
+
+<p><a href="https://the-team-oasis.github.io/getting-started/ocicli-config/">OCICLI 도구 설정하기</a></p>
+
+<h3 id="모듈-공통-구성-파일">모듈 공통 구성 파일</h3>
+<p>생성할 리소스들을 모듈화 했는데, 각 모듈에서 사용할 공통 구성 파일을 provider.tf, main.tf, vars.tf 3개의 파일로 구성했습니다.<br />
+먼저 provider.tf에는 oci provider를 다음과 같이 정의합니다.</p>
+
+<p><strong>provider.tf</strong></p>
+<div class="language-terraform highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">provider</span> <span class="s2">"oci"</span> <span class="p">{</span>
+  <span class="nx">tenancy_ocid</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">user_ocid</span>        <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">user_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">fingerprint</span>      <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">fingerprint</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">private_key_path</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">private_key_path</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">region</span>           <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">region</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>vars.tf 파일에는 프로바이더와 각 모듈에서 사용하는 변수들을 정의합니다. tfvars에 있는 값들은 vars.tf의 각 변수에 자동으로 매핑됩니다. 그 외에 각 모듈별로 사용할 변수와 값들이 포함되어 있습니다.
+<strong>vars.tf</strong></p>
+<div class="language-terraform highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Variables Exported from env.sh</span>
+
+<span class="c1"># Uses Default Value</span>
+<span class="k">variable</span> <span class="s2">"tenancy_ocid"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"user_ocid"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"oci_user_ocid"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"fingerprint"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"private_key_path"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"compartment_ocid"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"region"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"home_region"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"ssh_public_key"</span> <span class="p">{}</span>
+<span class="k">variable</span> <span class="s2">"availability_domain"</span> <span class="p">{</span>
+  <span class="nx">default</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="k">variable</span> <span class="s2">"name_prefix"</span> <span class="p">{</span>
+  <span class="nx">default</span> <span class="p">=</span> <span class="s2">"dan"</span>
+<span class="p">}</span>
+<span class="k">variable</span> <span class="s2">"freeform_tags"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">freeform_tags</span> <span class="p">=</span> <span class="s2">"Freeform Tags"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">variable</span> <span class="s2">"defined_tags"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"KRSET02.ET"</span> <span class="p">=</span> <span class="s2">"ET_TEAM:donghu.kim@oracle.com"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># for compute module</span>
+<span class="k">variable</span> <span class="s2">"compute"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">num_nodes</span>      <span class="p">=</span> <span class="mi">2</span>
+    <span class="nx">instance_shape</span> <span class="p">=</span> <span class="s2">"VM.Standard2.1"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># for vm database module</span>
+<span class="k">variable</span> <span class="s2">"dbsystem"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"database_edition"</span> <span class="p">=</span> <span class="s2">"ENTERPRISE_EDITION"</span>
+    <span class="s2">"db_version"</span>       <span class="p">=</span> <span class="s2">"12.2.0.1"</span>
+    <span class="s2">"admin_password"</span>   <span class="p">=</span> <span class="s2">"WelCome123##"</span>
+    <span class="s2">"character_set"</span>    <span class="p">=</span> <span class="s2">"AL32UTF8"</span>
+    <span class="s2">"ncharacter_set"</span>   <span class="p">=</span> <span class="s2">"AL16UTF16"</span>
+    <span class="s2">"db_workload"</span>      <span class="p">=</span> <span class="s2">"OLTP"</span>
+    <span class="s2">"licence_model"</span>    <span class="p">=</span> <span class="s2">"LICENSE_INCLUDED"</span>
+    <span class="s2">"node_count"</span>       <span class="p">=</span> <span class="mi">1</span>
+    <span class="s2">"shape"</span>            <span class="p">=</span> <span class="s2">"VM.Standard2.1"</span>
+    <span class="s2">"source"</span>           <span class="p">=</span> <span class="s2">"NONE"</span>
+    <span class="s2">"time_zone"</span>        <span class="p">=</span> <span class="s2">"Asia/Seoul"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># for container module</span>
+<span class="k">variable</span> <span class="s2">"container"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"kubernetes_version"</span>              <span class="p">=</span> <span class="s2">"LATEST"</span>
+    <span class="s2">"is_kubernetes_dashboard_enabled"</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="s2">"is_tiller_enabled"</span>               <span class="p">=</span> <span class="kc">true</span>
+    <span class="s2">"node_image_name"</span>                 <span class="p">=</span> <span class="s2">"Oracle-Linux-7.6"</span>
+    <span class="s2">"node_shape"</span>                      <span class="p">=</span> <span class="s2">"VM.Standard2.1"</span>
+    <span class="s2">"num_nodes"</span>                       <span class="p">=</span> <span class="mi">1</span>
+    <span class="s2">"kubecfg_expiration"</span>              <span class="p">=</span> <span class="mi">10</span>
+    <span class="s2">"kubecfg_token_version"</span>           <span class="p">=</span> <span class="s2">"2.0.0"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># for autonomous database module</span>
+<span class="k">variable</span> <span class="s2">"adb"</span> <span class="p">{</span>
+  <span class="nx">type</span> <span class="p">=</span> <span class="s2">"map"</span>
+
+  <span class="nx">default</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"cpu_core_count"</span>                                 <span class="p">=</span> <span class="mi">1</span>
+    <span class="s2">"data_storage_size_in_tbs"</span>                       <span class="p">=</span> <span class="mi">1</span>
+    <span class="s2">"db_workload"</span>                                    <span class="p">=</span> <span class="s2">"DW"</span> <span class="c1">#DW (ADW), OLTP (ATP)</span>
+    <span class="s2">"is_auto_scaling_enabled"</span>                        <span class="p">=</span> <span class="kc">false</span>
+    <span class="s2">"is_dedicated"</span>                                   <span class="p">=</span> <span class="kc">false</span>
+    <span class="s2">"is_preview_version_with_service_terms_accepted"</span> <span class="p">=</span> <span class="kc">false</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>main.tf에는 각 모듈을 실행하기 위해 해당 모듈이 있는 폴더의 위치를 지정하고, 넘겨줄 변수를 정의합니다.</p>
+
+<div class="language-terraform highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creates a group</span>
+<span class="k">module</span> <span class="s2">"group"</span> <span class="p">{</span>
+  <span class="nx">source</span>        <span class="p">=</span> <span class="s2">"./modules/group"</span>
+  <span class="nx">tenancy_ocid</span>  <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">user_ocid</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">oci_user_ocid</span><span class="k">}</span><span class="s2">"</span> <span class="c1">// IDCS에서 관리하는 사용자를 추가할 경우 ${var.user_ocid}</span>
+  <span class="nx">name_prefix</span>   <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Creates a compartment</span>
+<span class="k">module</span> <span class="s2">"compartment"</span> <span class="p">{</span>
+  <span class="nx">source</span>        <span class="p">=</span> <span class="s2">"./modules/compartment"</span>
+  <span class="nx">tenancy_ocid</span>  <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>   <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+
+  <span class="c1"># group_name   = "${module.group.group_name}"</span>
+<span class="p">}</span>
+
+<span class="c1"># Create a Virtual Cloud Network</span>
+<span class="k">module</span> <span class="s2">"vcn"</span> <span class="p">{</span>
+  <span class="nx">source</span>           <span class="p">=</span> <span class="s2">"./modules/vcn"</span>
+  <span class="nx">tenancy_ocid</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">compartment_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1">#compartment_ocid    = "${var.compartment_ocid}"</span>
+  <span class="nx">availability_domain</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">availability_domain</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>         <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span>       <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Creates Compute Instance</span>
+<span class="k">module</span> <span class="s2">"compute"</span> <span class="p">{</span>
+  <span class="nx">source</span>           <span class="p">=</span> <span class="s2">"./modules/compute"</span>
+  <span class="nx">tenancy_ocid</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">region</span>           <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">region</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">compartment_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1">#compartment_ocid    = "${var.compartment_ocid}"</span>
+  <span class="nx">availability_domain</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">availability_domain</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">compute</span>             <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">compute</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>         <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">ssh_public_key</span>      <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="nx">file</span><span class="p">(</span><span class="kd">var</span><span class="p">.</span><span class="nx">ssh_public_key</span><span class="p">)</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">public_subnet_ocid</span>  <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">vcn</span><span class="p">.</span><span class="nx">public_subnet_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span>       <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Creates Autonomous Database</span>
+<span class="k">module</span> <span class="s2">"dbsystem"</span> <span class="p">{</span>
+  <span class="nx">source</span>              <span class="p">=</span> <span class="s2">"./modules/dbsystem"</span>
+  <span class="nx">tenancy_ocid</span>        <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">availability_domain</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">availability_domain</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">compartment_ocid</span>    <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1">#compartment_ocid   = "${var.compartment_ocid}"</span>
+  <span class="nx">dbsystem</span>           <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">dbsystem</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">public_subnet_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">vcn</span><span class="p">.</span><span class="nx">public_subnet_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>        <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">ssh_public_key</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="nx">file</span><span class="p">(</span><span class="kd">var</span><span class="p">.</span><span class="nx">ssh_public_key</span><span class="p">)</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span>      <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Creates Autonomous Data Warehouse (ADW), Autonomous Transaction Processing (ATP)</span>
+<span class="k">module</span> <span class="s2">"adb"</span> <span class="p">{</span>
+  <span class="nx">source</span>           <span class="p">=</span> <span class="s2">"./modules/adb"</span>
+  <span class="nx">compartment_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1">#compartment_ocid = "${var.compartment_ocid}"</span>
+  <span class="nx">adb</span>           <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">adb</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Create Kubernetes Engine (OKE)</span>
+<span class="k">module</span> <span class="s2">"container"</span> <span class="p">{</span>
+  <span class="nx">source</span>           <span class="p">=</span> <span class="s2">"./modules/container"</span>
+  <span class="nx">tenancy_ocid</span>     <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">compartment_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1">#compartment_ocid = "${var.compartment_ocid}"</span>
+  <span class="nx">availability_domain</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">availability_domain</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">container</span>           <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">container</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">private_subnet_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">vcn</span><span class="p">.</span><span class="nx">private_subnet_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">vcn_id</span>              <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">vcn</span><span class="p">.</span><span class="nx">vcn_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>         <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+
+<span class="c1"># Create Funtions (Serverless)</span>
+<span class="k">module</span> <span class="s2">"functions"</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"./modules/functions"</span>
+  <span class="c1">#compartment_ocid = "${var.compartment_ocid}"</span>
+  <span class="nx">compartment_ocid</span>   <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_id</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">public_subnet_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${module</span><span class="p">.</span><span class="nx">vcn</span><span class="p">.</span><span class="nx">public_subnet_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>        <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">freeform_tags</span>      <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">freeform_tags</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="c1"># Create Policy</span>
+<span class="k">module</span> <span class="s2">"policy"</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"./modules/policy"</span>
+  <span class="c1">#compartment_ocid = "${var.compartment_ocid}"</span>
+  <span class="nx">compartment_ocid</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">tenancy_ocid</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">statements</span>       <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">local</span><span class="p">.</span><span class="nx">statements</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nx">name_prefix</span>      <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="kd">var</span><span class="p">.</span><span class="nx">name_prefix</span><span class="k">}</span><span class="s2">"</span>
+  <span class="c1"># providers = {</span>
+  <span class="c1">#   oci = "oci.home"</span>
+  <span class="c1"># }</span>
+<span class="p">}</span>
+
+<span class="nx">locals</span> <span class="p">{</span>
+  <span class="c1"># statements = [</span>
+  <span class="c1">#   "Allow service OKE to manage all-resources in compartment ${module.compartment.compartment_name}", "Allow service FaaS to manage all-resources in compartment ${module.compartment.compartment_name}"</span>
+  <span class="c1"># ]</span>
+  <span class="nx">statements</span> <span class="p">=</span> <span class="p">[</span>
+    <span class="s2">"Allow service OKE to manage all-resources in tenancy"</span><span class="p">,</span> <span class="s2">"Allow service FaaS to manage all-resources in compartment </span><span class="k">${module</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">compartment_name</span><span class="k">}</span><span class="s2">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위에서 <strong>module.compartment.compartment_id</strong> 이런 내용이 있는데 Compartment 모듈을 실행하고 Compartment의 Outputs.tf에서 나온 결과를 다른 모듈의 매개변수로 사용한 것입니다. 아래는 Compartment Module의 outputs.tf인데, output으로 compartment_id가 반환되는 것을 확인할 수 있습니다.</p>
+
+<div class="language-terraform highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Output variables from created compartment</span>
+
+<span class="k">output</span> <span class="s2">"compartment_name"</span> <span class="p">{</span>
+  <span class="nx">value</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="nx">oci_identity_compartment</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">name</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+
+<span class="k">output</span> <span class="s2">"compartment_id"</span> <span class="p">{</span>
+  <span class="nx">value</span> <span class="p">=</span> <span class="s2">"</span><span class="k">${</span><span class="nx">oci_identity_compartment</span><span class="p">.</span><span class="nx">compartment</span><span class="p">.</span><span class="nx">id</span><span class="k">}</span><span class="s2">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>main.tf 맨 아래 locals가 보입니다. 변수의 일종이지만, variable과는 다르게 일종의 지역변수와 같은 역할을 합니다. main.tf 안에서만 사용하면서 여기서 사용한 것과 같이 특정 모듈의 output의 값을 할당해서 동적으로 값을 지정할 수 있습니다. 본 예제의 Function의 경우 위에서 생성한 Compartment에서만 관리되도록 Policy 구문을 사용했고, OKE의 경우는 전체 Tenancy 레벨에서 괸리되는 구문을 사용했는데, locals에 해당 구문들을 정의했습니다.</p>
+
+<p><strong>OKE 관련 Policy</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Allow service OKE to manage all-resources in tenancy
+</code></pre></div></div>
+
+<p><strong>FaaS(Function) 관련 Policy</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Allow service FaaS to manage all-resources in compartment ${module.compartment.compartment_name}
+</code></pre></div></div>
+
+<h3 id="테라폼-초기화">테라폼 초기화</h3>
+<p>우선 provider.tf 파일이 있는 위치에서 terraform init을 통해 모듈 초기화 및 OCI Provider Plugin을 내려 받습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform init
+</code></pre></div></div>
+
+<h3 id="테라폼-실행">테라폼 실행</h3>
+<p>그럼 생성한 workspace를 선택하고 테라폼을 실행해보겠습니다. 먼저 workspace를 선택합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform workspace select myocitenancy-ap-seoul-1
+</code></pre></div></div>
+
+<p>현재 선택된 workspace를 보려면 다음과 같이 show 명령어를 사용합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform workspace show
+myocitenancy-ap-seoul-1
+</code></pre></div></div>
+
+<p>테라폼 적용(apply)전에 plan을 실행해서 수행될 작업에 대한 계획을 확인합니다. 구성 파일에 대한 유효성 검사도 같이 진행하게 됩니다. tfvars 환경 구성파일의 경우 현재 workspace 이름과 같기 때문에 아래와 같이 실행하면 해당 tfvars 파일을 참조하게 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform plan -var-file="env/$(terraform workspace show).tfvars"
+</code></pre></div></div>
+
+<p>plan 결과가 예상한 계획과 일치하면, apply를 통해서 실제 인프라에 반영합니다. 다음과 같이 apply를 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply -var-file="env/$(terraform workspace show).tfvars"
+</code></pre></div></div>
+
+<p>오류없이 완료되면 아래와 같은 메시지를 볼 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apply complete! Resources: 30 added, 0 changed, 0 destroyed.
+</code></pre></div></div>
+
+<p>OCI Console에 접속해서 실제 리소스가 생성된 것을 확인할 수 있습니다.</p>
+
+<p><strong>Group</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-groups.png" alt="" /></p>
+
+<p><strong>Group</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-groups.png" alt="" /></p>
+
+<p><strong>Compartment</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-compartments.png" alt="" /></p>
+
+<p><strong>Policy</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-policy.png" alt="" /></p>
+
+<p><strong>Compute (2nodes, VM-Standard-2.1)</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-compute.png" alt="" /></p>
+
+<p><strong>VCN</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-vcn.png" alt="" /></p>
+
+<p><strong>Function</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-function.png" alt="" /></p>
+
+<p><strong>Container (1node, VM-Standard-E2.1)</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-oke.png" alt="" /></p>
+
+<p><strong>Autonomous Database</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-adb.png" alt="" /></p>
+
+<p><strong>Autonomous Data Warehouse</strong>
+<img src="/assets/img/cloudnative-security/2022/oci-tf-adw.png" alt="" /></p>
+
+<h3 id="run_tfsh">run_tf.sh</h3>
+<p>등록된 테라폼 workspace들을 순차적으로 실행하기 위한 스크립트를 작성해봤습니다.</p>
+
+<blockquote>
+  <p>보통 workspace를 선택하고 실행하면 해당 workspace에 lock을 걸기 때문에 다른 workspace를 동시에 실행하기는 어렵습니다. 이럴땐 -lock=false 옵션을 주면 됩니다.</p>
+</blockquote>
+
+<p>사용 방식은 다음과 같습니다.<br />
+1개의 workspace만 실행할 경우 (action은 init, plan, apply)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./run_tf.sh {action} {workspace명}
+</code></pre></div></div>
+
+<p>등록된 모든 workspace를 실행할 경우 (action은 init, plan, apply)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./run_tf.sh {action}
+</code></pre></div></div>
+
+<blockquote>
+  <p>백그라운드로 실행하게 해서 병렬로 실행해봤더니, TLS handshake timeout이 발생합니다. 각 OCI Tenancy별로 API 통신을 할 때 핸드쉐이크하는 과정이 있어서 그런거 같은데, wait을 주면 해결될 것 같긴 하지만, 하여튼 병렬로 실행하는 것은 좀 더 확인해봐야 할 거 같습니다.</p>
+</blockquote>
+:ET

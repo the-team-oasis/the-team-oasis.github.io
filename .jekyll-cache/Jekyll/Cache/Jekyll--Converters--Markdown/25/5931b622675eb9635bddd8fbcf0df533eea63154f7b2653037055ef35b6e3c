@@ -1,0 +1,102 @@
+I"u<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#mysql-database-service-compare-configurations" id="markdown-toc-mysql-database-service-compare-configurations">MySQL Database Service: Compare Configurations</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#mysql-database-service-reduced-downtime-while-changing-configurations" id="markdown-toc-mysql-database-service-reduced-downtime-while-changing-configurations">MySQL Database Service: Reduced downtime while changing configurations</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#support-for-mysql-database" id="markdown-toc-support-for-mysql-database">Support for MySQL Database</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#introducing-heatwave-real-time-resizing" id="markdown-toc-introducing-heatwave-real-time-resizing">Introducing HeatWave Real-Time Resizing</a>    <ul>
+      <li><a href="#기능-소개-3" id="markdown-toc-기능-소개-3">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#mysql-heatwave-eliminates-the-minimum-cluster-size-requirement" id="markdown-toc-mysql-heatwave-eliminates-the-minimum-cluster-size-requirement">MySQL HeatWave eliminates the minimum cluster size requirement</a>    <ul>
+      <li><a href="#기능-소개-4" id="markdown-toc-기능-소개-4">기능 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="mysql-database-service-compare-configurations">MySQL Database Service: Compare Configurations</h2>
+<ul>
+  <li><strong>Services:</strong>  MySQL Database</li>
+  <li><strong>Release Date:</strong> June 1, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/5a92085b-19a2-4166-b558-bec8081b9f80/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/5a92085b-19a2-4166-b558-bec8081b9f80/</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>이제 MYSQL 데이터베이스 서비스 콘솔을 사용하여 두 구성의 모양, 초기화 변수 및 사용자 변수를 비교할 수 있습니다. MySQL 로 이동하여 구성 을 클릭 하고 비교하려는 두 구성 을 선택하고 작업 버튼을 클릭한 다음  비교 를 클릭 합니다 (변수값 및 shape의 비교 등)</p>
+
+<p><img src="/assets/img/infrastructure/2022/06/compareconfigurations01.png" alt="" /></p>
+
+<p><img src="/assets/img/infrastructure/2022/06/compareconfigurations02.png" alt="" /></p>
+
+<hr />
+
+<h2 id="mysql-database-service-reduced-downtime-while-changing-configurations">MySQL Database Service: Reduced downtime while changing configurations</h2>
+<ul>
+  <li><strong>Services:</strong>  MySQL Database</li>
+  <li><strong>Release Date:</strong> June 1, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/5a92085b-19a2-4166-b558-bec8081b9f80/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/5a92085b-19a2-4166-b558-bec8081b9f80/</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>MySQL 구성 변경할 때 가동 중지 시간이 줄어 듭니다. MySQL 데이터베이스 서비스는 다시 시작해야하는 변수와 아닌 변수를 자동으로 구분하여 현재 변경이 가능한 부분은 업데이트 되고 재부팅으로 변경이 가능한 부분은 데이터베이스가 다시 시작되는 경우 적용되게 됩니다.</p>
+
+<hr />
+
+<h2 id="support-for-mysql-database">Support for MySQL Database</h2>
+<ul>
+  <li><strong>Services:</strong> tools</li>
+  <li><strong>Release Date:</strong> June 14, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/41b4139c-0558-49e7-9e6d-31ee3d4ca241/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/41b4139c-0558-49e7-9e6d-31ee3d4ca241/</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+<p>OCI 내 데이터베이스 툴을 사용하여, MySQL 접속이 가능합니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/06/supportformysqldatabse01.png" alt="" /></p>
+
+<hr />
+
+<h2 id="introducing-heatwave-real-time-resizing">Introducing HeatWave Real-Time Resizing</h2>
+<ul>
+  <li><strong>Services:</strong> MySQL Databse</li>
+  <li><strong>Release Date:</strong> June 15, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/afd1d4a5-a497-4b06-8969-c635f6a93f19/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/afd1d4a5-a497-4b06-8969-c635f6a93f19/</a></li>
+</ul>
+
+<h3 id="기능-소개-3">기능 소개</h3>
+<p>HeatWave의 리사징을 다운타임 없이 조정이 가능합니다.</p>
+
+<ul>
+  <li>가동 중지 및 서비스 중단 없이 실시간으로 HeatWave 클러스터의 노드 크기를 조정(증가 또는 감소)할 수 있습니다.</li>
+  <li>HeatWave 클러스터의 노드 크기를 조정하면 다음과 같은 이점이 있습니다.
+    <ul>
+      <li>사용 가능: 크기 조정 중 다운타임 및 서비스 중단이 없으며 DB 시스템에서 계속 쿼리를 실행할 수 있습니다.</li>
+      <li>유연성: 데이터 크기에 따라 HeatWave 클러스터 노드를 1에서 64 사이의 숫자로 늘리거나 줄일 수 있습니다. 또한 선택한 모양과 데이터 크기에 따라 필요한 노드 수를 예측할 수 있습니다</li>
+      <li>균형 조정: 크기 조정이 완료된 후 데이터는 클러스터의 모든 노드에서 균형을 이루고 모든 새 쿼리는 새 클러스터 크기에서 실행됩니다</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="mysql-heatwave-eliminates-the-minimum-cluster-size-requirement">MySQL HeatWave eliminates the minimum cluster size requirement</h2>
+<ul>
+  <li><strong>Services:</strong> MySQL Databse</li>
+  <li><strong>Release Date:</strong> June 21, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/7e66c3d4-13f7-4e1e-8e47-20bc29faa14a/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/7e66c3d4-13f7-4e1e-8e47-20bc29faa14a/</a></li>
+</ul>
+
+<h3 id="기능-소개-4">기능 소개</h3>
+<p>MySQL HeatWave는 최소 클러스터 크기 요구 사항을 제거했습니다. 이것은 HeatWave 클러스터의 진입 비용을 줄입니다. 이제 최소 비용으로 소규모 워크로드에 HeatWave를 사용할 수 있습니다.</p>
+:ET

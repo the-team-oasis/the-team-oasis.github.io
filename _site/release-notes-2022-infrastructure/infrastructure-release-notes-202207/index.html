@@ -1,0 +1,641 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>7월 OCI Infrastructure 업데이트 소식</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="2022년 7월 OCI Infrastructure 업데이트 소식입니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//release-notes-2022-infrastructure/infrastructure-release-notes-202207/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="7월 OCI Infrastructure 업데이트 소식">
+	<meta property="og:description" content="2022년 7월 OCI Infrastructure 업데이트 소식입니다.">
+	<meta property="og:url" content="http://localhost:4000//release-notes-2022-infrastructure/infrastructure-release-notes-202207/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="7월 OCI Infrastructure 업데이트 소식">
+	<meta name="twitter:description" content="2022년 7월 OCI Infrastructure 업데이트 소식입니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//release-notes-2022-infrastructure/">release notes 2022 infrastructure</a>
+    
+  
+    
+        <a class="current">7월 OCI Infrastructure 업데이트 소식</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Release Notes 2022</p>
+				<h1>7월 OCI Infrastructure 업데이트 소식</h1>
+			</header>
+
+			
+			<p class="teaser">
+				2022년 7월 OCI Infrastructure 업데이트 소식입니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#cloudshell-now-offers-graalvm-enterprise-jdk-17-and-native-image" id="markdown-toc-cloudshell-now-offers-graalvm-enterprise-jdk-17-and-native-image">CloudShell now offers GraalVM Enterprise JDK 17 and Native Image</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#oci-network-firewall-service-is-now-availabile" id="markdown-toc-oci-network-firewall-service-is-now-availabile">OCI Network Firewall Service is now availabile</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#new-features-added-to-network-visualizer" id="markdown-toc-new-features-added-to-network-visualizer">New features added to Network Visualizer</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#extend-the-reboot-migration-deadline-for-compute-vm-instances-scheduled-for-infrastructure-maintenance" id="markdown-toc-extend-the-reboot-migration-deadline-for-compute-vm-instances-scheduled-for-infrastructure-maintenance">Extend the reboot migration deadline for Compute VM instances scheduled for infrastructure maintenance</a>    <ul>
+      <li><a href="#기능-소개-3" id="markdown-toc-기능-소개-3">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#advanced-bios-settings-for-bare-metal-compute-instances" id="markdown-toc-advanced-bios-settings-for-bare-metal-compute-instances">Advanced BIOS settings for bare metal compute instances</a>    <ul>
+      <li><a href="#기능-소개-4" id="markdown-toc-기능-소개-4">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#cloud-guard-adds-log-insight-detector" id="markdown-toc-cloud-guard-adds-log-insight-detector">Cloud Guard adds Log Insight Detector</a>    <ul>
+      <li><a href="#기능-소개-5" id="markdown-toc-기능-소개-5">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#process-automation-is-now-available" id="markdown-toc-process-automation-is-now-available">Process Automation is now available</a>    <ul>
+      <li><a href="#기능-소개-6" id="markdown-toc-기능-소개-6">기능 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="cloudshell-now-offers-graalvm-enterprise-jdk-17-and-native-image">CloudShell now offers GraalVM Enterprise JDK 17 and Native Image</h2>
+<ul>
+  <li><strong>Services:</strong> Cloud Shell</li>
+  <li><strong>Release Date:</strong> July 26, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/58ab4d12-028b-41c4-b875-4989833cf4cc/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/58ab4d12-028b-41c4-b875-4989833cf4cc/</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>Cloud Shell은 OCI Console(OCI 관리 콘솔)에서 실행되는 브라우저 기반 터미널입니다. OCI Cloud Shell은 GCP의 Google Cloud Shell, Azure의 Cloud Shell 및 AWS의 Session Manager와 같은 서비스입니다. OCI Cloud Shell를 이용하면 PuTTY를 사용하지 않고 OCI VM 인스턴스에 접속하거나 별도의 소프트웨어와 계정 설정 작업 없이 즉시 OCI CLI와 같은 툴을 사용할 수 있습니다.</p>
+<ul>
+  <li>GraalVM의 java 17 버전 및 네이티브 이미지를 지원합니다.</li>
+</ul>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221003-id3.png" alt="" /></p>
+
+<h2 id="oci-network-firewall-service-is-now-availabile">OCI Network Firewall Service is now availabile</h2>
+<ul>
+  <li><strong>Services:</strong>  Network Firewall, Oracle Cloud Infrastructure</li>
+  <li><strong>Release Date:</strong> July 21, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/47aff695-ff50-4f77-bafd-b25a3ab4c90f/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/47aff695-ff50-4f77-bafd-b25a3ab4c90f/</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>OCI 네트워크 방화벽은 팔로알토 네트웍스의 차세대 방화벽 기술(NGFW)을 사용하여 구축된 클라우드 네이티브 관리형 방화벽 서비스입니다. 기계 학습 기반 방화벽 기능을 제공하여 OCI 워크로드를 보호하고 OCI에서 쉽게 사용할 수 있습니다. OCI 기본 서비스로서의 방화벽 제품인 OCI 네트워크 방화벽을 사용하면 추가 보안 인프라를 구성 및 관리할 필요 없이 방화벽 기능을 활용할 수 있습니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/08/Medium.jpg" alt="" /></p>
+
+<h2 id="new-features-added-to-network-visualizer">New features added to Network Visualizer</h2>
+<ul>
+  <li><strong>Services:</strong>  Networking</li>
+  <li><strong>Release Date:</strong> July 19, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/47dcb6c4-9b30-4112-b162-f67013396a68/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/47dcb6c4-9b30-4112-b162-f67013396a68/</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+<p>Network Visualizer를 사용하여 토폴로지 맵과 관련 리소스 정보가 포함된 PDF를 내보낼 수 있습니다. 이제 탑재 대상 및 Kubernetes 클러스터를 포함하여 더 많은 유형의 리소스를 볼 수도 있습니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221003-ikb.png" alt="" /></p>
+
+<h2 id="extend-the-reboot-migration-deadline-for-compute-vm-instances-scheduled-for-infrastructure-maintenance">Extend the reboot migration deadline for Compute VM instances scheduled for infrastructure maintenance</h2>
+<ul>
+  <li><strong>Services:</strong>  Compute</li>
+  <li><strong>Release Date:</strong> July 19, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/ca548f96-2419-4934-a1fa-4b58d17d9a64/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/ca548f96-2419-4934-a1fa-4b58d17d9a64/</a></li>
+</ul>
+
+<h3 id="기능-소개-3">기능 소개</h3>
+
+<p>인프라 유지 보수를 위해 예약된 컴퓨팅 VM 인스턴스에 대한 재부팅 마이그레이션 마감 시간 연장이 가능합니다.</p>
+
+<h2 id="advanced-bios-settings-for-bare-metal-compute-instances">Advanced BIOS settings for bare metal compute instances</h2>
+<ul>
+  <li><strong>Services:</strong>  Compute</li>
+  <li><strong>Release Date:</strong> July 18, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/f038c65b-764c-4859-8ada-c4c9270662ac/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/f038c65b-764c-4859-8ada-c4c9270662ac/</a></li>
+</ul>
+
+<h3 id="기능-소개-4">기능 소개</h3>
+
+<p>베어메탈 컴퓨팅 인스턴스를 생성할 때 이제 성능을 최적화하고 라이선스 비용을 절감할 수 있는 고급 BIOS 설정을 구성할 수 있습니다. 다음 옵션을 사용할 수 있습니다.</p>
+
+<ul>
+  <li>코어 비활성화</li>
+  <li>NUMA 설정 사용자 지정</li>
+  <li>동시 멀티스레딩 비활성화</li>
+  <li>액세스 제어 서비스 활성화 또는 비활성화</li>
+  <li>가상화 지침 활성화 또는 비활성화</li>
+  <li>IOMMU(입출력 메모리 관리 장치) 활성화 또는 비활성화</li>
+</ul>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221003-ixi.png" alt="" /></p>
+
+<h2 id="cloud-guard-adds-log-insight-detector">Cloud Guard adds Log Insight Detector</h2>
+<ul>
+  <li><strong>Services:</strong>   Cloud Guard, Oracle Cloud Infrastructure</li>
+  <li><strong>Release Date:</strong> July 15, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/83af2734-ee0a-4408-9801-58303c21b713/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/83af2734-ee0a-4408-9801-58303c21b713/</a></li>
+</ul>
+
+<h3 id="기능-소개-5">기능 소개</h3>
+
+<p>Cloud Guard는 사용자가 Cloud Guard 기능을 로그 개체로 확장할 수 있는 두 가지 새로운 구성 요소를 추가했습니다.</p>
+
+<p>데이터 소스  를 통해 Cloud Guard는 탐지를 유도하는 데 사용할 수 있는 새로운 정보 소스를 정의할 수 있습니다. 데이터 소스 설정 을 참고하십시오 .
+Log Insight Detector 는 이러한 특수 데이터 소스에 대한 데이터 소스 쿼리를 사용하여 모니터링되는 로그 개체에 대한 문제를 식별한 다음 Cloud Guard 문제 페이지에서 문제를 표시합니다.</p>
+
+<h2 id="process-automation-is-now-available">Process Automation is now available</h2>
+<ul>
+  <li><strong>Services:</strong>    Oracle Cloud Infrastructure, Process Automation</li>
+  <li><strong>Release Date:</strong> July 13, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/dd3ff004-262a-4548-8eb7-9be0ffaab84a/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/dd3ff004-262a-4548-8eb7-9be0ffaab84a/</a></li>
+</ul>
+
+<h3 id="기능-소개-6">기능 소개</h3>
+
+<p>Oracle Cloud Infrastructure Process Automation REST API를 사용하여 비즈니스 프로세스를 자동화하고 관리가 가능합니다.</p>
+<ul>
+  <li>구조적 및 동적 프로세스 모델링</li>
+  <li>의사결정 모델링</li>
+  <li>외부 앱 및 통합에 대한 연결</li>
+  <li>웹 양식</li>
+  <li>
+    <p>사용자 작업 관리 및 추적</p>
+  </li>
+  <li><strong>링크:</strong> <a href="https://docs.oracle.com/en/cloud/paas/process-automation/user-process-automation/index.html" target="_blank" rel="noopener">https://docs.oracle.com/en/cloud/paas/process-automation/user-process-automation/index.html</a></li>
+</ul>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="" target="_blank"> Kisu Kim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-07-30T00:00:00+09:00" itemprop="datePublished"> 2022-07-30</time>
+				
+
+				<span class="icon-archive pr20"> RELEASE-NOTES-2022-INFRASTRUCTURE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci-release-notes-2022</span> <span class="icon-price-tag pr10"> July-2022</span> <span class="icon-price-tag pr10"> Infrastructure</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/release-notes-2022-infrastructure/infrastructure-release-notes-202206/">&laquo; 6월 OCI Infrastructure 업데이트 소식</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//release-notes-2022-infrastructure/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/release-notes-2022-infrastructure/infrastructure-release-notes-202208/">8월 OCI Infrastructure 업데이트 소식 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/release-notes-2022-infrastructure/infrastructure-release-notes-202207/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

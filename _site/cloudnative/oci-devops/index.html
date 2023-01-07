@@ -1,0 +1,630 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI DevOps Service</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI에서 DevOps라는 서비스를 제공하고 있는데, 관련 서비스에 대해서 간략히 살펴보고 정리해 봅니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/oci-devops/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI DevOps Service">
+	<meta property="og:description" content="OCI에서 DevOps라는 서비스를 제공하고 있는데, 관련 서비스에 대해서 간략히 살펴보고 정리해 봅니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/oci-devops/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI DevOps Service">
+	<meta name="twitter:description" content="OCI에서 DevOps라는 서비스를 제공하고 있는데, 관련 서비스에 대해서 간략히 살펴보고 정리해 봅니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">OCI DevOps Service</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>OCI DevOps Service</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI에서 DevOps라는 서비스를 제공하고 있는데, 관련 서비스에 대해서 간략히 살펴보고 정리해 봅니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#devops" id="markdown-toc-devops">DevOps</a></li>
+  <li><a href="#oci-devops-service" id="markdown-toc-oci-devops-service">OCI DevOps Service</a></li>
+  <li><a href="#scm" id="markdown-toc-scm">SCM</a>    <ul>
+      <li><a href="#1-code-repositories" id="markdown-toc-1-code-repositories">1. Code Repositories</a></li>
+      <li><a href="#2-artifacts" id="markdown-toc-2-artifacts">2. Artifacts</a></li>
+    </ul>
+  </li>
+  <li><a href="#빌드-파이프라인" id="markdown-toc-빌드-파이프라인">빌드 파이프라인</a></li>
+  <li><a href="#배포-파이프라인" id="markdown-toc-배포-파이프라인">배포 파이프라인</a>    <ul>
+      <li><a href="#1-deploy" id="markdown-toc-1-deploy">1. Deploy</a></li>
+      <li><a href="#2-control" id="markdown-toc-2-control">2. Control</a></li>
+      <li><a href="#3-integrations" id="markdown-toc-3-integrations">3. Integrations</a></li>
+    </ul>
+  </li>
+  <li><a href="#기타-제공-기능" id="markdown-toc-기타-제공-기능">기타 제공 기능</a></li>
+  <li><a href="#jenkins와-통합" id="markdown-toc-jenkins와-통합">Jenkins와 통합</a></li>
+  <li><a href="#참고" id="markdown-toc-참고">참고</a></li>
+</ul>
+
+</div>
+
+<h3 id="devops">DevOps</h3>
+<p>데브옵스(DevOps)는 소프트웨어의 개발(Development)과 운영(Operations)의 합성어로서, 소프트웨어 개발자와 정보기술 전문가 간의 소통, 협업 및 통합을 강조하는 개발 환경이나 문화를 의미합니다. (출처: 위키백과)</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/devops.png" alt="" /></p>
+
+<p>DevOps를 예전에는 운영조직이 단순히 운영적인 측면만 부각해서 적용하거나, 혹은 개발자가 운영까지 모두 책임져야만 하는 그런 경우들이 많았었는데, 근래에는 DevOps만을 위한 별도의 전담팀을 두는 경우가 점점 많아지고 있는 거 같습니다. DevOps를 위한 전담팀은 보통 그들의 환경에 적합한 올바른 도구를 찾아서, 이를 쉽고 효율적으로 운영하기 위한 전략을 고민하게 됩니다. 이러한 고민을 조금이나마 덜어주기 위해서 각 클라우드 프로바이더들은 잘 구성된 DevOps 지원을 위한 서비스들을 제공하고 있는데, OCI DevOps 서비스도 이러한 End-to-End DevOps 자동화를 위한 서비스라고 볼 수 있습니다.</p>
+
+<h3 id="oci-devops-service">OCI DevOps Service</h3>
+<p><img src="/assets/img/cloudnative-security/2022/oci-devops-1.png" alt="" />
+OCI DevOps 서비스는 소스관리부터, 빌드, 테스트 및 배포의 전반적인 엔드투엔드 DevOps를 지원합니다. 홈페이지상에서는 비용이 무료라고 나와 있는데, 서비스 자체에 적용된 비용은 없지만, 코드 저장을 위한 스토리지 비용이나, 빌드 및 배포과정에서 사용된 자원들(예, 로그, 알림, 빌드 환경등)에 대해서는 비용이 발생합니다. 하지만 사용시에만 발생하고, 활용 자원에 대한 비용도 저렴해서 가격에 대한 장점은 분명히 있다고 생각됩니다.</p>
+
+<p>OCI DevOps의 경우에는 하나의 DevOps 프로젝트(OCI에서는 DevOps 프로젝트를 하나 생성하는것 부터 시작)내에 코드관리부터, 빌드, 파이프라인, 배포, 모니터링등의 기능들이 모두 같이 포함됩니다. 보통 타사의 경우 필요한 부분만(예를 들면, 빌드) 활성화 해서 사용이 가능한 반면에 OCI의 경우는 프로젝트 단위로 생성해서 사용하도록 되어 있는데, 각 단계별로 별도의 통제가 필요하거나, 혹은 따로 모니터링을 해야 하는 경우와 같이 세심하게 관리는 어렵겠지만, 전체 과정을 하나의 프로젝트에서 통합 관리함으로써 관리상의 편리함에 대한 이점은 있다고 볼 수 있습니다.</p>
+
+<p><strong><em>DevOps 프로젝트 화면</em></strong><br />
+DevOps 프로젝트 생성후에 프로젝트 상세화면에 들어가면 우측에 코드관리, 빌드, 배포, 모니터링과 관련된 모든 메뉴를 볼 수 있습니다.
+<img src="/assets/img/cloudnative-security/2022/oci-devops-0.png" alt="" /></p>
+
+<h3 id="scm">SCM</h3>
+<h4 id="1-code-repositories">1. Code Repositories</h4>
+<p>Code 저장소로 Private Git Repository를 제공합니다. 추가적으로 GitHub이나 GitLab과 같은 외부 서비스들을 연결해서 OCI DevOps에서 관리하게 해주는 Mirroring 기능도 제공하는데, GitHub이나 GitLab에 있는 소스를 OCI 환경에서 빌드하고 배포하는 경우 이 기능을 활용할 수 있습니다.</p>
+
+<h4 id="2-artifacts">2. Artifacts</h4>
+<p>OCI에서는 Maven이나 Python Repository와 같이 패키지화된 소프트웨어들을 관리하는 Artifact Repository를 제공합니다. DevOps의 Artifacts는 배포 파이프라인에서 이 Artifact Repository에 있는 소프트웨어 패키지를 참조할 수 있도록 구성할 수 있는 기능입니다. Artifact에서는 Artifact Repository에서 관리되는 파일중에서 인스턴스 롤링 업데이트를 위한 YAML 형태의 파일(인스턴스 그룹이라는 기능으로 제공), Kubernetes Manifest 파일, 일반 패키징된 애플리케이션 (Maven이나 Python Repository 역할)을 참조할 수 있으며, 추가적으로 컨테이너 이미지 레지스트리 (OCIR)의 컨테이너 이미지를 참조할 수 있습니다. Artifacts를 통해 참조된 패키지나 컨테이너 이미지는 배포 파이프라인의 스테이지로 추가될 수 있습니다.</p>
+
+<h3 id="빌드-파이프라인">빌드 파이프라인</h3>
+<p>빌드 파이프라인은 워크플로우를 쉽게 구성하기 위한 UI를 제공하는데, 기본적으로 하나의 파이프라인에 다음 4개의 스테이지를 사용할 수 있습니다. 파이프라인에서 스테이지를 추가하기 위해서는 <strong>+</strong> 버튼을 클릭한 후 추가하기 위한 스테이지 목록에서 스테이지를 선택합니다.</p>
+
+<p><strong><em>빌드 파이프라인 화면</em></strong>
+<img src="/assets/img/cloudnative-security/2022/oci-devops-2.png" alt="" /></p>
+
+<p><strong><em>빌드 파이프라인에 스테이지 추가</em></strong>
+<img src="/assets/img/cloudnative-security/2022/oci-devops-4.png" alt="" /></p>
+
+<ul>
+  <li><strong>Managed Build:</strong><br />
+OCI DevOps에서 제공되는 빌드 러너를 이용해서 빌드 및 테스트 수행합니다. (AMD 혹은 Intel Shape 1 OCPU, 8 GB 사용, 별도 비용 발생)</li>
+  <li><strong>Deliver Artifacts:</strong><br />
+패키징된 소프트웨어를 Artifact Repository로 퍼블리시합니다.</li>
+  <li><strong>Trigger Deployment:</strong><br />
+배포 파이프라인이 있는경우 빌드 파이프라인에서 배포 파이프라인을 호출합니다.</li>
+  <li><strong>Wait:</strong><br />
+빌드 파이프라인내에서 사용하는 대기 타이머를 위한 스테이지입니다.</li>
+</ul>
+
+<p>이 기능외에 빌드 이력관리 기능을 제공합니다.</p>
+
+<h3 id="배포-파이프라인">배포 파이프라인</h3>
+<p>빌드 파이프라인과 마찬가지로 워크플로우 구성을 위한 UI를 제공하고 있으며 다음과 같은 스테이지를 사용할 수 있습니다. 아래 내용을 보면 알겠지만, 현재 배포환경의 경우 OKE, Instance Group, Functions을 지원하고 있습니다. 크게 3개의 영역으로 나눠서 스테이지를 제공합니다.</p>
+
+<p><strong><em>배포 파이프라인 화면</em></strong>
+<img src="/assets/img/cloudnative-security/2022/oci-devops-3.png" alt="" /></p>
+
+<p><strong><em>배포 파이프라인에 스테이지 추가</em></strong>
+<img src="/assets/img/cloudnative-security/2022/oci-devops-5.png" alt="" /></p>
+
+<h4 id="1-deploy">1. Deploy</h4>
+<ul>
+  <li><strong>Apply manifest to your Kubernetes cluster:</strong><br />
+쿠버네티스 클러스터 배포를 위한 매니패스트를 활용하여 배포할 수 있도록 해줍니다.</li>
+  <li>
+    <p><strong>Deploy incrementally through Compute instance groups:</strong><br />
+Compute Instance Group 점진적으로 롤링 업데이트를 수행하며, 한번에 오프라인이 될 수 있는 인스턴스의 수를 지정 가능하고 자동 롤백을 지원합니다.<br />
+참고로 인스턴스 그룹 환경 생성은 아래 링크 참고합니다.</p>
+
+    <p><a href="https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/Content/devops/using/create_instancegroup_environment.htm#create_instance_group_environment">https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/Content/devops/using/create_instancegroup_environment.htm#create_instance_group_environment</a></p>
+  </li>
+  <li><strong>Uses the built-in Functions update strategy:</strong><br />
+Functions 배포해주는 스테이지입니다.</li>
+</ul>
+
+<h4 id="2-control">2. Control</h4>
+<ul>
+  <li><strong>Pause the deployment for approvals:</strong><br />
+배포 중간단계에서 배포 파이프라인에 대한 승인 권한이 있는 관리자가 승인을 해야 진행할 수 있도록 해주는 스테이지로 승인자 수를 지정할 수 있습니다. 승인자의 경우는 OCI Policy를 통해서 지정할 수 있도록 되어있습니다.</li>
+  <li><strong>Traffic Shift:</strong><br />
+배포하는 과정에서 들어오는 트래픽을 분산하도록 해줍니다. Load Balancer가 지정되어 있는 백엔드에 대해서만 가능하며, Load Balancer와 Backend Listener, Traffic Target (실제 트래픽이 이동할 댓아 백엔드)를 지정합니다. Batch Count, Batch Delay의 경우 들어오는 트래픽의 얼마큼을 이동할지를 결정하는데, 예를 들어 Batch Count를 5로 지정하는 경우 20%(100/5)가 대상 환경으로 이동합니다. 보통 Canary나 Blue/Green 배포 전략을 세울때 사용하게 됩니다.</li>
+  <li><strong>Wait:</strong><br />
+배포 파이프라인에서 특정 시간만큼 일시중지가 필요할 때 사용됩니다.</li>
+</ul>
+
+<h4 id="3-integrations">3. Integrations</h4>
+<ul>
+  <li><strong>Run a custom logic through a function:</strong><br />
+배포 과정에서 특정 시스템에 로그를 남겨야 하거나, 알림을 특정 사용자에게 전달해야 하는 경와 같이 별도의 커스텀 로직을 실행해야 하는 경우가 있을 수 있습니다. 이 경우에 OCI Functions에 로직을 담은 함수를 배포하고, 배포 파이프라인에서 이를 활용할 수 있습니다.</li>
+</ul>
+
+<p>빌드 파이프라인과 동일하게 배포 파이프라인에도 이력관리 기능을 제공합니다.</p>
+
+<h3 id="기타-제공-기능">기타 제공 기능</h3>
+<ul>
+  <li>빌드 및 배포에 대한 로깅</li>
+  <li>매트릭스 (빌드 및 배포 실행 시간, 실패 건수, 배포 스테이지 타임아웃 건수, 코드 저장소 용량 및 개수, 코드 저장소 Push 및 Pull 건수 등)</li>
+</ul>
+
+<h3 id="jenkins와-통합">Jenkins와 통합</h3>
+<p>마지막으로 살펴볼 기능은 Jenkins와의 통합 기능입니다. 이 기능은 OCI Console에서 제공되는 기능이 아니라, Jenkins Plugin으로 제공되는 기능입니다.</p>
+
+<p><a href="https://plugins.jenkins.io/oracle-cloud-infrastructure-devops/">https://plugins.jenkins.io/oracle-cloud-infrastructure-devops/</a></p>
+
+<p>앞서 간단히 언급한 거처럼, 클라우드 프로바이더에서 제공하는 DevOps 서비스를 활용하기도 하지만, 보통은 Private 환경이나, 멀티 클라우드 환경으로 인해서 Jenkins와 같이 널리 사용되는 도구들을 표준으로 활용하는 경우가 많습니다. 만약 CI도구로 Jenkins를 활용하고 있다면, OCI Artifact 업로드나 배포 파이프라인 연동으로 OCI 빌드 파이프라인이 아닌 Jenkins와 통합하고자 하는 요구가 있을 수 있습니다. 이때 OCI DevOps Service에서 제공하는 Jenkins Plugin을 통해서 통합할 수 있습니다.</p>
+
+<h3 id="참고">참고</h3>
+<ul>
+  <li>https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm</li>
+  <li>https://plugins.jenkins.io/oracle-cloud-infrastructure-devops/</li>
+  <li>https://technology.amis.nl/software-development/oci-devops-build-pipelines-and-code-repositories-for-cicd/</li>
+  <li>https://docs.oracle.com/en/solutions/build-pipeline-using-devops/index.html#GUID-D0D5B9DA-5C61-468C-A238-BE5530965A3A</li>
+</ul>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2021-12-10T00:00:00+09:00" itemprop="datePublished"> 2021-12-10</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> devops</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-terraform-1/">IaC 도구인 Terraform 소개 (Feat. OCI) &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/oci-devops/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

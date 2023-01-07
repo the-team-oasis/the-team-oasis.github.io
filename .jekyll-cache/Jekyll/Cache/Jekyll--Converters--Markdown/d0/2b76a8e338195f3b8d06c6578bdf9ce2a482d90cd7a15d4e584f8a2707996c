@@ -1,0 +1,259 @@
+I"�I<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-opensearch-클러스터-준비" id="markdown-toc-oci-opensearch-클러스터-준비">OCI Opensearch 클러스터 준비</a></li>
+  <li><a href="#oke-cluster-준비" id="markdown-toc-oke-cluster-준비">OKE Cluster 준비</a></li>
+  <li><a href="#구성-아키텍처" id="markdown-toc-구성-아키텍처">구성 아키텍처</a></li>
+  <li><a href="#fluent-bit-설치" id="markdown-toc-fluent-bit-설치">Fluent Bit 설치</a></li>
+  <li><a href="#fluentd-설치" id="markdown-toc-fluentd-설치">Fluentd 설치</a></li>
+  <li><a href="#샘플-애플리케이션-배포" id="markdown-toc-샘플-애플리케이션-배포">샘플 애플리케이션 배포</a></li>
+  <li><a href="#opensearch-대시보드에서-로그-모니터링" id="markdown-toc-opensearch-대시보드에서-로그-모니터링">OpenSearch 대시보드에서 로그 모니터링</a></li>
+  <li><a href="#참고" id="markdown-toc-참고">참고</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-opensearch-클러스터-준비">OCI Opensearch 클러스터 준비</h3>
+<p>먼저 OCI OpenSearch Cluster를 준비합니다. OCI OpenSearch 서비스에 대한 소개와 Cluster 생성 방법은 아래 포스팅을 참고합니다.</p>
+
+<p><a href="http://localhost:4000//cloudnative/oci-opensearch-overview/#5-oci-opensearch-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">OCI Opensearch 서비스 살펴보기</a></p>
+
+<h3 id="oke-cluster-준비">OKE Cluster 준비</h3>
+<p>OKE Cluster는 편의상 OCI OpenSearch Cluster가 생성된 동일한 VCN에 구성하도록 합니다. (다른 VCN에 구성하는 경우에는 VCN Peering 구성 필요)</p>
+
+<p>OpenSearch에서 사용하는 VCN을 활용해야 하므로, OKE Cluster 생성 시 사용자 정의 생성 (Custom Create) 옵션을 선택하고, CNI 플러그인은 Flannel CNI 플러그인을 사용하여 구성하도록 하겠습니다. Flannel CNI 플러그인을 사용하여 사용자 정의로 OKE Cluster 생성하는 내용은 다음 포스트를 참고합니다.</p>
+
+<p><a href="https://the-team-oasis.github.io/cloudnative/oke-cluster-with-flannel-cni/">Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성</a></p>
+
+<h3 id="구성-아키텍처">구성 아키텍처</h3>
+<p>여기서는 Log Collector(로그 수집)로 Fluent Bit, Log Aggregator (로그 집계 및 처리)로 Fluentd를 사용하도록 구성합니다. Log Collector 및 Aggregator를 모두 Fluentd로 구성할 수도 있고, 혹은 Fluent Bit로만 수집하여 바로 목적지에 전달할 수도 있습니다. 하지만 여기서는 다양한 소스로부터 데이터를 집계 및 처리하고 라우팅하는 등의 작업을 중앙에서 처리해야 한다는 가정하에, Fluentd보다 훨씬 경량의 Fluent Bit로 Collector 역할만 따로 담당하도록 분리하여 구성하고, 복잡한 집계 처리 및 라우팅은 Fluentd에 맡기는 형태로 구성해 보도록 합니다.</p>
+
+<blockquote>
+  <p>참고) Fluent Bit은 Fluentd 프로젝트 에코시스템의 서브 컴포넌트이며, Fluentd의 경량화된 Forwarder 역할을 합니다. 초기에 임베디드 리눅스 환경에서 사용하기 위해 개발되어서 매우 가볍고 속도가 빠른 특징을 가지고 있습니다.</p>
+</blockquote>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-2.png" alt="" /></p>
+
+<p>OKE Cluster에 Fluent Bit와 Fluentd 구성 아키텍처입니다. Fluent Bit는 모든 노드의 로그를 수집하기 위해 DaemonSet으로 구성이 되며, 수집된 로그는 Fluentd로 전달되는 구성입니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-1.png" alt="" /></p>
+
+<h3 id="fluent-bit-설치">Fluent Bit 설치</h3>
+<p>Fluent Bit을 OKE Cluster에 구성할 수 있게 Helm Chart가 제공됩니다. Helm은 쿠버네티스 패키지 매니저로 설치는 다음 링크를 참고합니다.</p>
+
+<p><a href="https://helm.sh/docs/intro/install/">Installing Helm</a></p>
+
+<p>우선 Fluent Bit Helm 저장소를 추가합니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>helm repo add fluent https://fluent.github.io/helm-charts
+<span class="go">"fluent" has been added to your repositories
+</span></code></pre></div></div>
+
+<p>Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일은 아래 Github 저장소에서 다운받을 수 있습니다.</p>
+
+<p><a href="https://github.com/PA2702/OpenSearch-Log-Ingestion/blob/Fluentd%2BFluentbit/Fluentbit_values.yaml">Fluentbit_values.yaml</a></p>
+
+<p>Fluent Bit Helm Chart를 활용하여 OKE 배포합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ helm upgrade --install fluent-bit fluent/fluent-bit -f Fluentbit_values.yaml
+</code></pre></div></div>
+
+<p>배포된 Fluent Bit을 확인합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get all
+<span class="go">NAME                   READY   STATUS    RESTARTS   AGE
+pod/fluent-bit-cd7s4   1/1     Running   0          3m5s
+pod/fluent-bit-jp4dg   1/1     Running   0          3m6s
+pod/fluent-bit-xt4fz   1/1     Running   0          3m5s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)             AGE
+</span><span class="gp">service/fluent-bit   ClusterIP   10.96.20.7   &lt;none&gt;</span><span class="w">        </span>2020/TCP            3m6s
+<span class="gp">service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;</span><span class="w">        </span>443/TCP,12250/TCP   134m
+<span class="go">
+NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+</span><span class="gp">daemonset.apps/fluent-bit   3         3         3       3            3           &lt;none&gt;</span><span class="w">          </span>3m6s
+</code></pre></div></div>
+
+<h3 id="fluentd-설치">Fluentd 설치</h3>
+<p>Fluent Bit와 마찬가지로 Fluentd도 Helm Chart가 제공됩니다. Helm 레파지토리는 앞서 추가한 레파지토리를 그대로 사용합니다.</p>
+
+<p>Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일은 아래 Github 저장소에서 다운받을 수 있습니다.</p>
+
+<p><a href="https://github.com/PA2702/OpenSearch-Log-Ingestion/blob/Fluentd%2BFluentbit/Fluentd_values.yaml">Fluentd_values.yaml</a></p>
+
+<p>Fluentd_values.yaml 파일내의 <code class="language-plaintext highlighter-rouge">&lt;OPENSEARCH URL&gt;</code>을 OCI OpenSearch URL로 변경합니다. OpenSearch URL은 생성한 OCI OpenSearch Cluster 상세 페이지에서 확인할 수 있습니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-3.png" alt="" /></p>
+
+<p>변경 예시</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>04_outputs.conf: |-
+    &lt;label @OUTPUT&gt;
+      &lt;match **&gt;
+        @type opensearch
+        @id opensearch
+        @log_level info
+        include_tag_key true
+        type_name _doc
+        host "amaaaaaavsea7yia7qowt3....................opensearch.ap-seoul-1.oci.oraclecloud.com"
+        port 9200
+        scheme https
+        ssl_verify false
+        ssl_version TLSv1_2
+        suppress_type_name true
+      &lt;/match&gt;
+    &lt;/label&gt;
+</code></pre></div></div>
+
+<p>이제 Fluentd Helm Chart를 활용하여 OKE 배포합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>helm upgrade <span class="nt">--install</span> fluentd fluent/fluentd <span class="nt">-f</span> Fluentd_values.yaml
+</code></pre></div></div>
+
+<p>배포된 Fluentd를 확인합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get all
+<span class="go">NAME                                  READY   STATUS    RESTARTS   AGE
+pod/fluent-bit-cd7s4                  1/1     Running   0          32m
+pod/fluent-bit-jp4dg                  1/1     Running   0          32m
+pod/fluent-bit-xt4fz                  1/1     Running   0          32m
+pod/fluentd-fluentd-6cb89f56c8-sbbmj  1/1     Running   0          9m22s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)               AGE
+</span><span class="gp">service/fluent-bit       ClusterIP   10.96.20.7     &lt;none&gt;</span><span class="w">        </span>2020/TCP              32m
+<span class="gp">service/fluent-fluentd   ClusterIP   10.96.105.72   &lt;none&gt;</span><span class="w">        </span>24231/TCP,24224/TCP   13m
+<span class="gp">service/kubernetes       ClusterIP   10.96.0.1      &lt;none&gt;</span><span class="w">        </span>443/TCP,12250/TCP     163m
+<span class="go">
+NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+</span><span class="gp">daemonset.apps/fluent-bit   3         3         3       3            3           &lt;none&gt;</span><span class="w">          </span>32m
+<span class="go">
+NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/fluent-fluentd   1/1     1            1           13m
+
+NAME                                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/fluent-fluentd-6cb89f56c8   1         1         1       9m22s
+replicaset.apps/fluent-fluentd-8668855d46   0         0         0       13m
+</span></code></pre></div></div>
+
+<h3 id="샘플-애플리케이션-배포">샘플 애플리케이션 배포</h3>
+<p>간단한 애플리케이션을 배포하여 모니터링 해보도록 합니다.</p>
+
+<p>먼저 Ingress Controller를 생성합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.3/deploy/static/provider/cloud/deploy.yaml
+</code></pre></div></div>
+
+<p>간단한 애플리케이션 (docker-hello-world)을 배포하기 위해 다음 Manifest를 작성합니다.</p>
+
+<p><strong><em>hello-world-ingress.yaml</em></strong></p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">oke-app</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">oke-app</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">oke-app</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">scottsbaldwin/docker-hello-world:latest</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">docker-hello-world-svc</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">oke-app</span><span class="pi">:</span> <span class="s">docker-hello-world</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8088</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
+</code></pre></div></div>
+
+<p>Deployment와 서비스를 생성합니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl create <span class="nt">-f</span> hello-world-ingress.yaml
+</code></pre></div></div>
+
+<p>Ingress Manifest 파일을 작성합니다</p>
+
+<p><strong><em>ingress.yaml</em></strong></p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">networking.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Ingress</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hello-world-ing</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="na">kubernetes.io/ingress.class</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nginx"</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">rules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">http</span><span class="pi">:</span>
+      <span class="na">paths</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
+          <span class="na">pathType</span><span class="pi">:</span> <span class="s">Prefix</span>
+          <span class="na">backend</span><span class="pi">:</span>
+            <span class="na">service</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">docker-hello-world-svc</span>
+              <span class="na">port</span><span class="pi">:</span>
+                <span class="na">number</span><span class="pi">:</span> <span class="m">8088</span>
+</code></pre></div></div>
+
+<p>Ingress를 생성합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl create <span class="nt">-f</span> ingress.yaml
+</code></pre></div></div>
+
+<p>External IP를 확인합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get svc <span class="nt">-n</span> ingress-nginx
+<span class="go">NAME                                 TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                      AGE
+ingress-nginx-controller             LoadBalancer   10.96.44.164   146.xx.xx.xx   80:31713/TCP,443:32598/TCP   11m
+</span><span class="gp">ingress-nginx-controller-admission   ClusterIP      10.96.44.45    &lt;none&gt;</span><span class="w">         </span>443/TCP                      11m
+</code></pre></div></div>
+
+<p>curl을 사용해서 호출 테스트를 합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-I</span> http://146.xx.xx.xx
+<span class="go">HTTP/1.1 200 OK
+Date: Sat, 22 Oct 2022 07:56:06 GMT
+Content-Type: text/html
+Content-Length: 71
+Connection: keep-alive
+Last-Modified: Sat, 22 Oct 2022 07:47:02 GMT
+ETag: "63539ff6-47"
+Accept-Ranges: bytes
+</span></code></pre></div></div>
+
+<h3 id="opensearch-대시보드에서-로그-모니터링">OpenSearch 대시보드에서 로그 모니터링</h3>
+<p>아래 포스트 참고하여 OpenSearch 대시보드를 오픈합니다.</p>
+
+<p><a href="http://localhost:4000//cloudnative/oci-opensearch-overview/#5-oci-opensearch-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">OCI Opensearch 서비스 살펴보기</a></p>
+
+<p>메뉴에서 <strong>Stack Management &gt; Index Patterns</strong>를 선택한 후 <strong>Create index pattern</strong> 을 클릭합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-4.png" alt="" /></p>
+
+<p><strong>Index pattern name</strong>에 <strong>fluentd</strong>로 입력한 후 <strong>Next Step</strong>을 클릭합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-5.png" alt="" /></p>
+
+<p><strong>Time filed</strong>를 선택한 후 <strong>Create index pattern</strong>을 클릭합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-6.png" alt="" /></p>
+
+<p>매뉴에서 <strong>Discover</strong>를 선택합니다. Index pattern을 <strong>fluentd</strong>로 변경합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-7.png" alt="" /></p>
+
+<p>다음과 같이 앞서 배포한 docker-hello-world 서비스에 대한 로그를 확인할 수 있습니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-8.png" alt="" />
+<img src="/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-9.png" alt="" /></p>
+
+<h3 id="참고">참고</h3>
+<ul>
+  <li>https://blogs.oracle.com/cloud-infrastructure/post/using-oci-opensearch-ingest-logs-from-kubernetes-using-fluentbit-and-fluentd</li>
+  <li>https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm</li>
+</ul>
+:ET

@@ -1,0 +1,45 @@
+I"�<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-계정의-비밀번호-변경하기" id="markdown-toc-oci-계정의-비밀번호-변경하기">OCI 계정의 비밀번호 변경하기</a>    <ul>
+      <li><a href="#oci-iam-legacy-사용자-비밀번호-변경하기" id="markdown-toc-oci-iam-legacy-사용자-비밀번호-변경하기">OCI IAM (Legacy) 사용자 비밀번호 변경하기</a></li>
+      <li><a href="#oracle-idcs-사용자-비밀번호-변경하기" id="markdown-toc-oracle-idcs-사용자-비밀번호-변경하기">Oracle IDCS 사용자 비밀번호 변경하기</a></li>
+      <li><a href="#oci-iam-identity-domain-사용자-비밀번호-변경하기" id="markdown-toc-oci-iam-identity-domain-사용자-비밀번호-변경하기">OCI IAM Identity Domain 사용자 비밀번호 변경하기</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h3 id="oci-계정의-비밀번호-변경하기">OCI 계정의 비밀번호 변경하기</h3>
+<p>OCI 콘솔에 로그인 유형별 비밀번호 변경 방법에 대해 알아봅니다.</p>
+
+<h4 id="oci-iam-legacy-사용자-비밀번호-변경하기">OCI IAM (Legacy) 사용자 비밀번호 변경하기</h4>
+<ol>
+  <li>OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -&gt; <strong>비밀번호 변경</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-old-iam-change-password-1.png" alt="OLD IAM 비밀번호 변경 #1" /></li>
+  <li>기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
+<img src="/assets/img/getting-started/2022/oci-old-iam-change-password-2.png" alt="OLD IAM 비밀번호 변경 #2" /></li>
+</ol>
+
+<h4 id="oracle-idcs-사용자-비밀번호-변경하기">Oracle IDCS 사용자 비밀번호 변경하기</h4>
+<ol>
+  <li>OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -&gt; <strong>서비스 사용자 콘솔</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-idcs-change-password-1.png" alt="IDCS 비밀번호 변경 #1" /></li>
+  <li>이동한 화면에서 사용자 프로파일 아이콘 클릭 -&gt; <strong>비밀번호 변경</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-idcs-change-password-2.png" alt="IDCS 비밀번호 변경 #2" /></li>
+  <li>기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
+<img src="/assets/img/getting-started/2022/oci-idcs-change-password-3.png" alt="IDCS 비밀번호 변경 #3" /></li>
+</ol>
+
+<h4 id="oci-iam-identity-domain-사용자-비밀번호-변경하기">OCI IAM Identity Domain 사용자 비밀번호 변경하기</h4>
+<ol>
+  <li>OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -&gt; <strong>내 프로파일</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-new-iam-change-password-1.png" alt="NEW IAM 비밀번호 변경 #1" /></li>
+  <li>이동된 프로파일 화면에서 <strong>“비밀번호 변경”</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-new-iam-change-password-2.png" alt="NEW IAM 비밀번호 변경 #2" /></li>
+  <li>레이어팝업에서 현재 기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
+<img src="/assets/img/getting-started/2022/oci-new-iam-change-password-3.png" alt="NEW IAM 비밀번호 변경 #3" /></li>
+</ol>
+
+:ET

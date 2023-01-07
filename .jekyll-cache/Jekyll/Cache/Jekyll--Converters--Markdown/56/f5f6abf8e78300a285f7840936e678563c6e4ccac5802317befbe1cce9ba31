@@ -1,0 +1,43 @@
+I"�<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-콘솔에서-support-채팅-사용" id="markdown-toc-oci-콘솔에서-support-채팅-사용">OCI 콘솔에서 Support 채팅 사용</a></li>
+  <li><a href="#oracle-포럼-활용" id="markdown-toc-oracle-포럼-활용">Oracle 포럼 활용</a></li>
+  <li><a href="#스택-오버플로" id="markdown-toc-스택-오버플로">스택 오버플로</a></li>
+  <li><a href="#오라클-클라우드-사용자-그룹-facebook" id="markdown-toc-오라클-클라우드-사용자-그룹-facebook">오라클 클라우드 사용자 그룹 (Facebook)</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-콘솔에서-support-채팅-사용">OCI 콘솔에서 Support 채팅 사용</h3>
+<p>OCI Support 채팅은 Oracle Support Digital Assistant(Chatbot)에 연결되는 서비스로 기본적인 질문에 대한 답을 제공합니다. 이 서비스를 사용하기 위해서는 OCI 콘솔 우측 상단의 <strong>도움말(Help)</strong> 아이콘을 클릭하고 <strong>채팅하기</strong> 버튼을 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/getting-help-1.png" alt="" title=" " /></p>
+
+<p>다음과 같이 챗봇과 대화할 수 있는 채팅창이 활성화됩니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/getting-help-2.png" alt="" title=" " /></p>
+
+<blockquote>
+  <p>현재는 아쉽게도 한글은 지원하지 않습니다.</p>
+</blockquote>
+
+<h3 id="oracle-포럼-활용">Oracle 포럼 활용</h3>
+<p>Oracle이 지원하는 포럼을 활용하여 문의할 수 있습니다. 리소스 프로비저닝, 콘솔 문제, ID, 네트워킹, 문서, 스토리지, 데이터베이스, 에지 서비스 또는 기타 솔루션을 포함하여 Oracle Cloud Infrastructure 와 관련된 모든 문제의 경우 다음 위치에서 Cloud Customer Connect에 질문을 게시할 수 있습니다. 오라클 로그인 아이디(무료 가입)만 있으면 누구든지 질문을 올릴 수 있습니다.</p>
+
+<p><a href="https://community.oracle.com/customerconnect/categories/oracle-cloud-infrastructure-and-platform">https://community.oracle.com/customerconnect/categories/oracle-cloud-infrastructure-and-platform</a></p>
+
+<blockquote>
+  <p>오라클 본사에서 지원하는 포럼이라서 영어를 사용해야 합니다.</p>
+</blockquote>
+
+<h3 id="스택-오버플로">스택 오버플로</h3>
+<p>Oracle Cloud Infrastructure API, 엔드포인트 또는 서비스와 통합되는 애플리케이션을 생성하는 경우 개발 관련 질문에 대해 Stack Overflow 포럼을 사용할 수도 있습니다. 다음과 같이 oracle-cloud-infrastructure로 태그된 게시글들을 확인할 수 있습니다.</p>
+
+<p><a href="https://stackoverflow.com/questions/tagged/oracle-cloud-infrastructure">https://stackoverflow.com/questions/tagged/oracle-cloud-infrastructure</a></p>
+
+<h3 id="오라클-클라우드-사용자-그룹-facebook">오라클 클라우드 사용자 그룹 (Facebook)</h3>
+<p>페이스북에서 운영하는 오라클 클라우드 사용자 그룹입니다. 많은 오라클 전문가분들이 활동하고 계시며, OCI를 사용하면서 궁금한 내용들을 질문할 수 있습니다. 그 외에 오라클에서 진행하는 웨비나 정보, OCI 사용 가이드, 기타 다양한 소식들을 만나볼 수 있습니다.</p>
+
+<p><a href="https://ko-kr.facebook.com/groups/koreaoraclecloud/">https://ko-kr.facebook.com/groups/koreaoraclecloud/</a></p>
+:ET

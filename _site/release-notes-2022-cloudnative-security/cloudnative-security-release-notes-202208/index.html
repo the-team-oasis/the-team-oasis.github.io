@@ -1,0 +1,671 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>8월 OCI Cloud Native &amp; Security 업데이트 소식</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="2022년 8월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202208/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="8월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta property="og:description" content="2022년 8월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta property="og:url" content="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202208/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="8월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta name="twitter:description" content="2022년 8월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//release-notes-2022-cloudnative-security/">release notes 2022 cloudnative security</a>
+    
+  
+    
+        <a class="current">8월 OCI Cloud Native & Security 업데이트 소식</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">OCI Release Notes 2022</p>
+				<h1>8월 OCI Cloud Native & Security 업데이트 소식</h1>
+			</header>
+
+			
+			<p class="teaser">
+				2022년 8월 OCI Cloud Native & Security 업데이트 소식입니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#csi-volume-plugin-is-initial-default-for-clusters-running-kubernetes-version-124-or-later" id="markdown-toc-csi-volume-plugin-is-initial-default-for-clusters-running-kubernetes-version-124-or-later">CSI volume plugin is initial default for clusters running Kubernetes version 1.24 (or later)</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#code-editor-is-now-available" id="markdown-toc-code-editor-is-now-available">Code Editor is now available</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#process-automation-is-now-available" id="markdown-toc-process-automation-is-now-available">Process Automation is now available</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#support-for-setting-the-externaltrafficpolicy-parameter-and-client-ip-address-preservation-independently-of-each-other" id="markdown-toc-support-for-setting-the-externaltrafficpolicy-parameter-and-client-ip-address-preservation-independently-of-each-other">Support for setting the externalTrafficPolicy parameter and client IP address preservation independently of each other</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#support-for-explicitly-specifying-the-file-system-type-ext3-ext4-xfs-for-block-volumes-when-provisioning-pvcs" id="markdown-toc-support-for-explicitly-specifying-the-file-system-type-ext3-ext4-xfs-for-block-volumes-when-provisioning-pvcs">Support for explicitly specifying the file system type (ext3, ext4, XFS) for block volumes when provisioning PVCs</a>    <ul>
+      <li><a href="#기능-소개-3" id="markdown-toc-기능-소개-3">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#file-based-trigger-feature-for-devops-build-run" id="markdown-toc-file-based-trigger-feature-for-devops-build-run">File Based Trigger Feature for DevOps Build Run</a>    <ul>
+      <li><a href="#기능-소개-4" id="markdown-toc-기능-소개-4">기능 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="csi-volume-plugin-is-initial-default-for-clusters-running-kubernetes-version-124-or-later">CSI volume plugin is initial default for clusters running Kubernetes version 1.24 (or later)</h2>
+<ul>
+  <li><strong>Services:</strong> Kubernetes용 Container Engine</li>
+  <li><strong>Release Date:</strong> Aug. 2, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim.htm#Provisioning_Persistent_Volume_Claims_on_the_Block_Volume_Service" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim.htm#Provisioning_Persistent_Volume_Claims_on_the_Block_Volume_Service</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>OKE Cluster에서는 Block Volume Storage를 연결하기 위한 플러그인으로 CSI(Container Storage Interface) Volume Plugin과 FlexVolume Volume Plugin을 지원합니다. FlexVolume Volume Plugin은 CSI가 나오기 전의 out-of-tree(플러그인 소스 코드를 쿠버네티스 레파지토리에 추가하지 않고도 Custom Plugin을 만들 수 있는 방식) Volume Plugin입니다. CSI는 메소스, 도커스웜등의 여러 컨테이너 오케스트레이션 커뮤니티들이 협력하여 스토리지 관리를 위한 공통 인터페이스인데, 쿠버네티스의 경우 1.3 이후부터 CSI를 지원하기 시작했습니다.</p>
+
+<p>기존에는 OKE의 기본 Volume Plugin(지정하지 않을 경우)으로 FlexVoume Volume Plugin (Storage Class=oci)을 사용하였지만, 이번에 OKE 1.24버전 지원과 함께 CSI Volume Plugin (Storage Calss=oci-bv)이 기본 플러그인으로 변경되었습니다.</p>
+
+<hr />
+
+<h2 id="code-editor-is-now-available">Code Editor is now available</h2>
+<ul>
+  <li><strong>Services:</strong> Cloud Shell, Developer Tools</li>
+  <li><strong>Release Date:</strong> Aug. 2, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/API/Concepts/code_editor_intro.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/API/Concepts/code_editor_intro.htm</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>Code Editor는 웹 상에서 코드를 직접 편집할 수 있는 서비스입니다. Functions의 함수를 생성, 업데이트하거나, Resource Manager Stack에서 사용되는 Terraform 구성파일을 편집할 수도 있습니다.</p>
+
+<p>자세한 기능은 다음과 같습니다.</p>
+<ul>
+  <li>12개 이상의 프로그래밍 언어 지원에 대한 구문 강조, 지능형 자동 완성, 린트, 코드 탐색 및 리팩토링 기능 제공.</li>
+  <li>지원되는 OCI서비스들에 대한 특정 기능이나 코딩 워크플로우 제공을 위해 플러그인을 제공. (e.g. Functions Plugin은 Code Editor내에서 Function을 배포하고 호출하는 기능을 제공)</li>
+  <li>Git 기반 레파지토리와 연결하여 클론, 푸시, 커밋, 풀등의 작업 수행.</li>
+  <li>Cloud Shell과 통합하여 Cloud Shell 홈 디렉토리에 저장된 코드르 읽고 편집할 수 있으며, Cloud Shell과 함께 설치된 30개 이상의 클라우드 기반 도구에 직접 액세스 할 수 있음.</li>
+  <li>글꼴, 색 구성, 화면 레이아웃, 키보드 단축키 및 언어등을 모두 개인화 할 수 있는 기능 제공.</li>
+  <li>세션 간 상태 지속으로 작업 상황을 자동으로 저장하므로, 다시 시작 시 마지막으로 편집된 페이지를 자동으로 오픈.</li>
+</ul>
+
+<hr />
+
+<h2 id="process-automation-is-now-available">Process Automation is now available</h2>
+<ul>
+  <li><strong>Services:</strong> Oracle Cloud Infrastructure, Process Automation</li>
+  <li><strong>Release Date:</strong> Aug. 8, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en/cloud/paas/process-automation/" target="_blank" rel="noopener">https://docs.oracle.com/en/cloud/paas/process-automation/</a></li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>Process Automation은 OCI에서 비즈니스 프로세스를 신속하게 설계, 자동화 및 관리할 수 있는 서비스입니다. 프로스세 디자이너 기능으로 프로세스 설계를 하고, 제공되는 워크스페이스에서 프로세스를 실행하고 모니터링 할 수 있습니다.</p>
+
+<p><strong>Process Automation 프로비저닝</strong>
+<img src="https://oracle-livelabs.github.io/oic/opa-for-fusionApps/common/provision-opa/images/ocipa-instance-page.png" alt="" /></p>
+
+<p><strong>프로세스 디자인</strong>
+<img src="https://oracle-livelabs.github.io/oic/opa-for-fusionApps/get-started-opa/create-structured-process-app/images/submit-travel-request-impl.png" alt="" /></p>
+
+<p><strong>워크스페이스</strong>
+<img src="https://oracle-livelabs.github.io/oic/opa-for-fusionApps/get-started-opa/create-structured-process-app/images/workspace-approve-task.png" alt="" /></p>
+
+<hr />
+
+<h2 id="support-for-setting-the-externaltrafficpolicy-parameter-and-client-ip-address-preservation-independently-of-each-other">Support for setting the externalTrafficPolicy parameter and client IP address preservation independently of each other</h2>
+<ul>
+  <li><strong>Services:</strong> Container Engine for Kubernetes</li>
+  <li><strong>Release Date:</strong> Aug. 17, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm#contengcreatingnetworkloadbalancer_topic-Preserve_source_destination" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm#contengcreatingnetworkloadbalancer_topic-Preserve_source_destination</a> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm#contengcreatingnetworkloadbalancer_topic_Preserving_client_IP" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm#contengcreatingnetworkloadbalancer_topic_Preserving_client_IP</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+<p>OKE에서 Network Load Balancer를 사용하는 경우 이제 k8s 매니페스트 파일내에 externalTrafficPolicy 옵션을 사용할 수 있습니다. 이 옵션을 통해서 서비스가 노드 안에서만 응답할 것인지, 클러스터 전체로 나아가서 응답할 지를 결정할 수 있습니다. externalTrafficPolicy옵션의 기본 값은 <mark>cluster</mark>이며, 모든 노드 전반에 걸쳐서 패킷을 전송하여 부하를 고르게 분산하게 할 수 있습니다. 다만 트래픽을 받는 Pod가 없는 노드로 전송되는 경우에는 추가적인 홉을 거쳐서 다른 노드로 이동하므로, 수천개의 노드를 운영하는 클러스터의 경우 성능이 저하될 수 있습니다.</p>
+
+<p>externalTrafficPolicy옵션을 <mark>local</mark>로 설정하는 경우 kube-proxy가 전달받을 pod가 있는 노드로만 전송됩니다. (다른 노드로 전송 시 패킷 드랍) <mark>local</mark> 설정의 경우 노드 간의 트래픽을 제거하여 수천개의 노드를 운영하는 클러스터의 경우 성능을 향상 시킬 수 있습니다. 또한 로드발란서 Health Check를 통해서 Pod가 존재하는 노드로만 트래픽을 전송하므로 패킷 드랍도 발생하지 않습니다. 다만, 트래픽을 고르게 분산하지 못한다는 단점도 존재합니다.</p>
+
+<p><mark>externalTrafficPolicy=local</mark>로 설정하는 경우에는 추가적으로 IP 패킷 헤더에서 클라이언트 IP를 보존하거나 보존하지 않도록 지정할 수 있습니다. 이 경우 다른 노드로 네트워크 홉을 건너지 않기 때문에 클라이언트 IP가 보존될 수 있습니다. 여기서 추가적으로 매니페스트파일에 다음 annotation을 추가함으로써 클라이언트 IP를 보존하거나 보존하지 않도록 지정합니다.</p>
+
+<p><strong>클라이언트 IP 보존</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oci-network-load-balancer.oraclecloud.com/is-preserve-source: "true"
+</code></pre></div></div>
+
+<p><strong>클라이언트 IP 보존 방지</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oci-network-load-balancer.oraclecloud.com/is-preserve-source: "false"
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="support-for-explicitly-specifying-the-file-system-type-ext3-ext4-xfs-for-block-volumes-when-provisioning-pvcs">Support for explicitly specifying the file system type (ext3, ext4, XFS) for block volumes when provisioning PVCs</h2>
+<ul>
+  <li><strong>Services:</strong> Container Engine for Kubernetes</li>
+  <li><strong>Release Date:</strong> Aug. 17, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim.htm#contengcreatingpersistentvolumeclaim_topic_Provisioning_PVCs_on_BV_PV_File_storage_types" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim.htm#contengcreatingpersistentvolumeclaim_topic_Provisioning_PVCs_on_BV_PV_File_storage_types</a></li>
+</ul>
+
+<h3 id="기능-소개-3">기능 소개</h3>
+<p>이제 CSI Plugin을 사용하여 Persistent Volume Claim(PVC)을 프로비저닝할 때 이제 다음 파일 시스템 유형 중 하나를 갖도록 블록 볼륨을 구성할 수 있습니다.</p>
+
+<ul>
+  <li>ext3</li>
+  <li>ext4 (the default)</li>
+  <li>XFS</li>
+</ul>
+
+<p>다음은 ext3 파일 시스템을 갖는 블록 볼륨을 지원하는 PVC를 생성하기 위해 Storage Class를 생성하는 메니페스트 예시입니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">oci-bv-ext3</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">blockvolume.csi.oraclecloud.com</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">csi.storage.k8s.io/fstype</span><span class="pi">:</span> <span class="s">ext3</span>
+<span class="na">reclaimPolicy</span><span class="pi">:</span> <span class="s">Retain</span>
+<span class="na">allowVolumeExpansion</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">volumeBindingMode</span><span class="pi">:</span> <span class="s">WaitForConsumer</span>
+</code></pre></div></div>
+
+<p>PVC 생성 시 위에서 작성한 Storage Class를 지정한 예시입니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">oci-bv-claim-ext3</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">oci-bv-ext3</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">50Gi</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="file-based-trigger-feature-for-devops-build-run">File Based Trigger Feature for DevOps Build Run</h2>
+<ul>
+  <li><strong>Services:</strong> DevOps</li>
+  <li><strong>Release Date:</strong> Aug. 23, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/devops/using/trigger_build.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/devops/using/trigger_build.htm</a></li>
+</ul>
+
+<h3 id="기능-소개-4">기능 소개</h3>
+<p>이제 DevOps 빌드 파이프라인에서 파일 변경에 대한 트리거 옵션을 다음과 같이 지정할 수 있습니다.</p>
+
+<ul>
+  <li>Files to include: 기본적으로 레파지토리에 있는 모든 파일에 대한 변경 사항을 트리거하여 빌드를 실행합니다. 여기에 특정 파일이나 경로를 지정하여 해당되는 파일의 변경이 발생할 경우에만 빌드 파이프라인을 실행할 수 있도록 지정할 수 있습니다. 파일을 지정할 때에는 <a href="https://docs.oracle.com/en-us/iaas/Content/devops/using/glob-patterns.htm">glob patterns</a>의 문법을 따릅니다.</li>
+  <li>Files to exclude: 빌드 실행에 있어서 파일 변경이 되어도 빌드가 실행되지 않도록 특정 파일이나 경로를 지정하여 배제할 파일을 지정할 수 있습니다. 마찬가지로 <a href="https://docs.oracle.com/en-us/iaas/Content/devops/using/glob-patterns.htm">glob patterns</a>의 문법을 따릅니다.</li>
+</ul>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-08-30T00:00:00+09:00" itemprop="datePublished"> 2022-08-30</time>
+				
+
+				<span class="icon-archive pr20"> RELEASE-NOTES-2022-CLOUDNATIVE-SECURITY</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci-release-notes-2022</span> <span class="icon-price-tag pr10"> aug-2022</span> <span class="icon-price-tag pr10"> cloudnative</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202207/">&laquo; 7월 OCI Cloud Native & Security 업데이트 소식</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//release-notes-2022-cloudnative-security/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202209/">9월 OCI Cloud Native & Security 업데이트 소식 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202208/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

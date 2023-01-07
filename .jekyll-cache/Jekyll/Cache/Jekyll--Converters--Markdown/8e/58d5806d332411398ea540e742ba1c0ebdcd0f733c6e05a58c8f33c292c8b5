@@ -1,0 +1,59 @@
+I"�<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#introducing-flexible-compute-shapes-for-notebook-sessions-and-jobs" id="markdown-toc-introducing-flexible-compute-shapes-for-notebook-sessions-and-jobs">Introducing Flexible Compute Shapes for Notebook Sessions and Jobs</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+      <li><a href="#업데이트-내용" id="markdown-toc-업데이트-내용">업데이트 내용</a></li>
+    </ul>
+  </li>
+  <li><a href="#new-languages-supported-for-speech" id="markdown-toc-new-languages-supported-for-speech">New Languages Supported for Speech</a>    <ul>
+      <li><a href="#업데이트-소개" id="markdown-toc-업데이트-소개">업데이트 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="introducing-flexible-compute-shapes-for-notebook-sessions-and-jobs">Introducing Flexible Compute Shapes for Notebook Sessions and Jobs</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> Aug 17, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/0e9ab1ea-ea15-4c53-9b7c-22043ffc859a/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/0e9ab1ea-ea15-4c53-9b7c-22043ffc859a/</a></li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>노트북 세션은 OCI 데이터 과학(Data Science) 프로젝트에 포함된 서비스로 노트북 세션을 생성하여 JupyterLab 인터페이스의 머신 러닝 라이브러리를 사용하여 Python 코드를 작성하고 실행할 수 있습니다.</p>
+
+<h3 id="업데이트-내용">업데이트 내용</h3>
+<p>이번 업데이트를 통해 노트북 세션에서 사용하는 Compute Shape에서도 Flex Shape을 선택할 수 있도록 기능이 추가 되었습니다.</p>
+<ul>
+  <li>데이터 과학 프로젝트에서 <strong>“노트북 세션”</strong> -&gt; <strong>“노트북 세션 생성</strong>” 버튼을 클릭합니다.
+<img src="/assets/img/aiml/2022/oci-202208-release-md-1.png" alt="" title=" " /></li>
+  <li>컴퓨트 섹션의 <strong>“선택”</strong> 버튼을 클릭합니다.
+<img src="/assets/img/aiml/2022/oci-202208-release-md-2.png" alt="" title=" " /></li>
+  <li>AMD, Intel 계열의 Shape에서 Flex Shape이 추가된 것을 확인할 수 있습니다.
+<img src="/assets/img/aiml/2022/oci-202208-release-md-3.png" alt="" title=" " /></li>
+  <li><img src="/assets/img/aiml/2022/oci-202208-release-md-4.png" alt="" title=" " /></li>
+</ul>
+
+<h2 id="new-languages-supported-for-speech">New Languages Supported for Speech</h2>
+<ul>
+  <li><strong>Services:</strong> Speech</li>
+  <li><strong>Release Date:</strong> Aug 12, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/ba8d3a1b-6d78-47ef-9643-6327427ae37f/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/ba8d3a1b-6d78-47ef-9643-6327427ae37f/</a></li>
+</ul>
+
+<h3 id="업데이트-소개">업데이트 소개</h3>
+<p>OCI 의 AI 서비스 중 하나인 Speech 서비스는 사람의 음성을 포함한 파일 기반의 오디오 데이터를 텍스트 문자로 쉽게 변환할 수 있는 기능을 제공하는 서비스 입니다.
+이번 업데이트를 통해 기존에 <mark>영어(English-US), 스페인어(Spanish), 포르투갈어(Portuguese)</mark> 3가지 언어만 지원되던 Speech 서비스에 아래와 같이 새로운 언어(억양)가 추가로 지원됩니다.</p>
+<ul>
+  <li>영어(영국억양)(English-Great Britain)</li>
+  <li>영어(호주억양)(English-Australia)</li>
+  <li>영어(인도억양)(English-India)</li>
+  <li>프랑스어(French)</li>
+  <li>이탈리아어(Italian)</li>
+  <li>독일어(German)</li>
+  <li>힌디어(Hindi)
+<img src="/assets/img/aiml/2022/oci-202208-release-md-5.png" alt="" title=" " /></li>
+</ul>
+:ET

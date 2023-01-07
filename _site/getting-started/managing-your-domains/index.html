@@ -1,0 +1,586 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI에서 회사 도메인을 관리해보자</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI 테넌시에 회사 도메인을 등록함으로서, 누군가가 회사 도메인을 통해 새로운 테넌시를 생성하는 것을 방지할 수 있습니다. 이러한 도메인 관리 기능에 대해서 설명합니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//getting-started/managing-your-domains/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI에서 회사 도메인을 관리해보자">
+	<meta property="og:description" content="OCI 테넌시에 회사 도메인을 등록함으로서, 누군가가 회사 도메인을 통해 새로운 테넌시를 생성하는 것을 방지할 수 있습니다. 이러한 도메인 관리 기능에 대해서 설명합니다.">
+	<meta property="og:url" content="http://localhost:4000//getting-started/managing-your-domains/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI에서 회사 도메인을 관리해보자">
+	<meta name="twitter:description" content="OCI 테넌시에 회사 도메인을 등록함으로서, 누군가가 회사 도메인을 통해 새로운 테넌시를 생성하는 것을 방지할 수 있습니다. 이러한 도메인 관리 기능에 대해서 설명합니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//getting-started/">getting started</a>
+    
+  
+    
+        <a class="current">OCI에서 회사 도메인을 관리해보자</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Governance</p>
+				<h1>OCI에서 회사 도메인을 관리해보자</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI 테넌시에 회사 도메인을 등록함으로서, 누군가가 회사 도메인을 통해 새로운 테넌시를 생성하는 것을 방지할 수 있습니다. 이러한 도메인 관리 기능에 대해서 설명합니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#도메인-관리" id="markdown-toc-도메인-관리">도메인 관리</a></li>
+  <li><a href="#도메인-추가-및-확인" id="markdown-toc-도메인-추가-및-확인">도메인 추가 및 확인</a></li>
+  <li><a href="#도메인-관리-1" id="markdown-toc-도메인-관리-1">도메인 관리</a>    <ul>
+      <li><a href="#도메인-활성-비활성-이메일-업데이트-도메인-제거" id="markdown-toc-도메인-활성-비활성-이메일-업데이트-도메인-제거">도메인 활성, 비활성, 이메일 업데이트 도메인 제거</a></li>
+    </ul>
+  </li>
+  <li><a href="#도메인-해지" id="markdown-toc-도메인-해지">도메인 해지</a></li>
+</ul>
+
+</div>
+
+<h3 id="도메인-관리">도메인 관리</h3>
+<p>도메인 관리 기능은 현재 회사에서 사용하고 있는 OCI 테넌시에 회사의 도메인을 등록함으로서, 다른 누군가가 회사의 도메인을 가지는 이메일을 활용하여 새로운 테넌시를 생성하는 시도를 방지할 수 있게 해주는 기능입니다. 예를 들어, “Company A”에서 근무하고 “companyA”가 도메인 이름인 경우 또 다른 누군가가 OCI 테넌시 생성 시 입력하는 이메일의 도메인으로 “companyA”를 사용하는 경우 생성 시도가 실패하게 됩니다.</p>
+
+<p>결과적으로 엔터프라이즈 기업은 OCI의 도메인 관리 기능을 통해서, 회사의 도메인으로 OCI 테넌시를 생성하려고 하는 사용자를 파악할 수 있으며, 이를 통해서 OCI 환경을 보다 쉽게 제어함으로써 테넌시에 대한 기업 정책을 쉽게 적용할 수 있습니다. 또한 OCI 환경에서 도메인 소유권을 안전하게 확인하고 리소스 지출이나 관리를 보다 쉽게 제어할 수 있습니다.</p>
+
+<p>도메인 관리 기능을 사용하기 위해서는 다음 정책이 필요합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Allow group domainUsers to manage organizations-domain in compartmentA
+Allow group domainUsers to manage organizations-domain-governance in compartmentA
+</code></pre></div></div>
+
+<h3 id="도메인-추가-및-확인">도메인 추가 및 확인</h3>
+<p>관리할 도메인을 추가하는 방법은 다음과 같습니다.</p>
+
+<ol>
+  <li>먼저 OCI 콘솔 메뉴에서 <strong>거버넌스 &amp; 관리(Governance &amp; Administration) &gt; 도메인 관리(Domain Management)</strong>를 순서대로 클릭합니다.</li>
+</ol>
+
+<p><img src="/assets/img/getting-started/2022/managing-your-domains-1.png" alt="" title=" " /></p>
+
+<ol>
+  <li>
+    <p>도메인 추가 및 확인창 에서 추가 할 도메인의 이메일 주소를 입력합니다. 이 이메일 주소는 회사의 도메인을 가진 이메일로 누군가가 Oracle Cloud 계정을 생성하려고 할 때 알림을 받는 이메일입니다.</p>
+  </li>
+  <li>
+    <p><strong>Oracle Notification Service 요금에 동의합니다.</strong> 를 체크합니다. 이 서비스는 <a href="https://www.oracle.com/devops/notifications/">Oracle Notification Service</a>를 사용하며, 해당 서비스의 요금이 적용됩니다.</p>
+  </li>
+  <li>
+    <p>회사의 도메인을 입력한 후 추가 및 확인을 클릭합니다.</p>
+  </li>
+</ol>
+
+<p><img src="/assets/img/getting-started/2022/managing-your-domains-2.png" alt="" title=" " /></p>
+
+<ol>
+  <li>도메인이 추가되고 TXT 레코드 필드가 값이 생성됩니다. 복사 아이콘을 클릭하여 TXT 레코드 값을 도메인 레코드로 추가(<a href="https://kr.godaddy.com/help/add-a-txt-record-19232">TXT 레코드 추가</a>)하면, 오라클은 해당 도메인이 사용자가 소유한 도메인인지 검증합니다. 검증이 완료되면, 이후 OCI 도메인 관리에 등록된 도메인의 상태가 <strong>Pending</strong>에서 <strong>Verified</strong>로 변경됩니다. 이 과정을 완료하는데 최대 72시간 소요될 수 있습니다.</li>
+</ol>
+
+<h3 id="도메인-관리-1">도메인 관리</h3>
+<p>도메인 관리 페이지에 추가한 도메인이 표시됩니다. 도메인은 다음과 같은 정보를 포함합니다.</p>
+<ul>
+  <li><strong>도메인:</strong> 도메인의 이름입니다.</li>
+  <li><strong>알림:</strong> 연관된 <strong>Notification Service</strong>에 대한 <strong>Topic</strong>입니다. 도메인이 검증되어야만 Topic이 생성됩니다. 또한 Topic이 생성되면 이메일로 구독 확인요청 메일을 받게 되며, 확인을 해야 실제 알림을 받을수 있습니다.</li>
+  <li><strong>상태:</strong>
+    <ul>
+      <li><strong>보류중(Pending):</strong> 확인 중 상태</li>
+      <li><strong>실패(Failed):</strong> 72시간까지 검증이 제대로 되지 않은 경우의 상태</li>
+      <li><strong>활성(Active):</strong> 검증되고 거버넌스가 활성화(Enabled) 된 상태</li>
+      <li><strong>비활성화(Disabled):</strong> 확인되었지만 거버넌스가 활성화 되지 않아 관리되지 않은 상태</li>
+      <li><strong>해제중(Releasing):</strong> 고객이 삭제를 요청한 상태</li>
+      <li><strong>해제됨(Released):</strong> 작업 요청 완료, 7일이 지나면 도메인 관리 페이지에서 사라집니다.</li>
+    </ul>
+  </li>
+  <li><strong>날짜:</strong> 마지막으로 수정한 날짜입니다. verified, enabled, disabled 또는 이메일이 업데이트된 경우 업데이트됩니다.</li>
+</ul>
+
+<p>도메인의 상태가 Active인 경우 다음 작업을 수행할 수 있습니다.</p>
+<ul>
+  <li>거버넌스 활성화(Enable) 또는 비활성화(disable)</li>
+  <li>이메일 업데이트</li>
+  <li>도메인 제거</li>
+</ul>
+
+<h4 id="도메인-활성-비활성-이메일-업데이트-도메인-제거">도메인 활성, 비활성, 이메일 업데이트 도메인 제거</h4>
+<ul>
+  <li>도메인을 활성화 하기 위해서는 도메인 관리에서 <strong>작업(Actions)</strong> 메뉴를 클릭한 후 <strong>거버넌스 사용(Enable Governance)</strong>을 클릭합니다.</li>
+  <li>도메인을 비 활성화 하기 위해서는 도메인 관리에서 <strong>작업(Actions)</strong> 메뉴를 클릭한 후 <strong>거버넌스 사용 안함(Disable Governance)</strong>을 클릭합니다.</li>
+  <li>도메인의 이메일 주소를 업데이트하기 위해서는 도메인 관리에서 <strong>작업(Actions)</strong> 메뉴를 클릭한 후 <strong>이메일 업데이트(Update Email)</strong>를 클릭합니다.</li>
+  <li>도메인을 삭제하기 위해서는 도메인 관리에서 <strong>작업(Actions)</strong> 메뉴를 클릭한 후 <strong>도메인 제거(Remove Domain)</strong>를 클릭합니다.</li>
+</ul>
+
+<h3 id="도메인-해지">도메인 해지</h3>
+<p>오라클은 등록된 도메인이 유효하고 올바른 사용자에게 할당이 되었는지 정기적으로 확인합니다. 만일 도메인이 이 확인 검사를 통과하지 못하면 관리자는 이메일 알림을 받게되고 72시간 이내에 TXT 레코드 정보를 업데이트 해야 합니다. 만일 아무런 조치를 취하지 않으면 해당 도메인 등록은 취소(Revocation)됩니다. 취소되어도 다시 해당 도메인에 대해서 추가 및 검증을 할 수 있습니다.</p>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-06-18T09:00:01+09:00" itemprop="datePublished"> 2022-06-18</time>
+				
+
+				<span class="icon-archive pr20"> GETTING-STARTED</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> tenancy</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/getting-started/ocicli-config/">&laquo; OCICLI 도구 설정하기</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//getting-started/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/getting-started/best-practices-for-setting-up-your-tenancy/">OCI 테넌시(계정) 생성 후 테넌시 설정을 위한 모범 사례 알아보기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/getting-started/managing-your-domains/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

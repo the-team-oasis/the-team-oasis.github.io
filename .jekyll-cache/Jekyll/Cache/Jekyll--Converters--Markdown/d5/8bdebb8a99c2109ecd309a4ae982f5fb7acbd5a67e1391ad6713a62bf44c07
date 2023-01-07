@@ -1,0 +1,115 @@
+I"�$<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#vcn-생성" id="markdown-toc-vcn-생성">VCN 생성</a></li>
+  <li><a href="#compute-생성" id="markdown-toc-compute-생성">Compute 생성</a></li>
+  <li><a href="#security-list-설정" id="markdown-toc-security-list-설정">Security List 설정</a></li>
+  <li><a href="#instance-firewall-설정" id="markdown-toc-instance-firewall-설정">Instance Firewall 설정</a></li>
+</ul>
+
+</div>
+
+<h3 id="vcn-생성">VCN 생성</h3>
+<p>우선 VCN을 준비합니다. VCN 생성은 아래 포스팅을 참고합니다.</p>
+
+<blockquote>
+  <p><a href="https://the-team-oasis.github.io/getting-started/create-vcn/">OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기</a></p>
+</blockquote>
+
+<h3 id="compute-생성">Compute 생성</h3>
+<p>VM Compute Instace를 하나 생성합니다. <strong>Compute &gt; Instances &gt; Create Instances</strong>를 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/compute-firewall-1.png" alt="" /></p>
+
+<p>기본 선택화면에서 인스턴스 이름을 입력하고 이미지 (여기서는 Oracle Linux 8)를 선택하며, 인스턴스에서 사용하기 위한 VCN과 Subnet (Public)을 선택합니다.
+<img src="/assets/img/getting-started/2022/compute-firewall-2.png" alt="" /></p>
+
+<p>인스턴스에 접속하기 위해서는 SSH 키가 필요합니다. 사용하고 있는 키가 있다면, 해당 Public Key를 Copy &amp; Paste하고, 그렇지 않은 경우 <strong>Generate a key pair for me</strong>를 선택하여 키를 다운로드 받습니다. 마지막으로 <strong>Create</strong> 버튼을 클릭하여 인스턴스를 생성합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/compute-firewall-3.png" alt="" /></p>
+
+<h3 id="security-list-설정">Security List 설정</h3>
+<p>특정 포트를 오픈하기 위해서는 OCI에서 관리하는 Security List와 Instance의 OS에서 관리하는 Firewall 두 부분에 모두 추가해줘야 합니다. 우선 Security List에 오픈하기 위한 포트를 추가하여야 하는데, 인스턴스를 생성할 때 선택한 Subnet을 선택한 후 Security List를 선택합니다. (VCN Wizard를 통해 생성한 경우 Private Subnet을 위한 Security List와 Public Subnet을 위한 Security List 두 개가 생성되며, 네이밍이 <strong>Default Security List for {VCN명}</strong>으로 생성된 것이 Public Subnet의 Security List입니다.)</p>
+
+<p><img src="/assets/img/getting-started/2022/compute-firewall-4.png" alt="" /></p>
+
+<p><strong>Add Ingress Rules</strong>을 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/compute-firewall-5.png" alt="" /></p>
+
+<p>다음과 같이 <strong>Source CIDR</strong>와 <strong>Destination Port Range</strong>를 입력합니다.</p>
+
+<ul>
+  <li>Source CIDR: 0.0.0.0/0 (모든 IP를 허용)</li>
+  <li>Destination Port Range: 8080 (인스턴스에서 오픈할 포트)</li>
+</ul>
+
+<p><img src="/assets/img/getting-started/2022/compute-firewall-6.png" alt="" /></p>
+
+<h3 id="instance-firewall-설정">Instance Firewall 설정</h3>
+<p>iptables을 활용하여 관리할 수 있지만, Oracle Linux 7이상부터는 <strong><em>firewalld</em></strong> 라고 하는 데몬 서비스로 관리하며, 명령어는 <strong><em>firewall-cmd</em></strong> 명령어를 활용합니다.</p>
+
+<p>우선 ssh로 해당 인스턴스에 접속합니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="nt">-i</span> <span class="o">{</span>ssh key<span class="o">}</span> opc@<span class="o">{</span>ip address<span class="o">}</span>
+</code></pre></div></div>
+
+<p>다음과 같이 Firewall을 설정합니다. 참고로 <strong><em>–permanent</em></strong> 옵션은 영구적으로 설정하는 옵션이지만, 반드시 <strong><em>–reload</em></strong>를 방화벽을 재시작해줘야 합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-port</span><span class="o">=</span>8080/tcp
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--reload</span>
+</code></pre></div></div>
+
+<p>다음 명령어로 열린 포트를 확인합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--list-all</span>
+</code></pre></div></div>
+
+<p>이 외에 추가적으로 다음과 같은 명령어를 사용할 수 있습니다.</p>
+
+<p><strong>방화벽 실행 상태</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--state</span> 
+</code></pre></div></div>
+
+<p><strong>존 목록을 출력</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--get-zones</span>
+</code></pre></div></div>
+
+<p><strong>기본 존 출력</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--get-active-zones</span>
+</code></pre></div></div>
+
+<p><strong>zone을 지정해서 출력</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">firewall-cmd --zone=public --list-all
+</span></code></pre></div></div>
+<p><strong>임시로 포트 추가 / reload 없이 바로 반영되나 서버가 재부팅되면 설정도 사라짐</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--add-port</span><span class="o">=</span>8080/tcp
+</code></pre></div></div>
+
+<p><strong>포트 제거</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--remove-port</span><span class="o">=</span>8080/tcp
+</code></pre></div></div>
+
+<p><strong>서비스 추가</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--add-service</span><span class="o">=</span>ftp
+</code></pre></div></div>
+
+<p><strong>서비스 제거</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--remove-service</span><span class="o">=</span>ftp
+</code></pre></div></div>
+
+<p><strong>존을 지정해서 추가</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--zone</span><span class="o">=</span>trusted <span class="nt">--add-service</span><span class="o">=</span>ftp
+</code></pre></div></div>
+
+<p><strong>permanent 옵션으로 서비스 추가 / 영구적으로 추가되나 –reload 옵션으로 방화벽 재시작 필요</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-service</span><span class="o">=</span>ftp
+</code></pre></div></div>
+
+<p><strong>permanent 옵션으로 포트 추가 / 영구적으로 추가되나 –reload 옵션으로 방화벽 재시작 필요</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-port</span><span class="o">=</span>8080/tcp
+</code></pre></div></div>
+
+<p>방화벽을 완전히 해제하고 모든 포트를 오픈하는 경우에는 다음과 같이 명령어를 사용합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop firewalld.service
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable firewalld.service
+</code></pre></div></div>
+:ET

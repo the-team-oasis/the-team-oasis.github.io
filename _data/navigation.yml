@@ -1,0 +1,45 @@
+- title: "HOME"
+  url: "/"
+  side: left
+
+- title: "BLOG"
+  url: "/blog"
+  side: left
+
+- title: "CATEGORIES"
+  url: "/categories/"
+  side: left
+  dropdown:
+  - title: "Getting Started"
+    url: "/getting-started/"
+  - title: "Infrastructure"
+    url: "/infrastructure/"
+  - title: "Cloud Native"
+    url: "/cloudnative/"
+  - title: "Data Platform"
+    url: "/database/"
+  - title: "AI/ML"
+    url: "/aiml/"
+  - title: "Security"
+    url: "/security/"
+
+- title: "Release Notes (2022)"
+  url: "/release-notes-2022/"
+  side: left
+  dropdown:
+    - title: "Infrastructure"
+      url: "/release-notes-2022-infrastructure/"
+    - title: "Cloud Native & Security"
+      url: "/release-notes-2022-cloudnative-security/"
+    - title: "Data Platform"
+      url: "/release-notes-2022-database"
+    - title: "AI/ML"
+      url: "/release-notes-2022-aiml/"
+
+- title: "Learning"
+  url: "/learning/"
+  side: right
+
+- title: "Search"
+  url: "/search/"
+  side: right

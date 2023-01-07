@@ -1,0 +1,635 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI Compute Instance SSH Key 복구 방법</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI Compute Instance에서 SSH키 분실등의 이슈로 접속이 불가능한 상태에서 추가로 공개키를 등록하는 방법에 대해서 설명합니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//infrastructure/oci-recover-sshkey/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI Compute Instance SSH Key 복구 방법">
+	<meta property="og:description" content="OCI Compute Instance에서 SSH키 분실등의 이슈로 접속이 불가능한 상태에서 추가로 공개키를 등록하는 방법에 대해서 설명합니다.">
+	<meta property="og:url" content="http://localhost:4000//infrastructure/oci-recover-sshkey/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI Compute Instance SSH Key 복구 방법">
+	<meta name="twitter:description" content="OCI Compute Instance에서 SSH키 분실등의 이슈로 접속이 불가능한 상태에서 추가로 공개키를 등록하는 방법에 대해서 설명합니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//infrastructure/">infrastructure</a>
+    
+  
+    
+        <a class="current">OCI Compute Instance SSH Key 복구 방법</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Compute</p>
+				<h1>OCI Compute Instance SSH Key 복구 방법</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI Compute Instance에서 SSH키 분실등의 이슈로 접속이 불가능한 상태에서 추가로 공개키를 등록하는 방법에 대해서 설명합니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#실습을-위한-인스턴스-생성" id="markdown-toc-실습을-위한-인스턴스-생성">실습을 위한 인스턴스 생성</a></li>
+  <li><a href="#콘솔-접속-실행-console-connection" id="markdown-toc-콘솔-접속-실행-console-connection">콘솔 접속 실행 (Console Connection)</a></li>
+  <li><a href="#인스턴스-재부팅-및-boot-manager-진입" id="markdown-toc-인스턴스-재부팅-및-boot-manager-진입">인스턴스 재부팅 및 Boot Manager 진입</a></li>
+  <li><a href="#boot-menu에서-boot-엔트리-수정" id="markdown-toc-boot-menu에서-boot-엔트리-수정">Boot Menu에서 Boot 엔트리 수정</a></li>
+  <li><a href="#부트-엔트리-수정-후-재부팅" id="markdown-toc-부트-엔트리-수정-후-재부팅">부트 엔트리 수정 후 재부팅</a></li>
+  <li><a href="#ssh-키-추가-혹은-재설정" id="markdown-toc-ssh-키-추가-혹은-재설정">SSH 키 추가 혹은 재설정</a></li>
+  <li><a href="#ssh-전용-키를-이용하여-인스턴스-접속-확인" id="markdown-toc-ssh-전용-키를-이용하여-인스턴스-접속-확인">SSH 전용 키를 이용하여 인스턴스 접속 확인</a></li>
+</ul>
+
+</div>
+
+<h3 id="실습을-위한-인스턴스-생성">실습을 위한 인스턴스 생성</h3>
+<p>아래 가이드를 참고하여 OCI Compute Linux Instance를 하나 생성합니다.<br />
+<a href="https://docs.oracle.com/en-us/iaas/Content/GSG/Reference/overviewworkflow.htm">https://docs.oracle.com/en-us/iaas/Content/GSG/Reference/overviewworkflow.htm</a></p>
+
+<p>생성 과정에서 SSH Key를 등록하는 부분이 있는데, <strong>No SSH Keys</strong>를 선택합니다.
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-1.png" alt="" /></p>
+
+<h3 id="콘솔-접속-실행-console-connection">콘솔 접속 실행 (Console Connection)</h3>
+<p>생성된 인스턴스 상세 화면 좌측 <strong>리소스(Resources)</strong> 메뉴에서 <strong>콘솔 접속(Console Connection)</strong>을 선택합니다. <strong>콘솔 접속(Console Connection)</strong> 화면에서 <strong>로컬 접속 생성(Create local connection)</strong> 버튼을 클릭한 후 팝업창에서 <strong>전용 키 저장</strong>을 클릭하여 저장합니다. 그리고 <strong>콘솔 접속 생성(Create console connection)</strong> 버튼을 클릭하여 <strong>로컬 접속</strong>을 생성합니다.
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-2.png" alt="" /></p>
+
+<p>다운로드 받은 ssh의 Permission을 변경합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod 400 ssh-key-2022-07-09.key
+</code></pre></div></div>
+
+<p>생성된 <strong>로컬 접속</strong> 우측 아이콘을 클릭하여 접속을 복사 합니다. 여기서는 <strong>Linux/Mac용 직렬 콘솔 접속 복사 (Copy serial console connection for Linux/Mac</strong>를 선택하여 복사하였습니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-3.png" alt="" /></p>
+
+<p>다음과 같이 복사된 명령어를 터미널에서 실행하여 인스턴스 콘솔에 접속합니다. 주의할 부분은 앞서 다운로드 받은 sshkey 선택 옵션을 다음과 같이 추가해줘야 합니다.</p>
+
+<blockquote>
+  <p>ssh -i /{path}/{ssh_key} -o ProxyCommand=’ssh -i /{path}/{ssh_key} -W %h:%p -p 443..</p>
+</blockquote>
+
+<p>아래는 예시입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i ~/Downloads/ssh-key-2022-07-09.key -o ProxyCommand='ssh -i ~/Downloads/ssh-key-2022-07-09.key -W %h:%p -p 443 ocid1.instanceconsoleconnection.oc1.ap-seoul-1.anuwgljrvsea7yi...............@instance-console.ap-seoul-1.oci.oraclecloud.com' ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yi...............
+</code></pre></div></div>
+
+<p>접속하면 다음과 같은 아웃풋을 볼 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=================================================
+IMPORTANT: Use a console connection to troubleshoot a malfunctioning instance. For normal operations, you should connect to the instance using a Secure Shell (SSH) or Remote Desktop connection. For steps, see https://docs.cloud.oracle.com/iaas/Content/Compute/Tasks/accessinginstance.htm
+
+For more information about troubleshooting your instance using a console connection, see the documentation: https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/serialconsole.htm#four
+=================================================
+</code></pre></div></div>
+
+<h3 id="인스턴스-재부팅-및-boot-manager-진입">인스턴스 재부팅 및 Boot Manager 진입</h3>
+<p>인스턴스 상세 화면에서 <strong>인스턴스 재부팅 (Reboot)</strong>을 클릭하여 재부팅 합니다.
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-4.png" alt="" /></p>
+
+<blockquote>
+  <p>Oracle Autonomous Linux 7.x 또는 Oracle Linux 7.x에서는 재부팅을 하면 바로 Boot Menu를 확인 가능하지만, 이 외 버전에서는 Boot Manager로 진입한 후 UEFI Oracle BlockVolume을 선택하여 Boot Menu로 이동합니다. 여기서는 Oracle Linux 8버전을 사용하였기 때문에 Boot Manager로 접속하는 방법으로 진행합니다. Oracle Autonomous Linux 7.x 또는 Oracle Linux 7.x인 경우에는 아래 <strong>“Boot Menu에서 Boot 엔트리 수정”</strong> 단계부터 진행합니다.</p>
+</blockquote>
+
+<p>재부팅을 하면 <strong>콘솔 접속</strong>한 터미널 화면에서 <strong>Power Down</strong>이라는 메세지가 보이는데, 이 때부터 <strong>ESC키</strong> 혹은 <strong>F5키</strong>를 연속으로 클릭합니다.
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-3-1.png" alt="" /></p>
+
+<p>이제 다음과 같이 <strong>Boot Manager</strong> UI를 볼 수 있습니다. 
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-5.png" alt="" /></p>
+
+<blockquote>
+  <p>Boot Manager 화면에 접속한 상태에서 OCI Console을 통해 인스턴스를 재시작 하는 경우 인스턴스가 영구적으로 멈출 수 있습니다. 이 경우 별도로 오라클의 서포트를 받아야 할 수 있으니, OCI Console에서 인스턴스 재부팅을 할 경우에는 반드시 Boot Manager를 빠져나온 후 재부팅을 하여야 합니다.</p>
+</blockquote>
+
+<p>Boot Manager 메뉴에서 <strong>UEFI Oracle BlockVolume</strong>을 선택하고 <strong>엔터</strong>를 클릭한 후 바로 <strong>ESC키</strong> 혹은 <strong>F5키</strong>키(바로 입력하여야 합니다.)를 연속으로 클릭하면 다음과 같은 <strong>Boot Menu</strong>를 볼 수 있습니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-6.png" alt="" /></p>
+
+<h3 id="boot-menu에서-boot-엔트리-수정">Boot Menu에서 Boot 엔트리 수정</h3>
+<p>여기서 바로 <strong>e</strong> 키를 선택하여 <strong>부트 엔트리 수정</strong> 화면으로 이동합니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-7.png" alt="" /></p>
+
+<h3 id="부트-엔트리-수정-후-재부팅">부트 엔트리 수정 후 재부팅</h3>
+<p>커서를 이동하여 아래 내용을 스크린샷과 같이 마지막 라인에 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>init=/bin/bash
+</code></pre></div></div>
+
+<p><img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-8.png" alt="" /></p>
+
+<p><strong>CTRL+X</strong>를 입력하여 인스턴스를 재부팅하면, 다음과 같이 <strong>Bash 쉘 커맨드 라인</strong>을 볼 수 있습니다.
+<img src="/assets/img/infrastructure/2022/oci-recovery-sshkey-9.png" alt="" /></p>
+
+<h3 id="ssh-키-추가-혹은-재설정">SSH 키 추가 혹은 재설정</h3>
+<p>SSH 키 추가 혹은 재설정을 위해서 다음 명령어들을 순서대로 실행합니다. 우선 SElinux 정책을 로드합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/sbin/load_policy -i
+</code></pre></div></div>
+
+<p>Root 파티션에 대한 Read/Write 권한으로 리마운트 하기 위해 다음 명령어를 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /bin/mount -o remount, rw /
+</code></pre></div></div>
+
+<p>opc 사용자의 SSH Key 디렉토리로 변경합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~opc/.ssh
+</code></pre></div></div>
+
+<p>기존 <strong>authorized_keys</strong>키를 백업합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mv authorized_keys authorized_keys.old
+</code></pre></div></div>
+
+<p>추가하기 위한 SSH Public Key를 새로운 <strong>authorized_keys</strong>에 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo '&lt;contents of public key file&gt;' &gt;&gt; authorized_keys
+</code></pre></div></div>
+
+<p>아래는 예시입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnV1Flgu2pg4Uwn3b+eonrAvJBLeQV1lSwkrUa2TEnH9KNajvJ/HJsGme96zSlCzA28VN5HX1EAdM3FS5ik7w2QQLtWzZ40qYmsFn+lvQw1+Dy0usTuHSOoTVb732xiMZkSYu+gV45xhbZOlWGuwQqn7hb4mH2jXjMclrh0vRKoZZgzws+2OFVQ/J+WjHCVxtX1sEQTNRYtNlE/ADfhlh7ODGcl1U7zFU0JDtPhf0Vy731fqL9+hLH96YcUag7lrAM9XmQGyiZZbDvwWklM+M15yUWjJ............' &gt;&gt; authorized_keys
+</code></pre></div></div>
+
+<p>authorized_keys의 권한을 변경합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod 600 authorized_keys
+</code></pre></div></div>
+
+<p>소유자와 그룹도 변경해줍니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chown -R opc:opc authorized_keys
+</code></pre></div></div>
+
+<p>리부팅 합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/sbin/reboot -f
+</code></pre></div></div>
+
+<h3 id="ssh-전용-키를-이용하여-인스턴스-접속-확인">SSH 전용 키를 이용하여 인스턴스 접속 확인</h3>
+<p>등록한 SSH Public Key에 대응되는 Private Key를 활용하여 인스턴스에 정상적으로 접속이 되는지 확인합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh -i ~/.ssh/id_rsa opc@{public_ip}
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Last login: Sat Jul  9 07:26:50 2022 from xxx.xxx.xxx.xxx
+[opc@instance-20220709-1530 ~]$
+</code></pre></div></div>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-07-09T09:00:00+09:00" itemprop="datePublished"> 2022-07-09</time>
+				
+
+				<span class="icon-archive pr20"> INFRASTRUCTURE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> compute</span> <span class="icon-price-tag pr10"> sshkey_recovery</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/infrastructure/oci-scripts-examples/">&laquo; OCI 스크립트 및 예제코드</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//infrastructure/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/infrastructure/oci-autoscale-script/">OCI AutoScale (Scaling & Start/Stop) 스크립트 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/infrastructure/oci-recover-sshkey/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,551 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCICLI 도구 설정하기</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI CLI 도구나 SDK를 활용하여 Oracle Cloud Infrastructure (OCI)를 제어하기 위해서는 OCI API를 사용하기 위한 기본 설정을 하여야 합니다. 이번 포스팅에서는 OCI CLI도구를 활용하여 OCI 연동하는 방법에 대해서 설명합니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//getting-started/ocicli-config/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCICLI 도구 설정하기">
+	<meta property="og:description" content="OCI CLI 도구나 SDK를 활용하여 Oracle Cloud Infrastructure (OCI)를 제어하기 위해서는 OCI API를 사용하기 위한 기본 설정을 하여야 합니다. 이번 포스팅에서는 OCI CLI도구를 활용하여 OCI 연동하는 방법에 대해서 설명합니다.">
+	<meta property="og:url" content="http://localhost:4000//getting-started/ocicli-config/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCICLI 도구 설정하기">
+	<meta name="twitter:description" content="OCI CLI 도구나 SDK를 활용하여 Oracle Cloud Infrastructure (OCI)를 제어하기 위해서는 OCI API를 사용하기 위한 기본 설정을 하여야 합니다. 이번 포스팅에서는 OCI CLI도구를 활용하여 OCI 연동하는 방법에 대해서 설명합니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//getting-started/">getting started</a>
+    
+  
+    
+        <a class="current">OCICLI 도구 설정하기</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Compute</p>
+				<h1>OCICLI 도구 설정하기</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI CLI 도구나 SDK를 활용하여 Oracle Cloud Infrastructure (OCI)를 제어하기 위해서는 OCI API를 사용하기 위한 기본 설정을 하여야 합니다. 이번 포스팅에서는 OCI CLI도구를 활용하여 OCI 연동하는 방법에 대해서 설명합니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-cli-설치" id="markdown-toc-oci-cli-설치">OCI CLI 설치</a></li>
+  <li><a href="#oci-cli-구성" id="markdown-toc-oci-cli-구성">OCI CLI 구성</a></li>
+  <li><a href="#oci-cli-연결-확인" id="markdown-toc-oci-cli-연결-확인">OCI CLI 연결 확인</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-cli-설치">OCI CLI 설치</h3>
+<p>OCI CLI설치를 위한 오라클사의 공식 가이드는 <a href="https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm">https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm</a> 링크를 참고합니다. 해당 가이드에는 여러 운영체에에서 OCICLI를 설치하는 가이드가 포함되어 있는데 여기서는 MacOS를 기준으로 설명합니다.</p>
+
+<p>MacOS에서는 다음곽 같이 HomeBrew를 통해서 설치할 수 있습니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>brew update <span class="o">&amp;&amp;</span> brew <span class="nb">install </span>oci-cli
+</code></pre></div></div>
+
+<p>설치 후 다음과 같이 버전을 확인합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h3 id="oci-cli-구성">OCI CLI 구성</h3>
+<p>OCI CLI를 구성하기 위해서는 사전에 다음과 같은 정보가 준비되어야 합니다.</p>
+<ul>
+  <li>Tenancy OCID 
+  <img src="/assets/img/getting-started/2022/oci-cli-1.png" alt="" title=" " /></li>
+  <li>User OCID
+  <img src="/assets/img/getting-started/2022/oci-cli-2.png" alt="" title=" " /></li>
+</ul>
+
+<p>다음 명령어를 실행합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci setup config
+<span class="go">
+Enter a location for your config [/Users/username/.oci/config]: 기본선택
+</span><span class="gp">Enter a user OCID: &lt;위에서 확인한 User OCID&gt;</span><span class="w">
+</span><span class="gp">Enter a tenancy OCID:: &lt;위에서 확인한 Tenancy OCID&gt;</span><span class="w">
+</span><span class="gp">Enter a region by index or name: &lt;Region&gt;</span><span class="w"> </span><span class="nt">---</span><span class="o">&gt;</span> 리전 목록이 같이 보여집니다. OCICLI 접속을 위한 리전을 입력합니다. <span class="o">(</span>e.g. ap-seoul-1<span class="o">)</span>
+<span class="gp">Do you want to generate a new API Signing RSA key pair? (If you decline you will be asked to supply the path to an existing key.) [Y/n]: Y ---&gt;</span><span class="w"> </span>OCI와 연동하기 위해서 필요한 PEM 키를 생성합니다.
+</code></pre></div></div>
+
+<p>생성된 PEM키와 대응되는 공용키, config 파일이 위에서 지정한 경로에 생성됩니다. 생성된 PEM 공용키 등록을 위하여 오른쪽 상단의 <strong>사용자 프로파일</strong>을 클릭한 후 왼쪽 <strong>API 키 &gt; API 키 추가</strong>를 순서대로 클릭합니다. 다음 화면과 같이 생성된 PEM 공용키를 선택하고 <strong>추가</strong>를 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-cli-3.png" alt="" title=" " /></p>
+
+<h3 id="oci-cli-연결-확인">OCI CLI 연결 확인</h3>
+<p>다음 명령어는 OCI의 Object Storage의 Namespace 값을 가져오는 OCICLI 명령입니다. 실행했을 때 오류 없이 다음과 비슷한 결과가 나오면 성공입니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci os ns get
+<span class="go">{
+  "data": "cnrgtqg..."
+}
+</span></code></pre></div></div>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-06-18T09:00:00+09:00" itemprop="datePublished"> 2022-06-18</time>
+				
+
+				<span class="icon-archive pr20"> GETTING-STARTED</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> cli</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/getting-started/expenses-usage/">&laquo; OCI 비용과 사용량 분석하기</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//getting-started/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/getting-started/managing-your-domains/">OCI에서 회사 도메인을 관리해보자 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/getting-started/ocicli-config/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,672 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>8월 OCI Infrastructure 업데이트 소식</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="2022년 8월 OCI Infrastructure 업데이트 소식입니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//release-notes-2022-infrastructure/infrastructure-release-notes-202208/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="8월 OCI Infrastructure 업데이트 소식">
+	<meta property="og:description" content="2022년 8월 OCI Infrastructure 업데이트 소식입니다.">
+	<meta property="og:url" content="http://localhost:4000//release-notes-2022-infrastructure/infrastructure-release-notes-202208/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="8월 OCI Infrastructure 업데이트 소식">
+	<meta name="twitter:description" content="2022년 8월 OCI Infrastructure 업데이트 소식입니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//release-notes-2022-infrastructure/">release notes 2022 infrastructure</a>
+    
+  
+    
+        <a class="current">8월 OCI Infrastructure 업데이트 소식</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Release Notes 2022</p>
+				<h1>8월 OCI Infrastructure 업데이트 소식</h1>
+			</header>
+
+			
+			<p class="teaser">
+				2022년 8월 OCI Infrastructure 업데이트 소식입니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#cloud-shell-now-offers-private-access" id="markdown-toc-cloud-shell-now-offers-private-access">Cloud Shell now offers Private Access</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#block-volume-scheduled-backup-limited-to-one-per-volume-per-day" id="markdown-toc-block-volume-scheduled-backup-limited-to-one-per-volume-per-day">Block Volume scheduled backup limited to one per volume per day</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#oci-now-supports-intra-vcn-routing" id="markdown-toc-oci-now-supports-intra-vcn-routing">OCI now supports intra-VCN routing</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#bare-metal-compute-instances-reboot-migration-on-demand-and-extend-maintenance-due-date" id="markdown-toc-bare-metal-compute-instances-reboot-migration-on-demand-and-extend-maintenance-due-date">Bare metal compute instances: reboot migration on demand and extend maintenance due date</a>    <ul>
+      <li><a href="#기능-소개-3" id="markdown-toc-기능-소개-3">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#new-region-pairings-available-for-cross-region-replication-of-volumes" id="markdown-toc-new-region-pairings-available-for-cross-region-replication-of-volumes">New region pairings available for cross region replication of volumes</a>    <ul>
+      <li><a href="#기능-소개-4" id="markdown-toc-기능-소개-4">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#dynamic-performance-scaling-with-autotuning-for-block-volume-service" id="markdown-toc-dynamic-performance-scaling-with-autotuning-for-block-volume-service">Dynamic performance scaling with autotuning for Block Volume service</a>    <ul>
+      <li><a href="#기능-소개-5" id="markdown-toc-기능-소개-5">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#longer-notification-before-preemptible-compute-instances-are-deleted" id="markdown-toc-longer-notification-before-preemptible-compute-instances-are-deleted">Longer notification before preemptible compute instances are deleted</a>    <ul>
+      <li><a href="#기능-소개-6" id="markdown-toc-기능-소개-6">기능 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="cloud-shell-now-offers-private-access">Cloud Shell now offers Private Access</h2>
+<ul>
+  <li><strong>Services:</strong> Cloud Shell</li>
+  <li><strong>Release Date:</strong> Aug 2, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/db9629a3-0cf9-4c0c-94b7-b29e24180195/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/db9629a3-0cf9-4c0c-94b7-b29e24180195/</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>Cloud Shell은 OCI Console(OCI 관리 콘솔)에서 실행되는 브라우저 기반 터미널입니다. OCI Cloud Shell은 GCP의 Google Cloud Shell, Azure의 Cloud Shell 및 AWS의 Session Manager와 같은 서비스입니다. OCI Cloud Shell를 이용하면 PuTTY를 사용하지 않고 OCI VM 인스턴스에 접속하거나 별도의 소프트웨어와 계정 설정 작업 없이 즉시 OCI CLI와 같은 툴을 사용할 수 있습니다.
+이번에 추가된 기능으로 Private Access의 경우, public ip가 없는 private subnet의 경우 bastion, compute 통해서 터넕링 통해서 연결이 되었으나, private access를 사용하면 간단히 private subnet의 자원의 접근이 가능합니다.</p>
+
+<blockquote>
+  <p>테넌시의 홈리전을 기본으로 접속 가능하며, 홈리전 이외의 리전 접속의 경우, RPG 연결을 해줘야 합니다.</p>
+</blockquote>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221001-3bt.png" alt="" /></p>
+
+<h2 id="block-volume-scheduled-backup-limited-to-one-per-volume-per-day">Block Volume scheduled backup limited to one per volume per day</h2>
+<ul>
+  <li><strong>Services:</strong> Block Volume</li>
+  <li><strong>Release Date:</strong> Aug 2, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/2c45b14e-3180-44f2-9b85-c05c5c85796e/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/2c45b14e-3180-44f2-9b85-c05c5c85796e/</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+
+<p>블록볼륨의 백업은 이제 하나의 볼륨에 대해서 하루에 한 번의 백업으로 제한됩니다. 따라서 아래 우선순위에 따라서 조절이 됩니다 .</p>
+
+<ul>
+  <li>매일 : 백업이 매일 생성됩니다. 백업 시간을 지정합니다.</li>
+  <li>매주 : 백업이 매주 생성됩니다. 백업할 요일과 해당 요일의 시간을 지정합니다.</li>
+  <li>매월 : 백업이 매월 생성됩니다. 백업할 날짜와 시간을 지정합니다.</li>
+  <li>매년 : 백업이 매년 생성됩니다. 백업할 월, 해당 월의 일 및 해당 일의 시간을 지정합니다.</li>
+</ul>
+
+<blockquote>
+  <p>블록 볼륨 은 하루에 볼륨당 하나의 예약된 백업만 실행합니다. 특정 날짜에 볼륨에 대해 둘 이상의 백업이 예약된 경우 서비스는 다음 우선 순위를 사용하여 그 중 하나만 실행합니다.(1.매년 2.월간 간행물 3.주간 4.일일)</p>
+</blockquote>
+
+<h2 id="oci-now-supports-intra-vcn-routing">OCI now supports intra-VCN routing</h2>
+<ul>
+  <li><strong>Services:</strong> Networking</li>
+  <li><strong>Release Date:</strong> Aug 3, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/a1ada1f2-ca21-4650-9ebe-9246f576bc74/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/a1ada1f2-ca21-4650-9ebe-9246f576bc74/</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+
+<p>VCN 내부 라우팅을 사용하면 VCN CIDR 블록에 포함된 IP 주소로 향하는 트래픽에 적용된 기본 라우팅 결정을 재정의할 수 있습니다. VCN 내부 라우팅에는 다음과 같은 기능이 있습니다.</p>
+<ul>
+  <li>기본 경로: 모든 VCN 경로 테이블에는 VCN CIDR에 대한 암시적 로컬 경로가 있습니다. VCN의 대상으로 로컬 직접 라우팅에 사용됩니다. 경로 테이블의 사용자 지정 경로와 함께 이 암시적 로컬 경로가 최상의 경로 선택에 사용됩니다.</li>
+  <li>사용자 지정 VCN 내 경로: VCN 내 트래픽에 대해 라우팅 테이블에서 생성하는 라우팅 규칙입니다. 모든 사용자 지정 경로에는 대상 (DRG, LPG, VCN의 사설 IP) 과 경로 유형이 static 입니다.</li>
+  <li>경로 선택: 가장 긴 접두사 일치(또는 가장 구체적인 경로)가 선택됩니다. 동일한 접두사에 대해 여러 경로가 있는 경우 다음 경로 유형 우선순위에 따라 최상의 경로가 선택됩니다.
+    <ol>
+      <li>정적(사용자 정의)</li>
+      <li>암시적 로컬 경로(OCI에서 자동 생성)</li>
+    </ol>
+  </li>
+</ul>
+
+<blockquote>
+  <p>서브넷 내 라우팅은 지원되지 않습니다. 발신 VNIC와 동일한 서브넷에 있는 대상 IP 주소가 있는 트래픽은 적절한 대상으로 직접 전달(라우팅되지 않음)됩니다.</p>
+</blockquote>
+
+<p><img src="/assets/img/infrastructure/2022/08/vcn-intra.jpeg" alt="" /></p>
+
+<h2 id="bare-metal-compute-instances-reboot-migration-on-demand-and-extend-maintenance-due-date">Bare metal compute instances: reboot migration on demand and extend maintenance due date</h2>
+<ul>
+  <li><strong>Services:</strong> Compute</li>
+  <li><strong>Release Date:</strong> Aug 8, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/f5ffceca-e3de-4eb1-a45b-0459a2c69140/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/f5ffceca-e3de-4eb1-a45b-0459a2c69140/</a></li>
+</ul>
+
+<h3 id="기능-소개-3">기능 소개</h3>
+
+<p>계획된 인프라 유지 관리로 인해 베어메탈 인스턴스 재부팅 마이그레이션이 예약된 경우 이제 유지 관리 기한 전에 인스턴스 마이그레이션을 사전에 재부팅할 수 있습니다.</p>
+
+<p>재부팅 마이그레이션이 예약된 베어메탈 인스턴스의 유지 관리 기한을 연장할 수도 있습니다.</p>
+
+<ul>
+  <li><strong>인프라유지관리:</strong> <a href="https://docs.oracle.com/iaas/Content/Compute/References/infrastructure-maintenance.htm" target="_blank" rel="noopener">https://docs.oracle.com/iaas/Content/Compute/References/infrastructure-maintenance.htm</a></li>
+  <li><strong>재부팅 마이그레이션 기한 연장:</strong> <a href="https://docs.oracle.com/iaas/Content/Compute/Tasks/movinganinstance.htm#extend-maintenance-due-date" target="_blank" rel="noopener">https://docs.oracle.com/iaas/Content/Compute/Tasks/movinganinstance.htm#extend-maintenance-due-date</a></li>
+</ul>
+
+<h2 id="new-region-pairings-available-for-cross-region-replication-of-volumes">New region pairings available for cross region replication of volumes</h2>
+<ul>
+  <li><strong>Services:</strong> Block Volume</li>
+  <li><strong>Release Date:</strong> Aug 16, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/717024d7-98a1-481b-97f2-dbd5ab189861/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/717024d7-98a1-481b-97f2-dbd5ab189861/</a></li>
+</ul>
+
+<h3 id="기능-소개-4">기능 소개</h3>
+
+<p>볼륨 복제시 사용할 수 있는 리전의 영억이 추가 되었습니다. 볼륨의 복제의 경우, 볼륨을 서비스 지역 이외에 따른 리전에 복제함으로 가용성을 높일 수 있으며 가용성이 높아진 결과 장애에 대해서 더욱 적극적으로 대응 할 수 있습니다. 
+아래 그림은 source 리전 기준으로 복제 될 수 있는 리전의 리스트입니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/08/screencapture-docs-oracle-en-us-iaas-Content-Block-Concepts-volumereplication-htm-2022-10-03-13_53_31-edit.jpg" alt="" /></p>
+
+<h2 id="dynamic-performance-scaling-with-autotuning-for-block-volume-service">Dynamic performance scaling with autotuning for Block Volume service</h2>
+<ul>
+  <li><strong>Services:</strong>  Block Volume</li>
+  <li><strong>Release Date:</strong> Aug 30, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/87a4a40e-2727-41c2-a504-a2ecc4c081e8/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/87a4a40e-2727-41c2-a504-a2ecc4c081e8/</a></li>
+</ul>
+
+<h3 id="기능-소개-5">기능 소개</h3>
+
+<p>볼륨볼륨의 경우, 사용자의 IOPS를 지정하지 않은 상태에서 default 속도가 지정되며, 추후 고객의 어플리케이션의 높은 IOPS에 요구에 따라서 추가적인 성능을 온라인에서 수동으로 조절할 수 있습니다.
+성능 기반 자동 조정 이 활성화되면 블록 볼륨 은 성능을 최대한 기본 수준으로 조정합니다. 볼륨의 로드가 증가하면 서비스는 최선을 다해 필요에 따라 성능 수준을 높입니다</p>
+
+<ul>
+  <li>기본 성능 : 성능 기반 자동 조정 이 활성화 된 경우 볼륨이 연결될 때 Block Volume 이 성능을 조정하는 가장 낮은 성능 수준입니다. 성능 기반 자동 조정 이 비활성화된 경우 이는 볼륨의 성능 수준입니다 . Detached Volume Auto-tune 을 활성화 하고 볼륨이 분리된 경우 볼륨이 인스턴스에 다시 연결될 때 볼륨이 조정되는 성능 수준입니다.</li>
+  <li>Auto-tuned Performance : 볼륨의 유효 성능입니다. 볼륨에 대해 성능 기반 자동 조정 이 비활성화된 경우 이는 볼륨의 기본 성능과 동일합니다.</li>
+  <li>성능 기반 자동 튜닝 : 이 필드는 성능 기반 자동 튜닝 기능이 볼륨에 대해 활성화되어 있는지 여부를 나타냅니다. 꺼져 있을 때 볼륨의 자동 튜닝 성능 은 항상 기본 성능 에 지정된 것과 동일합니다 .</li>
+</ul>
+
+<p>분리된 볼륨 (compute에 연결되지 않은 detached 된 compute) 경우,</p>
+<ul>
+  <li>기본 성능 : 성능 기반 자동 조정 이 비활성화된 경우 볼륨을 생성하거나 기존 볼륨에 대한 성능 설정을 변경할 때 지정하는 볼륨의 성능 수준입니다. 볼륨이 연결되면 Detached Volume Auto-tune 의 활성화 여부에 관계없이 볼륨의 성능입니다.</li>
+  <li>Auto-tuned Performance : 볼륨의 유효 성능입니다. 볼륨에 대해 Detached Volume Auto-tune 이 활성화 된 경우 볼륨이 분리될 때 Auto-tuned Performance 가 Low Cost 로 조정됩니다 . 자동 조정된 성능 은 성능 조정이 완료될 때까지 성능 설정을 낮은 비용 으로 표시하지 않습니다.</li>
+  <li>Detached Volume Auto-tune : 이 필드는 Detached Volume Auto-tune 이 볼륨에 활성화되어 있는지 여부를 나타냅니다. 꺼져 있을 때 볼륨의 유효 성능은 항상 기본 성능 에 지정된 것과 동일합니다 . 켜져 있을 때 볼륨 분리 시 볼륨 성능이 Low Cost 로 조정됩니다 .</li>
+</ul>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221003-k8l.png" alt="" /></p>
+
+<h2 id="longer-notification-before-preemptible-compute-instances-are-deleted">Longer notification before preemptible compute instances are deleted</h2>
+<ul>
+  <li><strong>Services:</strong>  Compute</li>
+  <li><strong>Release Date:</strong> Aug 31, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/5120d35b-05be-4ef2-9e72-7ce2dcffb947/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/5120d35b-05be-4ef2-9e72-7ce2dcffb947/</a></li>
+</ul>
+
+<h3 id="기능-소개-6">기능 소개</h3>
+<p>선점 가능한 인스턴스는 일반 컴퓨팅 인스턴스와 동일하게 동작하지만 다른 곳에서 필요할 때 용량이 회수되고 인스턴스가 종료됩니다. 이벤트 서비스를 통해서 선점형 인스턴스가 종료되기전에 노티 서비스를 받을 수 있습니다.</p>
+
+<p><img src="/assets/img/infrastructure/2022/08/SCR-20221001-3yq.png" alt="" /></p>
+
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="" target="_blank"> Kisu Kim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-08-30T00:00:00+09:00" itemprop="datePublished"> 2022-08-30</time>
+				
+
+				<span class="icon-archive pr20"> RELEASE-NOTES-2022-INFRASTRUCTURE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci-release-notes-2022</span> <span class="icon-price-tag pr10"> Aug-2022</span> <span class="icon-price-tag pr10"> Infrastructure</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/release-notes-2022-infrastructure/infrastructure-release-notes-202207/">&laquo; 7월 OCI Infrastructure 업데이트 소식</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//release-notes-2022-infrastructure/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/release-notes-2022-infrastructure/infrastructure-release-notes-202209/">9월 OCI Infrastructure 업데이트 소식 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/release-notes-2022-infrastructure/infrastructure-release-notes-202208/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

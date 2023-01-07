@@ -1,0 +1,145 @@
+I"|'<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#ads-jupyterlab-ui-enhancements" id="markdown-toc-ads-jupyterlab-ui-enhancements">ADS JupyterLab UI Enhancements</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+      <li><a href="#업데이트-내용" id="markdown-toc-업데이트-내용">업데이트 내용</a>        <ul>
+          <li><a href="#the-environment-explorer-탭의-기능이-추가-되었습니다" id="markdown-toc-the-environment-explorer-탭의-기능이-추가-되었습니다">The Environment Explorer 탭의 기능이 추가 되었습니다.</a></li>
+          <li><a href="#the-launcher-tab-개선사항" id="markdown-toc-the-launcher-tab-개선사항">The Launcher tab 개선사항</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#the-data-labeling-v3-release-is-now-available" id="markdown-toc-the-data-labeling-v3-release-is-now-available">The Data Labeling V3 Release is now Available</a>    <ul>
+      <li><a href="#서비스-소개-1" id="markdown-toc-서비스-소개-1">서비스 소개</a></li>
+      <li><a href="#업데이트-내용-1" id="markdown-toc-업데이트-내용-1">업데이트 내용</a></li>
+    </ul>
+  </li>
+  <li><a href="#launch-of-the-notebook-explorer" id="markdown-toc-launch-of-the-notebook-explorer">Launch of the Notebook Explorer</a>    <ul>
+      <li><a href="#서비스-소개-2" id="markdown-toc-서비스-소개-2">서비스 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="ads-jupyterlab-ui-enhancements">ADS JupyterLab UI Enhancements</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> June 9, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/3f43adf7-d2ec-4aed-a676-781262e15c62/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/3f43adf7-d2ec-4aed-a676-781262e15c62/</a></li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>OCI Data Science 에서는 Data Science 모델 작업을 위한 JupyterLab Notebook 세션을 제공합니다. 노트북 세션에서는 다양한 워크로드에서 활용할 수 있는 Conda 환경을 제공하고 있으며, Conda 환경을 탐색할 수 있는 <strong>Environment Explorer</strong> 를 제공합니다.</p>
+
+<h3 id="업데이트-내용">업데이트 내용</h3>
+
+<h4 id="the-environment-explorer-탭의-기능이-추가-되었습니다">The Environment Explorer 탭의 기능이 추가 되었습니다.</h4>
+<ul>
+  <li>콘다 환경을 쉽게 설치, 복제, 게시, 제거할 수 있는 Action Menu가 추가되었습니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-1.png" alt="Environment Explorer #1" />
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-2.png" alt="Environment Explorer #2" /></li>
+  <li>Conda 환경의 <strong>“Description”</strong> 섹션에서 해당 환경의 최신버전에서 업데이트된 내용을 제공합니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-3.png" alt="Environment Explorer #3" /></li>
+</ul>
+
+<h4 id="the-launcher-tab-개선사항">The Launcher tab 개선사항</h4>
+<ul>
+  <li>설정 섹션에서 간편하게 오브젝트 스토리지 버킷에 대한 설정을 할 수 있습니다. 버킷을 설정하면 특정 Conda 환경 및 결과물을 게시할때 사용됩니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-4.png" alt="Launcher #1" /></li>
+  <li>런처 화면에서 설치되어 있는 Conda 환경을 Publish 할 수 있는 메뉴가 추가되었습니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-5.png" alt="Launcher #1" /></li>
+</ul>
+
+<hr />
+
+<h2 id="the-data-labeling-v3-release-is-now-available">The Data Labeling V3 Release is now Available</h2>
+<ul>
+  <li><strong>Services:</strong> Data Labeling</li>
+  <li><strong>Release Date:</strong> June 22, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/e2fbe612-239c-4704-8008-3932576dfacd/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/e2fbe612-239c-4704-8008-3932576dfacd/</a></li>
+</ul>
+
+<h3 id="서비스-소개-1">서비스 소개</h3>
+<p>OCI에서는 텍스트 또는 이미지로 구성된 데이터셋을 AI 또는 ML 에서 활용할 수 있도록 라벨링 할 수 있는 서비스인 Data Labeling 서비스를 제공합니다.</p>
+<ul>
+  <li>Data Labeling 예시 <strong>(데이터셋 준비 -&gt; 데이터 라벨링 -&gt; 모델 학습 -&gt; 모델 배포)</strong>
+<img src="/assets/img/aiml/2022/oci-202206-release-datalabeling-1.png" alt="Data Labeling 예시 #1" /></li>
+  <li>OCI Data Labeling 서비스 구성 예시
+<img src="/assets/img/aiml/2022/oci-202206-release-datalabeling-2.png" alt="Data Labeling 예시 #2" /></li>
+</ul>
+
+<h3 id="업데이트-내용-1">업데이트 내용</h3>
+<p>기존 V2 까지 공개되었던 데이터 라벨링 서비스에서 이번 업데이트를 통해 V3를 공개하였습니다. V3에서 추가된 기능은 아래와 같습니다.</p>
+
+<ul>
+  <li>이제 CSV 파일에서 텍스트 기반 <a href="https://docs.oracle.com/iaas/data-labeling/data-labeling/using/datasets.htm#dataset-create" target="_blank" rel="noopener">데이터셋을 생성</a>할 수 있습니다.
+    <ul>
+      <li>처음 5개의 열과 행이 미리 보기로 표시됩니다.</li>
+      <li>열 구분 기호, 줄 구분 기호 및 이스케이프 문자를 지정합니다. 모든 구분 기호를 사용자가 지정할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>Data-set을 JSONL Compact Plus Content format 으로 내보낼 수 있도록 기능이 추가 되었습니다.</li>
+  <li>데이터셋의 레코드를 <a href="https://github.com/oracle-samples/oci-data-science-ai-samples/tree/master/data_labeling_examples" target="_blank" rel="noopener">소스 코드</a>를 통해 대량으로 라벨링 할 수 있습니다.
+    <ul>
+      <li>크게 BOUNDING_BOX(위치 지정 라벨링), CLASSIFICATION(분류)) 방식으로 라벨링을 할 수 있도록 제공함</li>
+      <li>
+        <p>CLASSIFICATION(분류)) 의 경우 FIRST_LETTER_MATCH(첫글자 매칭), FIRST_REGEX_MATCH(정규식 매칭), CUSTOM_LABELS_MATCH(사용자 정의 매칭) 유형을 제공함.</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- FIRST_LETTER_MATCH: The first letter of the DLS Dataset record's name must be equal to the first letter of the label that the record will be annotated with. The matching is not case-sensitive.
+Consider a dataset having following records: cat1.jpeg, cat2.jpeg, dog1.png, dog2.png
+Label Set: cat , dog 
+Result of FIRST_LETTER_MATCH labeling algorithm: 
+    cat1.jpeg will be labeled with cat label
+    cat2.jpeg will be labeled with cat label
+    dog1.png will be labeled with dog label
+    dog2.png will be labeled with dog label
+
+- FIRST_REGEX_MATCH: The regular expression (regex) pattern assigned to _FIRST_MATCH_REGEX_PATTERN_ will be applied to the DLS Dataset record's name, and the first capture group extracted must be equal to the label that the record will be annotated with.
+Consider a dataset having following records: PetCat1.jpeg, PetCat2.jpeg, PetDog1.png, PetDog2.png
+Label Set: cat , dog 
+FIRST_MATCH_REGEX_PATTERN : ^([^\/]*)\/.*$
+Result of FIRST_REGEX_MATCH labeling algorithm: 
+    PetCat1.jpeg will be labeled with cat label
+    PetCat2.jpeg will be labeled with cat label
+    PetDog1.png will be labeled with dog label
+    PetDog2.png will be labeled with dog label
+
+
+- CUSTOM_LABELS_MATCH: This algorithm takes object storage path as input along with the label that needs to be applied to records under that path. Only root level path is supported. Multiple labels can also be assigned to a given path. The labeling algorithm for this case is .
+Consider a dataset having following records:
+cat/cat1.jpeg, cat/cat2.jpeg, dog/dog1.jpeg, dog/dog2.jpeg
+Labels in dataset: dog, pup, cat, kitten
+CUSTOM_LABELS={ "dog/": ["dog","pup"], "cat/": ["cat", "kitten"] }
+Result of CUSTOM_LABELS_MATCH algorithm: 
+    cat/cat1.jpeg will be labeled with cat and kitten labels
+    cat/cat2.jpeg will be labeled with cat and kitten labels
+    dog/dog1.png will be labeled with dog and pup labels
+    dog/dog2.png will be labeled with dog and pup labels
+</code></pre></div>        </div>
+      </li>
+      <li>BOUNDING_BOX는 레코드별로 OCI, BOX의 4개 좌표값, 라벨링 정보를 CSV 형태로 사전 정의가 필요합니다.
+<img src="/assets/img/aiml/2022/oci-202206-release-datalabeling-3.png" alt="데이터 예시" /></li>
+    </ul>
+  </li>
+  <li><a href="/aiml/bulk-labeling-with-python-code/" target="_blank" rel="noopener">샘플 코드를 활용하여 Python 코드를 활용하여 OCI DLS(Data Labeling Service)의 레코드에 라벨링 하기</a> 에서 자세한 내용을 확인할 수 있습니다.
+<br /><br /></li>
+</ul>
+
+<hr />
+
+<h2 id="launch-of-the-notebook-explorer">Launch of the Notebook Explorer</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> June 30, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/988eb1cd-2844-4bf2-94f6-a0f3da94d3e3/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/988eb1cd-2844-4bf2-94f6-a0f3da94d3e3/</a></li>
+</ul>
+
+<h3 id="서비스-소개-2">서비스 소개</h3>
+<p>OCI 데이터 과학의 Jupyter Notebook 세션에 Notebook Explorer 기능이 추가되었습니다. 이 기능을 통해서 다양한 콘다환경의 Notebook Example을 콘다환경 설치 없이 탐색하고 확인할 수 있게 되었습니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-6.png" alt="Notebook Explorer #1" />
+<img src="/assets/img/aiml/2022/oci-202205-release-notebook-7.png" alt="Notebook Explorer #2" /></p>
+
+<hr />
+:ET

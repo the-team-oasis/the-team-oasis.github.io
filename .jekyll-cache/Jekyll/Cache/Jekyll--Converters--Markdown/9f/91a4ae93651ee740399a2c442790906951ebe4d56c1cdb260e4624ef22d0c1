@@ -1,0 +1,123 @@
+I"8<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#use-graalvm-enterprise-in-devops-build-pipelines" id="markdown-toc-use-graalvm-enterprise-in-devops-build-pipelines">Use GraalVM Enterprise in DevOps Build Pipelines</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+      <li><a href="#빌드-파이프라인-구성" id="markdown-toc-빌드-파이프라인-구성">빌드 파이프라인 구성</a></li>
+    </ul>
+  </li>
+  <li><a href="#support-for-vcn-native-pod-networking" id="markdown-toc-support-for-vcn-native-pod-networking">Support for VCN-native pod networking</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+      <li><a href="#native-pod-networking을-사용하는-oke-cluster-구성하기" id="markdown-toc-native-pod-networking을-사용하는-oke-cluster-구성하기">Native pod networking을 사용하는 OKE Cluster 구성하기</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="use-graalvm-enterprise-in-devops-build-pipelines">Use GraalVM Enterprise in DevOps Build Pipelines</h2>
+<ul>
+  <li><strong>Services:</strong> DevOps</li>
+  <li><strong>Release Date:</strong> July 7, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>새로은 JIT Compiler인 Graal을 기반으로 하는 JVM인 GraalVM은 성능, Polygrot 환경 (여러 언어를 통합), 빠른 시작이 가능한 Native Image 기능을 제공하는 최신 VM입니다.</p>
+
+<p>OCI에서는 GraalVM Enterprise를 추가 비용없이 사용할 수 있는데, 이제 OCI DevOps Build Pipeline에서 이 GraalVM Enterprise 빌드 자동화를 지원합니다.</p>
+
+<h3 id="빌드-파이프라인-구성">빌드 파이프라인 구성</h3>
+<p>GraalVM Enterprise에서 필요한 컴포넌트를 설치하는 명령어를 스탭에 추가할 수 있는데, 아래 예시는 GraalVM Native Image를 위한 컴포넌트를 설치하는 스탭입니다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Install</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">latest</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">JDK</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">yum -y install graalvm22-ee-17-native-image</span>
+</code></pre></div></div>
+
+<p>환경 변수 JAVA_HOME에 GraalVM Home Path를 다음과 같이 정의할 수 있습니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="s2">"</span><span class="s">JAVA_HOME"</span> <span class="err">:</span> <span class="s2">"</span><span class="s">/usr/lib64/graalvm/graalvm22-ee-java17"</span>
+</code></pre></div></div>
+
+<p>아래와 같이 Step에서 Path에 Java Home을 지정할 수 있습니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="c1"># PATH is a reserved variable and cannot be defined as a variable.</span>
+    <span class="c1"># PATH can be changed in a build step and the change is visible in subsequent steps.</span>
+ 
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Set</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PATH</span><span class="nv"> </span><span class="s">here"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">export PATH=$JAVA_HOME/bin:$PATH</span>
+</code></pre></div></div>
+
+<p>아래 빌드 파이프라인은 Java 애플리케이션을 GraalVM과 Maven을 활용하여 Native Image로 빌드하는 예시입니다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="m">0.1</span>
+<span class="na">component</span><span class="pi">:</span> <span class="s">build</span>
+<span class="na">timeoutInSeconds</span><span class="pi">:</span> <span class="m">600</span>
+<span class="na">runAs</span><span class="pi">:</span> <span class="s">root</span>
+<span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="s2">"</span><span class="s">JAVA_HOME"</span> <span class="err">:</span> <span class="s2">"</span><span class="s">/usr/lib64/graalvm/graalvm22-ee-java17"</span>
+    <span class="c1"># PATH is a reserved variable and cannot be defined as a variable.</span>
+    <span class="c1"># However, PATH can be changed in a build step and the change is visible in subsequent steps.</span>
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Install</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">latest</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">JDK</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">yum -y install graalvm22-ee-17-native-image</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Set</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PATH</span><span class="nv"> </span><span class="s">here.</span><span class="nv"> </span><span class="s">JAVA_HOME</span><span class="nv"> </span><span class="s">already</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">env</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">variables</span><span class="nv"> </span><span class="s">above."</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">export PATH=$JAVA_HOME/bin:$PATH</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Build</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">executable</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">installed</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">mvn --no-transfer-progress -Pnative -DskipTests package</span>
+<span class="na">outputArtifacts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">app_native_executable</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">BINARY</span>
+    <span class="na">location</span><span class="pi">:</span> <span class="s">target/my-app</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="support-for-vcn-native-pod-networking">Support for VCN-native pod networking</h2>
+<ul>
+  <li><strong>Services:</strong> Container Engine for Kubernetes</li>
+  <li><strong>Release Date:</strong> July 12, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>OKE에서는 기존에 기본 CNI(Container Network Interface: 컨테이너간 네트워킹 제어를 위한 플러그인 개발 표준)로 Flannel만 제공되었습니다. Flannel은 대표적인 CNI중 하나이며, 오버레이 네트워크(Overlay Network: 각 노드들의 네트워크위에 별도의 가상 네트워크를 구성하여 마치 하나의 네트워크인 것처럼 인식하는 것)를 두고 서로 다른 노드간의 Pod 통신도 문제 없이 이뤄질 수 있도록 해주는 역할을 합니다.</p>
+
+<p><strong>Flannel overlay networking</strong><br />
+<cite>Image source: https://blogs.oracle.com/cloud-infrastructure/post/announcing-vcn-native-pod-networking-for-kubernetes-in-oci</cite>
+<img src="https://blogs.oracle.com/content/published/api/v1.1/assets/CONT94FDF8973EA4486AB65E88CA4DF72114/Medium?cb=_cache_7675&amp;format=jpg&amp;channelToken=f7814d202b7d468686f50574164024ec" alt="" /></p>
+
+<p>Flannel Overlay Networking로 클러스터를 구성하면, 위 그림처럼 Layer 3에서 네트워킹을 제공하는 추가적인 Overaly Networking이 구성됩니다. 그리고 Kubernetes Worker Node에서 실행되는 Pod는 Overlay Network을 통해서 IP를 할당받게 됩니다. Flannel은 VCN Worker Node 서브넷 대역의 IP를 사용히지 않아야 하는 경우나 Node 서브넷에서 제공되는 IP수가 운영해야 하는 Pod수보다 적을 수 있는 환경에서 사용하면 좋습니다.</p>
+
+<p>자세한 내용은 아래 Flannel 공식 Github 문서를 참고 하시기 바랍니다.</p>
+
+<p><a href="https://github.com/flannel-io/flannel">Flannel</a></p>
+
+<p><strong>Native pod networking</strong><br />
+<cite>Image source: https://blogs.oracle.com/cloud-infrastructure/post/announcing-vcn-native-pod-networking-for-kubernetes-in-oci</cite></p>
+
+<p><img src="https://blogs.oracle.com/content/published/api/v1.1/assets/CONT78BF0A5D337F41A887531F7969A18FDE/Medium?cb=_cache_7675&amp;format=jpg&amp;channelToken=f7814d202b7d468686f50574164024ec" alt="" /></p>
+
+<p>위 그림은 Worker Node를 위한 서브넷(CIDR: 10.20.40.0/24)과 Pod를 위한 서브넷  (CIDR: 10.20.50.0/24)을 VCN에 생성하여 <strong>Native pod networking</strong>를 사용한 OKE Cluster를 구성한 그림입니다. Pod의 경우 각 Worker Node의 vNICs(가상 네트워크 인터페이스 카드)에 Pod 서브넷 대역에서 제공되는 Private IP를 할당하고 이를 Pod에 사용하게 되며, Pod는 해당 인터페이스를 통해서 인바운드/아웃바운드 통신을 하게 됩니다. 이런 식으로 각 Pod는 vNIC에 연결되고 VCN에 직접 연결되어 Overlay Networking과 같은 캡슐화 없이 통신이 가능해집니다. Native pod networking을 사용한 Cluster내의 Pod는 OKE Cluster 노드가 아닌 같은 VCN내의 다른 VM 인스턴스과의 통신이 가능하며, 다른 VCN과의 통신(Local or Remote Peering 사용), 온프레미스 환경과의 통신(OCI FastConnect 혹은 IPSec VPN 사용)도 사용 가능합니다. 또한 OCI VCN Flow Log 기능을 통해서 Pod간 트래픽도 추적할 수 있습니다. 이 외에도 캡슐화를 위한 별도의 레이어가 없어 오버헤드가 줄어들면서 처리량이나 대기시간에 있어서 일관성 있는 성능을 제공합니다. (다른 노드간 Pod 통신 대기시간이 Flannel 사용시보다 약 25% 향상됨)</p>
+
+<h3 id="native-pod-networking을-사용하는-oke-cluster-구성하기">Native pod networking을 사용하는 OKE Cluster 구성하기</h3>
+<p>아래 포스트 참조</p>
+
+<p><a href="https://the-team-oasis.github.io/cloudnative/vcn-native-pod-networking-for-oke/">VCN-Native Pod Networking CNI 플러그인을 사용하여 OKE (Oracle Container Engine for Kubernetes) 클러스터 구성하기</a></p>
+
+:ET

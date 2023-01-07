@@ -1,0 +1,71 @@
+I"�<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#accelerated-data-science-v2510-is-released" id="markdown-toc-accelerated-data-science-v2510-is-released">Accelerated Data Science v2.5.10 is released</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+      <li><a href="#oci-ads-설치-방법" id="markdown-toc-oci-ads-설치-방법">OCI ADS 설치 방법</a></li>
+      <li><a href="#업데이트-내용" id="markdown-toc-업데이트-내용">업데이트 내용</a></li>
+    </ul>
+  </li>
+  <li><a href="#introducing-bring-your-own-container" id="markdown-toc-introducing-bring-your-own-container">Introducing Bring Your Own Container</a>    <ul>
+      <li><a href="#서비스-소개-1" id="markdown-toc-서비스-소개-1">서비스 소개</a></li>
+      <li><a href="#사전-요구-사항" id="markdown-toc-사전-요구-사항">사전 요구 사항</a></li>
+      <li><a href="#bring-your-own-container-적용-예시" id="markdown-toc-bring-your-own-container-적용-예시">Bring Your Own Container 적용 예시</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="accelerated-data-science-v2510-is-released">Accelerated Data Science v2.5.10 is released</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> May 6, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/0e643b8f-cca1-4f03-90d5-86a7e83fd9ae/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/0e643b8f-cca1-4f03-90d5-86a7e83fd9ae/</a></li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>Oracle ADS(Accelerated Data Science) SDK는 OCI Data Science 서비스의 일부로 포함된 Python 라이브러리입니다. ADS는 데이터 수집에서 모델 평가 및 해석에 이르기까지 기계 학습 모델의 수명 주기와 관련된 모든 단계를 다루는 개체 및 방법을 통해 친숙한 사용자 인터페이스를 제공합니다.</p>
+
+<h3 id="oci-ads-설치-방법">OCI ADS 설치 방법</h3>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python3 <span class="nt">-m</span> pip <span class="nb">install </span>oracle-ads
+</code></pre></div></div>
+
+<h3 id="업데이트-내용">업데이트 내용</h3>
+<ul>
+  <li>빅데이터 서비스에 연결하기 위한 <mark>BDSSecretKeeper</mark> 클래스에서 OCI Vault 서비스에 저장된 자격증명을 이용할 수 있도록 개선되었습니다.<br /><a href="https://docs.oracle.com/en-us/iaas/tools/ads-sdk/latest/user_guide/big_data_service/connect.html#using-the-vault" target="_blank" rel="noopener">자세한 내용 확인</a></li>
+  <li>빅데이터 서비스에 연결하기 위해 OCI Vault 없이 수동으로 연결을 구성하기 위한 <mark>krbcontext</mark> 와 <mark>refresh_ticket</mark> 기능이 추가 되었습니다.<br /><a href="https://docs.oracle.com/en-us/iaas/tools/ads-sdk/latest/user_guide/big_data_service/connect.html#without-using-the-vault" target="_blank" rel="noopener">자세한 내용 확인</a></li>
+  <li>ADS Configuration 구성파일 경로를 지정할 수 있도록 <mark>set_auth</mark> 메서드가 추가 되었습니다. 이 기능을 통해 OCI ADS 구성파일의 경로를 변경할 수 있습니다.<br /><a href="https://docs.oracle.com/en-us/iaas/tools/ads-sdk/latest/user_guide/big_data_service/quick_start.html?highlight=set+auth" target="_blank" rel="noopener">사용 예시 확인</a></li>
+  <li>OCI CLI 요구사항을 <mark>2.59.0</mark> 버전이상으로 변경하였습니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="introducing-bring-your-own-container">Introducing Bring Your Own Container</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> May 26, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/a569bbf6-4fb3-4f59-964b-cae816a3ccbd/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/a569bbf6-4fb3-4f59-964b-cae816a3ccbd/</a></li>
+</ul>
+
+<h3 id="서비스-소개-1">서비스 소개</h3>
+<p>사용자가 직접 구성한 컨테이너 이미지를 사용하여 Data Science의 <mark>Job</mark> 또는 <mark>Job Runs</mark>를 실행할 수 있도록 기능이 추가 되었습니다.</p>
+
+<h3 id="사전-요구-사항">사전 요구 사항</h3>
+<ul>
+  <li>사용자가 별도로 도커로 빌드한 이미지가 <strong>OCI 컨테이너 레지스트리</strong>에 업로드 되어 있어야 합니다.</li>
+  <li>업로드된 이미지의 OCID를 확인 후 복사합니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-ocir.png" alt="OCIR 예시" title=" " /></li>
+</ul>
+
+<h3 id="bring-your-own-container-적용-예시">Bring Your Own Container 적용 예시</h3>
+<ol>
+  <li><strong>“데이터 과학”</strong> 메뉴로 이동하여 프로젝트로 이동합니다. (프로젝트가 없는 경우 생성 필요)
+<img src="/assets/img/aiml/2022/oci-202205-release-byoc-1.png" alt="BYOC 예시" title=" " /></li>
+  <li><strong>“작업생성”</strong> 버튼을 클릭합니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-byoc-2.png" alt="BYOC 예시" title=" " /></li>
+  <li>작업생성 화면에서 <strong>“자체 컨테이너 적용”</strong>을 체크하고 복사한 <em>컨테이너 저장소에 저장한 이미지의 OCID</em>를 붙여넣습니다.
+<img src="/assets/img/aiml/2022/oci-202205-release-byoc-3.png" alt="BYOC 예시" title=" " /></li>
+  <li>다른 선택사항을 기존과 동일하게 선택하고 <strong>“생성”</strong> 버튼을 클릭 합니다.</li>
+</ol>
+:ET

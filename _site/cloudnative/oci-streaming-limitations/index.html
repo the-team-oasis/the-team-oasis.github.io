@@ -1,0 +1,591 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI Streaming Service 제약 사항</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI Streaming Service의 제약 사항에 대해서 알아봅니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/oci-streaming-limitations/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI Streaming Service 제약 사항">
+	<meta property="og:description" content="OCI Streaming Service의 제약 사항에 대해서 알아봅니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/oci-streaming-limitations/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI Streaming Service 제약 사항">
+	<meta name="twitter:description" content="OCI Streaming Service의 제약 사항에 대해서 알아봅니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">OCI Streaming Service 제약 사항</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>OCI Streaming Service 제약 사항</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI Streaming Service의 제약 사항에 대해서 알아봅니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-streaming-service" id="markdown-toc-oci-streaming-service">OCI Streaming Service</a></li>
+  <li><a href="#oci-streaming-service-제약-사항" id="markdown-toc-oci-streaming-service-제약-사항">OCI Streaming Service 제약 사항</a></li>
+  <li><a href="#참고" id="markdown-toc-참고">참고</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-streaming-service">OCI Streaming Service</h3>
+<p>OCI Streaming Service는 OCI에서 제공하는 관리형 Apache Kafka 호환 이벤트 스트리밍 서비스로 다음과 같은 장점을 제공합니다.</p>
+
+<ul>
+  <li>탄력적이고 확장성이 뛰어난 플랫폼으로 프로비저닝, 확장, 보안 패치를 포함하여 이벤트 스트리밍을 위한 모든 인프라 및 플랫폼을 OCI 환경에서 관리할 수 있습니다.</li>
+  <li>내구성 및 내결함성이 보장된 견고한 구성으로 엔터프라이즈 수준의 높은 안정성을 제공합니다.</li>
+  <li>Kafka 호환 API를 제공하여 특정 벤더에 대한 종속성을 제거할 수 있습니다.</li>
+  <li>프로비저닝된 용량에 대한 비용은 무료이며, 사용한 만큼만 지불하는 간소화된 가격 정책을 제공합니다.</li>
+  <li>OCI 자체 서비스나 타사 솔루션과의 Out of box 통합을 지원합니다. (GoldenGate, Object Storage, JDBC, OIC, Splunk 등)</li>
+</ul>
+
+<p><img src="/assets/img/cloudnative-security/2022/oci-streaming-limitations-1.png" alt="" title=" " /></p>
+
+<h3 id="oci-streaming-service-제약-사항">OCI Streaming Service 제약 사항</h3>
+<p>OCI Streaming Service를 사용하기 위해서는 기본적인 제약 사항에 대해서 알고 있어야 합니다. 제약 사항에 대해서 자세히 알아 보도록 합니다.</p>
+
+<ol>
+  <li>Stream내의 메시지 보관 기간은 최소 <mark>24시간</mark>, 최대 <mark>7일</mark>입니다. 지정된 보관 기간을 초과하면 메시지는 자동으로 삭제됩니다.
+    <ul>
+      <li>보관 기간은 Stream을 생성할 때 지정할 수 있으며 한번 생성된 Stream에 대한 보관 기간은 변경할 수 없습니다.</li>
+    </ul>
+  </li>
+  <li>Tenancy의 기본 Partition개수는 <mark>5개</mark> 입니다. (Monthly Universal Credit인 경우이며 PAYG인 경우 제공되지 않습니다.)
+    <ul>
+      <li>제약이 있지만, Partition이 더 필요한 경우에는 OCI Console에서 Limit Increase 요청을 통해서 늘릴수 있습니다.</li>
+    </ul>
+  </li>
+  <li>Stream을 한번 생성한 후에는 Partition의 수를 조정할 수 없습니다.
+    <ul>
+      <li>Stream을 생성할 때 애플리케이션의 처리량 요구 사항을 미리 산정하여 Partition수를 지정하여야 합니다.</li>
+      <li>추가 용량이 필요한 경우에는 Stream Pool에 Stream을 추가하는 방법으로 확장하여야 합니다.</li>
+      <li>현재는 제공되지 않고 있지만, 동적으로 Partition이 스케일 되는 기능이 추후에 제공될 예정이라고 합니다.</li>
+    </ul>
+  </li>
+  <li>각 Partition에 대한 데이터 쓰기 속도는 <mark>초당 1MB</mark>까지 지원하며, PUT 요청 수는 <mark>초당 1000개</mark> 까지 가능합니다.
+    <ul>
+      <li>Producer가 Stream에 게시할 수 있는 고유 메시지의 최대 크기는 1MB(Base64 디코딩된 후 키와 메시지 합계)입니다.</li>
+      <li>Partition의 수를 늘리게 되면 처리량도 증가합니다. 예를 들어, 10개의 Partition을 가지는 Stream인 경우라면 10MB/s의 쓰기 속도로 데이터를 전송할 수 있으며 초당 10,000개까지 쓸 수 있습니다.</li>
+      <li>만일 SDK를 사용하여 위 제한을 초과하는 요청이 전송되는 경우 다음과 같은 오류 메시지가 반환됩니다.<br />
+ <mark>exception is org.apache.kafka.common.errors.RecordBatchTooLargeException: The request included message batch larger than the configured segment size on the server.</mark></li>
+    </ul>
+  </li>
+  <li>각 Partition은 <mark>초당 2MB</mark>까지 읽기 속도를 지원합니다.
+    <ul>
+      <li>Partition의 수를 늘리게 되면 처리량도 증가합니다. 예를 들어, 10개의 Partition을 가지는 Stream인 경우라면 20MB/s의 읽기 속도를 지원합니다.</li>
+      <li>만일 SDK를 사용하여 위 제한을 초과하는 요청이 전송되는 경우 다음과 같은 오류 메시지가 반환됩니다.<br />
+ <mark>exception is org.apache.kafka.common.errors.RecordBatchTooLargeException: The request included message batch larger than the configured segment size on the server.</mark></li>
+    </ul>
+  </li>
+  <li>Stream에서 Partition Cursor (Consumer Group을 사용하지 않는 경우) 혹은 하나의 Consumer Group Cursor(Consumer Group을 사용하는 경우)에서는 <mark>초당 5개의 요청(GET)</mark>까지 지원합니다.
+    <ul>
+      <li>일반적으로 Partition Cursor는 한번 만들면 계속 재사용 가능하지만, 메시지 소비가 5분이상 중지되면 커서를 다시 생성해야 합니다.</li>
+    </ul>
+  </li>
+  <li>Stream당 Consumer Group은 최대 <mark>50개</mark>까지 생성할 수 있습니다.
+    <ul>
+      <li>Consumer Group을 50개 이상 생성하려고 하는 경우 다음과 같은 오류가 발생합니다.<br />
+ <mark>com.oracle.bmc.model.BmcException: (400, InvalidParameter, false) Too many groups created on stream.</mark></li>
+    </ul>
+  </li>
+  <li>Consumer Group을 사용하는 경우 하나의 Partition은 <mark>초당 최대 250개의 요청(GET)</mark>을 지원합니다.
+    <ul>
+      <li>Consumer Group당 초당 5개의 요청(GET)이 가능하고, 하나의 Stream에서는 최대 50개의 Consumer Group을 지원합니다. 또한 각 Partition은 Consumer Group의 최대 하나의 멤버(인스턴스)가 할당(Partition당 50개의 멤버가 할당될 수 있음)될 수 있으므로 최대 250개까지 요청(GET)을 지원하게 됩니다.</li>
+      <li>Stream에서 지원하는 최대 요청(GET) 개수가 250개 이므로, Partition을 늘려도 요청(GET)수를 늘릴 수 없습니다. (Stream당 Consumer Group수는 50개로 제한이 걸려 있기 때문)</li>
+    </ul>
+  </li>
+  <li>하나의 요청(GET)은 기본적으로 가능한 많은 메시지를 반환하지만, <mark>최대 10,000</mark>까지 메시지 수를 제한할 수 있습니다.
+    <ul>
+      <li>OCI Streaming SDK의 get 메소드(Java SDK의 경우 GetMessagesRequest Class의 getLimit 메소드)에 적용</li>
+    </ul>
+  </li>
+  <li>Consumer Group은 Stream에 구성된 보전 기간동안 사용하지 않으면 삭제되며, Consumer Group 멤버(인스턴스)가 <mark>30초</mark> 이상 메시지 소비를 중지하면 Consumer Group에서 삭제됩니다.
+    <ul>
+      <li>삭제된 멤버(인스턴스)와 기존에 연결되어 있던 Partition의 경우 다른 인스턴스에 재할당 됩니다. 이것을 <mark>Rebalancing</mark> 이라고 합니다.
+  <img src="/assets/img/cloudnative-security/2022/oci-streaming-limitations-2.png" alt="" title=" " /></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="참고">참고</h3>
+<p><a href="https://www.oracle.com/kr/cloud/cloud-native/streaming/faq/">https://www.oracle.com/kr/cloud/cloud-native/streaming/faq/</a></p>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-11-29T00:00:00+09:00" itemprop="datePublished"> 2022-11-29</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> streaming</span> <span class="icon-price-tag pr10"> kafka</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/cloudnative/oci-streaming-flink-integration/">&laquo; Streaming Cloud Service with Kafka and Flink</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-certificate-overview/">OCI Certificates 서비스 살펴보기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/oci-streaming-limitations/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

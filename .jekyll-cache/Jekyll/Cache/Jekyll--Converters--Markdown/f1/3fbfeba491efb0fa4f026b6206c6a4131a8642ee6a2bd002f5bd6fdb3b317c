@@ -1,0 +1,122 @@
+I"�"<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-콘솔-알아보기" id="markdown-toc-oci-콘솔-알아보기">OCI 콘솔 알아보기</a></li>
+  <li><a href="#oci-콘솔-화면-구성-살펴보기" id="markdown-toc-oci-콘솔-화면-구성-살펴보기">OCI 콘솔 화면 구성 살펴보기</a>    <ul>
+      <li><a href="#시작하기-탭" id="markdown-toc-시작하기-탭">시작하기 탭</a></li>
+      <li><a href="#대시보드-탭" id="markdown-toc-대시보드-탭">대시보드 탭</a></li>
+    </ul>
+  </li>
+  <li><a href="#콘솔-설정" id="markdown-toc-콘솔-설정">콘솔 설정</a>    <ul>
+      <li><a href="#세션-타임아웃-시간-변경" id="markdown-toc-세션-타임아웃-시간-변경">세션 타임아웃 시간 변경</a></li>
+      <li><a href="#사용자-프로필-설정" id="markdown-toc-사용자-프로필-설정">사용자 프로필 설정</a></li>
+    </ul>
+  </li>
+  <li><a href="#영역-전환" id="markdown-toc-영역-전환">영역 전환</a>    <ul>
+      <li><a href="#구독되어-있는-영역간-영역-전환" id="markdown-toc-구독되어-있는-영역간-영역-전환">구독되어 있는 영역간 영역 전환</a></li>
+      <li><a href="#영역-구독-추가" id="markdown-toc-영역-구독-추가">영역 구독 추가</a></li>
+      <li><a href="#제한-증가-요청-영역-구독-수" id="markdown-toc-제한-증가-요청-영역-구독-수">제한 증가 요청 (영역 구독 수)</a></li>
+    </ul>
+  </li>
+  <li><a href="#콘솔-언어-변경" id="markdown-toc-콘솔-언어-변경">콘솔 언어 변경</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-콘솔-알아보기">OCI 콘솔 알아보기</h3>
+<p>OCI Console을 원활하게 사용하기 위해서 지원되는 브라우저를 확인 후 지원되는 브라우저에서 로그인이 필요합니다. 아래 포스팅을 통해 지원되는 브라우저 조건 및 로그인 방법을 먼저 확인 합니다.</p>
+<blockquote>
+  <p><a href="/getting-started/sign-in-the-console/">OCI 콘솔 사용을 위한 기본 조건과 로그인 해보기</a></p>
+</blockquote>
+
+<h3 id="oci-콘솔-화면-구성-살펴보기">OCI 콘솔 화면 구성 살펴보기</h3>
+<p>콘솔에서 제공하는 시작하기, 대시보드 탭별로 화면 구성을 살펴 봅니다.</p>
+
+<h4 id="시작하기-탭">시작하기 탭</h4>
+<p>시작하기 탭에서는 서비스 링크, 빠른시작, 리소스 실행, 탐색 시작 섹션을 제공합니다. 자세한 내용은 아래 사진의 내용을 참고해주세요.
+<img src="/assets/img/getting-started/2022/oci-console-getting-start-1.png" alt="시작하기 설명 #1" />
+<img src="/assets/img/getting-started/2022/oci-console-getting-start-2.png" alt="시작하기 설명 #2" /></p>
+
+<h4 id="대시보드-탭">대시보드 탭</h4>
+<p>대시보드 탭에서는 리소스 탐색기, 청구, 모니터링, 로깅등을 시각화하여 모니터링 할 수 있는 도구를 제공합니다. 사용자의 요구사항에 따라 직접 위젯을 추가하거나 레이아웃을 편집할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-console-dashboard-1.png" alt="대시보드 설명 #1" /></p>
+
+<h3 id="콘솔-설정">콘솔 설정</h3>
+<p>OCI 콘솔 오른쪽 상단에 사용자 아이콘을 클릭하여 콘솔 설정을 변경할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-console-setting-1.png" alt="콘솔 설정 변경 #1" /></p>
+
+<h4 id="세션-타임아웃-시간-변경">세션 타임아웃 시간 변경</h4>
+<p>콘솔 설정 상단에 “<strong>세션 시간 초과</strong>” 섹션에서 세션 타임아웃 시간을 조정할 수 있습니다.
+타임아웃 시간은 15분, 30분, 60분, 사용자 정의 시간으로 선택할 수 있고 사용자 정의 시간은 5분~60분 사이로 입력 가능합니다.</p>
+
+<ul>
+  <li>세션 타임아웃 변경 섹션
+ <img src="/assets/img/getting-started/2022/oci-console-setting-2.png" alt="콘솔 설정 변경 #2" /></li>
+  <li>타임아웃 시간 초과 값 <strong>드롭다운</strong> 클릭 시 변경 옵션값을 확인할 수 있습니다.
+ <img src="/assets/img/getting-started/2022/oci-console-setting-3.png" alt="콘솔 설정 변경 #3" /></li>
+  <li><strong>사용자정의 시간(분)</strong> 선택 시 직접 입력할 수 있습니다. (5분~60분)
+ <img src="/assets/img/getting-started/2022/oci-console-setting-4.png" alt="콘솔 설정 변경 #4" /></li>
+</ul>
+
+<h4 id="사용자-프로필-설정">사용자 프로필 설정</h4>
+<p>메인 화면에서 추천 메뉴를 자동으로 추천하기 위한 사용자의 직무별 프로파일을 선택할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-console-setting-5.png" alt="콘솔 설정 변경 #5" /></p>
+
+<h3 id="영역-전환">영역 전환</h3>
+<p>OCI 콘솔 우측 상단에 드롭다운 박스를 클릭하여 OCI Region(영역)을 변경할 수 있습니다.</p>
+
+<h4 id="구독되어-있는-영역간-영역-전환">구독되어 있는 영역간 영역 전환</h4>
+<ol>
+  <li>우측 상단에 Region(영역) 드롭다운 박스를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-change-1.png" alt="영역 변경 #1" /></li>
+  <li>클릭하여 현재 구독되어 있는 Region(영역) 중 변경할 Region(영역)을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-change-2.png" alt="영역 변경 #2" /></li>
+  <li>Region(영역) 전환이 완료 되었습니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-change-3.png" alt="영역 변경 #3" /></li>
+</ol>
+
+<h4 id="영역-구독-추가">영역 구독 추가</h4>
+<ol>
+  <li>우측 상단에 Region(영역) 드롭다운 박스를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-change-1.png" alt="영역 변경 #1" /></li>
+  <li>레이어 팝업 하단 <strong>“영역 관리”</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-subscription-1.png" alt="영역 구독 추가 #1" /></li>
+  <li>영역 관리 메뉴에서 추가할 Region(영역) 우측 <strong>“구독”</strong> 버튼을 클릭하여 구독을 추가 합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-subscription-2.png" alt="영역 구독 추가 #2" /></li>
+  <li>팝업 내용을 확인하고 <strong>“구독”</strong> 버튼을 클릭하여 추가 합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-subscription-3.png" alt="영역 구독 추가 #3" /></li>
+</ol>
+
+<h4 id="제한-증가-요청-영역-구독-수">제한 증가 요청 (영역 구독 수)</h4>
+<p>만약 구독을 추가하려고 할때 아래 사진과 같이 최대 영역 수를 초과했다는 메시지가 나타난다면, 제한 증가 요청을 통해 구독 제한을 추가할 수 있습니다.</p>
+
+<ol>
+  <li>화면 우측에 있는 지원 센터 아이콘을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-subscription-4.png" alt="영역 구독 추가 #4" /></li>
+  <li>클릭 후 팝업되는 레이어에서 <strong>“제한 증가 요청”</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-regions-subscription-5.png" alt="영역 구독 추가 #5" /></li>
+  <li>클릭 후 이동된 화면에서 아래와 같이 선택 및 입력 합니다.
+    <ul>
+      <li>서비스 범주 : <strong>Regions</strong></li>
+      <li>리소스 : <strong>Subscribed region count</strong></li>
+      <li>테넌시 제한 : <strong>3</strong> / 각자 현재 제한에서 필요한 만큼 추가한 숫자를 입력합니다.</li>
+      <li>요청 사유 : <strong>각자 사유를 자유롭게 입력</strong></li>
+      <li><strong>“지원 요청 생성”</strong> 버튼 클릭하여 완료 합니다.</li>
+    </ul>
+
+    <p><img src="/assets/img/getting-started/2022/oci-console-regions-subscription-6.png" alt="영역 구독 추가 #6" /></p>
+  </li>
+  <li>지원 요청이 생성 완료된 이후 일반적으로 1 영업일 이내에 처리가 완료됩니다.</li>
+</ol>
+
+<h3 id="콘솔-언어-변경">콘솔 언어 변경</h3>
+<p>OCI 콘솔에서는 사용자에 맞게 콘솔 UI에서 표기되는 언어를 변경할 수 있습니다.</p>
+<ol>
+  <li>우측 상단 “언어” 아이콘을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-console-language-change-1.png" alt="콘솔 언어 변경 #1" /></li>
+  <li>원하는 언어를 선택 후 클릭합니다. (English 선택)
+<img src="/assets/img/getting-started/2022/oci-console-language-change-2.png" alt="콘솔 언어 변경 #2" /></li>
+  <li>언어 변경이 완료되었습니다. (한국어 -&gt; 영어)
+<img src="/assets/img/getting-started/2022/oci-console-language-change-3.png" alt="콘솔 언어 변경 #3" /></li>
+</ol>
+:ET

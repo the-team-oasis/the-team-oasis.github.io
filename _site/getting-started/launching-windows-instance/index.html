@@ -1,0 +1,787 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI에서 윈도우즈 인스턴스 생성 튜토리얼</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="Oracle Cloud Infrastructure (OCI)에서 윈도우즈 인스턴스를 생성하는 과정을 설명합니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//getting-started/launching-windows-instance/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI에서 윈도우즈 인스턴스 생성 튜토리얼">
+	<meta property="og:description" content="Oracle Cloud Infrastructure (OCI)에서 윈도우즈 인스턴스를 생성하는 과정을 설명합니다.">
+	<meta property="og:url" content="http://localhost:4000//getting-started/launching-windows-instance/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI에서 윈도우즈 인스턴스 생성 튜토리얼">
+	<meta name="twitter:description" content="Oracle Cloud Infrastructure (OCI)에서 윈도우즈 인스턴스를 생성하는 과정을 설명합니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//getting-started/">getting started</a>
+    
+  
+    
+        <a class="current">OCI에서 윈도우즈 인스턴스 생성 튜토리얼</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Compute</p>
+				<h1>OCI에서 윈도우즈 인스턴스 생성 튜토리얼</h1>
+			</header>
+
+			
+			<p class="teaser">
+				Oracle Cloud Infrastructure (OCI)에서 윈도우즈 인스턴스를 생성하는 과정을 설명합니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#튜토리얼에서-다룰-내용" id="markdown-toc-튜토리얼에서-다룰-내용">튜토리얼에서 다룰 내용</a></li>
+  <li><a href="#구획-compartment-생성" id="markdown-toc-구획-compartment-생성">구획 (Compartment) 생성</a></li>
+  <li><a href="#가상-클라우드-네트워크-virtual-cloud-network-vcn-생성" id="markdown-toc-가상-클라우드-네트워크-virtual-cloud-network-vcn-생성">가상 클라우드 네트워크 (Virtual Cloud Network: VCN) 생성</a></li>
+  <li><a href="#윈도우즈-인스턴스-접속-허용을-위해-security-list에-3389-포트-추가" id="markdown-toc-윈도우즈-인스턴스-접속-허용을-위해-security-list에-3389-포트-추가">윈도우즈 인스턴스 접속 허용을 위해 Security List에 3389 포트 추가</a></li>
+  <li><a href="#윈도우즈-인스턴스-생성-및-시작하기" id="markdown-toc-윈도우즈-인스턴스-생성-및-시작하기">윈도우즈 인스턴스 생성 및 시작하기</a></li>
+  <li><a href="#윈도우즈-인스턴스-접속을-위한-준비" id="markdown-toc-윈도우즈-인스턴스-접속을-위한-준비">윈도우즈 인스턴스 접속을 위한 준비</a></li>
+  <li><a href="#블록-볼륨-추가" id="markdown-toc-블록-볼륨-추가">블록 볼륨 추가</a>    <ul>
+      <li><a href="#블록-볼륨-생성" id="markdown-toc-블록-볼륨-생성">블록 볼륨 생성</a></li>
+      <li><a href="#인스턴스에-볼륨-연결-attach--connect" id="markdown-toc-인스턴스에-볼륨-연결-attach--connect">인스턴스에 볼륨 연결 (Attach &amp; Connect)</a></li>
+    </ul>
+  </li>
+  <li><a href="#모든-리소스-정리" id="markdown-toc-모든-리소스-정리">모든 리소스 정리</a>    <ul>
+      <li><a href="#블록-볼륨-분리-및-삭제" id="markdown-toc-블록-볼륨-분리-및-삭제">블록 볼륨 분리 및 삭제</a></li>
+      <li><a href="#인스턴스-종료" id="markdown-toc-인스턴스-종료">인스턴스 종료</a></li>
+      <li><a href="#가상-클라우드-네트워크-virtual-cloud-network-삭제" id="markdown-toc-가상-클라우드-네트워크-virtual-cloud-network-삭제">가상 클라우드 네트워크 (Virtual Cloud Network) 삭제</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h3 id="튜토리얼에서-다룰-내용">튜토리얼에서 다룰 내용</h3>
+<p>튜토리얼에서 다룰 내용은 다음과 같습니다.</p>
+
+<ul>
+  <li>클라우드 네트워크 및 인터넷 접속이 가능한 서브넷 생성</li>
+  <li>인스턴스 생성 및 시작</li>
+  <li>인스턴스에 접속</li>
+  <li>블록 볼륨 스토리지 추가</li>
+</ul>
+
+<p>아래 그림은 튜토리얼을 통해서 생성된 리소스들을 보여줍니다.
+<img src="/assets/img/getting-started/2022/gsg-instance-windows.png" alt="" title=" " /></p>
+
+<h3 id="구획-compartment-생성">구획 (Compartment) 생성</h3>
+<p>모든 리소스들을 특정 구획에 생성할 것입니다. 우선 <strong>Sandbox</strong>라는 이름의 구획을 생성해 보도록 하겠습니다. 메뉴에서 <strong>ID &amp; 보안 (Identity &amp; Security) &gt; 구획(Compartment)</strong>를 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-iam-7.png" alt="" title=" " /></p>
+
+<p><strong>구획 생성</strong> 버튼을 클릭하고, 입력창에 다음과 같이 입력합니다.</p>
+<ul>
+  <li>구획명: Sandbox</li>
+  <li>설명: Sandbox 사용자를 위한 구획</li>
+</ul>
+
+<p><img src="/assets/img/getting-started/2022/oci-iam-8.png" alt="" title=" " /></p>
+
+<h3 id="가상-클라우드-네트워크-virtual-cloud-network-vcn-생성">가상 클라우드 네트워크 (Virtual Cloud Network: VCN) 생성</h3>
+<p>인스턴스에서 사용할 VCN을 생성합니다. VCN 생성은 아래 링크를 참고하여 생성합니다.</p>
+
+<blockquote>
+  <p><a href="https://the-team-oasis.github.io/getting-started/create-vcn/">OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기</a></p>
+</blockquote>
+
+<p>VCN을 생성할 때 앞서 생성한 구획인 SandBox를 선택하여야 합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-linux-instance-1.png" alt="" title=" " /></p>
+
+<h3 id="윈도우즈-인스턴스-접속-허용을-위해-security-list에-3389-포트-추가">윈도우즈 인스턴스 접속 허용을 위해 Security List에 3389 포트 추가</h3>
+<p>VCN 목록에서 생성된 VCN을 선택한 후 왼쪽 <strong>리소스(Resources)</strong>의 <strong>보안 목록(Security Lists)</strong>탭을 선택하고, <strong>기본 보안 목록(Default Security List for {VCN이름})</strong>을 선택합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-2.png" alt="" title=" " /></p>
+
+<p><strong>수신 규칙 추가(Add Ingress Rules)</strong> 버튼을 클릭한 후 다음과 같이 입력하여 수신 규칙을 추가 합니다.</p>
+<ul>
+  <li><strong>소스 유형(Source Type):</strong> CIDR</li>
+  <li><strong>소스 CIDR(Source CIDR):</strong> 0.0.0.0/0</li>
+  <li><strong>IP 프로토콜(IP Protocol):</strong> RDP (TCP/3389)</li>
+  <li><strong>소스 포트 범위(Source Port Range):</strong> All</li>
+  <li><strong>대상 포트 범위(Destination Port Range):</strong> 3389</li>
+</ul>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-3.png" alt="" title=" " /></p>
+
+<h3 id="윈도우즈-인스턴스-생성-및-시작하기">윈도우즈 인스턴스 생성 및 시작하기</h3>
+<p>이제 윈도우즈 인스턴스를 하나 생성해보겠습니다. 메뉴에서 <strong>컴퓨트(Compute) &gt; 인스턴스(Instances)</strong>를 차례로 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-linux-instance-2.png" alt="" title=" " /></p>
+
+<p>구획으로 <strong>Sandbox</strong>를 선택한 후 <strong>인스턴스 생성(Create Instance)</strong>를 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-linux-instance-3.png" alt="" title=" " /></p>
+
+<p>인스턴스 생성 화면에서 다음과 같이 입력합니다.</p>
+
+<ul>
+  <li>이름 (Name): my_first_windows_instance</li>
+  <li>구획 (Create in compartment): Sandbox</li>
+  <li>배치 (Placement)의 가용 도메인 (Availability domain): AD 1
+    <ul>
+      <li>가용 도메인은 데이터 센터를 의미합니다. 서울은 1개의 가용 도메인으로 운영됩니다.</li>
+    </ul>
+  </li>
+  <li>이미지(Image): Windows (Server 2019 Standard)
+    <ul>
+      <li>이미지는 기본 플랫폼 이미지(Ubuntu, CentOS, Oracle Linux, Windows 등), 오라클 이미지, 파트너 이미지, 커뮤니티 이미지, 커스텀 이미지등으로 분류되어 있으며, <a href="https://docs.oracle.com/en-us/iaas/images/">https://docs.oracle.com/en-us/iaas/images/</a>에서 기본 플랫폼 이미지 목록을 확인할 수 있습니다.<br />
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-1.png" alt="" title=" " /></li>
+    </ul>
+  </li>
+  <li>쉐입 (Shape): VM.Standard.E4.Flex (가상 머신, 1 core OCPU, 16 GB memory, 1 Gbps network bandwidth)
+    <ul>
+      <li>쉐입에서는 <strong>가상 머신(Virtual machine)</strong>과 <strong>베어메탈(Bare metal machine)</strong> 인스턴스 유형으로 나눠져 있으며, <strong>가상 머신</strong> 유형에서는 <strong>AMD</strong>, <strong>Intel</strong>, <strong>Ampere (Arm 기반 프로세서)</strong>로 구분되어 있습니다. 모든 쉐입은 Flex 타입으로 제공되는데, CPU와 메모리를 사용자가 선택하여 구성할 수 있습니다. 여기서는 <strong>가상 머신</strong> 유형에서 AMD 쉐입인 <strong>VM.Standard.E4.Flex</strong>으로 선택하고 CPU는 1개, 메모리는 16 GB로 선택합니다.</li>
+      <li>OCI 쉐입에 대한 상세한 정보는 <a href="https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm">https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm</a> 링크에서 확인할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-linux-instance-4.png" alt="" title=" " /></li>
+    </ul>
+  </li>
+</ul>
+
+<p>네트워킹에서는 앞서 생성한 VCN과 공용 서브넷(Public Subnet)을 선택하고 (공용 IP 주소) Public IP address를 공용 IPv4 주소 지정 (Assign a public IPv4 address)으로 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-linux-instance-5.png" alt="" title=" " /></p>
+
+<p><strong>부트 볼륨 (Boot volume)</strong>의 경우는 기본 옵션 상태로 둡니다.</p>
+
+<p>마지막으로 <strong>생성 (Create)</strong> 버튼을 클릭합니다.</p>
+
+<h3 id="윈도우즈-인스턴스-접속을-위한-준비">윈도우즈 인스턴스 접속을 위한 준비</h3>
+<p>이제 실행중인 윈도우즈 인스턴스에 리모트 데스크탑을 사용하여 접속할 수 있습니다.</p>
+
+<p>인스턴스에 접속하기 위해서는 생성한 인스턴스의 공용 IP와 사용자 이름, 초기 비밀번호를 확인하여야 합니다. 인스턴스 목록에서 생성한 인스턴스를 클릭하면 다음과 같이 공용 IP와 사용자 이름, 초기 비밀번호를 확인할 수 있습니다.</p>
+
+<blockquote>
+  <p>여기서는 MacOS 환경에서 Microsoft Remote Desktop 클라이언트 애플리케이션을 활용하였습니다.</p>
+</blockquote>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-4.png" alt="" title=" " /></p>
+
+<p>Remote Desktop 클라이언트를 사용하여 접속을 합니다. 위에서 확인한 사용자 이름과 초기 비밀번호를 입력합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-5.png" alt="" title=" " /></p>
+
+<p>초기 비밀번호를 변경합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-6.png" alt="" title=" " /></p>
+
+<p>윈도우즈 데스크탑에 정상적으로 연결되었습니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-7.png" alt="" title=" " /></p>
+
+<h3 id="블록-볼륨-추가">블록 볼륨 추가</h3>
+<p>블록 볼륨 은 Oracle Cloud Infrastructure 컴퓨트 인스턴스에 사용할 수 스토리지입니다. 볼륨을 생성, 연결(Attach) 및 인스턴스에 탑재(Mount)한 후에는 인스턴스에서 물리적인 하드 드라이브처럼 사용할 수 있습니다. 볼륨은 한 번에 하나의 인스턴스에 연결할 수 있지만, 기존 인스턴스에서 볼륨을 분리하고 데이터를 유지한 상태에서 다른 인스턴스에 연결을 할 수 있습니다.</p>
+
+<p>이 작업에서는 볼륨을 생성하고 인스턴스에 연결한 다음 해당 볼륨을 인스턴스에 연결하는 방법을 보여줍니다.</p>
+
+<h4 id="블록-볼륨-생성">블록 볼륨 생성</h4>
+<p>메뉴에서 <strong>스토리지(Stroage) &gt; 블록 볼륨(Block Volumes)</strong>을 차례로 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-1.png" alt="" title=" " /></p>
+
+<p>다음과 같이 입력 및 선택합니다.</p>
+<ul>
+  <li>이름 (Name): my-block-volume-1</li>
+  <li>구획에 생성 (Create In Compartment): Sandbox</li>
+  <li>가용성 도메인 (Availability Domain): 데이터센터를 선택합니다. (서울은 1개)</li>
+  <li>볼륨 크기 및 성능 (Volume Size and Performance)
+    <ul>
+      <li>사용자정의 선택 (Custom)</li>
+      <li>볼륨 크기(GB) (Volume Size (in GB)) : 256</li>
+      <li>대상 볼륨 성능 (Target Volume Performance): VPU (Volume Performance Units)값으로 10
+        <ul>
+          <li>VPU에 대한 자세한 정보는 <a href="https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumeperformance.htm">https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumeperformance.htm</a> 에서 확인</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>성능 자동 조정 (Auto-tune Performance): 설정 (On)
+    <ul>
+      <li>성능 자동 조정은 해당 볼륨이 분리된 상태에서는 가장 낮은 성능 옵션으로 자동 변경되어 비용이 절감됩니다. 다시 연결되면 이전에 설정된 성능 옵션으로 자동 조정됩니다.</li>
+    </ul>
+  </li>
+  <li>백업 정책 (Backup Policies): 선택하지 않음
+    <ul>
+      <li>백업 정책을 설정하면 특정 시점에 자동으로 Object Storage에 백업이 이뤄집니다. 백업 정책 기본 Gold (가장 빈번하게 백업 발생), Silver, Bronze 정책이 제공되며, 사용자가 임의로 정의할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>영역 간 복제 (Cross Region Replication): 해제 (OFF)
+    <ul>
+      <li>영역 간 복제는 현재 블록 볼륨을 생성하는 리전과 매핑되는 리전으로 자동 비동기 복제를 하는 기능입니다.</li>
+      <li>영역 간 복제에 대한 설명과 매핑된 리전은 <a href="https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/volumereplication.htm">https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/volumereplication.htm</a>에서 확인할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>암호화 (Encryption): Encrypt using Oracle-managed keys (기본 설정 유지)</li>
+</ul>
+
+<p>미지막으로 <strong>블록 볼륨 생성 버튼 (Create Block Volume)</strong>을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-bv-2.png" alt="" title=" " />
+<img src="/assets/img/getting-started/2022/oci-bv-3.png" alt="" title=" " /></p>
+
+<h4 id="인스턴스에-볼륨-연결-attach--connect">인스턴스에 볼륨 연결 (Attach &amp; Connect)</h4>
+<p>iSCSI 방식으로 볼륨을 인스턴스에 연결해보도록 하겠습니다. 메뉴에서 <strong>컴퓨트 (Compute) &gt; 인스턴스 (Instances)</strong>를 차례로 선택한 후에 앞서 생성한 인스턴스를 선택합니다. 인스턴스 상세 페이지에서 아래와 같이 좌측 <strong>리소스 (Resources)</strong> 메뉴에서 <strong>연결된 블록 볼륨 (Attached block volumes)</strong>을 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-4.png" alt="" title=" " /></p>
+
+<p><strong>블록 볼륨 연결 (Attach block volume)</strong>버튼을 클릭하고 다음과 같이 입력/선택 합니다.</p>
+<ul>
+  <li><strong>블록 볼륨 선택 (Select volume):</strong> 앞서 생성한 블록 볼륨을 선택합니다.</li>
+  <li><strong>장치 경로 (Device path):</strong> 선택하지 않습니다. (사용할 수 없는 옵션)</li>
+  <li><strong>연결 유형 (Attachment type):</strong> ISCSI</li>
+  <li><strong>액세스 (Access):</strong> 읽기/쓰기(Read/write)</li>
+</ul>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-5-1.png" alt="" title=" " /></p>
+
+<p>연결을 클릭합니다.</p>
+
+<p>이제 iSCSI 연결을 구성할 수 있습니다. 우선 <strong>연결된 블록 볼륨</strong> 메뉴에서 연결된 블록 볼륨의 우측 아이콘을 선택한 후 <strong>iSCSI 명령 및 정보 (iSCSI commands and inforamtion)</strong>를 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-6.png" alt="" title=" " /></p>
+
+<p>다음과 같이 <strong>iSCSI 명령 및 정보</strong> 대화창에서 IP 주소 및 포트를 확인합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-7-1.png" alt="" title=" " /></p>
+
+<p>윈도우즈 데스크탑에서 서버 매니저 (Server Manager)를 실행합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-8.png" alt="" title=" " /></p>
+
+<p><strong>Tools &gt; iSCSI Initiator</strong> 를 선택합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-9.png" alt="" title=" " /></p>
+
+<p><strong>Discovery</strong>탭을 선택한 후 <strong>Discover Portal</strong> 버튼을 클릭합니다. 다음과 같이 위에서 확인한 블록 볼륨의 IP 주소와 포트를 입력하고 <strong>OK</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-10.png" alt="" title=" " /></p>
+
+<p><strong>Targets</strong>탭을 선택한 후 <strong>Connect</strong> 버튼을 클릭하고 <strong>OK</strong> 버튼을 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-11.png" alt="" title=" " /></p>
+
+<p><strong>File and Storage Services &gt; Volumes &gt; Disks</strong>를 차례로 선택하여 추가된 스토리지를 확인합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-12.png" alt="" title=" " /></p>
+
+<p>해당 스토리지를 선택한 후 마우스 오른쪽 클릭하여 <strong>New Volume</strong>을 클릭합니다. 다음과 같이 <strong>New Volume Wizard</strong>가 오픈됩니다. <strong>Next</strong> 버튼을 클릭합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-13.png" alt="" title=" " /></p>
+
+<p>Disk를 확인한 후 <strong>Next</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-14.png" alt="" title=" " /></p>
+
+<p>Volume size를 확인한 후 <strong>Next</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-15.png" alt="" title=" " /></p>
+
+<p>Drive letter 확인한 후 <strong>Next</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-16.png" alt="" title=" " /></p>
+
+<p>File system, Allocation unit size, Volume label을 확인한 후 <strong>Next</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-17.png" alt="" title=" " /></p>
+
+<p><strong>Create</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-18.png" alt="" title=" " /></p>
+
+<p>모든 과정이 완료된 것을 확인할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-19.png" alt="" title=" " /></p>
+
+<p>파일 탐색기를 통해서 추가된 볼륨과 볼륨 정보를 확인합니다.
+<img src="/assets/img/getting-started/2022/oci-lanunch-windows-instance-20.png" alt="" title=" " /></p>
+
+<h3 id="모든-리소스-정리">모든 리소스 정리</h3>
+<p>튜토리얼을 통해서 생성한 리소스에 대한 삭제는 다음 순서대로 진행합니다.</p>
+
+<h4 id="블록-볼륨-분리-및-삭제">블록 볼륨 분리 및 삭제</h4>
+<p>메뉴에서 <strong>컴퓨트 (Compute) &gt; 인스턴스 (Instances)</strong>에서 실습에서 사용한 인스턴스를 선택합니다. 인스턴스 세부 정보 화면에서 좌측 <strong>리소스 (Resources)</strong> 세션의 <strong>연결된 블록 볼륨</strong>을 선택합니다. 목록에서 실습에서 사용한 볼륨 오른쪽 아이콘을 선택하고 <strong>분리 (Detach)</strong>를 선택하여 인스턴스를 분리합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-8-1.png" alt="" title=" " /></p>
+
+<p>이제 볼륨을 삭제할 수 있습니다. 메뉴에서 <strong>스토리지 (Storage) &gt; 블록 볼륨 (Block Volumes)</strong>를 차례로 선택한 후에 실습에서 사용한 블록 볼륨의 오른쪽 아이콘을 클릭하고 <strong>종료 (Terminate)</strong>를 선택하여 볼륨을 삭제합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-9-1.png" alt="" title=" " /></p>
+
+<h4 id="인스턴스-종료">인스턴스 종료</h4>
+<p>메뉴에서 <strong>컴퓨트 (Compute) &gt; 인스턴스 (Instances)</strong>를 차례로 선택한 후 목록에서 실습에서 사용한 인스턴스의 오른쪽 아이콘을 클릭하고 <strong>종료 (Terminate)</strong>를 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-10-1.png" alt="" title=" " /></p>
+
+<p>삭제 대화창에서 <strong>부팅 볼륨을 영구적으로 삭제 (Permanently delete the attached boot volume)</strong>를 선택한 후 <strong>인스턴스 종료</strong> 버튼을 클릭하여 인스턴스와 부트볼륨을 모두 삭제합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-11-1.png" alt="" title=" " /></p>
+
+<h4 id="가상-클라우드-네트워크-virtual-cloud-network-삭제">가상 클라우드 네트워크 (Virtual Cloud Network) 삭제</h4>
+<p>메뉴에서 <strong>네트워킹 (Networking) &gt; 가상 클라우드 네트워크 (Virtual Cloud Network)</strong> 을 차례로 선택한 후 실습에서 사용한 VCN 오른쪽 메뉴를 클릭하고 <strong>종료 (Terminate)</strong>를 선택합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-12.png" alt="" /></p>
+
+<p>VCN과 연관된 모든 리소스들이 나열됩니다. <strong>모두 종료</strong>를 클릭하여 VCN과 관련된 모든 리소스를 삭제합니다.</p>
+
+<p><img src="/assets/img/getting-started/2022/oci-bv-13.png" alt="" /></p>
+
+<blockquote>
+  <p>VCN의 리소스들을 다른 자원에서 사용중인 경우라면 VCN 자원을 삭제할 수 없습니다. 이 경우에는 연관된 자원을 삭제 한 후에 다시 VCN 리소스를 정리하여야 합니다.</p>
+</blockquote>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-06-23T09:00:01+09:00" itemprop="datePublished"> 2022-06-23</time>
+				
+
+				<span class="icon-archive pr20"> GETTING-STARTED</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> compute</span> <span class="icon-price-tag pr10"> windows_instance</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/getting-started/launching-linux-instance/">&laquo; OCI에서 리눅스 인스턴스 생성 튜토리얼</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//getting-started/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/getting-started/loadbalancing/">OCI 로드 밸런서 사용해보기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/getting-started/launching-windows-instance/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

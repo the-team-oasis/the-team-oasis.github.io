@@ -1,0 +1,37 @@
+I"\
+<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#introducing-flexible-compute-shapes-for-model-deployments" id="markdown-toc-introducing-flexible-compute-shapes-for-model-deployments">Introducing Flexible Compute Shapes for Model Deployments</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+      <li><a href="#업데이트-내용" id="markdown-toc-업데이트-내용">업데이트 내용</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="introducing-flexible-compute-shapes-for-model-deployments">Introducing Flexible Compute Shapes for Model Deployments</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> July 19, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/27d18354-2b4c-4b7d-958b-8c90a909bca3/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/27d18354-2b4c-4b7d-958b-8c90a909bca3/</a></li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>모델 배치(Model Deployments)는 OCI에서 ML 학습 모델을 HTTP End-Point 통해 배치할 수 있는 OCI 데이터 과학 서비스의 관리 리소스입니다. 
+실시간으로 예측을 제공하는 Web Application(HTTP API 끝점)으로 ML 라이브러리 모델을 배포하는 것은 모델이 소비되는 가장 일반적인 방법 중 하나이며, 모델 배치를 통해 생성된 HTTP 엔드포인트는 유연하게 Model Prediction 요청을 처리할 수 있습니다. <br />
+<img src="/assets/img/aiml/2022/oci-202207-release-flow-to-deploy.png" alt="" title=" " /></p>
+
+<h3 id="업데이트-내용">업데이트 내용</h3>
+<p>이번 업데이트를 통해 모델 배포에서 사용하는 Compute Shape에서도 Flex Shape을 선택할 수 있도록 기능이 추가 되었습니다.</p>
+<ul>
+  <li>데이터 과학 프로젝트에서 <strong>“모델 배치”</strong> -&gt; <strong>“모델 배치 생성</strong>” 버튼을 클릭합니다.
+<img src="/assets/img/aiml/2022/oci-202207-release-md-1.png" alt="" title=" " /></li>
+  <li>컴퓨트 섹션의 <strong>“선택”</strong> 버튼을 클릭합니다.
+<img src="/assets/img/aiml/2022/oci-202207-release-md-2.png" alt="" title=" " /></li>
+  <li>AMD, Intel 계열의 Shape에서 Flex Shape이 추가된 것을 확인할 수 있습니다.
+<img src="/assets/img/aiml/2022/oci-202207-release-md-3.png" alt="" title=" " /></li>
+  <li><img src="/assets/img/aiml/2022/oci-202207-release-md-4.png" alt="" title=" " /></li>
+</ul>
+:ET

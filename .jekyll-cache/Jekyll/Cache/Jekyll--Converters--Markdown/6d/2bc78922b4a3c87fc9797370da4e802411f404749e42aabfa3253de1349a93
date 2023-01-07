@@ -1,0 +1,45 @@
+I"!
+<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#mysql-database-service-support-for-mysql-version-8029" id="markdown-toc-mysql-database-service-support-for-mysql-version-8029">MySQL Database Service Support for MySQL Version 8.0.29</a>    <ul>
+      <li><a href="#서비스-소개" id="markdown-toc-서비스-소개">서비스 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#mysql-database-service-new-e4-and-intel-shapes-are-now-available" id="markdown-toc-mysql-database-service-new-e4-and-intel-shapes-are-now-available">MySQL Database Service: New E4 and Intel shapes are now available</a>    <ul>
+      <li><a href="#서비스-소개-1" id="markdown-toc-서비스-소개-1">서비스 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="mysql-database-service-support-for-mysql-version-8029">MySQL Database Service Support for MySQL Version 8.0.29</h2>
+<ul>
+  <li><strong>Services:</strong> MySQL Database</li>
+  <li><strong>Release Date:</strong> May 4, 2022</li>
+  <li><strong>Documentation:</strong> https://docs.oracle.com/en-us/iaas/releasenotes/changes/5ee4b464-b8cd-41fd-89e1-c9d1526e7024/</li>
+</ul>
+
+<h3 id="서비스-소개">서비스 소개</h3>
+<p>OCI 내 MySQL 서비스로 MYSQL팀과 협력하며, 실제 MySQL 버전과 동일하게 지원되고 있습니다. 최신의 패치 및 서비스를 받을 수 있습니다.</p>
+
+<p>MySQL 데이터베이스 서비스는 이제 MySQL 8.0.29를 지원합니다. 새로운 MySQL DB 시스템은 최신 MySQL Database 버전을 기반으로 합니다. 버전 8.0.28에서 8.0.29로 등 기존 DB 시스템에 대한 MySQL Server 업그레이드는 수동으로 수행해야 합니다.</p>
+
+<hr />
+
+<h2 id="mysql-database-service-new-e4-and-intel-shapes-are-now-available">MySQL Database Service: New E4 and Intel shapes are now available</h2>
+<ul>
+  <li><strong>Services:</strong> MySQL Database</li>
+  <li><strong>Release Date:</strong> May 17, 2022</li>
+  <li><strong>Documentation:</strong> https://docs.oracle.com/en-us/iaas/releasenotes/changes/c8c1ad10-030f-4e34-af07-38060069b8b2/</li>
+</ul>
+
+<h3 id="서비스-소개-1">서비스 소개</h3>
+<p>OCI 내 MySQL 서비스로 MYSQL팀과 협력하며, 실제 MySQL 버전과 동일하게 지원되고 있습니다. 최신의 패치 및 서비스를 받을 수 있습니다.</p>
+
+<p>E4 Standard, Intel Standard 및 Intel Optimized 셰이프를 사용하여 MySQL DB 시스템을 프로비저닝할 수 있습니다. 
+새로운 형태 제품군은 이전 E3보다 성능이 우수합니다.</p>
+
+<hr />
+:ET

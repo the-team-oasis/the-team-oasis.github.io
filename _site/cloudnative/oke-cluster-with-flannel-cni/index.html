@@ -1,0 +1,938 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OKE (Oracle Container Engine for Kubernetes)에서는 CNI(컨테이너 네트워크 인터페이스) 플러그인으로 Flannel과 VCN-Native Pod Networking 플러그인을 지원합니다. Flannel 플러그인을 사용하는 OKE Cluster를 사용자 정의 구성하는 방법에 대해서 알아봅니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/oke-cluster-with-flannel-cni/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성">
+	<meta property="og:description" content="OKE (Oracle Container Engine for Kubernetes)에서는 CNI(컨테이너 네트워크 인터페이스) 플러그인으로 Flannel과 VCN-Native Pod Networking 플러그인을 지원합니다. Flannel 플러그인을 사용하는 OKE Cluster를 사용자 정의 구성하는 방법에 대해서 알아봅니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/oke-cluster-with-flannel-cni/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성">
+	<meta name="twitter:description" content="OKE (Oracle Container Engine for Kubernetes)에서는 CNI(컨테이너 네트워크 인터페이스) 플러그인으로 Flannel과 VCN-Native Pod Networking 플러그인을 지원합니다. Flannel 플러그인을 사용하는 OKE Cluster를 사용자 정의 구성하는 방법에 대해서 알아봅니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>Flannel CNI 플러그인으로 사용자 정의 OKE Cluster(Oracle Container Engine for Kubernetes) 클러스터 구성</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OKE (Oracle Container Engine for Kubernetes)에서는 CNI(컨테이너 네트워크 인터페이스) 플러그인으로 Flannel과 VCN-Native Pod Networking 플러그인을 지원합니다. Flannel 플러그인을 사용하는 OKE Cluster를 사용자 정의 구성하는 방법에 대해서 알아봅니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#flannel-cni-플러그인" id="markdown-toc-flannel-cni-플러그인">Flannel CNI 플러그인</a></li>
+  <li><a href="#flannel-cni-플러그인으로-oke-클러스터-생성하기" id="markdown-toc-flannel-cni-플러그인으로-oke-클러스터-생성하기">Flannel CNI 플러그인으로 OKE 클러스터 생성하기</a>    <ul>
+      <li><a href="#1-oke-cluster를-custom으로-구성하는-가이드-확인" id="markdown-toc-1-oke-cluster를-custom으로-구성하는-가이드-확인">1. OKE Cluster를 Custom으로 구성하는 가이드 확인</a></li>
+      <li><a href="#2-vcn-생성하기" id="markdown-toc-2-vcn-생성하기">2. VCN 생성하기</a></li>
+      <li><a href="#3-보안-목록security-list에-규칙-추가" id="markdown-toc-3-보안-목록security-list에-규칙-추가">3. 보안 목록(Security List)에 규칙 추가</a>        <ul>
+          <li><a href="#3-1-서브넷의-cidr-블록-정보" id="markdown-toc-3-1-서브넷의-cidr-블록-정보">3-1. 서브넷의 CIDR 블록 정보</a></li>
+          <li><a href="#3-2-public-kubernetes-api-endpoint-서브넷을-위한-보안-목록-규칙-추가" id="markdown-toc-3-2-public-kubernetes-api-endpoint-서브넷을-위한-보안-목록-규칙-추가">3-2. Public Kubernetes API Endpoint 서브넷을 위한 보안 목록 규칙 추가</a></li>
+          <li><a href="#3-3-private-worker-nodes-서브넷을-위한-보안-목록-규칙-생성" id="markdown-toc-3-3-private-worker-nodes-서브넷을-위한-보안-목록-규칙-생성">3-3. Private Worker Nodes 서브넷을 위한 보안 목록 규칙 생성</a></li>
+        </ul>
+      </li>
+      <li><a href="#4-oke-cluster-생성" id="markdown-toc-4-oke-cluster-생성">4. OKE Cluster 생성</a></li>
+      <li><a href="#5-oke-cluster-생성-확인-및-접속" id="markdown-toc-5-oke-cluster-생성-확인-및-접속">5. OKE Cluster 생성 확인 및 접속</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h3 id="flannel-cni-플러그인">Flannel CNI 플러그인</h3>
+<p>OKE에서는 CNI(Container Network Interface: 컨테이너간 네트워킹 제어를 위한 플러그인 개발 표준) 플러그인으로 Flannel과 VCN-Native Pod Networking을 지원합니다. Flannel에 대한 설명과 VCN-Native Pod Networking 구성 방법은 다음 포스팅을 참고합니다.</p>
+
+<p><a href="http://localhost:4000//cloudnative/vcn-native-pod-networking-for-oke/" target="_blank" rel="noopener">VCN-Native Pod Networking CNI 플러그인을 사용하여 OKE (Oracle Container Engine for Kubernetes) 클러스터 구성</a></p>
+
+<p><mark>OKE Cluster를 생성할 때 VCN등을 모두 자동으로 생성해 주는 <b>빠른 생성(Quick Create)</b> 옵션과 사용자가 VCN 및 이미지, 노드등을 직접 선택하여 구성하는 <b>사용자 정의(Custom Create)</b> 옵션을 제공합니다. <b>빠른 생성</b>의 경우 기본 CNI로 Flannel이 자동으로 적용됩니다. 하지만 Flannel CNI를 사용하면서 별도의 VCN에 OKE Cluster를 구성해야 할 필요가 있는데, 이 경우에는 <b>사용자 정의</b> 옵션을 통해서 구성해야 합니다. 이번 포스팅을 통해서 <b>사용자 정의</b> 옵션을 활용하여 Flannel CNI를 사용하는 OKE Cluster를 구성하는 방법에 대해서 알아봅니다.</mark></p>
+
+<h3 id="flannel-cni-플러그인으로-oke-클러스터-생성하기">Flannel CNI 플러그인으로 OKE 클러스터 생성하기</h3>
+
+<h4 id="1-oke-cluster를-custom으로-구성하는-가이드-확인">1. OKE Cluster를 Custom으로 구성하는 가이드 확인</h4>
+<p>OKE Cluster를 Custom으로 구성할 때 아래 공식 문서를 참고하여 구성할 수 있습니다.</p>
+
+<p><a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengnetworkconfigexample.htm#example-flannel-cni-publick8sapi_privateworkers_publiclb">공식문서</a></p>
+
+<p>문서에는 총 4개의 예제가 제공되는데, 여기서는 1번 예제를 참고하여 구성합니다. 1번 예제는 Kubernetes API Endpoint를 Public으로 구성하고, Worker Node는 Private, Load Balancer는 Public으로 구성하는 예제입니다. 구성도는 다음과 같습니다.</p>
+
+<p><img src="https://docs.oracle.com/en-us/iaas/Content/Resources/Images/conteng-network-flannel-eg1.png" alt="" /></p>
+
+<h4 id="2-vcn-생성하기">2. VCN 생성하기</h4>
+<p>VCN 생성은 아래 포스트를 참고하여 생성합니다. 여기서는 VCN 이름을 <code class="language-plaintext highlighter-rouge">my-vcn</code>으로 지정하여 생성하도록 하겠습니다.</p>
+
+<p><a href="https://the-team-oasis.github.io/getting-started/create-vcn/" target="_blank" rel="noopener">OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기</a></p>
+
+<h4 id="3-보안-목록security-list에-규칙-추가">3. 보안 목록(Security List)에 규칙 추가</h4>
+<p>VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Public)과 2개의 보안 목록(Private 용도와 Public 용도)이 자동으로 생성됩니다. 여기서는 기본으로 생성되는 서브넷과 보안 목록을 활용하여 구성합니다.</p>
+
+<h5 id="3-1-서브넷의-cidr-블록-정보">3-1. 서브넷의 CIDR 블록 정보</h5>
+<p>아래는 기본으로 생성된 서브넷과 CIDR 블록이며, API Endpoint와 Worker Node를 다음과 같이 구성하도록 하겠습니다.</p>
+
+<table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col /><col /><col /><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Name</th>
+      <th class="entry" id="About__entry__2">CIDR Block</th>
+      <th class="entry" id="About__entry__2">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">공용 서브넷-my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">10.0.0.0/24</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">API Endpoint를 위한 서브넷</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">10.0.1.0/24</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Worker Node를 위한 서브넷</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
+
+<h5 id="3-2-public-kubernetes-api-endpoint-서브넷을-위한-보안-목록-규칙-추가">3-2. Public Kubernetes API Endpoint 서브넷을 위한 보안 목록 규칙 추가</h5>
+<p>앞서 생성한 VCN (my-vcn)을 선택하고 왼쪽 리소스 메뉴에서 보안 목록(Security Lists) 선택 &gt; <strong>Default Security List for my-vcn</strong> 선택 후, 대화창에서 다른 수신 규칙(Another Ingress Rule)을 클릭하여 수신 규칙(Ingress Rule)을, 다른 송신 규칙(Another Egress Rule)을 클릭하여 송신 규칙(Egress Rule)을 입력합니다.</p>
+
+<summary><b>Ingress</b></summary>
+<div>
+  <table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col /><col /><col /><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Security List Name</th>
+      <th class="entry" id="About__entry__1">Rule Type</th>
+      <th class="entry" id="About__entry__2">State</th>
+      <th class="entry" id="About__entry__3">Source</th>
+      <th class="entry" id="About__entry__4">Protocol/Dest. Port</th>
+      <th class="entry" id="About__entry__4">Type and Code</th>
+      <th class="entry" id="About__entry__5">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">TCP/6443</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Kubernetes worker to Kubernetes API endpoint communication.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">TCP/12250</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Kubernetes worker to control plane communication.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">ICMP</td>
+      <td class="entry" headers="About__entry__6">Type: 3, Code: 4</td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Path Discovery.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">0.0.0.0/0</td>
+      <td class="entry" headers="About__entry__5">TCP/6443</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">External access (Internet) to Kubernetes API endpoint.</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
+</div>
+
+<summary><b>Egress</b></summary>
+<div>
+  <table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col /><col /><col /><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Security List Name</th>
+      <th class="entry" id="About__entry__1">Rule Type</th>
+      <th class="entry" id="About__entry__2">State</th>
+      <th class="entry" id="About__entry__3">Destination</th>
+      <th class="entry" id="About__entry__4">Protocol/Dest. Port</th>
+      <th class="entry" id="About__entry__4">Type and Code</th>
+      <th class="entry" id="About__entry__5">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">All <font color="green"><b>{region}</b></font> Services In Oracle Services Network <br />(기본 생성된 서비스 게이트웨이)</td>
+      <td class="entry" headers="About__entry__5">TCP/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow Kubernetes API endpoint to communicate with OKE.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">All <font color="green"><b>{region}</b></font> Services In Oracle Services Network <br />(기본 생성된 서비스 게이트웨이)</td>
+      <td class="entry" headers="About__entry__5">ICMP</td>
+      <td class="entry" headers="About__entry__6">Type: 3, Code: 4</td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Path Discovery.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">TCP/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow Kubernetes API endpoint to communicate with worker nodes.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">Default Security List for my-vcn</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">ICMP</td>
+      <td class="entry" headers="About__entry__6">Type: 3, Code: 4</td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Path Discovery.</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
+</div>
+
+<h5 id="3-3-private-worker-nodes-서브넷을-위한-보안-목록-규칙-생성">3-3. Private Worker Nodes 서브넷을 위한 보안 목록 규칙 생성</h5>
+<p>앞서 생성한 VCN (my-vcn)을 선택하고 왼쪽 리소스 메뉴에서 보안 목록(Security Lists) 선택 &gt; <strong>전용 서브넷-my-vcn의 보안 목록</strong> 선택 후, 대화창에서 다른 수신 규칙(Another Ingress Rule)을 클릭하여 수신 규칙(Ingress Rule)을, 다른 송신 규칙(Another Egress Rule)을 클릭하여 송신 규칙(Egress Rule)을 입력합니다.</p>
+
+<summary><b>Ingress</b></summary>
+<div>
+  <table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col /><col /><col /><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Security List Name</th>
+      <th class="entry" id="About__entry__1">Rule Type</th>
+      <th class="entry" id="About__entry__2">State</th>
+      <th class="entry" id="About__entry__3">Source</th>
+      <th class="entry" id="About__entry__4">Protocol/Dest. Port</th>
+      <th class="entry" id="About__entry__4">Type and Code</th>
+      <th class="entry" id="About__entry__5">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">ALL/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow pods on one worker node to communicate with pods on other worker nodes.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.0.0/24 (Kubernetes API Endpoint CIDR)</td>
+      <td class="entry" headers="About__entry__5">TCP/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow Kubernetes control plane to communicate with worker nodes.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Ingress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">0.0.0.0/0</td>
+      <td class="entry" headers="About__entry__5">ICMP</td>
+      <td class="entry" headers="About__entry__6">Type: 3, Code: 4</td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Path Discovery.</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
+</div>
+
+<summary><b>Egress</b></summary>
+<div>
+  <table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col /><col /><col /><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Security List Name</th>
+      <th class="entry" id="About__entry__1">Rule Type</th>
+      <th class="entry" id="About__entry__2">State</th>
+      <th class="entry" id="About__entry__3">Destination</th>
+      <th class="entry" id="About__entry__4">Protocol/Dest. Port</th>
+      <th class="entry" id="About__entry__4">Type and Code</th>
+      <th class="entry" id="About__entry__5">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.1.0/24 (Worker Nodes CIDR)</td>
+      <td class="entry" headers="About__entry__5">ALL/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow pods on one worker node to communicate with pods on other worker nodes.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">0.0.0.0/0</td>
+      <td class="entry" headers="About__entry__5">ICMP</td>
+      <td class="entry" headers="About__entry__6">Type: 3, Code: 4</td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Path Discovery.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">All <font color="green"><b>{region}</b></font> Services In Oracle Services Network <br />(기본 생성된 서비스 게이트웨이)</td>
+      <td class="entry" headers="About__entry__5">TCP/ALL</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Allow worker nodes to communicate with OKE.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.0.0/24</td>
+      <td class="entry" headers="About__entry__5">TCP/6443</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Kubernetes worker to Kubernetes API endpoint communication.</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">전용 서브넷-my-vcn의 보안 목록</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">Egress</span>
+      </td>
+      <td class="entry" headers="About__entry__3"><span class="ph">Stateful</span>
+      </td>
+      <td class="entry" headers="About__entry__4">10.0.0.0/24</td>
+      <td class="entry" headers="About__entry__5">TCP/12250</td>
+      <td class="entry" headers="About__entry__6"></td>
+      <td class="entry" headers="About__entry__7"><span class="ph">Kubernetes worker to control plane communication.</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
+</div>
+
+<h4 id="4-oke-cluster-생성">4. OKE Cluster 생성</h4>
+<p>이제 OKE Cluster를 생성합니다. OCI Console 왼쪽 상단 메뉴 버튼을 클릭한 후 <strong>개발자 서비스(Developer Services) &gt; Kubernetes 클러스터(OKE) (Kubernetes Clusters (OKE))</strong>를 차례로 선택합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-5.png" alt="" /></p>
+
+<p><strong>클러스터 생성(Create Cluster)</strong> 버튼을 클릭한 후 <strong>사용자정의 생성(Custom Create)</strong>를 선택하고 <strong>제출(Submit)</strong> 버튼을 클릭합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-6.png" alt="" /></p>
+
+<p>클러스터 정보를 다음과 같이 입력/선택 합니다.</p>
+
+<ul>
+  <li><strong>이름(Name):</strong> oke-cluster1</li>
+  <li><strong>구획(Compartment):</strong> 클러스터 생성을 위한 구획 선택</li>
+  <li><strong>Kubernetes 버전:</strong> v1.24.1 (현재 최신 버전)</li>
+</ul>
+
+<p><img src="/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-7.png" alt="" /></p>
+
+<p>네트워크 설정에서는 다음과 같이 구성합니다.</p>
+
+<ul>
+  <li><strong>네트워크 유형(Network type):</strong> 플란넬 오버레이(Flannel overay)</li>
+  <li><strong>VCN:</strong> 앞서 생성한 VCN (e.g. my-vcn)</li>
+  <li><strong>Kubernetes 서비스 LB 서브넷(Kubernetes service LB subnets):</strong> 공용 서브넷-my-vcn</li>
+  <li><strong>Kubernetes API 끝점 서브넷(Kubernetes API endpoint subnet):</strong> 공용 서브넷-my-vcn</li>
+  <li><strong>API 끝점에 공용 IP 주소 지정(Assign a public IP address to the API endpoint):</strong> 선택
+    <ul>
+      <li>Cluster 구성 후 바로 확인할 수 있도록 공용 IP주소를 할당합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-1.png" alt="" /></p>
+
+<p>노드 풀을 다음과 같이 설정합니다.</p>
+<ul>
+  <li><strong>이름(Name):</strong> pool1</li>
+  <li><strong>구획(Compartment):</strong> 노드 풀을 구성할 구획 선택</li>
+  <li><strong>버전(Version):</strong> v1.24.1 (클러스터 버전과 동일한 버전 선택)</li>
+  <li><strong>구성 및 이미지(Shape and Image)</strong>
+    <ul>
+      <li><strong>구성(Shape):</strong> VM.Standard.E4.Flex</li>
+      <li><strong>OCPU 수 선택(Select the number of OCPUs):</strong> 1</li>
+      <li><strong>메모리 양(Amount of Memory (GB)):</strong> 16</li>
+      <li><strong>이미지(Image):</strong> Oracle Linux 8 (이미지 빌드: 2022.06.30-0, 쿠버네티스 버전: 1.24.1)
+        <ul>
+          <li>이미지는 OKE 워커 노드 이미지로 구성하며 최신 클러스터 버전을 지원하는 최신 이미지로 선택</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>노드 풀 옵션(Node Pool options):</strong>
+    <ul>
+      <li><strong>노드 수(Number of nodes):</strong> 3</li>
+    </ul>
+  </li>
+  <li><strong>부트 볼륨(Boot volume):</strong> 기본</li>
+  <li><strong>배치 구성(Placement configuration)</strong>
+    <ul>
+      <li><strong>가용성 도메인(Availability domain):</strong> 가용성 도메인 선택</li>
+      <li><strong>워커 노드 서브넷(Worker node subnet):</strong> 전용 서브넷-my-vcn</li>
+      <li><strong>결함 도메인(Fault domains)):</strong> 선택 안함</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-2.png" alt="" /></p>
+
+<p>마지막으로 모든 설정을 검토하고 클러스터 생성(Craete Cluster) 버튼을 클릭하여 클러스터를 생성합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-3.png" alt="" /></p>
+
+<h4 id="5-oke-cluster-생성-확인-및-접속">5. OKE Cluster 생성 확인 및 접속</h4>
+<p>OKE Cluster가 생성되고 노드풀에 3개의 노드가 모두 활성 상태인 것을 확인할 수 있습니다.
+<img src="/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-4.png" alt="" /></p>
+
+<p>OKE Cluster에 접속하는 방법은 다음 포스팅을 참고합니다.</p>
+
+<p><a href="https://the-team-oasis.github.io/cloudnative/access-oke-cluster/">OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법</a></p>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-09-25T00:00:00+09:00" itemprop="datePublished"> 2022-09-25</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> kubernetes</span> <span class="icon-price-tag pr10"> oke</span> <span class="icon-price-tag pr10"> cni</span> <span class="icon-price-tag pr10"> flannel</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/cloudnative/vcn-native-pod-networking-for-oke/">&laquo; VCN-Native Pod Networking CNI 플러그인을 사용하여 OKE (Oracle Container Engine for Kubernetes) 클러스터 구성</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-opensearch-overview/">OCI Opensearch 서비스 살펴보기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/oke-cluster-with-flannel-cni/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

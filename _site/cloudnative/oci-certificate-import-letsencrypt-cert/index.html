@@ -1,0 +1,768 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="무료로 SSL 인증서 생성이 가능한 Let&#39;s Encrypt를 활용하여 인증서를 생성하고 OCI 인증서 서비스에 Import하는 방법을 알아봅니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/oci-certificate-import-letsencrypt-cert/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기">
+	<meta property="og:description" content="무료로 SSL 인증서 생성이 가능한 Let&#39;s Encrypt를 활용하여 인증서를 생성하고 OCI 인증서 서비스에 Import하는 방법을 알아봅니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/oci-certificate-import-letsencrypt-cert/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기">
+	<meta name="twitter:description" content="무료로 SSL 인증서 생성이 가능한 Let&#39;s Encrypt를 활용하여 인증서를 생성하고 OCI 인증서 서비스에 Import하는 방법을 알아봅니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기</h1>
+			</header>
+
+			
+			<p class="teaser">
+				무료로 SSL 인증서 생성이 가능한 Let's Encrypt를 활용하여 인증서를 생성하고 OCI 인증서 서비스에 Import하는 방법을 알아봅니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-certificates-소개" id="markdown-toc-oci-certificates-소개">OCI Certificates 소개</a></li>
+  <li><a href="#lets-encrypt-서비스란" id="markdown-toc-lets-encrypt-서비스란">Let’s Encrypt 서비스란?</a></li>
+  <li><a href="#lets-encrypt-인증서-발급-실습-안내" id="markdown-toc-lets-encrypt-인증서-발급-실습-안내">Let’s Encrypt 인증서 발급 실습 안내</a>    <ul>
+      <li><a href="#사전-준비-사항" id="markdown-toc-사전-준비-사항">사전 준비 사항</a></li>
+      <li><a href="#실습-순서" id="markdown-toc-실습-순서">실습 순서</a></li>
+      <li><a href="#1-도메인-구입" id="markdown-toc-1-도메인-구입">1. 도메인 구입</a></li>
+      <li><a href="#2-oci-dns-영역을-생성하고-도메인의-dns-서버로-설정" id="markdown-toc-2-oci-dns-영역을-생성하고-도메인의-dns-서버로-설정">2. OCI DNS 영역을 생성하고 도메인의 DNS 서버로 설정</a></li>
+      <li><a href="#3-oci-cli-설정-compute-instance-사용" id="markdown-toc-3-oci-cli-설정-compute-instance-사용">3. OCI CLI 설정 (Compute Instance 사용)</a></li>
+      <li><a href="#4-certbot-패키지-설치" id="markdown-toc-4-certbot-패키지-설치">4. Certbot 패키지 설치</a></li>
+      <li><a href="#5-certbot-dns-oci-플러그인-설치" id="markdown-toc-5-certbot-dns-oci-플러그인-설치">5. certbot-dns-oci 플러그인 설치</a></li>
+      <li><a href="#6-certbot을-실행하여-인증서-획득" id="markdown-toc-6-certbot을-실행하여-인증서-획득">6. certbot을 실행하여 인증서 획득</a></li>
+      <li><a href="#7-oci-인증서-서비스에-인증서-등록" id="markdown-toc-7-oci-인증서-서비스에-인증서-등록">7. OCI 인증서 서비스에 인증서 등록</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리-하며" id="markdown-toc-마무리-하며">마무리 하며…</a></li>
+  <li><a href="#참고-자료" id="markdown-toc-참고-자료">참고 자료</a>    <ul>
+      <li><a href="#references" id="markdown-toc-references">References</a></li>
+      <li><a href="#oracle-공식-문서" id="markdown-toc-oracle-공식-문서">Oracle 공식 문서</a></li>
+      <li><a href="#인증서-서비스관련-포스팅" id="markdown-toc-인증서-서비스관련-포스팅">인증서 서비스관련 포스팅</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h3 id="oci-certificates-소개">OCI Certificates 소개</h3>
+<p>OCI Certificates 서비스를 처음 접하시거나 자세한 내용이 궁금하신 경우 아래 포스팅을 통해 서비스 내용을 확인해보세요.</p>
+<blockquote>
+  <p><a href="/cloudnative/oci-certificate-overview/" target="_blank" rel="noopener">OCI Certificates 서비스 살펴보기</a></p>
+</blockquote>
+
+<h3 id="lets-encrypt-서비스란">Let’s Encrypt 서비스란?</h3>
+<p>Let’s Encrypt는 공공의 이익을 위해 ISRG(Internet Security Research Group)에서 제공하는 무료, 자동화된 개방형 CA 서비스 입니다.
+Let’s Encrypt에 대해 더 자세히 알고 싶은 경우 <a href="https://letsencrypt.org/ko/about/" target="_blank" rel="noopener">Let’s Encrypt 소개</a>페이지를 방문하여 확인해보세요.</p>
+
+<h3 id="lets-encrypt-인증서-발급-실습-안내">Let’s Encrypt 인증서 발급 실습 안내</h3>
+<p>이번 포스팅에서는 Certbot 플러그인을 사용하여 인증서를 발급받는 방법에 대해 소개합니다. Certbot 플러그인을 사용하면 DNS 레코드 작업을 브라우저를 통해 직접할 필요 없이 간편하게 인증서를 발급 받을 수 있습니다.</p>
+
+<h4 id="사전-준비-사항">사전 준비 사항</h4>
+<ul>
+  <li>Public 도메인</li>
+  <li>Oracle Cloud Infrastructure 계정</li>
+  <li>OCI Compute VM (Oracle Linux 8.x)</li>
+</ul>
+
+<h4 id="실습-순서">실습 순서</h4>
+<ol>
+  <li>도메인 이름 구입/획득</li>
+  <li>OCI를 도메인의 DNS 서버로 설정</li>
+  <li>OCI CLI 설정 (Cloud Shell 사용)</li>
+  <li>Certbot 설치</li>
+  <li>certbot-dns-oci 플러그인 설치</li>
+  <li>certbot을 실행하여 인증서 획득</li>
+  <li>OCI Certificates 서비스에 인증서 등록</li>
+</ol>
+
+<h4 id="1-도메인-구입">1. 도메인 구입</h4>
+<p>실습에 사용할 도메인이 없으신 경우 국내/외 도메인 구매 사이트에서 도메인을 구입하셔야 합니다.
+필자의 경우 실습용 도메인이기 때문에 저렴하게 구매하기 위해 가비아에서 도메인을 구입하여 실습을 진행했습니다. (약 3,000원 / 1년) 
+도메인 구입이 필요한 경우 <a href="https://domain.gabia.com/regist/today_domain" target="_blank" rel="noopener">가비아 도메인</a> 또는 기타 도메인 공급업체에서 구매합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-1.png" alt="" title=" " /></p>
+
+<h4 id="2-oci-dns-영역을-생성하고-도메인의-dns-서버로-설정">2. OCI DNS 영역을 생성하고 도메인의 DNS 서버로 설정</h4>
+<p>도메인을 구입했다면 OCI DNS 서비스에 영역(Zone)을 생성하고, 도메인을 구입한 사이트에서 DNS 서버 정보를 OCI DNS 서버로 변경합니다.</p>
+<ol>
+  <li>전체 메뉴에서 <strong>“네트워킹”</strong> -&gt; <strong>“DNS관리”</strong> -&gt; <strong>“영역”</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-2.png" alt="" title=" " /></li>
+  <li><strong>“영역생성”</strong> 버튼을 클릭한 후 구매한 도메인과 동일하게 영역을 생성합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-3.png" alt="" title=" " /></li>
+  <li>영역생성이 완료된 후 영역상세보기 화면에서 Name Server(이름서버) 정보를 확인합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-4.png" alt="" title=" " /></li>
+  <li>도메인을 구입한 업체의 홈페이지의 도메인 관리 화면에서 DNS 정보를 변경합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-4-1.png" alt="" title=" " /></li>
+  <li>변경한 DNS 정보가 적용되었는지 dnschecker를 통해 확인합니다.
+    <ul>
+      <li><a href="https://dnschecker.org//" target="_blank" rel="noopener">https://dnschecker.org</a></li>
+      <li><img src="/assets/img/cloudnative/2022/certificates/letsencrypt-4-2.png" alt="" title=" " /></li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="3-oci-cli-설정-compute-instance-사용">3. OCI CLI 설정 (Compute Instance 사용)</h4>
+<p>이번 실습에서는 OCI에서 아래와 같은 구성으로 Compute Instance를 생성하여 인증서를 발급 받을 예정입니다. 생성한 VM에서 CLI를 사용할 수 있도록 OCI CLI설정을 진행합니다. 
+Compute Instance 생성이나 접속, CLI 설정관련 자세한 내용은 아래 포스팅을 통해 확인하실 수 있으며, 이번 포스팅에서는 자세한 내용을 다루지 않습니다.</p>
+
+<ul>
+  <li><a href="/getting-started/ocicli-config/" target="_blank" rel="noopener">OCI CLI 도구 살펴보기</a></li>
+  <li>
+    <p><a href="/getting-started/launching-linux-instance/" target="_blank" rel="noopener">OCI에서 리눅스 인스턴스 생성 튜토리얼</a></p>
+  </li>
+  <li>Compute Instance 생성정보
+    <ul>
+      <li>OS : <strong>Oracle-Linux-Cloud-Developer 8.0</strong> (※ 아래 이미지 참고)</li>
+      <li>Shape : <strong>VM.Standard.E4.Flex</strong> / 1 OCPU, 16GB Memory</li>
+      <li>Network / Subnet : <strong>공용 서브넷</strong></li>
+    </ul>
+
+    <p><img src="/assets/img/cloudnative/2022/certificates/letsencrypt-20.png" alt="" title=" " />
+<br /></p>
+  </li>
+</ul>
+
+<ol>
+  <li>OCI 콘솔의 우측 상단의 프로파일 아이콘을 클릭 후 “내 프로파일” 메뉴를 클릭합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-5.png" alt="" title=" " /></li>
+  <li><strong>“API 키”</strong> 메뉴에서 <strong>“API Key 추가”</strong> 버튼을 클릭하여 API Key를 등록합니다. (전용키, 공용키 다운로드하여 잘 보관합니다.)
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-6.png" alt="" title=" " /></li>
+  <li>API 키 추가 후 추가된 키의 구성파일을 확인합니다. (복사하기)
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-7.png" alt="" title=" " /></li>
+  <li>OCI 콘솔의 우측 상단 클라우드쉘 버튼을 클릭하여 클라우드쉘을 활성화 합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-8.png" alt="" title=" " /></li>
+  <li>certbot 실습을 진행할 VM에 접속합니다. <strong>(VM생성 단계에서 적용한 ssh 키파일을 Cloud Shell에 업로드 해야합니다.)</strong>
+    <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="nt">-i</span> <span class="o">[</span>key_file_path] opc@[public_IP_address]
+</code></pre></div>    </div>
+  </li>
+  <li>홈 디렉토리에서 아래 명령어를 입력하여 디렉토리 &amp; 파일을 생성합니다.
+    <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> ~/.oci
+<span class="gp">$</span><span class="w"> </span>vi ~/.oci/oci-api-key.pem
+<span class="gp">$</span><span class="w"> </span>vi ~/.oci/oci-api-pub.pem
+</code></pre></div>    </div>
+  </li>
+  <li>oci-api-key.pem, oci-api-pub.pem에 각각 전용키, 공용키 내용을 입력합니다.
+    <ul>
+      <li><strong>oci-api-key.pem</strong>
+        <div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----<span class="n">BEGIN</span> <span class="n">PRIVATE</span> <span class="n">KEY</span>-----
+<span class="n">MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCgVVZGDQWv9ljq</span>
++<span class="n">sI5ITtfaBjRn6Ir45OFjGu2O1A</span>..............
+</code></pre></div>        </div>
+      </li>
+      <li><strong>oci-api-pub.pem</strong>
+        <div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----<span class="n">BEGIN</span> <span class="n">PUBLIC</span> <span class="n">KEY</span>-----
+<span class="n">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoFVWRg0Fr</span>/<span class="n">ZY6vrCOSE7</span>
+<span class="n">X2gY0Z</span>+<span class="n">iK</span>+<span class="n">OThYxrtjtQE7w6vY</span>..............
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>API 키 화면에서 Action 버튼을 통해 확인했던 구성 정보를 ~/.oci/config 파일로 생성해 줍니다. key_file의 경로는 업로드한 api-key 파일의 위치 및 파일명으로 지정합니다.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/.oci
+$ vi config
+</code></pre></div>    </div>
+
+    <div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">DEFAULT</span>]
+<span class="n">user</span>=<span class="n">ocid1</span>.<span class="n">user</span>.<span class="n">oc1</span>..<span class="n">aaaaaaaaeaacd7afudut</span>..............
+<span class="n">fingerprint</span>=<span class="m">8</span><span class="n">a</span>:<span class="n">fd</span>:<span class="m">9</span><span class="n">d</span>:<span class="n">aa</span>:<span class="m">81</span>:<span class="m">37</span>:<span class="n">b1</span>:..............
+<span class="n">tenancy</span>=<span class="n">ocid1</span>.<span class="n">tenancy</span>.<span class="n">oc1</span>..<span class="n">aaaaaaaam3ldu4ndce</span>..............
+<span class="n">region</span>=<span class="n">ap</span>-<span class="n">seoul</span>-<span class="m">1</span> <span class="c">#만약 seoul 리전이 아닌경우 실제 실습할 리전으로 대체합니다.
+</span><span class="n">key_file</span>=~/.<span class="n">oci</span>/<span class="n">oci</span>-<span class="n">api</span>-<span class="n">key</span>.<span class="n">pem</span> <span class="c"># 실제 저장한 키파일의 위치 및 파일이름으로 지정합니다.
+</span></code></pre></div>    </div>
+  </li>
+  <li>OCI CLI 설정이 잘 되었는지 확인하기 위해 아래와 같이 tenancy namespace 정보를 조회합니다.
+    <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci os ns get
+<span class="go">results
+{
+   "data": "axlpeslmb1ng"
+}
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="4-certbot-패키지-설치">4. Certbot 패키지 설치</h4>
+<p>클라우드쉘에는 기본적으로 Python3이 설치되어 있기 때문에 별도의 Python 설치 과정없이 바로 Certbot 패키지를 설치할 수 있습니다.
+아래 명령어를 이용하여 클라우드쉘에 Certbot 패키지를 설치합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span><span class="nb">sudo </span>pip3 <span class="nb">install </span>certbot
+</code></pre></div></div>
+<h4 id="5-certbot-dns-oci-플러그인-설치">5. certbot-dns-oci 플러그인 설치</h4>
+<p>certbot 프로그램에서 OCI DNS 서비스 접근을 위한 별도의 플러그인 설치가 필요합니다.
+아래 명령어를 차례로 입력하여 certbot-dns-oci 플러그인을 설치해주세요. 플러그인 관련하여 자세한 정보가 필요하신 경우 <a href="https://github.com/therealcmj/certbot-dns-oci" target="_blank" rel="noopener">플러그인 깃허브 레파지토리</a> 페이지에서 확인하실 수 있습니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>git clone https://github.com/therealcmj/certbot-dns-oci.git
+<span class="gp">   $</span><span class="w"> </span><span class="nb">cd </span>certbot-dns-oci
+<span class="gp">   $</span><span class="w"> </span><span class="nb">sudo </span>pip3 <span class="nb">install</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h4 id="6-certbot을-실행하여-인증서-획득">6. certbot을 실행하여 인증서 획득</h4>
+<p>여기까지 설정이 정상적으로 완료되었다면 이제 마지막으로 아래 certbot 명령어를 입력하여 인증서를 생성합니다.
+아래 명령어를 실행하면 cloudshell의 “logs” 디렉토리에 로그를 저장하고 “work”를 작업 디렉토리로 사용하고 “config” 디렉토리에 인증서 및 기타 항목을 저장합니다.
+나머지 세가지 옵션과 해당 인수는 certbot에게 챌린지 및 응답에 OCI DNS 플러그인을 사용하고 dns 관련 작업을 검증하기 위한 시간을 120초로 설정, “*.oci-younghwan.xyz”에 대한 인증서 생성을 요청합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>certbot certonly <span class="nt">--logs-dir</span> logs <span class="nt">--work-dir</span> work <span class="nt">--config-dir</span> config <span class="nt">--authenticator</span> dns-oci <span class="nt">--dns-oci-propagation-seconds</span> 120 <span class="nt">-d</span> <span class="k">*</span>.oci-younghwan.xyz
+</code></pre></div></div>
+
+<ul>
+  <li>위 명령어를 실행하면 아래와 같이 몇 단계 설정을 진행해야 합니다.
+    <ol>
+      <li>Enter email address (used for urgent renewal and security notices) -&gt; <strong>이메일 주소 입력</strong></li>
+      <li>Please read the Terms of Service at https://letsencrypt.org/documents/LE-SA-v1.3-September-21-2022.pdf. You must agree in order to register with the ACME server. Do you agree? -&gt; <strong>“Y” 입력</strong></li>
+      <li>Would you be willing, once your first certificate is successfully issued, to share your email address with the Electronic Frontier Foundation, a founding partner of the Let’s Encrypt project and the non-profit organization that develops Certbot? We’d like to send you email about our work encrypting the web, EFF news, campaigns, and ways to support digital freedom. -&gt; <strong>“Y” 입력</strong></li>
+    </ol>
+  </li>
+  <li>설정이 완료되면 아래와 같은 화면을 확인할 수 있습니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-9.png" alt="" title=" " /></li>
+  <li>명령어를 실행한 위치 기준으로 /config/live 경로로 이동하면 아래와 같이 생성된 인증서를 확인할 수 있습니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-10.png" alt="" title=" " /></li>
+  <li>생성된 인증서 파일 설명
+    <ul>
+      <li><strong>cert.pem</strong> : 요청한 도메인에 대한 인증서 파일 (Certificate)</li>
+      <li><strong>chain.pem</strong> : 인증서 검증을 위한 체인 파일</li>
+      <li><strong>fullchain.pem</strong> : cert.pem + chain.pem 두 파일을 하나로 합친 파일</li>
+      <li><strong>privkey.pem</strong> : 생성한 인증서 파일에 대한 개인키 파일</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="7-oci-인증서-서비스에-인증서-등록">7. OCI 인증서 서비스에 인증서 등록</h4>
+<p>앞서 6번째 단계에서 생성된 인증서를 OCI 인증서 서비스에 등록합니다. 인증서 서비스에 등록할때 필요한 파일은 아래를 참고해주세요</p>
+<ul>
+  <li><strong>cert.pem</strong> : 요청한 도메인에 대한 인증서 파일 (Certificate)</li>
+  <li><strong>chain.pem</strong> : 인증서 검증을 위한 체인 파일</li>
+  <li><strong>isrgrootx1.txt</strong> : root_ca Let’s Encrypt의 root ca 파일 <a href="/assets/files/cloudnative/isrgrootx1.txt" target="_blank" rel="noopener">Root CA 파일 다운로드</a></li>
+  <li><strong>privkey.pem</strong> : 생성한 인증서 파일에 대한 개인키 파일
+<br /></li>
+</ul>
+
+<ol>
+  <li>전체 메뉴에서 <strong>“ID &amp; 보안”</strong> -&gt; <strong>“인증서”</strong> -&gt; <strong>“인증서”</strong> 메뉴를 클릭합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-11.png" alt="" title=" " /></li>
+  <li>“인증서 생성” 버튼을 클릭합니다
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-12.png" alt="" title=" " /></li>
+  <li>인증서 생성화면에서 “임포트됨”을 선택하고 인증서 이름, 설명을 입력합니다. (어떤 도메인에 대한 인증서인지 식별할 수 있는 이름으로 작성합니다.)
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-13.png" alt="" title=" " /></li>
+  <li>주체 정보는 “임포트됨” 유형에서는 해당 없기 때문에 “다음” 버튼을 눌러서 다음단계로 이동합니다.</li>
+  <li>인증서 생성 단계에서는 앞서 생성된 인증서 정보를 입력합니다.
+    <ul>
+      <li>인증서 : cat 명령어를 통해 cert.pem의 내용을 확인 후 복사 붙여넣기 합니다.</li>
+      <li>인증서 체인 : cat 명령어를 통해 chain.pem의 내용을 확인 후 복사 붙여넣고 바로 다음에 아래 Root CA 파일의 내용을 복사하여 붙여넣기 합니다.
+<a href="/assets/files/cloudnative/isrgrootx1.txt" target="_blank" rel="noopener">Root CA 파일 다운로드</a></li>
+      <li>전용 키 : cat 명령어를 통해 privkey.pem의 내용을 확인 후 복사 붙여넣기 합니다.</li>
+      <li>전용키 암호 : 입력하지 않음.</li>
+      <li>“다음” 버튼을 클릭합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-14.png" alt="" title=" " /></li>
+    </ul>
+  </li>
+  <li>규칙 단계는 “임포트됨” 유형에서는 해당 없기 때문에 “다음” 버튼을 눌러서 다음단계로 이동합니다.</li>
+  <li>입력한 내용을 검포 후 “인증서 생성”버튼을 클릭합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-15.png" alt="" title=" " />
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-16.png" alt="" title=" " /></li>
+  <li>생성된 인증서 정보를 확인합니다.
+<img src="/assets/img/cloudnative/2022/certificates/letsencrypt-17.png" alt="" title=" " /></li>
+</ol>
+
+<h3 id="마무리-하며">마무리 하며…</h3>
+<p>이번 포스팅에서는 certbot을 이용하여 간편하게 인증서를 발급받고 OCI 인증서 서비스에 등록하는 과정에 대해 살펴보았습니다.
+다음에는 OCI 인증서 서비스를 다른 OCI 서비스 (로드밸런서, API Gateway)에 통합하는 과정도 살펴볼 예정입니다.
+아래 인증서 서비스관련 포스팅의 링크를 참조하세요.</p>
+
+<h3 id="참고-자료">참고 자료</h3>
+<h4 id="references">References</h4>
+<ul>
+  <li><a href="https://www.ateam-oracle.com/post/get-certificates-from-lets-encrypt-for-your-oci-services-the-easy-way" target="_blank" rel="noopener">https://www.ateam-oracle.com/post/get-certificates-from-lets-encrypt-for-your-oci-services-the-easy-way</a></li>
+</ul>
+
+<h4 id="oracle-공식-문서">Oracle 공식 문서</h4>
+<ul>
+  <li><a href="https://docs.oracle.com/en-us/iaas/Content/certificates/home.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/certificates/home.htm</a></li>
+  <li><a href="https://www.oracle.com/security/cloud-security/ssl-tls-certificates/" target="_blank" rel="noopener">https://www.oracle.com/security/cloud-security/ssl-tls-certificates/</a></li>
+  <li><a href="https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/" target="_blank" rel="noopener">https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/</a></li>
+</ul>
+
+<h4 id="인증서-서비스관련-포스팅">인증서 서비스관련 포스팅</h4>
+<ul>
+  <li><a href="/cloudnative/oci-certificate-with-lb/" target="_blank" rel="noopener">OCI 인증서를 Load Balancer에 적용하기</a></li>
+  <li>OCI 인증서를 API Gateway에 적용하기</li>
+  <li>OCI 인증서 서비스의 인증기관 생성 및 Load Balancer 적용하기</li>
+</ul>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="" target="_blank"> Young Hwan</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-12-02T00:00:00+09:00" itemprop="datePublished"> 2022-12-02</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> certificates</span> <span class="icon-price-tag pr10"> CA</span> <span class="icon-price-tag pr10"> lets encrypt</span> <span class="icon-price-tag pr10"> certbot</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/cloudnative/oci-certificate-overview/">&laquo; OCI Certificates 서비스 살펴보기</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-certificate-with-lb/">OCI Certificates - OCI 인증서 서비스에 등록한 인증서를 Application Load Balancer에 적용하기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/oci-certificate-import-letsencrypt-cert/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

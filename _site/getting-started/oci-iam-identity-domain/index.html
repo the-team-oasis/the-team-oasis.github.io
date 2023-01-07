@@ -1,0 +1,610 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI IAM Identity Domain 에 대해 알아보기</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="Oracle Cloud Infrastructure (OCI) IAM Identity Domain 에 대해 알아봅니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//getting-started/oci-iam-identity-domain/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI IAM Identity Domain 에 대해 알아보기">
+	<meta property="og:description" content="Oracle Cloud Infrastructure (OCI) IAM Identity Domain 에 대해 알아봅니다.">
+	<meta property="og:url" content="http://localhost:4000//getting-started/oci-iam-identity-domain/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI IAM Identity Domain 에 대해 알아보기">
+	<meta name="twitter:description" content="Oracle Cloud Infrastructure (OCI) IAM Identity Domain 에 대해 알아봅니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//getting-started/">getting started</a>
+    
+  
+    
+        <a class="current">OCI IAM Identity Domain 에 대해 알아보기</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">Identity & Security</p>
+				<h1>OCI IAM Identity Domain 에 대해 알아보기</h1>
+			</header>
+
+			
+			<p class="teaser">
+				Oracle Cloud Infrastructure (OCI) IAM Identity Domain 에 대해 알아봅니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#oci-iam-identity-domain-등장-배경" id="markdown-toc-oci-iam-identity-domain-등장-배경">OCI IAM Identity Domain 등장 배경</a></li>
+  <li><a href="#oci-iam-identity-domain-이란" id="markdown-toc-oci-iam-identity-domain-이란">OCI IAM Identity Domain 이란?</a>    <ul>
+      <li><a href="#도메인-유형-서비스별-제한사항-등" id="markdown-toc-도메인-유형-서비스별-제한사항-등">도메인 유형 (서비스별 제한사항 등)</a></li>
+    </ul>
+  </li>
+  <li><a href="#oci-iam-identity-domain-에서-달라진점" id="markdown-toc-oci-iam-identity-domain-에서-달라진점">OCI IAM Identity Domain 에서 달라진점</a>    <ul>
+      <li><a href="#기능비교" id="markdown-toc-기능비교">기능비교</a></li>
+      <li><a href="#oci-console-달라진점" id="markdown-toc-oci-console-달라진점">OCI Console 달라진점</a></li>
+    </ul>
+  </li>
+  <li><a href="#identity-domain을-통해-다중-id-domain-구성-예시" id="markdown-toc-identity-domain을-통해-다중-id-domain-구성-예시">Identity Domain을 통해 다중 ID Domain 구성 예시</a></li>
+  <li><a href="#identity-domain-을-위한-policy-작성-예시" id="markdown-toc-identity-domain-을-위한-policy-작성-예시">Identity Domain 을 위한 Policy 작성 예시</a></li>
+  <li><a href="#oci-iam-identity-domain-로그인-하기" id="markdown-toc-oci-iam-identity-domain-로그인-하기">OCI IAM Identity Domain 로그인 하기</a></li>
+</ul>
+
+</div>
+
+<h3 id="oci-iam-identity-domain-등장-배경">OCI IAM Identity Domain 등장 배경</h3>
+<p>현재의 Oracle Cloud Infrastructure가 등장하기 전 Oracle에서 제공하던 다양한 클라우드 애플리케이션의 인증 &amp; 관리를 위해 사용하던 Oracle Identity Cloud Service(IDCS)와 
+Oracle Cloud Infrastructure 서비스의 인증 &amp; 관리를 위한 OCI IAM 서비스가 따로 관리되어 왔지만, 최근들어 기존의 Oracle Cloud Application이 점차 OCI로 이관(통합) 되면서 기존 IDCS의 기능이 OCI IAM에 통합 되었습니다.<br />
+통합된 기능을 통해 OCI 고객은 OCI 및 오라클 클라우드 애플리케이션과 함께 사용할 수 있는 풍부한 엔터프라이즈급 IAM(ID 및 액세스 관리) 기능 세트를 사용할 수 있게 되었습니다.
+<img src="/assets/img/getting-started/2022/oci-new-iam-changes.png" alt="" title=" " /></p>
+
+<h3 id="oci-iam-identity-domain-이란">OCI IAM Identity Domain 이란?</h3>
+<p>OCI IAM Identity Domain에서 Domain 은 사용자 및 역할 관리, 사용자 연합 및 프로비저닝, Oracle SSO(Single Sign-On) 구성을 통한 보안 애플리케이션 통합, OAuth 관리를 위한 컨테이너입니다. 
+기본으로 제공되는 Default외에 추가 Domain을 생성해서 사용자는 특정 목적 또는 환경별로 사용자를 구분하여 관리할 수 있습니다. 예를 들어 개발/운영 업무에 맞게 각각 환경에 사용자를 추가하여 관리할 수 있습니다.</p>
+
+<h4 id="도메인-유형-서비스별-제한사항-등">도메인 유형 (서비스별 제한사항 등)</h4>
+<ul>
+  <li><strong>Free identity Domain</strong> : 각 OCI 테넌시는 OCI 리소스(네트워크, 컴퓨팅, 스토리지 등)에 대한 액세스를 관리하기 위한 프리 티어 기본 OCI IAM Identity Domain 을 포함합니다. OCI 리소스에 대한 액세스만 관리하려는 경우 포함된 기본 도메인. Oracle Cloud 리소스에 대한 액세스를 관리하기 위한 강력한 IAM 기능 세트를 제공합니다. 보안 모델 및 팀에 따라 고객은 이 도메인을 OCI 관리자용으로 예약하도록 선택할 수 있습니다.</li>
+  <li><strong>Oracle Apps identity Domain</strong> : 수많은 Oracle Cloud 애플리케이션(HCM, CRM, ERP, 산업 앱 등)에는 Oracle Apps 도메인을 통한 OCI IAM 사용이 포함될 수 있습니다. 이러한 도메인은 구독된 Oracle 애플리케이션과 함께 사용하기 위해 포함되며 Oracle Cloud 및 SaaS 서비스에 대한 액세스를 관리하기 위한 강력한 IAM 기능을 제공합니다. 고객은 이 도메인에 모든 직원을 추가하여 Oracle Cloud 애플리케이션 서비스에 대한 SSO를 활성화하고 이 도메인을 사용하여 OCI 리소스의 일부 또는 전체에 대한 액세스를 관리할 수 있습니다.</li>
+  <li><strong>Oracle Apps Premium identity Domain</strong> : SaaS 제공되지 않을 수 있는 Oracle 애플리케이션에 대한 액세스를 관리하기 위해 완전한 엔터프라이즈 기능으로 Oracle Apps 도메인을 확장하려는 경우(예: Oracle E-Business Suite 또는 Oracle Database, 온프레미스 또는 호스팅 여부) OCI에서) Oracle Apps Premium 도메인은 하이브리드 클라우드 환경에 배포될 수 있는 Oracle 대상과 함께 사용하기 위한 전체 OCI IAM 기능 세트를 제공합니다. 이것은 모든 기능을 갖추고 있지만 Oracle 대상과 함께 사용하도록 제한되는 저비용 서비스입니다.</li>
+  <li><strong>External identity Domain</strong> : 외부 Identity Domain 은 소매 사이트에 액세스하는 소비자, 시민이 액세스할 수 있는 정부 또는 비즈니스 파트너에 대한 액세스를 허용하는 기업과 같은 비직원을 위한 전체 OCI IAM 기능을 제공합니다. 대상이 될 수 있는 응용 프로그램에는 제한이 없습니다. 그러나 App Gateway 및 Provisioning Bridge와 같이 직원이 아닌 시나리오에서는 일반적으로 유용하지 않은 특정 엔터프라이즈 기능은 포함되지 않습니다. 외부 도메인에는 소셜 로그온, 자체 등록, 이용 약관 동의, 프로필/비밀번호 관리 지원이 포함됩니다.</li>
+  <li><strong>Premium identity Domain</strong> : 프리미엄 자격 증명 도메인은 대상 애플리케이션에 대한 제한 없이 전체 OCI IAM 기능을 제공합니다. 프리미엄 도메인은 클라우드 및 온프레미스 애플리케이션에서 직원 또는 인력 액세스를 관리하는 엔터프라이즈 IAM 서비스로 사용되어 보안 인증, 손쉬운 권한 관리, 최종 사용자를 위한 원활한 SSO를 지원합니다.
+<img src="/assets/img/getting-started/2022/oci-iam-identity-domain-types.png" alt="" title=" " /></li>
+</ul>
+
+<h3 id="oci-iam-identity-domain-에서-달라진점">OCI IAM Identity Domain 에서 달라진점</h3>
+<p>OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공하던 IDCS의 기능을 통합하여 OCI Native한 새로운 IDaaS 서비스를 제공하게 되었습니다.
+이로인해 기존의 OCI의 서비스 뿐만아니라 Oralce Cloud Application도 하나의 인증시스템에서 관리할 수 있게 되었습니다.</p>
+
+<h4 id="기능비교">기능비교</h4>
+<table class="table vl-table-bordered vl-table-divider-col" summary="OCI IAM 변경사항 설명"><caption></caption><colgroup><col /><col /><col /></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1" style="width:25%;">Before</th>
+      <th class="entry" id="About__entry__2" style="width:25%;">After</th>
+      <th class="entry" id="About__entry__3" style="width:50%;">Description</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1">OCI IAM - <b>Local Account</b></td>
+      <td class="entry" headers="About__entry__2">OCI IAM Identity Domains - <b>Default Domain</b></td>
+      <td class="entry" headers="About__entry__3">기존 OCI IAM의 Local Account는 신규 OCI IAM에서 Default Doamin으로 변경되었습니다.</td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1">OCI IAM - <b>External IdP</b></td>
+      <td class="entry" headers="About__entry__2">OCI IAM Identity Domains - <b>External IdP</b></td>
+      <td class="entry" headers="About__entry__3">기능 변경사항 없음</td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1">OCI IAM - <b>IDCS Federation</b></td>
+      <td class="entry" headers="About__entry__2">OCI IAM Identity Domains - <b>IDCS-Foundation</b></td>
+      <td class="entry" headers="About__entry__3">기존 OCI IAM에서 IDCS 시스템과 통합하기 위한 기능인 IDCS Federation 기능이 신규 OCI IAM에서 IDCS-Foundation Type의 도메인으로 변경되었습니다.</td>
+      </tr>
+      </tbody>
+</table>
+
+<p><img src="/assets/img/getting-started/2022/oci-identity-domain-changes.png" alt="" title=" " /></p>
+
+<h4 id="oci-console-달라진점">OCI Console 달라진점</h4>
+<p>새로운 기능이 추가되면서 사용자 메뉴 구성이 아래와 같이 변경 되었습니다.
+<img src="/assets/img/getting-started/2022/oci-iam-console-changes-1.png" alt="" title=" " /></p>
+
+<h3 id="identity-domain을-통해-다중-id-domain-구성-예시">Identity Domain을 통해 다중 ID Domain 구성 예시</h3>
+<p>달라진 OCI IAM Identity Domain을 통해 아래와 같이 다중 ID Domain 구성을 할 수 있습니다.</p>
+<ul>
+  <li>테넌시 생성 시 자동으로 생성되는 <strong>Default Domain</strong></li>
+  <li>“Production” 구획을 위한 <strong>ProductionDomain</strong>을 추가하여 별도의 사용자,그룹,정책등을 관리할 수 있습니다.</li>
+  <li>“Consumer” 구획을 위한 <strong>ConsumerDomain</strong>을 추가하여 별도의 사용자,그룹,정책등을 관리할 수 있습니다.
+<img src="/assets/img/getting-started/2022/oci-identity-domain-example.png" alt="" title=" " /></li>
+</ul>
+
+<h3 id="identity-domain-을-위한-policy-작성-예시">Identity Domain 을 위한 Policy 작성 예시</h3>
+<p>In the Policy Builder, select Show manual editor and enter the required policy statements.
+Identity Domain의 IAM 작성 문법 및 예시 입니다. 기존의 그룹명 위치에 생성한 <strong>[Domain이름]/[Domain내Group이름]</strong>을 넣어서 정책을 작성할 수 있습니다.</p>
+
+<p><strong>문법:</strong></p>
+<ul>
+  <li>allow group <strong>domain-name/group_name</strong> to verb resource-type in compartment compartment-name</li>
+  <li>allow group <strong>domain-name/group_name</strong> to verb resource-type in tenancy</li>
+</ul>
+
+<p><strong>예시:</strong></p>
+<ul>
+  <li>allow group <strong>admin/oci-integration-admins</strong> to manage integration-instance in compartment OICCompartment</li>
+</ul>
+
+<h3 id="oci-iam-identity-domain-로그인-하기">OCI IAM Identity Domain 로그인 하기</h3>
+<ol>
+  <li><a href="https://cloud.oracle.com">https://cloud.oracle.com</a> 링크로 접속합니다.</li>
+  <li><strong>[Cloud Account Name]</strong> 에 생성한 <strong>클라우드 계정 이름</strong>을 입력 후 <strong>Next</strong> 버튼을 클릭 합니다.
+<img src="/assets/img/getting-started/2022/oci-cloud-sign-in.png" alt="Cloud Sign-in #1" title=" " /></li>
+  <li>이동된 화면에서 로그인할 도메인을 선택한 후 <strong>Next</strong> 버튼을 클릭합니다.
+<img src="/assets/img/getting-started/2022/oci-cloud-id-sign-in.png" alt="Cloud Sign-in #2" title=" " /></li>
+  <li>이동된 화면에서 사용자 이름 및 비밀번호를 입력하고 <strong>사인인</strong> 버튼을 통해 로그인합니다.
+<img src="/assets/img/getting-started/2022/oci-cloud-id-sign-in2.png" alt="Cloud Sign-in #3" /></li>
+</ol>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="" target="_blank"> Young Hwan</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-06-21T09:00:00+09:00" itemprop="datePublished"> 2022-06-21</time>
+				
+
+				<span class="icon-archive pr20"> GETTING-STARTED</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> sign-in</span> <span class="icon-price-tag pr10"> identity domains</span> <span class="icon-price-tag pr10"> iam</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/getting-started/changing-your-password/">&laquo; OCI 계정의 비밀번호 변경하기</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//getting-started/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/getting-started/compute-firewall/">OCI Oracle Linux 7이상에서 방화벽 설정하기 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/getting-started/oci-iam-identity-domain/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

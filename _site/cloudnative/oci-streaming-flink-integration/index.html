@@ -1,0 +1,1110 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Streaming Cloud Service with Kafka and Flink</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI Streaming 서비스는 Apache Kafka API와 호환성을 제공하고 있습니다. 이번 글에서는 OCI Streaming Service와 함께 데이터 생산자(Producer)로 Kafka, 소비자(Consumer)로 Flink를 사용하는 방법을 정리하였습니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/oci-streaming-flink-integration/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="Streaming Cloud Service with Kafka and Flink">
+	<meta property="og:description" content="OCI Streaming 서비스는 Apache Kafka API와 호환성을 제공하고 있습니다. 이번 글에서는 OCI Streaming Service와 함께 데이터 생산자(Producer)로 Kafka, 소비자(Consumer)로 Flink를 사용하는 방법을 정리하였습니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/oci-streaming-flink-integration/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="Streaming Cloud Service with Kafka and Flink">
+	<meta name="twitter:description" content="OCI Streaming 서비스는 Apache Kafka API와 호환성을 제공하고 있습니다. 이번 글에서는 OCI Streaming Service와 함께 데이터 생산자(Producer)로 Kafka, 소비자(Consumer)로 Flink를 사용하는 방법을 정리하였습니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">Streaming Cloud Service with Kafka and Flink</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>Streaming Cloud Service with Kafka and Flink</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI Streaming 서비스는 Apache Kafka API와 호환성을 제공하고 있습니다. 이번 글에서는 OCI Streaming Service와 함께 데이터 생산자(Producer)로 Kafka, 소비자(Consumer)로 Flink를 사용하는 방법을 정리하였습니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#streamtopic-구성" id="markdown-toc-streamtopic-구성">Stream(Topic) 구성</a>    <ul>
+      <li><a href="#streamtopic-생성" id="markdown-toc-streamtopic-생성">Stream(Topic) 생성</a></li>
+      <li><a href="#stream-pool-stream-group-및-kafka-접속-정보" id="markdown-toc-stream-pool-stream-group-및-kafka-접속-정보">Stream Pool (Stream Group) 및 Kafka 접속 정보</a></li>
+      <li><a href="#auth-token-생성" id="markdown-toc-auth-token-생성">Auth Token 생성</a></li>
+    </ul>
+  </li>
+  <li><a href="#flink-환경-구성" id="markdown-toc-flink-환경-구성">Flink 환경 구성</a>    <ul>
+      <li><a href="#flink-설치" id="markdown-toc-flink-설치">Flink 설치</a></li>
+      <li><a href="#flink-클러스터-실행" id="markdown-toc-flink-클러스터-실행">Flink 클러스터 실행</a></li>
+    </ul>
+  </li>
+  <li><a href="#flink-소비자consumer" id="markdown-toc-flink-소비자consumer">Flink 소비자(Consumer)</a>    <ul>
+      <li><a href="#flink-소비자-코드-작성" id="markdown-toc-flink-소비자-코드-작성">Flink 소비자 코드 작성</a></li>
+      <li><a href="#빌드-및-잡job-실행" id="markdown-toc-빌드-및-잡job-실행">빌드 및 잡(Job) 실행</a></li>
+    </ul>
+  </li>
+  <li><a href="#kafka-생산자-producer" id="markdown-toc-kafka-생산자-producer">Kafka 생산자 (Producer)</a>    <ul>
+      <li><a href="#kafka-생산자-코드-작성" id="markdown-toc-kafka-생산자-코드-작성">Kafka 생산자 코드 작성</a></li>
+      <li><a href="#빌드-및-생산자-실행" id="markdown-toc-빌드-및-생산자-실행">빌드 및 생산자 실행</a></li>
+    </ul>
+  </li>
+  <li><a href="#flink-job-task-확인" id="markdown-toc-flink-job-task-확인">Flink Job Task 확인</a></li>
+  <li><a href="#소스-공유" id="markdown-toc-소스-공유">소스 공유</a></li>
+  <li><a href="#참고" id="markdown-toc-참고">참고</a></li>
+</ul>
+
+</div>
+
+<h3 id="streamtopic-구성">Stream(Topic) 구성</h3>
+<p>우선 OCI에서 Stream을 사용할 수 있도록 구성하고 Kafka 관련 접속 정보를 얻어야 합니다.</p>
+
+<h4 id="streamtopic-생성">Stream(Topic) 생성</h4>
+<p>OCI Streaming Service에서 Stream(Topic)을 생성하는 절차는 간단합니다. OCI 콘솔에 접속한 후 <strong>메뉴 &gt;Analytics &amp; AI &gt; 스트리밍(Streaming) &gt; 스트림 생성</strong> 경로로 이동해서 생성할 수 있습니다.</p>
+
+<p><img src="https://mangdan.github.io/assets/images/oci-create-streaming.png" alt="" /></p>
+
+<h4 id="stream-pool-stream-group-및-kafka-접속-정보">Stream Pool (Stream Group) 및 Kafka 접속 정보</h4>
+<p>Stream Pool은 Stream의 Group을 의미합니다. 위에서 생성한 Stream에 별도의 Stream Pool을 지정하지 않은 경우 기본 Stream Pool (DefaultPool)에 포함됩니다. Stream Pool을 보면 Stream Pool에 접속을 위한 Kafka 설정을 포함하고 있습니다. 이 정보를 이용해서 Kafka 및 Flink 설정을 하게 됩니다.</p>
+<ul>
+  <li>부트 스트랩 서버: cell-1.streaming.{Region-Code}.oci.oraclecloud.com:9092</li>
+  <li>SASL 접속 문자열: org.apache.kafka.common.security.plain.PlainLoginModule required username=”{테넌시명}/{OCI 계정}/{Stream Pool OCID}” * password=”{AUTH_TOKEN}”;</li>
+  <li>보안 프로토콜: SASL_SSL</li>
+  <li>보안 방식: PLAIN</li>
+</ul>
+
+<h4 id="auth-token-생성">Auth Token 생성</h4>
+<p>Kafka 접속 정보에서 필요한 정보를 얻을 수 있지만, 자신의 계정과 연관된 AUTH_TOKEN은 생성해 줘야합니다. 다음 순서로 토큰을 생성합니다.</p>
+<ul>
+  <li>우측 상단 프로파일 클릭 &gt; 계정 선택 &gt; 인증 토큰 &gt; 토큰 생성 &gt; 복사</li>
+</ul>
+
+<p><img src="https://mangdan.github.io/assets/images/oci-oss-create-token.png" alt="" /></p>
+
+<h3 id="flink-환경-구성">Flink 환경 구성</h3>
+<p>Flink 환경을 구성하고 소비자(Consumer)를 작성하여 실행할 것입니다. 여기서는 로컬 클러스터 환경으로 구성하도록 하겠습니다.</p>
+
+<h4 id="flink-설치">Flink 설치</h4>
+<p>설치는 아래 링크를 참고합니다.<br />
+<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/getting-started/tutorials/local_setup.html">https://ci.apache.org/projects/flink/flink-docs-release-1.9/getting-started/tutorials/local_setup.html</a></p>
+
+<p>MacOS의 경우 다음과 같이 HomeBrew를 활용하면 쉽게 설치할 수 있습니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>brew <span class="nb">install </span>apache-flink
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>flink <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h4 id="flink-클러스터-실행">Flink 클러스터 실행</h4>
+<p>MacOS에서 HomeBrew로 설치한 경우 보통 /usr/local/Cellar/apache-flink/{버전}과 같은 위치에 설치됩니다. 정확한 경로 위치는 다음과 같이 brew info로 확인할 수 있습니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>brew info apache-flink
+<span class="go">
+apache-flink: stable 1.16.0, HEAD
+Scalable batch and stream data processing
+https://flink.apache.org/
+/usr/local/Cellar/apache-flink/1.16.0 (174 files, 336MB) *
+  Built from source on 2022-11-04 at 14:46:29
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/apache-flink.rb
+License: Apache-2.0
+</span><span class="gp">==&gt;</span><span class="w"> </span>Requirements
+<span class="go">Required: java = 1.8 ✔
+</span><span class="gp">==&gt;</span><span class="w"> </span>Options
+<span class="go">--HEAD
+	Install HEAD version
+</span><span class="gp">==&gt;</span><span class="w"> </span>Analytics
+<span class="go">install: 713 (30 days), 2,253 (90 days), 13,079 (365 days)
+install-on-request: 714 (30 days), 2,243 (90 days), 13,028 (365 days)
+build-error: 0 (30 days)
+</span></code></pre></div></div>
+
+<p>다음과 같이 이동하여 실행합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd /usr/local/Cellar/apache-flink/1.16.0/libexec/bin
+
+$ ./start-cluster.sh
+</code></pre></div></div>
+
+<p>이제 Flink에서 제공하는 관리 콘솔에 접속해 봅니다.</p>
+<ul>
+  <li>http://localhost:8081</li>
+</ul>
+
+<p><img src="https://mangdan.github.io/assets/images/oci-oss-flink-dashboard.png" alt="" /></p>
+
+<h3 id="flink-소비자consumer">Flink 소비자(Consumer)</h3>
+<p>Flink는 Java와 Scala를 통해 코드를 작성할 수 있습니다. 여기서는 메이븐 프로젝트와 Java를 활용하여 작성하였습니다.</p>
+
+<h4 id="flink-소비자-코드-작성">Flink 소비자 코드 작성</h4>
+<p>Flink는 최신 버전인 1.16.0 버전을 사용하였습니다. 아래와 같이 Dependency와 Maven Plugin 설정을 합니다.</p>
+
+<p><strong>pom.xml</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span>
+	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>com.example.app<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>oss-kafka-flink-consumer<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+	<span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;properties&gt;</span>
+		<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+		<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+		<span class="nt">&lt;flink.version&gt;</span>1.16.0<span class="nt">&lt;/flink.version&gt;</span>
+	<span class="nt">&lt;/properties&gt;</span>
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>flink-connector-kafka<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>flink-java<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>flink-streaming-java<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;build&gt;</span>
+		<span class="nt">&lt;plugins&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-resources-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>3.2.0<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-shade-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>3.2.4<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;executions&gt;</span>
+					<span class="c">&lt;!-- Run shade goal on package phase --&gt;</span>
+					<span class="nt">&lt;execution&gt;</span>
+						<span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+						<span class="nt">&lt;goals&gt;</span>
+							<span class="nt">&lt;goal&gt;</span>shade<span class="nt">&lt;/goal&gt;</span>
+						<span class="nt">&lt;/goals&gt;</span>
+						<span class="nt">&lt;configuration&gt;</span>
+							<span class="nt">&lt;artifactSet&gt;</span>
+								<span class="nt">&lt;excludes&gt;</span>
+									<span class="c">&lt;!-- This list contains all dependencies of flink-dist
+									Everything else will be packaged into the fat-jar
+									--&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-shaded-*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-core<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-java<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-scala<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-runtime<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-optimizer<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-clients<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-avro<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-java-examples<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-scala-examples<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-streaming-examples<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.flink:flink-streaming-java<span class="nt">&lt;/exclude&gt;</span>
+
+									<span class="c">&lt;!-- Also exclude very big transitive dependencies of Flink
+									WARNING: You have to remove these excludes if your code relies on other
+									versions of these dependencies.
+									--&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.scala-lang:scala-library<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.scala-lang:scala-compiler<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.scala-lang:scala-reflect<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.amazonaws:aws-java-sdk<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.typesafe.akka:akka-actor_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.typesafe.akka:akka-remote_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.typesafe.akka:akka-slf4j_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>io.netty:netty-all<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>io.netty:netty<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-server<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-continuation<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-http<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-io<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-util<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-security<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.eclipse.jetty:jetty-servlet<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-fileupload:commons-fileupload<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.avro:avro<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-collections:commons-collections<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.codehaus.jackson:jackson-core-asl<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.codehaus.jackson:jackson-mapper-asl<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.thoughtworks.paranamer:paranamer<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.xerial.snappy:snappy-java<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.commons:commons-compress<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.tukaani:xz<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.esotericsoftware.kryo:kryo<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.esotericsoftware.minlog:minlog<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.objenesis:objenesis<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:chill_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:chill-java<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:chill-avro_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:chill-bijection_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:bijection-core_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.twitter:bijection-avro_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-lang:commons-lang<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>junit:junit<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>de.javakaffee:kryo-serializers<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>joda-time:joda-time<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.commons:commons-lang3<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.slf4j:slf4j-api<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.slf4j:slf4j-log4j12<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>log4j:log4j<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.commons:commons-math<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.sling:org.apache.sling.commons.json<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-logging:commons-logging<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.httpcomponents:httpclient<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.apache.httpcomponents:httpcore<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-codec:commons-codec<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.fasterxml.jackson.core:jackson-core<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.fasterxml.jackson.core:jackson-databind<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.fasterxml.jackson.core:jackson-annotations<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.codehaus.jettison:jettison<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>stax:stax-api<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.typesafe:config<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.uncommons.maths:uncommons-maths<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>com.github.scopt:scopt_*<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>org.mortbay.jetty:servlet-api<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-io:commons-io<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;exclude&gt;</span>commons-cli:commons-cli<span class="nt">&lt;/exclude&gt;</span>
+								<span class="nt">&lt;/excludes&gt;</span>
+							<span class="nt">&lt;/artifactSet&gt;</span>
+							<span class="nt">&lt;filters&gt;</span>
+								<span class="nt">&lt;filter&gt;</span>
+									<span class="nt">&lt;artifact&gt;</span>org.apache.flink:*<span class="nt">&lt;/artifact&gt;</span>
+									<span class="nt">&lt;excludes&gt;</span>
+										<span class="nt">&lt;exclude&gt;</span>org/apache/flink/shaded/**<span class="nt">&lt;/exclude&gt;</span>
+										<span class="nt">&lt;exclude&gt;</span>web-docs/**<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;/excludes&gt;</span>
+								<span class="nt">&lt;/filter&gt;</span>
+								<span class="nt">&lt;filter&gt;</span>
+									<span class="c">&lt;!-- Do not copy the signatures in the META-INF folder.
+									Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span>
+									<span class="nt">&lt;artifact&gt;</span>*:*<span class="nt">&lt;/artifact&gt;</span>
+									<span class="nt">&lt;excludes&gt;</span>
+										<span class="nt">&lt;exclude&gt;</span>META-INF/*.SF<span class="nt">&lt;/exclude&gt;</span>
+										<span class="nt">&lt;exclude&gt;</span>META-INF/*.DSA<span class="nt">&lt;/exclude&gt;</span>
+										<span class="nt">&lt;exclude&gt;</span>META-INF/*.RSA<span class="nt">&lt;/exclude&gt;</span>
+									<span class="nt">&lt;/excludes&gt;</span>
+								<span class="nt">&lt;/filter&gt;</span>
+							<span class="nt">&lt;/filters&gt;</span>
+							<span class="nt">&lt;transformers&gt;</span>
+								<span class="c">&lt;!-- add Main-Class to manifest file --&gt;</span>
+								<span class="nt">&lt;transformer</span> <span class="na">implementation=</span><span class="s">"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"</span><span class="nt">&gt;</span>
+									<span class="nt">&lt;mainClass&gt;</span>com.example.app.FlinkTestConsumer<span class="nt">&lt;/mainClass&gt;</span>
+								<span class="nt">&lt;/transformer&gt;</span>
+							<span class="nt">&lt;/transformers&gt;</span>
+							<span class="nt">&lt;createDependencyReducedPom&gt;</span>false<span class="nt">&lt;/createDependencyReducedPom&gt;</span>
+						<span class="nt">&lt;/configuration&gt;</span>
+					<span class="nt">&lt;/execution&gt;</span>
+				<span class="nt">&lt;/executions&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+
+			<span class="c">&lt;!-- Configure the jar plugin to add the main class as a manifest entry --&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>2.5<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;configuration&gt;</span>
+					<span class="nt">&lt;archive&gt;</span>
+						<span class="nt">&lt;manifestEntries&gt;</span>
+							<span class="nt">&lt;Main-Class&gt;</span>com.example.app.FlinkTestConsumer<span class="nt">&lt;/Main-Class&gt;</span>
+						<span class="nt">&lt;/manifestEntries&gt;</span>
+					<span class="nt">&lt;/archive&gt;</span>
+				<span class="nt">&lt;/configuration&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;configuration&gt;</span>
+					<span class="nt">&lt;release&gt;</span>8<span class="nt">&lt;/release&gt;</span>
+				<span class="nt">&lt;/configuration&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+		<span class="nt">&lt;/plugins&gt;</span>
+	<span class="nt">&lt;/build&gt;</span>
+	<span class="nt">&lt;profiles&gt;</span>
+		<span class="nt">&lt;profile&gt;</span>
+			<span class="c">&lt;!-- A profile that does everyting correctly:
+			We set the Flink dependencies to provided --&gt;</span>
+			<span class="nt">&lt;id&gt;</span>build-jar<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;activation&gt;</span>
+				<span class="nt">&lt;activeByDefault&gt;</span>false<span class="nt">&lt;/activeByDefault&gt;</span>
+			<span class="nt">&lt;/activation&gt;</span>
+			<span class="nt">&lt;dependencies&gt;</span>
+				<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>flink-java<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+				<span class="nt">&lt;/dependency&gt;</span>
+				<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>flink-streaming-java<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+				<span class="nt">&lt;/dependency&gt;</span>
+				<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>flink-clients<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
+					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+				<span class="nt">&lt;/dependency&gt;</span>
+			<span class="nt">&lt;/dependencies&gt;</span>
+		<span class="nt">&lt;/profile&gt;</span>
+	<span class="nt">&lt;/profiles&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+
+<p>다음은 OCI Streaming Service 접속을 위한 설정 파일을 작성합니다. 여기서 Stream Pool에서 확인한 Kafka 접속 정보를 사용합니다.</p>
+
+<p><strong>consumer.config</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootstrap.servers=cell-1.streaming.ap-seoul-1.oci.oraclecloud.com:9092
+group.id=FlinkExampleConsumer
+request.timeout.ms=60000
+sasl.mechanism=PLAIN
+security.protocol=SASL_SSL
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{테넌시명}/{사용자 계정}/{Stream Pool OCID}\" password=\"{AUTH_TOKEN}\";
+</code></pre></div></div>
+
+<p>Java로 작성된 코드이며, FlinkKafkaConsumer로 Stream(Topic)으로 메시지를 수신하여 출력만 하는 역할을 하는 간단한 코드입니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"all"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlinkTestConsumer</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">TOPIC</span> <span class="o">=</span> <span class="s">"flink-topic"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">FILE_PATH</span> <span class="o">=</span> <span class="s">"src/main/resources/consumer.config"</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//Load properties from config file</span>
+            <span class="nc">Properties</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Properties</span><span class="o">();</span>
+            <span class="n">properties</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="no">FILE_PATH</span><span class="o">));</span>
+            
+            <span class="kd">final</span> <span class="nc">StreamExecutionEnvironment</span> <span class="n">env</span> <span class="o">=</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">.</span><span class="na">getExecutionEnvironment</span><span class="o">();</span>
+            <span class="nc">DataStream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="na">addSource</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlinkKafkaConsumer011</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;(</span><span class="no">TOPIC</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SimpleStringSchema</span><span class="o">(),</span> <span class="n">properties</span><span class="o">));</span>
+            <span class="n">stream</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+            <span class="n">env</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">"Testing flink consumer"</span><span class="o">);</span>
+
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"FileNoteFoundException: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Failed with exception "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="빌드-및-잡job-실행">빌드 및 잡(Job) 실행</h4>
+<p><strong>빌드</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mvn package
+</code></pre></div></div>
+
+<p><strong>잡 실행</strong></p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>flink run <span class="nt">-c</span> <span class="s2">"com.example.app.FlinkTestConsumer"</span> target/oss-kafka-flink-consumer-1.0-SNAPSHOT.jar 
+<span class="go">
+Job has been submitted with JobID fe7e3abba870a537cf4f5a7961ae924e
+</span></code></pre></div></div>
+
+<p><strong>잡(Job) 실행 확인</strong>
+<img src="https://mangdan.github.io/assets/images/oci-oss-flink-running-jobs.png" alt="" /></p>
+
+<h3 id="kafka-생산자-producer">Kafka 생산자 (Producer)</h3>
+<p>Kafka 생산자는 Java로 작성하였습니다.</p>
+
+<h4 id="kafka-생산자-코드-작성">Kafka 생산자 코드 작성</h4>
+<p>Kafka Dependency 설정과 함께 Jar 실행 시 Kafka 관련 Library추가를 위한 Maven Plugin 구성을 합니다.</p>
+
+<p><strong>pom.xml</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>com.example.app<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>oss-kafka-producer<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+	<span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;properties&gt;</span>
+		<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+		<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+		<span class="nt">&lt;kafka.version&gt;</span>3.3.1<span class="nt">&lt;/kafka.version&gt;</span>
+	<span class="nt">&lt;/properties&gt;</span>
+
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.kafka<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>kafka-clients<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${kafka.version}<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>2.0.5<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>ch.qos.logback<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>logback-classic<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>1.4.5<span class="nt">&lt;/version&gt;</span>
+		  <span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>slf4j-log4j12<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>2.0.5<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jackson-databind<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.14.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span> 
+	<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;build&gt;</span>
+		<span class="nt">&lt;defaultGoal&gt;</span>install<span class="nt">&lt;/defaultGoal&gt;</span>
+		<span class="nt">&lt;plugins&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;configuration&gt;</span>
+					<span class="nt">&lt;release&gt;</span>8<span class="nt">&lt;/release&gt;</span>
+				<span class="nt">&lt;/configuration&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-resources-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>3.2.0<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;configuration&gt;</span>
+					<span class="nt">&lt;encoding&gt;</span>UTF-8<span class="nt">&lt;/encoding&gt;</span>
+				<span class="nt">&lt;/configuration&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>3.1.2<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;id&gt;</span>copy-dependencies<span class="nt">&lt;/id&gt;</span>
+                        <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>copy-dependencies<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                        <span class="nt">&lt;configuration&gt;</span>
+                            <span class="nt">&lt;outputDirectory&gt;</span>${project.build.directory}/libs<span class="nt">&lt;/outputDirectory&gt;</span>
+                            <span class="nt">&lt;overWriteReleases&gt;</span>false<span class="nt">&lt;/overWriteReleases&gt;</span>
+                            <span class="nt">&lt;overWriteSnapshots&gt;</span>false<span class="nt">&lt;/overWriteSnapshots&gt;</span>
+                            <span class="nt">&lt;overWriteIfNewer&gt;</span>true<span class="nt">&lt;/overWriteIfNewer&gt;</span>
+                            <span class="nt">&lt;includeScope&gt;</span>runtime<span class="nt">&lt;/includeScope&gt;</span>
+                        <span class="nt">&lt;/configuration&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
+				<span class="nt">&lt;version&gt;</span>2.5<span class="nt">&lt;/version&gt;</span>
+				<span class="nt">&lt;configuration&gt;</span>
+					<span class="nt">&lt;archive&gt;</span>
+						<span class="nt">&lt;manifest&gt;</span>
+							<span class="nt">&lt;addClasspath&gt;</span>true<span class="nt">&lt;/addClasspath&gt;</span>
+							<span class="nt">&lt;addExtensions&gt;</span>true<span class="nt">&lt;/addExtensions&gt;</span> 
+							<span class="nt">&lt;mainClass&gt;</span>com.example.app.KafkaProducerExample<span class="nt">&lt;/mainClass&gt;</span>
+							<span class="nt">&lt;classpathPrefix&gt;</span>libs/<span class="nt">&lt;/classpathPrefix&gt;</span>                            
+						<span class="nt">&lt;/manifest&gt;</span>
+						<span class="c">&lt;!-- &lt;manifestEntries&gt;
+							&lt;Class-Path&gt;libs/kafka-clients-2.6.0.jar&lt;/Class-Path&gt;
+						&lt;/manifestEntries&gt; --&gt;</span>
+					<span class="nt">&lt;/archive&gt;</span>
+				<span class="nt">&lt;/configuration&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+		<span class="nt">&lt;/plugins&gt;</span>
+	<span class="nt">&lt;/build&gt;</span>
+	<span class="nt">&lt;profiles&gt;</span>
+		<span class="nt">&lt;profile&gt;</span>
+			<span class="c">&lt;!-- A profile that does everyting correctly:
+			We set the Flink dependencies to provided --&gt;</span>
+			<span class="nt">&lt;id&gt;</span>build-jar<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;activation&gt;</span>
+				<span class="nt">&lt;activeByDefault&gt;</span>false<span class="nt">&lt;/activeByDefault&gt;</span>
+			<span class="nt">&lt;/activation&gt;</span>
+			<span class="nt">&lt;dependencies&gt;</span>
+				<span class="nt">&lt;dependency&gt;</span>
+					<span class="nt">&lt;groupId&gt;</span>org.apache.kafka<span class="nt">&lt;/groupId&gt;</span>
+					<span class="nt">&lt;artifactId&gt;</span>kafka-clients<span class="nt">&lt;/artifactId&gt;</span>
+					<span class="nt">&lt;version&gt;</span>${kafka.version}<span class="nt">&lt;/version&gt;</span>
+					<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+				<span class="nt">&lt;/dependency&gt;</span>
+			<span class="nt">&lt;/dependencies&gt;</span>
+		<span class="nt">&lt;/profile&gt;</span>
+	<span class="nt">&lt;/profiles&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+
+<p>실행 시 5건의 텍스트 메시지를 OCI Streaming Service로 전송하도록 다음과 같이 코드를 작성하였습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"all"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompatibleProducer</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">produce</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">authToken</span> <span class="o">=</span> <span class="s">"{AUTH_TOKEN}"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">tenancyName</span> <span class="o">=</span> <span class="s">"{테넌시명}"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"{사용자 계정}"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">streamPoolId</span> <span class="o">=</span> <span class="s">"{Stream Pool OCID}"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">topicName</span> <span class="o">=</span> <span class="s">"{Stream Name/Topic Name}"</span><span class="o">;</span>
+
+        <span class="nc">Properties</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Properties</span><span class="o">();</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">BOOTSTRAP_SERVERS_CONFIG</span><span class="o">,</span> <span class="s">"cell-1.streaming.ap-seoul-1.oci.oraclecloud.com:9092"</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">KEY_SERIALIZER_CLASS_CONFIG</span><span class="o">,</span> <span class="nc">StringSerializer</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">VALUE_SERIALIZER_CLASS_CONFIG</span><span class="o">,</span> <span class="nc">StringSerializer</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">TRANSACTION_TIMEOUT_CONFIG</span><span class="o">,</span> <span class="mi">5000</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">DELIVERY_TIMEOUT_MS_CONFIG</span><span class="o">,</span> <span class="mi">5000</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ProducerConfig</span><span class="o">.</span><span class="na">REQUEST_TIMEOUT_MS_CONFIG</span><span class="o">,</span> <span class="mi">5000</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"sasl.mechanism"</span><span class="o">,</span> <span class="s">"PLAIN"</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"security.protocol"</span><span class="o">,</span> <span class="s">"SASL_SSL"</span><span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"sasl.jaas.config"</span><span class="o">,</span>
+                        <span class="s">"org.apache.kafka.common.security.plain.PlainLoginModule required username=\""</span>
+                        <span class="o">+</span> <span class="n">tenancyName</span> <span class="o">+</span> <span class="s">"/"</span>
+                        <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">"/"</span>
+                        <span class="o">+</span> <span class="n">streamPoolId</span> <span class="o">+</span> <span class="s">"\" "</span>
+                        <span class="o">+</span> <span class="s">"password=\""</span>
+                        <span class="o">+</span> <span class="n">authToken</span> <span class="o">+</span> <span class="s">"\";"</span>
+        <span class="o">);</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"retries"</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span> <span class="c1">// retries on transient errors and load balancing disconnection</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"max.request.size"</span><span class="o">,</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span> <span class="c1">// limit request size to 1MB</span>
+
+        <span class="nc">KafkaProducer</span> <span class="n">producer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">KafkaProducer</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">ProducerRecord</span> <span class="n">record</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ProducerRecord</span><span class="o">(</span><span class="n">topicName</span><span class="o">,</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="s">"Test record #"</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+            
+            <span class="n">producer</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">record</span><span class="o">,</span> <span class="o">(</span><span class="n">md</span><span class="o">,</span> <span class="n">ex</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">ex</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">ex</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                            <span class="s">"Sent msg to "</span>
+                                    <span class="o">+</span> <span class="n">md</span><span class="o">.</span><span class="na">partition</span><span class="o">()</span>
+                                    <span class="o">+</span> <span class="s">" with offset "</span>
+                                    <span class="o">+</span> <span class="n">md</span><span class="o">.</span><span class="na">offset</span><span class="o">()</span>
+                                    <span class="o">+</span> <span class="s">" at "</span>
+                                    <span class="o">+</span> <span class="n">md</span><span class="o">.</span><span class="na">timestamp</span><span class="o">()</span>
+                    <span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+        <span class="n">producer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">producer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"produced 5 messages"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<h4 id="빌드-및-생산자-실행">빌드 및 생산자 실행</h4>
+<p><strong>빌드</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn package
+</code></pre></div></div>
+
+<p><strong>실행</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ java -jar target/oss-kafka-producer-1.0-SNAPSHOT.jar
+
+00:11 INFO  o.a.k.c.s.a.AbstractLogin - Successfully logged in.
+00:11 INFO  o.a.kafka.common.utils.AppInfoParser - Kafka version: 2.6.0
+00:11 INFO  o.a.kafka.common.utils.AppInfoParser - Kafka commitId: 62abe01bee039651
+00:11 INFO  o.a.kafka.common.utils.AppInfoParser - Kafka startTimeMs: 1601824282658
+00:11 INFO  org.apache.kafka.clients.Metadata - [Producer clientId=producer-1] Cluster ID: OSS
+Sent msg to 0 with offset 15 at 1601824286584
+Sent msg to 0 with offset 16 at 1601824286584
+Sent msg to 0 with offset 17 at 1601824286584
+Sent msg to 0 with offset 18 at 1601824286584
+Sent msg to 0 with offset 19 at 1601824286584
+00:11 INFO  o.a.k.clients.producer.KafkaProducer - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+produced 5 messages
+</code></pre></div></div>
+
+<p><strong>게시된 메시지를 OCI Streaming Service에서 확인</strong>
+<img src="https://mangdan.github.io/assets/images/oci-oss-recent-messages.png" alt="" /></p>
+
+<h3 id="flink-job-task-확인">Flink Job Task 확인</h3>
+<p>Flink Console에서 Task Managers &gt; Stdout으로 이동하여 소비한 메시지를 확인할 수 있습니다.
+<img src="https://mangdan.github.io/assets/images/oci-oss-flink-stdout.png" alt="" /></p>
+
+<h3 id="소스-공유">소스 공유</h3>
+<p>소스는 다음 <a href="https://github.com/MangDan/oci-streaming-examples">깃헙 저장소</a>에서 확인할 수 있습니다.</p>
+
+<h3 id="참고">참고</h3>
+<ul>
+  <li><a href="https://blogs.oracle.com/developers/oracle-streaming-service-producer-consumer">https://blogs.oracle.com/developers/oracle-streaming-service-producer-consumer</a></li>
+  <li><a href="https://github.com/igfasouza/OSS_examples">https://github.com/igfasouza/OSS_examples</a></li>
+</ul>
+
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-11-29T00:00:00+09:00" itemprop="datePublished"> 2022-11-29</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> streaming</span> <span class="icon-price-tag pr10"> kafka</span> <span class="icon-price-tag pr10"> flink</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/cloudnative/oci-opensearch-fluentbit-fluentd/">&laquo; OCI OpenSearch, FluentBit, Fluentd를 활용한 OKE 로그 모니터링</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-streaming-limitations/">OCI Streaming Service 제약 사항 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/oci-streaming-flink-integration/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

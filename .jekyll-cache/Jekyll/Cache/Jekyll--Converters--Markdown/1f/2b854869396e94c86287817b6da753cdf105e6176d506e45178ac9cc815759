@@ -1,0 +1,54 @@
+I"@<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#scheduled-reports-are-now-available" id="markdown-toc-scheduled-reports-are-now-available">Scheduled reports are now available</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#cross-availability-domain-replication-of-volumes-and-volume-groups" id="markdown-toc-cross-availability-domain-replication-of-volumes-and-volume-groups">Cross availability domain replication of volumes and volume groups</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#vcn-route-table-increase-for-route-rules" id="markdown-toc-vcn-route-table-increase-for-route-rules">VCN route table increase for route rules</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="scheduled-reports-are-now-available">Scheduled reports are now available</h2>
+<ul>
+  <li><strong>Services:</strong> Billing</li>
+  <li><strong>Release Date:</strong> Sept. 22, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/d6854868-535c-4828-b296-7aec0a4ecd6e/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/d6854868-535c-4828-b296-7aec0a4ecd6e/</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>새로운 예약 보고서 페이지를 사용하여 비용 분석에서 저장된 보고서를 기반으로 예약 보고서를 생성합니다.
+<img src="/assets/img/infrastructure/2022/09/SCR-20221124-eag.png" alt="" /></p>
+
+<p><img src="/assets/img/infrastructure/2022/09/SCR-20221124-emp.png" alt="" /></p>
+
+<h2 id="cross-availability-domain-replication-of-volumes-and-volume-groups">Cross availability domain replication of volumes and volume groups</h2>
+<ul>
+  <li><strong>Services:</strong> Block Volume</li>
+  <li><strong>Release Date:</strong> Sept. 7, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/8be8a64b-6ee7-4bff-8495-ce740b39c995/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/8be8a64b-6ee7-4bff-8495-ce740b39c995/</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>블록 볼륨은 이제 블록 볼륨, 부트 볼륨 및 볼륨 그룹에 대해 동일한 지역 내의 가용성 도메인 간 복제를 지원합니다. 이 기능은 여러 가용성 도메인을 포함하는 상용 지역에서만 지원됩니다.</p>
+
+<h2 id="vcn-route-table-increase-for-route-rules">VCN route table increase for route rules</h2>
+<ul>
+  <li><strong>Services:</strong> Networking</li>
+  <li><strong>Release Date:</strong> Sept. 1, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/iaas/releasenotes/changes/414f7fd7-9564-4e52-b5ec-50b6da131ac2/" target="_blank" rel="noopener">https://docs.oracle.com/iaas/releasenotes/changes/414f7fd7-9564-4e52-b5ec-50b6da131ac2/</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+<p>VCN 라우팅 테이블의 라우팅 규칙에 대한 기본 제한이 200으로 증가하였습니다.
+<img src="/assets/img/infrastructure/2022/09/SCR-20221124-eqx.png" alt="" /></p>
+
+:ET

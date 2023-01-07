@@ -1,0 +1,607 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>10월 OCI Cloud Native &amp; Security 업데이트 소식</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="2022년 10월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202210/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="10월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta property="og:description" content="2022년 10월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta property="og:url" content="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202210/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="10월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta name="twitter:description" content="2022년 10월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//release-notes-2022-cloudnative-security/">release notes 2022 cloudnative security</a>
+    
+  
+    
+        <a class="current">10월 OCI Cloud Native & Security 업데이트 소식</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">OCI Release Notes 2022</p>
+				<h1>10월 OCI Cloud Native & Security 업데이트 소식</h1>
+			</header>
+
+			
+			<p class="teaser">
+				2022년 10월 OCI Cloud Native & Security 업데이트 소식입니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#enhancements-in-trace-explorer" id="markdown-toc-enhancements-in-trace-explorer">Enhancements in Trace Explorer</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a>        <ul>
+          <li><a href="#enhancements-in-trace-explorer-1" id="markdown-toc-enhancements-in-trace-explorer-1">Enhancements in Trace Explorer</a></li>
+          <li><a href="#사용-예시" id="markdown-toc-사용-예시">사용 예시</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#export-dashboards-in-application-performance-monitoring" id="markdown-toc-export-dashboards-in-application-performance-monitoring">Export Dashboards in Application Performance Monitoring</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+    </ul>
+  </li>
+  <li><a href="#filter-trace-data-in-application-performance-monitoring-dashboards" id="markdown-toc-filter-trace-data-in-application-performance-monitoring-dashboards">Filter Trace Data in Application Performance Monitoring Dashboards</a>    <ul>
+      <li><a href="#기능-소개-2" id="markdown-toc-기능-소개-2">기능 소개</a>        <ul>
+          <li><a href="#사용-예시-1" id="markdown-toc-사용-예시-1">사용 예시</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="enhancements-in-trace-explorer">Enhancements in Trace Explorer</h2>
+<ul>
+  <li><strong>Services:</strong> Application Performance Monitoring</li>
+  <li><strong>Release Date:</strong> Oct. 6, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/e05e6075-ad83-4010-b9c8-26e652866fdd/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/e05e6075-ad83-4010-b9c8-26e652866fdd/</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<h4 id="enhancements-in-trace-explorer-1">Enhancements in Trace Explorer</h4>
+<ul>
+  <li>Span Details Drilldowns: 스팬 속성을 포함하는 사용자 정의 가능한 URL을 사용하여 다른 Oracle Cloud Infrastructure 서비스 또는 사용자 정의 서비스에 연결하는 기능</li>
+</ul>
+
+<p><img src="/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-1.png" alt="" /></p>
+
+<p><img src="/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-2.png" alt="" /></p>
+
+<h4 id="사용-예시">사용 예시</h4>
+<ul>
+  <li><strong>App Server Dashboard Drilldown:</strong>
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/apm/apm-traces/dashboards?dashId=OOBD-APM-app_server_dashboard_001&amp;activeCompartmentId=ocid1.compartment.oc1.XXXX&amp;dashFilter.apmDomain=ocid1.apmdomain.oc1.XXXX&amp;dashFilter.compartmentId=ocid1.compartment.oc1.XXXX&amp;dashFilter.DisplayName=&lt;DisplayName&gt;&amp;region=us-ashburn-1
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Database Management Performance Hub Drilldown:</strong>
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/dbmgmt-ui/perfhub?ocid=ocid1.database.oc1.XXXX&amp;perfhubContext={"dateTime":{"period":"LAST_24_HOUR"},"viewPort":{"startDate":"&lt;StartTimeInMs&gt;","endDate":"&lt;EndTimeInMs&gt;"},"selectedTab":{"name":"activityTab","filters": [{"key":"filter_list","value":"{\"sqlid\":{\"value\":\"&lt;DbOracleSqlId&gt;\",\"disabled\":true}}"}]}}
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Operations Insights SQL ID Drilldown:</strong>
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/opsi/sql-warehouse?sqlId=&lt;DbOracleSqlId&gt;&amp;region=us-ashburn-1&amp;compartmentId=ocid1.compartment.oc1.XXXX
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Jira Error Message Drilldown:</strong>
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://jira.oci.oraclecorp.com/issues/?jql=text ~ "&lt;ErrorMessage&gt;"
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="export-dashboards-in-application-performance-monitoring">Export Dashboards in Application Performance Monitoring</h2>
+<ul>
+  <li><strong>Services:</strong> Application Performance Monitoring</li>
+  <li><strong>Release Date:</strong> Oct. 6, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/43369fbd-26b1-4a51-b890-f9d86b520996/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/43369fbd-26b1-4a51-b890-f9d86b520996/</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>사용자 정의한 대시보드를 JSON 포멧으로 Export할 수 있는 기능이 추가되었습니다. 이제는 특정 테넌시에 있는 대시보드를 다른 테넌시 또는 다른 리전으로 쉽게 가져올 수 있게 됩니다.</p>
+
+<p>절차는 다음과 같습니다.</p>
+<ol>
+  <li>APM Dashboards 페이지에서 Actions icon (<img src="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/img/actions.png" alt="" />)을 선택한 후 <strong>Export</strong> 클릭</li>
+  <li>JSON 파일(exportedDashboard.json) 확인</li>
+</ol>
+
+<blockquote>
+  <p>사용자 정의 대시보드만 Export가 가능하며, 기본 제공하는 대시보드는 Export 기능을 제공하지 않습니다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="filter-trace-data-in-application-performance-monitoring-dashboards">Filter Trace Data in Application Performance Monitoring Dashboards</h2>
+<ul>
+  <li><strong>Services:</strong> Application Performance Monitoring</li>
+  <li><strong>Release Date:</strong> Oct. 6, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/filter-trace-data-dashboard.html" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/filter-trace-data-dashboard.html</a></li>
+</ul>
+
+<h3 id="기능-소개-2">기능 소개</h3>
+<p>APM Geomap과 APM Trace Table 위젯에 대해 다음 두 개의 기본 필터가 포함되었습니다.</p>
+
+<ul>
+  <li>Traces Dimension Filter</li>
+  <li>Spans Dimension Filter</li>
+</ul>
+
+<h4 id="사용-예시-1">사용 예시</h4>
+<ol>
+  <li>APM Geomap 위젯에서 두 필터를 활용하여 사용자 디바이스 유형(모바일, 데시크탑 등)에 따라 애플리케이션 사용 경험을 비교</li>
+  <li>APM Trace Table에서 두 필터를 활용하여 특정 지역에서의 애플리케이션 성능을 확인</li>
+</ol>
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-10-30T00:00:00+09:00" itemprop="datePublished"> 2022-10-30</time>
+				
+
+				<span class="icon-archive pr20"> RELEASE-NOTES-2022-CLOUDNATIVE-SECURITY</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci-release-notes-2022</span> <span class="icon-price-tag pr10"> oct-2022</span> <span class="icon-price-tag pr10"> cloudnative</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202209/">&laquo; 9월 OCI Cloud Native & Security 업데이트 소식</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//release-notes-2022-cloudnative-security/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202210/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

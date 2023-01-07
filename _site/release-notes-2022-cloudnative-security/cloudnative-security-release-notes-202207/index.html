@@ -1,0 +1,622 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>7월 OCI Cloud Native &amp; Security 업데이트 소식</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="2022년 7월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202207/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="7월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta property="og:description" content="2022년 7월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	<meta property="og:url" content="http://localhost:4000//release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202207/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="7월 OCI Cloud Native &amp; Security 업데이트 소식">
+	<meta name="twitter:description" content="2022년 7월 OCI Cloud Native &amp; Security 업데이트 소식입니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//release-notes-2022-cloudnative-security/">release notes 2022 cloudnative security</a>
+    
+  
+    
+        <a class="current">7월 OCI Cloud Native & Security 업데이트 소식</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">OCI Release Notes 2022</p>
+				<h1>7월 OCI Cloud Native & Security 업데이트 소식</h1>
+			</header>
+
+			
+			<p class="teaser">
+				2022년 7월 OCI Cloud Native & Security 업데이트 소식입니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#use-graalvm-enterprise-in-devops-build-pipelines" id="markdown-toc-use-graalvm-enterprise-in-devops-build-pipelines">Use GraalVM Enterprise in DevOps Build Pipelines</a>    <ul>
+      <li><a href="#기능-소개" id="markdown-toc-기능-소개">기능 소개</a></li>
+      <li><a href="#빌드-파이프라인-구성" id="markdown-toc-빌드-파이프라인-구성">빌드 파이프라인 구성</a></li>
+    </ul>
+  </li>
+  <li><a href="#support-for-vcn-native-pod-networking" id="markdown-toc-support-for-vcn-native-pod-networking">Support for VCN-native pod networking</a>    <ul>
+      <li><a href="#기능-소개-1" id="markdown-toc-기능-소개-1">기능 소개</a></li>
+      <li><a href="#native-pod-networking을-사용하는-oke-cluster-구성하기" id="markdown-toc-native-pod-networking을-사용하는-oke-cluster-구성하기">Native pod networking을 사용하는 OKE Cluster 구성하기</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="use-graalvm-enterprise-in-devops-build-pipelines">Use GraalVM Enterprise in DevOps Build Pipelines</h2>
+<ul>
+  <li><strong>Services:</strong> DevOps</li>
+  <li><strong>Release Date:</strong> July 7, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm</a></li>
+</ul>
+
+<h3 id="기능-소개">기능 소개</h3>
+<p>새로은 JIT Compiler인 Graal을 기반으로 하는 JVM인 GraalVM은 성능, Polygrot 환경 (여러 언어를 통합), 빠른 시작이 가능한 Native Image 기능을 제공하는 최신 VM입니다.</p>
+
+<p>OCI에서는 GraalVM Enterprise를 추가 비용없이 사용할 수 있는데, 이제 OCI DevOps Build Pipeline에서 이 GraalVM Enterprise 빌드 자동화를 지원합니다.</p>
+
+<h3 id="빌드-파이프라인-구성">빌드 파이프라인 구성</h3>
+<p>GraalVM Enterprise에서 필요한 컴포넌트를 설치하는 명령어를 스탭에 추가할 수 있는데, 아래 예시는 GraalVM Native Image를 위한 컴포넌트를 설치하는 스탭입니다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Install</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">latest</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">JDK</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">yum -y install graalvm22-ee-17-native-image</span>
+</code></pre></div></div>
+
+<p>환경 변수 JAVA_HOME에 GraalVM Home Path를 다음과 같이 정의할 수 있습니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="s2">"</span><span class="s">JAVA_HOME"</span> <span class="err">:</span> <span class="s2">"</span><span class="s">/usr/lib64/graalvm/graalvm22-ee-java17"</span>
+</code></pre></div></div>
+
+<p>아래와 같이 Step에서 Path에 Java Home을 지정할 수 있습니다.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="c1"># PATH is a reserved variable and cannot be defined as a variable.</span>
+    <span class="c1"># PATH can be changed in a build step and the change is visible in subsequent steps.</span>
+ 
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Set</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PATH</span><span class="nv"> </span><span class="s">here"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">export PATH=$JAVA_HOME/bin:$PATH</span>
+</code></pre></div></div>
+
+<p>아래 빌드 파이프라인은 Java 애플리케이션을 GraalVM과 Maven을 활용하여 Native Image로 빌드하는 예시입니다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="m">0.1</span>
+<span class="na">component</span><span class="pi">:</span> <span class="s">build</span>
+<span class="na">timeoutInSeconds</span><span class="pi">:</span> <span class="m">600</span>
+<span class="na">runAs</span><span class="pi">:</span> <span class="s">root</span>
+<span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="s2">"</span><span class="s">JAVA_HOME"</span> <span class="err">:</span> <span class="s2">"</span><span class="s">/usr/lib64/graalvm/graalvm22-ee-java17"</span>
+    <span class="c1"># PATH is a reserved variable and cannot be defined as a variable.</span>
+    <span class="c1"># However, PATH can be changed in a build step and the change is visible in subsequent steps.</span>
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Install</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">latest</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">JDK</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">yum -y install graalvm22-ee-17-native-image</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Set</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PATH</span><span class="nv"> </span><span class="s">here.</span><span class="nv"> </span><span class="s">JAVA_HOME</span><span class="nv"> </span><span class="s">already</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">env</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">variables</span><span class="nv"> </span><span class="s">above."</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">export PATH=$JAVA_HOME/bin:$PATH</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Command</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Build</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">executable</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">installed</span><span class="nv"> </span><span class="s">GraalVM</span><span class="nv"> </span><span class="s">Enterprise</span><span class="nv"> </span><span class="s">22.x</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Java</span><span class="nv"> </span><span class="s">17</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Native</span><span class="nv"> </span><span class="s">Image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">mvn --no-transfer-progress -Pnative -DskipTests package</span>
+<span class="na">outputArtifacts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">app_native_executable</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">BINARY</span>
+    <span class="na">location</span><span class="pi">:</span> <span class="s">target/my-app</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="support-for-vcn-native-pod-networking">Support for VCN-native pod networking</h2>
+<ul>
+  <li><strong>Services:</strong> Container Engine for Kubernetes</li>
+  <li><strong>Release Date:</strong> July 12, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm</a></li>
+</ul>
+
+<h3 id="기능-소개-1">기능 소개</h3>
+<p>OKE에서는 기존에 기본 CNI(Container Network Interface: 컨테이너간 네트워킹 제어를 위한 플러그인 개발 표준)로 Flannel만 제공되었습니다. Flannel은 대표적인 CNI중 하나이며, 오버레이 네트워크(Overlay Network: 각 노드들의 네트워크위에 별도의 가상 네트워크를 구성하여 마치 하나의 네트워크인 것처럼 인식하는 것)를 두고 서로 다른 노드간의 Pod 통신도 문제 없이 이뤄질 수 있도록 해주는 역할을 합니다.</p>
+
+<p><strong>Flannel overlay networking</strong><br />
+<cite>Image source: https://blogs.oracle.com/cloud-infrastructure/post/announcing-vcn-native-pod-networking-for-kubernetes-in-oci</cite>
+<img src="https://blogs.oracle.com/content/published/api/v1.1/assets/CONT94FDF8973EA4486AB65E88CA4DF72114/Medium?cb=_cache_7675&amp;format=jpg&amp;channelToken=f7814d202b7d468686f50574164024ec" alt="" /></p>
+
+<p>Flannel Overlay Networking로 클러스터를 구성하면, 위 그림처럼 Layer 3에서 네트워킹을 제공하는 추가적인 Overaly Networking이 구성됩니다. 그리고 Kubernetes Worker Node에서 실행되는 Pod는 Overlay Network을 통해서 IP를 할당받게 됩니다. Flannel은 VCN Worker Node 서브넷 대역의 IP를 사용히지 않아야 하는 경우나 Node 서브넷에서 제공되는 IP수가 운영해야 하는 Pod수보다 적을 수 있는 환경에서 사용하면 좋습니다.</p>
+
+<p>자세한 내용은 아래 Flannel 공식 Github 문서를 참고 하시기 바랍니다.</p>
+
+<p><a href="https://github.com/flannel-io/flannel">Flannel</a></p>
+
+<p><strong>Native pod networking</strong><br />
+<cite>Image source: https://blogs.oracle.com/cloud-infrastructure/post/announcing-vcn-native-pod-networking-for-kubernetes-in-oci</cite></p>
+
+<p><img src="https://blogs.oracle.com/content/published/api/v1.1/assets/CONT78BF0A5D337F41A887531F7969A18FDE/Medium?cb=_cache_7675&amp;format=jpg&amp;channelToken=f7814d202b7d468686f50574164024ec" alt="" /></p>
+
+<p>위 그림은 Worker Node를 위한 서브넷(CIDR: 10.20.40.0/24)과 Pod를 위한 서브넷  (CIDR: 10.20.50.0/24)을 VCN에 생성하여 <strong>Native pod networking</strong>를 사용한 OKE Cluster를 구성한 그림입니다. Pod의 경우 각 Worker Node의 vNICs(가상 네트워크 인터페이스 카드)에 Pod 서브넷 대역에서 제공되는 Private IP를 할당하고 이를 Pod에 사용하게 되며, Pod는 해당 인터페이스를 통해서 인바운드/아웃바운드 통신을 하게 됩니다. 이런 식으로 각 Pod는 vNIC에 연결되고 VCN에 직접 연결되어 Overlay Networking과 같은 캡슐화 없이 통신이 가능해집니다. Native pod networking을 사용한 Cluster내의 Pod는 OKE Cluster 노드가 아닌 같은 VCN내의 다른 VM 인스턴스과의 통신이 가능하며, 다른 VCN과의 통신(Local or Remote Peering 사용), 온프레미스 환경과의 통신(OCI FastConnect 혹은 IPSec VPN 사용)도 사용 가능합니다. 또한 OCI VCN Flow Log 기능을 통해서 Pod간 트래픽도 추적할 수 있습니다. 이 외에도 캡슐화를 위한 별도의 레이어가 없어 오버헤드가 줄어들면서 처리량이나 대기시간에 있어서 일관성 있는 성능을 제공합니다. (다른 노드간 Pod 통신 대기시간이 Flannel 사용시보다 약 25% 향상됨)</p>
+
+<h3 id="native-pod-networking을-사용하는-oke-cluster-구성하기">Native pod networking을 사용하는 OKE Cluster 구성하기</h3>
+<p>아래 포스트 참조</p>
+
+<p><a href="https://the-team-oasis.github.io/cloudnative/vcn-native-pod-networking-for-oke/">VCN-Native Pod Networking CNI 플러그인을 사용하여 OKE (Oracle Container Engine for Kubernetes) 클러스터 구성하기</a></p>
+
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-07-30T00:00:00+09:00" itemprop="datePublished"> 2022-07-30</time>
+				
+
+				<span class="icon-archive pr20"> RELEASE-NOTES-2022-CLOUDNATIVE-SECURITY</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci-release-notes-2022</span> <span class="icon-price-tag pr10"> july-2022</span> <span class="icon-price-tag pr10"> cloudnative</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202206/">&laquo; 6월 OCI Cloud Native & Security 업데이트 소식</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//release-notes-2022-cloudnative-security/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202208/">8월 OCI Cloud Native & Security 업데이트 소식 &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/release-notes-2022-cloudnative-security/cloudnative-security-release-notes-202207/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

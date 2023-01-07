@@ -1,0 +1,570 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:4000//assets/css/styles_feeling_responsive.css">
+
+  
+
+	<script src="http://localhost:4000//assets/js/modernizr.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: [ 'Lato:400,700,400italic:latin', 'Volkhov::latin' ]
+			}
+		});
+	</script>
+
+	<noscript>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7CVolkhov' rel='stylesheet' type='text/css'>
+	</noscript>
+
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="OCI에서 서비스하는 관리형 쿠버네티스 서비스인 OCI Container Engine for Kubernetes (OKE)에 접속하는 방법에 대해서 포스팅합니다.">
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ">
+	<meta name="msvalidate.01" content="0FB4C028ABCF07C908C54386ABD2D97F" >
+	
+	
+	
+	<link rel="canonical" href="http://localhost:4000//cloudnative/access-oke-cluster/">
+
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법">
+	<meta property="og:description" content="OCI에서 서비스하는 관리형 쿠버네티스 서비스인 OCI Container Engine for Kubernetes (OKE)에 접속하는 방법에 대해서 포스팅합니다.">
+	<meta property="og:url" content="http://localhost:4000//cloudnative/access-oke-cluster/">
+	<meta property="og:locale" content="en_EN">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OASIS's Technical Blog">
+	
+	<meta property="article:author" content="https://www.facebook.com/phlow.media">
+
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="phlow">
+	<meta name="twitter:creator" content="phlow">
+	<meta name="twitter:title" content="OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법">
+	<meta name="twitter:description" content="OCI에서 서비스하는 관리형 쿠버네티스 서비스인 OCI Container Engine for Kubernetes (OKE)에 접속하는 방법에 대해서 포스팅합니다.">
+	
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000//humans.txt">
+
+	
+
+	
+
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png">
+
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png">
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png">
+
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png">	
+
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png">
+
+	<meta name="msapplication-TileColor" content="#fabb00">
+
+
+	
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPHZDWLS3K"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-XPHZDWLS3K');
+	</script>
+	
+
+
+</head>
+<body id="top-of-page" class="page-fullwidth">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar data-options="scrolltop: false">
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="hide-for-large-up"><a href="http://localhost:4000/" class="icon-tree"> OASIS's Technical Blog</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar toggle-topbar-click menu-icon"><a><span>Nav</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//">HOME</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a  href="http://localhost:4000//blog">BLOG</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//categories/">CATEGORIES</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//getting-started/">Getting Started</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//cloudnative/">Cloud Native</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//database/">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//aiml/">AI/ML</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//security/">Security</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a  href="http://localhost:4000//release-notes-2022/">Release Notes (2022)</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-infrastructure/">Infrastructure</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-cloudnative-security/">Cloud Native &amp; Security</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-database">Data Platform</a></li>
+                    
+
+                      
+
+                      <li><a  href="http://localhost:4000//release-notes-2022-aiml/">AI/ML</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+      
+      
+
+      <ul class="right">
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//learning/">Learning</a></li>
+
+            
+            
+          
+        
+
+              
+
+
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a  href="http://localhost:4000//search/">Search</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+     
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+<nav class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+ <a href="http://localhost:4000/">HOME</a>
+ 
+   
+    
+        <a href="http://localhost:4000//cloudnative/">cloudnative</a>
+    
+  
+    
+        <a class="current">OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법</a>
+    
+  
+</nav>
+
+
+
+
+	
+
+
+<div class="row t30">
+	<div class="medium-12 columns">
+		<article>
+			<header>
+				<p class="subheadline">CloudNative</p>
+				<h1>OCI Container Engine for Kubernetes (OKE) Cluster 접속 방법</h1>
+			</header>
+
+			
+			<p class="teaser">
+				OCI에서 서비스하는 관리형 쿠버네티스 서비스인 OCI Container Engine for Kubernetes (OKE)에 접속하는 방법에 대해서 포스팅합니다.
+			</p>
+			
+
+			<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#실습을-위한-클러스터-생성" id="markdown-toc-실습을-위한-클러스터-생성">실습을 위한 클러스터 생성</a></li>
+  <li><a href="#준비사항" id="markdown-toc-준비사항">준비사항</a></li>
+  <li><a href="#클러스터에-접속access-cluster" id="markdown-toc-클러스터에-접속access-cluster">클러스터에 접속(Access Cluster)</a></li>
+  <li><a href="#cloud-shell을-통해-접속" id="markdown-toc-cloud-shell을-통해-접속">Cloud Shell을 통해 접속</a></li>
+</ul>
+
+</div>
+
+<h3 id="실습을-위한-클러스터-생성">실습을 위한 클러스터 생성</h3>
+<p>먼저 OKE Cluster가 준비되어야 합니다. OKE Cluster 생성은 다음 포스트를 참고합니다.</p>
+
+<p><a href="https://the-team-oasis.github.io/cloudnative/quick-create-oke-cluster/">OCI Container Engine for Kubernetes (OKE) Cluster를 Quick Create(빠르게 생성) 기능을 활용하여 빠르게 구성하기</a></p>
+
+<h3 id="준비사항">준비사항</h3>
+<p>OKE Cluster에 접속하기 위해서는 기본적으로 다음 두 개의 도구를 설치해야 합니다.</p>
+
+<ol>
+  <li>
+    <p>OCICLI 설치가 필요합니다. 설치 방법은 아래 포스트를 참고합니다.<br />
+ <a href="https://the-team-oasis.github.io/getting-started/ocicli-config/">OCICLI 도구 설정하기</a></p>
+  </li>
+  <li>
+    <p>kubectl 설치<br />
+ <a href="https://kubernetes.io/docs/tasks/tools/">Install kubectl</a></p>
+  </li>
+</ol>
+
+<h3 id="클러스터에-접속access-cluster">클러스터에 접속(Access Cluster)</h3>
+<p>앞서 생성한 Cluster 상세 화면에서 <strong>클러스터에 접속(Access Cluster)</strong> 버튼을 클릭한 후 다음 스크린샷과 같이 <strong>로컬 액세스</strong>를 선택합니다. 그러면 로컬에서 수행해야 하는 두 개의 명령어를 확인할 수 있습니다.
+<img src="/assets/img/cloudnative-security/2022/access-oke-cluster-1.png" alt="" /></p>
+
+<p>해당 명령어를 복사해서 로컬에서 실행합니다. 우선 첫 명령어로 kubeconfig 파일을 생성하기 위한 폴더를 생성합니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$HOME</span>/.kube
+</code></pre></div></div>
+
+<p>두 번째 명령어를 사용해서 kubeconfig 파일을 생성합니다. 다음 명령어를 실행하면 <strong>.kube</strong> 하위에 <strong>config</strong> 파일이 생성됩니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci ce cluster create-kubeconfig <span class="nt">--cluster-id</span> ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaulp............. <span class="nt">--file</span> <span class="nv">$HOME</span>/.kube/config <span class="nt">--region</span> ap-seoul-1 <span class="nt">--token-version</span> 2.0.0  <span class="nt">--kube-endpoint</span> PUBLIC_ENDPOINT
+</code></pre></div></div>
+
+<p>만약 OKE Cluster 생성 시 API Endpoint를 Private으로 지정한 경우에는 3번째 명령어를 실행합니다.</p>
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>oci ce cluster create-kubeconfig <span class="nt">--cluster-id</span> ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaulp............. <span class="nt">--file</span> <span class="nv">$HOME</span>/.kube/config <span class="nt">--region</span> ap-seoul-1 <span class="nt">--token-version</span> 2.0.0  <span class="nt">--kube-endpoint</span> PRIVATE_ENDPOINT
+</code></pre></div></div>
+
+<p>Kubectl 명령어로 접속을 확인합니다.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl cluster-info
+<span class="go">Kubernetes control plane is running at https://xxx.xxx.xxx.xxx:6443
+CoreDNS is running at https://xxx.xxx.xxx.xxx:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+</span></code></pre></div></div>
+
+<h3 id="cloud-shell을-통해-접속">Cloud Shell을 통해 접속</h3>
+<p>로컬에 OCICLI와 kubectl 설치할 환경이 안된다면, OCI Console에서 제공하는 <strong>Cloud Shell</strong>을 활용하여 OKE Cluster에 접속할 수 있습니다.</p>
+
+<p>앞서 생성한 Cluster 상세 화면에서 <strong>클러스터에 접속(Access Cluster)</strong> 버튼을 클릭한 후 다음 스크린샷과 같이 <strong>Cloud Shell 접속(Cloud Shell Access)</strong>를 선택합니다. 그러면 kubeconfig를 Cloud Shell에서 생성하는 명령어를 확인하고 복사합니다.
+<img src="/assets/img/cloudnative-security/2022/access-oke-cluster-2.png" alt="" /></p>
+
+<p>이제 <strong>Cloud Shell</strong>을 오픈합니다. 우측 상단의 <strong>Cloud Shell</strong> 버튼을 클릭하여 오픈합니다.
+<img src="/assets/img/cloudnative-security/2022/access-oke-cluster-3.png" alt="" /></p>
+
+<p>위에서 복사한 명령어를 <strong>Cloud Shell</strong>에서 실행한 후 동일하게 접속을 합니다.</p>
+
+<p><img src="/assets/img/cloudnative-security/2022/access-oke-cluster-4.png" alt="" /></p>
+
+
+			
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://github.com/mangdan" target="_blank"> DanKim</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2022-07-30T00:00:00+09:00" itemprop="datePublished"> 2022-07-30</time>
+				
+
+				<span class="icon-archive pr20"> CLOUDNATIVE</span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> oci</span> <span class="icon-price-tag pr10"> kubernetes</span> <span class="icon-price-tag pr10"> oke</span> </span>
+			</p>
+
+			
+			<div id="post-nav" class="row">
+				
+
+				
+				<div class="medium-5 columns"><a class="button small radius prev" href="/cloudnative/quick-create-oke-cluster/">&laquo; OCI Container Engine for Kubernetes (OKE) Cluster를 Quick Create(빠르게 생성) 기능을 활용하여 빠르게 구성하기</a></div><!-- /.small-4.columns -->
+				
+
+				<div class="medium-2 columns text-center"><a class="button small radius expand" href="http://localhost:4000//cloudnative/" title="">BACK</a></div><!-- /.small-4.columns -->
+				
+				
+				<div class="medium-5 columns text-right"><a class="button small radius next" href="/cloudnative/oci-sdk-emaildelivery-java/">OCI 전자메일 전송 서비스를 Java 코드를 통해 발송하기 (Javamail) &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			
+			</div><!--  /.page-meta -->
+
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+			    <div id="disqus_thread"></div>
+			    <script type="text/javascript">
+			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			        var disqus_shortname = 'the-team-oasis-github-io'; 
+			        var disqus_identifier = '/cloudnative/access-oke-cluster/';
+
+			        /* * * DON'T EDIT BELOW THIS LINE * * */
+			        (function() {
+			            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			        })();
+			    </script>
+			    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			
+
+
+
+			
+		</article>
+	</div><!-- /.medium-12.columns -->
+</div><!-- /.row -->
+
+
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>Created with &hearts; by OASIS.</p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="http://github.com/the-team-oasis" target="_blank" class="icon-github" title="Code und mehr..."></a></li>
+            
+              <li><a href="https://www.youtube.com/channel/UC60OcDzeEtn194-UPYNJs8A" target="_blank" class="icon-youtube" title="OCI Youtube"></a></li>
+            
+              <li><a href="https://twitter.com/oraclecloud" target="_blank" class="icon-twitter" title="OCI Twitter"></a></li>
+            
+              <li><a href="http://cloud.oracle.com" target="_blank" class="icon-cloud" title="OCI Home"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+
+<script src="http://localhost:4000//assets/js/javascript.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="http://localhost:4000//assets/js/copy-code-button.js"></script>
+</body>
+</html>
+

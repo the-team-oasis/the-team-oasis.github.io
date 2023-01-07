@@ -1,0 +1,23 @@
+I"�<div class="panel radius">
+  <p id="toc"><strong>Table of Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#accelerated-data-science-264-is-released" id="markdown-toc-accelerated-data-science-264-is-released">Accelerated Data Science 2.6.4 is released</a>    <ul>
+      <li><a href="#업데이트-내용" id="markdown-toc-업데이트-내용">업데이트 내용</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<h2 id="accelerated-data-science-264-is-released">Accelerated Data Science 2.6.4 is released</h2>
+<ul>
+  <li><strong>Services:</strong> Data Science</li>
+  <li><strong>Release Date:</strong> Sept. 14, 2022</li>
+  <li><strong>Documentation:</strong> <a href="https://docs.oracle.com/en-us/iaas/releasenotes/changes/46f1119d-f159-4ab7-8e0c-140a0cd8b7da/" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/releasenotes/changes/46f1119d-f159-4ab7-8e0c-140a0cd8b7da/</a></li>
+</ul>
+
+<h3 id="업데이트-내용">업데이트 내용</h3>
+<p>ADS 2.6.4 버전에서 Model Artifacts의 크기가 2-6GB 까지 지원하게 되었습니다.
+2기가 이상의 Artifacts를 사용하기 위해서 먼저 Object Storage에 업로드하고, Model Catalog로 전송하도록 구성해야 합니다.
+자세한 내용은 <a href="https://docs.oracle.com/en-us/iaas/tools/ads-sdk/latest/user_guide/model_catalog/model_catalog.html#large-model-artifacts" target="_blank" rel="noopener">Large-model-artifacts</a> 에서 확인하실 수 있습니다.</p>
+:ET
