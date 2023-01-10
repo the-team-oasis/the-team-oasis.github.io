@@ -7,11 +7,11 @@ subheadline: "CLOUD API"
 title: "OCI 커맨드라인 인터페이스 시작하기"
 teaser: "Oracle Cloud Infrastructure (OCI) Command Line Interface(CLI) 구성 및 사용 방법에 대해 알아봅니다."
 author: yhcho
-date: 2022-06-02 00:00:00
+date: 2022-06-01 00:00:00
 breadcrumb: true
 categories:
 - getting-started
-  tags:
+tags:
 - [oci, api, cli, oci-cli, command line interface]
 #published: false
 
@@ -352,12 +352,12 @@ C:\> oci network vcn list -c $Env:compartment_id
 
     ```terminal
 $ oci network security-list create -c <compartment_id>
---egress-security-rules '[{"destination": "<egress_desc>", "protocol": "<egress_desc_protocol>", "isStateless": true,
-"tcpOptions": {"destinationPortRange": <egress_desc_port>, "sourcePortRange": <egress_src_port>}}]'
---ingress-security-rules '[{"source": "<ingress_src>", "protocol": "<ingress_src_protocol>", "isStateless": false,
-"tcpOptions": {"destinationPortRange": {"max": <ingress_desc_port_max>, "min": <ingress_desc_port_min>}, "sourcePortRange": <ingress_src_port>}}]'
---vcn-id <vcn_id> --display-name <securitylist_name>
-```
+      --egress-security-rules '[{"destination": "<egress_desc>", "protocol": "<egress_desc_protocol>", "isStateless": true,
+          "tcpOptions": {"destinationPortRange": <egress_desc_port>, "sourcePortRange": <egress_src_port>}}]'
+      --ingress-security-rules '[{"source": "<ingress_src>", "protocol": "<ingress_src_protocol>", "isStateless": false,
+          "tcpOptions": {"destinationPortRange": {"max": <ingress_desc_port_max>, "min": <ingress_desc_port_min>}, "sourcePortRange": <ingress_src_port>}}]'
+      --vcn-id <vcn_id> --display-name <securitylist_name>
+    ```
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>보안목록 생성 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
