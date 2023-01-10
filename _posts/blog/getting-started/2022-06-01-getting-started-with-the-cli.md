@@ -1721,7 +1721,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
 ##### 2. 인스턴스 종료하기
 - 도움말 보기 : `oci compute instance terminate -h`
 - 생성한 인스턴스를 종료하기 위해 아래 파라미터와 같이 명령어를 실행합니다.
-- **instance_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
+- **instance_id** : 종료할 인스턴스의 ID를 입력합니다.
     ```terminal
     oci compute instance terminate --instance-id <instance_id>
     ```
@@ -1796,8 +1796,8 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
           {::options parse_block_html="false" /}
     2. 경로 테이블(Route Table) 규칙 삭제하기
         - 도움말 보기 : `oci network route-table update -h`
-        - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
-        - **route_table_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
+        - 실습에 사용한 VCN의 경로테이블의 규칙을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
+        - **route_table_id** : 규칙을 삭제할 경로 테이블의 ID를 입력합니다.
             ```terminal
                $ oci network route-table update --rt-id <route_table_id> --route-rules '[]'
             ```
@@ -1850,7 +1850,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
           {::options parse_block_html="false" /}
     3. 인터넷 게이트웨이 삭제하기
         - 도움말 보기 : `oci network internet-gateway delete -h`
-        - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
+        - 실습에 사용한 VCN의 인터넷 게이트웨이를 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
         - **ig_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
             ```terminal
              oci network internet-gateway delete --ig-id <ig_id> --force
