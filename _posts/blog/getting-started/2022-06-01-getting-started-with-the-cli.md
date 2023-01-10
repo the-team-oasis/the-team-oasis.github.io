@@ -10,9 +10,9 @@ author: yhcho
 date: 2022-06-02 00:00:00
 breadcrumb: true
 categories:
-  - getting-started
-tags:
-  - [oci, api, cli, oci-cli, command line interface]
+- getting-started
+  tags:
+- [oci, api, cli, oci-cli, command line interface]
 #published: false
 
 #
@@ -50,8 +50,8 @@ header: no
 이번 포스팅에서 사용할 OCI CLI 버전은 3.22.0 입니다. (2023-01-05 기준 최신버전)
 
 ### OCI CLI란?
-OCI CLI는 Oracle Cloud Infrastructure 콘솔에서 사용 가능한 대부분의 서비스로 작업할 수 있게 해주는 도구입니다. 
-CLI는 콘솔 과 동일한 핵심 기능 과 추가 명령을 제공합니다. 만약 OCI CLI 도구가 설치되어 있지 않은 경우 OCI 콘솔에서 제공되는 Cloud Shell을 사용하거나, 아래 포스팅을 참고하여 설정 후 이번 실습을 진행해야 합니다. 
+OCI CLI는 Oracle Cloud Infrastructure 콘솔에서 사용 가능한 대부분의 서비스로 작업할 수 있게 해주는 도구입니다.
+CLI는 콘솔 과 동일한 핵심 기능 과 추가 명령을 제공합니다. 만약 OCI CLI 도구가 설치되어 있지 않은 경우 OCI 콘솔에서 제공되는 Cloud Shell을 사용하거나, 아래 포스팅을 참고하여 설정 후 이번 실습을 진행해야 합니다.
 > [OCI CLI 도구 설정하기](/getting-started/ocicli-config/){:target="_blank" rel="noopener"}
 
 
@@ -70,7 +70,7 @@ $ oci bc volume -h
 $ oci os bucket create -?
 ```
 ### OCI CLI를 사용하여 OCI 리소스 생성하기
-이번 포스팅에서는 OCI CLI를 활용하여 OCI Compute Instance를 프로비전하는 과정을 안내할 예정입니다. 
+이번 포스팅에서는 OCI CLI를 활용하여 OCI Compute Instance를 프로비전하는 과정을 안내할 예정입니다.
 OCI CLI에 사용되는 파라미터를 매번 입력하기 번거롭기 때문에 자주 사용하는 변수는 환경변수로 등록하여 진행할 예정입니다.
 
 - 환경변수 설정 명령어 샘플 (리눅스 계열)
@@ -84,39 +84,40 @@ $Env:compartment_id = "ocid1.tenancy.oc1..aaaaaaaal1fvgn0h9njji5u6ldrwb4l6aay2x8
 ```
 
 - 리소스 생성 명령어를 실행 후 리소스가 특정 상태가 되기 까지 기다리기 위해서는 아래 파라미터와 함께 CLI 명령어를 실행합니다.
-  - 파라미터 : `--wait-for-state [text]`
-  - 파라미터 허용 값 :
-    ```text
-    AVAILABLE, PROVISIONING, TERMINATED, TERMINATING, UPDATING
-    ```
+    - 파라미터 : `--wait-for-state [text]`
+    - 파라미터 허용 값 :
+      ```text
+      AVAILABLE, PROVISIONING, TERMINATED, TERMINATING, UPDATING
+      ```
 
 **진행 순서**
 1. 구획(Compartments) 생성
 2. 가상클라우드 네트워크(VCN) 생성
-   - 가상클라우드 네트워크(VCN) 생성
-   - 보안목록(Security List) 생성(Ingress Rule 포함)
-   - 서브넷(Subnet) 생성
-   - 인터넷 게이트웨이(Internet Gateway) 생성
-   - 라우트 테이블(Route Table) 생성 및 룰 적용
+    - 가상클라우드 네트워크(VCN) 생성
+    - 보안목록(Security List) 생성(Ingress Rule 포함)
+    - 서브넷(Subnet) 생성
+    - 인터넷 게이트웨이(Internet Gateway) 생성
+    - 라우트 테이블(Route Table) 생성 및 룰 적용
 3. 인스턴스(Instance) 생성하기
-   - 인스턴스 생성 준비하기
-   - Linux 인스턴스 시작하기
-   - Windows 인스턴스 시작하기
-   - 인스턴스에 연결하기
+    - 인스턴스 생성 준비하기
+    - Linux 인스턴스 시작하기
+    - Windows 인스턴스 시작하기
+    - 인스턴스에 연결하기
 4. 실습 자원 정리하기
 
 #### 구획(Compartments) 선택하기 (조회 및 생성)
 ##### 1. 구획 조회하기
 - 도움말 보기 : `oci iam compartment list -h`
 - **tenancy_id** : 테넌시의 OCID 또는 조회하고 싶은 상위 구획의 OCID를 복사하여 입력합니다.
-![](/assets/img/getting-started/2022/oci-cli-1.png " ")
-   
+  ![](/assets/img/getting-started/2022/oci-cli-1.png " ")
+
    ```terminal
    $ oci iam compartment list -c <tenancy_id>
    ```
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>구획 조회하기 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -165,12 +166,13 @@ C:\> oci iam compartment list -c $Env:compartment_id
 - **compartment_name** : 생성할 구획의 이름을 입력합니다.
 - **root_compartment_id** : 구획이 생성될 상위 구획의 OCID를 복사하여 입력합니다.
 - **description** : 구획의 설명을 입력합니다.
-   
+
    ```terminal
    $ oci iam compartment create --name <compartment_name> -c <root_compartment_id> --description "<description>"
    ```
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>구획 생성하기 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -219,7 +221,7 @@ C:\> oci iam compartment create --name CLIsandbox -c $Env:compartment_id --descr
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>VCN 생성 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
-
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -280,6 +282,7 @@ C:\> oci network vcn create --compartment-id $Env:compartment_id --display-name 
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>VCN 리스트 조회 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -346,18 +349,19 @@ C:\> oci network vcn list -c $Env:compartment_id
 - **ingress_desc_port_max** : 보안 목록에서 허용할 Port를 범위로 입력하는 경우에 서브넷 내부의 대상 Port의 범위 중 max 값을 입력합니다. 이 실습에서는 윈도우 인스턴스 프로비전 및 접속 테스트를 진행할 예정이기 때문에 `3389` Port를 허용합니다.
 - **ingress_desc_port_min** : 보안 목록에서 허용할 Port를 범위로 입력하는 경우에 서브넷 내부의 대상 Port의 범위 중 min 값을 입력합니다. 이 실습에서는 윈도우 인스턴스 프로비전 및 접속 테스트를 진행할 예정이기 때문에 `3389` Port를 허용합니다.
 - **ingress_src_port** : 수신(Ingress) 트래픽의 Source Port를 입력합니다. 모든 Port를 허용할 경우 `null`로 입력합니다.
-    
+
     ```terminal
-$ oci network security-list create -c <compartment_id> 
-            --egress-security-rules '[{"destination": "<egress_desc>", "protocol": "<egress_desc_protocol>", "isStateless": true, 
-                "tcpOptions": {"destinationPortRange": <egress_desc_port>, "sourcePortRange": <egress_src_port>}}]'
-            --ingress-security-rules '[{"source": "<ingress_src>", "protocol": "<ingress_src_protocol>", "isStateless": false, 
-                "tcpOptions": {"destinationPortRange": {"max": <ingress_desc_port_max>, "min": <ingress_desc_port_min>}, "sourcePortRange": <ingress_src_port>}}]' 
-            --vcn-id <vcn_id> --display-name <securitylist_name>
-    ```
+$ oci network security-list create -c <compartment_id>
+--egress-security-rules '[{"destination": "<egress_desc>", "protocol": "<egress_desc_protocol>", "isStateless": true,
+"tcpOptions": {"destinationPortRange": <egress_desc_port>, "sourcePortRange": <egress_src_port>}}]'
+--ingress-security-rules '[{"source": "<ingress_src>", "protocol": "<ingress_src_protocol>", "isStateless": false,
+"tcpOptions": {"destinationPortRange": {"max": <ingress_desc_port_max>, "min": <ingress_desc_port_min>}, "sourcePortRange": <ingress_src_port>}}]'
+--vcn-id <vcn_id> --display-name <securitylist_name>
+```
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>보안목록 생성 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -441,6 +445,7 @@ C:\> oci network security-list create -c $Env:compartment_id  --vcn-id $Env:vcn_
     ```
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>가용성 도메인 조회 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -489,6 +494,7 @@ C:\> oci iam availability-domain list -c $Env:compartment_id
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>서브넷 생성 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -554,7 +560,7 @@ C:\> oci network subnet create --vcn-id $Env:vcn_id -c $Env:compartment_id --ava
 
 ##### 5. 인터넷 게이트웨이(Internet Gateway) 생성하기
 - 도움말 보기 : `oci network internet-gateway create -h`
-- 공용 IP를 보유하고 있는 리소스가 인터넷과 통신하기 위한 인터넷 게이트웨이를 생성하기 위해 아래와 같은 파라미터를 확인하고 CLI 명령어를 입력하여 
+- 공용 IP를 보유하고 있는 리소스가 인터넷과 통신하기 위한 인터넷 게이트웨이를 생성하기 위해 아래와 같은 파라미터를 확인하고 CLI 명령어를 입력하여
 - **vcn_id** : 위에서 생성한 VCN의 OCID를 입력합니다.
 - **compartment_id** : 서브넷을 생성할 대상 구획의 OCID를 입력합니다.
 - **gateway_display_name** : 인터넷 게이트웨이의 이름을 지정합니다. 예) ig-myvcncli
@@ -564,6 +570,7 @@ C:\> oci network subnet create --vcn-id $Env:vcn_id -c $Env:compartment_id --ava
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">-<b>인터넷 게이트웨이 생성 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -619,6 +626,7 @@ C:\> oci network internet-gateway create --is-enabled true --vcn-id $Env:vcn_id 
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>경로 테이블 리스트 조회 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -674,6 +682,7 @@ C:\> oci network route-table list --vcn-id $Env:vcn_id -c $Env:compartment_id
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>경로 테이블 규칙 추가 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -732,17 +741,18 @@ C:\> oci network route-table update --rt-id $Env:route_table_id --route-rules '[
     $ oci compute image list -c <compartment_id> --all
     ```
 - 인스턴스를 시작하기 위한 이미지는 Linux, Windows 각각 아래 ID로 지정하여 진행 하겠습니다.
-  - Linux : **Oracle-Linux-8.6-2022.12.15-0**
-    ```text
-    ocid1.image.oc1.ap-seoul-1.aaaaaaaaipgkmhwis7wmcc4rcrunq254nkhouw36dbujnpkvcupswag5ckiq
-    ```
-  - Windows : **Windows-Server-2022-Standard-Edition-VM-2022.09.06-0**
-    ```text
-    ocid1.image.oc1.ap-seoul-1.aaaaaaaanqhp46r4rbyz2gvt5zfdkjv5om4bfo6kvcn6hi6isgx44hsmaeya
-    ```
+    - Linux : **Oracle-Linux-8.6-2022.12.15-0**
+      ```text
+      ocid1.image.oc1.ap-seoul-1.aaaaaaaaipgkmhwis7wmcc4rcrunq254nkhouw36dbujnpkvcupswag5ckiq
+      ```
+    - Windows : **Windows-Server-2022-Standard-Edition-VM-2022.09.06-0**
+      ```text
+      ocid1.image.oc1.ap-seoul-1.aaaaaaaanqhp46r4rbyz2gvt5zfdkjv5om4bfo6kvcn6hi6isgx44hsmaeya
+      ```
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>컴퓨트 이미지 리스트 조회 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -828,6 +838,7 @@ C:\> oci compute image list -c $Env:compartment_id --all
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>컴퓨트 인스턴스 Shape 리스트 조회 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (유닉스 계열)
 ```terminal
@@ -841,7 +852,7 @@ C:\> $Env:route_table_id = "ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35y
 C:\> oci compute shape list -c $Env:compartment_id --availability-domain "wXsg:AP-SEOUL-1-AD-1"
 ```
 
-- 결과 샘플 
+- 결과 샘플
 ```json
 {
   "data": [
@@ -876,27 +887,27 @@ C:\> oci compute shape list -c $Env:compartment_id --availability-domain "wXsg:A
 ##### 3. Key Pair 준비하기
 - Linux 인스턴스를 시작할때 사용하기 위해 SSH Key Pair를 미리 생성하여 준비합니다.
 - 인스턴스에 SSH 접속을 위한 SSH 키 쌍 생성 (리눅스, 유닉스)
-  - `ssh-keygen -b 2048 -t rsa` 명령어를 터미널에 입력 합니다.
-    ```terminal
-    ssh-keygen -b 2048 -t rsa
-    ```
-  - 키파일 저장 위치를 물어보면 기본 설정에서 **"Enter"**키를 입력합니다. _예) /home/user_name/.ssh/id_rsa_
-  - 혹시 동일한 경로에 이미 같은 이름의 파일이 존재하는 경우 덮어 씌울지 확인하는데, **Y**를 입력하고 **"Enter"**키를 입력합니다.
-  - passphrase는 별도로 입력하지 않고 **"Enter"**키를 입력합니다.
-  - 생성된 키 파일을 확인합니다.
+    - `ssh-keygen -b 2048 -t rsa` 명령어를 터미널에 입력 합니다.
+      ```terminal
+      ssh-keygen -b 2048 -t rsa
+      ```
+    - 키파일 저장 위치를 물어보면 기본 설정에서 **"Enter"**키를 입력합니다. _예) /home/user_name/.ssh/id_rsa_
+    - 혹시 동일한 경로에 이미 같은 이름의 파일이 존재하는 경우 덮어 씌울지 확인하는데, **Y**를 입력하고 **"Enter"**키를 입력합니다.
+    - passphrase는 별도로 입력하지 않고 **"Enter"**키를 입력합니다.
+    - 생성된 키 파일을 확인합니다.
 - Putty Key Generator를 활용하여 SSH 키 생성
-  - 만일 클라이언트가 OpenSSH가 없는 윈도우 환경이라면, **Putty**를 활용하여 접속하는 경우가 많은데 이 경우에는 **Putty Key Generator**를 다운로드 받아서 Putty에서 사용하는 SSH키로 생성하여야 합니다. **Putty Key Generator**를 활용하면 기존에 사용중이던 [SSH-2 RSA 키 쌍](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/credentials.htm#Instance)를 Putty 전용 SSH 키로 변환도 가능합니다.
-  - 먼저 [https://www.puttygen.com/](https://www.puttygen.com/)에서 **PuTTYgen**을 다운로드 받고 설치합니다. **puttygen.exe**을 클릭하여 프로그램을 오픈합니다. 
-  - 다음과 같이 **SSH-2 RSA**를 선택하고 **키 사이즈**를 **2048**로 입력한 후 **Generate** 버튼을 클릭합니다.
-    ![](/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
+    - 만일 클라이언트가 OpenSSH가 없는 윈도우 환경이라면, **Putty**를 활용하여 접속하는 경우가 많은데 이 경우에는 **Putty Key Generator**를 다운로드 받아서 Putty에서 사용하는 SSH키로 생성하여야 합니다. **Putty Key Generator**를 활용하면 기존에 사용중이던 [SSH-2 RSA 키 쌍](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/credentials.htm#Instance)를 Putty 전용 SSH 키로 변환도 가능합니다.
+    - 먼저 [https://www.puttygen.com/](https://www.puttygen.com/)에서 **PuTTYgen**을 다운로드 받고 설치합니다. **puttygen.exe**을 클릭하여 프로그램을 오픈합니다.
+    - 다음과 같이 **SSH-2 RSA**를 선택하고 **키 사이즈**를 **2048**로 입력한 후 **Generate** 버튼을 클릭합니다.
+      ![](/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
 
-  - 생성되는 과정에서 빈 공간을 마우스를 움직이면 키가 랜덤하게 생성됩니다.
-    ![](/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
+    - 생성되는 과정에서 빈 공간을 마우스를 움직이면 키가 랜덤하게 생성됩니다.
+      ![](/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
 
-  - **Save private key**를 클릭하여 전용 키를 다운로드 받습니다. 공개키의 경우 **Public key for pasting into OpenSSH authorized_keys file**의 내용을 다운로드 받은 Private Key 이름에 **.pub**라는 파일 확장자를 추가해서 복사 & 붙여넣기 하여 생성합니다. <br>예시) Private Key: mykey, Public Key: mykey.pub
+    - **Save private key**를 클릭하여 전용 키를 다운로드 받습니다. 공개키의 경우 **Public key for pasting into OpenSSH authorized_keys file**의 내용을 다운로드 받은 Private Key 이름에 **.pub**라는 파일 확장자를 추가해서 복사 & 붙여넣기 하여 생성합니다. <br>예시) Private Key: mykey, Public Key: mykey.pub
   > 키 코멘트, passphrase (키를 암호화)는 이 단계에서 건너뜁니다.
 
-    ![](/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
+  ![](/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
 
 #### CLI를 이용하여 Linux 인스턴스를 시작하기
 여기까지 잘 진행하셨으면 이제 인스턴스를 시작하기 위한 준비는 모두 완료되었습니다. 이제 아래 남은 절차를 따라 진행하면서 인스턴스를 시작해보겠습니다!
@@ -916,23 +927,24 @@ C:\> oci compute shape list -c $Env:compartment_id --availability-domain "wXsg:A
 - **subnet_id** : 위에서 생성한 서브넷의 OCID를 입력합니다.
 - **display_name** : 인스턴스의 이름을 지정합니다. 예) `my-linux`
 - **shape_name** : 인스턴스의 Shape 이름을 지정합니다. 이번 실습에서는 `VM.Standard.E4.Flex`를 사용합니다.
-  - 인스턴스의 shape을 Flex로 설정할 경우 shape-config 설정을 통해 원하는 ocpu, memory 값을 추가로 지정해야 합니다.
-    ```json
-    { "ocpus": 1, "memoryInGBs": 16 }    
-    ```
+    - 인스턴스의 shape을 Flex로 설정할 경우 shape-config 설정을 통해 원하는 ocpu, memory 값을 추가로 지정해야 합니다.
+      ```json
+      { "ocpus": 1, "memoryInGBs": 16 }    
+      ```
 
-- **image_id** : 인스턴스를 시작할때 사용할 이미지의 ID를 입력합니다. 실습에서는 Oracle Linux 8 이미지를 사용합니다. 
-  - Linux : **Oracle-Linux-8.6-2022.12.15-0**
+- **image_id** : 인스턴스를 시작할때 사용할 이미지의 ID를 입력합니다. 실습에서는 Oracle Linux 8 이미지를 사용합니다.
+    - Linux : **Oracle-Linux-8.6-2022.12.15-0**
   ```text
   ocid1.image.oc1.ap-seoul-1.aaaaaaaaipgkmhwis7wmcc4rcrunq254nkhouw36dbujnpkvcupswag5ckiq
   ```
 
 - **path_to_authorized_keys_file** : 앞단계 에서 생성한 키파일의 경로를 입력합니다.
-  - Linux 예시 : `~/.ssh/id_rsa.pub`
-  - Winodws 예시 : `C:\Users\testuser\.oci\linux_key.pem`
+    - Linux 예시 : `~/.ssh/id_rsa.pub`
+    - Winodws 예시 : `C:\Users\testuser\.oci\linux_key.pem`
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>컴퓨트 인스턴스 생성 명령어(Linux)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1050,6 +1062,7 @@ C:\> oci compute instance launch --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 생성 명령어(Linux)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1119,6 +1132,7 @@ C:\> oci bv volume create --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c $Env:c
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 연결 명령어(Linux)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1204,6 +1218,7 @@ Windows 인스턴스를 시작하는 방법은 Linux 인스턴스를 시작하�
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>컴퓨트 인스턴스 생성 명령어(Windows)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1319,6 +1334,7 @@ C:\> oci compute instance launch --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 생성 명령어(Windows)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1387,6 +1403,7 @@ C:\> oci bv volume create --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c $Env:c
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 연결 명령어(Linux)</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1453,6 +1470,7 @@ C:\> oci compute volume-attachment attach --instance-id $Env:instance_id --type 
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>인스턴스 접속 정보(VNIC) 조회</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1511,6 +1529,7 @@ C:\> oci compute instance list-vnics --instance-id $Env:instance_id
 
 {::options parse_block_html="true" /}
 <details><summary><h5 style="color:cornflowerblue;">- <b>초기 인증 정보(Windows) 조회</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+- <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
 - 명령어 샘플 (리눅스 계열)
 ```terminal
@@ -1546,151 +1565,154 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
 
 ##### 1. 블록 볼륨 연결 해제 및 삭제 하기
 - 블록볼륨을 삭제하기 위해서는 먼저 연결된 블록볼륨 리스트를 조회하고, 연결된 블록볼륨은 인스턴스에서 연결 해제합니다. 그 이후 연결 해제된 블록볼륨을 삭제합니다.
-  1. 블록 볼륨이 연결된 리스트 조회하기
-      - 도움말 보기 : `oci compute volume-attachment list -h`
-      - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
-      - **compartment_id** : 블록볼륨이 연결된 내역을 조회할 구획의 ID를 입력합니다.
+    1. 블록 볼륨이 연결된 리스트 조회하기
+        - 도움말 보기 : `oci compute volume-attachment list -h`
+        - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
+        - **compartment_id** : 블록볼륨이 연결된 내역을 조회할 구획의 ID를 입력합니다.
+            ```terminal
+            oci compute volume-attachment list -c <compartment_id>
+            ```
+          {::options parse_block_html="true" /}
+          <details><summary><h5 style="color:cornflowerblue;">- <b>연결된 블록볼륨 리스트 조회</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
+
+            - 명령어 샘플 (리눅스 계열)
           ```terminal
-          oci compute volume-attachment list -c <compartment_id>
+          $ export compartment_id=ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka
+          $ oci compute volume-attachment list -c $compartment_id
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>연결된 블록볼륨 리스트 조회</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
 
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export compartment_id=ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka
-        $ oci compute volume-attachment list -c $compartment_id
-        ```
-
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:compartment_id = "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka"
-        C:\> oci compute volume-attachment list -c $Env:compartment_id
-        ```
-
-          - 결과 샘플
-        ```json
-        {
-          "data": [
-            {
-              "attachment-type": "iscsi",
-              "availability-domain": "wXsg:AP-SEOUL-1-AD-1",
-              "chap-secret": null,
-              "chap-username": null,
-              "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
-              "device": null,
-              "display-name": "volumeattachment20230109044147",
-              "encryption-in-transit-type": "NONE",
-              "id": "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya",
-              "instance-id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrkv6tzsac4v6ylilhsp363nmiripsyyfqag5qh2rpl3rrzzjqok4q",
-              "ipv4": "169.254.2.2",
-              "iqn": "iqn.2015-12.com.oracleiaas:9ac8f33d-bbf6-4466-85bf-0f2f90b21c8a",
-              "is-agent-auto-iscsi-login-enabled": null,
-              "is-multipath": null,
-              "is-pv-encryption-in-transit-enabled": false,
-              "is-read-only": false,
-              "is-shareable": false,
-              "iscsi-login-state": null,
-              "lifecycle-state": "ATTACHED",
-              "multipath-devices": null,
-              "port": 3260,
-              "time-created": "2023-01-09T04:41:47.781000+00:00",
-              "volume-id": "ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq"
-            },
-            {
-              "attachment-type": "iscsi",
-              "availability-domain": "wXsg:AP-SEOUL-1-AD-1",
-              "chap-secret": null,
-              "chap-username": null,
-              "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
-              "device": null,
-              "display-name": "volumeattachment20230109041009",
-              "encryption-in-transit-type": "NONE",
-              "id": "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacyd23s7rrmbuw4y3d7pavkpewoniaaio4nfipdfgtirwq",
-              "instance-id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrkv6tzsacp6yojrw4o6hkoenx56lilfn2jzrfjpcmpvtfqtxfybgq",
-              "ipv4": "169.254.2.2",
-              "iqn": "iqn.2015-12.com.oracleiaas:4f29ec30-4458-4f5a-86c8-28f45f71583e",
-              "is-agent-auto-iscsi-login-enabled": null,
-              "is-multipath": null,
-              "is-pv-encryption-in-transit-enabled": false,
-              "is-read-only": false,
-              "is-shareable": false,
-              "iscsi-login-state": null,
-              "lifecycle-state": "ATTACHED",
-              "multipath-devices": null,
-              "port": 3260,
-              "time-created": "2023-01-09T04:10:09.319000+00:00",
-              "volume-id": "ocid1.volume.oc1.ap-seoul-1.abuwgljrupnwlpq2tx7bhodmwd6q2xhgjpc62cm5lr2mg3gnyjmobdwjtp5q"
-            }
-          ]
-        }
-        ```
-
-        </details>
-        {::options parse_block_html="false" /}
-        
-      
-        
-  2. 연결된 블록볼륨 해제하기
-      - 도움말 보기 : `oci compute volume-attachment detach -h`
-      - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
-      - **volume_attachment_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
+            - 명령어 샘플 (윈도우 계열)
           ```terminal
-          oci compute volume-attachment detach --volume-attachment-id <volume_attachment_id>
+          C:\> $Env:compartment_id = "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka"
+          C:\> oci compute volume-attachment list -c $Env:compartment_id
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>연결된 블록볼륨 해제하기</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
 
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export volume_attachment_id=ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya
-        $ oci compute volume-attachment detach --volume-attachment-id $volume_attachment_id
-        ```
-
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:volume_attachment_id = "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya"
-        C:\> oci compute volume-attachment detach --volume-attachment-id $Env:volume_attachment_id
-        ```
-
-          - 결과 샘플
-        ```text
-        결과 없음
-        ```
-
-        </details>
-        {::options parse_block_html="false" /}
-  3. 블록볼륨 삭제하기
-      - 도움말 보기 : `oci bv volume delete -h`
-      - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
-      - **volume_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
-          ```terminal
-          oci bv volume delete --volume-id <volume_id> --force
+            - 결과 샘플
+          ```json
+          {
+            "data": [
+              {
+                "attachment-type": "iscsi",
+                "availability-domain": "wXsg:AP-SEOUL-1-AD-1",
+                "chap-secret": null,
+                "chap-username": null,
+                "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
+                "device": null,
+                "display-name": "volumeattachment20230109044147",
+                "encryption-in-transit-type": "NONE",
+                "id": "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya",
+                "instance-id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrkv6tzsac4v6ylilhsp363nmiripsyyfqag5qh2rpl3rrzzjqok4q",
+                "ipv4": "169.254.2.2",
+                "iqn": "iqn.2015-12.com.oracleiaas:9ac8f33d-bbf6-4466-85bf-0f2f90b21c8a",
+                "is-agent-auto-iscsi-login-enabled": null,
+                "is-multipath": null,
+                "is-pv-encryption-in-transit-enabled": false,
+                "is-read-only": false,
+                "is-shareable": false,
+                "iscsi-login-state": null,
+                "lifecycle-state": "ATTACHED",
+                "multipath-devices": null,
+                "port": 3260,
+                "time-created": "2023-01-09T04:41:47.781000+00:00",
+                "volume-id": "ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq"
+              },
+              {
+                "attachment-type": "iscsi",
+                "availability-domain": "wXsg:AP-SEOUL-1-AD-1",
+                "chap-secret": null,
+                "chap-username": null,
+                "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
+                "device": null,
+                "display-name": "volumeattachment20230109041009",
+                "encryption-in-transit-type": "NONE",
+                "id": "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacyd23s7rrmbuw4y3d7pavkpewoniaaio4nfipdfgtirwq",
+                "instance-id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrkv6tzsacp6yojrw4o6hkoenx56lilfn2jzrfjpcmpvtfqtxfybgq",
+                "ipv4": "169.254.2.2",
+                "iqn": "iqn.2015-12.com.oracleiaas:4f29ec30-4458-4f5a-86c8-28f45f71583e",
+                "is-agent-auto-iscsi-login-enabled": null,
+                "is-multipath": null,
+                "is-pv-encryption-in-transit-enabled": false,
+                "is-read-only": false,
+                "is-shareable": false,
+                "iscsi-login-state": null,
+                "lifecycle-state": "ATTACHED",
+                "multipath-devices": null,
+                "port": 3260,
+                "time-created": "2023-01-09T04:10:09.319000+00:00",
+                "volume-id": "ocid1.volume.oc1.ap-seoul-1.abuwgljrupnwlpq2tx7bhodmwd6q2xhgjpc62cm5lr2mg3gnyjmobdwjtp5q"
+              }
+            ]
+          }
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 삭제하기</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
 
-          - 명령어 샘플 (리눅스 계열)
+          </details>
+          {::options parse_block_html="false" /}
+
+
+
+2. 연결된 블록볼륨 해제하기
+    - 도움말 보기 : `oci compute volume-attachment detach -h`
+    - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
+    - **volume_attachment_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
         ```terminal
-        $ export volume_id=ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq
-        $ oci bv volume delete --volume-id $volume_id --force
+        oci compute volume-attachment detach --volume-attachment-id <volume_attachment_id>
         ```
+      {::options parse_block_html="true" /}
+      <details><summary><h5 style="color:cornflowerblue;">- <b>연결된 블록볼륨 해제하기</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+        - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
-          - 명령어 샘플 (윈도우 계열)
+        - 명령어 샘플 (리눅스 계열)
+      ```terminal
+      $ export volume_attachment_id=ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya
+      $ oci compute volume-attachment detach --volume-attachment-id $volume_attachment_id
+      ```
+
+        - 명령어 샘플 (윈도우 계열)
+      ```terminal
+      C:\> $Env:volume_attachment_id = "ocid1.volumeattachment.oc1.ap-seoul-1.anuwgljrkv6tzsacwmf343afvcp6yr7ycglna2rr5zqwwpyfuguel5aocjya"
+      C:\> oci compute volume-attachment detach --volume-attachment-id $Env:volume_attachment_id
+      ```
+
+        - 결과 샘플
+      ```text
+      결과 없음
+      ```
+
+      </details>
+      {::options parse_block_html="false" /}
+3. 블록볼륨 삭제하기
+    - 도움말 보기 : `oci bv volume delete -h`
+    - 블록 볼륨이 연결된 리스트를 조회하기 위해서 아래 파라미터와 같이 명령어를 실행합니다.
+    - **volume_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
         ```terminal
-        C:\> $Env:volume_attachment_id = "ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq"
-        C:\> oci bv volume delete --volume-id $Env:volume_id --force
+        oci bv volume delete --volume-id <volume_id> --force
         ```
+      {::options parse_block_html="true" /}
+      <details><summary><h5 style="color:cornflowerblue;">- <b>블록볼륨 삭제하기</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+        - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
-          - 결과 샘플
-        ```text
-        결과 없음
-        ```
-        
+        - 명령어 샘플 (리눅스 계열)
+      ```terminal
+      $ export volume_id=ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq
+      $ oci bv volume delete --volume-id $volume_id --force
+      ```
+
+        - 명령어 샘플 (윈도우 계열)
+      ```terminal
+      C:\> $Env:volume_attachment_id = "ocid1.volume.oc1.ap-seoul-1.abuwgljrgy2kdpauvhrsr4liqwfpzgrcqxfqgz27w6uvkaupzpq2xnbqc6fq"
+      C:\> oci bv volume delete --volume-id $Env:volume_id --force
+      ```
+
+        - 결과 샘플
+      ```text
+      결과 없음
+      ```
+
         - 스토리지가 삭제되었음을 OCI 콘솔에서 확인
-        ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-11.png " ")
-        </details>
-        {::options parse_block_html="false" /}
+          ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-11.png " ")
+      </details>
+      {::options parse_block_html="false" /}
 
 
 ##### 2. 인스턴스 종료하기
@@ -1702,6 +1724,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
     ```
   {::options parse_block_html="true" /}
   <details><summary><h5 style="color:cornflowerblue;">- <b>인스턴스 종료 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+    - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
     - 명령어 샘플 (리눅스 계열)
   ```terminal
@@ -1725,16 +1748,16 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
   ```text
   결과 없음
   ```
-  
-  - 인스턴스가 종료 중 또는 종료되었음을 OCI 콘솔에서 확인합니다.
-    ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-12.png " ")
+
+    - 인스턴스가 종료 중 또는 종료되었음을 OCI 콘솔에서 확인합니다.
+      ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-12.png " ")
   </details>
   {::options parse_block_html="false" /}
 
 
 ##### 3. 가상 클라우드 네트워크 리소스 삭제하기
 - 가상 클라우드 네트워크 리소스 삭제 하려면 2단계로 구분하여 리소스를 삭제합니다. 먼저 서브넷을 삭제한 후 인터넷 게이트웨이를 삭제하기 위해 경로테이블의 규칙을 삭제한 후 마지막으로 VCN을 삭제합니다.
-  1. 서브넷 삭제하기 
+    1. 서브넷 삭제하기
         - 도움말 보기 : `oci network subnet delete -h`
         - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
         - **subnet_id** : 삭제할 서브넷의 ID를 입력합니다.
@@ -1743,6 +1766,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
             ```
           {::options parse_block_html="true" /}
           <details><summary><h5 style="color:cornflowerblue;">- <b>VCN의 서브넷 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
             - 명령어 샘플 (리눅스 계열)
           ```terminal
@@ -1760,152 +1784,156 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
           ```text
           결과 없음
           ```
-          
-          - 서브넷이 삭제되었음을 OCI 콘솔에서 확인합니다.
-            ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-13.png " ")
+
+            - 서브넷이 삭제되었음을 OCI 콘솔에서 확인합니다.
+              ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-13.png " ")
           </details>
           {::options parse_block_html="false" /}
-  2. 경로 테이블(Route Table) 규칙 삭제하기
-      - 도움말 보기 : `oci network route-table update -h`
-      - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
-      - **route_table_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
+    2. 경로 테이블(Route Table) 규칙 삭제하기
+        - 도움말 보기 : `oci network route-table update -h`
+        - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
+        - **route_table_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
+            ```terminal
+               $ oci network route-table update --rt-id <route_table_id> --route-rules '[]'
+            ```
+          {::options parse_block_html="true" /}
+          <details><summary><h5 style="color:cornflowerblue;">- <b>경로 테이블 규칙 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
+
+            - 명령어 샘플 (리눅스 계열)
           ```terminal
-             $ oci network route-table update --rt-id <route_table_id> --route-rules '[]'
+          $ export route_table_id=ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq
+          $ oci network route-table update --rt-id $route_table_id --route-rules '[]'
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>경로 테이블 규칙 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
-
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export route_table_id=ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq
-        $ oci network route-table update --rt-id $route_table_id --route-rules '[]'
-        ```
-        ```text
-        WARNING: Updates to defined-tags and freeform-tags and route-rules will replace any existing values. Are you sure you want to continue? [y/N]: y
-        ```
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:route_table_id = "ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq"
-        C:\> oci network route-table update --rt-id $Env:route_table_id --route-rules '[]'
-        ```
-        ```text
-        WARNING: Updates to defined-tags and freeform-tags and route-rules will replace any existing values. Are you sure you want to continue? [y/N]: y
-        ```
-
-          - 결과 샘플
-        ```json
-        {
-        "data": {
-        "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
-        "defined-tags": {
-        "Oracle-Tags": {
-        "CreatedBy": "default/young.hwan.cho@oracle.com",
-        "CreatedOn": "2023-01-05T04:16:47.157Z"
-        }
-        },
-        "display-name": "Default Route Table for my-vcn-cli",
-        "freeform-tags": {},
-        "id": "ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq",
-        "lifecycle-state": "AVAILABLE",
-        "route-rules": [],
-        "time-created": "2023-01-05T04:16:47.267000+00:00",
-        "vcn-id": "ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq"
-        },
-        "etag": "fd31827e"
-        }
-        ```
-
-        </details>
-        {::options parse_block_html="false" /}
-  3. 인터넷 게이트웨이 삭제하기
-      - 도움말 보기 : `oci network internet-gateway delete -h`
-      - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
-      - **ig_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
+          ```text
+          WARNING: Updates to defined-tags and freeform-tags and route-rules will replace any existing values. Are you sure you want to continue? [y/N]: y
+          ```
+            - 명령어 샘플 (윈도우 계열)
           ```terminal
-           oci network internet-gateway delete --ig-id <ig_id> --force
+          C:\> $Env:route_table_id = "ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq"
+          C:\> oci network route-table update --rt-id $Env:route_table_id --route-rules '[]'
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>인터넷 게이트웨이 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+          ```text
+          WARNING: Updates to defined-tags and freeform-tags and route-rules will replace any existing values. Are you sure you want to continue? [y/N]: y
+          ```
 
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export ig_id=ocid1.internetgateway.oc1.ap-seoul-1.aaaaaaaani5rdna3vlikdchufhiqbpogqggh6ehnctmfoiu5c5etteh2mxna
-        $ oci network internet-gateway delete --ig-id $ig_id --force
-        ```
+            - 결과 샘플
+          ```json
+          {
+          "data": {
+          "compartment-id": "ocid1.compartment.oc1..aaaaaaaawpaqdecuuohlray2q6i7mlbubfdgqfvdpmvgry2zonx37wy3f3ka",
+          "defined-tags": {
+          "Oracle-Tags": {
+          "CreatedBy": "default/young.hwan.cho@oracle.com",
+          "CreatedOn": "2023-01-05T04:16:47.157Z"
+          }
+          },
+          "display-name": "Default Route Table for my-vcn-cli",
+          "freeform-tags": {},
+          "id": "ocid1.routetable.oc1.ap-seoul-1.aaaaaaaaqs3rjpcru35ysm5jyvi3v2vziqf4l5fyaa3425zu4nr6y6eoymiq",
+          "lifecycle-state": "AVAILABLE",
+          "route-rules": [],
+          "time-created": "2023-01-05T04:16:47.267000+00:00",
+          "vcn-id": "ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq"
+          },
+          "etag": "fd31827e"
+          }
+          ```
 
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:ig_id = "ocid1.internetgateway.oc1.ap-seoul-1.aaaaaaaani5rdna3vlikdchufhiqbpogqggh6ehnctmfoiu5c5etteh2mxna"
-        C:\> oci network internet-gateway delete --ig-id $ig_id --force
-        ```
+          </details>
+          {::options parse_block_html="false" /}
+    3. 인터넷 게이트웨이 삭제하기
+        - 도움말 보기 : `oci network internet-gateway delete -h`
+        - 실습에 사용한 VCN의 서브넷을 삭제하기 위해 아래 파라미터와 함께 명령어를 실행합니다.
+        - **ig_id** : 삭제할 인터넷 게이트웨이의 ID를 입력합니다.
+            ```terminal
+             oci network internet-gateway delete --ig-id <ig_id> --force
+            ```
+          {::options parse_block_html="true" /}
+          <details><summary><h5 style="color:cornflowerblue;">- <b>인터넷 게이트웨이 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
-          - 결과 샘플
-        ```text
-        결과 없음
-        ```
-
-          - 인터넷 게이트웨이가 삭제되었음을 OCI 콘솔에서 확인합니다.
-            ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-14.png " ")
-        </details>
-        {::options parse_block_html="false" /}
-  4. 보안목록 삭제하기
-      - 도움말 보기 : `oci network security-list delete -h`
-      - VCN을 삭제하기 위해 추가로 생성하였던 보안목록을 아래 파라미터와 함께 명령어를 실행하여 삭제합니다.
-      - **security_list_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
+            - 명령어 샘플 (리눅스 계열)
           ```terminal
-          oci network security-list delete --security-list-id  <security_list_id> --force
+          $ export ig_id=ocid1.internetgateway.oc1.ap-seoul-1.aaaaaaaani5rdna3vlikdchufhiqbpogqggh6ehnctmfoiu5c5etteh2mxna
+          $ oci network internet-gateway delete --ig-id $ig_id --force
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>보안목록 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
 
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export security_list_id=ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaamusjdk4mb5snn4wodziugvthz6dpzccbps2gooohseklngot3bsq
-        $ oci network security-list delete --ecurity-list-id $security_list_id --force
-        ```
-
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:security_list_id = "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaamusjdk4mb5snn4wodziugvthz6dpzccbps2gooohseklngot3bsq"
-        C:\> oci network security-list delete --vcn-id $Env:security_list_id --force
-        ```
-
-          - 결과 샘플
-        ```text
-        결과 없음
-        ```
-
-        </details>
-        {::options parse_block_html="false" /}
-  5. 가상 클라우드 네트워크 삭제하기
-      - 도움말 보기 : `oci network vcn delete -h`
-      - 마지막으로 가상 클라우드 네트워크를 삭제하기 위해 파라미터와 함께 명령어를 실행합니다.
-      - **vcn_id** : 삭제할 VCN의 ID를 입력합니다.
+            - 명령어 샘플 (윈도우 계열)
           ```terminal
-          oci network vcn delete --vcn-id  <vcn_id> --force
+          C:\> $Env:ig_id = "ocid1.internetgateway.oc1.ap-seoul-1.aaaaaaaani5rdna3vlikdchufhiqbpogqggh6ehnctmfoiu5c5etteh2mxna"
+          C:\> oci network internet-gateway delete --ig-id $ig_id --force
           ```
-        {::options parse_block_html="true" /}
-        <details><summary><h5 style="color:cornflowerblue;">- <b>가상클라우드 네트워크 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
 
-          - 명령어 샘플 (리눅스 계열)
-        ```terminal
-        $ export vcn_id=ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq
-        $ oci network vcn delete --vcn-id $vcn_id --force
-        ```
+            - 결과 샘플
+          ```text
+          결과 없음
+          ```
 
-          - 명령어 샘플 (윈도우 계열)
-        ```terminal
-        C:\> $Env:vcn_id = "ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq"
-        C:\> oci network vcn delete --vcn-id $Env:vcn_id --force
-        ```
+            - 인터넷 게이트웨이가 삭제되었음을 OCI 콘솔에서 확인합니다.
+              ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-14.png " ")
+          </details>
+          {::options parse_block_html="false" /}
+    4. 보안목록 삭제하기
+        - 도움말 보기 : `oci network security-list delete -h`
+        - VCN을 삭제하기 위해 추가로 생성하였던 보안목록을 아래 파라미터와 함께 명령어를 실행하여 삭제합니다.
+        - **security_list_id** : 위 단계에서 조회한 해제할 블록볼륨 연결의 ID를 입력합니다.
+            ```terminal
+            oci network security-list delete --security-list-id  <security_list_id> --force
+            ```
+          {::options parse_block_html="true" /}
+          <details><summary><h5 style="color:cornflowerblue;">- <b>보안목록 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
 
-          - 결과 샘플
-        ```text
-        결과 없음
-        ```
+            - 명령어 샘플 (리눅스 계열)
+          ```terminal
+          $ export security_list_id=ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaamusjdk4mb5snn4wodziugvthz6dpzccbps2gooohseklngot3bsq
+          $ oci network security-list delete --ecurity-list-id $security_list_id --force
+          ```
 
-        </details>
-        {::options parse_block_html="false" /}
+            - 명령어 샘플 (윈도우 계열)
+          ```terminal
+          C:\> $Env:security_list_id = "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaamusjdk4mb5snn4wodziugvthz6dpzccbps2gooohseklngot3bsq"
+          C:\> oci network security-list delete --vcn-id $Env:security_list_id --force
+          ```
+
+            - 결과 샘플
+          ```text
+          결과 없음
+          ```
+
+          </details>
+          {::options parse_block_html="false" /}
+    5. 가상 클라우드 네트워크 삭제하기
+        - 도움말 보기 : `oci network vcn delete -h`
+        - 마지막으로 가상 클라우드 네트워크를 삭제하기 위해 파라미터와 함께 명령어를 실행합니다.
+        - **vcn_id** : 삭제할 VCN의 ID를 입력합니다.
+            ```terminal
+            oci network vcn delete --vcn-id  <vcn_id> --force
+            ```
+          {::options parse_block_html="true" /}
+          <details><summary><h5 style="color:cornflowerblue;">- <b>가상클라우드 네트워크 삭제 명령어</b> 예제 및 결과예시 (클릭하여 보기)</h5></summary>
+            - <mark><b>명령어 샘플의 환경변수에 대입된 각 리소스 ID는 실제 본인의 환경에 맞는 값으로 교체하여 실행해야 합니다. 아래 값은 샘플 입니다.</b></mark>
+
+            - 명령어 샘플 (리눅스 계열)
+          ```terminal
+          $ export vcn_id=ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq
+          $ oci network vcn delete --vcn-id $vcn_id --force
+          ```
+
+            - 명령어 샘플 (윈도우 계열)
+          ```terminal
+          C:\> $Env:vcn_id = "ocid1.vcn.oc1.ap-seoul-1.amaaaaaakv6tzsaasylnws5ppr76r3wwkqnccwn4msbrd2tuktiaqtuv4fmq"
+          C:\> oci network vcn delete --vcn-id $Env:vcn_id --force
+          ```
+
+            - 결과 샘플
+          ```text
+          결과 없음
+          ```
+
+          </details>
+          {::options parse_block_html="false" /}
 
 
 ### 마무리하며...
