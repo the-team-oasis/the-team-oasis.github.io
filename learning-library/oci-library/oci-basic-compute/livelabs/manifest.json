@@ -32,6 +32,10 @@
         {
             "title": "Lab 5 : Oracle DBCS 접속 실습 with SQL 워크시트 (Optional)",
             "filename": "labs/lab-6/connect-dbcs-from-sqlworksheet.md"
+        },
+        {
+            "title": "Lab 6 : Oracle Function 서비스 간단 실습 (Optional)",
+            "filename": "labs/lab-7/create-oracle-function.md"
         }
     ]
 }
