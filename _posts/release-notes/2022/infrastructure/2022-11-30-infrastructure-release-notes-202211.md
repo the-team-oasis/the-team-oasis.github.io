@@ -43,6 +43,10 @@ header: no
 ### 기능 소개
 OCI ( Oracle Cloud Infrastructure ) Cloud Shell은 Oracle Cloud Console 에서 액세스할 수 있는 웹 브라우저 기반 터미널 입니다. Cloud Shell은 무료로 사용할 수 있으며(월 테넌시 한도 내에서) 사전 인증된 Oracle Cloud Infrastructure CLI, 사전 인증된 Ansible 설치 및 다음 Oracle Cloud Infrastructure 서비스 자습서 및 기타 유용한 도구와 함께 Linux 셸에 대한 액세스를 제공합니다. 실험실. Cloud Shell은 콘솔 에서 액세스할 수 있는 모든 OCI 사용자가 사용할 수 있는 기능 입니다. Cloud Shell은 Oracle Cloud Console 에 콘솔 의 영구 프레임으로 표시됩니다.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76b9f49a49d662719cb5f1feb56cb08f16c24472
 > Java JDK 11이 기본적으로 설치되어 있어 아래와 같이 변경하여 사용 할 수 있습니다.
 
 ```terminal
