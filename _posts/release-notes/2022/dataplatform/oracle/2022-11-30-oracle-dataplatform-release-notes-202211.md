@@ -55,16 +55,16 @@ OCI BDS 는 OCI 가 제공하는 Big Data 를 위한 Managed Big Data Cluster �
 Big Data Service (BDS) 에 신규 업데이트가 반영되었습니다.
 
 * ODH 가 2.0 으로 upgrade 되었습니다.
-    * ODH 2.0 에는 다음의 서비스들이 업그레이드 되었습니다
+    * ODH 2.0 에는 다음의 서비스들이 업그레이드 됨
         * Apache Hive 3.1.3
         * Apache Spark 3.2.1
         * Apache Hadoop 3.3.3
         * Trino 389
             ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/01.oci-bigdata-01.png)
-    * BDS Spark 서비스의 한 Part 로 Delta Lake 1.2.1 이 지원됨. Delta Lake는 BDS Spark 서비스용 클라우드 Object Storage 를 통해 ACID 지원 스토리지 계층을 제공합니다.
+    * BDS Spark 서비스의 한 Part 로 Delta Lake 1.2.1 이 지원됨. Delta Lake는 BDS Spark 서비스용 클라우드 Object Storage 를 통해 ACID 지원 스토리지 계층을 제공
 
-* Apache Flink 1.15.2 (스트리밍 프로세싱) 는 BDS cluster version 3.0.17 이상에서만 지원합니다.
-* 기존 클러스터에 Edge 노드를 추가할 수 있습니다.
+* Apache Flink 1.15.2 (스트리밍 프로세싱) 는 BDS cluster version 3.0.17 이상에서만 지원
+* 기존 클러스터에 Edge 노드를 추가할 수 있음
 
 <br>
 
