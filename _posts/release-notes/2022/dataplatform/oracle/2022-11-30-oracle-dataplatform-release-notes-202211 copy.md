@@ -48,7 +48,7 @@ OCI BDS 는 OCI 가 제공하는 Big Data 를 위한 Managed Big Data Cluster �
 
 자세한 Big Data 에 대한 서비스 소개는 아래 링크에서 자세히 소개되어 있습니다.
 
-* [OCI Big Data 소개](/_posts/blog/dataplatform/2022-10-07-oracle-bigdata-service-overview.md)
+* [OCI Big Data 소개](/dataplatform/2022-10-07-oracle-bigdata-service-overview/)
 
 ### 신규 변경 사항
 
