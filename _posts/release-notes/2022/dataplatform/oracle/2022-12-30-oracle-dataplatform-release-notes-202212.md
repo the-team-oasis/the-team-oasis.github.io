@@ -122,7 +122,7 @@ Bigdata 를 위한 Open Source Hadoop 은 Hadoop HDFS 및 관리를 위한 Open 
 
 자세한 Big Data 에 대한 서비스 소개는 아래 링크에서 자세히 소개되어 있습니다.
 
-* [OCI Big Data 소개](/_posts/blog/dataplatform/2022-10-07-oracle-bigdata-service-overview.md)
+* [OCI Big Data 소개](/dataplatform/2022-10-07-oracle-bigdata-service-overview/)
 
 OCI 에 Big Data 의 새로운 Release 가 반영되었습니다. 
 
