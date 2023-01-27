@@ -60,10 +60,6 @@ Queue 서비스는 완전 관리형 서버리스 서비스로 사용시에만 �
 ![](/assets/img/infrastructure/2022/12/SCR-20230118-k5r.png)
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 76b9f49a49d662719cb5f1feb56cb08f16c24472
 ## Live migration supported for Windows-based compute instances
 * **Services:** Compute
 * **Release Date:**  Dec. 19, 2022

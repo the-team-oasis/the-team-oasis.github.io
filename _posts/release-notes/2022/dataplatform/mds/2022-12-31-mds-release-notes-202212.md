@@ -66,11 +66,6 @@ Resources -> Endpoints (Read replica load balancer)
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/011ec02c-b243-4850-9ab1-3fe9bfc14df7/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/011ec02c-b243-4850-9ab1-3fe9bfc14df7/){:target="_blank" rel="noopener"}
 
 ### 기능 소개
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 76b9f49a49d662719cb5f1feb56cb08f16c24472
 GTID는 Global Transaction Identifier의 약자로 MySQL 복제에서 서버의 각 트랜잭션을 구분하는 고유한 식별자입니다. GTID는 모든 트랜잭션과 1:1 관계이며, GTID를 활용하면 복제본으로 장애 조치, 계층적 복제, 특정 시점으로 백업 복구하는 등의 작업을 더 쉽게 구현할 수 있으며, 오류 발생 빈도도 줄일 수 있습니다.
 
 여러 대에서 복제를 구성하는 경우 운영 관리를 단순화하기 위해 GTID(Global Transaction ID)가 구현되었습니다. GTID는 트랜잭션을 고유하게 식별할 수 있는 식별자입니다. 기존의 복제에서는 바이너리 로그의 위치 정보를 사용하여 복제가 어디까지 전파되었는지를 관리하고 있기 때문에 슬레이브를 새로운 마스터로 승격시키는 경우 등에 위치 정보를 확인할 필요가 있습니다. 번거로웠습니다. GTID를 사용하면 이 문제를 해결할 수 있습니다. GTID를 사용하면 슬레이브가 이미 실행 완료된 트랜잭션을 고유하게 식별할 수 있어 위치 정보를 확인하지 않고 슬레이브를 새 마스터로 승격시킬 수 있습니다.
