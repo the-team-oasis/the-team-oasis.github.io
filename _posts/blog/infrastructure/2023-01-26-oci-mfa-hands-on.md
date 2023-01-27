@@ -185,6 +185,8 @@ Security -> Sign-on Policies 이동 후 "Default Sign-On Policy" 클릭합니다
 
 
 
-
+#### SMS 이용시 가격
+SMS 메시지를 이용할 경우, 최초 1,000건 무료이고 그 이후 1건에 $ 0.03 비용이 발생합니다.
+![](/assets/img/infrastructure/2023/mfa/SCR-20230127-etx.png)
 
 
