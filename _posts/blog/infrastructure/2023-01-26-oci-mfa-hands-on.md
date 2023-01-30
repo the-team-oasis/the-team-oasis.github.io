@@ -149,6 +149,7 @@ MFA 활성화 하기 위해서 사용자의 상세정보를 확인 합니다.
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cl1.png)
 
 13) 룰이 등록된 이후 MFA를 우선순위를 높이기 위해서 드래그 앤 드랍을 통해서 우선순위 변경을 합니다.(가장 높은 순위로 변경합니다.)
+> 우선순위가 "MFA" , "Default Sign-On Rule" 순서로 드래그 앤 드랍으로 변경합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cn8.png)
 
