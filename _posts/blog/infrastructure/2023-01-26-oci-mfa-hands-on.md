@@ -3,7 +3,7 @@ layout: page-fullwidth
 #
 # Content
 #
-subheadline: "MFA 다중인증"
+subheadline: "MFA(Multi-Factor Authentication) 다중인증"
 title: "OCI의 MFA 이용하기"
 teaser: "OCI의 MFA 방법을 설명합니다."
 author: kisu.kim
@@ -34,10 +34,13 @@ header: no
 </div>
 
 ## 소개
-OCI에서 MFA는 다음과 같은 세 가지 오라클 제품에서 사용할 수 있습니다
+OCI에서 MFA는 다음과 같은 세 가지 인증 프로바이더 유형에 적용할 수 있습니다.
 - Old OCI IAM(Just for local OCI Users)
 - In IDCS. This is the recommended solution for SSO that works for IaaS,PaaS and SaaS.
 - In the new Identity Domains and it can be used for SSO for IaaS,PaaS and SaaS.
+
+OCI IAM, IDCS, Identity Domain에 대해서는 다음 블로그 포스트를 참고 바랍니다.  
+[OCI IAM Identity Domain 에 대해 알아보기](https://the-team-oasis.github.io/getting-started/oci-iam-identity-domain/)
 
 ### MFA(Multi-Fcator Authentication) 정책
 * IAM의 경우, 
@@ -83,12 +86,12 @@ OCI에서 MFA는 다음과 같은 세 가지 오라클 제품에서 사용할 �
 
 > 이번에는 구글 인증기를 기반으로 테스트 되었습니다.
   
-## Old OCI IAM(Just for local OCI Users)
-로그인을 할때, IAM을 통해서 로그인 할 경우 아래 화면과 같으며, MFA 설정 방법에 대해서 설명합니다.
+## OCI IAM을 사용하여 로그인 하는 경우
+로그인을 할때, IAM을 통해서 로그인 할 경우는 아래 화면과 같이 Direct Sign-In으로 로그인 하며, 이 경우의 MFA 설정 방법에 대해서 설명합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230126-e6m.png)
 
-1) 로그인 후  Menu → Identity&Security →Identity ->Users 이동합니다.
+1) 로그인 후  Menu → Identity&Security →Identity → Users 이동합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230126-edb.png)
 
@@ -110,12 +113,12 @@ MFA 활성화 하기 위해서 사용자의 상세정보를 확인 합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230126-ekh.png)
 
-## In IDCS. This is the recommended solution for SSO that works for IaaS,PaaS and SaaS.
-아래와 같이 로그인을 할때, 계정의 경우 Single Sign-On을 통해서 할 경우 MFA 설정 방법입니다.
+## IDCS를 사용하여 로그인 하는 경우
+아래와 같이 로그인을 할때, Single Sign-On을 통해서 할 경우 MFA 설정 방법입니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230126-e5i.png)
 
-1) 먼저, Menu →Identity and Security →Federation → Click on OracleIdentityCloudService 이동합니다. 
+1) 먼저, Menu → Identity and Security → Federation → Click on OracleIdentityCloudService 이동합니다. 
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-c69.png)
 
@@ -130,30 +133,26 @@ MFA 활성화 하기 위해서 사용자의 상세정보를 확인 합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cbm.png)
 
-
-
 4) MFA 사용할 그룹을 만들기 위해서 그룹에서 새로운 그룹을 생성합니다. & 생성된 그룹에 MFA 인증 할 사용자를 선택 후 저장합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-ce7.png)
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cg0.png)
 
-
-
-7) Security →Sign-On Policies 클릭 후 "Default Sign-On Policy"를 편집합니다.
+5) Security →Sign-On Policies 클릭 후 "Default Sign-On Policy"를 편집합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-chu.png)
 
-8) "Single-On Rules" 탭에서 새로운 룰을 등록합니다. 
+6) "Single-On Rules" 탭에서 새로운 룰을 등록합니다. 
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cl1.png)
 
-13) 룰이 등록된 이후 MFA를 우선순위를 높이기 위해서 드래그 앤 드랍을 통해서 우선순위 변경을 합니다.(가장 높은 순위로 변경합니다.)
+7) 룰이 등록된 이후 MFA를 우선순위를 높이기 위해서 드래그 앤 드랍을 통해서 우선순위 변경을 합니다.(가장 높은 순위로 변경합니다.)
 > 우선순위가 "MFA" , "Default Sign-On Rule" 순서로 드래그 앤 드랍으로 변경합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-cn8.png)
 
-14) 로그아웃 후 다시 로그인을 합니다:
+8) 로그아웃 후 다시 로그인을 합니다:
 
 MFA 인증 후 처음 로그인 하면, 초기 보안 설정을 위한 화면이 진행됩니다.
 
@@ -170,17 +169,14 @@ MFA 인증 후 처음 로그인 하면, 초기 보안 설정을 위한 화면이
 
 이후 validation 확인을 위한 인증코드 입력 후 정상적인 로그인이 진행됩니다.
 
+## Identity Domain (New IAM)으로 로그인 하는 경우
+새로운 도메인 기반의 로그인 정책 방식을 사용하는 경우로, 다음과 같이 설정합니다.
 
-
-
-## In the new Identity Domains
-새로운 도메인 기반의 로그인 정책 방식의 경우 아래와 같이 설정이 필요합니다.
-
-아래 화면은 도메인이 보여지는 로그인 방식의 경우 예시입니다.
+아래 화면의 경우 Identity Domain 기반으로 로그인 하는 화면 예시입니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230126-e88.png)
 
-로그인 후 Identity & Security -> Domains 클릭합니다.
+로그인 후 Identity & Security → Domains 클릭합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-blj.png)
 
@@ -188,15 +184,15 @@ MFA 적용할 도메인을 선택 합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-bo1.png)
 
-Domains -> Security 클릭합니다.
+Domains → Security 클릭합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-bp8.png)
 
-Security -> MFA 클릭 후 아래 화면과 같이 설정 합니다.
+Security → MFA 클릭 후 아래 화면과 같이 설정 합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-bqi.png)
 
-MFA를 사용할 그룹을 만듭니다. Groups -> Create group 이동합니다.
+MFA를 사용할 그룹을 만듭니다. Groups → Create group 이동합니다.
 
 > 예시에서 MFA 그룹을 "ORACLE" 로 만들었습니다. & 만들어진 그룹에 MFA 사용할 사용자를 등록해 줍니다.
 
@@ -204,7 +200,7 @@ MFA를 사용할 그룹을 만듭니다. Groups -> Create group 이동합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-btc.png)
 
-Security -> Sign-on Policies 이동 후 "Default Sign-On Policy" 클릭합니다.
+Security → Sign-on Policies 이동 후 "Default Sign-On Policy" 클릭합니다.
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-bv4.png)
 
@@ -222,12 +218,9 @@ Security -> Sign-on Policies 이동 후 "Default Sign-On Policy" 클릭합니다
 
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-c40.png)
 
-
-
 ## SMS 이용시 가격
 SMS 메시지를 이용할 경우, 최초 1,000건 무료이고 그 이후 1건에 $ 0.03 비용이 발생합니다.
 ![](/assets/img/infrastructure/2023/mfa/SCR-20230127-etx.png)
-
 
 ## 참고사항
 <br>**사용자 추가 및 Identity Domain 관련 자세한 내용은 아래 포스팅을 참고해주세요.**
