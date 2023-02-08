@@ -6,13 +6,13 @@ layout: page-fullwidth
 subheadline: "Release Notes 2022"
 title: "12월 OCI Infrastructure 업데이트 소식"
 teaser: "2022년 12월 OCI Infrastructure 업데이트 소식입니다."
-author: ks.kim
+author: kskim
 breadcrumb: true
 categories:
 - release-notes-2022-infrastructure
 tags:
 - oci-release-notes-2022
-- Dev-2022
+- Dec-2022
 - Infrastructure
 
 #
