@@ -8,7 +8,7 @@ layout: page-fullwidth
 #
 subheadline: "Networking"
 title: "Web Application Acceleration (WAA) 사용하여 응답속도 향상"
-author: "ks.kim"
+author: "kskim"
 breadcrumb: true
 categories:
   - network 

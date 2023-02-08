@@ -9,7 +9,7 @@ layout: page-fullwidth
 subheadline: "Compute"
 title: "Compute 부트볼륨 사이즈 업 이후 재설정"
 teaser: "Compute 부트볼륨 사이즈 업 이후 설정하는 방법에 대해서 배워보자."
-author: "ks.kim"
+author: "kskim"
 breadcrumb: true
 categories:
   - infrastructure 
