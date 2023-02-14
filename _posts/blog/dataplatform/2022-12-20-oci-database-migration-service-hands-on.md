@@ -267,7 +267,9 @@ SOURCE DB 와 TARGET DB 에 Migration 을 수행하기 위한 설정을 수행�
 
     ![Putty](/assets/img/dataplatform/2022/migration/26.dbhost-sqlplus-show-pdb.png)
 
-- SOURCE DB 와 TARGET DB 의 PDB로 접속하여 앞단계에서 생성한 SRC_OCIGGLL 스키마에 seed data 가 존재하는지 확인합니다. 
+- SOURCE DB 와 TARGET DB 의 PDB로 접속하여 앞단계에서 생성한 SRC_OCIGGLL 스키마에 seed data 가 존재하는지 확인합니다.
+(* SOURCE DB 가 non cdb 환경이라고 한다면 alter session 으로 pdb 접속하는 쿼리를 실행하지 않음)
+
   ```
     SQL> alter session set container=PDB1;
     SQL> select count(*) from SRC_OCIGGLL.SRC_CITY;
@@ -290,7 +292,19 @@ SOURCE DB 와 TARGET DB 에 Migration 을 수행하기 위한 설정을 수행�
     grant dba to ggadmin container=current;
     exec dbms_goldengate_auth.grant_admin_privilege('ggadmin');
   ```
-    ![Putty](/assets/img/dataplatform/2022/migration/28.dbhost-sqlplus-source-db-setting.png)
+ - SOURCE DB 가 non-cdb 기반의 DATABASE 라고 한다면 위의 쿼리대신 아래의 쿼리로 대신 ggadmin 사용자를 생성해 줍니다.
+
+ ```
+   create tablespace GG_DATA datafile 'ggdata01.dbf' size 100m autoextend on next 100m;
+   create user ggadmin identified by "password"; 
+   grant create session to ggadmin;
+   grant alter any table to ggadmin;
+   grant resource to ggadmin;
+   grant dba to ggadmin;
+   exec dbms_goldengate_auth.grant_admin_privilege('ggadmin');
+  ```
+  
+![Putty](/assets/img/dataplatform/2022/migration/28.dbhost-sqlplus-source-db-setting.png)
 
 
 - SOURCE DB 에 접속된 SQLPLUS Command 에서 CDB 에 접속하여 DMS Migration 을 위해 필요한 DB 사용자인 c##ggadmin 사용자를 아래와 같이 생성하고 권한을 부여해 줍니다. 더불어, 제일 마지막 줄의 global_names 파라미터도 false 로 세팅해 줍니다. (※ "password" 는 사용할 Password 로 대체 필요)
@@ -301,7 +315,10 @@ SOURCE DB 와 TARGET DB 에 Migration 을 수행하기 위한 설정을 수행�
     alter system set streams_pool_size=2G;
     alter database force logging;
     alter database add supplemental log data;
-    archive log list;
+    alter system set global_names=false;
+    
+    -- SOUCRCE DB 가 non-cdb 환경이라면 아래의 절차를 생략합니다.
+
     create tablespace GG_DATA datafile '+DATA' size 100m autoextend on next 100m;
     create user c##ggadmin identified by "password" container=all default tablespace GG_DATA temporary tablespace temp;
     grant alter system to c##ggadmin container=all;
@@ -310,7 +327,7 @@ SOURCE DB 와 TARGET DB 에 Migration 을 수행하기 위한 설정을 수행�
     grant alter any table to c##ggadmin container=all;
     grant resource to c##ggadmin container=all;
     exec dbms_goldengate_auth.grant_admin_privilege('c##ggadmin',container=>'all');
-    alter system set global_names=false;
+   
   ```
 
     ![Putty](/assets/img/dataplatform/2022/migration/29.dbhost-sqlplus-source-db-setting-2.png)
@@ -332,7 +349,7 @@ SOURCE DB 와 TARGET DB 에 Migration 을 수행하기 위한 설정을 수행�
 - TARGET DB 에는 추가적으로 Vault 환경에서 GoldenGate 를 구성할 수 있는 권한을 부여해 줍니다.
 
   ```
-    grant dv_glodengate_admin, dv_goldengate_redo_access to ggadmin container=current;
+    grant dv_goldengate_admin, dv_goldengate_redo_access to ggadmin container=current;
   ```
     ![Putty](/assets/img/dataplatform/2022/migration/31.dbhost-sqlplus-target-db-setting-2.png)
 
