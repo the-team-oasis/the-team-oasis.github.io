@@ -74,13 +74,21 @@ OCI의 컴퓨트 리소스를 관리할 수 있는 서비스인 인스턴스 구
    * 기본 VNIC (VCN 선택) : **vcn-oci-basic**
    * 기본 VNIC (Subnet 선택) : **공용 서브넷-vcn-oci-basic**
    ![](images/oci-compute-create-instance-pool-2.png " ")
-6. 로드 밸런서 연결을 선택하여 <mark>Lab 3</mark>에서 생성한 로드 밸런서를 연결합니다.
-   * 로드 밸런서 유형 : **로드 밸런서**
-   * [oci-basic 구획]의 로드 밸런서 : **lb\_for\_demo**
-   * 백엔드 집합 : **bs\_lb\_2022-0906-1452** / 각자 생성되어 있는 백엔드 집합을 선택합니다.
-   * 포트 : **80**
-   * VNIC : **기본 VNIC**
-   ![](images/oci-compute-create-instance-pool-3.png " ")
+6. 로드 밸런서 연결을 선택하여 <mark>Lab 2</mark>에서 생성한 로드 밸런서를 연결합니다. **Lab 2** 에서 네트워크 로드밸런서를 생성한 경우 "네트워크 로드 밸런서" 유형을 선택합니다.
+   - **(애플리케이션 로드 밸런서 연결) 로드 밸런서 유형**
+      * 로드 밸런서 유형 : **로드 밸런서**
+      * [oci-basic 구획]의 로드 밸런서 : **lb\_for\_demo**
+      * 백엔드 집합 : **bs\_lb\_2022-0906-1452** / 각자 생성되어 있는 백엔드 집합을 선택합니다.
+      * 포트 : **80**
+      * VNIC : **기본 VNIC**
+      ![](images/oci-compute-create-instance-pool-3.png " ")
+   - **(네트워크 로드 밸런서 연결) 로드 밸런서 유형**
+      * 로드 밸런서 유형 : **네트워크 로드 밸런서**
+      * [oci-basic 구획]의 로드 밸런서 : **nlb\_for\_demo**
+      * 백엔드 집합 : **backendsets\_nlb\_demo** / 각자 생성되어 있는 백엔드 집합을 선택합니다.
+      * 포트 : **Any**
+      * VNIC : **기본 VNIC**
+        ![](images/oci-compute-create-instance-pool-3-1.png " ")
 7. 입력 및 선택한 정보 확인 후 "생성" 버튼을 클릭하여 인스턴스 풀을 생성합니다.
    ![](images/oci-compute-create-instance-pool-4.png " ")
 8. 인스턴스 풀이 프로비전 완료되면 자동으로 동일한 구성의 인스턴스가 함께 프로비전 됩니다.

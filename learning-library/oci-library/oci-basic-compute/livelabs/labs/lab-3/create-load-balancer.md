@@ -60,5 +60,47 @@ OCI에서는 애플리케이션 로드 밸런서와 네트워크 로드 밸런�
     ![Load Balancer Create - 1](images/oci-networking-load-balancer-create-12.png " ")
 
 
+## Task 2: OCI Network Load Balancer 생성 (Option)
+Application Load Balancer대신 Network Load Balancer를 생성하여 실습을 할 수 있습니다.
+Network Load Balancer는 OCI 에서 무료로 사용 가능하며, TCP 또는 UDP 리스너를 구성할 수 있습니다.
+
+1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **네트워킹(Networking)**을 선택한 후 **로드 밸런서(Load Balancer)**를 클릭합니다.
+   ![Load Balancer Menu](images/oci-networking-load-balancer.png " ")
+2. 이동한 화면에서 현재 구획을 확인 후 **로드 밸런서 생성** 버튼을 클릭합니다.
+   ![Load Balancer Create - 1](images/oci-networking-load-balancer-create-1.png " ")
+3. 로드 밸런서 유형 선택 화면에서 상단의 Layer-4 **네트워크 로드 밸런서**를 선택 후 **로드 밸런서 생성** 버튼을 클릭합니다.
+4. 로드 밸런서 생성 화면에서 아래와 같이 입력 및 선택 합니다.
+    - 로드 밸런서 이름: **nlb\_for\_demo**
+    - 가시성 유형 선택: **공용**
+    - 공용 IP 주소 지정 : **임시 IP 주소** / 예약된 IP 주소를 사용하려면 사전에 예약된 IP 생성 필요
+      ![Load Balancer Create - 3](images/oci-networking-nlb-create-1.png " ")
+5. 네트워킹 선택에서 아래와 같이 선택 합니다.
+    - 가상 클라우드 네트워크: **vcn-oci-basic**
+    - 서브넷 선택: **공용 서브넷-vcn-oci-basic**
+    - **다음** 버튼을 클릭합니다.
+      ![Load Balancer Create - 3](images/oci-networking-nlb-create-2.png " ")
+6. 리스너 구성 화면에서 아래와 같이 입력 및 선택 합니다.
+    - 리스너 이름: **listener\_nlb\_demo**
+    - 리스너가 처리하는 트래픽의 유형 지정: **UDP/TCP**
+    - 송신 트래픽 포트: **포트사용** / 별도의 포트 지정없이 Client에서 요청한 트래픽을 백엔드로 전달합니다.
+    - **다음** 버튼을 클릭합니다.
+      ![Load Balancer Create - 3](images/oci-networking-nlb-create-3.png " ")
+7. 백엔드 선택 단계에서 아래와 같이 입력 및 선택합니다.
+    - 백엔드 집합 이름 : **backendset\_nlb\_demo**
+    - 백엔드 서버 선택 : **백엔드 추가** 버튼을 클릭하여 앞 단계에서 생성한 인스턴스를 추가 합니다.
+      ![Load Balancer Create - 3](images/oci-networking-nlb-create-4.png " ")
+8. 건전성 검사 정책 지정
+    - 건전성 검사 정책은 TCP 프로토콜로 80 포트를 확인하도록 구성 합니다.
+    - 프로토콜 : **TCP**
+    - 포트 : **80**
+    - 나머지 항목은 기본값을 유지하고 **다음** 버튼을 클릭합니다.
+      ![Load Balancer Create - 3](images/oci-networking-nlb-create-5.png " ")
+9. 입력한 내용을 검토 후 **네트워크 로드 밸런서 생성** 버튼을 클릭하여 리소스를 생성합니다.
+   ![Load Balancer Create - 3](images/oci-networking-nlb-create-6.png " ")
+
+
+
+
+
 
 [다음 랩으로 이동](#next)
