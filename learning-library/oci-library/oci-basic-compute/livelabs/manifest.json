@@ -36,6 +36,10 @@
         {
             "title": "Lab 6 : Oracle Function 서비스 간단 실습 (Optional)",
             "filename": "labs/lab-7/create-oracle-function.md"
+        },
+        {
+            "title": "Lab 7 : OCI MySQL Database Servie 간단 실습 (Optional)",
+            "filename": "labs/lab-mds/create-mds.md"
         }
     ]
 }

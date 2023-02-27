@@ -76,7 +76,9 @@
    ![VCN Create Review Screen](images/oci-vcn-create-4.png " ")
    ![VCN Create Complete Screen](images/oci-vcn-create-5.png " ")
 
-### Oracle Database (DBCS) 생성 (옵션)
+## Task 3: Oracle Database (DBCS) 준비하기 (옵션)
+
+### Oracle Database (DBCS) 생성
 
 1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **Oracle Database**을 선택한 후 **Oracle 기본 위치 데이터베이스(VM,BM)**를 클릭합니다.
 
@@ -140,5 +142,32 @@
 
 12. DB System이 프로비전되는 동안 다른 실습을 진행합니다.
     ![Oracle DBCS Create #10](images/oci-dbcs-create-10.png " ")
+
+## Task 4: OCI MySQL Database Service 준비하기 (옵션)
+
+1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **데이터베이스**를 선택한 후 **MySQL** , **DB 시스템**을 클릭합니다.
+   ![OCI MDS Create](images/create-mds-1.png " ")
+2. **"DB 시스템 생성"** 버튼을 클릭합니다.
+   ![OCI MDS Create](images/create-mds-2.png " ")
+3. DB시스템 생성 화면에서 아래와 같이 입력 및 선택 합니다.
+   - DB 시스템 타입 : **개발 또는 테스트**
+   - DB 시스템 정보 제공
+     - 구획에 생성 : **각자 실습을 진행하고 있는 구획을 선택 합니다.**
+     - 이름 : **demo_mds**
+   - **독립형** 선택
+   - 관리자 인증서 생성 `(설정한 관리자 정보로 로그인해야 하기 때문에 별도로 정보 저장해야 함)`
+     - 사용자 이름 : admin
+     - 비밀번호 & 비밀번호 확인 : 각자 기억하기 쉬운 비밀번호를 지정합니다. / 실습에서는 **WelCome12##** 로 지정하여 진행하겠습니다.
+   ![OCI MDS Create](images/create-mds-3.png " ")
+4. 네트워킹 구성
+   - 가상 클라우드 네트워크 : 기본 인프라 설정 시 생성한 VCN을 지정합니다.
+   - 서브넷 : VCN에서 Private 서브넷을 지정합니다.
+   - 배치구성 : 기본값
+   - 하드웨어 구성 : 기본값 **최소 사양인 E4.1.8GB을 선택하여 실습을 진행합니다.**
+   - 백업 계획 구성 : 기본값
+   - **"생성"** 버튼을 클릭하여 MDS를 생성합니다. (약 15분~20분 소요됨)
+   
+   ![OCI MDS Create](images/create-mds-4.png " ")
+   ![OCI MDS Create](images/create-mds-5.png " ")
 
 [다음 랩으로 이동](#next)
