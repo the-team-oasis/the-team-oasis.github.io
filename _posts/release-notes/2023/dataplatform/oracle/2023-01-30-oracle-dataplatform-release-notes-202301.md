@@ -82,6 +82,13 @@ header: no
     - Allow group DB-MGMT-ADMIN to read dbmgmt-work-requests in tenancy
     - Allow group DB-MGMT-ADMIN to manage dbmgmt-family in tenancy
 
+* 자동 Policy 생성 화면
+
+![Database Management](/assets/img/dataplatform/2023/10_oci_database_management_policy.png)
+
+![Database Management](/assets/img/dataplatform/2023/11_oci_database_management_policy_autogenerate.png)
+
+
 <br>
 
 
