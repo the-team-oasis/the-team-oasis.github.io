@@ -147,11 +147,3 @@ OCI DevOps 서비스의 Deployment Pipeline에서 이제 Shell Stage를 통해 �
 * 배포 실행중에 특정 파이프라인 변수를 참고하거나 파이프라인 파라미터나 변수를 변경하여 실행할 수 있습니다.
 * 운영 환경에 배포하기 전에 아티팩트에 대한 통합 테스트를 수행할 수 있습니다.
 * DevOps 워크플로를 사용자 지정하여 실행할 수 있습니다. 예를 들어 파이프라인에서 리소스를 배포하기 전에 일부 리소스가 준비될 때까지 대기할 수 있도록 구성할 수 있습니다.
-
-## Oracle Visual Builder Studio is now available
-* **Services:** Visual Builder Studio
-* **Release Date:** Feb. 14, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/144265b4-da13-46bf-8f5b-4e79332671dc/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/144265b4-da13-46bf-8f5b-4e79332671dc/){:target="_blank" rel="noopener"}
-
-### 서비스 소개
-OCI Classic에서 제공되던 Visual Builder Studio 
