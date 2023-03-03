@@ -95,7 +95,7 @@ header: no
 
 ---
 
-## Logging Analytics: OCI Search with OpenSearch now supports the OpenSearch Index State Management plugin
+## OCI Search with OpenSearch now supports the OpenSearch Index State Management plugin
 * **Services:** Search Service with OpenSearch
 * **Release Date:** Jan. 12, 2023
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/Content/search-opensearch/Tasks/ociopensearchindexstatemanagement.htm](https://docs.oracle.com/en-us/iaas/Content/search-opensearch/Tasks/ociopensearchindexstatemanagement.htm){:target="_blank" rel="noopener"}
