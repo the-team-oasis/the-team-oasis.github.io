@@ -85,7 +85,7 @@ Extract Process 가 동작을 하면 Trail File 이 생성되며  생성된 Trai
   아래 화면처럼 Operation 이름과 Purge 할 Trail File을 명기하여 "+" 를 클릭하여 추가합니다.
   - Operation Name : E1TrailPurge
   - Trail : E1
-  - Keep Rule : Days : 1
+  - Keep Rule : Days : 1 (최소 하루동안 파일 유지)
   - Purge Frequency : Days : 1 (하루 한번씩 수행)
   
 ![GGADMIN](/assets/img/dataplatform/2023/goldengate/07_oci_goldengate_trail_file_purge_02.png)
