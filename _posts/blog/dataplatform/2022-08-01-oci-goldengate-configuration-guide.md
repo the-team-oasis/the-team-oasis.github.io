@@ -443,7 +443,7 @@ Capture / Replication 프로세스 설정을 하기 위해서는 TARGET DB 에 C
   ![CHECKPOINT CREATE](/assets/img/dataplatform/2022/goldengate/45.oci-goldengate-checkpoint-create.png)
 
 
-- Checkpoint Table 입력창에 "SRCMIRROR_OCIGGLL"."CEHCKTABLE" 을 입력 후 Submit 버튼을 클릭합니다.
+- Checkpoint Table 입력창에 "SRCMIRROR_OCIGGLL"."CHECKTABLE" 을 입력 후 Submit 버튼을 클릭합니다.
 
   ![CHECKPOINT CREATE-2](/assets/img/dataplatform/2022/goldengate/46.oci-goldengate-checkpoint-create-2.png)
 
