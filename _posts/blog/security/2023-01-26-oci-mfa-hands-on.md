@@ -9,7 +9,7 @@ teaser: "OCI의 MFA 방법을 설명합니다."
 author: kisu.kim
 breadcrumb: true
 categories:
-  - infrastructure
+  - security
 tags:
   - [oci, mfa]
 #
@@ -75,12 +75,12 @@ OCI IAM, IDCS, Identity Domain에 대해서는 다음 블로그 포스트를 참
 모바일 인증기의 경우, 오라클에서 제공하는 인증기와 구글 인증기가 주로 사용이 됩니다. 오라클 인증기의 경우 OCI 전용으로 사용되며, 인증시 발생되는 코드를 직접 입력하지 않고 푸쉬를 통해서 인증기의 Access, Deny 으로 접속이 가능하며, 오라클 이외의 인증기는 발생되는 OTA 코드를 직접 입력해야합니다.
 
 
-![](/assets/img/infrastructure/2023/mfa/google otp.png)
+![](/assets/img/infrastructure/2023/mfa/google%20otp.png)
 
 - [IOS - Google Authenticator](https://apps.apple.com/kr/app/google-authenticator/id388497605)
 - [Goole - Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ko&gl=US)
 
-![](/assets/img/infrastructure/2023/mfa/oracle ota.png)
+![](/assets/img/infrastructure/2023/mfa/oracle%20ota.png)
 - [IOS - Oracle Mobile Authenticator](https://apps.apple.com/kr/app/oracle-mobile-authenticator/id835904829)
 - [Google - Oracle Mobile Authenticator](https://play.google.com/store/apps/details?id=oracle.idm.mobile.authenticator&hl=ko&gl=US)
 
