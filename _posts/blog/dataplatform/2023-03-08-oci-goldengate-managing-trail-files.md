@@ -104,7 +104,7 @@ Extract Process 가 동작을 하면 Trail File 이 생성되며  생성된 Trai
 ![GGADMIN](/assets/img/dataplatform/2023/goldengate/09_oci_goldengate_trail_file_purge_task_result.png)
 
 <br>
-이상 OCI GoldenGate 에서는 자동으로 Trail File 을 Purge 하는 기능에 대해서 알아봤습니다. OCI GoldenGate 에서는 기본적으로 생성되는 Trail File 을 삭제하지 않기 때문에 Purge TASK 를 정의하여 정리하는 작업을 만들어 주어야 합니다. 이러한 Purge 기능을 통해 GoldeGate 서버의 Disk 가 모두 소진되는 오류를 사전에 방지하실 수 있습니다.
+이상 OCI GoldenGate 에서는 자동으로 Trail File 을 Purge 하는 기능에 대해서 알아봤습니다. OCI GoldenGate 에서는 기본적으로 생성되는 Trail File 을 삭제하지 않기 때문에 Purge TASK 를 정의하여 정리하는 작업을 만들어 주어야 합니다. 이러한 Purge 기능을 통해 GoldenGate 서버의 Disk 가 모두 소진되는 오류를 사전에 방지하실 수 있습니다.
 
 <br>
 
