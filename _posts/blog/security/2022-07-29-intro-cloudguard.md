@@ -37,15 +37,15 @@ Cloud Guard를 사용하기 위해서는 우선 아래 구성과 4개의 용어�
 Cloud Guard에서 모니터링 할 범위를 TARGET이라고 부릅니다. Oracle Cloud에서는 Compartment라고 부르는 여러 OCI의 리소스에 대한 그룹핑 및 접근관리등을 할 수있는 논리적인 개념의 구역이 존재하는데, 보통 Cloud Guard에서의 TARGET으로 특정 Compartment를 지정합니다.
 
 #### DETECTORS
-Detector는 TARGET의 특정 리소스 및 활동을 감지하기 위한 규칙의 모음(여기서는 이를 Recipe라고 부른다)이라고 보면 됩니다. Detector로 정의된 규칙에 의해 TARGET에서 발생할 수 있는 잠재적인 보안 문제를 감지하게 됩니다.
+Detector는 TARGET의 특정 리소스 및 활동을 감지하기 위한 규칙의 모음(여기서는 이를 Recipe라고 부릅니다.)이라고 보면 됩니다. Detector로 정의된 규칙에 의해 TARGET에서 발생할 수 있는 잠재적인 보안 문제를 감지하게 됩니다.
 
 Detector는 OCI에서 기본적으로 제공하는 Recipe인 Oracle-managed detector recipe가 있고, 사용자가 직접 정의할 수 있는 User-managed detector recipe가 있는데, 보통은 Oracle-managed detector recipe를 활용하고, 이를 클론하여 사용자가 원하는 방향으로 수정하여 사용하는 것이 일반적입니다.
 
-Detector는 두 가지 유형의 Recipe가 존재하는데, OCI 구성에 대한 보안 문제를 감지하는 Configuration Detector recipe가 있고, 보안 문제를 야기하는 특정 행위를 감지하는 Activity Detector recipe가 있습니다.
+Detector는 세 가지 유형의 Recipe가 제공되는데, OCI 구성에 대한 보안 문제를 감지하는 Configuration Detector recipe, 보안 문제를 야기하는 특정 행위를 감지하는 Activity Detector recipe, 보안 위협이 되는 활동을 감지하는 Threat Detector recipe가 있습니다.
 
-Configuration Detector 예로 "Object Storage 의 Public Bucket 생성 불허용"과 같은 케이스가 있을 수 있습니다.
-
-Activity Detector의 경우에는 "Database 인스턴스 삭제 불허용"을 예로 들 수 있습니다.
+Configuration Detector Recipe의 예로, "Object Storage 의 Public Bucket 생성 불허용"과 같은 경우가 있습니다.  
+Activity Detector Recipe의 경우 "Database 인스턴스 삭제 불허용"이 하나의 예가 될 수 있습니다.  
+Threat Detector Recipe의 경우에는 특정 사용자 계정을 통해 보안 위협이 되는 행위를 할 수 있는 경우들이 있는데, 의심 스러운 IP 혹은 새로운 지리적 위치에서의 접속 및 행위, 일반적인 행위보다 과도한 프로비저닝 활동을 하는 경우, 특정 계정에 대한 무차별 암호 대입 기술 사용과 같은 경우들이 예가 될 수 있습니다.
 
 #### PROBLEM
 Detector에서 감지된 결과, 즉 보안 문제들을 Problem이라고 합니다. Problem 목록을 통해서 어떤 Problem들이 발생했는지 확인을 할 수 있으며, Problem 유형에 따라 관리자가 자동 혹은 수동으로 특정 액션을 수행할 수 있습니다.
@@ -106,39 +106,3 @@ Bucket의 Visibility가 다시 Private으로 변경된 것을 확인할 수 있�
 
 ### 참고
 * https://docs.oracle.com/en-us/iaas/cloud-guard/using/index.htm
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ![](/assets/img/security/2022/oci-policy-menu.png)
-2. 이동한 화면에서 "정책생성" 버튼을 클릭하여 정책 생성 화면으로 이동합니다.
-   ![](/assets/img/security/2022/oci-policy-create.png)
-3. 다음과 같이 입력 후 "**수동 편집기 표시**" 옵션을 활성화 합니다.
-   - 이름 : **billing-policy**
-   - 설명 : **빌링 메뉴 접근을 위한 정책 입니다.**
-   - 구획 : **전체 테넌시에 적용하기 위해서 root compartment에 정책을 생성합니다.**
-   ![](/assets/img/security/2022/oci-policy-billing-create.png)
-4. 수동 편집기에 아래와 같이 입력합니다.
-   - 특정 그룹에 대한 정책 생성 
-    ```
-    Allow group <group> to manage accountmanagement-family in tenancy
-    ```
-5. "**생성**" 버튼을 클릭하여 정책을 생성을 마무리 합니다.
-6. 정책을 생성한 그룹의 사용자로 로그인 후 적용 여부를 확인합니다.
