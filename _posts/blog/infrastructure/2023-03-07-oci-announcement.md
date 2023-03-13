@@ -38,6 +38,8 @@ header: no
 - 필터링 된 알림을 다른 사용자 그룹에 전달하는 기능이 추가되었습니다. 이는 모든 공지사항을 테넌트 관리자에게 전달한 기존 기능에서 변경된 것입니다. 
 - Notification 서비스의 통합을 통해 알림 유형, 지역, 서비스, 파티션 등의 알림 세부 정보를 기반으로 트리거되는 자동 워크플로를 정의할 수 있습니다.
 - 오라클 클라우드 인프라스트럭처 콘솔에서 존재하는 "공지사항"의 내용을 알려주는 기능을 합니다. 
+- 고객과 관련된 중단은 콘솔 알림을 통해 고객에게 전달됩니다. (고객이 사용하고 테넌트의 사용중인 서비스레벨에서 관계된 공고입니다.)
+- Oracle Cloud 인프라스트럭처 상태 대시보드에는 서비스 또는 지역 수준에서 서비스 중단이 표시됩니다. 고객과 관련된 중단은 콘솔 알림을 통해 고객에게 전달됩니다.
 
 ![](/assets/img/infrastructure/announcements/oci_announcement_arch.png)
 
@@ -75,7 +77,7 @@ header: no
   - 구획 : 구획의 경우 테넌시에서 만들어진 구획 (compartments) 선택 할 수 있습니다.
   - 플랫폼 : OCI 기준으로 IaaS, SaaS 이렇게 2가지로 서비스로 나뉘어 선택 할 수 있습니다.
   - 지역 : 테넌시를 구독하고 있는 Region 기준으로 공고를 받을 수 있습니다. 
-  - 리소스 OCI : 사용자가 OCI를 통해서 생성한 리소스 중에서 선택하여 공고를 받을 수 있습니다. 
+  - 리소스 OCID : 사용자가 OCI를 통해서 생성한 리소스 중에서 선택하여 공고를 받을 수 있습니다. 
   - 서비스 : OCI 서비스 기준으로 나뉘었으며, 종류는 아래와 같습니다. 
     - Java Managemnet Service
     - Oracle Analytics Cloud
@@ -152,13 +154,38 @@ header: no
     - Oracle Management Agent Cloud Service
     - Oracle MySQL Database Service
     - Oracle NoSQL Database Cloud Service
-- 표시 환결 설정 : 디스플레이되는 시간 설정
+- 표시 환경 설정 : 디스플레이되는 시간 설정
 
 ![](/assets/img/infrastructure/announcements/SCR-20230310-gbro.png)
 
+구독의 경우, 통지 토픽을 기존에 사용중이라면 기존 토픽을 사용하거나 새로 만들 수 있습니다.
+
 ![](/assets/img/infrastructure/announcements/SCR-20230310-gdas.png)
 
-- 구독이 완료된 이후 구독을 위한 테스트 메일이 발송되며, 수신된 메일을 클릭하면 활성화가 이루어집니다.
+신규 토픽 생성의 경우 아래와 같습니다. 
+- 신규 토픽의 경우, 아래의 정보를 입력합니다. 
+- 토픽 생성성할 구획 선택
+- 이름, 설명 입력 
+- 구독 프로토콜의 종류는 아래와 같습니다.
+  - 전자메일 
+  - HTTS 사용자정의 URL 
+  - Pagerduty
+  - Slack
+  - Function
+  - SMS
+
+![](/assets/img/infrastructure/announcements/SCR-20230310-nfai.png)
+
+기존 토픽 선택할 경우 아래와 같습니다. 
+- 기존 선택할 토픽에 맞는 구획을 선택하여 토픽을 선택합니다.
+
+![](/assets/img/infrastructure/announcements/SCR-20230310-ngst.png)
+
+구독이 완료되면 아래와 같이 활성화 상태가 나타납니다. 
+
+![](/assets/img/infrastructure/announcements/SCR-20230310-nhfr.png)
+
+구독이 완료된 이후 구독을 위한 validation 메일이 발송되며, 수신된 메일을 클릭하면 활성화가 이루어집니다.
 
 ![](/assets/img/infrastructure/announcements/SCR-20230310-gsiq.png)
 
