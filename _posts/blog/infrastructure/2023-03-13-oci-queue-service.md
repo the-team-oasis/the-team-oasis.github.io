@@ -4,14 +4,14 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Application Integration"
-title: "OCI에서 OCI queue 사용하기"
-teaser: "OCI에서 OCI queue 관련 정보에 대해서 알아봅니다.."
+title: "OCI에서 Queue Service 사용하기"
+teaser: "OCI에서 Queue Service 관련 정보에 대해서 알아봅니다.."
 author: kisu.kim
 breadcrumb: true
 categories:
-  - Infrastructure
+  - infrastructure
 tags:
-  - [oci, status]
+  - [oci, queue]
 #
 # Styling
 #
