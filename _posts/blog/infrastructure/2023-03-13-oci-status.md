@@ -9,7 +9,7 @@ teaser: "OCI에서 OCI Status 관련 정보에 대해서 알아봅니다.."
 author: kisu.kim
 breadcrumb: true
 categories:
-  - Governance
+  - Infrastructure
 tags:
   - [oci, status]
 #
@@ -74,3 +74,23 @@ header: no
 - 프로그램적으로 구현하는 방법 (JSon 방식)
   - 요약 보고서: 모든 서비스 및 지역의 현재 상태를 표시합니다.(https://ocistatus.oraclecloud.com/api/v2/components.json)
   - 상태 보고서: 모든 시스템에 대한 개괄적인 상태를 표시합니다. (https://ocistatus.oraclecloud.com/api/v2/status.json)
+
+- 앱스토어에서 "Feedly" 검색 후 설치(모바일)
+
+![](/assets/img/infrastructure/ocistatus/rss.png){:width="55%":align="center"}
+
+- 앱스토어에서 "Feedly" 검색 후 설치(chrome 브라우저 확장) 합니다.
+
+![](/assets/img/infrastructure/ocistatus/SCR-20230315-kmjq.png)
+
+크롬 확장 프로그램에서 Chrome 웹스토어 열기 및 추가 하도록 합니다.
+
+![](/assets/img/infrastructure/ocistatus/SCR-20230315-kmnf.png)
+
+추가 버튼 클릭해서 RSS URL 입력 합니다.
+
+![](/assets/img/infrastructure/ocistatus/SCR-20230315-kncu.png){:width="60%":align="center"}
+
+OCI Status를 "Follow" 해서 확장 프로그램에 추가 하도록 합니다.
+
+![](/assets/img/infrastructure/ocistatus/SCR-20230315-knim.png)

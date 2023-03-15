@@ -9,7 +9,7 @@ teaser: "OCI에서 OCI queue 관련 정보에 대해서 알아봅니다.."
 author: kisu.kim
 breadcrumb: true
 categories:
-  - Governance
+  - Infrastructure
 tags:
   - [oci, status]
 #
