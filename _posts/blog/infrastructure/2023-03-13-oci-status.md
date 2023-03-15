@@ -34,14 +34,11 @@ header: no
 </div>
 
 ### OCI Status 소개
-OCI STAUS는 지역 및 OCI 서비스 레벨의 상태를 대쉬보드를 통해서 상태를 확인 할 수 있으며, RSS 리더를 통해서 Feed를 확인 할 수 있습니다.  
-- OCI STATUS 대규모의 장애(전체 지역 또는 서비스가 중단되는 경우)에 사용되며, 사용자가 정해지지 않은 공개 채널입니다. 
-- 매우 큰 규모의 장애가 발생했을때만 사용되므로 전체 이벤트(장애) 증 극히 일부만 OCI STATUS 에 게시됩니다.
-- 장애의 히스토리 내역도 확인이 가능합니다.
-
-상태 대시보드에는 영역 내 각 개별 서비스의 상태가 표시됩니다. 
+OCI Status는 OCI 서비스의 상태와 가용성에 대한 실시간 정보를 제공하는 서비스입니다. 
+이를 통해 OCI 고객은 OCI 서비스의 상태를 모니터링하고 서비스 중단이나 성능 문제에 대한 최신 정보를 얻을 수 있습니다. 
+OCI Status는 각 OCI 서비스의 현재 상태는 물론 과거 데이터와 서비스 가용성에 대한 기타 세부 정보를 표시하는 대시보드를 제공합니다.
 상태 대시보드 페이지는 5분마다 자동으로 새로 고쳐집니다. 
-영역 그룹의 상태를 보려면 대시보드 패널 상단의 해당 탭을 클릭합니다.
+
 
 ![](/assets/img/infrastructure/ocistatus/SCR-20230313-oitu.png)
 
@@ -67,30 +64,11 @@ OCI STAUS는 지역 및 OCI 서비스 레벨의 상태를 대쉬보드를 통해
 - 장애 원인(임시적)Preliminary Root Cause: 장애에 대한 임시적인 원인 혹은 최종 원인에 대한 요약입니다.
 
 ### OCI Status 구독 방법
-- RSS 구독 방법
-  - https://ocistatus.oci.oc.scloud 로 이동합니다. 
-  - 오른쪽 메뉴의 RSS 메뉴바를 클릭합니다. 
-  - RSS URL 링크를 복사한 후, RSS Reader 를 통해서 등록합니다.
+- RSS 구독 방법 (모바일 어플리케이션 , E-mail notifications) - (오라클에서 지원하는 서비스는 아닙니다.)
+  - https://ocistatus.oraclecloud.com 이동 후 오른쪽 상단에 RSS 버튼 클릭하여, URL을 확인합니다. 
+  - 모바일 RSS Feeds 툴의 종류에 따라서 사용 가능합니다. (Feedly, NewsBlur, Inoreader)
+  - Rss feed email notification 서비스가 있어 해당 Rss 내용을 E-mail로 전달받을 수 있습니다.  
+
 - 프로그램적으로 구현하는 방법 (JSon 방식)
   - 요약 보고서: 모든 서비스 및 지역의 현재 상태를 표시합니다.(https://ocistatus.oraclecloud.com/api/v2/components.json)
   - 상태 보고서: 모든 시스템에 대한 개괄적인 상태를 표시합니다. (https://ocistatus.oraclecloud.com/api/v2/status.json)
-
-- 앱스토어에서 "Feedly" 검색 후 설치(모바일)
-
-![](/assets/img/infrastructure/ocistatus/rss.png){:width="55%":align="center"}
-
-- 앱스토어에서 "Feedly" 검색 후 설치(chrome 브라우저 확장) 합니다.
-
-![](/assets/img/infrastructure/ocistatus/SCR-20230315-kmjq.png)
-
-크롬 확장 프로그램에서 Chrome 웹스토어 열기 및 추가 하도록 합니다.
-
-![](/assets/img/infrastructure/ocistatus/SCR-20230315-kmnf.png)
-
-추가 버튼 클릭해서 RSS URL 입력 합니다.
-
-![](/assets/img/infrastructure/ocistatus/SCR-20230315-kncu.png){:width="60%":align="center"}
-
-OCI Status를 "Follow" 해서 확장 프로그램에 추가 하도록 합니다.
-
-![](/assets/img/infrastructure/ocistatus/SCR-20230315-knim.png)
