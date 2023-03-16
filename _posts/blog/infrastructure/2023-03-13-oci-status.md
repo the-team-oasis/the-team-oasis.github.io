@@ -37,7 +37,7 @@ header: no
 OCI Status는 OCI 서비스의 상태와 가용성에 대한 실시간 정보를 제공하는 서비스입니다. 
 이를 통해 OCI 고객은 OCI 서비스의 상태를 모니터링하고 서비스 중단이나 성능 문제에 대한 최신 정보를 얻을 수 있습니다. 
 OCI Status는 각 OCI 서비스의 현재 상태는 물론 과거 데이터와 서비스 가용성에 대한 기타 세부 정보를 표시하는 대시보드를 제공합니다.
-상태 대시보드 페이지는 5분마다 자동으로 새로 고쳐집니다. 
+
 
 
 ![](/assets/img/infrastructure/ocistatus/SCR-20230313-oitu.png)
@@ -64,11 +64,17 @@ OCI Status는 각 OCI 서비스의 현재 상태는 물론 과거 데이터와 �
 - 장애 원인(임시적)Preliminary Root Cause: 장애에 대한 임시적인 원인 혹은 최종 원인에 대한 요약입니다.
 
 ### OCI Status 구독 방법
-- RSS 구독 방법 (모바일 어플리케이션 , E-mail notifications) - (오라클에서 지원하는 서비스는 아닙니다.)
-  - https://ocistatus.oraclecloud.com 이동 후 오른쪽 상단에 RSS 버튼 클릭하여, URL을 확인합니다. 
-  - 모바일 RSS Feeds 툴의 종류에 따라서 사용 가능합니다. (Feedly, NewsBlur, Inoreader)
-  - Rss feed email notification 서비스가 있어 해당 Rss 내용을 E-mail로 전달받을 수 있습니다.  
+- RSS 구독 방법 
+  - RSS 구독을 위해서 모바일 및 E-mail Notification 서비스등이 다양하게 존재하며, 오라클에서 제공하는 서비스는 아닙니다. 오라클에서는 RSS URL만 제공합니다.
+  - https://ocistatus.oraclecloud.com 이동 후 오른쪽 상단에 RSS 버튼 클릭하여, URL을 확인 할 수 있습니다.
+  
+- 모바일(아이폰,안드로이드) RSS Feeds 어플을 이용한 구독 방법
+  - (Feedly, NewsBlur, Inoreader 등)
+- E-mail 기반의 Notifications 서비스를 통한 구독 방법 
+  - (https://blogtrottr.com , https://feedrabbit.com 등)  
 
 - 프로그램적으로 구현하는 방법 (JSon 방식)
-  - 요약 보고서: 모든 서비스 및 지역의 현재 상태를 표시합니다.(https://ocistatus.oraclecloud.com/api/v2/components.json)
-  - 상태 보고서: 모든 시스템에 대한 개괄적인 상태를 표시합니다. (https://ocistatus.oraclecloud.com/api/v2/status.json)
+  - 요약 보고서: 모든 서비스 및 지역의 현재 상태를 표시합니다.
+    - (https://ocistatus.oraclecloud.com/api/v2/components.json)
+  - 상태 보고서: 모든 시스템에 대한 개괄적인 상태를 표시합니다.
+    - (https://ocistatus.oraclecloud.com/api/v2/status.json)
