@@ -4,9 +4,9 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Governance"
-title: "OCI에서 OCI Status 사용하기"
-teaser: "OCI에서 OCI Status 관련 정보에 대해서 알아봅니다.."
-author: kisu.kim
+title: "OCI Status 사용하기"
+teaser: "OCI Status 관련 정보에 대해서 알아봅니다."
+author: kskim
 breadcrumb: true
 categories:
   - infrastructure
