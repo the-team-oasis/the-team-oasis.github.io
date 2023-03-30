@@ -221,16 +221,7 @@ Jenkins 초기 화면에서 Admin 사용자를 생성합니다.
 
 ![](/assets/img/cloudnative-security/2022/weblogic_oke_18.png)
 
-파이프라인을 실행하기 전에 대부분의 파이프라인에서 Groovy Script를 활용하고 있기 때문에 Jenkins에서 Groovy Script를 사용하도록 허용해야 합니다. 먼저 Jenkins 관리 화면으로 이동합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_27.png)
-
-**In-process Script Approval**을 클릭합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_28.png)
-
-모든 스크립트를 **Approve** 합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_29.png)
-
-이제 다시 Jenkins 파이프라인 화면에서 **create doamin** 을 선택한 후 다음과 같이 입력 및 선택합니다.
+Jenkins 파이프라인 화면에서 **create doamin** 을 선택한 후 다음과 같이 입력 및 선택합니다.
 * **Domain_Name:** okedomain(특수문자 허용하지 않습니다. 특수 문자가 들어간 경우 파이프라인 실행 시 오류 발생합니다.)
 * **Base_Image:** Default
 * **Administration_Username:** weblogic
@@ -271,6 +262,16 @@ Admin 서버와 2개의 Managed Server가 동작하고 있는 것을 확인할 �
 
 * https://[External Load Balancer IP]/sample-app/
 ![](/assets/img/cloudnative-security/2022/weblogic_oke_31.png)
+
+### Jenkins에서 Groovy Script 사용 허용
+파이프라인을 다시 실행하려고 하면, 처음에 리스트가 보였던 선택박스에 아무것도 나오지 않는 것을 볼 수 있습니다. WebLogic for OKE를 위한 대부분의 Jenkins Pipeline에서 Groovy Script를 사용하고 있는데, 이 부분을 사용하도록 허용하지 않아서 나오는 현상입니다. Jenkins에서 Groovy Script를 사용하도록 허용하기 위해서 다음과 같이 Jenkins 관리 화면으로 이동합니다.
+![](/assets/img/cloudnative-security/2022/weblogic_oke_27.png)
+
+**In-process Script Approval**을 클릭합니다.
+![](/assets/img/cloudnative-security/2022/weblogic_oke_28.png)
+
+모든 스크립트를 **Approve** 합니다.
+![](/assets/img/cloudnative-security/2022/weblogic_oke_29.png)
 
 지금까지 OCI 마켓플레이스를 통해서 WebLogic for OKE를 프로비저닝해보고, 웹로직 도메인 생성, 샘플 애플리케이션 배포까지 해보았습니다. 도메인 자체를 컨테이너 이미지화 하여 관리하고, 배포/확장/패치등을 CI/CD 파이프라인으로 자동화도 할 수 있도록 지원합니다. 사실 근래에 많은 애플리케이션이 Kubernetes 환경에서 운영이 되고 있고, DevOps 자동화 환경도 이에 맞춰서 운영이 되는 추세이기 때문에, 이러한 경험을 그대로 WebLogic 기반의 Java EE 애플리케이션 운영에도 적용할 수도 있으며, Kubernetes 환경에서 Java EE 애플리케이션 뿐 아니라 다양한 언어로 개발된 애플리케이션과의 연계가 용이한 환경도 훨씬 효율적으로 구성 가능할 것으로 기대됩니다.
 

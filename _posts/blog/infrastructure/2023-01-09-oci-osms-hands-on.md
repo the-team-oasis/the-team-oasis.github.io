@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Compute"
 title: "Compute의 OS Management service 서비스 이용하기"
 teaser: "Compute의 OS Management service 설정하는 방법을 설명합니다."
-author: kisu.kim
+author: kskim
 breadcrumb: true
 categories:
   - infrastructure

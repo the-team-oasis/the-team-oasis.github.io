@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Compute"
 title: "Compute의 Custom Log 이용하기"
 teaser: "Compute의 Custom Log 이용하여 Log 연동하는 방법을 설명합니다."
-author: kisu.kim
+author: kskim
 breadcrumb: true
 categories:
   - infrastructure

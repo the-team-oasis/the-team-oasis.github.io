@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Governance"
 title: "OCI에서 Private DNS 사용하기"
 teaser: "OCI에서 VCN간 혹은 DNS 연동하는 방법에 대해서 알아봅시다."
-author: kisu.kim
+author: kskim
 breadcrumb: true
 categories:
   - infrastructure
