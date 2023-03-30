@@ -193,6 +193,17 @@ Network File Storage인 File System 설정, WebLogic Docker Image 저장소인 O
 ### WebLogic 도메인 생성 
 OKE Cluster에 WebLogic가 완료되었습니다. 이제 Jenkins를 활용하여 WebLogic Domain을 구성해 보도록 하겠습니다. Jenkins 서버는 Private Subnet에 구성되어 있기 때문에 Bastion 서버를 활용하여 터널링을 통해 접속해야 합니다. 먼저 SOCKS Proxy 구성을 다음과 같이 진행합니다. (아래는 MacOS에서 SOCKS Proxy 설정한 화면)
 
+1) Terminal에서 다음 명령어 실행
+```
+ssh -D <port_for_socks_proxy> -fCqN -i <path_to_private_key> opc@<bastion_public_ip>
+```
+
+아래는 예시입니다.
+```
+ssh -D 1088 -fCqN -i ~/.ssh/id_rsa opc@146.56.41.162
+```
+
+2) SOCKS Proxy 설정
 * **SOCKS Proxy Server:** localhost:1088
 
 ![](/assets/img/cloudnative-security/2022/weblogic_oke_16.png)
