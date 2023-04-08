@@ -33,15 +33,15 @@ header: no
 {:toc}
 </div>
 
-### OCI Oracle Linux 에서 X11 Forwarding 설정하기
+### OCI Oracle Linux 에서 X11-Forwarding 설정하기
 이번 블로그에서는 OCI 의 Oracle Linux 에서 Database Configuration Assistant (DBCA) 와 같은 GUI 기반의 프로그램들을 실행시킬 수 있도록 X11 Forwarding 을 MobaXterm Tool 을 이용하여 설정하는 방법을 알아봅니다.
 <br>
 
-### X11 Forwarding 이란?
+### X11-Forwarding 이란?
 원격에 있는 리눅스에 SSH로 접속해서 GUI 기반의 X11 어플리케이션을 실행하기 위한 기법을 말합니다. 접속되어 있는 클라이언트 윈도우에 나타나도록 하는 것으로 서버와 클라이언트간의 통신에는 ssh 프로토콜을 이용하여 중계를 하게 됩니다.
 
 ### STEP 1 : MobaXterm 설치하기
-X11 Forwarding 을 통해 GUI 기반의 어플리케이션을 원할하게 사용하기 위해 범용적으로 MobaXterm 이라는 Tool 을 많이 사용합니다.
+X11-Forwarding 을 통해 GUI 기반의 어플리케이션을 원할하게 사용하기 위해 범용적으로 MobaXterm 이라는 Tool 을 많이 사용합니다.
 MobaXterm 은 아래의 사이트에서 다운로드 받아 설치하실 수 있습니다.
 
 - [MobaXterm 다운로드 URL](https://mobaxterm.mobatek.net/download-home-edition.html){:target="_blank" rel="noopener"} (https://mobaxterm.mobatek.net/download-home-edition.html)
@@ -54,7 +54,7 @@ MobaXterm 은 아래의 사이트에서 다운로드 받아 설치하실 수 있
 ![MobaXterm](/assets/img/dataplatform/2023/oracle/02_mobaxterm_main_screen.png)
 
 ### STEP 2 : SSH 서비스 설정 변경 하기
-X11 Forwarding 이 가능하게 하기 위해서 ssh 데몬 서비스에 대한 설정을 변경해 줍니다.
+X11-Forwarding 이 가능하게 하기 위해서 ssh 데몬 서비스에 대한 설정을 변경해 줍니다.
 
 - MobaXterm 의 접속하고자 하는 호스트의 Edit Session 세팅에서 X11-Forwarding 이 체크되어 있는지 점검합니다.
 
