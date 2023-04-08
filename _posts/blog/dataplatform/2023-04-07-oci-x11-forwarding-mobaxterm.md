@@ -92,7 +92,7 @@ $ sudo systemctl restart sshd
 - 아래 명령을 입력하여 xauth, xterm, xclock 을 설치합니다.
 
 ```text
-$ sudo yum-y install xauth
+$ sudo yum -y install xauth
 $ sudo yum -y install xterm
 $ sudo yum -y install xclock
 ```
@@ -161,6 +161,8 @@ localhost:10.0
 ```
 ![Terminal](/assets/img/dataplatform/2023/oracle/14_xauthority_oracle_setting.png)
 
+### STEP 5 : Oracle 사용자로 GUI 프로그램 실행하기
+로
 - xclock 과 dbca 명령으로 GUI 프로그램이 실행되는지 확인합니다.
 
 ```text
