@@ -65,7 +65,7 @@ X11-Forwarding 이 가능하게 하기 위해서 ssh 데몬 서비스에 대한 
 ![Terminal](/assets/img/dataplatform/2023/oracle/05_mobaxterm_session_setting_02.png)
 
 
-- MobaXterm 의 ssh session 중에서 X11 Forwarding 을 구성할 터미널 세션에 opc user 로 접속합니다.
+- MobaXterm 의 ssh session 중에서 X11-Forwarding 을 구성할 터미널 세션에 opc user 로 접속합니다.
 
 ![Terminal](/assets/img/dataplatform/2023/oracle/03_mobaxterm_session_login.png)
 
@@ -163,12 +163,14 @@ localhost:10.0
 
 ### STEP 5 : Oracle 사용자로 GUI 프로그램 실행하기
 로
-- xclock 과 dbca 명령으로 GUI 프로그램이 실행되는지 확인합니다.
+- xclock 명령으로 GUI 프로그램이 실행되는지 확인합니다.
 
 ```text
 $ xclock
 ```
 ![Terminal](/assets/img/dataplatform/2023/oracle/15_oracle_xclock.png)
+
+- dbca 명령으로 GUI 프로그램이 실행되는지 확인합니다.
 
 ```text
 $ dbca
