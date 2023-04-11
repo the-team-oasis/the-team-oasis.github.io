@@ -74,7 +74,7 @@ Python 3.6.8
 ```
 <br>
 
-### Oracle Linux 8 환경
+### Oracle Linux 8 환경 (CentOS 8 호환)
 
 Oracle Linux 8 을 사용한다면 **dnf** 명령을 통해 OCI CLI 를 설치할 수 있습니다. 
  ```terminal
@@ -93,7 +93,7 @@ $ sudo dnf install python36-oci-cli
 $ sudo dnf remove python36-oci-cli
 ```
 
-### Oracle Linux 7 환경
+### Oracle Linux 7 환경 (CentOS 7 호환)
 
 Oracle Linux 7 을 사용한다면 **yum** 명령을 통해 OCI CLI 를 설치할 수 있습니다. 
  ```terminal
