@@ -125,7 +125,7 @@ $ sudo dnf remove python36-oci-cli
 
 - OCI CLI 설치 후 제대로 설치가 되었는지 OCI CLI 버전을 확인합니다.
 
- ```terminal
+```terminal
 $ oci -v
 3.23.2
 ```
@@ -144,6 +144,7 @@ CLI 를 사용하기 전에 먼저, 반드시 configuration 설정을 통해 필
 <br>
 
 - 다음 명령어을 통해 config 를 시작합니다.
+
 ```terminal
 $ oci setup config
 
