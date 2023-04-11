@@ -7,6 +7,7 @@ subheadline: "DataPlatform"
 title: "OCI Oracle Linux 에서 GUI 실행을 위한 X11-Forwarding 설정하기 (MobaXterm 사용)"
 teaser: "OCI 의 Oracle Linux 에서 Database Configuration Assistant (DBCA) 와 같은 GUI 기반의 프로그램들을 실행시킬 수 있도록 X11 Forwarding 을 MobaXterm Tool 을 이용하여 설정하는 방법을 알아봅니다."
 author: lim
+date: 2023-04-07 00:00:00
 breadcrumb: true
 categories:
   - dataplatform
