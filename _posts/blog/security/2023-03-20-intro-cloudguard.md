@@ -79,15 +79,9 @@ Configuration Detector Recipe는 글을 작성하는 현재 50개의 Rule을 제
 Responder Recipe는 글을 작성하는 현재 10개의 Rule을 제공하고 있습니다. 마찬가지로 클론을 하게 되면 사용자가 내용을 수정할 수 있습니다.
 ![](/assets/img/cloudnative-security/2022/oci-cloudguard-8.png)
 
-Responder Rule은 NOTIFICATION(알림)과 REMEDIATION(복원) 2 가지 유형을 제공하는데, NOTIFICATION의 경우 발생한 Problem에 대한 정보를 OCI Event와 Notification 서비스를 통해서 이메일이나 OCI Function등으로 전달할 수 있는 유형이며, REMEDIATION은 Problem을 자동 혹은 관리자에 의해 해당 문제를 복원할 수 있도록 해주는 유형입니다. 현재는 Cloud Event Rule만 NOTIFICATION 유형에 해당되는데, 해당 Rule을 통해서 알림을 전달하기 위해서는 OCI Event와 OCI Notification 서비스를 구성하여야 합니다. 관련 가이드는 아래 링크에서 확인해볼 수 있습니다.
+Responder Rule은 NOTIFICATION(알림)과 REMEDIATION(복원) 2 가지 유형을 제공하는데, NOTIFICATION의 경우 발생한 Problem에 대한 정보를 OCI Event와 Notification 서비스를 통해서 이메일이나 OCI Function등으로 전달할 수 있는 유형이며, REMEDIATION은 Problem을 자동 혹은 관리자에 의해 해당 문제를 복원할 수 있도록 해주는 유형입니다. 현재는 Cloud Event Rule만 NOTIFICATION 유형에 해당되는데, 해당 Rule을 통해서 알림을 전달하기 위해서는 OCI Event와 OCI Notification 서비스를 구성하여야 합니다. OCI Event와 OCI Notification 서비스를 구성은 아래 포스팅을 참고합니다.
 
-> https://docs.oracle.com/en-us/iaas/cloud-guard/using/export-notifs-config.htm
-
-각 Responder Rule에는 Rule Trigger를 설정할 수 있습니다. Rule Trigger는 Responder Rule을 통해서 수행되는 작업이 자동 혹은 수동(관리자 확인/승인)으로 수행하도록 구성하는 옵션으로 이 설정을 위해서는 **Cloud Guard 홈에서 Targets > Target 선택 > Responder Recipe**를 순서대로 클릭한 후, Target에 설정된 Responder Recipe를 선택하여 설정할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-8-1.png)
-
-Rule Trigger의 "Ask me before executing rule"의 경우 관리자가 Problem에서 내용을 확인 한 후 액션을 취할 수 있으며, "Execute automatically"는 관리자 개입 없이 시스템이 자동으로 복원처리 하게 됩니다. 예를 들면 Private Bucket만 허용하는데, Public Bucket으로 생성하게 되면 자동으로 Private Bucket으로 변경이 됩니다. 또한 **Post Remediation Notification**을 체크하면 Remediation이 성공적으로 수행된 후 Cloud Event를 통해 알림을 전송할 수 있습니다. (OCI Event 및 Notification이 설정되어 있어야 함) 만일 해당 Responder Rule이 특정 조건에만 동작하도록 설정하고 싶다면 **Conditional group**을 활용합니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-9.png)
+[OCI Cloud Guard를 위한 Event 및 Notifications 구성하기](https://the-team-oasis.github.io/security/cloudguard-event/)
 
 ### 예시 - Cloud Guard 대상 (TARGET)에서 Public Bucket 생성
 간단히 Cloud Guard가 적요된 대상에서 Public Bucket을 하나 생성해 보도록 하겠습니다. 아래와 같이 Object Storage에서 Bucket 생성 후 Visibility를 Public으로 변경합니다.
