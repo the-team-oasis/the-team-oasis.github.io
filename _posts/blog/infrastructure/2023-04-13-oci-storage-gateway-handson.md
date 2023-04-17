@@ -165,7 +165,7 @@ $ sudo mkdir /ocisg
 - 다음은 아래의 명령을 이용하여 Mount 를 실행해 줍니다.
 
 ```terminal
-$ sudo mount /dev//<volume_group>/<logical_volume> /ocisg
+$ sudo mount /dev/<volume_group>/<logical_volume> /ocisg
 ```
 
 - 앞서 지정했던 volume group 과 logical volume 명을 지정하여 명령을 실행 후 df -h 명령으로 확인하면 정상적으로 1TB 의 Volume 이 /ocisg 라는 폴더에 Mount 된 것을 확인하실 수 있습니다.
