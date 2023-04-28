@@ -1,0 +1,51 @@
+---
+layout: page-fullwidth
+#
+# Content
+#
+subheadline: "OCI Release Notes 2023"
+title: "4월 OCI Cloud Native & Security 업데이트 소식"
+teaser: "2023년 4월 OCI Cloud Native & Security 업데이트 소식입니다."
+author: dankim
+breadcrumb: true
+categories:
+  - release-notes-2023-cloudnative-security
+tags:
+  - oci-release-notes-2023
+  - April-2023
+  - cloudnative
+#
+# Styling
+#
+header: no
+# image:
+#     title: mediaplayer_js-title.jpg
+#     thumb: mediaplayer_js-thumb.jpg
+#     homepage: mediaplayer_js-home.jpg
+#     caption: Photo by Corey Blaz
+#     caption_url: https://blaz.photography/
+# mediaplayer: true
+---
+
+<div class="panel radius" markdown="1">
+**Table of Contents**
+{: #toc }
+*  TOC
+{:toc}
+</div>
+
+## Support for preemptible capacity when configuring node pool placement
+* **Services:** Container Engine for Kubernetes
+* **Release Date:** April 4, 2023
+* **Documentation:** [https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengusingpreemptiblecapacity.htm](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengusingpreemptiblecapacity.htm){:target="_blank" rel="noopener"}
+
+### 릴리즈 내용
+이제 OKE 노드 풀에서 Worker Node 인스턴스의 Capacity 유형으로 Preemptible capacity를 지정할 수 있습니다. Preemptible Capacity를 사용하면 Preemptible 인스턴스를 사용하여 짧은 기간 동안만 실행해야 하거나 용량 회수 시 중단될 수 있는 워크로드를 실행함으로써 비용을 절감할 수 있습니다. Preemptible 인스턴스는 일반 컴퓨팅 인스턴스와 동일하게 작동하지만 다른 곳에서 필요할 때 용량이 회수되고 인스턴스가 종료됩니다.
+
+Preemptible 인스턴스가 종료되면 OKE에 알려지게 되며, 노드 인스턴스가 종료되기전에 다음과 같은 상태가 됩니다.
+* kube-scheduler가 해당 노드에 새 포드를 배치하지 못하도록 Worker Node를 통제하게 됩니다.
+* Pod을 안전하게 제거하기 위해 Worker Node를 Drain하며, Pod의 컨테이너가 정상적으로 종료되고 필요한 정리를 수행하도록 합니다.
+
+Preemptible Capacity를 지정하기 위해서는 Cluster 생성 시 Custom Create (사용자 지정 생성)하여야 하며, Pool 구성에서 Preemptible Capacity를 선택할 수 있습니다. 또한 생성된 Cluster에서도 Node Pool을 추가할 경우 지정하여 생성할 수 있습니다.
+
+![](/assets/img/cloudnative-security/2023/2023-04-28-cloudnative-security-release-notes-1.png)
