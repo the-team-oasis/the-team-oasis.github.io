@@ -49,3 +49,14 @@ Preemptible 인스턴스가 종료되면 OKE에 알려지게 되며, 노드 인�
 Preemptible Capacity를 지정하기 위해서는 Cluster 생성 시 Custom Create (사용자 지정 생성)하여야 하며, Pool 구성에서 Preemptible Capacity를 선택할 수 있습니다. 또한 생성된 Cluster에서도 Node Pool을 추가할 경우 지정하여 생성할 수 있습니다.
 
 ![](/assets/img/cloudnative-security/2023/2023-04-28-cloudnative-security-release-notes-1.png)
+
+## Support for service mesh and performance improvements when using the VCN-Native CNI plugin
+* **Services:** Container Engine for Kubernetes
+* **Release Date:** April 26, 2023
+* **Documentation:** [https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm](https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm){:target="_blank" rel="noopener"}
+
+### 릴리즈 내용
+OCI VCN-Native Pod Networking CNI 플러그인에서는 이제 다음과 같은 추가 기능을 제공합니다.
+
+1. OCI Service Mesh, Istio 및 Linkerd와 같은 Service Mesh 솔루션을 지원합니다. 단, 현재는 Oracle Linux 7만 지원하며, Oracle Linux 8은 향후 지원할 예정입니다.
+2. 네트워크 성능이 대폭 개선이 됩니다.
