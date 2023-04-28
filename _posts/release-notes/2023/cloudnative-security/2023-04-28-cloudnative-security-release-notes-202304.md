@@ -50,6 +50,17 @@ Preemptible Capacity를 지정하기 위해서는 Cluster 생성 시 Custom Crea
 
 ![](/assets/img/cloudnative-security/2023/2023-04-28-cloudnative-security-release-notes-1.png)
 
+## Support for Kubernetes version 1.26.2
+* **Services:** Container Engine for Kubernetes
+* **Release Date:** April 25, 2023
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/b4d16d65-6cbf-4304-a10f-5a51382e1072/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/b4d16d65-6cbf-4304-a10f-5a51382e1072/){:target="_blank" rel="noopener"}
+
+### 릴리즈 내용
+이제 Kubernetes 1.25.4 및 1.24.1 외에도 1.26.2 버전을 추가로 지원합니다. 이에 따라 OKE에서는 2023년 6월 1일에 Kubernetes 버전 1.23.4에 대한 지원을 중단합니다. 이에 따라 1.23.4 버전에 대한 다음 작업을 수행할 수 없게 됩니다.
+
+* Kubernetes 버전 1.23.4를 실행하는 새 클러스터를 만듭니다.
+* Kubernetes 버전 1.23.4를 실행하는 기존 클러스터에 새 노드 풀을 추가합니다.
+
 ## Support for service mesh and performance improvements when using the VCN-Native CNI plugin
 * **Services:** Container Engine for Kubernetes
 * **Release Date:** April 26, 2023
