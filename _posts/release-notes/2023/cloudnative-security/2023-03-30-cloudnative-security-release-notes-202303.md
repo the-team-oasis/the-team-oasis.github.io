@@ -371,7 +371,7 @@ OKE에서 지원되는 GPU Shape에 대한 자세한 정보는 아래 링크를 
 * Object Storage File Extractor : Data Flow Integration 작업을 사용하여 소스 파일을 성공적으로 압축 해제하기 위해 Data Integration Pipeline의 일부로 unzip PBF 기능을 통합합니다.
 
 ## Support for customizing build runner shape
-* **Services:** Functions
+* **Services:** DevOps
 * **Release Date:** March 21, 2023
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/Content/devops/using/add_buildstage.htm](https://docs.oracle.com/en-us/iaas/Content/devops/using/add_buildstage.htm){:target="_blank" rel="noopener"}
 
@@ -383,7 +383,7 @@ OKE에서 지원되는 GPU Shape에 대한 자세한 정보는 아래 링크를 
 > 사용자 정의의 경우 프로비저닝 시간이 더 오래 소요됩니다.
 
 ## DevOps now supports validating external connection
-* **Services:** Functions
+* **Services:** DevOps
 * **Release Date:** March 28, 2023
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/Content/devops/using/validate_connection.htm](https://docs.oracle.com/en-us/iaas/Content/devops/using/validate_connection.htm){:target="_blank" rel="noopener"}
 
