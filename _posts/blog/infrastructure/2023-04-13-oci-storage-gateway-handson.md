@@ -84,7 +84,7 @@ Storage Gateway 는 On-Premise 의 Application 서버와 Oracle Cloud Infrastruc
 
 
 - Block Volume 을 Attach 할 Instance 를 선택하고 Device Path 를 선택 후 **Attach** 버튼을 클릭합니다.
-  - Instance : <Storage Gateway 설치를 위해 생성한 Instance 선택>
+  - Instance : **앞에 사전 준비 단계에서 생성했던 Storage Gateway 설치를 위해 생성한 Instance 선택**
   - Device Path : /dev/oracleoci/oraclevdb 선택
 
  ![SGW](/assets/img/infrastructure/2023/storage_gateway/04_oci_storage_gateway_block_volume_attach_02.png " ")

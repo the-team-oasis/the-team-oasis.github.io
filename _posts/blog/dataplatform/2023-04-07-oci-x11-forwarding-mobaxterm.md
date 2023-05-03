@@ -142,11 +142,12 @@ $ ls -al
 ```
 ![Terminal](/assets/img/dataplatform/2023/oracle/12_xauthority_owner_check.png)
 
-- 아래 명령을 실행하여 .Xauthority 파일에 대한 소유권을 oracle:oinstall 로 변경합니다.
+- root 사용자료 아래 명령을 실행하여 .Xauthority 파일에 대한 소유권을 oracle:oinstall 로 변경 후 xauth 목록에 oracle 사용자를 추가합니다.
 
 ```text
 $ chown oracle .Xauthority
 $ chgrp oinstall .Xauthority
+$ xauth add $(xauth -f ~oracle/.Xauthority list|tail -1)
 $ ls -al
 ```
 ![Terminal](/assets/img/dataplatform/2023/oracle/13_xauthority_owner_change.png)
