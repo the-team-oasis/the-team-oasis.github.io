@@ -131,10 +131,12 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
 - 생성한 SRC_OCIGGLL 사용자로 SQLDeveloper 접속을 생성합니다. (※ SOURCE DB 가 DBCS 라면 생성한 SRC_OCIGGLL 사용자는 PDB 사용자로 반드시 아래의 서비스 이름에 PDB명을 입력해야 합니다. PDB명은 DB 생성 시 입력한 PDB명 입니다.)
 
   - non-CDB 연결 설정 예
-  ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-non-CDB-connect-2023.png)
 
+    ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-non-CDB-connect-2023.png)
+  
   - CDB 연결 설정 예
-  ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-connect.png)
+    
+    ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-connect.png)
 
 
 - 상기 생성한 SRC_OCIGGLL 사용자로 SQL Developer 에 접속 후 SQL 커맨드 창에서 아래의 SEED Data Load Script 를 수행합니다. SEED Data Load Script 는 [SOURCE-SEED-DATA.SQL](/assets/files/ocigg-sql/SOURCE-SEED-DATA.SQL) 를 다운받아 생성한 SRC_OCIGGLL 사용자의 Connection 을 이용해 접속 후 SQL 실행창에 복사하여 붙여놓고 SQL 문장들을 실행합예다. (※ 아래 내용은 해당 스크립트의 일부입니다.)
