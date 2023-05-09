@@ -48,6 +48,7 @@ OCI GoldenGate 는 타 Cloud Vendor 에서는 제공하지 않는 OCI 에서만 
 OCI GoldenGate 서비스를 구성하려면 먼저 아래와 같은 사항들이 준비되어야 합니다.
 - DBCS 구성을 위한 Virtual Cloud Network (VCN) 구성 
 - Source Oracle DB (OCI DBCS 혹은 ADB) - (Oracle DB 11.2.0.4 버전 이상, 19.0.0.0 버전만 제외) - DBCS 생성 시  [DBCS 생성 퀵스타트 가이드 참고](/dataplatform/oracle-database-cloud-service-quickstart/){:target="_blank" rel="noopener"} 
+- 선택적으로 Source DB 를 DBCS 가 아닌 On-Premise 혹은 non-CDB 환경을 가정하여 구성하기 원하면 [Marketplace 의 오라클 데이터베이스 이미지로 생성하기](/dataplatform/oracle-database-marketplace-image){:target="_blank" rel="noopener"}를 참조하여 구성
 - Target Oracle DB (OCI DBCS 혹은 ADB) - (Oracle DB 11.2.0.4 버전 이상, 19.0.0.0 버전만 제외)
 - SQL Developer 실행을 위한 Windows Instance (선택 사항)
 
@@ -112,6 +113,7 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
 - 복제를 수행할 Source 데이터베이스를 구성합니다. 먼저, Source DB 의 CDB ROOT 사용자인 sys 사용자로 Connection 을 연결 후, SRC_OCIGGLL 이라는 사용자를 생성해 줍니다. (※ password 항목은 사용할 password 로 대체 필요)
 
   ```sql
+  -- SOURCE DB 가 non-CDB 일 경우, 아래 alter session 문장 제거 
   ALTER SESSION SET CONTAINER=PDB1;
 
   CREATE USER "SRC_OCIGGLL" IDENTIFIED BY "<password>";
@@ -126,12 +128,16 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
   ![SEED User](/assets/img/dataplatform/2022/goldengate/09.oci-goldengate-sql-developer-seed-user.png)
 
 
-- 생성한 SRC_OCIGGLL 사용자로 SQLDeveloper 접속을 생성합니다. (※ 생성한 SRC_OCIGGLL 사용자는 PDB 사용자로 반드시 아래의 서비스 이름에 PDB명을 입력해야 합니다. PDB명은 DB 생성 시 입력한 PDB명 입니다.)
+- 생성한 SRC_OCIGGLL 사용자로 SQLDeveloper 접속을 생성합니다. (※ SOURCE DB 가 DBCS 라면 생성한 SRC_OCIGGLL 사용자는 PDB 사용자로 반드시 아래의 서비스 이름에 PDB명을 입력해야 합니다. PDB명은 DB 생성 시 입력한 PDB명 입니다.)
 
+  - non-CDB 연결 설정 예
+  ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-non-CDB-connect-2023.png)
+
+  - CDB 연결 설정 예
   ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-connect.png)
 
 
-- 상기 생성한 SRC_OCIGGLL 사용자로 SQL Developer 에 접속 후 SQL 커맨드 창에서 아래의 SEED Data Load Script 를 수행합니다. SEED Data Load Script 는 [SOURCE-SEED-DATA.SQL](/assets/files/ocigg-sql/SOURCE-SEED-DATA.SQL) 를 다운받아 생성한 SRC_OCIGGLL 사용자의 Connection 을 이용해 접속 후 SQL 실행창에 복사하여 붙여놓고 SQL 문장들을 실행합니다. (※ 아래 내용은 해당 스크립트의 일부입니다.)
+- 상기 생성한 SRC_OCIGGLL 사용자로 SQL Developer 에 접속 후 SQL 커맨드 창에서 아래의 SEED Data Load Script 를 수행합니다. SEED Data Load Script 는 [SOURCE-SEED-DATA.SQL](/assets/files/ocigg-sql/SOURCE-SEED-DATA.SQL) 를 다운받아 생성한 SRC_OCIGGLL 사용자의 Connection 을 이용해 접속 후 SQL 실행창에 복사하여 붙여놓고 SQL 문장들을 실행합예다. (※ 아래 내용은 해당 스크립트의 일부입니다.)
 
 
   ```sql
@@ -252,15 +258,19 @@ SOURCE DB 의 SUPPLEMENT LOGGING 추가를 위해 SQL Developer 를 통해 SOURC
   SOURCE DB 의 DATA Capture 를 위해서는 중요한 설정 중 하나는 SUPPLEMENTAL LOG 를 ENABLE 하는 설정입니다. 이 설정이 ENABLE 되어야 SOURCE DB 의 변경 데이터가 Capture 됩니다. SQL Developer 로 sys 계정의 CDB$ROOT 로 접속하여 아래 SQL Script 를 실행합니다.
 
     ```sql
-    
+    -- SOURCE DB 가 non-CDB 일 경우, 아래 문장 제거 
     ALTER SESSION SET CONTAINER=CDB$ROOT;
+
     ALTER SYSTEM SWITCH LOGFILE;
     ALTER SYSTEM SET enable_goldengate_replication=true;
     ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
     
+    -- SOURCE DB 가 non-CDB 일 경우, scope=both 제거
     ALTER SYSTEM SET STREAMS_POOL_SIZE=5000M scope=both;
 
+    -- SOURCE DB 가 non-CDB 일 경우, 아래 문장 제거 
     ALTER SESSION SET CONTAINER=PDB1;
+    
     ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
     
     ```
@@ -279,9 +289,13 @@ SOURCE DB 와 TARGET DB 에 OCI GoldenGate 가 추출 및 복제를 수행하기
   SOURCE DB 에 OCI GoldenGate Admin (C##GGADMIN) 계정 생성을 위해  SQL Developer 로 sys 계정의 CDB$ROOT 로 접속하여 아래 SQL SCRIPT 를 실행합니다. (※ password 항목은 사용할 password 로 대체 필요)
 
     ```sql
+    -- SOURCE DB 가 non-CDB 일 경우, 아래 문장 제거 
     ALTER SESSION SET CONTAINER=CDB$ROOT;
+
+    -- SOURCE DB 가 non-CDB 일 경우, C##GGADMIN 대신 GGADMIN 으로 변경 
     CREATE USER C##GGADMIN IDENTIFIED BY "<password>";
     EXEC dbms_goldengate_auth.grant_admin_privilege('C##GGADMIN',container=>'ALL');
+    -- OURCE DB 가 non-CDB 일 경우, 아래 문장에서 container=all 제거 
     GRANT DBA TO C##GGADMIN container=all;
 
     ALTER SYSTEM SET enable_goldengate_replication=true;
@@ -305,43 +319,42 @@ OCI GoldenGate 서비스를 사용하기 위해 서비스를 Deploy 해야 합�
 
 - 아래의 OCI 메인 메뉴에서 GoldenGate 를 찾아 선택합니다.
 
-    ![GG NAVIGATION MENU](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu.png)
+    ![GG NAVIGATION MENU](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
 
 - GoldenGate 의 좌측 메뉴 중에서 두번째 Deployments 메뉴를 선택 후 Compartment 를 선택합니다. 우측의 목록 상단의 "Create Deployment" 버튼을 클릭합니다.
 
-    ![GG DEPLOYMENT MENU](/assets/img/dataplatform/2022/goldengate/20.oci-goldengate-deployment-main.png)
+    ![GG DEPLOYMENT MENU](/assets/img/dataplatform/2022/goldengate/20.oci-goldengate-deployment-main-2023.png)
 
 - 아래 화면과 같이 OCI GoldenGate Deploy 를 위한 입력 사항들을 입력해 후 Next 버튼을 클릭합니다. (※ AutoScaling 체크 시, 초기 설정한 OCPU 의 3배까지 자동 스켈링 수행)
     > 중요 : OCI GoldenGate Web Console 을 접근하기 위해서는 반드시 Public Subnet 을 선택하여 Deploy 합니다. Public Subnet 에 Deploy 를 하지만 Private IP 기반으로만 통신합니다.
 
-    ![DEPLOYMENT INPUT](/assets/img/dataplatform/2022/goldengate/21.oci-goldengate-deployment-input-public.png)
+    ![DEPLOYMENT INPUT](/assets/img/dataplatform/2022/goldengate/21.oci-goldengate-deployment-input-public-2023.png)
 
-- 다음은 OCI GoldenGate instance 명과 관리자 화면에 로그인할 사용자 및 Password 를 입력 후 Create 버튼을 클릭합니다.
+- 다음은 OCI GoldenGate 를 복제할 DB 기술을 technology 목록에서 선택 후, instance 명과 관리자 화면에 로그인할 사용자 및 Password 를 입력 후 Create 버튼을 클릭합니다.
 
-    ![DEPLOY INPUT](/assets/img/dataplatform/2022/goldengate/22.oci-goldengate-deployment-input-2-public.png)
+    ![DEPLOY INPUT](/assets/img/dataplatform/2022/goldengate/22.oci-goldengate-deployment-input-2-public-2023.png)
 
-- Deploy 가 시작되면 아래와 같이 노란색 상태의 Creating 메시지가 나옵니다. (Deploy 시간 : 약 15분 소요)
+- Deploy 가 시작되면 아래와 같이 노란색 상태의 Creating 메시지가 나옵니다. (Deploy 시간 : 약 10분 소요)
 
-    ![CREATING](/assets/img/dataplatform/2022/goldengate/23.oci-goldengate-deployment-creating-public.png)
+    ![CREATING](/assets/img/dataplatform/2022/goldengate/23.oci-goldengate-deployment-creating-public-2023.png)
 
 - Deploy 가 완료되면 아래와 같이 녹색 상태로 전환이 됩니다.
 
-    ![CREATED](/assets/img/dataplatform/2022/goldengate/24.oci-goldengate-deployment-created-public.png)
-
+    ![CREATED](/assets/img/dataplatform/2022/goldengate/24.oci-goldengate-deployment-created-public-2023.png)
 
 
 - Deploy 가 완료되면 OCI GoldenGate Admin 콘솔에 로그인하여 DB 연결 구성 및 Capture, Replication 등의 프로세스를 구성해야 합니다. 
 OCI GoldenGate Admin 콘솔은 Private IP 로만 통신하도록 구성되기 때문에 위에서 생성한 Windows 인스턴스 내에서 브라우저를 통해 접근이 가능합니다.
 
-    > 중요 : Private IP/ Private Domain Name 으로만 접근하게 되므로 반드시 STEP 1 에서 생성한 Windows 인스턴스에서 브라우저를 통해 OCI GoldenGate Admin 콘솔 접근 해야만 합니다.
+    > 중요 : Private IP/ Private Domain Name 으로 네트워크 액세스를 하게 되므로 반드시 STEP 1 에서 생성한 Windows 인스턴스에 원격 데스크탑으로 접속 후 브라우저를 통해 OCI GoldenGate Admin 콘솔을 접근합니다.
 
 - Windows Instance 에서 브라우저를 실행 후 OCI 에 로그인 후 Deploy 된 OCI GoldenGate Deployment 화면에는 생성된 OCI GoldenGate 로 로그인 할 수 있는 URL 이 생성되어 있게 됩니다. 생성된 URL 을 통해 OCI GoldenGate Admin 콘솔 Web 화면으로 접근이 가능합니다. 아래 화면에서 Launch Console 버튼을 클릭하면 생성된 URL 로 바로 접근이 됩니다.
 
-    ![Launch Console](/assets/img/dataplatform/2022/goldengate/25.oci-goldengate-remote-launch-console.png)
+    ![Launch Console](/assets/img/dataplatform/2022/goldengate/25.oci-goldengate-remote-launch-console-2023.png)
 
     <br>
 
-    ![Launch Console](/assets/img/dataplatform/2022/goldengate/26.oci-goldengate-remote-launch-console-2.png)
+    ![Launch Console](/assets/img/dataplatform/2022/goldengate/26.oci-goldengate-remote-launch-console-2-2023.png)
    
 - OCI GoldenGate 의 Admin Service 화면이 나타나면 Deploy 생성 시 입력했던 GoldenGate Admin 사용자 (ggadmin) ID 와 Password 를 입력 후 로그인이 가능한지 확인합니다.
 
@@ -354,44 +367,63 @@ OCI GoldenGate Admin 콘솔은 Private IP 로만 통신하도록 구성되기 �
 
 <br>
 
-### STEP 7 : Register Database (OCI Console)
+### STEP 7 : Connections 설정 (Database 연결 - OCI Console)
 
-OCI GoldenGate 에서 캡쳐/추출 및 복제를 할 대상 Database 들에 대해 Connection 정보를 등록하고 관리하는 절차입니다. OCI 콘솔 화면에서 Database 들을 등록하면 OCI GoldenGate Admin Console 에서도 등록된 Database 들이 나타나게 됩니다.
+OCI GoldenGate 에서 캡쳐/추출 및 복제를 할 대상 Database 들에 대해 Connection 정보를 등록하고 관리하는 절차입니다. OCI 콘솔 화면에서 Database 들을 등록하면 OCI GoldenGate Admin Console 에서도 등록된 Database Connection 들이 나타나게 됩니다.
 
-- Register Database 메뉴 실행 후 (GoldenGate -> Register Database) Register Database 버튼을 클릭합니다.
+- Connections 메뉴 실행 후 (GoldenGate -> Connections) Create Connection 버튼을 클릭합니다.
 
-    ![NAVI Menu](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu.png)
+    ![NAVI Menu](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
 
-    ![REG DB-1](/assets/img/dataplatform/2022/goldengate/29.oci-goldengate-register-database-menu.png)
+    ![REG DB-1](/assets/img/dataplatform/2022/goldengate/29.oci-goldengate-register-database-menu-2023.png)
 
-- 등록 버튼을 클릭하면 DB 를 등록할 수 있는 화면이 우측에 나타나며 아래 그림들을 참고하여 SOURCE DB 와 TARGET DB 의 정보와 Connection 정보를 입력합니다.
+- Create Connection 버튼을 클릭하면 DB 연결을 생성할 수 있는 화면이 우측에 나타나며 아래 그림들을 참고하여 SOURCE DB 와 TARGET DB 의 정보와 Connection 정보를 입력합니다.
 
-  - SOURCE DB Register 입력 화면
+  - Create Connection 화면에서 아래 화면과 같이 이름과 설명을 입력하고 Type 을 Oracle Database 로 선택 후 Next 버튼을 클릭합니다.
 
-    ![SREG-DB-2](/assets/img/dataplatform/2022/goldengate/30.oci-goldengate-register-database-input.png)
+    ![SREG-DB-2](/assets/img/dataplatform/2022/goldengate/30.oci-goldengate-register-database-input-2023.png)
 
-      > 주의 : SOURCE DB 의 Connection String 입력 시 반드시 CDB 의 서비스명으로 입력을 합니다. <br> 화면 입력 예) Database Connection string : srcggdb.sub07160235111.pslimvcn2021071.oraclevcn.com:1521/SRCGGDB_SRCGGDB.sub07160235111.pslimvcn2021071.oraclevcn.com
+   - SOURCE DB 가 DBCS 가 아닌 On-Premise 나 non-CDB 환경일 경우, Connection 생성 입력 화면을 아래와 같이 입력하고 하단의 Network connectivity Option 을 체크해 줍니다. (SOURCE DB 가 DBCS 일 경우, 아래 TARGET DB 의 Connection 생성 부분을 참고합니다.)
 
-    ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-2.png)
+      ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-2-2023.png)
+
+   - SOURCE DB 가 DBCS 가 아닌 On-Premise 나 non-CDB 환경일 경우, Network connectivity 항목을 아래의 세션 모드 및 Subnet, DB 서버의 IP 정보를 입력 후 Create 버튼을 클릭해서 생성합니다.
+
+     ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-network-2-2023.png)   
+
+
+- 생성한 Connection 을 앞서 생성한 OGGDeployment Instance 에서 활용을 하기 위해서는 해당 Instance 에 Assign 을 해 주어야 합니다.
+  - 아래와 같이 Connection Detail 화면에서 Assign 버튼을 클릭합니다.  
   
-    ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-input-3.png)
+    ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-input-3-2023.png)
 
-  - TARGET DB Register 입력 화면
+  - Assign deployment 창에서 Assign 하고자 하는 Deployment 의 목록을 선택 후, Assign deployment 버튼을 클릭합니다.
 
-    > 주의 : TARGET DB 의 Connection String 은 반드시 PDB 의 서비스명으로 입력을 합니다. 화면 입력 예) trgggdb.sub07160235111.pslimvcn2021071.oraclevcn.com:1521/PDB1.sub07160235111.pslimvcn2021071.oraclevcn.com
+    ![SREG-DB-4](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-4-2023.png)
+
+  - 아래와 같이 Assign 이 완료된 Connection 정보들만이 추후 OCI GoldenGate Admin Console 에서 해당 Connection 정보들을 Source 혹은 Target DB 에 대한 연결 정보로써 활용할 수 있게 됩니다.
+
+    ![SREG-DB-4](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-result-5-2023.png)
 
 
-    ![TREG-DB-1](/assets/img/dataplatform/2022/goldengate/33.oci-goldengate-register-database-target-input-1.png)
+  - TARGET DB (DBCS)에 대한 Connection 설정을 아래와 같이 진행합니다. (SOURCE DB도 DBCS 를 사용한다면, 아래와 동일한 절차로 Connection 설정)
 
-    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/34.oci-goldengate-register-database-target-input-2.png)
+    ![TREG-DB-1](/assets/img/dataplatform/2022/goldengate/33.oci-goldengate-register-database-target-input-1-2023.png)
 
-    
+  - TARGET DB 로 DBCS 를 사용할 경우, "Select Database" 를 선택하면, OCI 내의 기존 생성한 DBCS 들이 목록에 나타나며, 목록을 선택하면 기본적인 DB Home 정보들을 자동으로 가져옵니다. 
 
-    ![TREG-DB-3](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-3.png)
+  - TARGET DB 의 연결 사용자로는 앞서 생성한 CDB 의 GGADMIN 사용자 (C##GGADMIN) 로 PDB 에 대한 Connection 설정 후 Create 버튼을 눌러 Connection 을 생성합니다.
+  > 주의 : TARGET DB DBCS 로 설정할 경우는 아래 그림처럼 반드시 PDB를 선택해서 Connection 을 설정해 줍니다. 만일, SOURCE DB 의 DBCS 에 대한 Connection 을 설정할 경우는 CDB 로 접속을 설정해 주어야 합니다. CDB 설정은 PDB 에 대한 목록을 선택하지 않으면, CDB 로 설정이 됩니다. 
 
-- 등록 버튼을 클릭하면 아래와 같이 Database 에 대해 등록작업이 진행되며, 등록이 완료된 Database 는 상태 정보가 "Active" 상태로 전환됩니다. 등록한 두 Database 의 상태가 "Active" 상태가 될때까지 대기 후 다음 절차를 진행합니다.
+    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/34.oci-goldengate-register-database-target-input-2-2023.png)
 
-    ![REG-DB List](/assets/img/dataplatform/2022/goldengate/36.oci-goldengate-register-database-reuslt.png)
+  - Connection 생성이 완료되면, 앞서 SOURCE DB Connection 에 대한 Assign Deployment 절차와 동일하게 Assign 을 진행합니다.
+
+    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-3-2023.png)
+
+    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-4-2023.png)
+
+    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-5-2023.png)
 
 <br>
 
@@ -405,22 +437,34 @@ OCI Console 에서 등록한 Database 들은 OCI GoldenGate 에서 조회가 가
 
   ![GG Console](/assets/img/dataplatform/2022/goldengate/38.oci-goldengate-console-config.png)
 
-- Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Credential 정보들이 나타납니다. Credential 정보들 중에서 SOURCE DB 의 Connection 정보에 대한 Action 메뉴 중에서 빨간색으로 표시된 버튼을 클릭합니다.
+- Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Connection 정보들이 나타납니다. Connection 정보들 중에서 SOURCE DB 의 Connection 정보에 대한 Action 메뉴 중에서 빨간색으로 표시된 버튼을 클릭합니다.
 
-  ![Config Credetial](/assets/img/dataplatform/2022/goldengate/39.oci-goldengate-console-config-credentials.png)
+  ![Config Credetial](/assets/img/dataplatform/2022/goldengate/39.oci-goldengate-console-config-connection-2023.png)
 
 - 다음과 같은 TRANDATA Information 창이 나타나며 그림의 빨간색으로 표시된 "+" 버튼을 클릭합니다.
 
-  ![TRANDATA Info](/assets/img/dataplatform/2022/goldengate/40.oci-goldengate-trandata-information.png)
+  ![TRANDATA Info](/assets/img/dataplatform/2022/goldengate/40.oci-goldengate-trandata-information-2023.png)
 
 
-- "+" 버튼을 클릭했을때, 나타나는 아래의 입력창의 Schema Name 란에 PDB1.SRC_OCIGGLL 을 입력하고 Submit 버튼을 클릭합니다.
+- "+" 버튼을 클릭했을때, 나타나는 아래의 입력창의 Schema Name 란에 SOURCE DB 가 non-CDB 일 경우, SRC_OCIGGLL 만 입력하고, SOURCE DB 가 CDB 일 경우, PDB1.SRC_OCIGGLL 을 입력하고 Submit 버튼을 클릭합니다.
 
-  ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit.png)
+  - SOURCE DB 가 non-CDB 일 경우 입력 예
+
+    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit-non-CDB-2023.png)
+
+  - SOURCE DB 가 CDB 일 경우 입력 예 
+  
+    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit.png)
 
 - 추가한 TRANDATA 가 제대로 생성되었는지 확인하기 위해 아래 빨간색으로 표시된 입력창에 PDB1.SRC_OCIGGLL 을 입력하고 창 옆에 빨간색으로 표시된 돋보기 버튼을 클릭하면 생성된 TRANDATA 정보가 하단에 디스플레이 됩니다.
 
-  ![TRANDATA SEARCH](/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check.png)
+  - SOURCE DB 가 non-CDB 일 경우 생성 결과 예
+
+    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check-non-CDB-2023.png)
+  
+  - SOURCE DB 가 CDB 일 경우 생성 결과 예
+
+    ![TRANDATA SEARCH](/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check.png)
 
 <br>
 
@@ -430,11 +474,15 @@ Capture / Replication 프로세스 설정을 하기 위해서는 TARGET DB 에 C
 
 > 주의 : 앞서 TARGET DB 의 Register Database 생성 단계에서 Connection String 이 PDB 에 대한 Connection String 으로 연결을 하도록 설정하게 되어 있는지 체크합니다. 점검 방법은 Connection String 의 Service 명에 DB 데이터가 존재하는 PDB 명이 명기 되어 있는지 점검합니다. <br> 예) SERVICE_NAME=PDB1.sub07160235111.pslimvcn2021071.oraclevcn.com
 
-- 먼저, 사전에 TARGEDB 의 SRCMIRROR_OCIGGLL 사용자로 로그인하여 해당 스키마에 Checkpoint Table 이 생성되어 있지 않음을 확인합니다. 
+- 아래 그림처럼 Connection 정보에 PDB 로의 Connection String 이 설정되어 있는지 확인합니다.
+
+  ![CREDENTIALS](/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-target-pdb-check-2023.png)
+
+- PDB로 서비스명이 제대로 설정이 되어 있다면, SQL Developer 를 통해 TARGEDB 의 SRCMIRROR_OCIGGLL 사용자로 로그인하여 해당 스키마에 Checkpoint Table 이 생성되어 있지 않음을 확인합니다. 
 
   ![CREDENTIALS](/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-checkpoint-check.png)
 
-- OCI GoldenGate 의 Admin Console 로 로그인 후 Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Credential 정보들이 나타납니다. Credential 정보들 중에서 TARGET DB 의 Connection 정보에 대한 Action 메뉴 중에서 빨간색으로 표시된 버튼을 클릭합니다.
+- OCI GoldenGate 의 Admin Console 로 로그인 후 Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Connection 정보들이 나타납니다. Connection 정보들 중에서 TARGET DB 의 Connection 정보에 대한 Action 메뉴 중에서 아래 그림과 같이 빨간색으로 표시된 버튼을 클릭합니다.
 
   ![TARGET Config](/assets/img/dataplatform/2022/goldengate/43.oci-goldengate-checkpoint-credential.png)
 
@@ -478,21 +526,20 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
 
 - Add Extract 의 두번째 화면을 아래쪽으로 스크롤 하면 DB 의 Credential 과 Managed Option 을 지정하는 화면에 아래 그림과 같이 리스트에서 지정하거나 선택 후 Next 버튼을 클릭합니다.
     - Credential Domain : OracleGoldenGate
-    - Credential Alias : SRCGGDB
-    - Register to PDBs : PDB1 (DBCS 생성 시 입력했던 PDB 이름)
+    - Credential Alias : SOURCEDB
+    - Register to PDBs : PDB1 (DBCS 생성 시 입력했던 PDB 이름) - SOURCE DB 가 non-CDB 일 경우, 이 입력 항목은 나타나지 않습니다.
     - Managed Option -> Critical to deployment health : Enable
 
-  ![PROCESS CREDENTIAL](/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-credentiial-managed-option.png)
+      - SOURCE DB 가 non-CDB 일 경우의 입력 화면 예
+      ![PROCESS CREDENTIAL](/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-non-CDB-2023.png)  
+      
+      - SOURCE DB 가 CDB 일 경의 입력 화면 예
+      ![PROCESS CREDENTIAL](/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-credentiial-managed-option.png)
 
 
-- Add Extract 세번째 화면에서는 Parameter File 을 입력하는 절차입니다. Parameter 에는 추출할 대상 스키마의 대상 테이블 정보들을 정의해 줍니다. 아래의 Parameter 내용을 복사하여 Parameter File 란에 기존 정보를 지우고 붙여넣기를 합니다. "Create and Run" 버튼을 클릭합니다. (※ 맨 아래 Parameter 항목에 Capture 할 테이블에 대한 정보가 명기되어 있는 것을 확인할 수 있습니다.)
+- Add Extract 세번째 화면에서는 Parameter File 을 입력하는 절차입니다. Parameter 에는 추출할 대상 스키마의 대상 테이블 정보들을 정의해 줍니다. 아래의 Parameter 내용을 복사하여 Parameter File 란의 맨마지막 부분에 다음 텍스트를 복사하여 이어 붙여넣기를 합니다. "Create and Run" 버튼을 클릭합니다. (※ 맨 아래 Parameter 항목에 Capture 할 테이블에 대한 정보가 명기되어 있는 것을 확인할 수 있습니다.)
 
     ```text
-    
-    EXTRACT UAEXT
-    USERIDALIAS SRCGGDB DOMAIN OracleGoldenGate
-    EXTTRAIL E1
-
     -- Capture DDL operations for listed schema tables
     ddl include mapped
 
@@ -512,8 +559,11 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
     -- every 10 minutes.
     reportcount every 10 minutes, rate
 
-    -- Table list for capture
-    TABLE PDB1.SRC_OCIGGLL.*;
+    -- Table list for capture (SOURCE DB 가 non-CDB 일 경우)
+    TABLE SRC_OCIGGLL.*;
+
+    -- Table list for capture (SOURCE DB 가 CDB 일 경우)
+    -- TABLE PDB1.SRC_OCIGGLL.*;
 
     ```
 
@@ -557,13 +607,9 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
   ![NONINTEGRATED REPLICAT](/assets/img/dataplatform/2022/goldengate/59.oci-goldengate-replicat-process-managed-options.png)
 
 - Add Replicat 의 세번째 화면은 Parameter File 을 입력하는 화면입니다. 
-Extract 프로세스의 Parmeter 를 입력하는 방식과 동일하게 아래의 내용을 Parameter 입력란에 붙여넣기로 기존 입력 항목을 대체 후 "Create and Run" 버튼을 클릭합니다. (※ 맨 마지막에 MAP 항목은 SOURCE DB 의 테이블을 TARGET DB 로 MAPPING 을 어떻게 할 것인지 정의해 주는 항목입니다.)
+Extract 프로세스의 Parmeter 를 입력하는 방식과 동일하게 아래의 내용을 Parameter 입력란의 맨 마지막 부분에 있는 "MAP *.*, TARGET *.*;" 부분을 지우고 다음의 텍스트를 복사하여 붙여넣고 "Create and Run" 버튼을 클릭합니다. (※ 맨 마지막에 MAP 항목은 SOURCE DB 의 테이블을 TARGET DB 로 MAPPING 을 어떻게 할 것인지 정의해 주는 항목입니다.)
 
     ```text
-    
-    REPLICAT REP
-    USERIDALIAS TRGGGDB DOMAIN OracleGoldenGate
-
     -- Capture DDL operations for listed schema tables
     --
     ddl include mapped
@@ -591,8 +637,11 @@ Extract 프로세스의 Parmeter 를 입력하는 방식과 동일하게 아래�
     -- Table map list for apply
     --
     DBOPTIONS ENABLE_INSTANTIATION_FILTERING;
-    
-    MAP PDB1.SRC_OCIGGLL.*, TARGET PDB1.SRCMIRROR_OCIGGLL.*;
+
+    -- SOURCE DB 가 non-CDB 인 경우의 입력예
+    MAP SRC_OCIGGLL.*, TARGET PDB1.SRCMIRROR_OCIGGLL.*;
+    -- SOURCE DB 가 CDB 인 경우의 예
+    -- MAP PDB1.SRC_OCIGGLL.*, TARGET PDB1.SRCMIRROR_OCIGGLL.*;
     
     ```
 
