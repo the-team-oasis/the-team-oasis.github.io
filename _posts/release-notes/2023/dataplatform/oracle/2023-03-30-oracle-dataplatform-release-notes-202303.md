@@ -12,7 +12,7 @@ categories:
   - release-notes-2023-dataplatform
 tags:
   - oci-release-notes-2023
-  - Feb-2023
+  - Mar-2023
   - DATAPLATFORM, DATABASE, BIGDATA, DATAFLOW, SPARK, ORACLE, GOLDENGATE
 #
 # Styling

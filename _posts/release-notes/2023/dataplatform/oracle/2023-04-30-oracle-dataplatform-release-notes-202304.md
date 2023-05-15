@@ -89,12 +89,15 @@ OCI GoldenGate 서비스에 이제 Microsoft SQL Server 배포 유형 및 연결
 
 ### 서비스 소개
 
-이제 Database Tools 에는 다양한 새로운 기능을 갖춘 새롭고 더욱 강력한 버전의 SQL 워크시트가 포함되어 있습니다.
+Database Tools 는 OCI 에서 제공하는 Database 개발을 위한 툴을 제공하고 있으며, 보다 진보된 SQL Developer 와 유사한 UI 제공합니다.
+
 Database Tools 는 아래와 같이 Private Endpoint 기반의 Connections 를 설정하여 연결하고 Vault 에 Secret Key 를 저장하여 관리합니다.
 
 - Database Tools Connection / Vault Secret
 
 ![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/06.db_tools_1.png)
+
+이제 Database Tools 에는 다양한 새로운 기능을 갖춘 새롭고 더욱 강력한 버전의 SQL Worksheet 가 포함되어 있습니다.
 
 - Database Tools - SQL Worksheet
 
