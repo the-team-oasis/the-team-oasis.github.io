@@ -44,8 +44,22 @@ header: no
 
 OCI Data Flow는 Apache Spark ™ 애플리케이션을 실행하기 위한 완전 관리형 서비스입니다. 개발자가 애플리케이션에 집중할 수 있도록 하고 이를 실행할 수 있는 쉬운 런타임 환경을 제공합니다. 
 
-OCI Data Flow 서비스에서 이제 driver 및 executor 에 대한 Arm 기반 컴퓨팅 Shape 을 선택할 수 있습니다.
+OCI Data Flow 서비스에서 이제 driver 및 executor 에 대한 ARM 기반 컴퓨팅 Shape 을 선택할 수 있습니다.
 
+ARM 프로세서는 가격이 저렴하고, Linear 한 Scaling 이 가능하고 보안이 내장되어 있는 단일 Thread 코어 아키텍쳐를 가지고 있는 프로세서로써 폭넓은 개발자 에코시스템을 보유하고 있는 프로세서 입니다.
+
+- Ampere (Altra Processor) A1 이 적합한 Case
+  - 컨테이너화된 workloads
+  - In-memory 기반 databases (MySQL 포함)
+  - Web application
+  - Media encoding
+  - AI 와 Machine learning (ML) inferencing
+  - Mobile apps 과 game 개발
+  - High performance computing (HPC)
+
+- Data Flow 의 ARM Processor Shape 선택 화면
+
+![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/08.data_flow_arm.png)
 
 ##  New maintenance features available for GoldenGate
 * **Services:** GoldenGate

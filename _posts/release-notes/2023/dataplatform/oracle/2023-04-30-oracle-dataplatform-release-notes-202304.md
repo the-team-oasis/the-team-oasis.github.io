@@ -42,7 +42,7 @@ header: no
 
 ### 서비스 소개
 
-OCI GoldenGate 서비스에 이제 Microsoft SQL Server 배포 유형 및 연결을 지원합니다. 추이 빅 데이터 연결에 대한 지원도 추가되었습니다.
+OCI GoldenGate 서비스에 이제 Microsoft SQL Server 배포 유형 및 연결을 지원합니다. 빅 데이터 연결에 대한 지원도 추가되었습니다.
 
 - Microsoft SQL Server 를 위한 Deployment Type 이 추가되어 아래와 같은 서비스에 연결들을 제공합니다.
   - Azure SQL Database
