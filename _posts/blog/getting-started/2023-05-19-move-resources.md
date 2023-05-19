@@ -37,7 +37,7 @@ header: no
 
 ### OCI 콘솔에서 구획을 이동 하는 방법
 OCI 콘솔에서 생성된 리소스는 구획 단위로 확인이 가능합니다. 만약 이미 생성한 리소스의 구획을 이동해야 하는 경우 OCI 콘솔에서 간단하게 이동할 수 있습니다.
-지금부터 OCI의 Compute Instance, Virtual Cloud Network(VCN), Load Balancer(LB), Certification(인증서), MySQL Database System(MDS) 리소스를 이동하는 방법에 대해 알아 보도록 하겠습니다.
+지금부터 OCI의 Compute Instance, Virtual Cloud Network(VCN), Object Storage(Bucket), Load Balancer(LB), Certification(인증서), MySQL Database System(MDS) 리소스를 이동하는 방법에 대해 알아 보도록 하겠습니다.
 
 ### 리소스를 이동할 구획 생성하기
 먼저 리소스를 이동할 구획을 생성해야 합니다.
@@ -135,6 +135,12 @@ VCN 리소스를 이동하기 위해서 VCN 하위에 생성되어 있는 리소
    ![](/assets/img/getting-started/2023/move-resources/move-resources-25.png " ")
 2. 이동할 구획을 선택하고 **"리소스 이동"** 버튼을 클릭합니다.
    ![](/assets/img/getting-started/2023/move-resources/move-resources-26.png " ")
+
+### 오브젝트 스토리지 (Object Storage) 구획 이동하기
+1. 오브젝트 스토리지 세부정보 화면에서 **"리소스 이동"** 버튼을 클릭합니다.
+   ![](/assets/img/getting-started/2023/move-resources/move-resources-38.png " ")
+2. 이동할 구획을 선택하고 **"리소스 이동"** 버튼을 클릭합니다.
+   ![](/assets/img/getting-started/2023/move-resources/move-resources-39.png " ")
 
 ### 로드 밸런서 (Load Balancer) 구획 이동하기
 1. 로드 밸런서 세부정보 화면에서 **"리소스 이동"** 버튼을 클릭합니다.
