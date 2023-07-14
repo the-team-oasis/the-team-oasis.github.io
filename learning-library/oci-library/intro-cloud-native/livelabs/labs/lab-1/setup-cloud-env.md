@@ -66,16 +66,19 @@
       - Compartment: **CloudNativeHandsOn**
       - Kubernetes Version: **최신 버전으로 선택**
       - Kubernetes API Endpoint: **Public Endpoint**
+      - Node Type: **Managed**
       - Kubernetes Worker Nodes: **Private Worker Nodes**
       - OCPU: **1**
       - Memory: **16**
       - Number of nodes: **3**
 
-   ![Cluster Details](images/OKE-create-cluster-details-ko.png " ")
+   ![Cluster Details](images/OKE-create-cluster-details-ko-1.png " ")
+   ![Cluster Details](images/OKE-create-cluster-details-ko-2.png " ")
+   ![Cluster Details](images/OKE-create-cluster-details-ko-3.png " ")
 
    모든 항목을 입력/선택하였으면, **Next**를 클릭합니다.
 
-1. 생성되는 리소스를 최종 확인한 후 **Create Cluster** 버튼을 클릭합니다.
+1. 생성되는 리소스를 최종 확인한 후 **Basic Cluster** 생성 확인을 체크합니다. 만일 체크하지 않는 경우에는 **Enhanced Cluster** 유형의 클러스터로 생성됩니다. (Cluster 관리비용 발생) **Create Cluster** 버튼을 클릭합니다.
 
    ![Cluster Info](images/OKE-create-cluster-details-review-ko.png " ")
 
@@ -97,19 +100,17 @@
 
    ![Access Cluster](images/OKE-cloud-shell-create-kubeconfig-ko.png " ")
 
-1. `kubectl` 명령어로 클러스터에 접속하는지 확인합니다.
+1. `kubectl` 명령어로 클러스터 정보를 확인합니다.
 
     ````shell
     <copy>
-    kubectl get cs
+    kubectl cluster-info
     </copy>
     ````
 
     ````shell
-    NAME                 STATUS    MESSAGE             ERROR
-   scheduler            Healthy   ok                  
-   controller-manager   Healthy   ok                  
-   etcd-0               Healthy   {"health":"true"}
+    Kubernetes control plane is running at https://138.2.126.7:6443
+    CoreDNS is running at https://138.2.126.7:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
     ````
 
 1. 다음 명령어로 kubectl client와 kubernetes server의 버전을 확인합니다.

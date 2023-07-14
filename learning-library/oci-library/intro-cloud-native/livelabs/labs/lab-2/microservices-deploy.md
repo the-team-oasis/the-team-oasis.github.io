@@ -2,7 +2,7 @@
 
 ## 소개
 
-Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스를 OKE 환경에 배포하는 과정입니다.
+Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스를 OKE 환경에 배포하는 과정입니다.
 
 소요시간: 30 minutes
 
