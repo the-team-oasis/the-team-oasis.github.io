@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment    
+metadata:
+  labels:
+    app: ${APP_NAME}
+  name: ${APP_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+app: ${APP_NAME}
+    spec:
+      containers:
+      - name: ${APP_NAME}
+image: ${OCIR_PATH}:${TAG}
+      imagePullSecrets:
+      # - name: <생성한 Secret의 이름을 입력합니다>
+      - name: regcred-yhcho
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${APP_NAME}-service
+  annotations:
+    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "100"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: ${APP_NAME}
