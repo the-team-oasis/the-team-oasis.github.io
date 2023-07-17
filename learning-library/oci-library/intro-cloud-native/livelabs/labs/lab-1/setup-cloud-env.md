@@ -92,7 +92,7 @@
 
 1. **Launch Cloud Shell** 버튼을 클릭하여 Cloud Shell을 오픈합니다.
 
-> **Note**: 우측 상단에도 **Cloud Shell** 아이콘을 클릭하여 오픈할 수도 있습니다.
+> **Note**: 우측 상단의 **Cloud Shell** 아이콘을 클릭하여 오픈할 수도 있습니다.
 
    ![Access Cluster](images/OKE-access-cluster-cli-ko.png " ")
 

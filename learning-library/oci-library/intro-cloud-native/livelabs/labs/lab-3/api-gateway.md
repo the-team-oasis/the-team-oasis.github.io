@@ -52,10 +52,10 @@ API 게이트웨이는 정책, 메트릭 및 로깅을 통해 Kubernetes, Comput
 1. 앞서 생성한 Compartment (CloudNativeHandsOn)를 선택합니다.
 
 1. **Create Gateway**를 클릭합니다.
-1. 이니셜을 포함하여 Gateway 이름을 입력합니다. (e.g. `movie-gw-kdh`)
+1. 이니셜을 포함하여 Gateway 이름을 입력합니다. (e.g. `movie-gw-dankim`)
 1. Type을 선택합니다. (e.g. `public`)
-1. Newwork에서 VCN은 OKE에서 사용중인 VCN을 선택합니다. (e.g. `oke-vcn-quick-oke-cluster1-7f60d55ba`)
-1. Newwork에서 Subnet은 Public으로 노출한 Subnet을 선택합니다. (e.g. `oke-svclbsubnet-quick-oke-cluster1-7f60d55ba-regional`)
+1. Network에서 VCN은 OKE에서 사용중인 VCN을 선택합니다. (e.g. `oke-vcn-quick-oke-cluster1-7f60d55ba`)
+1. Network에서 Subnet은 Public으로 노출한 Subnet을 선택합니다. (e.g. `oke-svclbsubnet-quick-oke-cluster1-7f60d55ba-regional`)
 
     ![](images/oci-apigateway-1.png)
 
@@ -80,15 +80,44 @@ API 게이트웨이는 정책, 메트릭 및 로깅을 통해 Kubernetes, Comput
 
     ![](images/oci-apigateway-5.png)
 
+1. **Next**를 클릭한 후 Authentication (API 호출 시 인증 여부)은 No Authentication을 선택합니다.
+
+    ![](images/oci-apigateway-3-1.png)
+
 1. **Next**를 클릭한 후 **Route 1**을 등록합니다.
 
-1. PATH를 입력합니다. (e.g. `/movielist`)
-2. METHODS를 선택합니다. (e.g. `GET`)
-3. TYPE을 선택합니다. (e.g. `HTTP`)
-4. URL을 입력합니다. Lab 2에서 배포한 서비스의 **http://{EXTERNAL-IP}:30000/api/search/v1/movies** 입니다.
-5. **Next**를 클릭한 후 **Save Changes**를 클릭합니다.
+    * Path: `/movielist`
+    * Methods: `GET`
+    * Backend Type: `HTTP`
+    * URL: http://{Microprofile 서비스의 EXTERNAL-IP}:30000/api/search/v1/movies
+
+    > EXTERNAL-IP는 kubectl get svc 명령어를 통해 확인할 수 있습니다.
 
     ![](images/oci-apigateway-6.png)
+
+1. **Another route**를 클릭한 후 다음과 같이 **Route 2**, **Route 3**, **Route 4**를 추가합니다.
+
+    Route 2
+    * Path: `/movielist/{id}`
+    * Methods: `GET`
+    * Backend Type: `HTTP`
+    * URL: http://{Microprofile 서비스의 EXTERNAL-IP}:30000/api/search/v1/movies/${request.path[id]}
+
+    Route 3
+    * Path: `/moviepeople/{id}`
+    * Methods: `GET`
+    * Backend Type: `HTTP`
+    * URL: http://{SpringBoot 서비스의 EXTERNAL-IP}:31000/moviepeople/${request.path[id]}
+
+    Route 4
+    * Path: `/moviepeople/filmography/{filmography}`
+    * Methods: `GET`
+    * Backend Type: `HTTP`
+    * URL: http://{SpringBoot 서비스의 EXTERNAL-IP}:31000/moviepeople/filmography/${request.path[filmography]}
+
+1. Review 후 Create를 클릭하여 Deployment를 생성합니다.
+
+    ![](images/oci-apigateway-6-2.png)
 
 ## Task 4: API Gateway를 통해 백엔드 서비스 테스트
 
@@ -98,10 +127,82 @@ API 게이트웨이는 정책, 메트릭 및 로깅을 통해 Kubernetes, Comput
 
 1. 브라우저로 접속합니다.
 
-> **Note**: 접속 주소는 API Gateway Deployment의 Endpoint주소 + Deployment의 PATH (e.g. `/movielist`) 입니다.
+> **Note**: 접속 주소는 API Gateway Deployment의 Endpoint주소 + Deployment의 PATH입니다.
 
-JSON 형태의 결과값을 확인합니다.
-    ![](images/oci-apigateway-9.png)
-    ![](images/oci-apigateway-8.png)
+Microprofile REST (movielist) 예시
+* https://k44iwrvwjh3r2qbm2m6ydrcrrq.apigateway.ap-chuncheon-1.oci.customer-oci.com/movielist
+* https://k44iwrvwjh3r2qbm2m6ydrcrrq.apigateway.ap-chuncheon-1.oci.customer-oci.com/movielist/575264
+
+SpringBoot REST (moviepeople) 예시
+* https://k44iwrvwjh3r2qbm2m6ydrcrrq.apigateway.ap-chuncheon-1.oci.customer-oci.com/moviepeople/10081054
+* https://k44iwrvwjh3r2qbm2m6ydrcrrq.apigateway.ap-chuncheon-1.oci.customer-oci.com/moviepeople/filmography/미션 임파서블: 데드 레코닝 PART ONE
+
+## Task 5: Frontend UI 배포하기 (Optional)
+앞에서 배포한 두 개의 API를 활용한 프론트엔드 애플리케이션을 배포하겠습니다.
+
+1. 먼저 프론트엔드 애플리케이션 폴더내의 endpoints.json 파일의 내용중 endpoint 부분을 API Gateway에서 구성한 Deployment Endpoint로 수정합니다. 아래는 예시입니다.
+
+    ```shell
+    <copy>
+    vi movie/jet-movie-msa-ui/js/endpoints.json
+
+    {
+        "endpoint": "https://k44iwrvwjh3r2qbm2m6ydrcrrq.apigateway.ap-chuncheon-1.oci.customer-oci.com",
+        "image": "https://image.tmdb.org/t/p/w185"
+    }
+    </copy>
+    ```
+
+1. 이미지로 빌드 합니다.
+
+    ```shell
+    <copy>
+    cd movie/jet-movie-msa-ui
+
+    docker build -t yny.ocir.io/axiffngjdqvm/movie/helidon-movie-api-mp:dankim .
+    </copy>
+    ```
+
+1. 이미지를 푸시 합니다.
+
+    ```shell
+    <copy>
+    docker push yny.ocir.io/axiffngjdqvm/movie/helidon-movie-api-mp:dankim
+    </copy>
+    ```
+
+1. Kubernetes Manifest 파일을 열어서 **애플리케이션 태그**, **Object Storage Namespace**의 값을 변경하고 저장합니다. 
+
+    ```shell
+    <copy>
+    vi kube-jet-movie-msa-ui-config.yml
+    </copy>
+    ```
+
+1. 프론트엔드 애플리케이션을 배포합니다.
+
+    ```shell
+    <copy>
+    kubectl apply -f kube-jet-movie-msa-ui-config.yml
+    </copy>
+    ```
+
+1. External IP를 확인한 후 접속합니다.
+
+    ```shell
+    <copy>
+    kubectl get svc
+
+    NAME                                  TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)           AGE
+    service/helidon-movie-api-mp          LoadBalancer   10.96.252.217   10.0.20.138   30000:30527/TCP   4h30m
+    service/jet-movie-msa-ui              LoadBalancer   10.96.144.118   144.xxx.xxx   80:31741/TCP      8s
+    service/springboot-movie-people-api   LoadBalancer   10.96.134.69    10.0.20.147   31000:31893/TCP   20m
+    </copy>
+    ```
+
+1. http://{EXTERNAL-IP}
+
+    ![](images/jet-frontend-1.png)
+    ![](images/jet-frontend-2.png)
 
 [다음 랩으로 이동](#next)
