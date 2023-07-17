@@ -24,16 +24,27 @@
 1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **Developer Services**을 선택한 후 Application Integration의 **Notifications**를 클릭합니다.
    ![Notifications](images/notification-create-1.png " ")
 
-1. **Create Topic**을 클릭합니다.
+2. **Create Topic**을 클릭합니다.
    ![Notifications Screen](images/notification-create-2.png " ")
 
-1. 다음과 같이 입력:
+3. 다음과 같이 입력:
    - Name: Enter **TopicForDevOps\__[개인이니셜]_**
    - **Create** 클릭
    ![Notifications create](images/notification-create-3.png " ")
 
-1. 생성된 Topic을 확인합니다.
+4. 생성된 Topic을 확인합니다.
    ![Topic Screen](images/notification-create-4.png " ")
+5. "구독 생성" 버튼을 클릭하여 DevOps 프로젝트 관련 알림을 받을 구독을 구성합니다. 실습에서는 전자메일 유형으로 구성하기 위해 아래와 같이 입력하여 구독을 생성합니다.
+   - 프로토콜: **전자메일**
+   - 전자메일 : **개인 이메일 주소 입력**
+   - **생성** 버튼 클릭
+   ![Topic Screen](images/notification-create-4-1.png " ")
+6. 구독을 생성할 경우 아래와 같이 이메일이 발신되는데, 이메일 본문의 "Confirm subscription" 링크를 클릭합니다.
+   ![Topic Screen](images/notification-create-4-2.png " ")
+7. 링크를 클릭하면 아래와 같이 페이지가 열리면서 구독이 정상적으로 완료되었다는 안내를 확인할 수 있습니다.
+   ![Topic Screen](images/notification-create-4-3.png " ")
+8. 다시 토픽의 구독 목록에 보면 조금 전 생성한 구독의 상태가 "Pending"에서 "Active"로 변경되었음을 확인할 수 있습니다.
+   ![Topic Screen](images/notification-create-4-4.png " ")
 
 ## Task 2: OCI DevOps Project 생성
 
@@ -65,51 +76,89 @@
 
 1. **햄버거 메뉴**를 클릭한 후, **Identity & Security**, **Compartments**를 선택합니다.
    ![Compartments](images/identity-compartments.png " ")
-
-1. Compartments 화면에서 **OCIDevOpsHandsOn** 클릭 후 OCID를 복사해 따로 보관합니다
+2. Compartments 화면에서 **OCIDevOpsHandsOn** 클릭 후 OCID를 복사해 따로 보관합니다
    ![Compartments](images/identity-compartments-screen.png " ")
    ![Compartments](images/identity-compartment-detail.png " ")
-
-1. **햄버거 메뉴**를 클릭한 후, **Identity & Security**, **Policies**를 선택합니다.
+3. **햄버거 메뉴**를 클릭한 후, **Identity & Security**, **Domain** 메뉴를 선택한 후 동적그룹을 생성할 도메인을 클릭하여 **Dynamic Group** 메뉴를 선택합니다.)
+   ![Policies](images/identity-domain-dynamic-group.png " ")
+   - Identity Domain 이 적용되지 않은 계정에서는 **햄버거 메뉴**를 클릭한 후, **Identity & Security**, **Dynamic Group**를 선택합니다.
+     ![Policies](images/identity-dynamic-group.png " ")
+4. 복사한 구획의 OCID를 이용하여 DevOps 서비스 정책을 작성하기 위해 필요한 동적 그룹을 생성합니다.
+   - CoderepoDynamicGroup
+    ````shell
+    <copy>
+    ALL {resource.type = 'devopsrepository', resource.compartment.id = '<Compartments OCID>'}
+    </copy>
+    ````
+   - ConnectionDynamicGroup
+    ````shell
+    <copy>
+    ALL {resource.type = 'devopsconnection', resource.compartment.id = '<Compartments OCID>'}
+    </copy>
+    ````
+   - BuildDynamicGroup
+    ````shell
+    <copy>
+    ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = '<Compartments OCID>'}
+    </copy>
+    ````
+   - DeployDynamicGroup
+    ````shell
+    <copy>
+    ALL {resource.type = 'devopsdeploypipeline', resource.compartment.id = '<Compartments OCID>'}
+    </copy>
+    ````
+5. **햄버거 메뉴**를 클릭한 후, **Identity & Security**, **Policies**를 선택합니다.
    ![Policies](images/identity-policies.png " ")
-
-1. **Create Policy** 버튼을 클릭합니다
+6. **Create Policy** 버튼을 클릭합니다
    ![Policies](images/identity-policies-create-1.png " ")
-
-1. 다음과 같이 입력합니다:
-   - Name : **DevOpsPolicy**
+7. 다음과 같이 입력합니다:
+   - Name : **DevOpsPolicy_compartment**
    - Description : **DevOps 실습을 위한 Policy**
    - Comparments : **OCIDevOpsHandsOn**
    - Policy 입력 예시 **[Compartments OCID]** 에 위에서 복사한 구획의 OCID로 변환하여 입력합니다
     ````shell
     <copy>
-    Allow any-user to manage devops-family in compartment id [Compartments OCID]
-    Allow any-user to manage all-artifacts in compartment id [Compartments OCID]
-    Allow any-user to manage instance-agent-command-execution-family in compartment id [Compartments OCID]
-    Allow any-user to manage all-resources in compartment id [Compartments OCID]
-    Allow any-user to manage secret-family in compartment id [Compartments OCID]
-    Allow any-user to manage objectstorage-namespaces in compartment id [Compartments OCID]
-    Allow any-user to manage repos in compartment id [Compartments OCID]
-    Allow any-user to manage buckets in compartment id [Compartments OCID]
-    Allow any-user to manage objects in compartment id [Compartments OCID]
-    Allow any-user to manage generic-artifacts in compartment id [Compartments OCID]
+    Allow dynamic-group CoderepoDynamicGroup to read secret-family in compartment <Compartments Name>
+    Allow dynamic-group CoderepoDynamicGroup to manage devops-family in compartment <Compartments Name>
+    
+    Allow dynamic-group ConnectionDynamicGroup to read secret-family in compartment <Compartments Name>
+   
+    Allow dynamic-group BuildDynamicGroup to manage repos in compartment <Compartments Name>
+    Allow dynamic-group BuildDynamicGroup to read secret-family in compartment <Compartments Name>
+    Allow dynamic-group BuildDynamicGroup to manage devops-family in compartment <Compartments Name>
+    Allow dynamic-group BuildDynamicGroup to manage generic-artifacts in compartment <Compartments Name>
+    Allow dynamic-group BuildDynamicGroup to use ons-topics in compartment <Compartments Name>
+    
+    Allow dynamic-group DeployDynamicGroup to manage all-resources in compartment <Compartments Name>
     </copy>
     ````
-
+8. OCIR Repository를 미리 생성하지 않은 경우 루트 구획의 Repository에 자동으로 생성되기 때문에 아래와 같이 루트 구획 레벨로 정책도 작성합니다.
+   - Name : **DevOpsPolicy_root**
+   - Description : **DevOps 실습을 위한 Root Policy**
+   - Comparments : **루트 구획**
     ````shell
     <copy>
-    Allow any-user to manage devops-family in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage all-artifacts in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage instance-agent-command-execution-family in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage all-resources in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage secret-family in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage objectstorage-namespaces in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage repos in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage buckets in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage objects in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
-    Allow any-user to manage generic-artifacts in compartment id ocid1.compartment.oc1..aaaaaaaar5ipgpwetas6micvxh5coupnvlvug5wa6umt3lvzonlrgr4uwtqa
+    Allow dynamic-group BuildDynamicGroup to manage repos in tenancy
     </copy>
     ````
-    ![Policies](images/identity-policies-create-2.png " ")
+9. 만약 Jenkins와 같이 외부 CI 도구를 통해 소스코드를 빌드하고 OCIR로 결과물을 업로드하거나, DevOps의 Deployment Pipeline을 호출하기 위해서는 별도의 그룹을 만든 후 아래와 같은 정책을 추가로 작성해야 합니디ㅏ.
+   - Name : **DevOpsPolicy\_root\_jenkins**
+   - Description : **Jenkins를 이용한 DevOps 실습을 위한 Policy**
+   - Comparments : **루트 구획**
+    ````shell
+    <copy>
+    Allow group <YourGroupName> to manage repos in tenancy
+    </copy>
+    ````
 
+   - Name : **DevOpsPolicy\_compartment\_jenkins**
+   - Description : **Jenkins를 이용한 DevOps 실습을 위한 Policy**
+   - Comparments : **OCIDevOpsHandsOn**
+    ````shell
+    <copy>
+    Allow group <YourGroupName> to manage repos in compartment <Compartments Name>
+    Allow group <YourGroupName> to manage devops-family in compartment <Compartments Name>
+    </copy>
+    ````
 [다음 랩으로 이동](#next)
