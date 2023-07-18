@@ -122,8 +122,10 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     <copy>
     kubectl config set-context --current --namespace=movie-dankim
     </copy>
+    ````
+    
+    Secret 생성:
 
-    Secret 생성 :
     ````shell
     <copy>
     kubectl create secret docker-registry ocirsecret --docker-server=yny.ocir.io --docker-username={Object Storage Namespace}/oracleidentitycloudservice/{OCI Username} --docker-password='{Auth Token}' --docker-email={이메일}
