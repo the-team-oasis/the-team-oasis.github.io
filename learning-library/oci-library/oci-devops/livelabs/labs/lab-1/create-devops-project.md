@@ -142,7 +142,21 @@
     Allow dynamic-group BuildDynamicGroup to manage repos in tenancy
     </copy>
     ````
-9. 만약 Jenkins와 같이 외부 CI 도구를 통해 소스코드를 빌드하고 OCIR로 결과물을 업로드하거나, DevOps의 Deployment Pipeline을 호출하기 위해서는 별도의 그룹을 만든 후 아래와 같은 정책을 추가로 작성해야 합니디ㅏ.
+
+
+### Jenkins 등 외부 도구에서 사용하기 위한 그룹 및 사용자, 정책 작성하기
+만약 Jenkins와 같이 외부 CI 도구를 통해 소스코드를 빌드하고 OCIR로 결과물을 업로드하거나, DevOps의 Deployment Pipeline을 호출하기 위해서는 별도의 그룹 및 사용자를 생성한 후 최소한의 필요한 권한만 부여해야 합니다.
+
+1. 그룹 생성하기
+   - DevOps 서비스 관련 권한만 최소로 부여할 그룹을 생성합니다.
+   - Name : **DevOps**
+   - Description : Group for DevOps
+2. 사용자 생성하기
+   - 외부에서 Auth Token, API Key로 연동하기 위한 사용자를 생성합니다.
+   - ID : **devops_[YourInitial]**
+   - Description : User for DevOps Service
+   - 사용자를 생성한 후 1번 단계에서 생성한 그룹에 사용자를 Assign 합니다.
+3. 정책 작성하기
    - Name : **DevOpsPolicy\_root\_jenkins**
    - Description : **Jenkins를 이용한 DevOps 실습을 위한 Policy**
    - Comparments : **루트 구획**
@@ -161,4 +175,5 @@
     Allow group <YourGroupName> to manage devops-family in compartment <Compartments Name>
     </copy>
     ````
+
 [다음 랩으로 이동](#next)
