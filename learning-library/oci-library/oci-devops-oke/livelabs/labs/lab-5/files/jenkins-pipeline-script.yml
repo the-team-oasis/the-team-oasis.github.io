@@ -1,0 +1,75 @@
+import groovy.json.JsonOutput
+
+def imageTag_latest = "${params.DOCKER_REGISTRY}/${params.NAMESPACE}/${params.APPLICATION}:latest"
+def random_str = UUID.randomUUID().toString()
+def imageTag = "${params.DOCKER_REGISTRY}/${params.NAMESPACE}/${params.APPLICATION}:" + random_str
+
+def args_map = [version: "1.${BUILD_NUMBER}",OCIR_PATH: "${params.DOCKER_REGISTRY}/${params.NAMESPACE}/${params.APPLICATION}", APP_NAME: "spring-boot-docker", TAG: random_str];
+def args_json = JsonOutput.toJson(args_map)
+
+podTemplate(yaml: '''
+              kind: Pod
+              metadata:
+                name: kaniko-image-build-pod
+              spec:
+                containers:
+                - name: maven
+                  image: maven:3-openjdk-8
+                  imagePullPolicy: Always
+                  command:
+                  - sleep
+                  args:
+                  - 99d
+                - name: kaniko
+                  image: gcr.io/kaniko-project/executor:debug
+                  imagePullPolicy: Always
+                  command:
+                  - sleep
+                  args:
+                  - 99d
+                  volumeMounts:
+                    - name: registry-credentials
+                      mountPath: /kaniko/.docker
+                  tty: true
+                volumes:
+                    - name: registry-credentials
+                      secret:
+                        secretName: regcred-yhcho
+                        items: 
+                        - key: .dockerconfigjson
+                          path: config.json
+'''
+  ) {
+    
+    
+    node(POD_LABEL) {
+        stage('Git Process') {
+            
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'credForOCICodeRepo_yhcho', url: 'https://devops.scmservice.ap-chuncheon-1.oci.oraclecloud.com/namespaces/axiffngjdqvm/projects/DevOpsHandsOn_yhcho/repositories/spring-boot-docker']])
+            
+        }
+        stage('build maven project'){
+            
+            container('maven') { 
+                sh 'mvn clean install'
+                sh 'mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)'
+            }
+            
+        }
+        stage('Build Image and push') { 
+    
+            withCredentials([usernamePassword(credentialsId: 'credForOCIR_yhcho', passwordVariable: 'REGISTRY_TOKEN', usernameVariable: 'REGISTRY_USERNAME')]) {
+                container('kaniko') { 
+                    sh "executor --dockerfile=Dockerfile \
+                    --context=dir://${env.WORKSPACE} \
+                    --destination=${imageTag} \
+                    --destination=${imageTag_latest}"
+                }
+            }
+    
+        }
+        stage('Call OCI Deployment Pipeline'){
+            OCIDeployment (argumentVal: args_json, credentialsId: 'credForDevOps_yhcho', displayName: 'SpringBootDockerFromJenkins', endpoint: 'https://devops.ap-chuncheon-1.oci.oraclecloud.com', executionMode: 'ASYNC', pipelineId: 'ocid1.devopsdeploypipeline.oc1.ap-chuncheon-1.amaaaaaa3mrdaiya4otth6v7pzswifxnkozx7y3fnuk2xodmvw2vshvhhioa', pollingConfig: [pollingIntervalSeconds: 10, timeoutSeconds: 120])
+        }
+    }
+}

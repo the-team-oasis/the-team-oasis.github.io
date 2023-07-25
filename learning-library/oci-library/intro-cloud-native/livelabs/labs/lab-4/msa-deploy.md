@@ -89,7 +89,7 @@ MuShop 애플리케이션 배포 방식으로 Manual 배포(Docker)부터 자동
     namespace/mushop created
     ````
 
-1. kubectl 명령어로 위에서 생성한 Namespace에 작업을 할때마다 **--namespace=mushop** 옵션을 붙여야 합니다. 아래와 같이 context에 미리 **--namespace=mushop**을 설정하면, kubectl 명령어 실행할 때 자동으로 설정되므로, 매번 **--namespace=mushop** 옵션을 붙이지 않아도 됩니다.
+1. Context에 **--namespace=mushop**을 설정합니다.
 
     ````shell
     <copy>

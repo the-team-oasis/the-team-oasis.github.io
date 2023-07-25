@@ -14,8 +14,8 @@
             "filename": "labs/lab-1/setup-cloud-env.md"
         },
         {
-            "title": "Lab 2: Microprofile 기반의 마이크로서비스 배포",
-            "filename": "labs/lab-2/microprofile-deploy.md"
+            "title": "Lab 2: Spring Boot 및 Microprofile 기반의 마이크로서비스 배포",
+            "filename": "labs/lab-2/microservices-deploy.md"
         },
         {
             "title": "Lab 3: OCI API Gateway",
