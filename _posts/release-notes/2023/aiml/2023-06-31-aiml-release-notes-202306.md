@@ -35,7 +35,7 @@ header: no
 </div>
 
 
-## ## Accelerated Data Science 2.8.6 is released
+## Accelerated Data Science 2.8.6 is released
 * **Services:** Data Science
 * **Release Date:** June 13, 2023
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/808730ae-b28a-4025-8153-691ce33e4f20/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/808730ae-b28a-4025-8153-691ce33e4f20/){:target="_blank" rel="noopener"}
@@ -56,7 +56,7 @@ OCI Data Science 서비스에서 제공하는 Python 라이브러리 인 ADS 2.8
 - Eliminated the legacy `ads.dataflow` package from ADS.
 
 
-## ## Accelerated Data Science 2.8.7 is released
+## Accelerated Data Science 2.8.7 is released
 * **Services:** Data Science
 * **Release Date:** June 22, 2023
 * **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/55fdef5a-035f-4340-ab75-2bde25976703/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/55fdef5a-035f-4340-ab75-2bde25976703/){:target="_blank" rel="noopener"}
