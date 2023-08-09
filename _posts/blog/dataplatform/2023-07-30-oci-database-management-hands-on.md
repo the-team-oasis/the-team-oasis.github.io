@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "DataPlatform"
-title: "[Hands-On] OCI Database Management 활성화 방법 실습"
+title: "[Hands-On] OCI Database Management Service 활성화 (Enable) 방법 실습"
 teaser: "On-Premise 와 Cloud 에서 동작 중인 Oracle Database 의 관리와 모니터링을 위해 다양한 기능들을 제공하는 OCI (Oracle Cloud Infrastructure) 의 Database Management 를 활성화 하는 방법에 대해 실습해 봅니다."
 author: lim
 breadcrumb: true
@@ -35,7 +35,7 @@ header: no
 
 ### 서비스 소개
 
-데이터베이스 관리는 온프레미스 및 클라우드에서 Oracle 데이터베이스를 관리하고 모니터링하기 위한 광범위한 기능을 제공하는 클라우드 서비스입니다. 새로운 Database Management 서비스 릴리스는 이제 Management Agent를 설치하지 않고도 OCI의 가상 머신, Bare Metal 및 Exadata Cloud Service에서 Oracle Database를 지원합니다.
+OCI Database Management Service 는 온프레미스 및 클라우드에서 Oracle 데이터베이스를 관리하고 모니터링하기 위한 광범위한 기능을 제공하는 클라우드 서비스입니다. 새로운 Database Management 서비스 릴리스는 이제 Management Agent를 설치하지 않고도 OCI의 가상 머신, Bare Metal 및 Exadata Cloud Service에서 Oracle Database를 지원합니다.
 
 OCI IaaS, ExaCC, 온프레미스 또는 기타 클라우드에서 실행되는 데이터베이스의 경우 관리 에이전트를 설치하고 데이터베이스 관리 서비스에서 데이터베이스를 외부 데이터베이스 리소스로 등록해야 합니다.
 
