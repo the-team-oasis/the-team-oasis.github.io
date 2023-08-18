@@ -4,8 +4,8 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Billing & Cost"
-title: "비용 관점에서 사전 고려가 필요한 OCI의 서비스들"
-teaser: "OCI에서 제공하는 다양한 서비스들을 사용함에 있어서 비용적인 측면에서 고려해야 할 내용들을 정리하였습니다."
+title: "비용 이슈가 생길 수 있는 OCI 서비스 정리"
+teaser: "OCI에서 제공하는 다양한 서비스들을 사용함에 있어서 비용적인 측면에서 이슈가 될 만한 내용들을 정리하였습니다."
 author: dankim
 breadcrumb: true
 categories:
