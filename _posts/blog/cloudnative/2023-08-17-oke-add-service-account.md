@@ -221,6 +221,6 @@ kubectl -n kube-system delete secret <secret-name>
 kubectl -n kube-system delete secret oke-kubeconfig-sa-token
 ```
 
-## 마무리하며....
+## 마무리하며...
 이번 포스팅에서는 OKE 클러스터에 접속하기 위한 서비스 계정을 생성하고 인증 토큰을 설정하는 방법에 대해 알아보았습니다.
 이 포스팅이 도움이 되셨으면 좋겠습니다. 감사합니다.
