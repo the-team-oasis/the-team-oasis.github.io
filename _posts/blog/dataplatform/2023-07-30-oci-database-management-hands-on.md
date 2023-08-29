@@ -191,6 +191,6 @@ Base Database 서비스 Virtual Machines, Bare Metal 및 Exadata Cloud Service�
 
 Database Management 서비스에 대한 자세한 기능은 아래 블로그 글을 참조 바랍니다.
 
-- [OCI Database Management Features](dataplatform/oci-database-management-features/){:target="_blank" rel="noopener"}
+- [OCI Database Management Features](/dataplatform/oci-database-management-features/){:target="_blank" rel="noopener"}
 
 ---
