@@ -189,6 +189,8 @@ Base Database 서비스 Virtual Machines, Bare Metal 및 Exadata Cloud Service�
 이 실습에서는 CDB 에 대한 Database Managment 활성화를 수행해 보았지만, PDB 에 대한 Database Management 활성화도 동일한 방법으로 손쉽게 활성화하실 수 있습니다.
 포괄적인 데이터베이스 성능 진단, 모니터링 및 관리 기능을 시작하고 활용하십시오.
 
-Database Management 서비스에 대한 자세한 기능은 다음 블로그 글을 통해 설명드리도록 하겠습니다.
+Database Management 서비스에 대한 자세한 기능은 아래 블로그 글을 참조 바랍니다.
+
+- [OCI Database Management Features](dataplatform/oci-database-management-features/){:target="_blank" rel="noopener"}
 
 ---
