@@ -55,7 +55,7 @@ header: no
 5. 문서 이미지의 텍스트가 추출되어 각 텍스트를 선택할 수 있으며, 선택한 텍스트를 우측 Labels의 Label을 클릭하여 분류할 수 있습니다. 분류 결과는 좌측 Summary에서 확인할 수 있습니다.
    ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-5.png)
 
-
+ 
 ## Introducing Model Versioning in Model Catalogs
 * **Services:** Data Science
 * **Release Date:** Jan 17, 2023
