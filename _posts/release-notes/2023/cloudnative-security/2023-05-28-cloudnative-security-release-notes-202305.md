@@ -57,7 +57,7 @@ Node Cycling에는 다음의 두 가지 전략을 사용할 수 있습니다.
 ### maxSurge, maxUnavailable
 두 가지 전략 선택을 위해 maxSurge, maxUnavailable라는 옵션을 활용합니다. 해당 옵션은 Node Pool의 **Cycle nodes** 버튼을 클릭하면 볼 수 있습니다.
 
-![](/assets/img/cloudnative-security/2023/2023-05-28-cloudnative-security-release-notes-1.png)
+![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-05-28-cloudnative-security-release-notes-1.png)
 
 * maxSurge
   * 업그레이드 작업 중에 일시적으로 허용할 추가 Workder Node 수입니다. 추가 Worker Node 수가 많을수록 병렬로 업그레이드할 Node수가 많아지므로, 더 높은 가용성을 확보할 수 있으나, 비용은 상승할 수 있습니다.
@@ -186,7 +186,7 @@ Kubernetes에서 Ingress Controller는 Cluster로 유입되는 트래픽을 Clus
 Native Ingress Controller는 라우터 역할을 하는 OCI Load Balancer와 통합되며, OCI 인증서 서비스를 통해서 TLS/SSL 통신 설정에 사용되는 인증서를 관리하게 됩니다.
 
 **OCI Native Ingress Controller 아키텍처**
-![](/assets/img/cloudnative-security/2023/2023-05-28-cloudnative-security-release-notes-2.png)
+![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-05-28-cloudnative-security-release-notes-2.png)
 
 ### 제약사항
 OCI Native Ingress Controller는 다음의 제약 사항을 가지고 있습니다.

@@ -46,12 +46,12 @@ header: no
 ### 업데이트 내용
 이번 업데이트를 통해 노트북 세션에서 사용하는 Compute Shape에서도 Flex Shape을 선택할 수 있도록 기능이 추가 되었습니다.
 - 데이터 과학 프로젝트에서 **"노트북 세션"** -> **"노트북 세션 생성**" 버튼을 클릭합니다.
-  ![](/assets/img/aiml/2022/oci-202208-release-md-1.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202208-release-md-1.png " ")
 - 컴퓨트 섹션의 **"선택"** 버튼을 클릭합니다.
-  ![](/assets/img/aiml/2022/oci-202208-release-md-2.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202208-release-md-2.png " ")
 - AMD, Intel 계열의 Shape에서 Flex Shape이 추가된 것을 확인할 수 있습니다.
-  ![](/assets/img/aiml/2022/oci-202208-release-md-3.png " ")
-- ![](/assets/img/aiml/2022/oci-202208-release-md-4.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202208-release-md-3.png " ")
+- ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202208-release-md-4.png " ")
 
 
 ## New Languages Supported for Speech
@@ -69,4 +69,4 @@ OCI 의 AI 서비스 중 하나인 Speech 서비스는 사람의 음성을 포�
 - 이탈리아어(Italian)
 - 독일어(German)
 - 힌디어(Hindi)
-  ![](/assets/img/aiml/2022/oci-202208-release-md-5.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202208-release-md-5.png " ")

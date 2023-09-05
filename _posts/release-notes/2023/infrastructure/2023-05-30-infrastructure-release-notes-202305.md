@@ -51,11 +51,11 @@ header: no
 - Yearly
 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230728-heqq.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230728-heqq.png " ")
 
 스냅샷 보존 기간은 아래와 같습니다. 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230728-hgkg.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230728-hgkg.png " ")
 
 
 

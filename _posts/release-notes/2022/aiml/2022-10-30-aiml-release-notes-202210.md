@@ -58,11 +58,11 @@ For more information about Anomaly Detection and features in Cloud regions, see:
 
 ### 업데이트 소개
 OCI 의 AI 서비스 중 하나인 Language 서비스에 언어 번역 기능과 Custom Model Train 기능이 추가 되었습니다.
-![](/assets/img/aiml/2022/oci-202210-release-aiml-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202210-release-aiml-1.png " ")
 
 #### Language Translate 기능 추가 (번역 서비스)
 AI Language 서비스에 번역기능이 추가되었습니다. 번역기능은 사전에 학습된 모델을 기반으로 번역이 되며 아래와 같이 다양한 언어의 번역을 지원합니다.
-![](/assets/img/aiml/2022/oci-202210-release-aiml-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202210-release-aiml-2.png " ")
 
 - 지원언어 (언어 코드는 ISO 639-1 코드로 설정함 [코드정보확인](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes){:target="_blank" rel="noopener"}<br>
   - 아랍어, 브라질-포르투갈, 체코어, 덴마크어, 네덜란드어, 영어, 핀란드어, 프랑스어, 프랑스어-캐나다어, 독일어, 이탈리아어, 일본어, 한국어, 노르웨이어, 폴란드어, 루마니아어, 중국어(간체), 중국어(번체), 스페인어, 스웨덴어, 터키어

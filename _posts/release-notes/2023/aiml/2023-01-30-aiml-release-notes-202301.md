@@ -45,15 +45,15 @@ header: no
 
 ### 기능 소개
 1. 데이터셋 생성 시 데이터 집합 형식을 "Document Labeling" , 주석 클래스를 "Key Value" 로 각각 선택합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-1.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-1.png)
 2. 데이터셋에서 분류하고자 하는 Key를 Label로 지정합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-2.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-2.png)
 3. 지정한 옵션 및 입력 정보를 확인합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-3.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-3.png)
 4. 생성된 데이터셋의 레코드를 클릭하여 라벨링 합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-4.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-4.png)
 5. 문서 이미지의 텍스트가 추출되어 각 텍스트를 선택할 수 있으며, 선택한 텍스트를 우측 Labels의 Label을 클릭하여 분류할 수 있습니다. 분류 결과는 좌측 Summary에서 확인할 수 있습니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-5.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-5.png)
 
 
 ## Introducing Model Versioning in Model Catalogs
@@ -67,15 +67,15 @@ header: no
 
 ### 기능 소개
 1. 먼저 데이터 과학 프로젝트에서 "모델 버전 집합 생성" 버튼을 클릭하여 모델 버전 집합을 생성합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-6-1.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-6-1.png)
 2. 모델 버전 집합의 이름을 입하고 "생성" 버튼을 클릭합니다. **모델 버전 집합의 이름은 구획 내에서 고유해야 합니다.**
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-6.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-6.png)
 3. 모델 생성 시 사전에 생성한 모델 버전 집합을 선택하고, 버전을 식별할 수 있는 라벨을 입력 합니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-7.png)
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-8.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-7.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-8.png)
 4. 같은 버전 집합에 생성된 모델의 버전을 비교할 수 있습니다.
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-10.png)
-   ![](/assets/img/aiml/2023/oci-releasenote-202301-11.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-10.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-11.png)
 
 ## Personal Identifiable Information detection is introduced
 * **Services:** Language
@@ -124,6 +124,6 @@ OCI Language 의 PII 탐지 기능에서 식별 가능한 항목은 아래와 �
 
 ### 기능 소개
 - 개인정보가 포함된 텍스트를 OCI 콘솔에 입력하고 분석 합니다.
-  ![](/assets/img/aiml/2023/oci-releasenote-202301-12.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-12.png)
 - 분석 결과에서 개인정보 탐지가 되었는지 확인합니다. 개인 식별 정보(PII)로 탐지된 결과는 마스킹되어 반환됩니다.
-  ![](/assets/img/aiml/2023/oci-releasenote-202301-13.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-13.png)

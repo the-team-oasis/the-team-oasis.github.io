@@ -48,7 +48,7 @@ Preemptible 인스턴스가 종료되면 OKE에 알려지게 되며, 노드 인�
 
 Preemptible Capacity를 지정하기 위해서는 Cluster 생성 시 Custom Create (사용자 지정 생성)하여야 하며, Pool 구성에서 Preemptible Capacity를 선택할 수 있습니다. 또한 생성된 Cluster에서도 Node Pool을 추가할 경우 지정하여 생성할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2023/2023-04-28-cloudnative-security-release-notes-1.png)
+![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-04-28-cloudnative-security-release-notes-1.png)
 
 ## Support for Kubernetes version 1.26.2
 * **Services:** Container Engine for Kubernetes

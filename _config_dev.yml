@@ -8,6 +8,7 @@
 url: 		'http://localhost:4000'
 baseurl: 	''
 urlimg: 	'http://localhost:4000/images/'
+urlblogimg2022: 	'https://the-team-oasis.github.io/blog-images-2022'
 
 # See › https://github.com/jekyll/jekyll-gist#disabling-noscript-support
 gist:

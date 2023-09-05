@@ -57,9 +57,9 @@ NVIDIA A10 기반의 GPU를 이용한 VM 이 신규로 출시되었습니다. In
 - BM.GPU4.8
 - BM.Optimized3.36
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230427-nhsv.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230427-nhsv.png " ")
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230427-niie.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230427-niie.png " ")
 "전용 컴퓨터 클러스터"를 선택 할 수 있습니다.  
 
 

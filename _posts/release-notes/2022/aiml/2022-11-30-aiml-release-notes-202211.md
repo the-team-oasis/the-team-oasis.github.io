@@ -183,13 +183,13 @@ Document Understanding을 사용하면 사전 구축된 AI 모델로 반복적�
 
 ### Document Understanding를 통해 Document 이미지의 Key-Value 라벨링 (2023-01 추가된 기능)
 * Data Labeling 서비스에서 데이터 셋 생성 (Document Labeling, Key-Value 선택)
-![](/assets/img/aiml/2022/release-note/document-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/document-1.png)
 
 * Datasets의 Label 추가 (Key값)
-![](/assets/img/aiml/2022/release-note/document-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/document-2.png)
 
 * 생성된 레코드 라벨링 (Value 텍스트를 먼저 선택하고 우측에서 라벨 선택함)
-![](/assets/img/aiml/2022/release-note/document-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/document-3.png)
 
 * 모든 Label에 대한 텍스트를 라벨링하면 Summary 섹션에서 결과 확인할 수 있음
-![](/assets/img/aiml/2022/release-note/document-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/document-4.png)

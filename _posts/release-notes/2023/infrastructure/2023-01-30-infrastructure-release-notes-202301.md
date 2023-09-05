@@ -58,11 +58,11 @@ header: no
 
 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230303-bdd.png){:width="100%":align="center"}
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230303-bdd.png){:width="100%":align="center"}
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230303-bgj.png){:width="100%":align="center"}
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230303-bgj.png){:width="100%":align="center"}
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230303-bqb.png){:width="100%":align="center"}
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230303-bqb.png){:width="100%":align="center"}
 
 
 
@@ -75,5 +75,5 @@ header: no
 ### 서비스 소개
 compute의 인스턴스 상태지표는 컴퓨터의 인스턴스 상태 및 엑세스 가능을 모니터링하는데 도움을 줍니다. 아래 인스턴스 접근성 상태의 "instance_accessibility_status"을 사용하며 vm 인스턴스가 응답 하지 않는지 여부를 모니터링 할 수 있습니다. 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230303-bu3.png){:width="100%":align="center"}
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230303-bu3.png){:width="100%":align="center"}
 

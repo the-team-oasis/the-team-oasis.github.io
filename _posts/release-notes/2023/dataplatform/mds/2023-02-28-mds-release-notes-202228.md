@@ -42,4 +42,4 @@ header: no
 ### 서비스 소개
 MySQL 데이터베이스 서비스에는 이제 SQL 수준에서 일련의 OpenSSL 기능을 포함하는 엔터프라이즈 암호화 기능이 있습니다. MySQL Enterprise Encryption을 사용하여 공개 키 비대칭 암호화를 사용하여 서명을 암호화, 해독, 서명 및 확인하는 데이터 보호를 구현할 수 있습니다. 새로운 기능은 MySQL 구성 요소인 component_enterprise_encryption에서 제공합니다.
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230303-c31.png){:width="100%":align="center"}
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230303-c31.png){:width="100%":align="center"}

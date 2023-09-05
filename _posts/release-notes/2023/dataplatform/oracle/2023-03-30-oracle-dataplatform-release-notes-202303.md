@@ -59,7 +59,7 @@ ARM 프로세서는 가격이 저렴하고, Linear 한 Scaling 이 가능하고 
 
 - Data Flow 의 ARM Processor Shape 선택 화면
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/08.data_flow_arm.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/08.data_flow_arm.png)
 
 ##  New maintenance features available for GoldenGate
 * **Services:** GoldenGate
@@ -76,7 +76,7 @@ OCI 의 GoldneGate 서비스에 대해 이제 업그레이드를 예약하고, �
 
 - Snooze - Patch 적용을 원하는 시간에 수행하기 위해 자동 업그레이드를 중지할 수 있습니다.
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/02.oci_goldengate_upgrade.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/02.oci_goldengate_upgrade.png)
 
 ##  New Database Summary Daily and Database Summary Hourly data objects
 * **Services:** Operation Insights
@@ -92,7 +92,7 @@ OCI 의 GoldneGate 서비스에 대해 이제 업그레이드를 예약하고, �
 
 - Host Explorer 화면 예
 
-![Host Explorer](/assets/img/dataplatform/2023/release_note/202303/01.host_explorer.png)
+![Host Explorer]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/01.host_explorer.png)
 
 
 ##  New Release for Data Integration

@@ -48,7 +48,7 @@ DB 시스템의 데이터를 최신 DB 시스템 또는 특정 시점에 복원 
 
 아래 표는 지원되는 시점 복구 시나리오입니다. 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230428-buss.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230428-buss.png " ")
 
 
 
@@ -60,4 +60,4 @@ DB 시스템의 데이터를 최신 DB 시스템 또는 특정 시점에 복원 
 ### 릴리즈 내용
 최대 스토리지로 저장할 수 있는 용량이 128TB까지 확장되었습니다. 
 
-![](/assets/img/infrastructure/2023/release-note/SCR-20230427-npcj.png " ")
+![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230427-npcj.png " ")

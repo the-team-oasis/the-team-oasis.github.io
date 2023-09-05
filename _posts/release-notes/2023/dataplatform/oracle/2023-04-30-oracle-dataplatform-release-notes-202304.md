@@ -62,7 +62,7 @@ OCI GoldenGate 서비스에 이제 Microsoft SQL Server 배포 유형 및 연결
 
 - 다양하게 추가된 OCI GoldenGate Deployment Type 
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/03.oci_goldengate_deployment_type.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/03.oci_goldengate_deployment_type.png)
 
 
 ## ADDM Spotlight Integration
@@ -76,11 +76,11 @@ OCI GoldenGate 서비스에 이제 Microsoft SQL Server 배포 유형 및 연결
 
 - ADDM Spotlight Findings 화면
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/04.operation_insights_addm_spotlight_findings.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/04.operation_insights_addm_spotlight_findings.png)
 
 - ADDM Spotlight Reommendations 화면
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/05.operation_insights_addm_spotlight_recommendations.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/05.operation_insights_addm_spotlight_recommendations.png)
 
 ## New SQL Worksheet in Database Tools
 * **Services:** Operation Insights
@@ -95,16 +95,16 @@ Database Tools 는 아래와 같이 Private Endpoint 기반의 Connections 를 �
 
 - Database Tools Connection / Vault Secret
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/06.db_tools_1.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/06.db_tools_1.png)
 
 이제 Database Tools 에는 다양한 새로운 기능을 갖춘 새롭고 더욱 강력한 버전의 SQL Worksheet 가 포함되어 있습니다.
 
 - Database Tools - SQL Worksheet
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/07.db_tools_2.png)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/07.db_tools_2.png)
 
 - Explain Plan Diagram
 
-![OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202303/07.db_tools_explain_plan.jpg)
+![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202303/07.db_tools_explain_plan.jpg)
 
 ---

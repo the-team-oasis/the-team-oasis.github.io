@@ -46,19 +46,19 @@ header: no
 #### 단변량 이상 감지
 단변량 이상 탐지(UAD)는 단일 시계열 데이터에서 이상을 식별하는 문제를 말합니다. 단일 시계열 데이터에는 메트릭 또는 측정과 같은 하나의 신호에 대한 타임스탬프 값이 포함됩니다.
 이번 업데이트에서는 단변량 신호에서 다양한 유형의 이상(포인트, 집단 및 컨텍스트 이상)을 감지할 수 있는 일변량 신호의 이상 감지에 대한 완전한 지원을 제공합니다.
-![](/assets/img/aiml/2023/oci-releasenote-202301-16.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-16.png)
 
 ##### 지점 이상 감지(Point anomaly detection)
 지점 이상 탐지는 데이터 집합의 나머지 데이터와 비교하여 특이한 단일 데이터 지점을 찾습니다.
-![](/assets/img/aiml/2023/oci-releasenote-202301-17.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-17.png)
 
 ##### 집단 이상 감지(Collective anomaly detection)
 집단 이상 탐지는 전체 데이터 세트와 비교하여 관련된 이상 데이터 인스턴스를 찾습니다.
-![](/assets/img/aiml/2023/oci-releasenote-202301-18.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-18.png)
 
 ##### 상황별 이상 감지(Contextual anomaly detection)
 상황별 이상 탐지는 데이터 포인트와 관련된 상황별 속성에 대해 볼 때 비정상적인 것으로 간주되는 데이터 포인트를 찾습니다. 시간의 맥락에서 또는 계절, 주중, 주말과 같은 시간 관련 개념의 맥락에서 데이터를 보면 그러한 맥락과 직접적으로 관련된 비정상적인 행동을 드러낼 수 있습니다.
-![](/assets/img/aiml/2023/oci-releasenote-202301-19.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-19.png)
 
 ##### 기타 개선 사항  
 * 교육 및 평가 모두에 대한 성능 개선
@@ -78,7 +78,7 @@ header: no
 * 비동기 감지를 사용하는 다변량 MSET에 대한 명시적 옵션을 사용하여 서비스를 호출합니다.
 * 서비스는 내부적으로 적절하게 큰 배치 크기를 사용하여 누적 합계를 기반으로 상태를 계산합니다.
 * 이 가용성은 과거 컨텍스트를 유지함으로써 향상된 성능을 제공하므로 동기식 감지와 비교할 때 알람 누락 비율이 낮아집니다.
-  ![](/assets/img/aiml/2023/oci-releasenote-202301-20.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-20.png)
 
 ### 비동기 감지
 고객은 이제 대규모에서 초대형 데이터 세트(1억~10억 개의 데이터 포인트)에 대해 Asynchronous Detection API를 사용할 수 있습니다. 
@@ -106,6 +106,6 @@ header: no
 
 ### 업데이트 소개
 - 더 나은 성능을 위해 아이콘 캐시 메커니즘과 시작하기 노트북이 별도의 단추로 업데이트되었습니다. 시작 프로그램 시작 섹션 정보가 Environment Explorer 및 노트북 탐색기에 대한 링크, 설정 및 설명서를 포함하도록 업데이트되었습니다.
-  ![](/assets/img/aiml/2023/oci-releasenote-202301-14.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-14.png)
 - GitHub에서 예제 노트북에 대한 정보를 받도록 Notebook Explorer가 업데이트 되었으며 인터넷에 액세스할 수 없는 경우 개체 저장소 위치로 백업됩니다. Example Notebook 카드는 노트북 설명, 제목 및 개발된 콘도를 보여줍니다. [Example Notebook 링크](https://github.com/oracle-samples/oci-data-science-ai-samples/tree/master/notebook_examples){:target="_blank" rel="noopener"}
-  ![](/assets/img/aiml/2023/oci-releasenote-202301-15.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2023/oci-releasenote-202301-15.png)

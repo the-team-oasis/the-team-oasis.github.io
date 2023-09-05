@@ -118,51 +118,51 @@ header: no
 2. 다운로드 받은 데이터셋을 업로드할 버킷을 생성합니다. (**햄버거 메뉴** -> **"스토리지"** -> **"버킷"**)
    - 버킷이름 : **bucketForDemoDataset**
    
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-1.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-1.png " ")
 3. 다운로드 받은 파일의 압축을 해제하여 모두 업로드 합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-2.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-2.png " ")
 
 #### Data Labeling 생성
 1. 햄버거 메뉴를 클릭하고 **"Analytics & AI"** -> **"데이터 레이블링"** 메뉴를 클릭합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-3.png " ")
 2. **"데이터 집합"** 메뉴를 클릭하고, **"데이터 집합 생성"** 버튼을 클릭합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-4.png " ")
 3. 아래와 같이 선택 및 입력합니다.
    - 이름 : **BulkDemoDS**
    - 데이터 집합 형식 : **이미지**
    - 주석 클래스 : **단일 레이블**
    - **"다음"** 버튼을 클릭합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-5.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-5.png " ")
 4. 아래와 같이 선택 및 입력합니다.
    - "오브젝트 스토리지에서 선택" 유형을 선택합니다.
    - 버킷 : **bucketForDemoDataset** 선택
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-6.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-6.png " ")
 5. 아래와 같이 선택 및 입력합니다.
    - 레이블 추가 : dog, cat을 차례대로 입력 합니다. (단어 하나씩 입력 후 엔터)
    - **"다음"** 버튼을 클릭합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-7.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-7.png " ")
 6. 생성 정보를 확인 후 **"생성"** 버튼을 클릭하여 데이터셋을 생성합니다.
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-8.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-8.png " ")
 7. 데이터셋 생성 확인
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-9.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-9.png " ")
 
 #### 설정파일 변경
 1. config.py 파일의 내용을 변경합니다.
    - DATASET_ID : **위 단계에서 생성한 데이터 집합의 OCID를 입력합니다.**
    - ANNOTATION_TYPE : <mark>CLASSIFICATION</mark>
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-11.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-11.png " ")
 2. classification_config.py 파일의 내용을 아래와 같이 변경합니다.
    - LABELING_ALGORITHM : <mark>FIRST_LETTER_MATCH</mark>
-   ![](/assets/img/aiml/2022/oci-bulk-dls-demo-10.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-10.png " ")
 
 #### 실행 및 결과 확인
 - 터미널에서 아래와 같이 입력하여 Bulk Labeling 을 실행합니다.<br>
   <mark>$ python3 bulk_labeling_script.py</mark>
 - 실행 결과 예시 (200개 레코드 약 24초에 처리 완료)
-  ![](/assets/img/aiml/2022/oci-bulk-dls-demo-12.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-12.png " ")
 - 라벨링 결과 확인
   - 라벨링 완료된 레코드 수치 확인
-  ![](/assets/img/aiml/2022/oci-bulk-dls-demo-15.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-15.png " ")
   - 라벨링 된 레코드의 레이블 확인
-  ![](/assets/img/aiml/2022/oci-bulk-dls-demo-14.png " ")
-  ![](/assets/img/aiml/2022/oci-bulk-dls-demo-16.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-14.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-bulk-dls-demo-16.png " ")

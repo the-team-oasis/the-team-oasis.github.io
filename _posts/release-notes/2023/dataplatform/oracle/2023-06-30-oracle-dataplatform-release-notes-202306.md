@@ -53,7 +53,7 @@ BDS 3.0.22 릴리스에는 다음과 같은 새로운 기능이 추가되었습�
 
   - Cluster Profile 은 Hadoop Ecosystem 으로 추가로 설치될 Application 의 종류들이 정의된 Profile 을 의미
   - BigData Cloud Service Cluster Profile 에 추가된 Kafka profile
-  ![OCI BDS Kafka](/assets/img/dataplatform/2023/release_note/202305/03_oci_bigdata_kafka_cluster.png)
+  ![OCI BDS Kafka]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/03_oci_bigdata_kafka_cluster.png)
 
 - OCI 에서는 Kafka 기술을 두가지 쓸 수 있게 되었습니다. 첫번째는 OCI Streaming 서비스에서 Kafka Cluster 를 Managed 서비스로 사용하실 수 있고, 두번째로 OCI BDS 에 추가된 Kafka Cluster 를 통해 Hadoop 기반의 Kafka Cluster 를 사용하실 수 있게 되었습니다.
 
@@ -92,7 +92,7 @@ Data Flow Pool 은 더 빠른 시작 시간으로 Data Flow 기반 Spark Workloa
   - 일정에 따라 Pool 자동 시작 및 유휴 시간을 기준으로 자동 종료
 
 - Data Flow Pool 화면
-  ![OCI BDS Kafka](/assets/img/dataplatform/2023/release_note/202305/04_oci_dataflow_pool.png)
+  ![OCI BDS Kafka]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/04_oci_dataflow_pool.png)
 
 ## New Release for Database Management
 * **Services:** Database Management

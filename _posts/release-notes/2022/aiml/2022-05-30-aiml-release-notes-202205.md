@@ -69,13 +69,13 @@ $ python3 -m pip install oracle-ads
 ### 사전 요구 사항
 - 사용자가 별도로 도커로 빌드한 이미지가 **OCI 컨테이너 레지스트리**에 업로드 되어 있어야 합니다.
 - 업로드된 이미지의 OCID를 확인 후 복사합니다.
-![OCIR 예시](/assets/img/aiml/2022/oci-202205-release-ocir.png " ")
+![OCIR 예시]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202205-release-ocir.png " ")
 
 ### Bring Your Own Container 적용 예시
 1. **"데이터 과학"** 메뉴로 이동하여 프로젝트로 이동합니다. (프로젝트가 없는 경우 생성 필요)
-   ![BYOC 예시](/assets/img/aiml/2022/oci-202205-release-byoc-1.png " ")
+   ![BYOC 예시]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202205-release-byoc-1.png " ")
 2. **"작업생성"** 버튼을 클릭합니다.
-   ![BYOC 예시](/assets/img/aiml/2022/oci-202205-release-byoc-2.png " ")
+   ![BYOC 예시]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202205-release-byoc-2.png " ")
 3. 작업생성 화면에서 **"자체 컨테이너 적용"**을 체크하고 복사한 *컨테이너 저장소에 저장한 이미지의 OCID*를 붙여넣습니다.
-   ![BYOC 예시](/assets/img/aiml/2022/oci-202205-release-byoc-3.png " ")
+   ![BYOC 예시]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/oci-202205-release-byoc-3.png " ")
 4. 다른 선택사항을 기존과 동일하게 선택하고 **"생성"** 버튼을 클릭 합니다.

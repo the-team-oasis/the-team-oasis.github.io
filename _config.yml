@@ -39,6 +39,7 @@ improve_content: https://github.com/Phlow/feeling-responsive/edit/gh-pages
 # Markdown-Example for posts ![Image Text]({{ site.urlimg }}image.jpg)
 #
 urlimg: 'https://the-team-oasis.github.io/images/'
+urlblogimg2022_2023: 	'https://the-team-oasis.github.io/blog-images-2022-2023'
 
 # Logo size is 600x80 pixels
 logo: "oasis-team-logo-2.png"

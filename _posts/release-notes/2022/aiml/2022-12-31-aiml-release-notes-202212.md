@@ -45,11 +45,11 @@ header: no
 이전에는 다른 연장할 시간을 선택하여 선택한 시간만큼만 노트북 세션 시간을 연장할 수 있었지만, OCI 사용자의 피드백에 따라 콘솔의 기능을 변경했습니다.
 
 * 기존 세션 연장 화면 예시
-  ![](/assets/img/aiml/2022/release-note/notebook-session-1.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/notebook-session-1.png)
 * 신규 세션 연장 버튼
-  ![](/assets/img/aiml/2022/release-note/notebook-session-2.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/notebook-session-2.png)
 * 세션 연장 결과 예시
-  ![](/assets/img/aiml/2022/release-note/notebook-session-3.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/aiml/2022/release-note/notebook-session-3.png)
 
 
 ## Document Functionality is Moving to a New Service
