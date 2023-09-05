@@ -43,9 +43,9 @@ header: no
 #### Enhancements in Trace Explorer
 * Span Details Drilldowns: 스팬 속성을 포함하는 사용자 정의 가능한 URL을 사용하여 다른 Oracle Cloud Infrastructure 서비스 또는 사용자 정의 서비스에 연결하는 기능
 
-![](/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-1.png)
 
-![](/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/2022-10-30-cloudnative-security-release-notes-2.png)
 
 #### 사용 예시
 * **App Server Dashboard Drilldown:**  

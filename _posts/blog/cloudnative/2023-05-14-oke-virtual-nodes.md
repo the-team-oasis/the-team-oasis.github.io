@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -96,10 +96,10 @@ OKE Cluster 생성 시 노드 유형을 **가상(Virtual)**를 선택하거나 *
 
 이제 OKE Enhanced Cluster 및 Virtual Nodes Pool을 생성해 보도록 하겠습니다.
 1) OCI Console에서 ***개발자 서비스 > Kubernetes 클러스터(OKE)***를 차례로 클릭합니다.
-  ![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-1.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-1.png " ")
 
 2) 여기서는 **빠른 생성** 기능을 통해서 클러스터와 관련된 VCN도 자동으로 같이 생성하도록 하겠습니다.
-  ![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-2.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-2.png " ")
 
 3) 다음과 같이 입력 및 선택합니다.
   * 이름: VirtualNodesCluster1
@@ -110,16 +110,16 @@ OKE Cluster 생성 시 노드 유형을 **가상(Virtual)**를 선택하거나 *
   * 노드 수: 3
   * POD 구성: Pod.Standard.E4.Flex (AMD Shape으로 최대 64 OCPU(128 vCPU), 1TB 메모리 지원)
 
-  ![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-3.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-3.png " ")
 
 4) 모든 내용을 검토한 후 **클러스터 생성** 버튼을 클릭합니다.
-  ![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-4.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-4.png " ")
 
 5) 클러스터 목록에서 생성된 클러스터를 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-5.png " ")
 
 6) 클러스터 세부 정보에서 클러스터 유형이 **고급(Enhanced)** 인 것을 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-6.png " ")
 
 ### Mushop 배포 (MSA 기반의 이커머스 애플리케이션(Polygrot)) 및 부하 테스트
 Mushop은 오라클에서 제공하는 MSA 기반의 이커머스 데모 애플리케이션으로 여러 언어로 개발된 Polygrot 마이크로 서비스 애플리케이션입니다. 현재 Helm Chart 형태로 제공되고 있습니다.
@@ -294,4 +294,4 @@ Managed Node와는 다르게 Load Balancer 서비스를 생성할 때 자동으�
 3) External IP로 접속하면 다음과 같은 화면을 볼 수 있습니다.
 ```http://140.83.xx.xxx/```
 
-![](/assets/img/cloudnative-security/2023/oke-virtual-nodes-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oke-virtual-nodes-7.png " ")

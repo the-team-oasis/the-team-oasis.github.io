@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/

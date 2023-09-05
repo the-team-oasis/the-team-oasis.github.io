@@ -49,7 +49,7 @@ OKE Cluster에 접속하기 위해서는 기본적으로 다음 두 개의 도�
 
 ### 클러스터에 접속(Access Cluster)
 앞서 생성한 Cluster 상세 화면에서 **클러스터에 접속(Access Cluster)** 버튼을 클릭한 후 다음 스크린샷과 같이 **로컬 액세스**를 선택합니다. 그러면 로컬에서 수행해야 하는 두 개의 명령어를 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/access-oke-cluster-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/access-oke-cluster-1.png)
 
 해당 명령어를 복사해서 로컬에서 실행합니다. 우선 첫 명령어로 kubeconfig 파일을 생성하기 위한 폴더를 생성합니다.
 
@@ -82,14 +82,14 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 로컬에 OCICLI와 kubectl 설치할 환경이 안된다면, OCI Console에서 제공하는 **Cloud Shell**을 활용하여 OKE Cluster에 접속할 수 있습니다.
 
 앞서 생성한 Cluster 상세 화면에서 **클러스터에 접속(Access Cluster)** 버튼을 클릭한 후 다음 스크린샷과 같이 **Cloud Shell 접속(Cloud Shell Access)**를 선택합니다. 그러면 kubeconfig를 Cloud Shell에서 생성하는 명령어를 확인하고 복사합니다.
-![](/assets/img/cloudnative-security/2022/access-oke-cluster-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/access-oke-cluster-2.png)
 
 이제 **Cloud Shell**을 오픈합니다. 우측 상단의 **Cloud Shell** 버튼을 클릭하여 오픈합니다.
-![](/assets/img/cloudnative-security/2022/access-oke-cluster-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/access-oke-cluster-3.png)
 
 위에서 복사한 명령어를 **Cloud Shell**에서 실행한 후 동일하게 접속을 합니다.
 
-![](/assets/img/cloudnative-security/2022/access-oke-cluster-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/access-oke-cluster-4.png)
 
 
 

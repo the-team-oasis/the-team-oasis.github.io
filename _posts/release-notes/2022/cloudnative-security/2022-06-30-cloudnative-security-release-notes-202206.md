@@ -58,7 +58,7 @@ header: no
 * OKE 이미지에는 Worker Node로서 필요한 모든 구성 요소와 필수 소프트웨어가 최적화되어 포함되어 있습니다.
 * OKE 이미지는 Oracle에서 제공하며 기본 플랫폼 이미지 위에 구성됩니다.
 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-1.png)
 
 ---
 
@@ -154,7 +154,7 @@ header: no
 ### OCI Console에서 Private Endpoint 생성
 리소스 매니저의 Private Endpoint는 테라폼 구성외에도 OCI UI Console에서도 생성할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-2.png)
 
 ### Private Git Server 접속
 Private Endpoint를 활용하면 Private Git Server에 있는 테라폼 구성에 접근할 수 있습니다. 관련 가이드는 아래 링크 참고합니다.
@@ -172,7 +172,7 @@ Private Endpoint를 활용하면 Private Git Server에 있는 테라폼 구성�
 Web Application Acceleration(WAA)은 압축과 캐싱기능을 활용하여 Layer 7 Load Balancer의 트래픽 속도를 높여주는 서비스입니다.
 
 ***WAA UI***  
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-3.png)
 
 현재 WAA에서 압축을 지원하는 응답 유형은 다음과 같습니다.
 * application/atom+xml
@@ -311,7 +311,7 @@ Draining은 Kubernetes Cluster의 삭제하고자 하는 Worker Node에 있는 P
 ### Node 삭제 방법
 OKE 노드풀의 노드를 클릭한 후 작업(Action)을 선택하여 삭제(Delete Note)를 수행할 수 있으며, 삭제 대화창에서 고급 옵션 표시(Show Advanced Options)를 선택하면 다음과 같이 **Cordon** 및 **drain** 지정 옵션을 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-06-4.png)
 
 #### 축출 유예 기간 (Eviction grade period)
 축출 유예 기간은 삭제 대상 Node에 대한 **Cordoning** (스케쥴러에서 배제) 및 **Draining** (Pod를 다른 노드로 이동)하기 위한 유예 시간을 지정하는 부분으로 기본 **60**분입니다. 만약 유예 시간없이 즉시 삭제하고 싶다면, **0을** 지정합니다.

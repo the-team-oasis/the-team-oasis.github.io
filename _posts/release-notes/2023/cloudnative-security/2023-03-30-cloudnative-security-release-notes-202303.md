@@ -145,7 +145,7 @@ OKE Virtual Node 및 Virtual Node Pool 기능은 기존 Managed Node(컴퓨팅 �
 향상된 클러스터(Enhanced Cluster)에서는 클러스터당 2,000개 까지 노드 확장을 지원합니다. (기존 1,000개)  
 이 외에도 Virtual Node의 경우 리전 별 9개까지 지원하며, 하나의 Virtual Node당 500개까지 Pod를 지원합니다. (Universal Credit 기준)
 
-![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-1.png)
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-1.png)
 
 ## Support for workload identity to improve cluster security
 * **Services:** Container Engine for Kubernetes
@@ -378,7 +378,7 @@ OKE에서 지원되는 GPU Shape에 대한 자세한 정보는 아래 링크를 
 ### 릴리즈 내용
 이제 DevOps 서비스에서 Build Stage에서 사용하는 Build Runner Shape에 대해서 OCPU 수와 메모리 양(GB)을 선택하여 사용자 정의할 수 있습니다.
 
-![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-2.png)
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-2.png)
 
 > 사용자 정의의 경우 프로비저닝 시간이 더 오래 소요됩니다.
 
@@ -392,7 +392,7 @@ OKE에서 지원되는 GPU Shape에 대한 자세한 정보는 아래 링크를 
 
 > 유효성 검사가 성공하였다 하더라도 PAT가 선택한 리포지토리에 액세스할 수 있는 권한이 없는 등의 이유로 빌드가 실패할 수 있습니다.
 
-![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-3.png)
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/2023-03-30-cloudnative-security-release-notes-3.png)
 
 > 현재는 GitLab 및 Bitbucket에 대한 연결에는 유효성 검사를 지원하지 않습니다.
 

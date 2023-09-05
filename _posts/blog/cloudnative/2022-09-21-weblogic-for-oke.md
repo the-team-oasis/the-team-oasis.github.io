@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -36,7 +36,7 @@ header: no
 ### WebLogic for OCI, WebLogic for OKE
 엔터프라이즈 웹 애플리케이션 서버 시장에서 가장 인기가 높은 WebLogic 서버가 현재 OCI에서 관리형 서비스로 제공되고 있습니다. 제공되는 배포 모델은 VM에 직접 설치 구성되는 WebLogic for OCI와 OCI Container Engine인 OKE에 배포하는 WebLogic for OKE 모델 두 가지입니다. 모두 OCI의 마켓플레이스를 통해서 제공되며, OCI의 IaC 도구인 Resource Manager를 통해서 자동으로 배포가 가능합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_0.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png)
 
 이번 포스팅에서는 WebLogic을 OKE 환경에 배포하는 내용을 다루도록 합니다.
 
@@ -45,7 +45,7 @@ Kubernetes Cluster에 WebLogic Domain을 관리 배포할 수 있는 WebLogic Op
 
 [WebLogic Kubernetes Operator](https://oracle.github.io/weblogic-kubernetes-operator/)
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_0_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0_1.png)
 
 WebLogic Operator의 주요 역할은 다음과 같습니다.
 * Kubernetes의 기능으로 WebLogic 환경을 프로비저닝하고 운영하기 위한 메커니즘 제공
@@ -61,15 +61,15 @@ WebLogic Operator를 OKE를 포함하여 다른 CSP에서 제공하는 Kubernete
 ### WebLogic for OKE provisioning in OCI Marketplace
 현재 WebLogic for OKE를 OCI 마켓플레이스에서 제공하고 있습니다. OCI 마켓플레이스에서 제공되는 WebLogic for OKE 배포 아키텍처는 다음과 같습니다. 기본적으로 Jenkins나 Nginx, WebLogic Operator를 위한 Non-WebLogic Node Pool과 WebLogic 도메인을 포함되는 WebLogi Node Pool로 구성됩니다. 여기에 Jenkins나 Admin 서버등 내부에서만 접속 가능하도록 Private Load Balancer가 배포되어 연결되며, 도메인에 배포되는 애플리케이션은 Public Load Balancer가 서비스로 배포됩니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_0_3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0_3.png)
 
 WebLogic for OKE를 OCI 마켓플레이스에서 확인하려면, OCI 콘솔에 로그인 후 메뉴에서 마켓플레이스(Marketplace) > 모든 애플리케이션(All Applications)를 차례로 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_0_2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0_2.png)
 
 검색 키워드를 ```weblogic oke```로 검색하면 다음과 같이 4개의 애플리케이션이 검색됩니다. 이 중에서 필요한 애플리케이션을 선택합니다. 여기서는 **Oracle WebLogic Server Enterprise Edition for OKE BYOL**을 선택하여 진행하도록 합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_1.png)
 
 > 현재는 WebLogic Enterprise와 Suite만 제공되며, BYOL(Bring Your Own License)과 UCM중에서 선택할 수 있습니다. BYOL은 WebLogic License를 가지고 있는 경우 해당 License를 그대로 OCI에서 사용할 수 있으며, 인프라 사용 비용만 청구됩니다. UCM의 경우 WebLogic License가 없는 사용자인 경우에 구독 비용에 License를 같이 포함하여 사용할 수 있습니다. 인프라 사용비용 외에 추가 비용이 발생합니다.
 
@@ -79,10 +79,10 @@ WebLogic for OKE를 OCI 마켓플레이스에서 확인하려면, OCI 콘솔에 
 
 > 현재 OKE에 구성 가능한 버전은 12.2.1.4 버전이며, VM에 구성되는 WebLogic for OCI의 경우는 14.1.1.0 까지 지원합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_2.png)
 
 기본 설정으로 두고 다음을 클릭합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_3.png)
 
 #### 스택 구성 - WebLogic Server on Container Cluster (OKE)
 WebLogic Server on Container Cluster (OKE) 부분에 다음과 같이 입력합니다.
@@ -91,7 +91,7 @@ WebLogic Server on Container Cluster (OKE) 부분에 다음과 같이 입력합�
 * **SSH Public Key**
   * 인스턴스에 접속하기 위한 SSH Public키를 입력합니다. 가지고 있는 키가 있다면 해당 키를 사용하고, 없다면 ssh-keygen과 같은 도구를 활용하여 공개키를 생성합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_4.png)
 
 #### 스택 구성 - Network
 Network 설정에서는 VCN을 구성하게 됩니다. VCN 구성 시 미리 생성한 VCN이 있다면 해당 VCN을 활용하면 되고, 없다면 새로 생성됩니다.
@@ -116,8 +116,8 @@ Network 설정에서는 VCN을 구성하게 됩니다. VCN 구성 시 미리 생
 * **Minimum Bandwidth for Jenkins Load Balancer:** 10
 * **Maximum Bandwidth for Jenkins Load Balancer:** 100
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_5.png)
-![](/assets/img/cloudnative-security/2022/weblogic_oke_6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_6.png)
 
 #### 스택 구성 - Container Cluster (OKE) Configuration
 OKE 클러스터를 구성하기 위한 설정입니다. 다음과 같이 선택 및 입력합니다.
@@ -132,7 +132,7 @@ OKE 클러스터를 구성하기 위한 설정입니다. 다음과 같이 선택
 * **Nodes in the Node Pool for WebLogic pods:** 3
 * **PODs CIDR:** 10.96.0.0/16
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_7.png)
 
 #### 스택 구성 - Administration Instances
 WebLogic Admin 서버가 배포되는 노드를 설정합니다.
@@ -142,7 +142,7 @@ WebLogic Admin 서버가 배포되는 노드를 설정합니다.
 * **Bastion Instance Shape:** VM.Standard.E4.Flex (1 OCPU, 16GB Memory)
   * WebLogic 서버에 접속하기 위한 Bastion 서버 인스턴스
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_8.png)
 
 #### 스택 구성 - File System, Registry (OCIR), OCI Policies
 Network File Storage인 File System 설정, WebLogic Docker Image 저장소인 OCIR (Oracle Cloud Infrastructure Registry) 구성, OCI Policies 생성에 대한 설정을 합니다.
@@ -158,37 +158,37 @@ Network File Storage인 File System 설정, WebLogic Docker Image 저장소인 O
 
   ```OCIR Auth Token 생성 및 Valut Secret 생성) ``` OCIR에 연결하기 위해서는 username과 password가 필요합니다. password의 경우는 인증 토큰(Auth Token)이라는 값을 활용하는데, 인증 토큰의 경우 우측 상단 프로파일에서 사용자를 클릭한 후 왼쪽에 있는 **인증 토큰** 메뉴를 통해서 토큰을 생성할 수 있습니다.
 
-  ![](/assets/img/cloudnative-security/2022/weblogic_oke_8_1.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_8_1.png)
 
   이렇게 생성한 토큰을 OCI Vault에 저장하여야 합니다. Valut를 생성하기 위해서는 메뉴에서 **Identity & Security > Vault**로 이동하여 다음 화면과 같이 생성합니다.
 
-  ![](/assets/img/cloudnative-security/2022/weblogic_oke_8_2.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_8_2.png)
 
   Valut 저장소를 생성한 후에는 아래 화면과 같이 마스터 암호화 키(Master Encryption Keys)를 생성합니다.
 
-  ![](/assets/img/cloudnative-security/2022/weblogic_oke_8_3.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_8_3.png)
 
   이제 앞서 생성한 인증 토큰을 암호(Secret)에 생성합니다.
-  ![](/assets/img/cloudnative-security/2022/weblogic_oke_8_4.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_8_4.png)
 
   **OCI Policies**
   * **OCI Policies:** 체크
     * Resource Manager Stack 실행시에 앞서 생성한 Valut Secret과 Oracle Database등의 접근을 허용하기 위한 Policy를 자동으로 생성해줍니다.
 
-  ![](/assets/img/cloudnative-security/2022/weblogic_oke_9.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_9.png)
 
 이제 모든 스택 구성이 완료되었습니다. **다음** 버튼을 눌러서 최종 검토를 한 후에 **생성** 버튼을 클릭하여 스택 생성 및 Job을 실행합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_10.png)
 
 **프로비저닝 진행**
-![](/assets/img/cloudnative-security/2022/weblogic_oke_12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_12.png)
 
 **프로비저닝 완료**
-![](/assets/img/cloudnative-security/2022/weblogic_oke_14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_14.png)
 
 **출력된 결과 확인**
-![](/assets/img/cloudnative-security/2022/weblogic_oke_15.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_15.png)
 
 ### WebLogic 도메인 생성 
 OKE Cluster에 WebLogic가 완료되었습니다. 이제 Jenkins를 활용하여 WebLogic Domain을 구성해 보도록 하겠습니다. Jenkins 서버는 Private Subnet에 구성되어 있기 때문에 Bastion 서버를 활용하여 터널링을 통해 접속해야 합니다. 먼저 SOCKS Proxy 구성을 다음과 같이 진행합니다. (아래는 MacOS에서 SOCKS Proxy 설정한 화면)
@@ -206,7 +206,7 @@ ssh -D 1088 -fCqN -i ~/.ssh/id_rsa opc@146.56.41.162
 2) SOCKS Proxy 설정
 * **SOCKS Proxy Server:** localhost:1088
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_16.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_16.png)
 
 > SOCKS Proxy 설정은 Windows 10/11의 경우 인터넷 옵션에서 구성이 가능하며, Putty를 활용하여 구성도 가능합니다. 방법은 구글링을 해보면 많이 나와 있기 때문에 여기서는 다루지 않도록 합니다.
 
@@ -215,11 +215,11 @@ ssh -D 1088 -fCqN -i ~/.ssh/id_rsa opc@146.56.41.162
 * **Url:** http://[Private Load Balancer IP]/jenkins
 
 Jenkins 초기 화면에서 Admin 사용자를 생성합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_17.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_17.png)
 
 여러개의 빌트인된 파이프라인을 볼 수 있습니다. 여기서 **create domain** 파이프라인으로 도메인을 생성할 것입니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_18.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_18.png)
 
 Jenkins 파이프라인 화면에서 **create doamin** 을 선택한 후 다음과 같이 입력 및 선택합니다.
 * **Domain_Name:** okedomain(특수문자 허용하지 않습니다. 특수 문자가 들어간 경우 파이프라인 실행 시 오류 발생합니다.)
@@ -230,14 +230,14 @@ Jenkins 파이프라인 화면에서 **create doamin** 을 선택한 후 다음�
 * **Patch Automatically:** 체크
 그 외 모두 기본으로 둔 상태에서 **빌드하기** 버튼을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_19.png)
-![](/assets/img/cloudnative-security/2022/weblogic_oke_20.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_19.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_20.png)
 
 **실행 로그**
-![](/assets/img/cloudnative-security/2022/weblogic_oke_21.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_21.png)
 
 **Stage View**
-![](/assets/img/cloudnative-security/2022/weblogic_oke_22.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_22.png)
 
 다음 정보로 웹로직 관리 콘솔에 로그인을 합니다.
 # Weblogic Server 로그인 정보
@@ -245,33 +245,33 @@ Jenkins 파이프라인 화면에서 **create doamin** 을 선택한 후 다음�
 * **ID:** weblogic
 * **PW:** welcome1
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_23.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_23.png)
 
 정상적으로 로그인이 되었습니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_24.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_24.png)
 
 Admin 서버와 2개의 Managed Server가 동작하고 있는 것을 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_25.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_25.png)
 
 ### Sample Application 배포
 이번에는 샘플 애플리케이션을 웹로직 서버에 배포해보도록 합니다. Jenkins 파이프라인에서 **sample App**을 선택합니다. 아래 화면과 같이 배포할 도메인을 선택하고 실패 시 롤백이 되도록 **Rollback_On_Failure**를 체크한 후 **빌드하기**버튼을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/weblogic_oke_26.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_26.png)
 
 배포가 되면 External Load Balancer가 서비스로 배포됩니다. 다음과 같이 접속할 수 있습니다.
 
 * https://[External Load Balancer IP]/sample-app/
-![](/assets/img/cloudnative-security/2022/weblogic_oke_31.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_31.png)
 
 ### Jenkins에서 Groovy Script 사용 허용
 파이프라인을 다시 실행하려고 하면, 처음에 리스트가 보였던 선택박스에 아무것도 나오지 않는 것을 볼 수 있습니다. WebLogic for OKE를 위한 대부분의 Jenkins Pipeline에서 Groovy Script를 사용하고 있는데, 이 부분을 사용하도록 허용하지 않아서 나오는 현상입니다. Jenkins에서 Groovy Script를 사용하도록 허용하기 위해서 다음과 같이 Jenkins 관리 화면으로 이동합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_27.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_27.png)
 
 **In-process Script Approval**을 클릭합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_28.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_28.png)
 
 모든 스크립트를 **Approve** 합니다.
-![](/assets/img/cloudnative-security/2022/weblogic_oke_29.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_29.png)
 
 지금까지 OCI 마켓플레이스를 통해서 WebLogic for OKE를 프로비저닝해보고, 웹로직 도메인 생성, 샘플 애플리케이션 배포까지 해보았습니다. 도메인 자체를 컨테이너 이미지화 하여 관리하고, 배포/확장/패치등을 CI/CD 파이프라인으로 자동화도 할 수 있도록 지원합니다. 사실 근래에 많은 애플리케이션이 Kubernetes 환경에서 운영이 되고 있고, DevOps 자동화 환경도 이에 맞춰서 운영이 되는 추세이기 때문에, 이러한 경험을 그대로 WebLogic 기반의 Java EE 애플리케이션 운영에도 적용할 수도 있으며, Kubernetes 환경에서 Java EE 애플리케이션 뿐 아니라 다양한 언어로 개발된 애플리케이션과의 연계가 용이한 환경도 훨씬 효율적으로 구성 가능할 것으로 기대됩니다.
 

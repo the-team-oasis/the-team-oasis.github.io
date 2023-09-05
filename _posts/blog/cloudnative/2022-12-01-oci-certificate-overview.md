@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -48,13 +48,13 @@ TLS를 적용하려면 SSL 인증서라고 하는 TLS 인증서를 사용해야 
 #### OCI 인증서 관리 기능 소개
 - **유연한 개인 Certificate Authority 계증 구현** - 손쉽게 개인 root CA 와 subordinate CA를 생성 가능
   - 최대 10개 단계 깊이까지 생성 가능한 CA 계층의 Trust Chain을 통해 유연성과 보안을 확보할 수 있습니다.
-  - ![](/assets/img/cloudnative/2022/certificates/certificates-1.png " ")
+  - ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2022/certificates/certificates-1.png " ")
 - **유연한 인증서 생성** - 인증서 자동 배포 기능
   - 내부 CA를 사용하여 인증서를 쉽게 생성하고 배포하거나, CSR(인증서 서명 요청)을 인증서 서비스로 가져오거나 기존에 타 기관에서 발급받은 인증서를 업로드하여 통합 서비스에 자동 배포할 수 있습니다.
-  - ![](/assets/img/cloudnative/2022/certificates/certificates-2.png " ")
+  - ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2022/certificates/certificates-2.png " ")
 - **손쉬운 OCI 서비스 통합** - OCI Load balancer 또는 API Gateway와 간편한 서비스 통합 기능
   - OCI 인증서를 로드 밸런서 또는 API 게이트웨이와 쉽게 통합할 수 있습니다. Oracle Cloud Infrastructure Certificates는 인증서 모니터링, 배포 및 자동 갱신기능을 제공하기 때문에 만료된 사용자가 인증서 만료를 걱정을 덜 수 있습니다.
-  - ![](/assets/img/cloudnative/2022/certificates/certificates-3.png " ")
+  - ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2022/certificates/certificates-3.png " ")
 
 #### OCI 인증서 리소스를 통합할 수 있는 OCI 서비스 
 아래 내용은 2022년 12월을 기준으로 작성되었습니다.

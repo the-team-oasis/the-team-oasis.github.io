@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -75,34 +75,34 @@ $ docker push icn.ocir.io/axwawciiyibv/springboot-movie-people-api:latest
 ```
 
 OCIR에 이미지가 올라온 것을 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-1.png " ")
 
 #### Container Instance 프로비저닝
 Container Instance 생성을 위해 **메뉴 > 개발자 서비스(Developer Services) > 컨테이너 인스턴스(Container Instances)**로 이동한 후 컨테이너 인스턴스 생성(Create Container Instance) 버튼을 클릭합니다.
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-2.png " ")
 
 Container instance 이름, 구획, 배치할 가용성 도메인, Shape과 CPU/Memeory, 네트워킹 구성을 합니다. 네트워킹에서는 미리 생성한 VCN을 활용할 것이며, SpringBoot 서비스에서 사용할 8080 포트를 Security List에서 오픈해줘야 합니다. VCN 생성은 아래 포스트를 참고합니다.
 
 [OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기](https://the-team-oasis.github.io/getting-started/create-vcn/)
 
 **Container instance 이름, 구획, 배치할 가용성 도메인, Shape과 CPU/Memeory 설정**
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-3.png " ")
 
 **네트워킹 설정**
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-4.png " ")
 
 다음을 클릭한 후 Container 설정을 합니다. 컨테이너의 경우 한 개 이상의 컨테이너를 추가할 수 있습니다. 이미지 선택을 클릭한 후 앞에서 OCIR에 올린 이미지를 선택합니다. 사용자 이름과 암호는 앞서 이미지 푸시할 때 사용한 아이디와 암호를 사용합니다. 외부 레지스트리의 경우 기본은 도커허브(index.docker.io)이며, 그외 다른 3-party의 레지스트리(AWS ECR, Harbor, 다른 테넌시의 OCIR등)도 가능합니다.
 
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-5.png " ")
       
 마지막으로 다음을 클릭한 후 생성 버튼을 클릭합니다.
 
 정상적으로 Container Instance가 생성되었습니다. 
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-6.png " ")
 
 이제 공용 IP 주소(Container Instance 상세 페이지에서 확인)를 활용하여 서비스를 호출해봅니다.  
 **http://[공용 IP 주소]:8080/moviepeople**
-![](/assets/img/cloudnative-security/2023/oci-container-Instances-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-container-Instances-7.png " ")
 
 ### 참고
 * [https://blogs.oracle.com/cloud-infrastructure/post/announcing-the-availability-of-oci-container-instances](https://blogs.oracle.com/cloud-infrastructure/post/announcing-the-availability-of-oci-container-instances)

@@ -36,19 +36,19 @@ header: no
 ### DevOps
 데브옵스(DevOps)는 소프트웨어의 개발(Development)과 운영(Operations)의 합성어로서, 소프트웨어 개발자와 정보기술 전문가 간의 소통, 협업 및 통합을 강조하는 개발 환경이나 문화를 의미합니다. (출처: 위키백과)
 
-![](/assets/img/cloudnative-security/2022/devops.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/devops.png)
 
 DevOps를 예전에는 운영조직이 단순히 운영적인 측면만 부각해서 적용하거나, 혹은 개발자가 운영까지 모두 책임져야만 하는 그런 경우들이 많았었는데, 근래에는 DevOps만을 위한 별도의 전담팀을 두는 경우가 점점 많아지고 있는 거 같습니다. DevOps를 위한 전담팀은 보통 그들의 환경에 적합한 올바른 도구를 찾아서, 이를 쉽고 효율적으로 운영하기 위한 전략을 고민하게 됩니다. 이러한 고민을 조금이나마 덜어주기 위해서 각 클라우드 프로바이더들은 잘 구성된 DevOps 지원을 위한 서비스들을 제공하고 있는데, OCI DevOps 서비스도 이러한 End-to-End DevOps 자동화를 위한 서비스라고 볼 수 있습니다. 
 
 ### OCI DevOps Service
-![](/assets/img/cloudnative-security/2022/oci-devops-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-1.png)
 OCI DevOps 서비스는 소스관리부터, 빌드, 테스트 및 배포의 전반적인 엔드투엔드 DevOps를 지원합니다. 홈페이지상에서는 비용이 무료라고 나와 있는데, 서비스 자체에 적용된 비용은 없지만, 코드 저장을 위한 스토리지 비용이나, 빌드 및 배포과정에서 사용된 자원들(예, 로그, 알림, 빌드 환경등)에 대해서는 비용이 발생합니다. 하지만 사용시에만 발생하고, 활용 자원에 대한 비용도 저렴해서 가격에 대한 장점은 분명히 있다고 생각됩니다.
 
 OCI DevOps의 경우에는 하나의 DevOps 프로젝트(OCI에서는 DevOps 프로젝트를 하나 생성하는것 부터 시작)내에 코드관리부터, 빌드, 파이프라인, 배포, 모니터링등의 기능들이 모두 같이 포함됩니다. 보통 타사의 경우 필요한 부분만(예를 들면, 빌드) 활성화 해서 사용이 가능한 반면에 OCI의 경우는 프로젝트 단위로 생성해서 사용하도록 되어 있는데, 각 단계별로 별도의 통제가 필요하거나, 혹은 따로 모니터링을 해야 하는 경우와 같이 세심하게 관리는 어렵겠지만, 전체 과정을 하나의 프로젝트에서 통합 관리함으로써 관리상의 편리함에 대한 이점은 있다고 볼 수 있습니다.
 
 ***DevOps 프로젝트 화면***  
 DevOps 프로젝트 생성후에 프로젝트 상세화면에 들어가면 우측에 코드관리, 빌드, 배포, 모니터링과 관련된 모든 메뉴를 볼 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-devops-0.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-0.png)
 
 ### SCM
 #### 1. Code Repositories
@@ -61,10 +61,10 @@ OCI에서는 Maven이나 Python Repository와 같이 패키지화된 소프트�
 빌드 파이프라인은 워크플로우를 쉽게 구성하기 위한 UI를 제공하는데, 기본적으로 하나의 파이프라인에 다음 4개의 스테이지를 사용할 수 있습니다. 파이프라인에서 스테이지를 추가하기 위해서는 **+** 버튼을 클릭한 후 추가하기 위한 스테이지 목록에서 스테이지를 선택합니다.
 
 ***빌드 파이프라인 화면***
-![](/assets/img/cloudnative-security/2022/oci-devops-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-2.png)
 
 ***빌드 파이프라인에 스테이지 추가***
-![](/assets/img/cloudnative-security/2022/oci-devops-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-4.png)
 
 
 * **Managed Build:**  
@@ -82,10 +82,10 @@ OCI DevOps에서 제공되는 빌드 러너를 이용해서 빌드 및 테스트
 빌드 파이프라인과 마찬가지로 워크플로우 구성을 위한 UI를 제공하고 있으며 다음과 같은 스테이지를 사용할 수 있습니다. 아래 내용을 보면 알겠지만, 현재 배포환경의 경우 OKE, Instance Group, Functions을 지원하고 있습니다. 크게 3개의 영역으로 나눠서 스테이지를 제공합니다.
 
 ***배포 파이프라인 화면***
-![](/assets/img/cloudnative-security/2022/oci-devops-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-3.png)
 
 ***배포 파이프라인에 스테이지 추가***
-![](/assets/img/cloudnative-security/2022/oci-devops-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-devops-5.png)
 
 #### 1. Deploy
 * **Apply manifest to your Kubernetes cluster:**  

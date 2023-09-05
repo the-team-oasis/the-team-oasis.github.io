@@ -446,34 +446,34 @@ Apply complete! Resources: 30 added, 0 changed, 0 destroyed.
 OCI Console에 접속해서 실제 리소스가 생성된 것을 확인할 수 있습니다.
 
 **Group**
-![](/assets/img/cloudnative-security/2022/oci-tf-groups.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-groups.png)
 
 **Group**
-![](/assets/img/cloudnative-security/2022/oci-tf-groups.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-groups.png)
 
 **Compartment**
-![](/assets/img/cloudnative-security/2022/oci-tf-compartments.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-compartments.png)
 
 **Policy**
-![](/assets/img/cloudnative-security/2022/oci-tf-policy.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-policy.png)
 
 **Compute (2nodes, VM-Standard-2.1)**
-![](/assets/img/cloudnative-security/2022/oci-tf-compute.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-compute.png)
 
 **VCN**
-![](/assets/img/cloudnative-security/2022/oci-tf-vcn.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-vcn.png)
 
 **Function**
-![](/assets/img/cloudnative-security/2022/oci-tf-function.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-function.png)
 
 **Container (1node, VM-Standard-E2.1)**
-![](/assets/img/cloudnative-security/2022/oci-tf-oke.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-oke.png)
 
 **Autonomous Database**
-![](/assets/img/cloudnative-security/2022/oci-tf-adb.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-adb.png)
 
 **Autonomous Data Warehouse**
-![](/assets/img/cloudnative-security/2022/oci-tf-adw.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-tf-adw.png)
 
 
 ### run_tf.sh

@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -373,11 +373,11 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 #### 4. OKE Cluster 생성
 이제 OKE Cluster를 생성합니다. OCI Console 왼쪽 상단 메뉴 버튼을 클릭한 후 **개발자 서비스(Developer Services) > Kubernetes 클러스터(OKE) (Kubernetes Clusters (OKE))**를 차례로 선택합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-5.png)
 
 **클러스터 생성(Create Cluster)** 버튼을 클릭한 후 **사용자정의 생성(Custom Create)**를 선택하고 **제출(Submit)** 버튼을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-6.png)
 
 클러스터 정보를 다음과 같이 입력/선택 합니다.
 
@@ -385,7 +385,7 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 * **구획(Compartment):** 클러스터 생성을 위한 구획 선택
 * **Kubernetes 버전:** v1.24.1 (현재 최신 버전)
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-7.png)
 
 네트워크 설정에서는 다음과 같이 구성합니다.
 
@@ -396,7 +396,7 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 * **API 끝점에 공용 IP 주소 지정(Assign a public IP address to the API endpoint):** 선택
   * Cluster 구성 후 바로 확인할 수 있도록 공용 IP주소를 할당합니다.
 
-![](/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-1.png)
 
 노드 풀을 다음과 같이 설정합니다.
 * **이름(Name):** pool1
@@ -416,15 +416,15 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
   * **워커 노드 서브넷(Worker node subnet):** 전용 서브넷-my-vcn
   * **결함 도메인(Fault domains)):** 선택 안함
 
-![](/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-2.png)
 
 마지막으로 모든 설정을 검토하고 클러스터 생성(Craete Cluster) 버튼을 클릭하여 클러스터를 생성합니다.
 
-![](/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-3.png)
 
 #### 5. OKE Cluster 생성 확인 및 접속
 OKE Cluster가 생성되고 노드풀에 3개의 노드가 모두 활성 상태인 것을 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oke-cluster-with-flannel-cni-4.png)
 
 OKE Cluster에 접속하는 방법은 다음 포스팅을 참고합니다.
 

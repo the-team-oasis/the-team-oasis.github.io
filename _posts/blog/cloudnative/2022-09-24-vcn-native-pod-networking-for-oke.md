@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -126,7 +126,7 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 ##### 3-2. Public Kubernetes API Endpoint 서브넷을 위한 보안 목록 규칙 생성
 보안 목록 생성은 앞서 생성한 VCN (OKEVCN)을 선택하고 왼쪽 리소스 메뉴에서 **보안 목록(Security Lists) 선택 > 보안 목록 생성 (Create Security List)**를 차례로 선택한 후 대화창에서 **다른 수신 규칙(Another Ingress Rule)**을 클릭하여 수신 규칙(Ingress Rule)을, **다른 송신 규칙(Another Egress Rule)**을 클릭하여 송신 규칙(Egress Rule)을 입력합니다. 
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-1.png)
 
 생성하기 위한 보안 목록은 다음 테이블을 참고하여 생성합니다.
 
@@ -670,12 +670,12 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 ##### 3-6. 생성된 보안 목록 규칙 확인
 아래와 같이 기본 2개의 보안목록 외에 4개의 보안 목록이 생성된 것을 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-2.png)
 
 #### 4. 서브넷 생성
 총 4개의 서브넷을 생성할 것입니다. 서브넷은 앞서 생성한 VCN(OKEVCN)을 클릭한 후 왼쪽 리소스 메뉴에서 서브넷(Subnet)을 선택 후 서브넷 생성(Create Subnet)을 클릭하여 생성합니다. 
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-3.png)
 
 생성을 위한 정보는 다음 테이블을 참고합니다.
 
@@ -769,16 +769,16 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 
 생성을 하면 서브넷 목록에서 다음과 같이 4개의 서브넷을 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-4.png)
 
 #### 5. OKE Cluster 생성
 이제 OKE Cluster를 생성합니다. OCI Console 왼쪽 상단 메뉴 버튼을 클릭한 후 **개발자 서비스(Developer Services) > Kubernetes 클러스터(OKE) (Kubernetes Clusters (OKE))**를 차례로 선택합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-5.png)
 
 **클러스터 생성(Create Cluster)** 버튼을 클릭한 후 **사용자정의 생성(Custom Create)**를 선택하고 **제출(Submit)** 버튼을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-6.png)
 
 클러스터 정보를 다음과 같이 입력/선택 합니다.
 
@@ -786,7 +786,7 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 * **구획(Compartment):** 클러스터 생성을 위한 구획 선택
 * **Kubernetes 버전:** v1.24.1 (현재 최신 버전)
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-7.png)
 
 네트워크 설정에서는 다음과 같이 구성합니다.
 
@@ -797,7 +797,7 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 * **API 끝점에 공용 IP 주소 지정(Assign a public IP address to the API endpoint):** 선택
   * Cluster 구성 후 바로 확인할 수 있도록 공용 IP주소를 할당합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-8.png)
 
 노드 풀을 다음과 같이 설정합니다.
 * **이름(Name):** pool1
@@ -819,11 +819,11 @@ VCN을 자동으로 생성하면, 기본적으로 2개의 서브넷 (Private, Pu
 * **Pod 통신(Pod communication)**
   * **서브넷(Subnet):** Private Subnet for Pods
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-9.png)
 
 마지막으로 모든 설정을 검토하고 **클러스터 생성(Craete Cluster)** 버튼을 클릭하여 클러스터를 생성합니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-10.png)
 
 #### 6. OKE Cluster 접속 및 Native Pod Network 확인
 OKE Cluster에 접속하는 방법은 다음 포스트를 참고합니다.
@@ -942,5 +942,5 @@ Events:           <none>
 
 생성된 각 Worker Node의 vNIC에도 Pod를 위한 Secondary vNIC이 존재하는 것을 확인할 수 있으며, 해당 vNIC에 31개의 Pod를 위한 IP가 지정되어 있는 것을 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-11.png)
-![](/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/vcn-native-pod-networking-for-oke-12.png)

@@ -92,4 +92,4 @@ API 게이트웨이는 모든 OAuth 2.0 호환 토큰에 대한 JWT 유효성 �
 ### 기능 소개
 OCI DevOps 서비스는 외부 코드 저장소로 GitHub, GitLab, Bitbucket Cloud, Bitbucket Server, GitLab Server를 지원하였으며, 이번에 Visual Studio Builder Studio를 추가로 지원하게 되었습니다.
 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-09-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-09-1.png)

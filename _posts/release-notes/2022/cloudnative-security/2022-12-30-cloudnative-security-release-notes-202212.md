@@ -120,10 +120,10 @@ OCI Event 서비스를 통해서 Container Instances 서비스를 자동화할 �
 ### Container Instances 생성 화면
 
 1. Add basic details
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-1.png)
 
 2. Configure containers 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-2.png)
 ---
 
 ## Support for OAuth 2.0 and OpenID Connect
@@ -138,10 +138,10 @@ OCI Event 서비스를 통해서 Container Instances 서비스를 자동화할 �
 OIDC(OpenID Connect) 프로토콜은 OAuth 2.0 프로토콜상에 있는 간단한 ID 계층입니다. OpenID Connect를 사용하면 브라우저, 모바일 애플리케이션, 데스크톱 클라이언트와 같은 다양한 유형의 애플리케이션들이 안전하고 중앙 집중식이며 표준화된 방식으로 인증 및 ID 관리를 할 수 있도록 지원합니다. OpenID Connect 프로토콜을 기반으로 하는 앱은 사용자 ID를 확인하기 위해 ID 공급자를 사용하여 인증 프로세스를 안전하게 처리합니다.
 
 #### OpenID Connect 인증 흐름
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-3.png)
 
 ### API Gateway에서의 OpenID Connect 구현
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-4.png)
 
 ### 일반적인 API 인증
 1. 타사 시스템은 ID 공급자로부터 획득한 토큰을 제시하여 게이트웨이를 통해 백엔드 서비스에 대한 액세스를 요청합니다.
@@ -167,7 +167,7 @@ OIDC(OpenID Connect) 프로토콜은 OAuth 2.0 프로토콜상에 있는 간단�
 이제 OAuth 2.0 토큰 인증 정책을 정의할 때 로그아웃 백엔드에 대한 경로를 포함하는 OAuth 2.0 유효성 검사 실패 정책을 선택적으로 지정할 수 있습니다. 로그아웃 백 엔드를 사용하면 API 클라이언트가 액세스 토큰을 취소하여 로그아웃하고 잠재적으로 다른 URL을 호출하여 추가 로그아웃 작업을 수행할 수 있습니다.
 
 **API Gateway Deployment에서 Logout URI 추가 화면**
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-5.png)
 
 ## Support for dynamically provisioning Kubernetes Persistent Volume Claims (PVCs) on new file systems in File Storage service
 * **Services:** Container Engine for Kubernetes
@@ -290,7 +290,7 @@ spec:
 ### 기능 소개
 OCI Queue 서비스는 비동기 작업을 지원하는 완전 관리형 서버리스 서비스입니다. Queue는 손실 혹은 중복 없이 독립적으로 처리된 메시지가 필요한 대용량 트랜잭션 데이터를 처리하는데 사용됩니다.
 
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-6.png)
 
 ### 개념 이해
 #### message
@@ -327,4 +327,4 @@ Consumer에게 전달되었지만 아직 삭제되지 않은 메시지 수입니
 메시지가 성공적으로 전송되지 않고 구성된 maximum delivery attempts 횟수보다 더 많은 전달 시도가 있는 경우 메시지는 Dead Letter Queue(DLQ)로 전송됩니다.
 
 ### Service Limits
-![](/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudnative-security-release-notes-12-7.png)

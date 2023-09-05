@@ -280,7 +280,7 @@ $ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaa__
 ### 자체 관리 노드 생성
 자체 관리노드를 생성하기 위해서는 Compute Instance 생성과 동일한 방법으로 생성하는데, 앞서 생성한 Cloud-init을 포함하여 생성합니다.
 
-![]({{site.urlblogimg2023}}/assets/img/cloudnative-security/2023/2023-06-28-cloudnative-security-release-notes-1.png)
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/2023-06-28-cloudnative-security-release-notes-1.png)
 
 이렇게 생성한 노드는 OKE Cluster에 포함됩니다.
 ```

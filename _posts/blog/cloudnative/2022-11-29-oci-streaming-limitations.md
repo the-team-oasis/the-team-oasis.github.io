@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -42,7 +42,7 @@ OCI Streaming Service는 OCI에서 제공하는 관리형 Apache Kafka 호환 �
 * 프로비저닝된 용량에 대한 비용은 무료이며, 사용한 만큼만 지불하는 간소화된 가격 정책을 제공합니다.
 * OCI 자체 서비스나 타사 솔루션과의 Out of box 통합을 지원합니다. (GoldenGate, Object Storage, JDBC, OIC, Splunk 등)
 
-![](/assets/img/cloudnative-security/2022/oci-streaming-limitations-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-streaming-limitations-1.png " ")
 
 ### OCI Streaming Service 제약 사항
 OCI Streaming Service를 사용하기 위해서는 기본적인 제약 사항에 대해서 알고 있어야 합니다. 제약 사항에 대해서 자세히 알아 보도록 합니다.
@@ -76,7 +76,7 @@ OCI Streaming Service를 사용하기 위해서는 기본적인 제약 사항에
    * OCI Streaming SDK의 get 메소드(Java SDK의 경우 GetMessagesRequest Class의 getLimit 메소드)에 적용
 10. Consumer Group은 Stream에 구성된 보전 기간동안 사용하지 않으면 삭제되며, Consumer Group 멤버(인스턴스)가 <mark>30초</mark> 이상 메시지 소비를 중지하면 Consumer Group에서 삭제됩니다.
    * 삭제된 멤버(인스턴스)와 기존에 연결되어 있던 Partition의 경우 다른 인스턴스에 재할당 됩니다. 이것을 <mark>Rebalancing</mark> 이라고 합니다.
-      ![](/assets/img/cloudnative-security/2022/oci-streaming-limitations-2.png " ")
+      ![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-streaming-limitations-2.png " ")
 
 ### 참고
 [https://www.oracle.com/kr/cloud/cloud-native/streaming/faq/](https://www.oracle.com/kr/cloud/cloud-native/streaming/faq/)

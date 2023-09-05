@@ -17,8 +17,8 @@ tags:
 #
 header: no
 #  image:
-#    title: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
-#     thumb: /assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#    title: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
+#     thumb: {{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/weblogic_oke_0.png
 #     homepage: mediaplayer_js-home.jpg
 #     caption: Photo by Corey Blaz
 #     caption_url: https://blaz.photography/
@@ -50,11 +50,11 @@ OpenSearch에서 사용하는 VCN을 활용해야 하므로, OKE Cluster 생성 
 
 > 참고) Fluent Bit은 Fluentd 프로젝트 에코시스템의 서브 컴포넌트이며, Fluentd의 경량화된 Forwarder 역할을 합니다. 초기에 임베디드 리눅스 환경에서 사용하기 위해 개발되어서 매우 가볍고 속도가 빠른 특징을 가지고 있습니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-2.png)
 
 OKE Cluster에 Fluent Bit와 Fluentd 구성 아키텍처입니다. Fluent Bit는 모든 노드의 로그를 수집하기 위해 DaemonSet으로 구성이 되며, 수집된 로그는 Fluentd로 전달되는 구성입니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-1.png)
 
 ### Fluent Bit 설치
 Fluent Bit을 OKE Cluster에 구성할 수 있게 Helm Chart가 제공됩니다. Helm은 쿠버네티스 패키지 매니저로 설치는 다음 링크를 참고합니다.
@@ -102,7 +102,7 @@ Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일
 
 Fluentd_values.yaml 파일내의 `<OPENSEARCH URL>`을 OCI OpenSearch URL로 변경합니다. OpenSearch URL은 생성한 OCI OpenSearch Cluster 상세 페이지에서 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-3.png)
 
 변경 예시
 ```text
@@ -263,24 +263,24 @@ Accept-Ranges: bytes
 
 메뉴에서 **Stack Management > Index Patterns**를 선택한 후 **Create index pattern** 을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-4.png)
 
 **Index pattern name**에 **fluentd**로 입력한 후 **Next Step**을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-5.png)
 
 **Time filed**를 선택한 후 **Create index pattern**을 클릭합니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-6.png)
 
 매뉴에서 **Discover**를 선택합니다. Index pattern을 **fluentd**로 변경합니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-7.png)
 
 다음과 같이 앞서 배포한 docker-hello-world 서비스에 대한 로그를 확인할 수 있습니다.
 
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-8.png)
-![](/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/opensearch-fluentbit-fluentd-9.png)
 
 ### 참고
 * https://blogs.oracle.com/cloud-infrastructure/post/using-oci-opensearch-ingest-logs-from-kubernetes-using-fluentbit-and-fluentd

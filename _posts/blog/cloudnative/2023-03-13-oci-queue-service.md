@@ -53,12 +53,12 @@ allow group <group-name> to manage queues in tenancy
 
 큐의 경우, 10MB/sec ingress and 10MB/sec data egress per queue (soft) 임계값을 초과하면 스로틀링 활성화됩니다.
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-nbln.png){:width="70%":align="right"}
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-nbln.png){:width="70%":align="right"}
 
 
 ### Queue 장점
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mecq.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mecq.png)
 
 - Enables Scaling : 메시지의 워크 로드에 따라서 자동적으로 오토스케일링이 지원됩니다.
 - Enables Decoupling : 다른 서비스와 종속되지 않은 서비스를 제공합니다.
@@ -79,15 +79,15 @@ allow group <group-name> to manage queues in tenancy
 
 
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mnlw.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mnlw.png)
 
 - "Applications & Integration"에서 Queue 서비스로 이동합니다.
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mnow.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mnow.png)
 
 - 위 화면에서 "Create Queue"를 클릭하여 Queue 서비스를 생성합니다.
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mobb.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mobb.png)
 
 - Name : Queue에 사용할 이름을 적습니다.
 - Compartment : 생성할 구획을 선택합니다.
@@ -98,16 +98,16 @@ allow group <group-name> to manage queues in tenancy
     - 최대 보존 기간 : 삭제 전까지 메시지가 대기열에 보존될 수 있는 시간입니다.
     - 전달되지 않은 메시지의 대기열 설정 (최대 전달 시도 횟수) : DLQ(전달되지 않은 메시지 대기열)로 전송되기 전 메시지 소비에 대한 최대 재시도 횟수입니다.
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-moej.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-moej.png)
 
 - 아래 생성된 큐의 상세정보를 확인할 수 있습니다.
   - 
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mqbm.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mqbm.png)
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mqew.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mqew.png)
 
-![](/assets/img/cloudnative/2023/queue/SCR-20230313-mqit.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230313-mqit.png)
 
 ### Queue 메시지 Put/Get 하기 
 아래 소스는 Java 기준으로 예시이며, OCI 라이브러리를 통해서 만들어져 있습니다. 또한 OCI-CLI를 통해서 API Key가 등록되어 있어야 합니다.
@@ -206,4 +206,4 @@ Consumer 소스 코드
 ```
 
 ### 가격
-![](/assets/img/cloudnative/2023/queue/SCR-20230314-numu.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative/2023/queue/SCR-20230314-numu.png)
