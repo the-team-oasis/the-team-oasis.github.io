@@ -43,7 +43,7 @@ header: no
 ### 기능 소개
 이제 Azure용 Oracle 데이터베이스 서비스에서 MySQL Heatwave 만들 수 있습니다.
 
-![](/assets/img/dataplatform/2022/release-note/mds/11/azure_heatwave.jpeg)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/11/azure_heatwave.jpeg)
 
 공식 문서
 * **Provisioning MySQL HeatWave:** [https://docs.oracle.com/iaas/odsaz/odsa-provisioning-mysql-heatwave.html](https://docs.oracle.com/iaas/odsaz/odsa-provisioning-mysql-heatwave.html){:target="_blank" rel="noopener"}

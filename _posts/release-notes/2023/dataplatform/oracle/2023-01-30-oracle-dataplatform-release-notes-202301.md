@@ -52,15 +52,15 @@ header: no
 
 * PDB 에 대한 Database Management 등록 및 모니터링
 
-![Database Management]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/01_database_management_overview.png)
+![Database Management]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/01_database_management_overview.png)
 
 * PDB - Database Management Enable 기능
 
-![Database Management]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/02_oci_database_management_pdb.png)
+![Database Management]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/02_oci_database_management_pdb.png)
 
 * PDB 에 대한 Database Management 등록
 
-![Database Management]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/03_oci_database_management_pdb_enable_2.png)
+![Database Management]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/03_oci_database_management_pdb_enable_2.png)
 
 <br>
 
@@ -84,9 +84,9 @@ header: no
 
 * 자동 Policy 생성 화면
 
-![Database Management]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/10_oci_database_management_policy.png)
+![Database Management]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/10_oci_database_management_policy.png)
 
-![Database Management]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/11_oci_database_management_policy_autogenerate.png)
+![Database Management]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/11_oci_database_management_policy_autogenerate.png)
 
 
 <br>

@@ -50,7 +50,7 @@ OCI Media Flow 서비스에서 서브 타이틀을 생성할때 SRT (SubRip subt
 
 * Media Flow AI Transcribe 설정 화면
 
-![Media Flow]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/04_oci_media_flow_01.png)
+![Media Flow]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/04_oci_media_flow_01.png)
 
 <br>
 
@@ -71,11 +71,11 @@ Oracle GoldenGate에서 마스터 키가 생성되면 GoldenGate가 트레일 �
 
 * GoldenGate Admin 에서 Master Key 추가 기능
 
-![GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/05_oci_goldengate_master_key.png)
+![GoldenGate]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/05_oci_goldengate_master_key.png)
 
 * OCI GoldenGate Deployment 에서 Vault 로 Master Key Export
 
-![GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/06_oci_goldengate_masterkey_export.png)
+![GoldenGate]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/06_oci_goldengate_masterkey_export.png)
 
 <br>
 
@@ -106,13 +106,13 @@ Oracle Database Zero Data Loss Autonomous Recovery Service는 OCI 에서 실행�
 
 * Oracle Database Autonomous Recovery Service (Zero Data Loss Autonomous Recovery Service)
 
-![ZDLA]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/07_oci_ars_zdla_01.png)
+![ZDLA]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/07_oci_ars_zdla_01.png)
 
 * Recovery Service Proctected Database 
 
-![ZDLA]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/08_oci_ars_zdla_02.png)
+![ZDLA]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/08_oci_ars_zdla_02.png)
 <br>
-![ZDLA]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/09_oci_ars_zdla_03.png)
+![ZDLA]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/09_oci_ars_zdla_03.png)
 
 <br>
 

@@ -46,7 +46,7 @@ OCI Media Streams는 HTTP 라이브 스트리밍(HLS)과 같은 형식으로 패
 
 다음 다이어그램은 OCI Media Flow 와 OCI Media Streams 가 어떻게 통합되는지를 나타내는 그림입니다. 
 
-![](/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
 
 ### Key Capabilities
 * Media Services에는 ABR (Adaptive Bit Rate) 스트림에 대한 대상 형식 변환, 암호화 및 비디오 분할을 위한 패키징 기능이 포함되어 있습니다. 또한 선도적인 CDN(Content Delivery Network) 파트너 생성 통합 또는 직접 서비스 에지 서비스를 사용하여 패키지된 ABR 콘텐츠의 안전하고 확장 가능한 배포를 제공합니다. Media Streams는 소스 콘텐츠에서 스트리밍 형식의 배포 및 패키징 프로세스를 단순화하고 복잡한 비디오 패키징 인프라의 원활한 관리를 가능하게 합니다.
@@ -75,7 +75,7 @@ Operations Insights는 이제 Solaris 및 Windows 호스트 플랫폼 유형을 
     - zLinux
     - Windows
 
-![](/assets/img/database/2022/09/06_operation_insights_host.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/06_operation_insights_host.png)
 
 <br>
 
@@ -112,7 +112,7 @@ Operations Insights는 이제 Solaris 및 Windows 호스트 플랫폼 유형을 
 신규 버전의 GoldenGate 서비스가 Release 되었습니다. 새로운 GoldenGate Release 에는 Oracle 데이터베이스, MySQL 및 Bigdata Deployment 유형과 이러한 Deployment 를 지원하는 다양한 DB Connection 유형이 추가되었습니다.
 추가된 Deployment Type 인 MySQL 과 BigData 도 GoldenGate 구성이 가능해졌습니다.
 
-![](/assets/img/database/2022/10/01_New-GoldenGate.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/10/01_New-GoldenGate.png)
 
 ### 신규 변경 사항
 

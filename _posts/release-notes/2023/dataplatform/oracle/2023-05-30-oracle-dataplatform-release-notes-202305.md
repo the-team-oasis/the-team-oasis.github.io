@@ -54,7 +54,7 @@ Oracle Cloud Infrastructure Media Streams 리소스는 이제 메트릭을 Monit
 
     - Matrics 화면
 
-    ![OCI GoldenGate]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/01_oci_media_streams_metrics.png)
+    ![OCI GoldenGate]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/release_note/202305/01_oci_media_streams_metrics.png)
 
 
 ## Big Data Service 3.0.21 has added additional features
@@ -74,9 +74,9 @@ BDS 3.0.21 릴리스에는 다음과 같은 새로운 기능이 추가되었습�
 - BDS Cluster 에서 Hive ACID 속성 활성화
 
   - Ambari 에서 Presto (Trino) 연결 화면
-  ![OCI Bigdata]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/05_oci_bigdata_trino.png)  
+  ![OCI Bigdata]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/release_note/202305/05_oci_bigdata_trino.png)  
   - Presto (Trino) 화면
-  ![OCI Bigdata]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/06_oci_bigdata_presto_trino.png)  
+  ![OCI Bigdata]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/release_note/202305/06_oci_bigdata_presto_trino.png)  
 
 또한 다음과 같은 버그/향상이 이루어졌습니다.
 
@@ -108,7 +108,7 @@ BDS 3.0.21 릴리스에는 다음과 같은 새로운 기능이 추가되었습�
 - 증분 백업을 시작할 Time Window 를 선택. 이 Time Window 는 L0 백업의 Time Window 와 다를 수 있음.
 - Time Window 는 2시간 일정 Window 와 기본 6 시간 Window 로 동일하게 유지
   - DBCS 자동 백업 구성 화면
-    ![Database backup]({{site.urlblogimg2023}}/assets/img/dataplatform/2023/release_note/202305/02_oci_database_backup.png)
+    ![Database backup]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/release_note/202305/02_oci_database_backup.png)
 
 ## New Release for Data Integration
 * **Services:** Database

@@ -72,32 +72,32 @@ GRANT EXECUTE ON DBMS_WORKLOAD_REPOSITORY TO dbsnmp;
 
 - 수행 결과
 
-![Terminal](/assets/img/dataplatform/2023/oracle/dbmgnt/01_oci_dbmgmt_user_unlock.png)
+![Terminal]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/01_oci_dbmgmt_user_unlock.png)
 
 ### STEP 2 : Monitoring 사용자 비밀번호를 OCI Vault 에 Secret 으로 저장
 OCI Console 의 메뉴에서 ID & Security 에서 Vault 서비스를 선택 클릭합니다.
 
-![Vault](/assets/img/dataplatform/2023/oracle/dbmgnt/02_oci_dbmgmt_vault_secret_01.png)
+![Vault]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/02_oci_dbmgmt_vault_secret_01.png)
 
 - 필요한 경우 새로운 Vault 를 생성하기 위해 Create Vault 버튼을 클릭합니다. 
 
-  ![Vault](/assets/img/dataplatform/2023/oracle/dbmgnt/03_oci_dbmgmt_vault_secret_02.png)
+  ![Vault]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/03_oci_dbmgmt_vault_secret_02.png)
 
 - Vault 저장소를 아래 그림과 같이 Vault 이름을 지정하여 Vault 를 생성합니다.
 
-  ![Vault](/assets/img/dataplatform/2023/oracle/dbmgnt/04_oci_dbmgmt_vault_secret_03.png)
+  ![Vault]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/04_oci_dbmgmt_vault_secret_03.png)
 
 - Vault 내에서 사용자 암호를 암호화하는데 사용할 키를 아래 그림과 같이 만듭니다.
 
-  ![Key](/assets/img/dataplatform/2023/oracle/dbmgnt/05_oci_dbmgmt_vault_secret_04.png)
+  ![Key]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/05_oci_dbmgmt_vault_secret_04.png)
 
 - 좌측 메뉴의 Secrets 메뉴를 클릭하여 DBSNMP 사용자에 대한 패스워드를 아래 그림과 같이 DBSNMP_DB_Password 와 같은 이름으로 저장해 줍니다.
 
-  ![Key](/assets/img/dataplatform/2023/oracle/dbmgnt/06_oci_dbmgmt_vault_secret_05.png)
+  ![Key]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/06_oci_dbmgmt_vault_secret_05.png)
 
 - Secret 생성 시 이전 단계에서 생성한 Key 를 선택하고, 저장할 비밀번호를 Secret Contents 에 입력합니다.
 
-  ![Key](/assets/img/dataplatform/2023/oracle/dbmgnt/07_oci_dbmgmt_vault_secret_06.png)
+  ![Key]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/07_oci_dbmgmt_vault_secret_06.png)
 
 ### STEP 3 : Database Management 서비스에 대한 IAM 권한 할당
 Database Management 서비스를 사용하기 위한 Identity & Access Management 에 다음의 권한을 부여합니다.
@@ -130,16 +130,16 @@ WHERE 절을 사용하여 이러한 권한을 특정 리소스로 추가로 제�
 Database Management 서비스는 VCN 내에 생성된 Private Endpoint 를 통해 클라우드 Database 와 상호 통신을 합니다. Private Endpoint 는 Cloud Database 와 동일한 Subnet 에 있을 필요는 없지만 Cloud Database 와의 통신을 허용하는 Subnet 에 있어야 합니다.
 
 - OCI Console 에서 Database Management 메뉴를 찾아 클릭합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/08_oci_dbmgmt_menu.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/08_oci_dbmgmt_menu.png)
 
 - Database Management 메뉴 중에서 Administration 의 Private Endpoints 메뉴에 Access 후 "Create private endpoint" 버튼을 클릭합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/09_oci_dbmgmt_private_endpoint_01.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/09_oci_dbmgmt_private_endpoint_01.png)
 
 - Private Endpoint 이름을 지정하고 Compartment 를 선택한 다음 VCN, Subnet 등을 선택 후 마지막에 Private Endpoint 생성 버튼을 클릭합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/10_oci_dbmgmt_private_endpoint_02.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/10_oci_dbmgmt_private_endpoint_02.png)
 
 - Private Endpoint 가 생성되면 화면과 같이 Endpoint 를 위한 Private IP 가 할당됩니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/11_oci_dbmgmt_private_endpoint_03.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/11_oci_dbmgmt_private_endpoint_03.png)
 
 ### STEP 6 : Network 구성 - Private Endpoint 와 Cloud Database 간의 Network Traffic 허용
 VCN 의 Security List 나 Security Group 에 수신 (Ingress) 및 송신 (Egress) 규칙을 추가하여 Database Management 서비스가 Private Endpoint 를 통해 Cloud Database 와 통신할 수 있도록 합니다. RAC DB 인 경우 SCAN IP 를 사용하여 Database Management 서비스와 통신하도록 설정합니다.
@@ -149,9 +149,9 @@ VCN 의 Security List 나 Security Group 에 수신 (Ingress) 및 송신 (Egress
   - Private Endpoint 의 Network Security List 에 Oracle Base Database Service 의 VM DB 시스템의 Private IP를 Egress Rule 에 추가하여 Database Management Service 가 데이터베이스에 요청을 보낼 수 있도록 Egress Rule 설정
 
 - VCN Subnet Security List 의 Ingress Rule 설정 추가 예
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/12_oci_dbmgmt_security_list_01.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/12_oci_dbmgmt_security_list_01.png)
 - VCN Subnet Security List 의 Engress Rule 설정 Egress Rule 설정 예
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/13_oci_dbmgmt_security_list_02.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/13_oci_dbmgmt_security_list_02.png)
 
 ### STEP 7 : Database Management 활성화 
 
@@ -163,26 +163,26 @@ Database Management 를 활성화하면 Full Management 또는 Base Management �
 
 - Database Management 를 Enable 하기 위해 Database Details 페이지로 Access 합니다.
 
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/14_oci_dbmgmt_enable_dbmgmt_01.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/14_oci_dbmgmt_enable_dbmgmt_01.png)
 
 - 아래로 스크롤 다운하여 Database Management Enable 을 클릭합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/15_oci_dbmgmt_enable_dbmgmt_02.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/15_oci_dbmgmt_enable_dbmgmt_02.png)
 
 - Enable 버튼 클릭 시 나타난 입력란에는 기본적인 정보들이 아래 화면과 같이 모두 입력되어 있습니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/16_oci_dbmgmt_enable_dbmgmt_03.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/16_oci_dbmgmt_enable_dbmgmt_03.png)
 
 - Enable Database Management 창을 아래로 더 스크롤 다운하여 Database Management 서비스가 연결 시 사용할 사용자 정보 DBSNMP 를 아래 화면과 같이 입력하고, STEP 2 에서 생성했던 Vault 의 Secret Key 를 선택하고, STEP 5 에서 생성했던 Private Endpoint 를 선택 후 아래로 스크롤 다운합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/17_oci_dbmgmt_enable_dbmgmt_04.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/17_oci_dbmgmt_enable_dbmgmt_04.png)
 
 - Enable Database Management 창을 아래로 더 스크롤 다운하여 Management Option 을 선택해 후 Enable Database 버튼을 클릭하여 활성화를 진행합니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/18_oci_dbmgmt_enable_dbmgmt_05.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/18_oci_dbmgmt_enable_dbmgmt_05.png)
 
 - 아래 그림과 같이 Database 의 상태가 "UPDATE" 상태로 바뀝니다.
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/19_oci_dbmgmt_enable_dbmgmt_06.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/19_oci_dbmgmt_enable_dbmgmt_06.png)
 
 - Database 의 상태가 "AVAILABLE" 상태로 바뀌면, Database Management 메뉴로 Access 를 하면 아래 그림과 같이 조금전 등록했던 Database (DBMGMT) 이름이 나타나는 것을 확인할 수 있습니다.
 
-  ![DBMGMT](/assets/img/dataplatform/2023/oracle/dbmgnt/20_oci_dbmgmt_enable_dbmgmt_07.png)
+  ![DBMGMT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/oracle/dbmgnt/20_oci_dbmgmt_enable_dbmgmt_07.png)
 
 지금까지 Database Management 서비스를 활성화하는 절차를 단계별로 설명해 보았습니다.
 Base Database 서비스 Virtual Machines, Bare Metal 및 Exadata Cloud Service에서 Oracle Cloud 데이터베이스에 대한 Database Management 서비스를 매우 쉽게 ​​활성화할 수 있습니다.

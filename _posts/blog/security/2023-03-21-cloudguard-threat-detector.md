@@ -42,18 +42,18 @@ Threat Detector는 [MITRE ATT&CK(마이터 어택)](https://attack.mitre.org/) �
 ### Cloud Guard Threat Detector 사용 방법
 Threat Detector의 경우도 다른 Detector Recipe와 마찬가지로 OCI에서 기본적으로 제공하는 Recipe인 Oracle-managed detector recipe와 사용자가 직접 정의할 수 있는 User-managed detector recipe로 제공됩니다. User-managed detector를 생성하기 위해서는 기본 제공되는 Oracle-managed Threat Detector를 선택한 후 **Clone** 버튼을 클릭하여 생성합니다. 현재 User-managed Threat Detector에서 사용자 정의할 수 있는 부분은 Detector의 상태를 **활성 혹은 비활성**으로 변경하는 부분과 특정 조건에만 동작하도록 Conditional Group을 지정하는 부분입니다.
 
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-1.png)
 
 기본 Oracle-managed Threat Detector Recipe를 활용하여도 상관없지만, 여기서는 Clone 한 Threat Recipe를 사용해 보도록 하겠습니다. Cloud Guard의 Targets 메뉴를 선택한 후 생성되어 있는 Target을 선택, Detector Recipe를 순서대로 선택합니다.
 그리고 **Add recipes**를 선택한 후 앞서 Clone 한 Threat Recipe를 선택하면 설정이 완료됩니다.
 
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-2.png)
 
 추가된 Threat Detector를 선택해보면 **Rogue User** Rule을 볼 수 있으며, 오른쪽 <svg width="15" height="15" viewBox="0 0 20 20" focusable="false" xmlns="http://www.w3.org/2000/svg" ratio="0.75"> <circle cx="10" cy="3" r="2"></circle> <circle cx="10" cy="10" r="2"></circle> <circle cx="10" cy="17" r="2"></circle></svg> 아이콘을 클릭하면 해당 Rule에 특정 조건에 Rule이 동작하도록 Conditional Group을 추가할 수 있습니다.
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-3.png)
 
 오른쪽에 있는 **⌄** 아이콘을 클릭하면 **Sighting type(목격 유형)**을 볼 수 있습니다.
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-4.png)
 
 ### Sighting Type
 Rogue User(악성 혹은 불량 사용자)를 판별하기 위한 기준으로 현재 총 7개의 Sighting Type을 제공합니다. 각 Sighting Type은 MITRE ATT&CK 프레임워크의 전략과 기술을 기반으로 동작합니다. Sighting Type의 심각도 및 신뢰도 요소에 많이 포함될수록 심각도와 확신 수준이 높아집니다.
@@ -147,7 +147,7 @@ Rogue User(악성 혹은 불량 사용자)를 판별하기 위한 기준으로 �
 
 ### 사용 사례
 아래는 Anakin이라는 사용자에 대한 Threat Detector Monitoring 화면입니다.
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-5.png)
 
 처음 Anakin 사용자에 대한 무차별 암호 대입에 대한 Sighting이 발견되었습니다. **Password Guessing**과 **Password Spraying**이 나타났지만, Anakin의 권한이 낮아 중간 정도의 심각도와 확신 수준을 보여줄 정도로 위험도가 낮아 보입니다. 
 
@@ -155,7 +155,7 @@ Rogue User(악성 혹은 불량 사용자)를 판별하기 위한 기준으로 �
 
 이는 Cloud Guard Threat Detector Recipe의 Rogue User Rule에 대한 임계치(80)를 초과하게 되고, Cloud Guard에서 Problem으로 판단하여 Cloud Guard Responder Recipe를 통해 관리자에게 경고 및 자동 혹은 수동적인 Remediation을 수행(Disable IAM User)하게 됩니다.
 
-![](/assets/img/cloudnative-security/2023/cloudguard-threat-detector-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/cloudguard-threat-detector-6.png)
 
 ### 마무리
 지금까지 2회에 걸쳐서 Cloud Guard 및 Thread Detector에 대해서 알아보았습니다. Public Cloud를 사용함에 있어서 보안은 매우 중요하고 어려운 주제이지만, 반드시 이해하고 있어야 합니다. OCI Cloud Guard는 무료 서비스이면서 다양한 기능과 최신의 보안 감지 규칙이 매우 빠르게 업데이트되고 있기 때문에 잘 활용하면 OCI 보안에 매우 도움이 될 것이라 생각됩니다.

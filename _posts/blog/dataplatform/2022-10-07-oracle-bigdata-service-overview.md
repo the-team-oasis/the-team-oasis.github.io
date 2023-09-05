@@ -37,7 +37,7 @@ header: no
 이번 글에서는 OCI 에서 제공하는 빅데이터 (Bigdata) 를 위한 Hadoop Cluster 서비스에 대해서 알아보도록 하겠습니다.
 Big Data Service는 가용성이 높은 전용 Hadoop 및 Spark Cluster를 온디맨드로 프로비저닝해 주는 서비스로써 안전하게 OCI 에서 관리되는 Managed Service 입니다. 작은 규모의 테스트 및 개발 클러스터에서부터 대규모 Production Cluster를 지원하는 다양한 Oracle Cloud Infrastructure 컴퓨팅 Shape들을 사용하여 빅 데이터 및 분석 워크로드에 맞게 클러스터를 확장하는 서비스입니다.
 
-![](/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
 
 ***Big Data Service 가 포함하고 있는 사항***
 
@@ -56,41 +56,41 @@ Big Data Service는 가용성이 높은 전용 Hadoop 및 Spark Cluster를 온�
 
 Open Source Hadoop 은 Hadoop HDFS 및 관리를 위한 Open Source 진영의 다양한 Ecosystem 들이 있습니다. Ecosystem 을 이루고 있는 Tool 들을 역할에 맞는 솔루션을 사용함으로써 완전한 Big Data 시스템을 완성하게 됩니다.
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
 
 ### OCI Big Data Cluster
 OCI 에서 Managed 서비스로 제공되는 Big Data 서비스는 손쉽게 Cluster 를 One-Click 으로 생성하게 됩니다.
 Big Data Cluster 생성을 수행하게 되면 노드들의 역할에 따라 Master Node, Utility Node, Master Node, Worker Node 들이 설치되고 각각의 노드에 Ambari, Hue, Jupyter Notebook, Ranger 등의 툴들이 자동 설치가 됩니다.
 Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하여 Scale-Out 을 원활하게 수행할 수 있게 지원합니다.
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_1.png)
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_2.png)
 
 * OCI Bigdata Cluster Components - Cluster 를 Provisioing 하면 Hadoop Ecosystem 의 S/W 들이 BigData Cluster 생성 시에 아래의 각 역할별 노드들에 자동 구성됩니다.
 
-![](/assets/img/dataplatform/2022/bigdata/01.oci-bigdata-cloud-service-cluster-components.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/01.oci-bigdata-cloud-service-cluster-components.PNG)
 
 * Cluster Manager - Cluster 를 관리하기 위한 관리 툴로 Cloudera Hadoop (CDH) 일 경우 Cloudera admin 이 설치되고, Oracle Distribution Hadoop (ODH) 일 경우 Ambari 가 설치됩니다.
 
-![](/assets/img/dataplatform/2022/bigdata/02.oci-bigdata-cloud-service-cluster-manage-admin.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/02.oci-bigdata-cloud-service-cluster-manage-admin.PNG)
 
 * Cluster 권한 관리 - Cluster 의 권한 및 정책 관리를 위해 Ranger 가 설치됩니다.
 
-![](/assets/img/dataplatform/2022/bigdata/03.oci-bigdata-cloud-service-cluster-policy-mgr.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/03.oci-bigdata-cloud-service-cluster-policy-mgr.PNG)
 
 
 * Hadoop 데이터 저장 - Hadoop File System (HDFS) 에 데이터 저장은 hadoop fs put 명령을 통해 저장합니다. 저장 시 hive 명령을 통해 Hive DB 에 데이터를 저장합니다.
 
-![](/assets/img/dataplatform/2022/bigdata/04.oci-bigdata-cloud-service-hadoop-hive-data-load.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/04.oci-bigdata-cloud-service-hadoop-hive-data-load.PNG)
 
 * Hive 데이터 조회 - Hive DB 에 저장된 Data 조회를 위해 Hue 인터페이스를 제공하며, SQL 쿼리로 데이터 조회할 수 있습니다. (Utility Node)
 
-![](/assets/img/dataplatform/2022/bigdata/05.oci-bigdata-cloud-service-hive-hue-data-query.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/05.oci-bigdata-cloud-service-hive-hue-data-query.PNG)
 
 * Data Lake (Object Storage) 로의 Data 저장 - Hadoop File System 의 데이터를 Data Lake 인 Object Storage 로의 Data 저장을 지원합니다.
 
-![](/assets/img/dataplatform/2022/bigdata/06.oci-bigdata-cloud-service-data-lake-load.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/06.oci-bigdata-cloud-service-data-lake-load.PNG)
 
 * 빅데이터 소스 쿼리를 위한 Oracle SQL 지원 (Oracle Cloud SQL) - 별도의 Oracle Cloud SQL 컴퓨트 노드를 지원합니다.
   - 다양한 소스에 대한 손쉬운 쿼리 지원
@@ -100,9 +100,9 @@ Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하
   - 단순한 관리
       - 기존 Hive 메타데이터 및 보안 사용
 
-![](/assets/img/dataplatform/2022/bigdata/08.oci-bigdata-cloud-service-cloud-sql-0.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/08.oci-bigdata-cloud-service-cloud-sql-0.PNG)
 
-![](/assets/img/dataplatform/2022/bigdata/07.oci-bigdata-cloud-service-cloud-sql.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/07.oci-bigdata-cloud-service-cloud-sql.PNG)
 
 <br>
 
@@ -112,7 +112,7 @@ Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하
 
 * 다음 그림은 OCI 기준의 Lake House 를 지원하는 서비스 구성들입니다.
 
-![](/assets/img/dataplatform/2022/bigdata/09.oci-bigdata-cloud-lake-house.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/09.oci-bigdata-cloud-lake-house.PNG)
 
 
     - Autonomouse Data Warehouse : 고성능 스토리지 및 자동화된 관리 기능을 가진 Oracle DB PaaS 서비스
@@ -124,7 +124,7 @@ Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하
 
 * 기존의 Bigdata 및 DW 환경을 OCI의 Data Lake 서비스들을 매핑하여 아래 그림과 같이 구축하실 수 있습니다.
 
-![](/assets/img/dataplatform/2022/bigdata/10.oci-bigdata-cloud-lake-house-example.PNG)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/bigdata/10.oci-bigdata-cloud-lake-house-example.PNG)
 
 이러한 OCI Big Data Service는 데이터 통합, 데이터 과학 및 분석 서비스와 상호 운용되는 동시에 개발자가 Oracle SQL을 사용하여 데이터에 쉽게 액세스할 수 있도록 하기 때문에 사용하고 관리하기 쉽습니다. 
 

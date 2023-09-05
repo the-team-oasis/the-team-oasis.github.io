@@ -61,7 +61,7 @@ Operations Insights는 오라클 데이터베이스 및 일반 Host 의 리소�
 
 * Host Capacity Planning
 
-![Operation Insights](/assets/img/database/2022/08/01_Operation-insights-host.png)
+![Operation Insights]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/01_Operation-insights-host.png)
 
 ## Optimizer Statistics Monitoring in Database Management
 * **Services:**  Database Management
@@ -76,7 +76,7 @@ Managed Database에 대한 Optimizer 통계를 모니터링하고, 통계 수집
 * Optimizer Statistics
   - Optimizer Statistics는 데이터베이스 및 데이터베이스의 개체에 대한 세부 정보를 설명하는 데이터 모음입니다. 통계는 액세스 경로를 평가할 때 Optimizer 가 사용하는 데이터 저장 및 배포에 대한 통계적으로 정확한 그림을 제공합니다. Optimizer는 통계를 사용하여 테이블, 파티션 또는 인덱스에서 검색된 행 수(및 바이트 수)를 추정합니다. Optimizer는 액세스 비용을 추정하고 가능한 계획에 대한 비용을 결정한 다음 비용이 가장 낮은 실행 계획을 선택합니다.
 
-    ![Optimizer Statistics](/assets/img/database/2022/08/02_Optimzer_statistics.png)
+    ![Optimizer Statistics]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/02_Optimzer_statistics.png)
 
 * Optimizer Statistics Monitoring
 
@@ -96,7 +96,7 @@ Oracle Cloud Console 내에서 GoldenGate 모니터링을 위해 새로운 Metri
 
 * Monitoring 메뉴 : OCI Console -> Observability & Management -> Monitoring -> Service Metrics 에 oci_goldengate 가 추가됨
 
-![OGG Monitoring](/assets/img/database/2022/08/03_oci_goldengate_monitoring.png)
+![OGG Monitoring]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/03_oci_goldengate_monitoring.png)
 
 
 ## New Release for Database Management
@@ -116,11 +116,11 @@ Oracle Cloud Console 내에서 GoldenGate 모니터링을 위해 새로운 Metri
 
 * Database Filtering 및 Alarm 경보 수 보기
 
-![OGG Monitoring](/assets/img/database/2022/08/04_database_management_new.png)
+![OGG Monitoring]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/04_database_management_new.png)
 
 * Database Management ADB 추가 기능
 
-![OGG Monitoring](/assets/img/database/2022/08/05_database_management_new_adb_add.png)
+![OGG Monitoring]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/05_database_management_new_adb_add.png)
 
 
 ## Data Flow now supports Oracle Cloud Infrastructure Logging
@@ -135,7 +135,7 @@ Oracle Cloud Infrastructure Data Flow는 Apache Spark 애플리케이션을 실�
 * 신규 기능 
   - 이번에 추가된 Data Flow 의 신규 기능은 Oracle Cloud Infrastructure Logging을 사용하여 콘솔 또는 CLI에서 Spark 진단 로그 및 (사용자 지정) 애플리케이션 로그를 제공할 수 있습니다.
 
-![Data Flow](/assets/img/database/2022/08/06_data_flow_logging.png)
+![Data Flow]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/06_data_flow_logging.png)
 
 ## Database CPU Capacity Planning Allocation Range
 * **Services:**  Operation Insights
@@ -152,7 +152,7 @@ Operations Insights Capacity Planning 기능은 데이터베이스의 리소스 
 
 * Over Allocation Range Chart
 
-![Operation Insights](/assets/img/database/2022/08/07_operation_insights_forecast-over.png)
+![Operation Insights]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/07_operation_insights_forecast-over.png)
 
 
 ## New Release for Data Integration (Security fixes)
@@ -187,6 +187,6 @@ Data Integration 의 이번 릴리스에는 보안 취약점을 수정하는 수
 
 * Database Management Console 에서 Capacity Planning 및 SQL 웨어하우스 액세스
 
-![DB Mgmt](/assets/img/database/2022/08/08_database_management_capacity_sql_warehouse.png)
+![DB Mgmt]({{site.urlblogimg2022_2023}}/assets/img/database/2022/08/08_database_management_capacity_sql_warehouse.png)
 
 ---

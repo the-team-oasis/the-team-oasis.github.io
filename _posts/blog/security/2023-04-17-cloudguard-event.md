@@ -31,25 +31,25 @@ Cloud Guard를 사용할 때 Cloud Guard에서 감지한 여러가지 이벤트�
 
 #### Cloud Guard Notification Topic 구성
 먼저 Notification 설정을 위해서 Notification Topic을 생성합니다. Notification Topic 생성을 위해서 ***메뉴 > 개발자 서비스(Developer Services) > 애플리케이션 통합(Application Integration) > 통지(Notification)*** 로 이동합니다.
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-1.png)
 
 토픽 생성 (Create Topic) 버튼을 클릭한 후 다음과 같이 Topic을 생성합니다.
 * **Name:** TopicForCloudGuardEvent
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-2.png)
 
 구독(Subscription) 채널은 Email, Functions, HTTPS, PagerDuty, Slack, SMS를 제공하는데, 여기서는 Email로 구독을 설정하겠습니다. 구독 생성(Create Subscription) 버튼을 클릭한 후 다음과 같이 입력하고 생성합니다.
 
 * **Protocol:** Email
 * **Email:** 수신받을 이메일 주소
 
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-3.png)
 
 이메일 구독을 할 경우에는 이메일 확인이 필요합니다. 구독한 이메일로 수신한 메일에서 **Confirm subscription**을 클릭합니다.
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-4.png)
 
 #### Cloud Guard Event Rule 구성
 Event 설정을 위해서 ***메뉴 > 관찰 가능성 및 관리(Observability & Management) > 이벤트 서비스(Event Service) > 규칙(Rule)** 으로 이동합니다.
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-5.png)
 
 규칙 생성 버튼을 클릭한 후 다음과 같이 입력하고 생성합니다.
 * **Display Name:** CloudGuardEvent
@@ -70,7 +70,7 @@ Event 설정을 위해서 ***메뉴 > 관찰 가능성 및 관리(Observability 
     * **Notifications Compartment:** Topic을 생성한 구획
     * **Topic:** TopicForCloudGuardEvent
 
-![](/assets/img/cloudnative-security/2023/oci-cloudguard-7-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2023/oci-cloudguard-7-6.png)
 
 
 

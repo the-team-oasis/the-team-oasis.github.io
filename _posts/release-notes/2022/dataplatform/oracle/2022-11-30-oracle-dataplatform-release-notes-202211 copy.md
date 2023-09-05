@@ -44,7 +44,7 @@ header: no
 ### 서비스 소개
 OCI BDS 는 OCI 가 제공하는 Big Data 를 위한 Managed Big Data Cluster 서비스입니다.
 
-![](/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
 
 자세한 Big Data 에 대한 서비스 소개는 아래 링크에서 자세히 소개되어 있습니다.
 
@@ -60,7 +60,7 @@ Big Data Service (BDS) 에 신규 업데이트가 반영되었습니다.
         * Apache Spark 3.2.1
         * Apache Hadoop 3.3.3
         * Trino 389
-            ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/01.oci-bigdata-01.png)
+            ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/01.oci-bigdata-01.png)
     * BDS Spark 서비스의 한 Part 로 Delta Lake 1.2.1 이 지원됨. Delta Lake는 BDS Spark 서비스용 클라우드 Object Storage 를 통해 ACID 지원 스토리지 계층을 제공
 
 * Apache Flink 1.15.2 (스트리밍 프로세싱) 는 BDS cluster version 3.0.17 이상에서만 지원
@@ -77,13 +77,13 @@ Big Data Service (BDS) 에 신규 업데이트가 반영되었습니다.
 ### 서비스 소개
 OCI Data Flow는 Apache Spark ™ 애플리케이션을 실행하기 위한 완전 관리형 서비스입니다. 개발자가 애플리케이션에 집중할 수 있도록 하고 이를 실행할 수 있는 쉬운 런타임 환경을 제공합니다. 
 
-![](/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
 
 ### 신규 변경 사항
 
 Oracle DB 연결 Application 사용 시 SCAN 프록시 기능을 사용하여 Oracle RAC 환경에서 데이터베이스에 액세스할 수 있게 되었습니다.
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/02.oci-data_flow-01.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/02.oci-data_flow-01.png)
 
 <br>
 
@@ -142,19 +142,19 @@ Data Science 와 Data Flow 통합은 완전히 관리되는 Jupyter 노트북을
 
 * Data Sicence notebook - Data Flow 연계 흐름도
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/03.oci-data_flow-data_science-integration.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/03.oci-data_flow-data_science-integration.png)
 
 * Data Science notebook 의 Conda Environment 세팅
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/04.oci-data_flow-data_science-integration-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/04.oci-data_flow-data_science-integration-2.png)
 
 * Data Science notebook session 에서 Data Flow Spark Cluster 생성 요청
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/05.oci-data_flow-provisioning.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/05.oci-data_flow-provisioning.png)
 
 * Data Flow 의 Data Source 인 Object Storage 의 CSV 파일을 SQL 로 쿼리
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/06.oci-data_flow-object-storage-query.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/06.oci-data_flow-object-storage-query.png)
 
 <br>
 
@@ -168,14 +168,14 @@ Data Science 와 Data Flow 통합은 완전히 관리되는 Jupyter 노트북을
 OCI Media Service 는 미디어(비디오) 소스 콘텐츠를 처리하기 위한 완전 관리형 서비스입니다.
 Media Flow 는 OCI Object Storage 서비스의 Object Storage 버킷을 input source 로 사용하고 지정된 트랜스코딩 작업을 수행하여 객체 스토리지 버킷에 ABR 패키지를 생성합니다. OCI Media Streams 를 사용하여 스트리밍된 VOD(주문형 비디오)로 OCI Media Flow 의 output 을 전달할 수 있습니다.
 
-![](/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
 
 
 ### 신규 변경 사항
 
 Media Flow를 사용하면 Oracle Cloud Infrastructure Logging을 사용하여 Media Workflow 작업에 대한 실행 로그를 제공할 수 있습니다. 
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/07.oci-media_flow-log.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/11/07.oci-media_flow-log.png)
 
 <br>
 

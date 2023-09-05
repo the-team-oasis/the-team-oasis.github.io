@@ -51,11 +51,11 @@ Exadata Cloud Service 에 대한 자원을 Operation Insights 에서 가시성 �
 
 * Fleet Administrator 에서 Exadata 추가
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/01.oci_release_note_12_operation_insights_change_exa_support_01.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/01.oci_release_note_12_operation_insights_change_exa_support_01.png)
 
 * Exadata System Detail 화면에서 Operation Insights member 추가
 
-![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/02.oci_release_note_12_operation_insights_change_exa_support_02.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/02.oci_release_note_12_operation_insights_change_exa_support_02.png)
 
 <br>
 
@@ -74,11 +74,11 @@ Collect diagnostics : 이번 Release 에는 deployment 진단 수집에 대한 s
 
 * 진단 수집 설정 메뉴
 
-    ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/03.oci_release_note_12_goldengate_diagnostic_01.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/03.oci_release_note_12_goldengate_diagnostic_01.png)
 
 * 진단 수집 설정
 
-    ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/04.oci_release_note_12_goldengate_diagnostic_02.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/04.oci_release_note_12_goldengate_diagnostic_02.png)
 
 <br>
 
@@ -97,15 +97,15 @@ PostgreSQL 에 대한 신규 Deployment 가 추가되었고, 그에 맞는 Conne
 
 * PostgreSQL Deployment Type
 
-    ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/05.oci_release_note_12_goldengate_new_db_01.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/05.oci_release_note_12_goldengate_new_db_01.png)
 
 * PostgreSQL Connections Type
 
-    ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/06.oci_release_note_12_goldengate_new_db_conn_01.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/06.oci_release_note_12_goldengate_new_db_conn_01.png)
 
 * PostgreSQL Connections Setting
 
-    ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/07.oci_release_note_12_goldengate_new_db_conn_02.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/07.oci_release_note_12_goldengate_new_db_conn_02.png)
 
 <br>
 
@@ -118,7 +118,7 @@ PostgreSQL 에 대한 신규 Deployment 가 추가되었고, 그에 맞는 Conne
 ### 서비스 소개
 Bigdata 를 위한 Open Source Hadoop 은 Hadoop HDFS 및 관리를 위한 Open Source 진영의 다양한 Ecosystem 들이 있습니다. Ecosystem 을 이루고 있는 Tool 들을 역할에 맞는 솔루션을 사용함으로써 완전한 Big Data 시스템을 완성하게 됩니다.
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
 
 자세한 Big Data 에 대한 서비스 소개는 아래 링크에서 자세히 소개되어 있습니다.
 
@@ -135,10 +135,10 @@ OCI 에 Big Data 의 새로운 Release 가 반영되었습니다.
     * Spark
     * HBase
     * Trino
-        ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/08.oci_release_note_12_bigdata_cluster_profile_01.png)
+        ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/08.oci_release_note_12_bigdata_cluster_profile_01.png)
 
       * Hadoop Profile
-         ![](/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/09.oci_release_note_12_bigdata_cluster_profile_02.png)     
+         ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/db-bigdata/2022/12/09.oci_release_note_12_bigdata_cluster_profile_02.png)     
 
 * 필요한 만큼만 사용할 수 있도록 Cluster 를 중지하고 시작할 수 있도록 변경되었습니다.
 

@@ -131,9 +131,9 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
 성능 허브(Performance Hub)는 여러 탭과 옵션으로 구성되어 있으며 데이터베이스를 모니터링할 수 있도록 다양한 보고서를 제공합니다.
 성능 허브는 데이터베이스 세부정보 화면에서 **"성능 허브"** 버튼을 클릭하여 이동할 수 있습니다. <mark>(데이터베이스 관리 기능이 활성화 되어야 사용 가능)</mark>
 
-![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-1.png)
 
-![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-2.png)
 
 #### 성능 허브(Performance Hub) 지원 탭
 
@@ -142,30 +142,30 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
   * 이 탭을 사용하여 Consumer Group, Wait Class, SQL ID, User Name 등과 같은 여러 차원에서 데이터베이스 성능을 드릴다운할 수 있습니다.
   * ASH 분석 탭에서 평균 활성 세션 차원을 선택하고 선택한 기간 동안 해당 차원의 상위 활동을 볼 수 있습니다. 평균 활성 세션 차트에는 차트 오른쪽 끝에 표시되는 ASH 데이터의 해상도를 선택할 수 있는 컨트롤이 있습니다.
   <br><br>_ASH 분석 탭 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-3.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-3.png)
   <br><br>_ASH 분석 탭 세션 세부정보 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-4.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-4.png)
   <br><br>_ASH 분석 탭 세션 세부정보 측정항목 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-5.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-5.png)
   <br><br>_ASH 분석 탭 세션 세부정보 SQL 모니터 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-6.png)<br>
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-6.png)<br>
 
 * SQL 모니터링
   * SQL 모니터링 탭에는 모니터링되는 SQL 문을 표시하는 테이블이 포함되어 있습니다.
   * SQL 모니터링 탭의 테이블에는 마지막 활성 시간, CPU 시간, 데이터베이스 시간 등과 같은 차원별로 SQL 문 실행이 표시됩니다. 현재 실행 중인 SQL 문에 대한 정보뿐만 아니라 완료, 실패 또는 종료된 SQL 문에 대한 정보도 제공합니다. 이 테이블은 모니터링되는 SQL 문에 대한 상태, 기간, SQL ID 등을 포함하는 열로 구성됩니다.
   <br><br>_SQL 모니터링 탭 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-7.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-7.png)
   <br><br>_실시간 SQL 모니터링 - 계획 통계 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-8.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-8.png)
   <br><br>_실시간 SQL 모니터링 - 병렬 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-9.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-9.png)
   <br><br>_실시간 SQL 모니터링 - SQL 텍스트 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-10.png)<br>
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-10.png)<br>
 
 * 자동 데이터베이스 진단 모니터(ADDM) - _<mark>해당 기능은 기본(Basic) 관리에서 제공되지 않습니다.</mark>_
   * ADDM은 AWR( Automatic Workload Repository ) 데이터를 정기적으로 분석한 다음 성능 문제의 근본 원인을 찾고 문제 해결을 위한 권장 사항을 제공하며 응용 프로그램의 문제가 아닌 영역을 식별합니다. AWR은 과거 성능 데이터의 저장소이므로 ADDM을 사용하여 이벤트 후 성능 문제를 분석할 수 있으므로 문제를 재현하는 데 필요한 시간과 리소스를 절약할 수 있습니다.
   <br><br>_ADDM 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-11.png)<br>
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-11.png)<br>
 
 * 차단 세션 - _<mark>해당 기능은 기본(Basic) 관리에서 제공되지 않습니다.</mark>_
   * 차단 세션 탭에는 현재 차단 및 대기 중인 세션이 계층 구조로 표시됩니다.
@@ -174,7 +174,7 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
     * 관련된 SQL을 검사하거나 드릴다운하여 차단의 원인을 확인합니다. 
     * 대기 중인 세션 문제를 해결하기 위해 하나 이상의 나열된 세션 종료를 포함하여 여러 문제 해결 작업을 수행합니다.
   <br><br>_차단 중인 세션 화면_
-  ![](/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-12.png)<br>
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/perfomance-hub-12.png)<br>
 
 * 워크로드 - _<mark>해당 기능은 기본(Basic) 관리에서 제공되지 않습니다.</mark>_
   * 워크로드 탭에는 데이터베이스 워크로드를 모니터링하고 급증 및 병목 현상을 식별하는 데 사용할 수 있는 네 가지 통계 세트가 그래픽으로 표시됩니다.
@@ -207,16 +207,16 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
 플리트 요약 화면을 통해 사용자는 데이터베이스가 위치한 구획이나 데이터베이스 그룹 전체에 속한 오라클 데이터베이스의 인벤토리에 대한 모니터링과 Insight를 확보할 수 있습니다.
 
 1. 전체 메뉴에서 "관찰 가능성 및 관리 - 데이터베이스 관리 - 플리트 요약" 메뉴를 클릭하여 서비스 화면으로 이동합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-0.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-0.png)
 
 2. 이동한 화면에서 모니터링하고자 하는 구획 또는 데이터베이스 그룹을 선택합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-1.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-1.png)
 
 3. 해당 구획이나 데이터베이스 그룹에 속한 데이터베이스의 **<mark>평균 활성 세션, CPU, 스토리지 I/O</mark>** 등의 항목에 대한 상태와 성능을 모니터링 합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-2.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-2.png)
 
 4. 각 데이터베이스에는 현재 CPU 및 스토리지 사용량이 있으며 선택한 기간과 비교 기간 사이의 데이터베이스 메트릭 비교를 퍼센트로 보여주는 기능도 포함됩니다. 이 기능을 사용하면 데이터베이스 리소스 사용량 추세를 파악할 수 있습니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-5.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-5.png)
 
 
 #### 특정 데이터베이스 모니터링 하기
@@ -224,10 +224,10 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
 플리트 요약 페이지나 데이터베이스 세부정보 화면에서 특정 데이터베이스를 모니터링 할 수 있는 화면으로 이동할 수 있습니다.
 
 * 플리트 요약 페이지에서 이동하려면 CDB 또는 PDB의 이름을 클릭하여 관리 데이터베이스 세부정보 화면으로 이동할 수 있습니다.
-  ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-3.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-3.png)
 
 * 데이터베이스 세부정보 화면에서 이동하려면 데이터베이스 정보의 "연관된 서비스 - 데이터베이스 관리"의 링크 버튼을 클릭하여 관리 데이터베이스 세부정보 화면으로 이동할 수 있습니다.
-  ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-4.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-4.png)
 
 ##### 데이터베이스 관리 콘솔 살펴보기
 
@@ -235,18 +235,18 @@ OCI Database Management Cloud Service를 통해 DBA는 모니터링, 성능 관�
 각 데이터베이스 별로 타임라인 별 데이터베이스 상태와 현재 데이터베이스의 작업, 스토리지 I/O, 메모리 활용율, 스토리지 할당 및 사용 현황을 확인할 수 있습니다.
 
 CDB 요약 화면 예시
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-6.png)
 
 PDB 요약 화면 예시 (PDB가 여러개인 경우 목록에서 PDB를 선택하여 세부정보로 이동할 수 있습니다.)
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-7.png)<br><br>
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-7.png)<br><br>
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-8.png)
 
 ##### 경보 로그 확인하기
 
 데이터베이스 관리 화면 우측 리소스 패널에서 "경보 로그" 메뉴를 클릭하여 해당 데이터베이스의 경보 로그, 주의 로그를 확인할 수 있습니다. 
 주의 로그는 21c 버전 이후 부터 사용할 수 있습니다.
 
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-9.png)
 
 ##### 테이블스페이스 현황 확인 및 관리 기능 사용하기
 
@@ -254,18 +254,18 @@ PDB 요약 화면 예시 (PDB가 여러개인 경우 목록에서 PDB를 선택�
 테이블스페이스를 생성하거나 편집하려면 SYSDBA 권한이 있는 사용자 정보가 필요합니다. (비밀번호는 Vault에 저장되어 있어야 함)
 
 **_테이블스페이스 생성 예시_** - <mark>데이터베이스 사용자 비밀번호가 Vault에 저장되어 있어야 합니다.</mark>
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-10.png)<br><br>
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-10.png)<br><br>
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-11.png)
 
 **_테이블스페이스 현황 예시_** - <mark>우측 Action 버튼을 클릭하여 테이블스페이스 관리 메뉴를 확인할 수 있습니다.</mark>
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-12.png)
 
 ##### 사용자별 권한 및 현황 확인 기능 사용하기
 
 데이터베이스 관리 화면 우측 리소스 패널에서 "사용자" 메뉴를 클릭하여 해당 데이터베이스의 사용자 현황을 확인할 수 있습니다.
 사용자 메뉴에서는 사용자 계정 상태와 만료일자등의 정보를 확인할 수 있습니다.
 
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-13.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-13.png)
 
 ##### 데이터베이스 매개변수 관리 기능 사용하기
 
@@ -273,10 +273,10 @@ PDB 요약 화면 예시 (PDB가 여러개인 경우 목록에서 PDB를 선택�
 매개변수를 편집하려면 SYSDBA 권한이 있는 사용자 정보가 필요합니다. (비밀번호는 Vault에 저장되어 있어야 함)
 
 **_매개변수 현황 확인하기_**
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-14.png)
 
 **_매개변수 편집 하기_** - <mark>데이터베이스 사용자 비밀번호가 Vault에 저장되어 있어야 합니다.</mark>
-![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-15.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-15.png)
 
 #### 데이터베이스 그룹 기능 사용하기
 
@@ -284,16 +284,16 @@ PDB 요약 화면 예시 (PDB가 여러개인 경우 목록에서 PDB를 선택�
 CDB 및 PDB를 원하는 목적에 따라 그룹화 할 수 있으며 이러한 그룹에 대량 SQL 작업을 실행할 수 있는 SQL 템플릿을 만들고 실행할 수 있습니다.
 
 1. 전체 메뉴에서 "관찰 가능성 및 관리 - 데이터베이스 관리 - 데이터베이스 그룹" 메뉴를 클릭하여 서비스 화면으로 이동합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-16.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-16.png)
 
 2. 이동한 화면에서 데이터베이스 그룹 생성 버튼을 클릭하여 정보를 입력 후 그룹을 생성합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-17.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-17.png)
 
 3. 생성된 그룹에서 관리하고자 하는 데이터베이스를 선택하여 추가합니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-19.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-19.png)
 
 4. 생성된 그룹으로 플리트 요약 화면을 조회할 수 있습니다.
-   ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-20.png)
+   ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-20.png)
 
 
 #### 대시보드 기능 사용하기
@@ -303,13 +303,13 @@ CDB 및 PDB를 원하는 목적에 따라 그룹화 할 수 있으며 이러한 
 
 * Autonomous Database Performance
 * Cloud DB 인프라 성능
-  ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-21.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-21.png)
 
 * 데이터베이스 플리트 성능
-  ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-22.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-22.png)
 
 * Cloud/External Database Performance
-  ![](/assets/img/dataplatform/2023/dbmgmt/dbmgmt-23.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/dbmgmt/dbmgmt-23.png)
 
 ## 마무리하며...
 

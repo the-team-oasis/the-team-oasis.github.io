@@ -73,7 +73,7 @@ OCI Media Service 는 미디어(비디오) 소스 콘텐츠를 처리하기 위�
 
 * ABR 은 아래 그림처럼 다양한 Device 에서 최적의 Resolution 으로 Play 될 수 있는 Streaming Package 를 만드는 방식의 스트리밍 방식입니다.  
 
-![](/assets/img/database/2022/07/06_ABR_Streaming.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/06_ABR_Streaming.png)
 
 * OCI Media Services 에는 OCI Media Flow 와 OCI Media Stream 이 포함됩니다. 서비스는 독립적으로 또는 함께 사용할 수 있으며 OCI Object Storage 에 저장된 콘텐츠에 대해 작동합니다. (Serverless-Functions 서비스)
 
@@ -84,7 +84,7 @@ OCI Media Service 는 미디어(비디오) 소스 콘텐츠를 처리하기 위�
 
 * 다음은 OCI에 구축된 일반적인 end-to-end VOD 스트리밍 솔루션에 대한 개요입니다. 다음 다이어그램은 OCI Media Flow 와 OCI Media Streams 가 어떻게 통합되는지를 나타내는 그림입니다. 
 
-![](/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
 
 ### Key Capabilities
 
@@ -100,9 +100,9 @@ OCI Media Service 는 미디어(비디오) 소스 콘텐츠를 처리하기 위�
 미디어 워크플로 작업: 유형에 따라 워크플로의 특정 지점에서 수행할 처리를 정의합니다.
 * Media Flow Job : 작업은 워크플로를 통해 콘텐츠를 실행하는 데 사용됩니다. 여러 미디어 워크플로를 정의하고 워크플로를 사용하여 여러 작업을 만들 수 있습니다.
 
-![](/assets/img/database/2022/07/02_medserv_screenshot_0.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/02_medserv_screenshot_0.png)
 
-![](/assets/img/database/2022/07/02_medserv_screenshot.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/02_medserv_screenshot.png)
 
 
 ## Media Streams is now available
@@ -117,7 +117,7 @@ OCI Media Streams는 HTTP 라이브 스트리밍(HLS)과 같은 형식으로 패
 
 다음은 OCI에 구축된 일반적인 end-to-end VOD 스트리밍 솔루션에 대한 개요입니다. 다음 다이어그램은 OCI Media Flow 와 OCI Media Streams 가 어떻게 통합되는지를 나타내는 그림입니다. 
 
-![](/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/01_architecturediagram_medserv_1.png)
 
 ### Key Capabilities
 * Media Services에는 ABR (Adaptive Bit Rate) 스트림에 대한 대상 형식 변환, 암호화 및 비디오 분할을 위한 패키징 기능이 포함되어 있습니다. 또한 선도적인 CDN(Content Delivery Network) 파트너 생성 통합 또는 직접 서비스 에지 서비스를 사용하여 패키지된 ABR 콘텐츠의 안전하고 확장 가능한 배포를 제공합니다. Media Streams는 소스 콘텐츠에서 스트리밍 형식의 배포 및 패키징 프로세스를 단순화하고 복잡한 비디오 패키징 인프라의 원활한 관리를 가능하게 합니다.
@@ -137,18 +137,18 @@ OCI Media Streams는 HTTP 라이브 스트리밍(HLS)과 같은 형식으로 패
 
 아래 그림은 Streaming Distribution Channel 을 생성하는 화면입니다.
 
-![](/assets/img/database/2022/07/03_medserv_streaming_dist_channel.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/03_medserv_streaming_dist_channel.png)
 
 Streaming Distribution Channel 에 배포하기 위해서는 정해진 Packaging 구성과 Play List 들을 기반으로 Edge 나 CDN 으로 배포할 비디오들을 선별하여 배포합니다.
 
 아래 화면은 HTTP Live Streaming 을 위한 Packaging 을 구성하는 화면입니다. 
 
-![](/assets/img/database/2022/07/04_medserv_streaming_create_package.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/04_medserv_streaming_create_package.png)
 
 
 아래 화면은 CDN 으로 배포할 Play List 를 설정하는 화면입니다. Object Storage 에 저장된 비디오 항목을 선택하여 Play List 에 추가하여 설정합니다.
 
-![](/assets/img/database/2022/07/05_medserv_streaming_create_playlists.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/05_medserv_streaming_create_playlists.png)
 
 
 ## AWR Explorer for Operations Insights
@@ -166,11 +166,11 @@ Operations Insights에서 AWR Explorer를 사용하면 다음을 수행할 수 �
 * 시간별 AWR 보고서를 만들 필요 없이 성능 추세를 쉽게 식별
 * 성능 문제를 감지하는 데 도움이 될 수 있는 Oracle Database 성능 데이터의 다양한 측면을 시각화
 
-![AWR Explorer](/assets/img/database/2022/07/07_AWR_Explorer.png)
+![AWR Explorer]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/07_AWR_Explorer.png)
 <br>
-![AWR Explorer-2](/assets/img/database/2022/07/08_AWR_Explorer-2.png)
+![AWR Explorer-2]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/08_AWR_Explorer-2.png)
 <br>
-![AWR Explorer-3](/assets/img/database/2022/07/09_AWR_Explorer-3.png)
+![AWR Explorer-3]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/09_AWR_Explorer-3.png)
 
 ## TCPS Support for Oracle Cloud Databases
 * **Services:** Database Management
@@ -183,10 +183,10 @@ Operations Insights에서 AWR Explorer를 사용하면 다음을 수행할 수 �
 이제 Oracle Cloud Database에 대한 데이터베이스 관리를 활성화할 때 TCP/IP with Transport Layer Security(TCPS) 프로토콜을 사용할 수 있습니다.
 TCP 기반의 통신과 달리 TCPS 기반의 통신을 위해서는 Key Vault 에서 관리하는 전자 지갑의 PKCS 나 Java Key Store (keystore.jks) 저장소 컨텐츠가 필요합니다. 
 
-![DB Mgmt](/assets/img/database/2022/07/10_Database_Mgmnt_TCPS.png)
+![DB Mgmt]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/10_Database_Mgmnt_TCPS.png)
 <br>
 
-![DB Mgmt](/assets/img/database/2022/07/11_Database_Mgmnt_TCPS_keystore.png)
+![DB Mgmt]({{site.urlblogimg2022_2023}}/assets/img/database/2022/07/11_Database_Mgmnt_TCPS_keystore.png)
 <br>
 
 ## Updates to autoscaling and customer-managed encryption key features

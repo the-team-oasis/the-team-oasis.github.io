@@ -44,14 +44,14 @@ GoldenGate Trail File은 GoldenGate 에서 정의한 고유한 바이너리 형�
 
 - Trail File 에 담겨진 내용 샘플
 
-![Trail File example](/assets/img/dataplatform/2023/goldengate/01_oci_goldengate_trail_file_example.png)
+![Trail File example]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/01_oci_goldengate_trail_file_example.png)
 
 ### Trail File 생성
 Trail File 은 Extract 프로세스를 생성할때 어떤 파일로 만들 것인지, 파일의 사이즈는 얼마정도까지 만들 것인지를 Extract (추출) 프로세스를 만들때 정의해 줍니다. 파일의 사이즈를 조정하지 않을 경우 Default 로 500 MB 사이즈 단위로 파일을 만듭니다.
 
 - Extract 프로세스에서 Trail File 명 및 사이즈 정의
 
-![Trail File Define](/assets/img/dataplatform/2023/goldengate/02_oci_goldengate_trail_file_define.png)
+![Trail File Define]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/02_oci_goldengate_trail_file_define.png)
 
 <br>
 
@@ -61,11 +61,11 @@ Extract Process 가 동작을 하면 Trail File 이 생성되며  생성된 Trai
 
 - OCI GoldenGate Deployment 상세 화면
 
-![Trail File Define](/assets/img/dataplatform/2023/goldengate/03_oci_goldengate_deployment.png) 
+![Trail File Define]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/03_oci_goldengate_deployment.png) 
 
 - Trail File 메뉴 선택 (OCI GoldenGate Deployment 상세 화면 스크롤 다운)
 
-![Trail File list](/assets/img/dataplatform/2023/goldengate/04_oci_goldengate_trail_file_menu.png) 
+![Trail File list]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/04_oci_goldengate_trail_file_menu.png) 
 
 <br>
 
@@ -74,11 +74,11 @@ Extract Process 가 동작을 하면 Trail File 이 생성되며  생성된 Trai
 
 - OCI GoldenGate Admin Console 로그인
 
-![GGADMIN](/assets/img/dataplatform/2023/goldengate/05_oci_goldengate_admin_console.png) 
+![GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/05_oci_goldengate_admin_console.png) 
 
 - Configuration -> TASKS 메뉴에서 "+" 버튼 클릭
 
-![GGADMIN](/assets/img/dataplatform/2023/goldengate/06_oci_goldengate_trail_file_purge_01.png)
+![GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/06_oci_goldengate_trail_file_purge_01.png)
 
 - Purge Trail Task 에 대해 정의
 
@@ -88,20 +88,20 @@ Extract Process 가 동작을 하면 Trail File 이 생성되며  생성된 Trai
   - Keep Rule : Days : 1 (최소 하루동안 파일 유지)
   - Purge Frequency : Days : 1 (하루 한번씩 수행)
   
-![GGADMIN](/assets/img/dataplatform/2023/goldengate/07_oci_goldengate_trail_file_purge_02.png)
+![GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/07_oci_goldengate_trail_file_purge_02.png)
 
 ### Trail File Purge TASK 
 앞단계에서 생성한 Trail File에 대한 Purge TASK 에 대한 정의 화면은 아래와 같습니다.
 
 - 정의된 Trail File Purge TASK 목록
 
-![GGADMIN](/assets/img/dataplatform/2023/goldengate/08_oci_goldengate_trail_file_purge_task.png)
+![GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/08_oci_goldengate_trail_file_purge_task.png)
 
 정의된 Trail File Purge TASK 가 동작을 하게 되면 수행한 결과를 "Purge Tasks" 메뉴에서 확인하실 수 있습니다.
 
 - Purge Tasks 수행 결과 확인
 
-![GGADMIN](/assets/img/dataplatform/2023/goldengate/09_oci_goldengate_trail_file_purge_task_result.png)
+![GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2023/goldengate/09_oci_goldengate_trail_file_purge_task_result.png)
 
 <br>
 이상 OCI GoldenGate 에서는 자동으로 Trail File 을 Purge 하는 기능에 대해서 알아봤습니다. OCI GoldenGate 에서는 기본적으로 생성되는 Trail File 을 삭제하지 않기 때문에 Purge TASK 를 정의하여 정리하는 작업을 만들어 주어야 합니다. 이러한 Purge 기능을 통해 GoldenGate 서버의 Disk 가 모두 소진되는 오류를 사전에 방지하실 수 있습니다.

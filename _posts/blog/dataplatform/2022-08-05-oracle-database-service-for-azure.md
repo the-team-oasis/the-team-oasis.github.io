@@ -48,7 +48,7 @@ ODSA 는 서비스 기반 접근 방식을 사용하여 기존의 복잡한 클�
 
 **Case 3. Azure를 사용하는 고객 중 OCI 계정이 있는 경우에는?**
 - OCI 계정은 <mark>IDCS</mark> 기반이 아닌 <mark>Identity Domain</mark> 적용되어 있는 계정만 연동 가능함. (만약 IDCS 기반인 경우 새로운 OCI 계정 생성이 필요합니다.)
-  ![Diff IDCS vs Identity Domain #4](/assets/img/dataplatform/2022/oci-idcs-identity-domain-ui-diff.png)
+  ![Diff IDCS vs Identity Domain #4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oci-idcs-identity-domain-ui-diff.png)
 
 #### 사용 가능한 Oracle 데이터베이스 시스템
 Azure용 Oracle Database Service 는 다음 제품을 제공합니다.
@@ -247,57 +247,57 @@ ODSA 서비스는 OCI 와 Azure의 데이터센터가 Interconnect 되어있는 
 
 ### Azure 도메인 사용자 생성 및 권한 부여하기
 1. Azure Active Directory 메뉴 이동 후 "User(사용자)" 메뉴를 클릭합니다.
-   ![Create User #1](/assets/img/dataplatform/2022/azure-ad-create-user-1.png)
+   ![Create User #1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-1.png)
 2. 이동된 화면에서 "New User" -> "Create New User" 버튼을 차례로 클릭합니다.
-   ![Create User #2](/assets/img/dataplatform/2022/azure-ad-create-user-2.png)
+   ![Create User #2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-2.png)
 3. 사용자 생성화면에서 정보를 입력후 사용자를 생성합니다.
-   ![Create User #3](/assets/img/dataplatform/2022/azure-ad-create-user-3.png)
+   ![Create User #3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-3.png)
 4. 생성된 사용자의 세부사항을 확인하기 위해 사용자를 클릭합니다.
-   ![Create User #4](/assets/img/dataplatform/2022/azure-ad-create-user-4.png)
+   ![Create User #4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-4.png)
 5. Assigned Roles를 클릭하여 권한을 새로운 권한을 부여하기 위해 "Add assignments" 버튼을 클릭합니다.
-   ![Create User #5](/assets/img/dataplatform/2022/azure-ad-create-user-5.png)
+   ![Create User #5]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-5.png)
 6. 우측 화면에서 "global(전역)" 을 입력하여 "global administrator(전역 관리자)" 권한을 선택 및 추가 합니다.
-   ![Create User #6](/assets/img/dataplatform/2022/azure-ad-create-user-6.png)
+   ![Create User #6]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-6.png)
 7. Azure 구독 (Subscription) 화면으로 이동하여 ODSA를 설정할 구독의 세부화면으로 이동합니다.
 8. 이동한 화면에서 "Access Control(IAM)" -> "Add" -> "Add co-administrator" 버튼을 차례로 클릭하여 해당 구독의 공동 관리자를 등록합니다.
-   ![Create User #7](/assets/img/dataplatform/2022/azure-ad-create-user-7.png)
+   ![Create User #7]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-7.png)
 9. 우측 화면에서 새로 생성한 계정을 선택 후 추가하여 공동 관리자 등록을 완료합니다.
-   ![Create User #8](/assets/img/dataplatform/2022/azure-ad-create-user-8.png)
+   ![Create User #8]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/azure-ad-create-user-8.png)
 
 ### ODSA 연결을 위한 포탈 접속 및 로그인
 ODSA 서비스를 사용하기 위해 [https://signup.multicloud.oracle.com/azure](https://signup.multicloud.oracle.com/azure){:target="_blank" rel="noopener"} 링크를 클릭하여 접속 합니다.
 로그인시 사용할 ID는 전 단계에서 생성한 Azure 자체 도메인 사용자 계정 및 비밀번호를 입력합니다.
 1. Azure Portal에서 사용자 정보를 복사합니다.
-   ![Signin to ODSA Console #1](/assets/img/dataplatform/2022/oracle-odsa-signin-1.png)
+   ![Signin to ODSA Console #1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-1.png)
 2. 로그인 화면에서 복사한 정보를 붙여넣기 합니다.
-   ![Signin to ODSA Console #2](/assets/img/dataplatform/2022/oracle-odsa-signin-2.png)
+   ![Signin to ODSA Console #2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-2.png)
 3. 암호를 입력합니다
-   ![Signin to ODSA Console #3](/assets/img/dataplatform/2022/oracle-odsa-signin-3.png)
+   ![Signin to ODSA Console #3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-3.png)
 4. ODSA 설정을 위한 콘솔에 로그인 되었습니다.
-   ![Signin to ODSA Console #4](/assets/img/dataplatform/2022/oracle-odsa-signin-4.png)
+   ![Signin to ODSA Console #4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-4.png)
 
 ### ODSA 에서 Azure 계정과 OCI 계정 연동하기
 1. ODSA 콘솔에서 "Start fully automated configuration" 버튼을 클릭합니다.
-   ![ODSA Link account #1](/assets/img/dataplatform/2022/oracle-odsa-link-account-0.png)
+   ![ODSA Link account #1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-0.png)
 2. Azure의 Subscription(구독)을 선택하는 화면에서 연동할 구독을 선택하고 "Continue(계속)" 버튼을 클릭합니다.
-   ![ODSA Link account #2](/assets/img/dataplatform/2022/oracle-odsa-link-account-1.png)
+   ![ODSA Link account #2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-1.png)
 3. 연동할 OCI 계정의 테넌시 정보를 입력합니다.(Identity Domain이 적용된 테넌시만 연동 가능)
-   ![ODSA Link account #3](/assets/img/dataplatform/2022/oracle-odsa-link-account-2.png)
+   ![ODSA Link account #3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-2.png)
 4. 이동된 화면에서 해당 테넌시의 관리자 계정으로 로그인합니다.
-   ![ODSA Link account #4](/assets/img/dataplatform/2022/oracle-odsa-link-account-3.png)
+   ![ODSA Link account #4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-3.png)
 5. 연동할 리전을 선택합니다. (한국의 경우 Seoul 리전이 Azure와 인터커넥트로 연결되어 있기 때문에 서울을 선택합니다.)
-   ![ODSA Link account #5](/assets/img/dataplatform/2022/oracle-odsa-link-account-5.png)
+   ![ODSA Link account #5]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-5.png)
 6. 선택 후 문제가 없다면 약 5분정도 기다린 후에 설정이 완료됩니다.
-   ![ODSA Link account #6](/assets/img/dataplatform/2022/oracle-odsa-link-account-6.png)
+   ![ODSA Link account #6]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-link-account-6.png)
 
 ### ODSA 콘솔 접속하기
 ODSA 서비스를 사용하기 위해 [https://console.multicloud.oracle.com/azure](https://console.multicloud.oracle.com/azure){:target="_blank" rel="noopener"} 링크를 클릭하여 콘솔에 접속 합니다.
 로그인시 사용할 ID는 전 단계에서 생성한 Azure 자체 도메인 사용자 계정 및 비밀번호를 입력합니다.
 1. Azure Portal에서 사용자 정보를 복사합니다.
-   ![Signin to ODSA Console #1](/assets/img/dataplatform/2022/oracle-odsa-signin-1.png)
+   ![Signin to ODSA Console #1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-1.png)
 2. 로그인 화면에서 복사한 정보를 붙여넣기 합니다.
-   ![Signin to ODSA Console #2](/assets/img/dataplatform/2022/oracle-odsa-signin-2.png)
+   ![Signin to ODSA Console #2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-2.png)
 3. 암호를 입력합니다
-   ![Signin to ODSA Console #3](/assets/img/dataplatform/2022/oracle-odsa-signin-3.png)
+   ![Signin to ODSA Console #3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-3.png)
 4. ODSA 콘솔에 접속되었습니다.
-   ![Signin to ODSA Console #3](/assets/img/dataplatform/2022/oracle-odsa-signin-5.png)
+   ![Signin to ODSA Console #3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/oracle-odsa-signin-5.png)

@@ -48,13 +48,13 @@ MySQL Database Service 사용자는 이제 최대 18개의 읽기 복제본을 �
 
 
 Resources -> Read Replicas (DB 생성 이후 초기 화면)
-![](/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jlo.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jlo.png)
 
 Resources -> Endpoints (DB 생성 이후 초기 화면)
-![](/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jkf.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jkf.png)
 
 Resources -> Endpoints (Read replica load balancer)
-![](/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jrj.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-jrj.png)
 
 
 
@@ -83,7 +83,7 @@ GTID는 Global Transaction Identifier의 약자로 MySQL 복제에서 서버의 
 ```
 
 
-![](/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-day.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230118-day.png)
 
 
 
@@ -95,4 +95,4 @@ GTID는 Global Transaction Identifier의 약자로 MySQL 복제에서 서버의 
 ### 기능 소개
 HeatWave는 MySQL Database Service를 위해 개발된 인메모리 쿼리 가속기이며 Oracle Cloud Infrastructure에서만 사용할 수 있습니다. HeatWave를 사용한 MySQL Database 서비스를 사용하면 애플리케이션을 변경하지 않고도 MySQL 데이터베이스에서 직접 OLTP(온라인 트랜잭션 처리) 및 OLAP(Online Analytical Processing) 작업 로드를 실행할 수 있습니다. 따라서 별도의 분석 데이터베이스가 필요하지 않습니다.
 
-![](/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230116-jyq.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/release-note/mds/12/SCR-20230116-jyq.png)

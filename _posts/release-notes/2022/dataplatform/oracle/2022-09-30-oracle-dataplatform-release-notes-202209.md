@@ -50,7 +50,7 @@ header: no
 * 고급 진단 (Advanced diagnostics) : Performance Hub 및 AWR Explorer와 같은 진단 도구를 사용할 수 있는 고급 권한입니다. 고급 진단 자격 증명이 관리되는 데이터베이스에 대해 설정된 경우 진단 기능을 자동으로 사용하고 관리되는 데이터베이스의 읽기 작업에 사용할 수 있습니다.
 * 관리 (Administrator) : 테이블스페이스 생성 및 데이터베이스 매개변수 편집과 같은 관리 작업을 수행할 수 있는 관리 권한입니다. 관리되는 데이터베이스에 대해 관리 자격 증명이 설정된 경우 관리되는 데이터베이스에서 쓰기 작업을 수행하기 위해 사용할 수 있습니다.
 
-![](/assets/img/database/2022/09/09_database_management_overview.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/09_database_management_overview.png)
 
 ## Data Flow now supports Spark 3.2.1, Conda Packs, and Delta Lakes
 * **Services:**  Data Flow
@@ -62,20 +62,20 @@ header: no
 
 Oracle Cloud Infrastructure Data Flow는 Apache Spark ™ 애플리케이션을 실행하기 위한 완전 관리형 서비스입니다. 개발자가 애플리케이션에 집중할 수 있도록 하고 이를 실행할 수 있는 쉬운 런타임 환경을 제공합니다. 애플리케이션 및 워크플로와의 통합을 위한 API 지원을 통해 쉽고 간단한 사용자 인터페이스를 제공합니다. 
 
-![](/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
 
 
 * 신규 개선 사항
   - OCI Data Flow 서비스에서 이제 Spark 3.2.1을 지원합니다. Spark 3.2.1에 대한 지원은 Data Flow가 이제 Delta Lakes 를 지원 하고 Conda Pack과 통합 될 수 있음 을 의미합니다.
-  ![](/assets/img/database/2022/09/03_data_flow_spark_new.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/03_data_flow_spark_new.png)
 
 * Delta Lakes 지원
   - Delta Lake는 데이터 레이크에 안정성을 제공하는 오픈 소스 스토리지 계층입니다. Delta Lake는 Parquet 을 기반으로 한 Open Format 이며, ACID 트랜잭션을 제공하고  Apache Spark API와 완벽하게 호환됩니다.  Delta Lake 를 사용하면 데이터 레이크 위에 Lakehouse 아키텍처를 구축할 수 있습니다. Delta Lake 1.2.1은 Data Flow Spark 3.2.1 처리 엔진과 통합되어 있으므로 추가 Spark 구성이 필요하지 않습니다.
-  ![](/assets/img/database/2022/09/01_data_flow_delta.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/01_data_flow_delta.png)
 
 * Conda Pack 과의 통합 지원
   - Conda 는 가장 널리 사용되는 Python 패키지 관리 시스템입니다. conda-pack 을 사용 하면 PySpark 사용자는 Conda 환경을 직접 사용하여 다양한 Python 패키지를 사용할 수 있습니다. Spark 3.2.1과 함께 Data Flow를 사용하는 경우 Conda Pack과 통합할 수 있습니다.
-  ![](/assets/img/database/2022/09/04_data_flow_spark_new-2.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/04_data_flow_spark_new-2.png)
 
 <br>
 
@@ -109,7 +109,7 @@ Data Integration 의 Bug Fix 수정 사항들이 반영되었습니다. 지속�
 
 OCi GoldenGate 버전 21.6 이상으로 업그레이드된 Deployment 는 이제 리소스 아래의 배포 세부 정보 페이지에서 Trail File 의 정보를 볼 수 있습니다.
 
-![](/assets/img/database/2022/09/07_GoldenGate_Trail.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/07_GoldenGate_Trail.png)
 
 Trail 파일은 시간 경과에 따라 축적될 수 있으므로 사용되지 않은 추적 파일을 주기적으로 비워야 합니다. Trail 파일을 Purge 하는 방법은 아래와 같습니다.
 
@@ -120,7 +120,7 @@ Trail 파일은 시간 경과에 따라 축적될 수 있으므로 사용되지 
 3. Purge Task Setup 
     - OCI GoldenGate Admin 의 Configuration 메뉴에서 Purge Task 설정
 
-    ![](/assets/img/database/2022/09/08_GoldenGate_Trail_Purge_Task.png)
+    ![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/09/08_GoldenGate_Trail_Purge_Task.png)
 
  
 ---

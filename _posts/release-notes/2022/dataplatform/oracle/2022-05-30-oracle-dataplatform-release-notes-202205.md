@@ -42,19 +42,19 @@ header: no
 ### 서비스 소개
 Operations Insights는 데이터베이스 및 호스트의 리소스 활용도와 용량에 대한 360도 통찰력을 제공합니다. CPU 및 스토리지 리소스를 쉽게 분석하고, 용량 문제를 예측하고, 데이터베이스 플릿 전체에서 SQL 성능 문제를 사전에 식별할 수 있습니다.
 
-![](/assets/img/database/2022/05/oci_database_releasenote_operation_insights_main.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/oci_database_releasenote_operation_insights_main.png)
 
 ### 신규 기능
 데모 모드를 사용하면 모니터링되는 환경을 구성할 필요 없이 즉시 Operations Insights 기능을 탐색할 수 있습니다. 데모 모드가 활성화되면 Operations Insights는 리소스에 대한 복잡한 환경 설정없이 다양한 리소스 모니터링 및 분석 기능을 탐색할 수 있는 데이터들로 채워집니다.
 
 데모 모드를 활성화하려면 Operations Insights 개요 페이지로 이동하여 데모 모드 활성화를 클릭합니다.
-![](/assets/img/database/2022/05/demo_mode.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/demo_mode.png)
 
 데모 모드를 활성화를 클릭하면 다음과 같이 데모 모드 사용을 위한 필요 Policy 설정 적용 화면이 나타납니다. 
-![](/assets/img/database/2022/05/demo_mode_policy.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/demo_mode_policy.png)
 
 데모 모드 Policy 설정이 완료되면 아래와 같이 별도의 복잡한 환경 설정 작업없이 아래와 같이 분석 기능들을 맛볼 수 있는 데모 모드가 나타납니다.
-![](/assets/img/database/2022/05/demo_mode_screen.png) 
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/demo_mode_screen.png) 
 
 ---
 
@@ -66,7 +66,7 @@ Operations Insights는 데이터베이스 및 호스트의 리소스 활용도�
 ### 서비스 소개
 Big Data Service는 가용성이 높은 전용 Hadoop 및 Spark Cluster를 온디맨드로 프로비저닝해 주는 서비스로써 안전하게 OCI 에서 관리되는 Managed Service 입니다. 작은 규모의 테스트 및 개발 클러스터에서부터 대규모 Production Cluster를 지원하는 다양한 Oracle Cloud Infrastructure 컴퓨팅 Shape들을 사용하여 빅 데이터 및 분석 워크로드에 맞게 클러스터를 확장하는 서비스입니다. Big Data Service 의 신규 버전이 반영되었습니다.
 
-![](/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/05_oci_database_releasenote_bigdata_main.png)
 
 ***Big Data Service 가 포함하고 있는 사항***
 
@@ -85,16 +85,16 @@ Big Data Service는 가용성이 높은 전용 Hadoop 및 Spark Cluster를 온�
 
 Open Source Hadoop 은 Hadoop HDFS 및 관리를 위한 Open Source 진영의 다양한 Ecosystem 들이 있습니다. Ecosystem 을 이루고 있는 Tool 들을 역할에 맞는 솔루션을 사용함으로써 완전한 Big Data 시스템을 완성하게 됩니다.
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_hadoop_echosystem.png)
 
 ### OCI Big Data Cluster
 OCI 에서 Managed 서비스로 제공되는 Big Data 서비스는 손쉽게 Cluster 를 One-Click 으로 생성하게 됩니다.
 Big Data Cluster 생성을 수행하게 되면 노드들의 역할에 따라 Master Node, Utility Node, Master Node, Worker Node 들이 설치되고 각각의 노드에 Ambari, Hue, Jupyter Notebook, Ranger 등의 툴들이 자동 설치가 됩니다.
 Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하여 Scale-Out 을 원활하게 수행할 수 있게 지원합니다.
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_1.png)
 
-![](/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/06_oci_database_releasenote_bigdata_cluster_2.png)
 
 
 ### 신규 기능 (Big Data 3.0.7)
@@ -117,25 +117,25 @@ Worker Node 는 용량이 추가 증설이 필요할 경우, 노드를 추가하
 
 ### 서비스 소개
 Data Integration 은 데이터 엔지니어와 ETL 개발자가 다양한 데이터 자산에서 데이터 수집과 같은 공통 ETL(추출, 변환 및 로드) 작업을 수행하는 데 도움이 되는 Fully Managed Multi tenant 서비스입니다. Integration 할 Source 의 데이터를 정리, 변환 및 재구성하고 Target 데이터 Asset에 효율적으로 로드해 주는 서비스입니다. 이번에 Data Integration 의 신규 버전이 반영되었습니다.
-![](/assets/img/database/2022/05/07_oci_data_integration_overview_0.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/07_oci_data_integration_overview_0.png)
 
 
-![](/assets/img/database/2022/05/07_oci_data_integration_overview_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/07_oci_data_integration_overview_1.png)
 
 ### Data Integration Workspace
 Data Integration 은 하나의 프로젝트 개념의 관리할 데이터 자산에 대한 등록, 데이터 흐름, 수행을 관리하는 Workspace 라는 기능을 통해 관리합니다.
 
-![](/assets/img/database/2022/05/08_oci_data_integration_workspace.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/08_oci_data_integration_workspace.png)
 
 ### Data Flow 관리
 Data Integration 에 등록된 자산들을 기반으로 연계할 Data 의 흐름을 Data Flow Designer 를 통해 아래와 같이 흐름을 디자인합니다.
 
-![](/assets/img/database/2022/05/09_oci_data_integration_dataflow.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/09_oci_data_integration_dataflow.png)
 
 ### Applicatoin 실행
 디자인된 Data Flow 의 데이터 흐름을 기반으로 수행할 ETL Application 을 Job 으로 실행하게 됩니다.
 
-![](/assets/img/database/2022/05/10_oci_data_integration_application_job.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/10_oci_data_integration_application_job.png)
 
 ### 신규 기능
 * HDFS(Hadoop Distributed File System)를 데이터 소스 또는 타겟으로 연결
@@ -161,7 +161,7 @@ Forecast Backtesting 을 사용하면 실제 데이터가 수집되는 기간에
 * 이상값(Outliers)에 대한 Forcasts 의 민감도(sensitivity)  평가
 * 장거리(longer-range) Forecasts 의 정확성 평가(Training Period 의 1/2 이상)
 
-![](/assets/img/database/2022/05/11_forecast_backtesting_cpu.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/11_forecast_backtesting_cpu.png)
 
 데이터베이스 및 호스트 리소스에 대한 용량 계획(CPU, 스토리지, 메모리, I/O)을 통해 Forecasts Backtesting 을 수행합니다. 
 
@@ -184,7 +184,7 @@ Forecast Backtesting 을 사용하면 실제 데이터가 수집되는 기간에
 데이터베이스 관리를 사용하여 컨테이너 데이터베이스(CDB), PDB 및 비컨테이너 데이터베이스(non-CDB)를 포함하는 단일 인스턴스 및 RAC 데이터베이스를 모니터링할 수 있습니다. 
 데이터베이스 관리는 Oracle 데이터베이스 버전 11.2.0.4 이상을 지원합니다. 
 
-![](/assets/img/database/2022/05/12_database_management_overview.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/05/12_database_management_overview.png)
 
 다음은 Database Management 를 사용하여 수행할 수 있는 작업들입니다.
 

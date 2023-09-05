@@ -38,7 +38,7 @@ On-Premise 기반의 Oracle Database 간의 SOURCE DB 와 TARGET DB 간의 실�
 OCI 에는 기존 On-Premise 기반의 Oracle GoldenGate (OGG) 솔루션이 OCI GoldenGate 라는 이름의 Managed 서비스가 추가가 되었습니다.
 OCI GoldenGate 는 타 Cloud Vendor 에서는 제공하지 않는 OCI 에서만 제공하는 CDC 솔루션입니다.
 
-![OCI GG Overview](/assets/img/dataplatform/2022/goldengate/00.oci-goldengate-overview.png)
+![OCI GG Overview]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/00.oci-goldengate-overview.png)
 
 이번 글에서는 OCI GoldenGate 서비스에 대한 DB 복제 구성을 실습해 보도록 합니다. 
 
@@ -52,12 +52,12 @@ OCI GoldenGate 서비스를 구성하려면 먼저 아래와 같은 사항들이
 - Target Oracle DB (OCI DBCS 혹은 ADB) - (Oracle DB 11.2.0.4 버전 이상, 19.0.0.0 버전만 제외)
 - SQL Developer 실행을 위한 Windows Instance (선택 사항)
 
-![DBCS Preparation](/assets/img/dataplatform/2022/goldengate/01.oci-goldengate-dbcs-preparation.png)
+![DBCS Preparation]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/01.oci-goldengate-dbcs-preparation.png)
 
 상기 그림과 같이 OCI GoldenGate 구성을 위해 SOURCE 와 TARGET DBCS 를 미리 구성해 놓았고 SOURCE DBCS 에서 TARGET DBCS 로의 복제 구성을 실습하게 됩니다.
 DBCS 를 일반적으로 Private Subnet 안에 구성되기 때문에 Public Subnet 을 통해 DB 접근이 가능하도록 SQL Developer 실행을 위한 Windows 서버를 추가로 구성합니다.
 
-![Windows Preparation](/assets/img/dataplatform/2022/goldengate/02.oci-goldengate-windows-preparation.png)
+![Windows Preparation]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/02.oci-goldengate-windows-preparation.png)
 
 <br>
 
@@ -65,21 +65,21 @@ DBCS 를 일반적으로 Private Subnet 안에 구성되기 때문에 Public Sub
 
 DB 서버 접속을 위해 상기 Provisioning 한 윈도우 서버에 원격 데스크탑 을 통해 접속합니다.
 
-![Windows Preparation](/assets/img/dataplatform/2022/goldengate/03.oci-goldengate-windows-preparation-2.png)
+![Windows Preparation]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/03.oci-goldengate-windows-preparation-2.png)
 
 접속된 윈도우 서버에서 Oracle SQL Developer (https://www.oracle.com/database/sqldeveloper/technologies/download/) 를 다운로드 받아 설치합니다. 다운받은 zip 파일을 압축만 해제하면 됩니다. 압축해제된 파일 폴더에서 sqldeveloper.exe 를 실행합니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/goldengate/04.oci-goldengate-windows-sql-developer.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/04.oci-goldengate-windows-sql-developer.png)
 
 SQL Developer 를 실행하면 아래와 같은 화면이 나타나며 상단의 새로운 DB Connection 을 생성할 수 있는 버튼을 클릭합니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/goldengate/05.oci-goldengate-windows-sql-developer-2.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/05.oci-goldengate-windows-sql-developer-2.png)
 
 생성된 DB 의 Connection 정보는 DBCS 의 상세화면에서 DB Connection 정보를 획득할 수 있습니다. 아래 그림과 같이 DB Connection 정보를 복사합니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/dbcs/quickstart/19.oci-dbcs-db-connection-string.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/dbcs/quickstart/19.oci-dbcs-db-connection-string.png)
 
-![SQL Developer](/assets/img/dataplatform/2022/dbcs/quickstart/20.oci-dbcs-db-connection-string-copy.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/dbcs/quickstart/20.oci-dbcs-db-connection-string-copy.png)
 
 ```text
 * DB Connection 정보  : srcggdb.sub07160235111.pslimvcn2021071.oraclevcn.com:1521/SRCGGDB_SRCGGDB.sub07160235111.pslimvcn2021071.oraclevcn.com
@@ -93,15 +93,15 @@ SQL Developer 를 실행하면 아래와 같은 화면이 나타나며 상단의
 
 아래의 화면에 사용자 이름에 DB 생성 시 입력한 sys 사용자의 password 와 호스트 이름, 서비스 이름을 입력하고 테스트 및 저장 버튼을 클릭합니다. 여기서 반드시 사용자의 롤(Role)을 SYSDBA 로 선택해 줍니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/goldengate/06.oci-goldengate-sql-developer-connection-sys.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/06.oci-goldengate-sql-developer-connection-sys.png)
 
 Target DB 에 대해서도 동일한 방식으로 sys 사용자에 대해 Connection 을 생성하여 저장해 둡니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/goldengate/07.oci-goldengate-sql-developer-connection-sys-2.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/07.oci-goldengate-sql-developer-connection-sys-2.png)
 
 Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확인합니다.
 
-![SQL Developer](/assets/img/dataplatform/2022/goldengate/08.oci-goldengate-sql-developer-connect-sql.png)
+![SQL Developer]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/08.oci-goldengate-sql-developer-connect-sql.png)
 
 <br>
 
@@ -125,18 +125,18 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
   GRANT UNLIMITED TABLESPACE TO "SRC_OCIGGLL";
   ```
 
-  ![SEED User](/assets/img/dataplatform/2022/goldengate/09.oci-goldengate-sql-developer-seed-user.png)
+  ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/09.oci-goldengate-sql-developer-seed-user.png)
 
 
 - 생성한 SRC_OCIGGLL 사용자로 SQLDeveloper 접속을 생성합니다. (※ SOURCE DB 가 DBCS 라면 생성한 SRC_OCIGGLL 사용자는 PDB 사용자로 반드시 아래의 서비스 이름에 PDB명을 입력해야 합니다. PDB명은 DB 생성 시 입력한 PDB명 입니다.)
 
   - non-CDB 연결 설정 예
 
-    ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-non-CDB-connect-2023.png)
+    ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-non-CDB-connect-2023.png)
   
   - CDB 연결 설정 예
     
-    ![SEED User](/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-connect.png)
+    ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/10.oci-goldengate-sql-developer-seed-user-connect.png)
 
 
 - 상기 생성한 SRC_OCIGGLL 사용자로 SQL Developer 에 접속 후 SQL 커맨드 창에서 아래의 SEED Data Load Script 를 수행합니다. SEED Data Load Script 는 [SOURCE-SEED-DATA.SQL](/assets/files/ocigg-sql/SOURCE-SEED-DATA.SQL) 를 다운받아 생성한 SRC_OCIGGLL 사용자의 Connection 을 이용해 접속 후 SQL 실행창에 복사하여 붙여놓고 SQL 문장들을 실행합예다. (※ 아래 내용은 해당 스크립트의 일부입니다.)
@@ -164,7 +164,7 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
   ```
   아래 화면은 상기 SEED-DATA.SQL 스크립트를 실행한 결과입니다. SRC_OCIGGLL 스키마에 샘플테이블인 SRC_CITY, SRC_CUSTOMER, SRC_PRODUCT, SRC_REGION 등의 테이블과 데이터가 입력이 되어 있는지 확인합니다.
 
-    ![SEED User](/assets/img/dataplatform/2022/goldengate/11.oci-goldengate-sql-developer-seed-data-result.png)
+    ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/11.oci-goldengate-sql-developer-seed-data-result.png)
 
 
 <br>
@@ -188,12 +188,12 @@ Connection 을 클릭하여 설정한 SOURCE DB 로 연결이 잘 되는지 확�
   GRANT UNLIMITED TABLESPACE TO "SRCMIRROR_OCIGGLL";
   ```
 
-  ![SEED User](/assets/img/dataplatform/2022/goldengate/12.oci-goldengate-sql-developer-target-user.png)
+  ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/12.oci-goldengate-sql-developer-target-user.png)
 
 
 - 생성한 Target DB 의 사용자인 SRCMIRROR_OCIGGLL 사용자로 아래 그림처럼 SQLDeveloper 접속을 생성합니다. 
 
-  ![SEED User](/assets/img/dataplatform/2022/goldengate/13.oci-goldengate-sql-developer-target-user-connect.png)
+  ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/13.oci-goldengate-sql-developer-target-user-connect.png)
 
 - Target DB 에도 아래의 SEED Data Load Script 를 수행합니다. SEED Data Load Script 는 [TARGET-SEED-DATA.SQL](/assets/files/ocigg-sql/TARGET-SEED-DATA.SQL) 를 다운받아 생성한 SRCMIRROR_OCIGGLL 사용자의 Connection 을 이용해 접속 후 SQL 실행창에 복사하여 붙여놓고 SQL 문장들을 실행합니다. (※ 아래 내용은 해당 스크립트의 일부입니다.)
 
@@ -225,7 +225,7 @@ BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
 ```
 
   아래 화면은 상기 SEED-DATA.SQL 스크립트를 실행한 결과입니다. SRCMIRROR_OCIGGLL 스키마에 SOURCE DB의 샘플테이블인 SRC_CITY, SRC_CUSTOMER, SRC_PRODUCT, SRC_REGION 등의 테이블과 데이터가  동일하게 입력이 되어 있는지 확인합니다.
-    ![SEED User](/assets/img/dataplatform/2022/goldengate/14.oci-goldengate-sql-developer-target-seed-data.png)
+    ![SEED User]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/14.oci-goldengate-sql-developer-target-seed-data.png)
 
 <br>
 
@@ -237,7 +237,7 @@ SOURCE DB 의 SUPPLEMENT LOGGING 추가를 위해 SQL Developer 를 통해 SOURC
     ```sql
     SELECT log_mode FROM v$database;
     ```
-    ![ARCHIVELOG CHECK](/assets/img/dataplatform/2022/goldengate/15.oci-goldengate-sql-developer-archivelog-check.png)
+    ![ARCHIVELOG CHECK]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/15.oci-goldengate-sql-developer-archivelog-check.png)
 
     ※ 만일, LOG_MODE 가 "NOARCHIVELOG" 모드로 설정이 되어 있다면 아래와 같이 SOURCE DB 인스턴스로 ssh 로그인하여 아래 절차대로 실행해 줍니다. (※ 상기 화면과 같이 "ARCHIVELOG" 모드로 설정되어 있다면 아래 SCRIPT 는 수행하지 않습니다.)
 
@@ -277,7 +277,7 @@ SOURCE DB 의 SUPPLEMENT LOGGING 추가를 위해 SQL Developer 를 통해 SOURC
     
     ```
     
-    ![SUPPLEMENTAL LOGGING](/assets/img/dataplatform/2022/goldengate/16.oci-goldengate-sql-developer-supplement-logging.png)
+    ![SUPPLEMENTAL LOGGING]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/16.oci-goldengate-sql-developer-supplement-logging.png)
 
 <br>
 
@@ -308,10 +308,10 @@ SOURCE DB 와 TARGET DB 에 OCI GoldenGate 가 추출 및 복제를 수행하기
     ALTER PROFILE DEFAULT LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
     ```
 
-    ![GGADMIN USER CREATE](/assets/img/dataplatform/2022/goldengate/17.oci-goldengate-sql-developer-ggadmin-user-create.png)
+    ![GGADMIN USER CREATE]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/17.oci-goldengate-sql-developer-ggadmin-user-create.png)
 
 - TARGET DB 에  SQL Developer 로 sys 계정으로 CDB$ROOT 에 접속하여 TARGET DB 에도 위의 절차와 동일하게 동일한 SQL SCRIPT 를 실행시켜 OCI GoldenGate Admin 사용자를 생성해 줍니다.
-    ![TARGET GGADMIN](/assets/img/dataplatform/2022/goldengate/18.oci-goldengate-sql-developer-ggadmin-user-create-target.png)
+    ![TARGET GGADMIN]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/18.oci-goldengate-sql-developer-ggadmin-user-create-target.png)
 
 <br>
 
@@ -321,28 +321,28 @@ OCI GoldenGate 서비스를 사용하기 위해 서비스를 Deploy 해야 합�
 
 - 아래의 OCI 메인 메뉴에서 GoldenGate 를 찾아 선택합니다.
 
-    ![GG NAVIGATION MENU](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
+    ![GG NAVIGATION MENU]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
 
 - GoldenGate 의 좌측 메뉴 중에서 두번째 Deployments 메뉴를 선택 후 Compartment 를 선택합니다. 우측의 목록 상단의 "Create Deployment" 버튼을 클릭합니다.
 
-    ![GG DEPLOYMENT MENU](/assets/img/dataplatform/2022/goldengate/20.oci-goldengate-deployment-main-2023.png)
+    ![GG DEPLOYMENT MENU]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/20.oci-goldengate-deployment-main-2023.png)
 
 - 아래 화면과 같이 OCI GoldenGate Deploy 를 위한 입력 사항들을 입력해 후 Next 버튼을 클릭합니다. (※ AutoScaling 체크 시, 초기 설정한 OCPU 의 3배까지 자동 스켈링 수행)
     > 중요 : OCI GoldenGate Web Console 을 접근하기 위해서는 반드시 Public Subnet 을 선택하여 Deploy 합니다. Public Subnet 에 Deploy 를 하지만 Private IP 기반으로만 통신합니다.
 
-    ![DEPLOYMENT INPUT](/assets/img/dataplatform/2022/goldengate/21.oci-goldengate-deployment-input-public-2023.png)
+    ![DEPLOYMENT INPUT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/21.oci-goldengate-deployment-input-public-2023.png)
 
 - 다음은 OCI GoldenGate 를 복제할 DB 기술을 technology 목록에서 선택 후, instance 명과 관리자 화면에 로그인할 사용자 및 Password 를 입력 후 Create 버튼을 클릭합니다.
 
-    ![DEPLOY INPUT](/assets/img/dataplatform/2022/goldengate/22.oci-goldengate-deployment-input-2-public-2023.png)
+    ![DEPLOY INPUT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/22.oci-goldengate-deployment-input-2-public-2023.png)
 
 - Deploy 가 시작되면 아래와 같이 노란색 상태의 Creating 메시지가 나옵니다. (Deploy 시간 : 약 10분 소요)
 
-    ![CREATING](/assets/img/dataplatform/2022/goldengate/23.oci-goldengate-deployment-creating-public-2023.png)
+    ![CREATING]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/23.oci-goldengate-deployment-creating-public-2023.png)
 
 - Deploy 가 완료되면 아래와 같이 녹색 상태로 전환이 됩니다.
 
-    ![CREATED](/assets/img/dataplatform/2022/goldengate/24.oci-goldengate-deployment-created-public-2023.png)
+    ![CREATED]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/24.oci-goldengate-deployment-created-public-2023.png)
 
 
 - Deploy 가 완료되면 OCI GoldenGate Admin 콘솔에 로그인하여 DB 연결 구성 및 Capture, Replication 등의 프로세스를 구성해야 합니다. 
@@ -352,20 +352,20 @@ OCI GoldenGate Admin 콘솔은 Private IP 로만 통신하도록 구성되기 �
 
 - Windows Instance 에서 브라우저를 실행 후 OCI 에 로그인 후 Deploy 된 OCI GoldenGate Deployment 화면에는 생성된 OCI GoldenGate 로 로그인 할 수 있는 URL 이 생성되어 있게 됩니다. 생성된 URL 을 통해 OCI GoldenGate Admin 콘솔 Web 화면으로 접근이 가능합니다. 아래 화면에서 Launch Console 버튼을 클릭하면 생성된 URL 로 바로 접근이 됩니다.
 
-    ![Launch Console](/assets/img/dataplatform/2022/goldengate/25.oci-goldengate-remote-launch-console-2023.png)
+    ![Launch Console]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/25.oci-goldengate-remote-launch-console-2023.png)
 
     <br>
 
-    ![Launch Console](/assets/img/dataplatform/2022/goldengate/26.oci-goldengate-remote-launch-console-2-2023.png)
+    ![Launch Console]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/26.oci-goldengate-remote-launch-console-2-2023.png)
    
 - OCI GoldenGate 의 Admin Service 화면이 나타나면 Deploy 생성 시 입력했던 GoldenGate Admin 사용자 (ggadmin) ID 와 Password 를 입력 후 로그인이 가능한지 확인합니다.
 
-    ![Admin Login](/assets/img/dataplatform/2022/goldengate/27.oci-goldengate-remote-admin-login.png)
+    ![Admin Login]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/27.oci-goldengate-remote-admin-login.png)
 
 
 - 로그인이 되면 아래와 같은 추출 및 프로세스를 구성할 수 있는 화면이 나오게 됩니다. 추후 프로세스 구성을 위해 Console 화면을 이용하게 됩니다.
 
-    ![Admin Main](/assets/img/dataplatform/2022/goldengate/28.oci-goldengate-remote-admin-main.png)
+    ![Admin Main]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/28.oci-goldengate-remote-admin-main.png)
 
 <br>
 
@@ -375,57 +375,57 @@ OCI GoldenGate 에서 캡쳐/추출 및 복제를 할 대상 Database 들에 대
 
 - Connections 메뉴 실행 후 (GoldenGate -> Connections) Create Connection 버튼을 클릭합니다.
 
-    ![NAVI Menu](/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
+    ![NAVI Menu]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/19.oci-goldengate-navigation-menu-2023.png)
 
-    ![REG DB-1](/assets/img/dataplatform/2022/goldengate/29.oci-goldengate-register-database-menu-2023.png)
+    ![REG DB-1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/29.oci-goldengate-register-database-menu-2023.png)
 
 - Create Connection 버튼을 클릭하면 DB 연결을 생성할 수 있는 화면이 우측에 나타나며 아래 그림들을 참고하여 SOURCE DB 와 TARGET DB 의 정보와 Connection 정보를 입력합니다.
 
   - Create Connection 화면에서 아래 화면과 같이 이름과 설명을 입력하고 Type 을 Oracle Database 로 선택 후 Next 버튼을 클릭합니다.
 
-    ![SREG-DB-2](/assets/img/dataplatform/2022/goldengate/30.oci-goldengate-register-database-input-2023.png)
+    ![SREG-DB-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/30.oci-goldengate-register-database-input-2023.png)
 
    - SOURCE DB 가 DBCS 가 아닌 On-Premise 나 non-CDB 환경일 경우, Connection 생성 입력 화면을 아래와 같이 입력하고 하단의 Network connectivity Option 을 체크해 줍니다. (SOURCE DB 가 DBCS 일 경우, 아래 TARGET DB 의 Connection 생성 부분을 참고합니다.)
 
-      ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-2-2023.png)
+      ![SREG-DB-3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-2-2023.png)
 
    - SOURCE DB 가 DBCS 가 아닌 On-Premise 나 non-CDB 환경일 경우, Network connectivity 항목을 아래의 세션 모드 및 Subnet, DB 서버의 IP 정보를 입력 후 Create 버튼을 클릭해서 생성합니다.
 
-     ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-network-2-2023.png)   
+     ![SREG-DB-3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/31.oci-goldengate-register-database-input-network-2-2023.png)   
 
 
 - 생성한 Connection 을 앞서 생성한 OGGDeployment Instance 에서 활용을 하기 위해서는 해당 Instance 에 Assign 을 해 주어야 합니다.
   - 아래와 같이 Connection Detail 화면에서 Assign 버튼을 클릭합니다.  
   
-    ![SREG-DB-3](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-input-3-2023.png)
+    ![SREG-DB-3]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-input-3-2023.png)
 
   - Assign deployment 창에서 Assign 하고자 하는 Deployment 의 목록을 선택 후, Assign deployment 버튼을 클릭합니다.
 
-    ![SREG-DB-4](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-4-2023.png)
+    ![SREG-DB-4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-4-2023.png)
 
   - 아래와 같이 Assign 이 완료된 Connection 정보들만이 추후 OCI GoldenGate Admin Console 에서 해당 Connection 정보들을 Source 혹은 Target DB 에 대한 연결 정보로써 활용할 수 있게 됩니다.
 
-    ![SREG-DB-4](/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-result-5-2023.png)
+    ![SREG-DB-4]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/32.oci-goldengate-register-database-assign-result-5-2023.png)
 
 
   - TARGET DB (DBCS)에 대한 Connection 설정을 아래와 같이 진행합니다. (SOURCE DB도 DBCS 를 사용한다면, 아래와 동일한 절차로 Connection 설정)
 
-    ![TREG-DB-1](/assets/img/dataplatform/2022/goldengate/33.oci-goldengate-register-database-target-input-1-2023.png)
+    ![TREG-DB-1]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/33.oci-goldengate-register-database-target-input-1-2023.png)
 
   - TARGET DB 로 DBCS 를 사용할 경우, "Select Database" 를 선택하면, OCI 내의 기존 생성한 DBCS 들이 목록에 나타나며, 목록을 선택하면 기본적인 DB Home 정보들을 자동으로 가져옵니다. 
 
   - TARGET DB 의 연결 사용자로는 앞서 생성한 CDB 의 GGADMIN 사용자 (C##GGADMIN) 로 PDB 에 대한 Connection 설정 후 Create 버튼을 눌러 Connection 을 생성합니다.
   > 주의 : TARGET DB DBCS 로 설정할 경우는 아래 그림처럼 반드시 PDB를 선택해서 Connection 을 설정해 줍니다. 만일, SOURCE DB 의 DBCS 에 대한 Connection 을 설정할 경우는 CDB 로 접속을 설정해 주어야 합니다. CDB 설정은 PDB 에 대한 목록을 선택하지 않으면, CDB 로 설정이 됩니다. 
 
-    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/34.oci-goldengate-register-database-target-input-2-2023.png)
+    ![TREG-DB-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/34.oci-goldengate-register-database-target-input-2-2023.png)
 
   - Connection 생성이 완료되면, 앞서 SOURCE DB Connection 에 대한 Assign Deployment 절차와 동일하게 Assign 을 진행합니다.
 
-    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-3-2023.png)
+    ![TREG-DB-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-3-2023.png)
 
-    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-4-2023.png)
+    ![TREG-DB-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-4-2023.png)
 
-    ![TREG-DB-2](/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-5-2023.png)
+    ![TREG-DB-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/35.oci-goldengate-register-database-target-input-5-2023.png)
 
 <br>
 
@@ -435,38 +435,38 @@ OCI Console 에서 등록한 Database 들은 OCI GoldenGate 에서 조회가 가
 
 - OCI GoldenGate Admin Console 접속 후 Configuration 메뉴로 접근합니다.
 
-  ![Admin Login](/assets/img/dataplatform/2022/goldengate/27.oci-goldengate-remote-admin-login.png)
+  ![Admin Login]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/27.oci-goldengate-remote-admin-login.png)
 
-  ![GG Console](/assets/img/dataplatform/2022/goldengate/38.oci-goldengate-console-config.png)
+  ![GG Console]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/38.oci-goldengate-console-config.png)
 
 - Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Connection 정보들이 나타납니다. Connection 정보들 중에서 SOURCE DB 의 Connection 정보에 대한 Action 메뉴 중에서 빨간색으로 표시된 버튼을 클릭합니다.
 
-  ![Config Credetial](/assets/img/dataplatform/2022/goldengate/39.oci-goldengate-console-config-connection-2023.png)
+  ![Config Credetial]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/39.oci-goldengate-console-config-connection-2023.png)
 
 - 다음과 같은 TRANDATA Information 창이 나타나며 그림의 빨간색으로 표시된 "+" 버튼을 클릭합니다.
 
-  ![TRANDATA Info](/assets/img/dataplatform/2022/goldengate/40.oci-goldengate-trandata-information-2023.png)
+  ![TRANDATA Info]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/40.oci-goldengate-trandata-information-2023.png)
 
 
 - "+" 버튼을 클릭했을때, 나타나는 아래의 입력창의 Schema Name 란에 SOURCE DB 가 non-CDB 일 경우, SRC_OCIGGLL 만 입력하고, SOURCE DB 가 CDB 일 경우, PDB1.SRC_OCIGGLL 을 입력하고 Submit 버튼을 클릭합니다.
 
   - SOURCE DB 가 non-CDB 일 경우 입력 예
 
-    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit-non-CDB-2023.png)
+    ![TRANDATA SUBMIT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit-non-CDB-2023.png)
 
   - SOURCE DB 가 CDB 일 경우 입력 예 
   
-    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit.png)
+    ![TRANDATA SUBMIT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/41.oci-goldengate-trandata-add-submit.png)
 
 - 추가한 TRANDATA 가 제대로 생성되었는지 확인하기 위해 아래 빨간색으로 표시된 입력창에 PDB1.SRC_OCIGGLL 을 입력하고 창 옆에 빨간색으로 표시된 돋보기 버튼을 클릭하면 생성된 TRANDATA 정보가 하단에 디스플레이 됩니다.
 
   - SOURCE DB 가 non-CDB 일 경우 생성 결과 예
 
-    ![TRANDATA SUBMIT](/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check-non-CDB-2023.png)
+    ![TRANDATA SUBMIT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check-non-CDB-2023.png)
   
   - SOURCE DB 가 CDB 일 경우 생성 결과 예
 
-    ![TRANDATA SEARCH](/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check.png)
+    ![TRANDATA SEARCH]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/42.oci-goldengate-trandata-check.png)
 
 <br>
 
@@ -478,32 +478,32 @@ Capture / Replication 프로세스 설정을 하기 위해서는 TARGET DB 에 C
 
 - 아래 그림처럼 Connection 정보에 PDB 로의 Connection String 이 설정되어 있는지 확인합니다.
 
-  ![CREDENTIALS](/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-target-pdb-check-2023.png)
+  ![CREDENTIALS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-target-pdb-check-2023.png)
 
 - PDB로 서비스명이 제대로 설정이 되어 있다면, SQL Developer 를 통해 TARGEDB 의 SRCMIRROR_OCIGGLL 사용자로 로그인하여 해당 스키마에 Checkpoint Table 이 생성되어 있지 않음을 확인합니다. 
 
-  ![CREDENTIALS](/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-checkpoint-check.png)
+  ![CREDENTIALS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/44.oci-goldengate-checkpoint-check.png)
 
 - OCI GoldenGate 의 Admin Console 로 로그인 후 Configuration 메뉴로 접근하면 OCI Console 에서 등록했던 Database 의 Connection 정보들이 나타납니다. Connection 정보들 중에서 TARGET DB 의 Connection 정보에 대한 Action 메뉴 중에서 아래 그림과 같이 빨간색으로 표시된 버튼을 클릭합니다.
 
-  ![TARGET Config](/assets/img/dataplatform/2022/goldengate/43.oci-goldengate-checkpoint-credential.png)
+  ![TARGET Config]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/43.oci-goldengate-checkpoint-credential.png)
 
 - 아래에 나타난 Checkpoint 항목에서 빨간색으로 표시된 "+" 버튼을 클릭합니다.
 
-  ![CHECKPOINT CREATE](/assets/img/dataplatform/2022/goldengate/45.oci-goldengate-checkpoint-create.png)
+  ![CHECKPOINT CREATE]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/45.oci-goldengate-checkpoint-create.png)
 
 
 - Checkpoint Table 입력창에 "SRCMIRROR_OCIGGLL"."CHECKTABLE" 을 입력 후 Submit 버튼을 클릭합니다.
 
-  ![CHECKPOINT CREATE-2](/assets/img/dataplatform/2022/goldengate/46.oci-goldengate-checkpoint-create-2.png)
+  ![CHECKPOINT CREATE-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/46.oci-goldengate-checkpoint-create-2.png)
 
 - Submit 버튼을 클릭하면 Checkpoint table 생성을 진행 후 아래와 같이 화면 전환이 되고 생성된 Checkpoint table 이 조회됩니다.
 
-  ![CHECKPOINT TABLE VIEW](/assets/img/dataplatform/2022/goldengate/47.oci-goldengate-checkpoint-create-result.png)
+  ![CHECKPOINT TABLE VIEW]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/47.oci-goldengate-checkpoint-create-result.png)
 
 - SQL Developer 로 TARGET DB 에 접속해서 Checkpoint Table 들이 생성이 되었는지 확인합니다. (기존 Connection 이 연결되어 있는 경우, Refresh 버튼 클릭해서 확인)
 
-  ![CHECKPOINT RESULT](/assets/img/dataplatform/2022/goldengate/48.oci-goldengate-checkpoint-create-result-sqldev.png)
+  ![CHECKPOINT RESULT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/48.oci-goldengate-checkpoint-create-result-sqldev.png)
 
 <br>
 
@@ -513,18 +513,18 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
 
 - OCI GoldenGate Admin 콘솔 로그인 후 Administration Service 탭의 메인 화면에서 Extracts (추출) 화면쪽의 "+" 버튼을 클릭합니다.
 
-  ![EXTRACT ADD](/assets/img/dataplatform/2022/goldengate/49.oci-goldengate-extract-process-add.png)
+  ![EXTRACT ADD]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/49.oci-goldengate-extract-process-add.png)
 
 - Add Extract 화면에서 Extract Type 을 "Integrated Extract" 를 선택 후 Next 버튼을 클릭합니다.
 
-  ![INTEGRATED EXTRACT](/assets/img/dataplatform/2022/goldengate/50.oci-goldengate-extract-process-integrated-extract.png)
+  ![INTEGRATED EXTRACT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/50.oci-goldengate-extract-process-integrated-extract.png)
 
 - Add Extract 의 두번째 화면에서는 Process Name 과 Trail File 이 저장될 Trail Name 을 아래와 같이 입력합니다.
     - Process Name : UAEXT (사용하고자 하는 프로세스 명)
     - Intent : Unidirectional 선택
     - Trail Name : E1 (반드시 2자만 입력)
 
-  ![PROCESS NAME](/assets/img/dataplatform/2022/goldengate/51.oci-goldengate-extract-process-name-trail.png)
+  ![PROCESS NAME]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/51.oci-goldengate-extract-process-name-trail.png)
 
 - Add Extract 의 두번째 화면을 아래쪽으로 스크롤 하면 DB 의 Credential 과 Managed Option 을 지정하는 화면에 아래 그림과 같이 리스트에서 지정하거나 선택 후 Next 버튼을 클릭합니다.
     - Credential Domain : OracleGoldenGate
@@ -533,10 +533,10 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
     - Managed Option -> Critical to deployment health : Enable
 
       - SOURCE DB 가 non-CDB 일 경우의 입력 화면 예
-      ![PROCESS CREDENTIAL](/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-non-CDB-2023.png)  
+      ![PROCESS CREDENTIAL]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-non-CDB-2023.png)  
       
       - SOURCE DB 가 CDB 일 경의 입력 화면 예
-      ![PROCESS CREDENTIAL](/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-credentiial-managed-option.png)
+      ![PROCESS CREDENTIAL]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/52.oci-goldengate-extract-process-credentiial-managed-option.png)
 
 
 - Add Extract 세번째 화면에서는 Parameter File 을 입력하는 절차입니다. Parameter 에는 추출할 대상 스키마의 대상 테이블 정보들을 정의해 줍니다. 아래의 Parameter 내용을 복사하여 Parameter File 란의 맨마지막 부분에 다음 텍스트를 복사하여 이어 붙여넣기를 합니다. "Create and Run" 버튼을 클릭합니다. (※ 맨 아래 Parameter 항목에 Capture 할 테이블에 대한 정보가 명기되어 있는 것을 확인할 수 있습니다.)
@@ -569,16 +569,16 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
 
     ```
 
-  ![PROCESS PARAMETER](/assets/img/dataplatform/2022/goldengate/53.oci-goldengate-extract-process-parameter-file.png)
+  ![PROCESS PARAMETER]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/53.oci-goldengate-extract-process-parameter-file.png)
 
 
 
 - 추가한 프로세스는 아래 그림과 같이 노란 상태로 추가가 되며 프로세스가 정상적인 상태가 되면 녹색 상태로 전환됩니다.
 
-  ![PROCESS STATUS](/assets/img/dataplatform/2022/goldengate/54.oci-goldengate-extract-process-status-yellow.png)
+  ![PROCESS STATUS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/54.oci-goldengate-extract-process-status-yellow.png)
 
 
-  ![PROCESS STATUS-2](/assets/img/dataplatform/2022/goldengate/55.oci-goldengate-extract-process-status-green.png)
+  ![PROCESS STATUS-2]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/55.oci-goldengate-extract-process-status-green.png)
 
 <br>
 
@@ -588,11 +588,11 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
 
 - OCI GoldenGate Admin 콘솔 로그인 후 Administration Service 탭의 메인 화면에서 Replicats (복제) 화면쪽의 "+" 버튼을 클릭합니다.
 
-  ![REPLICAT ADD](/assets/img/dataplatform/2022/goldengate/56.oci-goldengate-replicat-process-add.png)
+  ![REPLICAT ADD]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/56.oci-goldengate-replicat-process-add.png)
 
 - Add Replicat 화면에서 Replicat Type 을 세번째 항목인 "Nonintegrated Replicat" 을 선택 후 Next 버튼을 클릭합니다.
 
-  ![NONINTEGRATED REPLICAT](/assets/img/dataplatform/2022/goldengate/57.oci-goldengate-replicat-process-nonintegrated.png)
+  ![NONINTEGRATED REPLICAT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/57.oci-goldengate-replicat-process-nonintegrated.png)
 
 - Add Replicat 화면의 Replicat Options 페이지에서 입력항목들에 아래와 같이 입력합니다.
     - Process Name : REP
@@ -602,11 +602,11 @@ OCI GoldenGate Admin 콘솔에서 EXTRACT(Capture) 프로세스를 추가하는 
     - Checkpoint Table : "SRCMIRROR_OCIGGLL"."CHECKTABLE"
 
 
-  ![REPLICAT OPTIONS](/assets/img/dataplatform/2022/goldengate/58.oci-goldengate-replicat-process-name.png)
+  ![REPLICAT OPTIONS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/58.oci-goldengate-replicat-process-name.png)
 
 - Add Replicat 의 두번째 화면을 아래쪽으로 스크롤 하면 Managed Option 을 지정하는 화면에 "Critical to deployment health" 를 Enable 로 설정 후 Next 버튼을 클릭합니다.
 
-  ![NONINTEGRATED REPLICAT](/assets/img/dataplatform/2022/goldengate/59.oci-goldengate-replicat-process-managed-options.png)
+  ![NONINTEGRATED REPLICAT]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/59.oci-goldengate-replicat-process-managed-options.png)
 
 - Add Replicat 의 세번째 화면은 Parameter File 을 입력하는 화면입니다. 
 Extract 프로세스의 Parmeter 를 입력하는 방식과 동일하게 아래의 내용을 Parameter 입력란의 맨 마지막 부분에 있는 "MAP *.*, TARGET *.*;" 부분을 지우고 다음의 텍스트를 복사하여 붙여넣고 "Create and Run" 버튼을 클릭합니다. (※ 맨 마지막에 MAP 항목은 SOURCE DB 의 테이블을 TARGET DB 로 MAPPING 을 어떻게 할 것인지 정의해 주는 항목입니다.)
@@ -647,17 +647,17 @@ Extract 프로세스의 Parmeter 를 입력하는 방식과 동일하게 아래�
     
     ```
 
-  ![REPLICAT PROCESS](/assets/img/dataplatform/2022/goldengate/60.oci-goldengate-replicat-process-parameter-file.png)
+  ![REPLICAT PROCESS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/60.oci-goldengate-replicat-process-parameter-file.png)
 
 - 추가한 프로세스는 아래 그림과 같이 노란 상태로 추가가 되며 프로세스가 정상적인 상태가 되면 녹색 상태로 전환됩니다.
 
-  ![PROCESS STATUS](/assets/img/dataplatform/2022/goldengate/61.oci-goldengate-replicat-process-status-yellow.png)
+  ![PROCESS STATUS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/61.oci-goldengate-replicat-process-status-yellow.png)
 
-  ![PROCESS STATUS](/assets/img/dataplatform/2022/goldengate/62.oci-goldengate-replicat-process-status-green.png)
+  ![PROCESS STATUS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/62.oci-goldengate-replicat-process-status-green.png)
 
 - Extract(추출) 및 Replicat(복제) 프로세스가 정상적으로 동작하는지는 아래와 같이 모든 프로세스의 상태가 Green 표시로 나타나야 하며, 아래 에러메시지 창에도 붉은색 Error 메시지가 없는 상태가 정상 동작 상태입니다.
 
-    ![PROCESS OK](/assets/img/dataplatform/2022/goldengate/72.oci-goldengate-process-ok.png)
+    ![PROCESS OK]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/72.oci-goldengate-process-ok.png)
 
 > STEP 11번까지의 단계가 모두 성공적으로 완료되면 기본적인 OCI GoldenGate 의 Capture (추출) 및 Replicat (복제) 구성이 완료된 상태가 됩니다.
 
@@ -669,15 +669,15 @@ OCI GoldenGate 를 통해 SOURCE DB 에서 TARGET DB 로의 복제 구성이 완
 
 - Perormance Metrics Service 에서는 동작하고 있는 각 프로세스의 상태 정보 및 처리 통계 정보들을 확인할 수 있습니다. OCI GoldenGate Admin 콘솔 화면에서 상단탭들 중에서 Performance Metrics Service 를 클릭하면 모든 프로세스의 동작 상태를 확인할 수 있고 그중 Extract (추출) 현황을 확인하기 위해 Extract 프로세스인 UAEXT 프로세스를 클릭합니다.
 
-  ![PERFORMANCE METRICS](/assets/img/dataplatform/2022/goldengate/63.oci-goldengate-performance-metrics.png)
+  ![PERFORMANCE METRICS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/63.oci-goldengate-performance-metrics.png)
 
 - Extract 프로세스의 동작 현황들이 나타납니다. 해당 프로세스가 사용하고 있는 CPU, Memory, I/O 등의 자원 현황들이 나타납니다. Extract 프로세스가 DB 에 처리하는 처리 건수 및 통계를 확인하기 위해서 상단 탭 메뉴들 중에서 "Database Statistics" 메뉴를 클릭합니다.
 
-  ![PERFORMANCE CHART](/assets/img/dataplatform/2022/goldengate/64.oci-goldengate-performance-metrics-chart.png)
+  ![PERFORMANCE CHART]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/64.oci-goldengate-performance-metrics-chart.png)
 
 - Performance Metrics 의 Datatbase Statistics 에서는 OCI GoldenGate 가 처리하고 있는 DB 테이블에서 일어나고 있는 Insert, Update, Delete 등의 변경 정보들에 대한 추출 및 복제 처리 건수에 대한 통계 정보들을 확인할 수 있습니다. 해당 화면의 맨아래로 스크롤을 하면 Table Statistics 라는 항목이 나타납니다.
 
-  ![DATABASE STATISTICS](/assets/img/dataplatform/2022/goldengate/65.oci-goldengate-performance-metrics-database-statistics.png)
+  ![DATABASE STATISTICS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/65.oci-goldengate-performance-metrics-database-statistics.png)
 
 - 다음 STEP 에서 OCI GoldenGate 에 대한 복제 및 추출 현황을 모니터링하기 위해 Performance Metrics 의 Database Statistics 의 Table Statistics 화면을 열어 놓은 상태에서 STEP 13 을 진행합니다.
 
@@ -690,10 +690,10 @@ OCI GoldenGate 를 통해 SOURCE DB 에서 TARGET DB 로의 복제 구성이 완
 - 윈도우 서버에 설치한 SQL Developer 를 통해 SOURCE DB (SRC_OCIGGLL 사용자 스키마) 와 TARGET DB (SRCMIRROR_OCIGGLL 사용자 스키마) 의 SRC_CITY, SRC_REGION 테이블의 내용이 동일한지 데이터 내용 및 건수를 확인합니다.
 
     - SOURCE DB 의 SRC_OCIGGLL.SRC_CITY 테이블 내용 및 건수 확인
-    ![SOURCEDB CITYTABLE](/assets/img/dataplatform/2022/goldengate/66.oci-goldengate-source-table-src-city.png)
+    ![SOURCEDB CITYTABLE]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/66.oci-goldengate-source-table-src-city.png)
 
     - TARGET DB 의 SRCMIRROR_OCIGGLL.SRC_CITY 테이블 내용 및 건수 확인 (※ 상기 SOURCE DB 와 내용 및 건수가 동일한지 비교 확인)
-    ![TARGETDB CITYTABLE](/assets/img/dataplatform/2022/goldengate/67.oci-goldengate-target-table-src-city.png)
+    ![TARGETDB CITYTABLE]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/67.oci-goldengate-target-table-src-city.png)
 
 
 - SQL Developer 를 통해 SOURCE DB 에 SRC_OCIGGLL 사용자로 PDB 에 접속하여 SQL 실행창에 아래의 Insert 쿼리를 복사 후 붙여넣기를 한 후 SCRIPT 를 실행합니다. (※ INSERT, UPDATE, DELETE 등의 SOURCE DB 변경 후 COMMIT 문 반드시 실행)
@@ -710,20 +710,20 @@ OCI GoldenGate 를 통해 SOURCE DB 에서 TARGET DB 로의 복제 구성이 완
 
     ```
 
-    ![INSERT QUERY](/assets/img/dataplatform/2022/goldengate/68.oci-goldengate-sourcedb-insert.png)
+    ![INSERT QUERY]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/68.oci-goldengate-sourcedb-insert.png)
 
 
 - 앞서 STEP 12 에서 열어 두었던 OCI GoldenGate 의 Performance Metrics 의 Database Statistics 의 Table Statistics 화면에서 테이블 건수의 변화 및 Chart 의 변화를 확인합니다. Table Statistics 건수에 앞서 Insert 를 수행했던 두개의 테이블에 각각 2건씩 Insert 가 추가된 것이 통계로 나타납니다. 또한 중간에 나타나는 진행 그래프에서 아래 그림처럼 빨간색으로 표시된 그래프처럼 그래프의 변화가 일어나면 해당 시점에서 Capture 추출 프로세스가 처리된 것을 나타냅니다.
 
-    ![PERFORMANCE METRICS](/assets/img/dataplatform/2022/goldengate/69.oci-goldengate-table-statistics.png)
+    ![PERFORMANCE METRICS]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/69.oci-goldengate-table-statistics.png)
 
 - SQL Developer 를 통해 입력한 데이터가 SOURCE DB 와 TARGET DB 에 제대로 반영이 되었는지 확인합니다. 
 
     - SOURCE DB 의 SRC_OCIGGLL.SRC_CITY 테이블 내용 및 건수 확인
-    ![SOURCEDB INSERTCHECK](/assets/img/dataplatform/2022/goldengate/70.oci-goldengate-sourcedb-insert-check.png)
+    ![SOURCEDB INSERTCHECK]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/70.oci-goldengate-sourcedb-insert-check.png)
 
     - TARGET DB 의 SRCMIRROR_OCIGGLL.SRC_CITY 테이블 내용 및 건수 확인 (※ 상기 SOURCE DB 와 내용 및 건수가 동일한지 비교 확인)
-    ![TARGETDB REPLICATCHECK](/assets/img/dataplatform/2022/goldengate/71.oci-goldengate-targetdb-replicat-check.png)
+    ![TARGETDB REPLICATCHECK]({{site.urlblogimg2022_2023}}/assets/img/dataplatform/2022/goldengate/71.oci-goldengate-targetdb-replicat-check.png)
 
 - TARGET DB 에도 SOURCE DB 에 SRC_CITY 테이블에 INSERT 했던 'Seoul', 'Pusan' 레코드가 복제된 것을 확인할 수 있습니다. SOURCE DB 의 TABLE 들에 다른 DATA 를 INSERT 하거나 UPDATE 하거나 DELETE 를 하더라도 모든 DB 테이블들의 변경들이 TARGET DB 로 복제되는 것을 확인하실 수 있게 됩니다. 수고하셨습니다.
 

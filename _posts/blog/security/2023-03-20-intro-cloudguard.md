@@ -33,7 +33,7 @@ header: no
 Cloud Guard는 클라우드 사용자의 보안 취약한 잘못된 설정(Misconfigurations)이나 비보안적인 행위(Insecure Activities)에 대해 통합적으로 모니터링하고, 문제를 감지하여 제안 및 조치를 취할 수 있도록 도와주는 무료 보안 서비스입니다.
 
 Cloud Guard를 사용하기 위해서는 우선 아래 구성과 4개의 요소에 대해서 이해하여야 합니다. 구성에 대해서 간략히 요약하면 지정된 특정 구획 또는 전체 테넌시(**TARGETS**)에 있는 리소스를 모니터링한 후 보안 취약점이 발견되면(**DETECTORS**) 이를 보안 문제로 기록(**PROBLEMS**)한 후 적절한 작업(**RESPONDERS**)을 수행하는 구성이라고 볼 수 있습니다. 그럼 각 요소에 대해서 좀 더 자세히 살펴보겠습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-1.png)
 
 #### TARGET
 Cloud Guard에서 모니터링 할 범위, 대상을 TARGET이라고 부릅니다. OCI에서는 구획(Compartment)라고 부르는 OCI 리소스에 대한 그룹핑 및 접근관리등을 할 수있는 논리적인 개념이 존재하는데, 보통 Cloud Guard에서의 TARGET으로 특정 구획(Compartment)을 지정합니다.
@@ -58,26 +58,26 @@ Detector를 통해서 감지된 결과를 Problem(잠재적인 보안 문제)이
 ### Cloud Guard 활성화
 Cloud Guard는 기본적으로 비활성화 되어 있습니다. Cloud Guard를 활성화 하기 위해서는 OCI Console > Identity & Security > Cloud Guard 로 이동한 후 Enable 버튼을 클릭하여 활성화 하여야 합니다. (기본으로 제공하는 무료 크래딧 300$로 체험할 수 있습니다. 단 Always Free에서는 사용할 수 없으며, 300$ 소진 후에는 유료 계정으로 업그레이드 해야 합니다.)
 
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-2.png)
 
 Cloud Guard에서 여러 OCI 리소스에 접근을 허락해줘야 하기 때문에 기본적으로 필요한 Policy를 추가해 줘야 하는데, 활성화 과정에서 친절하게 한번에 추가할 수 있는 기능을 제공합니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-3.png)
 
 Cloud Guard에서 모니터링 할 TARGET을 지정합니다. Detector Recipe도 지정할 수 있는데, Cloud Guard를 활성화 할때 선택해줘도 되지만, 활성화 한 이후에 별도로 지정도 가능합니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-4.png)
 
 Cloud Guard가 활성화 되면 다음과 같은 Cloud Guard 대시보드를 볼 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-5.png)
 
 ### User-managed detector, resopnder recipe
 기본은 아래와 같이 Oracle-managed Recipe를 사용하지만, 수정이 불가능하기 때문에 Clone 버튼을 클릭하여 해당 Recipe를 클론한 후에 사용합니다. 클론한 Recipe의 경우 사용자가 해당 규칙을 수정할 수 있게 됩니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-6.png)
 
 Configuration Detector Recipe는 글을 작성하는 현재 50개의 Rule을 제공하고 있습니다. 클론한 경우 Status(Disble, Enable), Risk Level (Minor, Low, Medium, High, Critical), Condition (발생 조건)등을 수정할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-7.png)
 
 Responder Recipe는 글을 작성하는 현재 10개의 Rule을 제공하고 있습니다. 마찬가지로 클론을 하게 되면 사용자가 내용을 수정할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-8.png)
 
 Responder Rule은 NOTIFICATION(알림)과 REMEDIATION(복원) 2 가지 유형을 제공하는데, NOTIFICATION의 경우 발생한 Problem에 대한 정보를 OCI Event와 Notification 서비스를 통해서 이메일이나 OCI Function등으로 전달할 수 있는 유형이며, REMEDIATION은 Problem을 자동 혹은 관리자에 의해 해당 문제를 복원할 수 있도록 해주는 유형입니다. 현재는 Cloud Event Rule만 NOTIFICATION 유형에 해당되는데, 해당 Rule을 통해서 알림을 전달하기 위해서는 OCI Event와 OCI Notification 서비스를 구성하여야 합니다. OCI Event와 OCI Notification 서비스를 구성은 아래 포스팅을 참고합니다.
 
@@ -85,19 +85,19 @@ Responder Rule은 NOTIFICATION(알림)과 REMEDIATION(복원) 2 가지 유형을
 
 ### 예시 - Cloud Guard 대상 (TARGET)에서 Public Bucket 생성
 간단히 Cloud Guard가 적요된 대상에서 Public Bucket을 하나 생성해 보도록 하겠습니다. 아래와 같이 Object Storage에서 Bucket 생성 후 Visibility를 Public으로 변경합니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-10.png)
 
 Cloud Guard 대시보드에서 Critical을 포함하여 Problem이 4개 생성된 것을 확인할 수 있습니다. Responder Status에도 1개의 Pending이 걸려 있는데, 앞서 관련된 Responder Rule의 Rule Trigger를 "Ask me before executing rule"로 설정해 놨기 때문에 관리자 액션이 있어야 하므로, Pending이 된 것입니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-11.png)
 
 **Responder Activity** 메뉴에서 Responder Recipe Rule에 의해 Private으로 변경하기 전에 확인 요청이 생성 된 것을 볼 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-12.png)
 
 Skip Execute 를 선택 하면 해당 Remediation 은 취소 되는데, 여기서는 **Execute**를 클릭 해봅니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-13.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-13.png)
 
 Bucket의 Visibility가 다시 Private으로 변경된 것을 확인할 수 있습니다.
-![](/assets/img/cloudnative-security/2022/oci-cloudguard-14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/cloudnative-security/2022/oci-cloudguard-14.png)
 
 ### 다음에는
 Public Cloud에서 가장 빈번하게 발생하는 보안 사고중 하나가 계정 탈취에 의한 해킹사고입니다. 클라우드 사용자는 자신의 계정 정보나 API Signing Key가 해커에 의해 탈취당할 수 있으며, 해커는 이를 이용하여 대량의 리소스를 생성하여 체굴장으로 사용할 수 있으며 이에 따른 피해는 고스란히 사용자가 책임지게 됩니다. 다음 포스팅에서는 이렇게 사용자의 계정을 불법적으로 사용하는 행위를 감지하기 위한 Threat Detector에 대해서 자세히 알아보도록 하겠습니다.

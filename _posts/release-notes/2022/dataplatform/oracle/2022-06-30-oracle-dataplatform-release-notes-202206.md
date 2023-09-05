@@ -44,15 +44,15 @@ header: no
 ### 서비스 소개
 Oracle Cloud Infrastructure Data Flow는 Apache Spark ™ 애플리케이션을 실행하기 위한 완전 관리형 서비스입니다. 개발자가 애플리케이션에 집중할 수 있도록 하고 이를 실행할 수 있는 쉬운 런타임 환경을 제공합니다. 애플리케이션 및 워크플로와의 통합을 위한 API 지원을 통해 쉽고 간단한 사용자 인터페이스를 제공합니다. 
 
-![](/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/01_Data_Flow_Service_overview_1.png)
 
 Data Flow 는 Serverless 기반으로 작성된 Application 을 Spark Job 으로 생성하여 Job을 수행할 수가 있습니다. 아래 그림은 Spark Job 을 Serverless 로 수행하기 위한 절차입니다.
 
-![](/assets/img/database/2022/06/02_Data_Flow_Service_overview_2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/02_Data_Flow_Service_overview_2.png)
 
 Job 이 수행되고 난 후에는 Job 실행 결과를 확인하고 Log 를 분석하여 처리 결과를 확인하게 됩니다.
 
-![](/assets/img/database/2022/06/03_Data_Flow_Service_overview_3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/03_Data_Flow_Service_overview_3.png)
 
 ### 신규 기능
 다음의 Flexible Compute Shape 들을 지원하게 되었습니다.
@@ -76,7 +76,7 @@ SQL Explorer UI를 사용하면 SQL 쿼리를 통해 성능 통계를 탐색하�
 
 UI는 속성 목록에서 열을 선택할 수 있도록 하여 SQL SELECT 문 구성을 단순화합니다. 또는 SQL을 수동으로 입력할 수 있습니다. 자동 완성 기능을 사용하면 쿼리에 대해 SQL을 입력할 수 있으며 SQL 탐색기는 자동으로 속성 열의 인라인 드롭다운 목록을 제공하여 명령문을 완성합니다. SQL 쿼리를 실행하여 원시 데이터를 추출합니다. 구성된 SQL SELECT 쿼리에서 반환된 원시 데이터를 본 다음 이 데이터를 사용하여 쉽게 소비하고 추론을 이끌어낼 수 있는 직관적인 시각화를 만듭니다.
 
-![](/assets/img/database/2022/06/05_sql_explorer_ui_workflow.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/05_sql_explorer_ui_workflow.png)
 
 ---
 ## A new release for Database Management is now available!
@@ -109,7 +109,7 @@ Performance Hub 는 Database 의 실시간 및 과거 성능 데이터를 볼 �
 
 Base Database Service, Exadata Cloud Service 또는 External Database Service로 관리되는 데이터베이스에서 실행되는 데이터베이스와 함께 Performance Hub를 사용하려면 데이터베이스에 대해 Database Management 를 활성화해야 합니다. Database Management 를 활성화할 때 데이터베이스 관리자는 기본 관리와 전체 관리의 두 가지 옵션 중에서 선택할 수 있습니다.
 
-![](/assets/img/database/2022/06/06_Performance_Hub.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/06_Performance_Hub.png)
 
 ### 신규 기능
 이제 Performance Hub를 통해 사용자는 ADDM(Automatic Database Diagnostic Monitor) 작업을 생성하고 실행하여 데이터베이스의 현재 또는 과거 성능을 분석할 수 있습니다.
@@ -135,9 +135,9 @@ Enterprise Manager(EM) Warehouse는 하나 이상의 Enterprise Manager 저장�
 
 다음 그림과 같이 EM 리포지토리 데이터는 Cloud Bridge를 통해 테넌시의 OCI Object Storage Bucket으로 업로드됩니다. 여기에서 데이터는 EM Bridge를 통해 Operations Insights Warehouse로 전송됩니다. EM Warehouse는 Operations Insights Autonomous Data Warehouse 내의 스키마입니다.
 
-![](/assets/img/database/2022/06/07_em_warehouse_architecture.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/07_em_warehouse_architecture.png)
 
-![](/assets/img/database/2022/06/08_em_wh_dataflow.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/database/2022/06/08_em_wh_dataflow.png)
 
    ※ Enterprise Manager Warehouse(EM Warehouse) 기능을 사용하려면 OCI Operations Insights Service 라이선스 구독 필요
 
