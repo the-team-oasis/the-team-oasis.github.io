@@ -61,7 +61,7 @@ Allow group domainUsers to manage organizations-domain-governance in compartment
 
 1. 먼저 OCI 콘솔 메뉴에서 **거버넌스 & 관리(Governance & Administration) > 도메인 관리(Domain Management)**를 순서대로 클릭합니다.
 
-![](/assets/img/getting-started/2022/managing-your-domains-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/managing-your-domains-1.png " ")
 
 2. 도메인 추가 및 확인창 에서 추가 할 도메인의 이메일 주소를 입력합니다. 이 이메일 주소는 회사의 도메인을 가진 이메일로 누군가가 Oracle Cloud 계정을 생성하려고 할 때 알림을 받는 이메일입니다.
 
@@ -69,7 +69,7 @@ Allow group domainUsers to manage organizations-domain-governance in compartment
 
 4. 회사의 도메인을 입력한 후 추가 및 확인을 클릭합니다.
 
-![](/assets/img/getting-started/2022/managing-your-domains-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/managing-your-domains-2.png " ")
 
 5. 도메인이 추가되고 TXT 레코드 필드가 값이 생성됩니다. 복사 아이콘을 클릭하여 TXT 레코드 값을 도메인 레코드로 추가([TXT 레코드 추가](https://kr.godaddy.com/help/add-a-txt-record-19232))하면, 오라클은 해당 도메인이 사용자가 소유한 도메인인지 검증합니다. 검증이 완료되면, 이후 OCI 도메인 관리에 등록된 도메인의 상태가 **Pending**에서 **Verified**로 변경됩니다. 이 과정을 완료하는데 최대 72시간 소요될 수 있습니다.
 

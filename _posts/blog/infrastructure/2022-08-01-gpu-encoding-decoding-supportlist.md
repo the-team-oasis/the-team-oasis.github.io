@@ -31,10 +31,10 @@ OCI 에서 지원하는 GPU 코어의 경우, A100, V100으로 나뉘며, 지원
 따라서 아래 표에서 지원하는 인코딩/디코딩 영역에 대해서 표로 전달합니다.
 
 ### v100
-![](/assets/img/infrastructure/2022/08/gpu-encod-decode/A100.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/gpu-encod-decode/A100.png)
 
 ### A100
-![](/assets/img/infrastructure/2022/08/gpu-encod-decode/V100.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/gpu-encod-decode/V100.png)
 
 
 ### 참조

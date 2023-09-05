@@ -90,11 +90,11 @@ OCI에서는 특정 구획내의 리소스 사용을 제한할 수 있는 구획
 ### 할당량 적용 방법
 할당량 정책 적용을 위해 OCI Console 메뉴에서 거버넌스 & 관리(Governance & Administration) > 테넌시 관리(Tenancy Management) > 할당량 정책(Quota Policies)로 이동합니다.
 
-![](/assets/img/infrastructure/2023/oci-quotas-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-quotas-1.png)
 
 다음 화면과 같이 할당량 생성(Create Quota) 버튼을 클릭한 후 이름과 설명, 할당량 정책 구문을 입력하여 정책을 생성합니다.
 
-![](/assets/img/infrastructure/2023/oci-quotas-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-quotas-2.png)
 
 ### 할당량 구문 예시
 다음은 몇 가지 구문 예시입니다.

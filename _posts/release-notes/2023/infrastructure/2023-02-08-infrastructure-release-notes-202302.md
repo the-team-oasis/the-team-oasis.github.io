@@ -53,8 +53,8 @@ header: no
 
 
 지원되는 shape은 AMD 입니다.
-![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230214-e62.png){:width="80%":align="center"}
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/release-note/SCR-20230214-e62.png){:width="80%":align="center"}
 
 
-![]({{site.urlblogimg2023}}/assets/img/infrastructure/2023/release-note/SCR-20230214-e4c.png){:width="80%":align="center"}
+![]({{site.urlblogimg2023}}{{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/release-note/SCR-20230214-e4c.png){:width="80%":align="center"}
 

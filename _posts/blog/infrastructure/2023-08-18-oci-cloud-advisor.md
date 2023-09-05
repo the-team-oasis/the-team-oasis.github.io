@@ -63,23 +63,23 @@ Cloud Advisor는 다음과 같은 이점을 제공합니다.
 ### Cloud Advisor 화면
 #### 대시보드
 원가관리, 고가용성, 성능 및 보안을 하나의 대시보드를 통해서 보여줍니다.
-![](/assets/img/infrastructure/2023/oci-cloud-advisor-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-cloud-advisor-1.png " ")
 
 #### 초기 권장 사항 내용
 권장 사항에서는 범주별(원가 관리, 성능, 고가용성)로 조회가 가능하며, 예상 절감 비용, 중요도, 상태등을 확인할 수 있습니다. 각 권장 사항을 클릭하면 권장 내용과 함께 연관된 리소스를 확인할 수 있습니다.
-![](/assets/img/infrastructure/2023/oci-cloud-advisor-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-cloud-advisor-2.png " ")
 
 #### 작업 요청
 작업 요청에서는 Cloud Advisor 통해서 실행된 요청 내역을 볼 수 있습니다.
-![](/assets/img/infrastructure/2023/oci-cloud-advisor-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-cloud-advisor-3.png " ")
 
 #### 내역
 내역에서는 Cloud Advisor 통해서 설정된 모든 리스트를 볼 수 있습니다.
-![](/assets/img/infrastructure/2023/oci-cloud-advisor-4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-cloud-advisor-4.png " ")
 
 #### 설정
 설정을 통해서 Cloud Advisor 적용할 리소스에 대한 설정 및 우선 범위 설정을 할 수 있습니다.
-![](/assets/img/infrastructure/2023/oci-cloud-advisor-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/oci-cloud-advisor-5.png " ")
 
 ### 마무리
 이름에서 알 수 있듯이 Cloud Advisor를 통해서 전체 테넌시에 대한 비용 최적화를 위한 조언과 권장 및 보안, 성능, 고가용성에 대한 조언과 권장을 받아볼 수 있습니다. 이를 통해서 보다 비용 효율적이고 성능 최적화된 환경을 달성하는데 도움이 되기를 바랍니다.

@@ -35,7 +35,7 @@ header: no
 
 ### 실습에 필요한 서비스에 대해 간단히 알아보기
 이번 실습에서는 Compute Instance를 이용하여 인스턴스 구성, 인스턴스 풀, 자동 확장 설정을 진행할 예정입니다. 각 서비스별 간단한 개념은 아래 내용을 참고해주세요.<br>
-![Compute Auto Scaling](/assets/img/infrastructure/2022/oci-compute-autoscaling.png)
+![Compute Auto Scaling]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-compute-autoscaling.png)
 
 #### Instance Configuration (인스턴스 구성)
 인스턴스 구성은 기본 이미지, 모양 및 메타데이터와 같은 세부 정보를 포함하여 컴퓨팅 인스턴스를 생성할 때 사용할 설정을 정의합니다. 
@@ -103,13 +103,13 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
 1. 생성된 인스턴스에 접속합니다.
    * 접속 방법을 모르시는 경우 [리눅스 인스턴스 접속으르 위한 준비](/getting-started/launching-linux-instance/#리눅스-인스턴스-접속을-위한-준비){:target="_blank" rel="noopener"} 내용을 참조 해주세요.
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-1.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-1.png " ")
 2. 아래 명령어를 입력하여 마운트 대상이 될 디렉토리를 생성합니다.
    ```
    $ sudo mkdir /mnt/disk1
    ```
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-2.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-2.png " ")
 3. <mark>/etc/fstab</mark> 파일에 아래 내용을 추가 후 저장합니다.
    * **명령어 구조**
      * `[연결할 Volume의 경로 (BV생성시 지정가능)]` <mark>[마운트할 타겟 Dir]</mark> `(disk 포멧 형식)` defaults,_netdev,nofail 0 2 
@@ -121,7 +121,7 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
    /dev/oracleoci/oraclevdb /mnt/disk1 ext4 defaults,_netdev,nofail 0 2
    ```
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-3.png " ")
 4. 아래 명령어를 입력하여 오토스켈링 테스트에서 사용할 Stress Tool을 다운로드 하고 설치 합니다.
    ```
    $ wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/s/stress-1.0.4-16.el7.x86_64.rpm
@@ -134,8 +134,8 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
  * **이름** : custom-image-bv-demo
  * **"사용자정의 이미 생성"** 버튼을 클릭하여 이미지를 생성합니다.
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-4.png " ")
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-5.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-custom-image-5.png " ")
 
 ### 2. Instance Configuration 생성하기
 앞 단계에서 생성한 Custom Image를 사용하여 신규 인스턴스를 생성하고 Block Volume 연결등 설정을 진행한 후 인스턴스 구성을 생성합니다.
@@ -143,10 +143,10 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
 #### 2-1. Custom Image 로  새로운 Instance 생성하기
 1. 인스턴스 생성 버튼을 클릭합니다.
 2. 생성화면에서 **"이미지 > 이미지 변경"** 버튼을 클릭합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-1.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-1.png " ")
 3. 팝업에서 이미지 소스를 **"사용자정의 이미지"**로 변경합니다.
 4. (1) 단계에서 생성한 Custom Image를 선택 후 하단 **"이미지 선택"** 버튼을 클릭합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-2.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-2.png " ")
 5. Shape 및 네트워크 등 기타 설정 부분은 상단의 Instance 생성하기 내용을 참고하여 설정합니다.
 6. 화면 최하단 **"고급 옵션 표시"** 를 클릭합니다.
 7. 초기화 스크립트 섹션에서 **"Cloud-init 스크립트 붙여넣기"** 를 선택 후 아래 내용을 복사하여 붙여넣기 합니다. (Block Volume 포멧 및 마운트 명령 추가)
@@ -156,11 +156,11 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
    sudo mount -a
    ```
 8. **"생성"** 버튼을 클릭하여 인스턴스를 생성합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-3.png " ")
 
 #### 2-2. 연결할 Block Volume 생성 및 인스턴스에 연결하기
 1. 전체 메뉴에서 **"스토리지 > 블록 스토리지 > 블록 볼륨"** 메뉴를 클릭하여 서비스 화면으로 이동합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-4.png " ")
 2. **"블록 볼륨 생성"** 버튼을 클릭하여 아래 내용을 입력 및 선택하여 블록 볼륨을 생성합니다.
  * 이름 : demoAutoScalingBV
  * 구획에 생성 : <mark>각자 테스트를 진행하는 구획 선택</mark>
@@ -171,10 +171,10 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
  * 암호화 : 오라클 관리 키를 사용하여 암호화
  * **"블록 볼륨 생성"** 버튼 클릭하여 생성
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-5.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-5.png " ")
 3. (2-1) 단계에서 생성한 인스턴스 상세보기 화면으로 이동합니다.
 4. 화면 왼쪽 하단 **"연결된 블록 볼륨"** 메뉴를 클릭하고 **"블록 볼륨 연결"** 버튼을 클릭합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-6.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-6.png " ")
 5. 아래와 같이 입력 및 선택하여 블록 볼륨을 연결 합니다.
  * [구획]의 볼륨 : **demoAutoScalingBV**
  * 장치 경로 : **/dev/oracleoci/oraclevdb** <mark>(선택 옵션중 최상단 값 선택)</mark>
@@ -183,7 +183,7 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
  * 액세스 : **읽기/쓰기**
  * **"연결"** 버튼을 클릭합니다.
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-7.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-7.png " ")
 
 #### 2-3. 인스턴스에 접속하여 Block Volume 연결 확인하기
 1. (2-1)에서 생성한 인스턴스의 공용 IP를 확인하고 해당 인스턴스에 접속합니다.<br>
@@ -231,7 +231,7 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
     $ sudo /sbin/mkfs.ext4 /dev/oracleoci/oraclevdb
     ```
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-8.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-8.png " ")
 
    마운트 명령어 실행
     ```
@@ -244,48 +244,48 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
     $ df -h
     ```
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-9.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-9.png " ")
 
 #### 2-4. Instance Configuration(인스턴스 구성) 생성하기
 1. 위 단계 까지 문제없이 완료되었다면, 인스턴스 상세보기 화면에서 **"인스턴스 구성 생성하기"** 버튼을 클릭합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-10.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-10.png " ")
 2. 아래와 같이 입력 후 "인스턴스 구성 생성" 버튼을 클릭합니다.
  * 구획에 생성 : <mark>각자 테스트를 진행하는 구획 선택</mark>
  * 이름 : instance-config-blockvolume-demo
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-11.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-config-11.png " ")
 
 ### 3. Instance Pool 생성하기
 1. 인스턴스 구성이 생성된 후 상세보기 화면에서 **"인스턴스 풀 생성"** 버튼을 클릭 합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-1.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-1.png " ")
 2. **기본 세부정보 추가** 단계에서 아래와 같이 입력 및 선택 후 **"다음"** 버튼을 클릭합니다.
  * 이름 : instance-pool-blockvolume-demo
  * 구획에 생성 : <mark>각자 테스트를 진행하는 구획 선택</mark>
  * [구획]의 인스턴스 구성 : **2 단계에서 생성한 인스턴스 구성 선택** / `instance-config-blockvolume-demo`
  * 인스턴스 수 : **1**
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-2.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-2.png " ")
 3. 풀 배치 구성 단계에서 아래와 같이 입력 및 선택 후 "다음" 버튼을 클릭합니다.
  * 가용성 도메인 : 기본값
  * 결함 도메인 : 선택안함
  * 기본 VNIC (VCN 선택) : <mark>각자 테스트를 진행하는 VCN 선택</mark>
  * 기본 VNIC (Subnet 선택) : <mark>각자 테스트를 진행하는 Public Subnet 선택</mark>
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-3.png " ")
 4. 입력 및 선택한 정보 확인 후 "생성" 버튼을 클릭하여 인스턴스 풀을 생성합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-4.png " ")
 5. 인스턴스 풀이 프로비전 완료되면 자동으로 동일한 구성의 인스턴스가 함께 프로비전 됩니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-5.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-instance-pool-5.png " ")
 
 ### 4. Auto Scaling 설정 생성하기
 1. 인스턴스 풀이 생성되면 **"작업 더 보기"** 드롭 다운을 클릭하여 **"자동 스케일링 구성 생성"** 기능을 통해 Auto Scaling 설정을 생성할 수 있습니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-1.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-1.png " ")
 2. 자동 스케일링 구성 생성 화면에서 아래와 같이 입력합니다.
  * 이름 : **autoscaling-config-blockvolume-demo**
  * 구획에 생성 : <mark>각자 테스트를 진행하는 구획 선택</mark>
  * **"다음"** 버튼을 클릭합니다.
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-2.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-2.png " ")
 3. **자동 스케일링 정책 구성** 단계에서 아래와 같이 선택 및 입력 후 **"다음"** 버튼을 클릭합니다.
  * **측정항목 기준 자동 스케일링** 선택
  * 자동 스케일링 정책 구성
@@ -305,9 +305,9 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
       * 최대 인스턴스 수 : 3
       * 초기 인스턴스 수 : 1
 
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-3.png " ")
 4. 입력한 내용을 검토 후 이상이 없을 시 **"생성"** 버튼을 클릭하여 자동 스케일링 구성을 생성합니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-create-scale-config-4.png " ")
 
 ### 5. Stress Tool을 사용하여 Auto Scaling 확인 및 Block Volume 연결 확인하기
 1. (2-1) 에서 생성한 인스턴스에 접속하여 아래와 같이 입력하여 해당 VM의 CPU에 부하를 줍니다.
@@ -315,16 +315,16 @@ Custom 이미지를 생성하기 위한 인스턴스 구성을 위해서 먼저 
     $ stress -c 8
     ```
    * 명령어 실행 전 CPU 활용률
-     ![](/assets/img/infrastructure/2022/oci-autoscaling-test-1.png " ")
+     ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-test-1.png " ")
    * 명령어 실행 후 CPU 활용률
-     ![](/assets/img/infrastructure/2022/oci-autoscaling-test-2.png " ")
+     ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-test-2.png " ")
    
 2. Auto Scaling은 최소 300초의 간격으로 작업이 수행되기 때문에 최대 5분간 부하를 주며 Auto Scaling 작업이 수행되기 기다립니다.
 3. Auto Scaling 작업이 수행되면 자동으로 설정한 수 만큼 인스턴스가 추가 됩니다.
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-test-3.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-test-3.png " ")
 4. 추가된 인스턴스에 접속하여 블록볼륨이 연결되어 있는지 확인합니다. (인스턴스 생성이 완료되었더라도, 블록볼륨 포멧 및 연결에 추가로 시간이 필요하여 너무 빨리 확인하면 블록볼륨이 연결되어있지 않을 수 있습니다.)
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-test-4.png " ")
-   ![](/assets/img/infrastructure/2022/oci-autoscaling-test-5.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-test-4.png " ")
+   ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaling-test-5.png " ")
     
 
 

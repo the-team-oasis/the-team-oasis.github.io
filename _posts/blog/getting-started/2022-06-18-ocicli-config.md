@@ -51,9 +51,9 @@ $ oci --version
 ### OCI CLI 구성
 OCI CLI를 구성하기 위해서는 사전에 다음과 같은 정보가 준비되어야 합니다.
 * Tenancy OCID 
-    ![](/assets/img/getting-started/2022/oci-cli-1.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-1.png " ")
 * User OCID
-    ![](/assets/img/getting-started/2022/oci-cli-2.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-2.png " ")
 
 다음 명령어를 실행합니다.
 ```terminal
@@ -68,7 +68,7 @@ Do you want to generate a new API Signing RSA key pair? (If you decline you will
 
 생성된 PEM키와 대응되는 공용키, config 파일이 위에서 지정한 경로에 생성됩니다. 생성된 PEM 공용키 등록을 위하여 오른쪽 상단의 **사용자 프로파일**을 클릭한 후 왼쪽 **API 키 > API 키 추가**를 순서대로 클릭합니다. 다음 화면과 같이 생성된 PEM 공용키를 선택하고 **추가**를 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-cli-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-3.png " ")
 
 ### OCI CLI 연결 확인
 다음 명령어는 OCI의 Object Storage의 Namespace 값을 가져오는 OCICLI 명령입니다. 실행했을 때 오류 없이 다음과 비슷한 결과가 나오면 성공입니다. 

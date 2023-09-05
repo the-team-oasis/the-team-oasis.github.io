@@ -50,7 +50,7 @@ header: no
     - 도메인 네임 스페이스는 이러한 DNS가 저장 관리하는 계층적 구조를 가집니다.
     - 도메인 네임 스페이스는 최상위에 루트 DNS 서버가 존재하고 그 하위로 연결된 모든 노드가 연속해서 이어진 계층 구조로 되어있습니다. (폴더 구조와 비슷합니다.)
 
-![](/assets/img/infrastructure/2023/private_dns/SCR-20230203-brw.png){:width="50%":align="center"}
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/private_dns/SCR-20230203-brw.png){:width="50%":align="center"}
 
 
 
@@ -63,7 +63,7 @@ header: no
 
 - DNS 동작 과정 전체 설명
 
-![](/assets/img/infrastructure/2023/private_dns/SCR-20230203-c58.png){:width="100%":align="center"}
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/private_dns/SCR-20230203-c58.png){:width="100%":align="center"}
 
 
 - DNS 동작 과정 전체 예시
@@ -102,4 +102,4 @@ header: no
 
 
 - DNS Peering With On-Prem
-![](/assets/img/infrastructure/2023/private_dns/SCR-20230201-e78.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/private_dns/SCR-20230201-e78.png)

@@ -67,11 +67,11 @@ VCN 생성은 다음 가이드를 참고합니다.
 ### Local Peering Gateway(LPG) 생성
 생성한 두 개의 VCN 모두 LPG를 생성합니다. 먼저 다음과 같이 **VCN-1**에 **LPG-1**을 하나 생성합니다.
 
-![](/assets/img/infrastructure/2022/oci-local-peering-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-1.png)
 
 **VCN-2**에도 마찬가지로 **LPG-2**를 생성합니다.
 
-![](/assets/img/infrastructure/2022/oci-local-peering-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-2.png)
 
 ### 라우팅 규칙 추가
 두 개의 VCN에서 사용할 서브넷 (여기서는 Public Subnet)의 기본 라우팅 테이블에 다음과 같이 라우팅 규칙을 추가합니다.
@@ -81,14 +81,14 @@ VCN 생성은 다음 가이드를 참고합니다.
 * **대상 CIDR 블록:** 192.168.0.0/16 (VCN-2의 CIDR)
 * **대상 로컬 피어링 게이트웨이:** LPG-1 (VCN-1에 생성한 LPG)
 
-![](/assets/img/infrastructure/2022/oci-local-peering-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-3.png)
 
 ***VCN-2***
 * **대상 유형:** 로컬 피어링 게이트웨이
 * **대상 CIDR 블록:** 10.0.0.0/16 (VCN-1의 CIDR)
 * **대상 로컬 피어링 게이트웨이:** LPG-2 (VCN-2에 생성한 LPG)
 
-![](/assets/img/infrastructure/2022/oci-local-peering-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-4.png)
 
 ### 보안 목록 (Security List)에 수신(Ingress) 규칙 추가
 두 개의 VCN에서 사용할 서브넷 (여기서는 Public Subnet)의 보안 목록에 각 VCN의 CIDR를 수신 규칙으로 추가합니다.
@@ -97,31 +97,31 @@ VCN 생성은 다음 가이드를 참고합니다.
 * **소스 유형:** CIDR
 * **소스 CIDR:** 192.168.0.0/16 (VCN-2의 CIDR)
 
-![](/assets/img/infrastructure/2022/oci-local-peering-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-5.png)
 
 
 **VCN-2**의 Public Subnet에 있는 보안 목록에 다음과 같이 추가합니다.
 * **소스 유형:** CIDR
 * **소스 CIDR:** 10.0.0.0/16 (VCN-2의 CIDR)
-![](/assets/img/infrastructure/2022/oci-local-peering-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-6.png)
 
 ### Peering 접속 설정
 
 LPG를 서로 연결합니다. 연결 작업은 어느쪽에서든 한 번만 작업하면 됩니다. 여기서는 **LPG-1**에서 연결을 하도록 합니다. **LPG-1**에서 연결을 위해서는 먼저 **LPG-2**의 OCID를 확인하여야 합니다. 다음과 같이 **VCN-2**의 **LPG-2**의 OCID를 확인합니다.
 
-![](/assets/img/infrastructure/2022/oci-local-peering-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-7.png)
 
 다시 **VCN-1**의 **LPG-1**로 이동하여 다음과 같이 **피어링 접속 설정**을 선택 후 앞서 복사한 **LPG-2**의 OCID를 입력하고 **피어링 접속 설정**을 클릭합니다.
 
-![](/assets/img/infrastructure/2022/oci-local-peering-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-8.png)
 
 약간의 시간(1-2분)이 지나면 자동으로 **피어링됨** 상태로 변경됩니다. 마찬가지로 **LPG-2**의 상태도 **피어링됨** 상태로 변경됩니다.
 
 **LPG-1 상태**
-![](/assets/img/infrastructure/2022/oci-local-peering-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-9.png)
 
 **LPG-2 상태**
-![](/assets/img/infrastructure/2022/oci-local-peering-10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-local-peering-10.png)
 
 ### 두 개의 VCN에 생성한 인스턴스에서의 연결 테스트
 먼저 VCN-1에 있는 인스턴스에서 핑 테스트 수행 결과입니다.

@@ -42,9 +42,9 @@ header: no
 
 ### 기능 소개
 새로운 예약 보고서 페이지를 사용하여 비용 분석에서 저장된 보고서를 기반으로 예약 보고서를 생성합니다.
-![](/assets/img/infrastructure/2022/09/SCR-20221124-eag.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/09/SCR-20221124-eag.png)
 
-![](/assets/img/infrastructure/2022/09/SCR-20221124-emp.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/09/SCR-20221124-emp.png)
 
 
 
@@ -65,7 +65,7 @@ header: no
 
 ### 기능 소개
 VCN 라우팅 테이블의 라우팅 규칙에 대한 기본 제한이 200으로 증가하였습니다.
-![](/assets/img/infrastructure/2022/09/SCR-20221124-eqx.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/09/SCR-20221124-eqx.png)
 
 
 

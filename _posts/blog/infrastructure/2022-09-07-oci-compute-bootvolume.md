@@ -47,9 +47,9 @@ header: no
 compute 생성 이후 필요에 따라서 추가적인 block volume을 추가하기도 하지만 원천적인 boot volume의 사이즈를 변경해야하는 경우, 아래와 같이 진행하면 됩니다.
 > 부트볼륨의 경우, 한 번 사이즈 업 된 이후에는 다시 사이즈 다운이 안됩니다!
 
-![접근하기](/assets/img/infrastructure/bootvolume/boot1.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/bootvolume/boot1.png)
 원하는 사이즈로 변경합니다.
-![접근하기](/assets/img/infrastructure/bootvolume/boot2.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/bootvolume/boot2.png)
 
 변경 이후 필요한 위 팝업의 명령어를 OS 상에서 실행하기 위해서 copy해 줍니다.
 
@@ -65,7 +65,7 @@ Web브라우저 통해서 boot volume  수정후 팝업창의 명령어를 실�
 > "sudo /usr/libexec/oci-growfs" 명령어를 통해서 실제 적용할 수 있도록 합니다. "Confirm? [y/n]: y" 입력합니다.
 
 Rescan 이후 "sudo /usr/libexec/oci-growfs" 실행과정 참조
-![실행과정](/assets/img/infrastructure/bootvolume/boot3.png)
+![실행과정]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/bootvolume/boot3.png)
 
 
 

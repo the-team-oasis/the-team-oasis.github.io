@@ -47,28 +47,28 @@ header: no
 #### Dynamic Group 생성 하기
 Identity & Security -> Dynamic Groups -> Create Group)
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log1.png " ")
 
 1. Name, Description 입력 후, 적용 할 Matching Rules 만들기 위해서 ”Rule Builder” 클릭 합니다.
 2. Create Matching Rule 에서 
   - Include instance that match : ”All of the following” 선택 합니다.
   - Match instance with :   Compartment OCID 선택 후 value에 OCID 입력 합니다.
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log2.png " ")
 
 - 입력이 완료된 이후 정책 결과 확인 합니다.
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log3.png " ")
 
 #### Log Group 생성 하기
 Observability & Management -> Logging -> Log Groups -> Create Log Group 생성 합니다.
 - Name, Description 입력 후 생성 합니다.
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log4.png " ")
 
 - Log Group 생성이 완료된 화면
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log5.png " ")
 
 
 #### Log 에 custom Log 생성 하기
@@ -76,29 +76,29 @@ Observability & Management -> Logging -> Logs -> Create custom log 클릭 (앞�
 
 - "Create Custom log" 클릭 합니다.
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log6.png " ")
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log7.png " ")
 
 #### Logging에서 Agent Configurations 생성 하기
 Observability & Management -> Logging -> Log Groups -> Agent Configurations -> Create agent config (로그와 custom log 에 매핑을 위해서 생성 합니다.)
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log8.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log8.png " ")
 
 - Agent Configuration 완료 이후 상세 정보 및 Log input 관련 정보는 아래와 같습니다. 
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log9.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log9.png " ")
 
 
 #### Compute 상세보기에서 “Oracle Cloud Agent” 탭 안에 Custom Logs Monitoring 활성화 하기.
 Compute 에서 custom log 활성화를 위해서는 compute에서 “Oracle Cloud Agent” 가 ”Enable”  되어야 합니다.
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log10.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log10.png " ")
 
 
 Custom logs 정상 활성화 이후엔 log path에 설정된 파일 or 디렉토리로부터 log가 수집되며, compute 의 Resources 에  Custom logs 에서 확인이 가능합니다. 
 
-![](/assets/img/infrastructure/2023/custom_log/custom_log11.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/custom_log/custom_log11.png " ")
 
 
 ### 참고 자료

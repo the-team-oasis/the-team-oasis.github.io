@@ -37,7 +37,7 @@ header: no
 OCI Status는 OCI 서비스의 상태와 가용성에 대한 실시간 정보를 제공하는 공개된 서비스입니다. 사용자는 웹 브라우저를 통해서 [https://ocistatus.oraclecloud.com/](https://ocistatus.oraclecloud.com/)로 접속하여 확인할 수 있습니다.
 
 OCI 사용자는 OCI 서비스의 상태를 대시보드를 통해서 확인할 수 있으며, 성능과 관련된 최신 정보를 얻을 수 있습니다. 대시보드는 페이지는 5분마다 자동으로 새로 고쳐집니다. 각 지역별 상태를 확인하기 위해서는 상단의 지역 그룹을 선택합니다.
-![](/assets/img/infrastructure/ocistatus/SCR-20230313-oitu.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/ocistatus/SCR-20230313-oitu.png)
 
 대시보드에 표시되는 서비스에는 다음과 같은 유형의 상태 표시기 아이콘이 표시될 수 있습니다:
 - 정상 성능(Normal Performance): 서비스가 정상적으로 작동합니다. 이 상태에서는 관련된 이벤트 보고서는 제공되지 않습니다.

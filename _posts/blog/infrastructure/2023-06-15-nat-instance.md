@@ -50,7 +50,7 @@ Private Subnet에 속해 있는 리소스의 경우 외부에서 내부로 traff
 ### 아키텍처#1 
  - 하나의 VNICs을 사용해서 (in-bound, out-bound) 흐름 제어하기
 
-![](/assets/img/infrastructure/2023/SCR-20230619-kian.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/SCR-20230619-kian.png " ")
 
 두 개의 Private Subnet에서 하나의 Private Subnet에서 다른 Private Subnet에 있는 compute를 통해서 외부 인터넷에 접속할 수 있도록 하는 방법입니다. 
 
@@ -70,7 +70,7 @@ Private Subnet에 속해 있는 리소스의 경우 외부에서 내부로 traff
 ### 아키텍처#2
 - NAT Instance에 2개의 VNICs 사용하여 out-bound 트래픽은 NAT Instance의 VNIC#1, in-oubound는 NAT Instance의 VNIC#2
 
-![](/assets/img/infrastructure/2023/SCR-20230619-ktlg.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/SCR-20230619-ktlg.png " ")
 
 두 개의 Private Subnet에서 하나의 Private Subnet에서 다른 Private Subnet에 있는 compute를 통해서 외부 인터넷에 접속할 수 있도록 하는 방법입니다.
 
@@ -95,7 +95,7 @@ Private Subnet에 속해 있는 리소스의 경우 외부에서 내부로 traff
 - NAT Instance에 2개의 VNICs 사용하여 out-bound 트래픽은 NAT Instance의 VNIC#1, in-oubound는 NAT Instance의 VNIC#2- 단 VNIC#2는 NAT Instance와 다른 Subnet에 있습니다.
 
 
-![](/assets/img/infrastructure/2023/SCR-20230619-khxq.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/SCR-20230619-khxq.png " ")
 
 두 개의 Private Subnet에서 하나의 Private Subnet에서 다른 Private Subnet에 있는 compute를 통해서 외부 인터넷에 접속할 수 있도록 하는 방법입니다. 그러나 VNIC을 다른 서브넷에 구성하여
 in-bound 트래픽과 out-bound 트래픽을 분리하는 방식입니다.

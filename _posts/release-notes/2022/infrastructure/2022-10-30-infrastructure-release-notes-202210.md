@@ -59,7 +59,7 @@ header: no
 
 
 
-![](/assets/img/infrastructure/2022/10/SCR-20221124-evi.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/10/SCR-20221124-evi.png)
 
 ## X9-based (Intel) and E4-based (AMD) GPU shapes for Compute instances
 * **Services:** Compute

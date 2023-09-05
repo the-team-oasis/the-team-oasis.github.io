@@ -65,7 +65,7 @@ Oracle Cloud Infrastructure(OCI) 컴퓨팅 인스턴스를 사용하면 기존�
 - **Bare Metal Instance** : Oracle Cloud Infrastructure는 물리적 호스트("bare metal") 시스템을 제어할 수 있도록 지원합니다. Bare Metal Instance(BM)는 물리적인 서버를 하이퍼바이저 없이 **단일 사용자(테넌트)에게 전용으로 사용할 수 있는 컴퓨팅 환경을 제공합니다**. 물리적 CPU, 메모리 및 NIC(네트워크 인터페이스 카드)를 단독으로 제어할 수 있기 때문에 서버자원의 성능을 100% 사용할 수 있어서 높은 성능을 제공합니다.
 - **Virtual Machine Instance** : Virtual Machine Instance(VM)는 물리적인 서버위에 하이퍼바이저에 의해 가상화된 환경을 통해 컴퓨팅 환경을 제공하며, **단일 사용자가 아닌 다중 사용자가 환경을 공유 합니다**. 하이퍼바이저에 의해 가상화된 계층에서 컴퓨팅 자원이 실행되기 때문에 Bare Metal 보다 상대적으로 낮은 성능을 제공합니다.
 - **Dedicated VM Host** : Dedicated VM Host는 BM과 VM의 조합입니다. 일반적인 VM과는 달리 단일 사용자에게 할당된 Bare Metal 서버위에 VM 환경이 제공되기 때문에 공유 인프라를 사용하지 못하도록 하는 격리에 대한 규정 준수 및 관련 요구사항을 충족할 수 있습니다. 하지만 VM에 비교하여 지원하는 Shape이 제한적이고, 인스턴스와 관련된 기능 중 자동확장,인스턴스 구성,인스턴스 풀 등 일부 기능을 지원하지 않습니다.
-![OCI Compute Types](/assets/img/getting-started/2022/oci-compute-types.png " ")
+![OCI Compute Types]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-compute-types.png " ")
 
 #### Shape
 Compute 리소스 또는 Load Balancing 리소스에 대한 사양을 구성하는 조합입니다.
@@ -454,10 +454,10 @@ Fault Domain은 Avalability Domain에 구성되어있는 하드웨어와 Infrast
 #### Console
 Oracle Cloud Infrastructure에 액세스하고 관리하는 데 사용할 수 있는 간단하고 직관적인 웹 기반 사용자 인터페이스입니다. 
   - OCI Console 화면 예시 : **Get Started**
-      ![OCI Console 화면](/assets/img/getting-started/2022/oci-console-getting-started.png " ")
+      ![OCI Console 화면]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-console-getting-started.png " ")
 
   - OCI Console 화면 예시 : **Dash Board**
-      ![OCI Console Dashboard](/assets/img/getting-started/2022/oci-console-dashboard.png " ")
+      ![OCI Console Dashboard]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-console-dashboard.png " ")
   
 #### Oracle Cloud Identifier(OCID)
 모든 오라클 클라우드 인프라 리소스에는 오라클 OCID(Oracle Cloud Identifier)라는 오라클이 할당한 고유 ID가 있습니다. 이 ID는 콘솔 및 API에서 리소스 정보의 일부로 포함됩니다.

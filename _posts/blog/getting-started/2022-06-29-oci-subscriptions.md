@@ -57,7 +57,7 @@ BYOL 가격으로 Oracle PaaS를 구매할 때 동일한 라이선스 지원(기
 
 #### Oracle PaaS 서비스 사용 시 BYOL 적용 방법
 OCI에서 라이센스 가격이 포함된 서비스를 프로비전할 때 On-prem의 자체 라이센스를 적용할 수 있는 옵션이 있습니다. 해당 옵션을 선택하게 되면 좀 더 합리적인 가격으로 OCI 서비스를 이용할 수 있습니다. 적용 방법은 담당 영업대표에게 문의가 필요합니다.
-    ![BYOL Sample](/assets/img/getting-started/2022/oci-byol-example.png " ")
+    ![BYOL Sample]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-byol-example.png " ")
 
 ### Universal Credit (UC)
 Oracle Cloud 에서는 범용 크레딧이라고 하는 Oracle Cloud Services 에 대한 유연한 소비가 가능한 구독 모델을 제공합니다. 

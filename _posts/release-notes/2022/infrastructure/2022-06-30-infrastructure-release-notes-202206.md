@@ -45,6 +45,6 @@ header: no
 - 고성능으로 변경할때, 부팅 볼륨을 분리했다가 다시 연결해야합니다.
 - 볼륨 크기에 따른 성능이 다릅니다. 따라서 볼륨 크기에 따른 성능은 아래와 같습니다. 
 
-![](/assets/img/infrastructure/2022/06/uhp01.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/06/uhp01.png)
 
 

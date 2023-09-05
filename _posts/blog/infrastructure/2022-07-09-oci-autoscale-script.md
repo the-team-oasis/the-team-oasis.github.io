@@ -65,7 +65,7 @@ OCI 인스턴스를 하나 생성해서 스크립트를 설치하도록 하겠�
 * 이미지: Oracle Autonomous Linux
 * SSH 키 추가: SSH로 접속하기 위한 키
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-1.png)
 
 나머지는 기본 옵션으로 선택하고 **생성** 버튼을 클릭하여 인스턴스를 생성합니다.
 
@@ -74,11 +74,11 @@ OCI 인스턴스를 하나 생성해서 스크립트를 설치하도록 하겠�
 ### 다이나믹 그룹 및 권한 정책 설정
 생성된 인스턴스를 포함하는 다이나믹 그룹을 생성하고 해당 그룹에 있는 인스턴스에서 모든 리소스에 접근할 수 있는 정책을 생성하여 부여합니다. 먼저 생성한 인스턴스의 OCID를 확인하고 복사합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-2.png)
 
 메뉴에서 **ID & 보안 (Identity & Security) > 다이나믹 그룹 (Dynamic Groups)**를 순서대로 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-3.png)
 
  **동적 그룹 생성 (Create Dynamic Group)** 버튼을 클릭하고 다음과 같이 입력합니다.
 
@@ -89,11 +89,11 @@ OCI 인스턴스를 하나 생성해서 스크립트를 설치하도록 하겠�
 
 **생성**을 클릭하여 다이나믹 그룹을 생성합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-4.png)
 
 이번엔 정책을 생성합니다. **ID (Identity)** 메뉴에서 **정책 (Policies)**를 선택하고, **정책 생성 (Create Policy)** 버튼을 클릭합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-5.png)
 
 정책 생성 대화창에서 다음과 같이 입력합니다.
 * 이름: Autoscaling-Policy
@@ -104,7 +104,7 @@ OCI 인스턴스를 하나 생성해서 스크립트를 설치하도록 하겠�
   * 수동 편집기 표시: ON
   * 정책: allow dynamic-group Autoscaling to manage all-resources in tenancy
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-6.png)
 
 ### 생성한 인스턴스(auto-scaler)에 OCI Config 구성
 위에서 생성한 인스턴스(auto-scaler)에서 OCI Python SDK를 사용하기 위해서는 OCI Config가 구성되어 있어야 합니다. 먼저 SSH로 해당 인스턴스에 접속합니다.
@@ -173,26 +173,26 @@ Namespace and keys for scheduling have been created
 
 생성된 태그 네임스페이스를 확인합니다. OCI 메뉴에서 **거버넌스 & 관리 (Governance & Administration) > 태그 네임스페이스 (Tag Namespaces)**를 순서대로 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-7.png)
 
 왼쪽 구획 (Compartment)는 가장 상위 루트 구획을 선택합니다. 다음과 같이 Schedule 이라는 태그 네임스페이스가 생성된 것을 확인할 수 있습니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-8.png)
 
 다음과 같이 태그 네임스페이스내의 태그 키가 생성된 것을 확인할 수 있습니다.
-![](/assets/img/infrastructure/2022/oci-autoscaler-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-9.png)
 
 ### 태그 네임스페이스와 태그 키란?
 태그 네임스페이스와 태그 키는 OCI 리소스에 태깅을 할 때 사용합니다. 태깅이 되는 구성은 기본적으로 **{태그 네임스페이스}.{태그 키}.{태그 값}** 형태로 리소스에 태깅할 수 있습니다. 다음은 하나의 리눅스 인스턴스에 태깅을 하는 과정입니다. 우선 태깅을 위한 인스턴스를 하나 선택한 후 **작업 더 보기 > 태그 추가**를 순서대로 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-10.png)
 
 다음과 같이 **태그 네임스페이스**, **태그 키**, **태그 값**을 입력하여 리소스에 태깅이 가능합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-11.png)
 
 추가된 태그는 다음과 같이 **태그** 탭에서 확인할 수 있습니다.
-![](/assets/img/infrastructure/2022/oci-autoscaler-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-12.png)
 
 ### 스케쥴 태그 값 설정하기 
 스케쥴 태그 키는 AnyDay, Weekday, Weekend, Day of week(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,Sunday), DayOfMonth로 제공되는데, 값 설정의 경우 DayOfMonth만 제외하고 모두 동일합니다.
@@ -266,7 +266,7 @@ DayOfMonth 태그 키는 매달 특정 일자를 지정하여 태그 값을 지�
 ### 매달 N 번째 특정 요일로 설정
 예를 들면 매달 두 번째 월요일, 혹은 세 번째 토요일과 같이 지정이 필요하면, 기존 태그 네임스페이스에 추가로 태그 키를 생성하여 정의할 수 있습니다. 태그 키 생성할 경우에는 다음과 같이 Monday2, Saturday3와 같이 태그를 추가하여 지정합니다. 태그 값은 위에서 설명한 24자리 숫자를 활용하여 지정합니다.
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-13.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-13.png)
 
 ### 인스턴스에 스케쥴 태깅 및 매뉴얼로 스크립트 실행
 테스트를 위한 인스턴스를 생성한 후에 다음과 같이 태그를 지정합니다.
@@ -288,7 +288,7 @@ DayOfMonth 태그 키는 매달 특정 일자를 지정하여 태그 값을 지�
       </tbody>
 </table>
 
-![](/assets/img/infrastructure/2022/oci-autoscaler-14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-14.png)
 
 스크립트가 설치된 인스턴스에서 다음과 같이 실행합니다. -rg 옵션으로 리전을 지정할 수 있습니다.
 
@@ -297,7 +297,7 @@ $ python3 AutoScaleALL.py -ip -rg ap-seoul-1
 ```
 
 테스트용 인스턴스가 중지되는 것을 확인할 수 있습니다.
-![](/assets/img/infrastructure/2022/oci-autoscaler-14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-autoscaler-14.png)
 
 ### crontab에 OCI-AutoScale 등록
 crontab에 스크립트를 등록하여 스케쥴링을 걸 수 있습니다. 다음은 매 시간 1분에 스크립트를 실행하도록 crontab에 스크립트를 등록하는 예제입니다.

@@ -48,9 +48,9 @@ header: no
 ### 로그인 옵션 종류
 Oracle Cloud 계정을 생성하게 되면 Oracle 에서는 사용자에게 두 가지 다른 ID 시스템을 제공하여 사용자를 생성하고 Oracle Cloud Infrastructure 에 로그인 할 수 있는 옵션을 제공합니다. 
 
-![](/assets/img/getting-started/2022/oci-identity-systems.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-identity-systems.png " ")
 <br>
-![](/assets/img/getting-started/2022/oci-signin-options.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-signin-options.png " ")
 
 
 ### Oracle Cloud Infrastructure IAM Service (Identity and Access Management)
@@ -71,12 +71,12 @@ Oracle Identity Cloud Service는 OCI 이전에 Oracle에서 서비스하던 여�
  - **OCI IAM 서비스** : 기본적으로 Oracle Cloud Infrastructure의 서비스에 대한 인증 & 엑세스 제어를 관리 합니다. 통합(페더레이션) 기능을 통해 3rd Party 인증서비스와 통합 가능합니다.
  - **Oracle IDCS 서비스** : Oracle Identity Cloud Service는 Oracle Cloud Infrastructure 뿐만 아니라 Oracle의 다른 Cloud 서비스(PaaS)에 대한 인증 & 엑세스 제어를 관리 합니다.
 
-![](/assets/img/getting-started/2022/oci-iam-idcs-comparison.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-iam-idcs-comparison.png " ")
 
 
 ### 주의할 사항
 OCI IAM 과 Oracle IDCS는 각기 다른 시스템이기 때문에 OCI IAM 에서 특정 사용자의 비밀번호를 변경하는 경우 Oracle IDCS에는 변경사항이 반영되지 않습니다.
-![](/assets/img/getting-started/2022/oci-iam-idcs-change-pw.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-iam-idcs-change-pw.png " ")
 
 ### 요약
 현재는 IDCS와 IAM이 통합된 OCI IAM Identity Domain이라는 OCI 자체 서비스가 출시되었고, 점차 모든 리전과 무료 계정에도 적용되고 있으니, 앞으로는 OCI에서의 IAM 관리가 보다 심플해질 것이라 생각됩니다.

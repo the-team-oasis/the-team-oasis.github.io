@@ -118,19 +118,19 @@ OCI 콘솔에 로그인 하는 절차를 확인합니다.
 #### 기존 고객 (Identity Domain 미 적용 고객)
 1. [https://cloud.oracle.com](https://cloud.oracle.com) 링크로 접속합니다.
 2. **[Cloud Account Name]** 에 생성한 **클라우드 계정 이름**을 입력 후 **Next** 버튼을 클릭 합니다.
-   ![Cloud Sign-in #1](/assets/img/getting-started/2022/oci-cloud-sign-in.png " ")
+   ![Cloud Sign-in #1]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-sign-in.png " ")
 3. 이동된 화면에서 IDCS 또는 OCI IAM 중 로그인할 방법을 선택 후 정보를 입력하여 로그인합니다.
-   ![Cloud Sign-in #2](/assets/img/getting-started/2022/oci-cloud-sign-in-options.png " ")
+   ![Cloud Sign-in #2]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-sign-in-options.png " ")
 4. OCI IAM 서비스를 통해 로그인하는 경우, Oracle Cloud Infrastructure Direct Sign-In 하단에 정보를 입력 후 **Sign-In** 버튼을 통해 로그인 합니다.
-   ![Cloud Sign-in #4](/assets/img/getting-started/2022/oci-cloud-sign-in-iam.png " ")
+   ![Cloud Sign-in #4]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-sign-in-iam.png " ")
 5. IDCS 서비스를 통해 로그인하는 경우, 아래 화면에서 사용자 이름 및 비밀번호를 입력하고 **사인인** 버튼을 통해 로그인 합니다.
-   ![Cloud Sign-in #3](/assets/img/getting-started/2022/oci-cloud-sign-in-idcs.png " ")
+   ![Cloud Sign-in #3]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-sign-in-idcs.png " ")
 
 #### 신규 고객 (Identity Domain 적용 고객)
 1. [https://cloud.oracle.com](https://cloud.oracle.com) 링크로 접속합니다.
 2. **[Cloud Account Name]** 에 생성한 **클라우드 계정 이름**을 입력 후 **Next** 버튼을 클릭 합니다.
-   ![Cloud Sign-in #1](/assets/img/getting-started/2022/oci-cloud-sign-in.png " ")
+   ![Cloud Sign-in #1]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-sign-in.png " ")
 3. 이동된 화면에서 로그인할 도메인을 선택한 후 **Next** 버튼을 클릭합니다.
-   ![Cloud Sign-in #2](/assets/img/getting-started/2022/oci-cloud-id-sign-in.png " ")
+   ![Cloud Sign-in #2]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-id-sign-in.png " ")
 5. 이동된 화면에서 사용자 이름 및 비밀번호를 입력하고 **사인인** 버튼을 통해 로그인합니다.
-   ![Cloud Sign-in #3](/assets/img/getting-started/2022/oci-cloud-id-sign-in2.png)
+   ![Cloud Sign-in #3]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cloud-id-sign-in2.png)

@@ -47,13 +47,13 @@ header: no
 > WAA 구성을 위해서는 LB가 기본적으로 구성되어 있어야 합니다.
 
 - WAA 생성하기 위해 Networking -> Web Application Accelerations 클릭
-![접근하기](/assets/img/infrastructure/WAA/SCR-20220906-kzu.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/WAA/SCR-20220906-kzu.png)
 - 아래 접근해서 새로운 WAA 생성하기
-![접근하기](/assets/img/infrastructure/WAA/SCR-20220906-l21.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/WAA/SCR-20220906-l21.png)
 - WAA 생성시, Caching 및 Compression 옵션을 선택 후 미리 생성된 LB에 연결 할 수 있도록 합니다.
-![접근하기](/assets/img/infrastructure/WAA/SCR-20220906-l5g.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/WAA/SCR-20220906-l5g.png)
 - 생성된 WAA를 클릭하면 세부정보를 확인이 가능하다.
-![접근하기](/assets/img/infrastructure/WAA/SCR-20220906-l8z.png)
+![접근하기]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/WAA/SCR-20220906-l8z.png)
 
 
 ### 3.테스트하기 (추후 업데이트 예정)

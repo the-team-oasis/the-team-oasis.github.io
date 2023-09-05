@@ -52,7 +52,7 @@ $ pyshon -V
 Python 3.6.8
 ```
 
- ![python](/assets/img/getting-started/2023/cli/01_oci-linux-cli-1.png " ")
+ ![python]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/01_oci-linux-cli-1.png " ")
 
 
 - Oracle Linux 7 에서는 Python 버전이 2.7.5 버전으로 하위 버전이 기본적으로 설치되어 있습니다. 이 경우에는 yum 명령을 통해 ptyhon36 을 설치해 줍니다.
@@ -63,7 +63,7 @@ Python 2.7.5
 $ sudo yum install -y python36 
 ```
 
- ![python](/assets/img/getting-started/2023/cli/02_oci-linux-cli-2.png " ")
+ ![python]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/02_oci-linux-cli-2.png " ")
 
  - Oracle Linux 7 에서 Python36 이 이미 설치되어 있지만 Python 의 기본 버전이 2.7.5 로 세팅되어 있는 경우가 있습니다. 그럴 경우 다른 환경에 영향을 주지 않기 위해 세션에 아래와 같이 alias 를 주어 현재 접속한 세션에서 Python 의 버전을 3.6 버전으로 전환하여 사용하실 수 있습니다.
 
@@ -81,7 +81,7 @@ Oracle Linux 8 을 사용한다면 **dnf** 명령을 통해 OCI CLI 를 설치�
 $ sudo dnf -y install oraclelinux-developer-release-el8
 $ sudo dnf install python36-oci-cli
 ```
- ![python](/assets/img/getting-started/2023/cli/03_oci-linux-cli-3.png " ")
+ ![python]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/03_oci-linux-cli-3.png " ")
 
 - CLI 는 다음과 같은 Python site package 들을 설치합니다.
     - /usr/lib/python3.6/site-packages/oci_cli
@@ -99,7 +99,7 @@ Oracle Linux 7 을 사용한다면 **yum** 명령을 통해 OCI CLI 를 설치�
  ```terminal
 $ sudo yum install python36-oci-cli
 ```
- ![python](/assets/img/getting-started/2023/cli/04_oci-linux-cli-4.png " ")
+ ![python]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/04_oci-linux-cli-4.png " ")
 
 - CLI 는 다음과 같은 Python site package 들을 설치합니다.
     - /usr/lib/python3.6/site-packages/oci_cli
@@ -137,9 +137,9 @@ CLI 를 사용하기 전에 먼저, 반드시 configuration 설정을 통해 필
 
 - OCI CLI를 구성하기 위해서는 사전에 다음과 같은 정보가 준비되어야 합니다.
     - Tenancy OCID 에 대해 copy 후 메모장에 보관
-        ![](/assets/img/getting-started/2022/oci-cli-1.png " ")
+        ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-1.png " ")
     - User OCID 에 대해 copy 후 메모장에 보관
-        ![](/assets/img/getting-started/2022/oci-cli-2.png " ")
+        ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-2.png " ")
 
 <br>
 
@@ -181,11 +181,11 @@ xQIDTEST
 
 - 생성된 PEM 공용키 등록을 위하여 오른쪽 상단의 **My Profile**을 클릭한 후 왼쪽 **API Keys > Add API Key**를 순서대로 클릭합니다. 다음 화면과 같이 생성된 PEM 공용키를 선택하고 **Add**를 클릭합니다.
 
-![](/assets/img/getting-started/2023/cli/05_oci-linux-cli-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/05_oci-linux-cli-5.png " ")
 
 - **Add API Key** 메뉴 창에서 **Paste a public key** 메뉴를 클릭 후 복사해 두었던 public key 내용을 아래 그림처럼 붙여넣기 후 **Add** 버튼을 클릭하여 key 를 추가해 줍니다.
 
-![](/assets/img/getting-started/2023/cli/06_oci-linux-cli-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/06_oci-linux-cli-6.png " ")
 
 
 
@@ -197,7 +197,7 @@ API Key 가 등록이 되면 이제부터 OCI CLI 를 통해 OCI Resource handli
 ```terminal
 $ oci iam region list --output table
 ``` 
-![](/assets/img/getting-started/2023/cli/07_oci-linux-cli-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/cli/07_oci-linux-cli-7.png " ")
 
 OCI Region 목록이 제대로 출력이 되었다면 이제 oci cli 기반의 command 들을 수행하실 수 있습니다.
 더 다양하고 자세한 oci cli 를 통한 resource handling 을 수행하고자 하실 경우 아래의 주제에서 좀 더 자세히 다루고 있으니 해당 블로그 글 참고바랍니다.

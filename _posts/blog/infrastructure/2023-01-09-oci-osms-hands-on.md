@@ -53,7 +53,7 @@ header: no
 
 #### OSMS (OS Management service) 란?
 
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-iah.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-iah.png)
 OSMS는 OS Management service 서비스로 OS 관련 보안패치 , 설치된 패키지 업데이트 삭제 및 추가를 OCI WebConsole로 관리 할 수 있는 서비스입니다.
 
 지원되는 OS는 아래와 같습니다.
@@ -72,7 +72,7 @@ OSMS는 OS Management service 서비스로 OS 관련 보안패치 , 설치된 �
 리소스에 대한 접근을 하기 위한 Dynamic Groups 생성합니다.
 아래 그림은 OSMS 다이나믹 그룹을 생성하여, Compartment id를 입력하여 생성한 결과입니다. 
 
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-ih7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-ih7.png)
 
 
 아래 compartment.id의 경우, OSMS 그룹(Compartments) 만들어진 OCID 값입니다.
@@ -85,7 +85,7 @@ OSMS는 OS Management service 서비스로 OS 관련 보안패치 , 설치된 �
 OSMS 관련해서 사용하기 위한 Policy 정책을 넣어줍니다. 
  
 
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-im0.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-im0.png)
 
 ```text
 Allow service osms to read instances in tenancy
@@ -97,7 +97,7 @@ Allow dynamic-group osms to use osms-managed-instances in tenancy
 #### Compute 설정하기
 OSMS에 정상적인 실행 및 로그 확인을 위해서 Compute Terminal 접속합니다.
 
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-iwg.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-iwg.png)
 
 
 오라클 리눅스8의 경우 아래 명령어를 통해서 설정이 필요합니다.
@@ -162,17 +162,17 @@ tail -200f /var/log/oracle-cloud-agent/plugins/osms/agent.log
 
 Compute의 상세 페이지의 OS Managemnet의 상세 내용을 보면 아래와 같이 보안, 버그, 패치등에 대해서 화면에 노출됩니다. 
 상세 페이지 클릭시 OSMS 관련된 보안 패치 등이 보여집니다.
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-ja4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-ja4.png)
 
 Compute의 OS 필요한 상세 내용 화면이 보여집니다.
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-jbw.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-jbw.png)
 
 필요한 업데이트건을 설치시 아래와 같이 작업이 진행이 되며, 완료됩니다. (업데이트시, CPU, 메모리의 리소스를 사용합니다.)
 업데이트시, 운영 시간이외에 패치 및 업데이트를 권장합니다. (업데이트에 따른 CPU, 메모리 부하가 생깁니다.) , 해당 부분 Work Requests에 해당 작업 관련해서 작업 진행 결과가 보여집니다.
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-l3i.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-l3i.png)
 
 완료 후 상태값에 진행된 이후 해당 부분 종료됩니다. 
-![](/assets/img/infrastructure/2023/osms/SCR-20230109-l3p.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/osms/SCR-20230109-l3p.png)
 
 
 

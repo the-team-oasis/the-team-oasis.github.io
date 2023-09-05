@@ -47,7 +47,7 @@ header: no
 Cloud Shell은 OCI Console(OCI 관리 콘솔)에서 실행되는 브라우저 기반 터미널입니다. OCI Cloud Shell은 GCP의 Google Cloud Shell, Azure의 Cloud Shell 및 AWS의 Session Manager와 같은 서비스입니다. OCI Cloud Shell를 이용하면 PuTTY를 사용하지 않고 OCI VM 인스턴스에 접속하거나 별도의 소프트웨어와 계정 설정 작업 없이 즉시 OCI CLI와 같은 툴을 사용할 수 있습니다.
 - GraalVM의 java 17 버전 및 네이티브 이미지를 지원합니다.
 
-![](/assets/img/infrastructure/2022/08/SCR-20221003-id3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221003-id3.png)
 
 ## OCI Network Firewall Service is now availabile
 * **Services:**  Network Firewall, Oracle Cloud Infrastructure
@@ -57,7 +57,7 @@ Cloud Shell은 OCI Console(OCI 관리 콘솔)에서 실행되는 브라우저 �
 ### 기능 소개
 OCI 네트워크 방화벽은 팔로알토 네트웍스의 차세대 방화벽 기술(NGFW)을 사용하여 구축된 클라우드 네이티브 관리형 방화벽 서비스입니다. 기계 학습 기반 방화벽 기능을 제공하여 OCI 워크로드를 보호하고 OCI에서 쉽게 사용할 수 있습니다. OCI 기본 서비스로서의 방화벽 제품인 OCI 네트워크 방화벽을 사용하면 추가 보안 인프라를 구성 및 관리할 필요 없이 방화벽 기능을 활용할 수 있습니다.
 
-![](/assets/img/infrastructure/2022/08/Medium.jpg)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/Medium.jpg)
 
 ## New features added to Network Visualizer
 * **Services:**  Networking
@@ -67,7 +67,7 @@ OCI 네트워크 방화벽은 팔로알토 네트웍스의 차세대 방화벽 �
 ### 기능 소개
 Network Visualizer를 사용하여 토폴로지 맵과 관련 리소스 정보가 포함된 PDF를 내보낼 수 있습니다. 이제 탑재 대상 및 Kubernetes 클러스터를 포함하여 더 많은 유형의 리소스를 볼 수도 있습니다.
 
-![](/assets/img/infrastructure/2022/08/SCR-20221003-ikb.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221003-ikb.png)
 
 
 
@@ -96,7 +96,7 @@ Network Visualizer를 사용하여 토폴로지 맵과 관련 리소스 정보�
 - 가상화 지침 활성화 또는 비활성화
 - IOMMU(입출력 메모리 관리 장치) 활성화 또는 비활성화
 
-![](/assets/img/infrastructure/2022/08/SCR-20221003-ixi.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221003-ixi.png)
 
 
 ## Cloud Guard adds Log Insight Detector

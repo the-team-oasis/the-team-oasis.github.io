@@ -109,7 +109,7 @@ $Env:compartment_id = "ocid1.tenancy.oc1..aaaaaaaal1fvgn0h9njji5u6ldrwb4l6aay2x8
 ##### 1. 구획 조회하기
 - 도움말 보기 : `oci iam compartment list -h`
 - **tenancy_id** : 테넌시의 OCID 또는 조회하고 싶은 상위 구획의 OCID를 복사하여 입력합니다.
-  ![](/assets/img/getting-started/2022/oci-cli-1.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-cli-1.png " ")
 
    ```terminal
    $ oci iam compartment list -c <tenancy_id>
@@ -269,7 +269,7 @@ C:\> oci network vcn create --compartment-id $Env:compartment_id --display-name 
 ```
 
 - 생성된 리소스 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-1.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-1.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -554,7 +554,7 @@ C:\> oci network subnet create --vcn-id $Env:vcn_id -c $Env:compartment_id --ava
 ```
 
 - 생성된 리소스 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-2.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-2.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -611,7 +611,7 @@ C:\> oci network internet-gateway create --is-enabled true --vcn-id $Env:vcn_id 
 ```
 
 - 생성된 리소스 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-3.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-3.png " ")
 
 </details>
 {::options parse_block_html="false" /}
@@ -729,7 +729,7 @@ C:\> oci network route-table update --rt-id $Env:route_table_id --route-rules '[
 ```
 
 - 생성된 경로 규칙 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-4.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-4.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -899,15 +899,15 @@ C:\> oci compute shape list -c $Env:compartment_id --availability-domain "wXsg:A
     - 만일 클라이언트가 OpenSSH가 없는 윈도우 환경이라면, **Putty**를 활용하여 접속하는 경우가 많은데 이 경우에는 **Putty Key Generator**를 다운로드 받아서 Putty에서 사용하는 SSH키로 생성하여야 합니다. **Putty Key Generator**를 활용하면 기존에 사용중이던 [SSH-2 RSA 키 쌍](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/credentials.htm#Instance)를 Putty 전용 SSH 키로 변환도 가능합니다.
     - 먼저 [https://www.puttygen.com/](https://www.puttygen.com/)에서 **PuTTYgen**을 다운로드 받고 설치합니다. **puttygen.exe**을 클릭하여 프로그램을 오픈합니다.
     - 다음과 같이 **SSH-2 RSA**를 선택하고 **키 사이즈**를 **2048**로 입력한 후 **Generate** 버튼을 클릭합니다.
-      ![](/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
+      ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
 
     - 생성되는 과정에서 빈 공간을 마우스를 움직이면 키가 랜덤하게 생성됩니다.
-      ![](/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
+      ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
 
     - **Save private key**를 클릭하여 전용 키를 다운로드 받습니다. 공개키의 경우 **Public key for pasting into OpenSSH authorized_keys file**의 내용을 다운로드 받은 Private Key 이름에 **.pub**라는 파일 확장자를 추가해서 복사 & 붙여넣기 하여 생성합니다. <br>예시) Private Key: mykey, Public Key: mykey.pub
   > 키 코멘트, passphrase (키를 암호화)는 이 단계에서 건너뜁니다.
 
-  ![](/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
 
 #### CLI를 이용하여 Linux 인스턴스를 시작하기
 여기까지 잘 진행하셨으면 이제 인스턴스를 시작하기 위한 준비는 모두 완료되었습니다. 이제 아래 남은 절차를 따라 진행하면서 인스턴스를 시작해보겠습니다!
@@ -1045,7 +1045,7 @@ C:\> oci compute instance launch --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c
 ```
 
 - 생성된 인스턴스OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-7.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-7.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1115,7 +1115,7 @@ C:\> oci bv volume create --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c $Env:c
 ```
 
 - 생성된 스토리지를 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-5.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-5.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1181,7 +1181,7 @@ C:\> oci compute volume-attachment attach --instance-id $Env:instance_id --type 
 ```
 
 - 스토리지가 인스턴스에 연결되었음을 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-6.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-6.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1316,7 +1316,7 @@ C:\> oci compute instance launch --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c
 ```
 
 - 생성된 인스턴스OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-8.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-8.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1387,7 +1387,7 @@ C:\> oci bv volume create --availability-domain "wXsg:AP-SEOUL-1-AD-1" -c $Env:c
 ```
 
 - 생성된 스토리지를 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-9.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-9.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1452,7 +1452,7 @@ C:\> oci compute volume-attachment attach --instance-id $Env:instance_id --type 
 ```
 
 - 스토리지가 인스턴스에 연결되었음을 OCI 콘솔에서 확인
-  ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-10.png " ")
+  ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-10.png " ")
 </details>
 {::options parse_block_html="false" /}
 
@@ -1713,7 +1713,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
       ```
 
         - 스토리지가 삭제되었음을 OCI 콘솔에서 확인
-          ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-11.png " ")
+          ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-11.png " ")
       </details>
       {::options parse_block_html="false" /}
 
@@ -1754,7 +1754,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
   ```
 
     - 인스턴스가 종료 중 또는 종료되었음을 OCI 콘솔에서 확인합니다.
-      ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-12.png " ")
+      ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-12.png " ")
   </details>
   {::options parse_block_html="false" /}
 
@@ -1791,7 +1791,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
           ```
 
             - 서브넷이 삭제되었음을 OCI 콘솔에서 확인합니다.
-              ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-13.png " ")
+              ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-13.png " ")
           </details>
           {::options parse_block_html="false" /}
     2. 경로 테이블(Route Table) 규칙 삭제하기
@@ -1878,7 +1878,7 @@ C:\> oci compute instance get-windows-initial-creds --instance-id $Env:instance_
           ```
 
             - 인터넷 게이트웨이가 삭제되었음을 OCI 콘솔에서 확인합니다.
-              ![](/assets/img/getting-started/2022/cli/oci-getting-start-cli-14.png " ")
+              ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/cli/oci-getting-start-cli-14.png " ")
           </details>
           {::options parse_block_html="false" /}
     4. 보안목록 삭제하기

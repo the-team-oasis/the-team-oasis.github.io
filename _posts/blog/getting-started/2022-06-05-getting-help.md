@@ -38,11 +38,11 @@ header: no
 ### OCI 콘솔에서 Support 채팅 사용
 OCI Support 채팅은 Oracle Support Digital Assistant(Chatbot)에 연결되는 서비스로 기본적인 질문에 대한 답을 제공합니다. 이 서비스를 사용하기 위해서는 OCI 콘솔 우측 상단의 **도움말(Help)** 아이콘을 클릭하고 **채팅하기** 버튼을 클릭합니다.
 
-![](/assets/img/getting-started/2022/getting-help-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/getting-help-1.png " ")
 
 다음과 같이 챗봇과 대화할 수 있는 채팅창이 활성화됩니다.
 
-![](/assets/img/getting-started/2022/getting-help-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/getting-help-2.png " ")
 
 > 현재는 아쉽게도 한글은 지원하지 않습니다.
 

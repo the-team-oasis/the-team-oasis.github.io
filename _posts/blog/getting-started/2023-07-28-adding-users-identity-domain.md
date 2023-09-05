@@ -53,7 +53,7 @@ OCI Identity Domain에 대한 자세한 내용과 Identity Domain이 적용되�
 ### OCI Identity Domain 환경 에서의 사용자(Users), 그룹(Groups), 정책(Policies)
 OCI 관리자(처음 OCI 계정을 생성할 때 등록한 사용자)는 기본적으로 OCI Administrator 그룹에 속하며, 이 권한을 사용하여 추가로 OCI 사용자를 추가할 수 있습니다. 추가된 사용자는 별도 정의된 그룹의 구성원이 될 수 있으며, 해당 그룹에 대한 권한은 정책을 통해서 정의됩니다. 정책에서는 그룹의 구성원이 수행할 수 있는 작업의 범위와 어떤 구획에서 권한을 수행할 수 있는지를 정의할 수 있습니다. 이렇게 정의하면 사용자는 자신이 속한 그룹에 설정된 정책을 기반으로 작업을 수행할 수 있게됩니다.
 
-![](/assets/img/getting-started/2022/iam-model-png.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/iam-model-png.png " ")
 
 
 ### OCI IAM Identity Domain 에서 달라진점
@@ -86,11 +86,11 @@ OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공�
       </tbody>
 </table>
 
-![](/assets/img/getting-started/2022/oci-identity-domain-changes.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-identity-domain-changes.png " ")
 
 #### OCI Console 달라진점
 새로운 기능이 추가되면서 사용자 메뉴 구성이 아래와 같이 변경 되었습니다.
-![](/assets/img/getting-started/2022/oci-iam-console-changes-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-iam-console-changes-1.png " ")
 
 ### 실습: Identity Domain (Default) 사용자에게 특정 구획(Compartment)에 접근할 수 있는 권한 추가
 기본 도메인 (Default) 사용자에게 필요한 액세스 권한을 설정하는 방법을 이해하는데 도움이 되도록, 다음과 같은 시나리오로 구성해보도록 하겠습니다.
@@ -101,25 +101,25 @@ OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공�
 #### 1. 구획 (Compartment) 생성
 우선 OCI에 **Sandbox**라는 구획을 생성하고, 사용자에게 이 구획에만 접근 가능하도록 구성해보겠습니다. 우선 위에서 **Sandbox**라는 구획을 생성합니다. 메뉴에서 **ID & 보안 (Identity & Security) > 구획(Compartments)**를 선택합니다.
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-1.png " ")
 
 **구획 생성** 버튼을 클릭하고, 입력창에 다음과 같이 입력합니다.
 * 구획명: Sandbox
 * 설명: Sandbox 사용자를 위한 구획
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-2.png " ")
 
 #### 2. 기본 도메인 (Default Domain)에 사용자 추가
 두 번째로 기본 도메인에 사용자를 추가합니다. 메뉴에서 **ID & 보안 (Identity & Security) > 도메인(Domain)**을 선택합니다. 
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-3.png " ")
 
 이동한 화면에서 기본 도메인 (Default Domain)을 선택합니다. 만약 Default 도메인이 보이지 않은 경우 왼쪽 하단에서 루트 구획을 선택합니다.
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-4.png " ")
 
 이동한 도메인 화면에서 **사용자** > **사용자 생성**를 클릭하여 사용자를 생성합니다.
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-5.png " ")
 
 **사용자 생성 대화상자**에서 다음을 입력합니다.  
 
@@ -133,7 +133,7 @@ OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공�
 #### 3. 기본 도메인 (Default Domain) 에서 그룹 생성
 세 번째로 기본 도메인에 그룹을 추가합니다. 메뉴에서 **ID & 보안 (Identity & Security) > 도메인(Domain)**을 선택합니다.
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-3.png " ")
 
 이동한 화면에서 기본 도메인 (Default Domain)을 선택합니다. 만약 Default 도메인이 보이지 않은 경우 왼쪽 하단에서 루트 구획을 선택합니다. 
 
@@ -142,16 +142,16 @@ OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공�
 * 설명: Sandbox 구획을 사용하기 위한 그룹
 * 사용자: 위에서 추가한 기본 도메인 사용자
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-6.png " ")
 
 
 #### 4. 기본 도메인 그룹에 정책 (Policy) 설정
 이제 **Sandbox** 구획에 대한 **SandboxGroup** 그룹에 권한을 부여하기 위한 정책을 생성합니다. 메뉴에서 **ID & 보안 (Identity & Security) > 정책(Policy)**을 선택합니다. 
 
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-7.png " ")
 
 **정책 생성** 버튼을 클릭한 후 다음과 같이 입력합니다.
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-8.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-8.png " ")
 
 * 이름: SandboxPolicy
 * 설명: 사용자에게 Sandbox 구획에 대한 모든 권한 부여
@@ -160,7 +160,7 @@ OCI Native로 제공하던 IAM 서비스와 Oracle에서 PaaS 형태로 제공�
   * Allow group SandboxGroup to manage all-resources in compartment Sandbox
   * **Sandbox** 구획에 모든 리소스를 관리할 수 있는 권한을 **SandboxGroup** 그룹에 할당하는 정책 구문
   
-![](/assets/img/getting-started/2023/identity-domain/oci-identity-domain-9.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2023/identity-domain/oci-identity-domain-9.png " ")
 
 #### 5. 요약
 OCI의 IDCS라는 PaaS형 IAM 서비스가 OCI 자체 IAM 서비스와 통합된 Identity Domain 서비스에서 사용자,그룹,정책을 관리하는 방법에 대해서 알아보았습니다. 이번 포스팅에서 진행한 내용을 간단히 도식하면 다음과 같습니다.

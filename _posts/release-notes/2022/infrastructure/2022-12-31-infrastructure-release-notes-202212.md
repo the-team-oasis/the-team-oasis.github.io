@@ -48,16 +48,16 @@ Queue 서비스는 완전 관리형 서버리스 서비스로 사용시에만 �
 
 
 - 일반적인 구성
-![](/assets/img/infrastructure/2022/12/queue-overview.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/12/queue-overview.png)
 
 - 화면 구성 (Developer Services -> Application Integration -> Queues)
-![](/assets/img/infrastructure/2022/12/SCR-20230116-jnq.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/12/SCR-20230116-jnq.png)
 
 - 제한사항
-![](/assets/img/infrastructure/2022/12/SCR-20230116-jg5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/12/SCR-20230116-jg5.png)
 
 - 가격
-![](/assets/img/infrastructure/2022/12/SCR-20230118-k5r.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/12/SCR-20230118-k5r.png)
 
 
 ## Live migration supported for Windows-based compute instances
@@ -87,4 +87,4 @@ Live Migration의 경우, 기존 인스턴스가 계속 실행 중일 때 상태
 
 
 
-![](/assets/img/infrastructure/2022/12/SCR-20230116-iev.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/12/SCR-20230116-iev.png)

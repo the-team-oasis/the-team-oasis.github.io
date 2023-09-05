@@ -36,7 +36,7 @@ Remote Peering Connection(이하 RPC)는 서로 다른 리전에 있는 VCN을 �
 [OCI Local Peering - 동일 리전에서 서로 다른 VCN간 연결하기](https://the-team-oasis.github.io/infrastructure/oci-local-peering/)
 
 다음 다이어그램은 **RPC**를 사용하여 동일 리전의 서로 다른 VCN을 연결하는 다이어그램입니다. 연결하고자 하는 각 VCN에 Dynamic Routing Gateway(이하 DRG)를 붙이고, DRG에 Remote Peering Connection을 구성하여 연결하는 구성입니다.
-![](/assets/img/infrastructure/2022/network_remote_peering_basic.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/network_remote_peering_basic.png)
 
 > 주의: Peering을 연결하는 두 VCN은 서로 CIDR이 겹치지 않아야 합니다.
 
@@ -73,7 +73,7 @@ VCN 생성은 다음 가이드를 참고합니다.
 #### DRG 생성
 먼저 각 리전에 DRG를 생성합니다. DRG를 생성하기 위해서는 **메뉴 > 네트워킹(Networking) >> Customer Connectivity(고객 접속) Dynamic Routing Gateways(동적 경로 지정 게이트웨이)**로 이동합니다.
 
-![](/assets/img/infrastructure/2022/oci-remote-peering-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-1.png)
 
 **동적 경로 지정 게이트웨이 생성(Create Dynamic Routing Gateway)** 버튼을 클릭한 후 다음 이름으로 DRG를 생성합니다. 
 
@@ -95,10 +95,10 @@ VCN 생성은 다음 가이드를 참고합니다.
 * **VCN:** oci-hubvcn2
 
 **Seoul**
-![](/assets/img/infrastructure/2022/oci-remote-peering-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-2.png)
 
 **Tokyo**
-![](/assets/img/infrastructure/2022/oci-remote-peering-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-3.png)
 
 #### Remote Peering Connection(RPC) 생성
 **원격 피어링 접속 연결(Remote Peering Connections Attachments)**을 생성합니다. 생성한 각 DRG를 클릭한 후 다음과 같이 RPC 연결을 생성합니다.
@@ -113,20 +113,20 @@ VCN 생성은 다음 가이드를 참고합니다.
 
 **RPC-2**의 OCID값을 얻기 위해서는 먼저 앞서 생성한 **RPC-2 연결**의 **Remote Peering Connection(원격 피어링 접속)** 항목의 **RPC-2**를 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-remote-peering-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-4.png)
 
 다음과 같이 OCID 값을 복사합니다.
-![](/assets/img/infrastructure/2022/oci-remote-peering-4-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-4-1.png)
 
 다시 **RPC-1 연결**로 이동한 후 **원격 피어링 접속(Remote Peering Connection)** 항목에 있는 **RPC-1**을 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-remote-peering-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-5.png)
 
 **연결 설정**을 선택한 후 지역을 **ap-tokyo-1(도쿄)**, **원격 피어링 접속 OCID**를 앞서 복사한 OCID로 입력한 후 **연결 설정**을 클릭합니다.
-![](/assets/img/infrastructure/2022/oci-remote-peering-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-6.png)
 
 연결이 되면 다음과 같이 피어링 상태가 **피어링됨**으로 변경됩니다.
-![](/assets/img/infrastructure/2022/oci-remote-peering-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-7.png)
 
 ### 경로 테이블(Routing Table)과 보안 목록(Security List) 설정
 #### 경로 테이블 설정
@@ -149,10 +149,10 @@ VCN 생성은 다음 가이드를 참고합니다.
     * **Target(대상):** DRG-OCI-HUB2
 
 **Seoul**
-![](/assets/img/infrastructure/2022/oci-remote-peering-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-8.png)
 
 **Tokyo**
-![](/assets/img/infrastructure/2022/oci-remote-peering-9.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-9.png)
 
 #### 보안 목록 설정
 보안 목록에서는 테스트를 위해 서로 모든 프로토콜에 대해 모든 포트를 오픈하도록 하겠습니다. 각 VCN의 **보안 목록**에서 다음과 같이 **수신 규칙(Ingress Rules)**를 추가합니다.
@@ -171,10 +171,10 @@ VCN 생성은 다음 가이드를 참고합니다.
 
 
 **Seoul**
-![](/assets/img/infrastructure/2022/oci-remote-peering-10.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-10.png)
 
 **Tokyo**
-![](/assets/img/infrastructure/2022/oci-remote-peering-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-remote-peering-11.png)
 
 ### 접속 테스트
 이제 각 리전의 공용 서브넷에 VM 인스턴스를 하나씩 생성한 후에 연결을 테스트해보도록 하겠습니다. 리눅스 인스턴스 생성 및 접속 방법은 아래 포스팅을 참고합니다.

@@ -50,23 +50,23 @@ OCI 콘솔에 로그인 유형별 비밀번호 변경 방법에 대해 알아봅
 
 #### OCI IAM (Legacy) 사용자 비밀번호 변경하기
 1. OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -> **비밀번호 변경** 메뉴를 클릭합니다.
-   ![OLD IAM 비밀번호 변경 #1](/assets/img/getting-started/2022/oci-old-iam-change-password-1.png)
+   ![OLD IAM 비밀번호 변경 #1]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-old-iam-change-password-1.png)
 2. 기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
-   ![OLD IAM 비밀번호 변경 #2](/assets/img/getting-started/2022/oci-old-iam-change-password-2.png)
+   ![OLD IAM 비밀번호 변경 #2]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-old-iam-change-password-2.png)
 
 #### Oracle IDCS 사용자 비밀번호 변경하기
 1. OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -> **서비스 사용자 콘솔** 메뉴를 클릭합니다.
-   ![IDCS 비밀번호 변경 #1](/assets/img/getting-started/2022/oci-idcs-change-password-1.png)
+   ![IDCS 비밀번호 변경 #1]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-idcs-change-password-1.png)
 2. 이동한 화면에서 사용자 프로파일 아이콘 클릭 -> **비밀번호 변경** 메뉴를 클릭합니다.
-   ![IDCS 비밀번호 변경 #2](/assets/img/getting-started/2022/oci-idcs-change-password-2.png)
+   ![IDCS 비밀번호 변경 #2]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-idcs-change-password-2.png)
 3. 기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
-   ![IDCS 비밀번호 변경 #3](/assets/img/getting-started/2022/oci-idcs-change-password-3.png)
+   ![IDCS 비밀번호 변경 #3]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-idcs-change-password-3.png)
 
 #### OCI IAM Identity Domain 사용자 비밀번호 변경하기
 1. OCI 콘솔에서 사용자 프로파일 아이콘 클릭 -> **내 프로파일** 메뉴를 클릭합니다.
-   ![NEW IAM 비밀번호 변경 #1](/assets/img/getting-started/2022/oci-new-iam-change-password-1.png)
+   ![NEW IAM 비밀번호 변경 #1]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-new-iam-change-password-1.png)
 2. 이동된 프로파일 화면에서 **"비밀번호 변경"** 버튼을 클릭합니다.
-   ![NEW IAM 비밀번호 변경 #2](/assets/img/getting-started/2022/oci-new-iam-change-password-2.png)
+   ![NEW IAM 비밀번호 변경 #2]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-new-iam-change-password-2.png)
 3. 레이어팝업에서 현재 기존 비밀번호와 새로운 비밀번호를 입력하여 비밀번호를 변경합니다.
-   ![NEW IAM 비밀번호 변경 #3](/assets/img/getting-started/2022/oci-new-iam-change-password-3.png)
+   ![NEW IAM 비밀번호 변경 #3]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-new-iam-change-password-3.png)
 

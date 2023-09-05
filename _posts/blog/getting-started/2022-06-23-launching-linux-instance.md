@@ -44,7 +44,7 @@ header: no
 * 블록 볼륨 스토리지 추가
 
 아래 그림은 튜토리얼을 통해서 생성된 리소스들을 보여줍니다.
-![](/assets/img/getting-started/2022/gsg-instance-linux.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/gsg-instance-linux.png " ")
 
 ### 인스턴스에 SSH 접속을 위한 SSH 키 쌍 생성
 OpenSSH로 인스턴스에 접속 혹은 유닉스 기반 클라이언트(MacOS 등)에서 접속하는 경우에는 인스턴스 생성 시에 자동으로 생성된 SSH 키 쌍을 다운로드 받을 수 있기 때문에 이 단계를 건너뜁니다. 또한 이미 [SSH-2 RSA 키 쌍](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/credentials.htm#Instance)을 가지고 있는 경우에도 인스턴스 생성할 때 공개 키를 업로드 하거나 붙여넣기하여 추가할 수 있으므로, 마찬가지로 이 단계를 건너뜁니다.  
@@ -55,29 +55,29 @@ OpenSSH로 인스턴스에 접속 혹은 유닉스 기반 클라이언트(MacOS 
 
 다음과 같이 **SSH-2 RSA**를 선택하고 **키 사이즈**를 **2048**로 입력한 후 **Generate** 버튼을 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-1.png " ")
 
 생성되는 과정에서 빈 공간을 마우스를 움직이면 키가 랜덤하게 생성됩니다.
 
-![](/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-2.png " ")
 
 **Save private key**를 클릭하여 전용 키를 다운로드 받습니다. 공개키의 경우 **Public key for pasting into OpenSSH authorized_keys file**의 내용을 다운로드 받은 Private Key 이름에 **.pub**라는 파일 확장자를 추가해서 복사 & 붙여넣기 하여 생성합니다.  
 예시) Private Key: mykey, Public Key: mykey.pub
 
 > 키 코멘트, passphrase (키를 암호화)는 이 단계에서 건너뜁니다. 
 
-![](/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-create-sshkey-3.png " ")
 
 ### 구획 (Compartment) 생성
 모든 리소스들을 특정 구획에 생성할 것입니다. 우선 **Sandbox**라는 이름의 구획을 생성해 보도록 하겠습니다. 메뉴에서 **ID & 보안 (Identity & Security) > 구획(Compartment)**를 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-iam-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-iam-7.png " ")
 
 **구획 생성** 버튼을 클릭하고, 입력창에 다음과 같이 입력합니다.
 * 구획명: Sandbox
 * 설명: Sandbox 사용자를 위한 구획
 
-![](/assets/img/getting-started/2022/oci-iam-8.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-iam-8.png " ")
 
 ### 가상 클라우드 네트워크 (Virtual Cloud Network: VCN) 생성
 인스턴스에서 사용할 VCN을 생성합니다. VCN 생성은 아래 링크를 참고하여 생성합니다.
@@ -85,16 +85,16 @@ OpenSSH로 인스턴스에 접속 혹은 유닉스 기반 클라이언트(MacOS 
 > [OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기](https://the-team-oasis.github.io/getting-started/create-vcn/)
 
 VCN을 생성할 때 앞서 생성한 구획인 SandBox를 선택하여야 합니다.
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-1.png " ")
 
 ### 리눅스 인스턴스 생성 및 시작하기
 이제 리눅스 인스턴스를 하나 생성해보겠습니다. 메뉴에서 **컴퓨트(Compute) > 인스턴스(Instances)**를 차례로 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-2.png " ")
 
 구획으로 **Sandbox**를 선택한 후 **인스턴스 생성(Create Instance)**를 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-3.png " ")
 
 인스턴스 생성 화면에서 다음과 같이 입력합니다.
 
@@ -108,11 +108,11 @@ VCN을 생성할 때 앞서 생성한 구획인 SandBox를 선택하여야 합�
   * 쉐입에서는 **가상 머신(Virtual machine)**과 **베어메탈(Bare metal machine)** 인스턴스 유형으로 나눠져 있으며, **가상 머신** 유형에서는 **AMD**, **Intel**, **Ampere (Arm 기반 프로세서)**로 구분되어 있습니다. 모든 쉐입은 Flex 타입으로 제공되는데, CPU와 메모리를 사용자가 선택하여 구성할 수 있습니다. 여기서는 **가상 머신** 유형에서 AMD 쉐입인 **VM.Standard.E4.Flex**으로 선택하고 CPU는 1개, 메모리는 16 GB로 선택합니다.
   * OCI 쉐입에 대한 상세한 정보는 [https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm) 링크에서 확인할 수 있습니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-4.png " ")
 
 **네트워킹**에서는 앞서 생성한 VCN과 공용 서브넷(Public Subnet)을 선택하고 **(공용 IP 주소) Public IP address**를 **공용 IPv4 주소 지정 (Assign a public IPv4 address)**으로 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-5.png " ")
 
 **SSH 키 추가**에서는 **자동으로 키 쌍 생성(Generate a key pair for me)**을 선택하고 **전용 키 저장 (Save Private Key)**를 클릭하여 생성된 키를 다운로드 받을 수 있습니다.
 
@@ -124,7 +124,7 @@ VCN을 생성할 때 앞서 생성한 구획인 SandBox를 선택하여야 합�
 
 마지막으로 **생성 (Create)** 버튼을 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-6.png " ")
 
 
 ### 리눅스 인스턴스 접속을 위한 준비
@@ -132,7 +132,7 @@ VCN을 생성할 때 앞서 생성한 구획인 SandBox를 선택하여야 합�
 
 우선 인스턴스에 접속하기 위해서는 생성한 인스턴스의 공용 IP를 확인하여야 합니다. 생성한 인스턴스 목록에서 바로 공용 IP를 확인할 수 있습니다.
 
-![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-7.png " ")
 
 #### Unix 스타일 시스템에서 Linux 인스턴스에 연결하려면
 다운로드 받은 **전용 키** 혹은 **업로드 한 공용 키에 대응하는 전용 키**에 대해서 소유자만 파일을 읽을 수 있는 권한으로 변경합니다.
@@ -155,7 +155,7 @@ $ ssh -i <private_key_file> <username>@<public-ip-address>
 3. **사용 권한 (Permissions)** 탭 의 **사용 권한 항목 (Permission entries)** 에 대해 **보안 주체**에 **자신의 사용자 계정**이 보이는지 확인합니다.
 4. **상속 사용 안함**을 클릭하고, **상속된 사용 권한을 이 개체에 대한 명시적 사용 권한으로 변환**을 선택합니다.
 
-    ![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-8.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-8.png " ")
 
 5.  **사용 권한 항목 (Permission entries)**에서 자신의 사용자 계정을 제외한 항목은 모두 삭제합니다.
 6. 자신의 사용자 계정에 대한 액세스 권한이 **모든 권한 (Full control)**인지 확인합니다.
@@ -171,17 +171,17 @@ $ ssh -i <private_key_file> <username>@<public-ip-address>
 1. Putty를 오픈합니다.
 2. Category에서 Session을 선택한 후 **Host Name (or IP address)**에 생성한 인스턴스의 공용  IP를 입력합니다. Port는 **22** 이고, Connection type은 **SSH**로 선택합니다.
 
-    ![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-9.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-9.png " ")
 
 3. Category에서 Connection과 Data를 순서대로 클릭한 후 **Auto-login username**에 사용자를 입력합니다.
 
-    ![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-10.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-10.png " ")
 
     > Oracle Linux 및 CentOS 이미지의 경우 기본 사용자 이름은 opc입니다. Ubuntu 이미지의 경우 기본 사용자 이름은 ubuntu입니다.
 
 4. Category에서 Connection과 SSH, Auth를 순서대로 클릭한 후 **Private key file for authentication**에 앞서 PuttyGen으로 생성한 **전용 키**를 선택하고 **Open**을 클릭하여 세션을 시작합니다.
 
-    ![](/assets/img/getting-started/2022/oci-lanunch-linux-instance-11.png " ")
+    ![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-lanunch-linux-instance-11.png " ")
 
     > 인스턴스에 처음 연결하는 경우 서버의 호스트 키가 레지스트리에 캐시되지 않는다는 메시지가 표시될 수 있습니다. 연결을 계속 하려면 **예** 를 클릭 합니다.
 
@@ -193,7 +193,7 @@ $ ssh -i <private_key_file> <username>@<public-ip-address>
 #### 블록 볼륨 생성
 메뉴에서 **스토리지(Stroage) > 블록 볼륨(Block Volumes)**을 차례로 클릭합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-1.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-1.png " ")
 
 다음과 같이 입력 및 선택합니다.
 * 이름 (Name): my-block-volume-1
@@ -214,13 +214,13 @@ $ ssh -i <private_key_file> <username>@<public-ip-address>
 * 암호화 (Encryption): Encrypt using Oracle-managed keys (기본 설정 유지)
 
 미지막으로 **블록 볼륨 생성 버튼 (Create Block Volume)**을 클릭합니다.
-![](/assets/img/getting-started/2022/oci-bv-2.png " ")
-![](/assets/img/getting-started/2022/oci-bv-3.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-2.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-3.png " ")
 
 #### 인스턴스에 볼륨 연결 (Attach & Connect)
 iSCSI 방식으로 볼륨을 인스턴스에 연결해보도록 하겠습니다. 메뉴에서 **컴퓨트 (Compute) > 인스턴스 (Instances)**를 차례로 선택한 후에 앞서 생성한 인스턴스를 선택합니다. 인스턴스 상세 페이지에서 아래와 같이 좌측 **리소스 (Resources)** 메뉴에서 **연결된 블록 볼륨 (Attached block volumes)**을 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-4.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-4.png " ")
 
 **블록 볼륨 연결 (Attach block volume)**버튼을 클릭하고 다음과 같이 입력/선택 합니다.
 * **블록 볼륨 선택 (Select volume):** 앞서 생성한 블록 볼륨을 선택합니다.
@@ -228,17 +228,17 @@ iSCSI 방식으로 볼륨을 인스턴스에 연결해보도록 하겠습니다.
 * **연결 유형 (Attachment type):** ISCSI
 * **액세스 (Access):** 읽기/쓰기(Read/write)
 
-![](/assets/img/getting-started/2022/oci-bv-5.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-5.png " ")
 
 연결을 클릭합니다.
 
 이제 iSCSI 연결을 구성할 수 있습니다. 우선 **연결된 블록 볼륨** 메뉴에서 연결된 블록 볼륨의 우측 아이콘을 선택한 후 **iSCSI 명령 및 정보 (iSCSI commands and inforamtion)**를 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-6.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-6.png " ")
 
 다음과 같이 **iSCSI 명령 및 정보** 대화창에서 접속 (Connect)에 있는 명령어를 복사합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-7.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-7.png " ")
 
 인스턴스에 SSH로 접속합니다.
 
@@ -341,28 +341,28 @@ tmpfs                       1.6G     0  1.6G   0% /run/user/1000
 #### 블록 볼륨 분리 및 삭제
 메뉴에서 **컴퓨트 (Compute) > 인스턴스 (Instances)**에서 실습에서 사용한 인스턴스를 선택합니다. 인스턴스 세부 정보 화면에서 좌측 **리소스 (Resources)** 세션의 **연결된 블록 볼륨**을 선택합니다. 목록에서 실습에서 사용한 볼륨 오른쪽 아이콘을 선택하고 **분리 (Detach)**를 선택하여 인스턴스를 분리합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-8.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-8.png " ")
 
 이제 볼륨을 삭제할 수 있습니다. 메뉴에서 **스토리지 (Storage) > 블록 볼륨 (Block Volumes)**를 차례로 선택한 후에 실습에서 사용한 블록 볼륨의 오른쪽 아이콘을 클릭하고 **종료 (Terminate)**를 선택하여 볼륨을 삭제합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-9.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-9.png " ")
 
 #### 인스턴스 종료
 메뉴에서 **컴퓨트 (Compute) > 인스턴스 (Instances)**를 차례로 선택한 후 목록에서 실습에서 사용한 인스턴스의 오른쪽 아이콘을 클릭하고 **종료 (Terminate)**를 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-10.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-10.png " ")
 
 삭제 대화창에서 **부팅 볼륨을 영구적으로 삭제 (Permanently delete the attached boot volume)**를 선택한 후 **인스턴스 종료** 버튼을 클릭하여 인스턴스와 부트볼륨을 모두 삭제합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-11.png " ")
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-11.png " ")
 
 #### 가상 클라우드 네트워크 (Virtual Cloud Network) 삭제
 메뉴에서 **네트워킹 (Networking) > 가상 클라우드 네트워크 (Virtual Cloud Network)** 을 차례로 선택한 후 실습에서 사용한 VCN 오른쪽 메뉴를 클릭하고 **종료 (Terminate)**를 선택합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-12.png)
 
 VCN과 연관된 모든 리소스들이 나열됩니다. **모두 종료**를 클릭하여 VCN과 관련된 모든 리소스를 삭제합니다.
 
-![](/assets/img/getting-started/2022/oci-bv-13.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/getting-started/2022/oci-bv-13.png)
 
 > VCN의 리소스들을 다른 자원에서 사용중인 경우라면 VCN 자원을 삭제할 수 없습니다. 이 경우에는 연관된 자원을 삭제 한 후에 다시 VCN 리소스를 정리하여야 합니다.

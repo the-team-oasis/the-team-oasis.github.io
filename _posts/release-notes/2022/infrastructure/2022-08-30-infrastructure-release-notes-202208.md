@@ -46,7 +46,7 @@ Cloud Shell은 OCI Console(OCI 관리 콘솔)에서 실행되는 브라우저 �
 
 > 테넌시의 홈리전을 기본으로 접속 가능하며, 홈리전 이외의 리전 접속의 경우, RPG 연결을 해줘야 합니다.
 
-![](/assets/img/infrastructure/2022/08/SCR-20221001-3bt.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221001-3bt.png)
 
 ## Block Volume scheduled backup limited to one per volume per day
 * **Services:** Block Volume
@@ -81,7 +81,7 @@ VCN 내부 라우팅을 사용하면 VCN CIDR 블록에 포함된 IP 주소로 �
 
 > 서브넷 내 라우팅은 지원되지 않습니다. 발신 VNIC와 동일한 서브넷에 있는 대상 IP 주소가 있는 트래픽은 적절한 대상으로 직접 전달(라우팅되지 않음)됩니다.
 
-![](/assets/img/infrastructure/2022/08/vcn-intra.jpeg)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/vcn-intra.jpeg)
 
 ## Bare metal compute instances: reboot migration on demand and extend maintenance due date
 * **Services:** Compute
@@ -109,7 +109,7 @@ VCN 내부 라우팅을 사용하면 VCN CIDR 블록에 포함된 IP 주소로 �
 볼륨 복제시 사용할 수 있는 리전의 영억이 추가 되었습니다. 볼륨의 복제의 경우, 볼륨을 서비스 지역 이외에 따른 리전에 복제함으로 가용성을 높일 수 있으며 가용성이 높아진 결과 장애에 대해서 더욱 적극적으로 대응 할 수 있습니다. 
 아래 그림은 source 리전 기준으로 복제 될 수 있는 리전의 리스트입니다. 
 
-![](/assets/img/infrastructure/2022/08/screencapture-docs-oracle-en-us-iaas-Content-Block-Concepts-volumereplication-htm-2022-10-03-13_53_31-edit.jpg)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/screencapture-docs-oracle-en-us-iaas-Content-Block-Concepts-volumereplication-htm-2022-10-03-13_53_31-edit.jpg)
 
 
 
@@ -133,7 +133,7 @@ VCN 내부 라우팅을 사용하면 VCN CIDR 블록에 포함된 IP 주소로 �
 - Auto-tuned Performance : 볼륨의 유효 성능입니다. 볼륨에 대해 Detached Volume Auto-tune 이 활성화 된 경우 볼륨이 분리될 때 Auto-tuned Performance 가 Low Cost 로 조정됩니다 . 자동 조정된 성능 은 성능 조정이 완료될 때까지 성능 설정을 낮은 비용 으로 표시하지 않습니다. 
 - Detached Volume Auto-tune : 이 필드는 Detached Volume Auto-tune 이 볼륨에 활성화되어 있는지 여부를 나타냅니다. 꺼져 있을 때 볼륨의 유효 성능은 항상 기본 성능 에 지정된 것과 동일합니다 . 켜져 있을 때 볼륨 분리 시 볼륨 성능이 Low Cost 로 조정됩니다 .
 
-![](/assets/img/infrastructure/2022/08/SCR-20221003-k8l.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221003-k8l.png)
 
 
 ## Longer notification before preemptible compute instances are deleted
@@ -144,6 +144,6 @@ VCN 내부 라우팅을 사용하면 VCN CIDR 블록에 포함된 IP 주소로 �
 ### 기능 소개
 선점 가능한 인스턴스는 일반 컴퓨팅 인스턴스와 동일하게 동작하지만 다른 곳에서 필요할 때 용량이 회수되고 인스턴스가 종료됩니다. 이벤트 서비스를 통해서 선점형 인스턴스가 종료되기전에 노티 서비스를 받을 수 있습니다.
 
-![](/assets/img/infrastructure/2022/08/SCR-20221001-3yq.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/08/SCR-20221001-3yq.png)
 
 

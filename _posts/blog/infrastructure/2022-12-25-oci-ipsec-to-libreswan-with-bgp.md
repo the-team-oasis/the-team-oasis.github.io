@@ -74,48 +74,48 @@ VCN 생성은 아래 블로그 포스트를 참고합니다.
 * Private IP: 172.16.0.93
 
 **구성도**
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-1.png)
 
 ### DRG (Dynamic Routing Gateway) 생성 및 서울 리전 VCN 연결
 Dynamic Routing Gateway (이하 DRG)는 OCI의 특정 VCN에서 동일 리전의 VCN이나 다른 리전의 VCN, 혹은 온프레미스 네트워크와의 연결을 지원하기 위한 가상 라우터입니다. OCI VPN IPSec Connection을 생성하기 위해서는 이 DRG를 미리 준비하여야 합니다. DRG는 서울리전 (OCI)에 생성합니다.
 
 DRG를 생성하기 위해서는 다음과 같이 서울 리전에서 **메뉴 > 네트워킹(Networking) > 고객 접속(Customer Connectivity)**으로 이동 후 **동적 경로 지정 게이트웨이(Dynamic Routing Gateway)**를 선택합니다.
 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-2.png)
 
 **동적 경로 지정 게이트웨이 생성(Create Dynamic Routing Gateway)** 생성 버튼을 클릭하고 다음과 같이 DRG를 생성합니다.
 
 * Name: DRG-SEOUL-1
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-3.png)
 
 생성한 DRG를 서울 리전 VCN에 연결합니다. **가상 클라우드 네트워크 연결(Virtual Cloud Networks Attachments)** 메뉴를 클릭하고 **가상 클라우드 네트워크 연결 생성(Create Virtual Cloud Network Attachment)** 버튼을 클릭한 후 다음과 같이 입력하여 생성합니다.
 
 * **첨부 파일 이름(Attachment name):** VCN-SEOUL-HUB-DRG-ATT
 * **가상 클라우드 네트워크(Virtual Cloud Network):** VCN-SEOUL-HUB
 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-3-1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-3-1.png)
 
 ### IPSec 접속 생성
 IPSec 접속 생성을 위해 서울 리전에서 **메뉴 > 네트워킹(Networking) > 고객 접속(Customer Connectivity)**으로 이동 후 **사이트 간 VPN(Site-to-Site VPN)**을 선택합니다. 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-4.png)
 
 두 개의 버튼이 있는데, Security List나 Route Table 구성등을 자동으로 해주는 **VPN 마법사**를 사용하겠습니다. **VPN 마법사 시작(Start VPN Wizard)** 버튼을 클릭합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-5.png)
 
 #### IPSec 접속 생성 - 기본 정보
 기본 정보에서는 구획, 앞서 생성한 DRG, Internet Gateway를 선택합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-6.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-6.png)
 
 #### IPSec 접속 생성 - 서브넷 및 보안
 서브넷 및 보안에서는 연결하기 위한 서브넷과 Security List를 선택합니다. 여기서는 테스트를 위해서 쉽게 SSH 접속을 하기 위해 Public Subnet과 연결하도록 합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-7.png)
 
 #### IPSec 접속 생성 - 사이트 간 VPN
 사이트 간 VPN 설정에서는 다음과 같이 설정합니다.
 * **VPN 이름(VPN Name):** IPSec-OnPremise-1-SeoulHubVCN
 * **경로 지정 유형(Routing Type):** BGP 동적 경로 지정
 * **온프레미스 네트워크에 대한 경로(Routes To Your On-Premises Network):** 10.0.0.0/16 (춘천 리전 VCN CIDR)
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-8.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-8.png)
 
 * **터널 1**
   * **터널 이름(Tunnel Name):** Tunnel-1
@@ -123,14 +123,14 @@ IPSec 접속 생성을 위해 서울 리전에서 **메뉴 > 네트워킹(Networ
   * **내 BGP ASN(Your BGP ASN):** 65000
   * **IPv4 내부 터널 인터페이스 - CPE(IPv4 Inside Tunnel Interface - CPE):** 10.10.10.1/30
   * **IPv4 내부 터널 인터페이스 - Oracle(IPv4 Inside Tunnel Interface - Oracle):** 10.10.10.2/30
-  ![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-9.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-9.png)
 * **터널 2**
   * **터널 이름(Tunnel Name):** Tunnel-2
   * **IKE 버전(IKE Version):** IKEv1
   * **내 BGP ASN(Your BGP ASN):** 65000
   * **IPv4 내부 터널 인터페이스 - CPE(IPv4 Inside Tunnel Interface - CPE):** 10.10.10.5/30
   * **IPv4 내부 터널 인터페이스 - Oracle(IPv4 Inside Tunnel Interface - Oracle):** 10.10.10.6/30
-  ![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-10.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-10.png)
 
 #### IPSec 접속 생성 - 고객 구내 장비(CPE)
 마지막으로 CPE(Customer Premises Equipment)를 생성합니다. CPE는 온프레미스 네트워크 엣지에 있는 라우터로 Site-to-Site VPN이 접속하기 위한 장비입니다. 여기서는 Libreswan이 CPE역할을 하므로 Libreswan이 설치된 인스턴스로 등록합니다.
@@ -141,20 +141,20 @@ IPSec 접속 생성을 위해 서울 리전에서 **메뉴 > 네트워킹(Networ
   * **공급업체(Vendor):** Libreswan
   * **Platform/Version:** 3.18 or later
 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-11.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-11.png)
 
 마지막으로 설정한 내용을 최종 검토하고 **VPN 솔루션 생성(Create VPN Solution)** 버튼을 클릭하여 IPSec Connection을 생성합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-12.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-12.png)
 
 #### IPSec 접속 생성 - 상세
 생성된 IPSec 접속 상세화면을 다음과 같이 볼 수 있습니다. 이제 IPSec 상태와 IPv4 BGP 상태가 모두 작동(Up) 상태가 되어야 합니다. 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-13.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-13.png)
 
 우선 CPE 구성 헬퍼 열기(Open CPE Configuration Helper)를 클릭하면 CPE를 구성하기 위한 Helper를 볼 수 있습니다. **콘텐츠 생성(Create Content)를 클릭한 후
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-14.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-14.png)
 
 클립보드로 구성 복사(Copy Configuration To Clipboard) 혹은 구성 다운로드(Download Configuration)를 클릭하여 CPE 구성 정보를 저장합니다. 추후 이 정보를 참고하여 CPE를 구성합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-15.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-15.png)
 
 ### CPE 구성 (Libreswan 설치 및 구성)
 CPE 구성을 위해 Libreswan을 설치하도록 합니다. 앞서 Libreswan을 위해 생성한 인스턴스로 접속합니다.
@@ -223,7 +223,7 @@ $ firewall-cmd --runtime-to-permanent
 ````
 
 CPE(Libreswan)가 위치한 Subnet의 Security List의 Ingress Rule도 다음과 같이 추가해줍니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-16.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-16.png)
 
 Libreswan을 설치합니다. Libreswan은 다음 명령어로 설치합니다.
 ```terminal
@@ -320,7 +320,7 @@ Checking for obsolete ipsec.conf options          	[OK]
 ```
 
 IPSec 접속 상세 화면에서 각 터널의 IPSec 상태가 작동 중(Up) 상태인 것을 확인합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-17.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-17.png)
 
 OCI쪽의 터널 인터페이스와 연결이 되었는지 확인합니다.
 ```
@@ -511,8 +511,8 @@ Total number of neighbors 2
 
 위에서 볼 수 있듯이 접두사를 보내고 받는 것을 확인할 수 있습니다. 이제 OCI Console에서 IPSec Tunnel의 수신된 BGP 경로(BGP Routes Received)와 보급된 BGP 경로(BGP Route Advertised)를 확인합니다.
 
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-18.png)
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-19.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-18.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-19.png)
 
 위 그림에서 보는바와 같이 온프레미스(춘천 리전, Libreswan)와 OCI 사이에 서로 경로를 송수신 하는 것을 확인할 수 있습니다.
 
@@ -522,10 +522,10 @@ Total number of neighbors 2
 > 기본적으로 모든 VNIC은 각 네트워크 패킷의 헤더에 나열된 소스와 대상을 확인합니다. VNIC이 소스 또는 대상이 아니면 패킷이 삭제됩니다. 경로 테이블의 타겟으로 설정하는 것은 소스와 대상의 중간에 위치에 있다는 의미이므로, 소스/대상 검사 건너뛰기를 체크해야 합니다.
 
 **CPE(Libreswan) 인스턴스의 소스/대상 검사 건너뛰기(Skip source/destination check) 체크**
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-20.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-20.png)
 
 이제 CPE(Libreswan)이 있는 서브넷의 경로 규칙을 다음과 같이 추가합니다.
-![](/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-21.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/oci-ipsec-to-libreswan-with-bgp-21.png)
 
 ### 연결 테스트
 먼저 춘천 리전(온프레미스)에 생성한 테스트용 인스턴스(OnPremise VM Instance-1)에 접속합니다.

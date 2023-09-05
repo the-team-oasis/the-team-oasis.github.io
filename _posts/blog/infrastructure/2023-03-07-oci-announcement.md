@@ -38,7 +38,7 @@ OCI Announcemnets Service(이하 AS)는 사용자의 테넌시와 관련된 중�
 
 기본적으로 테넌시 관리자만 OCI AS를 통해서 공지를 받지만, 구독 기능을 활용하면 공지를 받는 사용자를 별도로 지정하여 공지할 수 있습니다. 또한 필터를 통해서 특정 리소스나 구획 등에 대해서만 따로 공지를 받을 수 있습니다. 공지를 이메일, SMS와 같은 채널을 통해서 구독을 하는 경우에는 OCI Notification과 연동하여야 합니다. 자세한 내용은 [구독](http://localhost:4000//infrastructure/oci-announcement/#%EA%B5%AC%EB%8F%85)에서 자세히 설명합니다.
 
-![](/assets/img/infrastructure/announcements/oci_announcement_arch.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/oci_announcement_arch.png)
 
 OCI Compute Instance에 영향을 미치는 라이브 마이그레이션과 같은 작업이 예정되어 있는 경우에는 14일 전에 사전 공고를 받게 됩니다. 만일 사용자가 해당 일자에 예정된 작업을 연기해야 하는 경우가 있다면 OCI Service Request 통해서 최대 2주까지 연장이 가능합니다.
 
@@ -82,10 +82,10 @@ AS를 통해 공고하는 유형은 다음과 같습니다.
 
 ### AS 대시보드
 1) 아래와 같이 우측 상단 "공고(Announcements)"를 클릭합니다.
-  ![](/assets/img/infrastructure/announcements/SCR-20230308-ngjg.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230308-ngjg.png)
 
 2) 다음과 같이 기본적인 대시보드를 확인할 수 있습니다.
-  ![](/assets/img/infrastructure/announcements/SCR-20230308-nhfr.png)
+  ![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230308-nhfr.png)
 
 AS 대시보드에서는 총 3개의 메뉴를 확인할 수 있습니다.
 - 개요: 대시보드 화면을 볼 수 있으며, 필요한 조치와 향후 유지보수 작업에 대한 개요가 표시됩니다.
@@ -95,11 +95,11 @@ AS 대시보드에서는 총 3개의 메뉴를 확인할 수 있습니다.
 ### 공고
 공고는 **모든 작업 / 필요한 작업 / 권장작업 / 일정이 잡힌 유지보수 / 기타**로 분류되며, 각 공고별로 영향을 받는 리소스와 정보를 확인 할 수 있습니다.
 
-![](/assets/img/infrastructure/announcements/SCR-20230310-gdgx.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-gdgx.png)
 
 세부정보를 클릭하면, 아래와 같이 공고의 세부내용이 보여지며, 영향 받은 지역, 영향을 받는 리소스 등에 대해서 상세히 확인할 수 있습니다. 세부정보는 읽음 표시를 클릭하지 않으면 안 읽음으로 계속 볼드채로 유지되며, 해당 공고와 비슷한 유형의 공고가 있을 경우 별도로 구독을 생성하여 구독할 수 있습니다.
 
-![](/assets/img/infrastructure/announcements/SCR-20230310-gerr.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-gerr.png)
 
 ### 구독
 구독은 앞에서 언급된 공고에 대해서 구독을 할 수 있게 설정해 주는 부분으로 아래와 같이 공고에는 **모든공고 / 선택한 공고만** 이렇게 2가지 옵션이 제공됩니다.
@@ -113,7 +113,7 @@ AS 대시보드에서는 총 3개의 메뉴를 확인할 수 있습니다.
   - 서비스 : 특정 OCI 서비스로 필터링하여 공고를 받을 경우 사용합니다.
 - 표시 환경 설정 : 공고에 표기되는 시간대를 설정합니다.
 
-![](/assets/img/infrastructure/announcements/SCR-20230310-gbro.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-gbro.png)
 
 앞서 언급한바와같이 Notification 서비스를 사용하여 구독할 수 있습니다.
 
@@ -128,16 +128,16 @@ AS 대시보드에서는 총 3개의 메뉴를 확인할 수 있습니다.
   - Function
   - SMS
 
-![](/assets/img/infrastructure/announcements/SCR-20230310-nfai.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-nfai.png)
 
 기존에 이미 생성한 Notification Topic이 있는 경우 다음과 같이 Topic이 생성된 구획을 선택한 후 기 생성된 Topic을 선택합니다.
-![](/assets/img/infrastructure/announcements/SCR-20230310-ngst.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-ngst.png)
 
 구독이 완료되면 아래와 같이 활성화 상태가 나타납니다.
-![](/assets/img/infrastructure/announcements/SCR-20230310-nhfr.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-nhfr.png)
 
 구독 채널로 **전자메일**을 선택한 경우로 구독이 완료된 이후 validation 메일이 발송되며, **Confirm subscription** 클릭하면 검증이 완료됩니다.
-![](/assets/img/infrastructure/announcements/SCR-20230310-gsiq.png)
-![](/assets/img/infrastructure/announcements/SCR-20230310-gskz.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-gsiq.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/announcements/SCR-20230310-gskz.png)
 
 이제 테넌시 관리자를 포함하여 구독한 사용자에게도 공고 정보를 구독한 채널을 통해서 수신할 수 있습니다.

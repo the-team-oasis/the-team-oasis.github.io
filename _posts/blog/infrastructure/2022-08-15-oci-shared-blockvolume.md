@@ -28,7 +28,7 @@ header: no
 # mediaplayer: true
 
 ---
-![](/assets/img/infrastructure/shared-blockvolume/SCR-20220823-k0g.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/SCR-20220823-k0g.png)
 
 ### Shared Blockvolume
 OCI(Oracle Cloud Infrastructure)는 여러 Compute 인스턴스가 공유하는 Block Volume을 지원합니다. 1개의 Block Volume을 2개 이 이상의 Compute 인스턴스가 마운트할 수 있습니다. 여러 Compute 인스턴스가 1개 Block Volume을 읽기/쓰기 모드로 마운트할 경우, 쓰기 중복을 방지하기 위해서 여러 Compute 인스턴스의 파일 쓰기를 조정하는 중재 소프트웨어가 필요합니다. 이런 중재 소프트웨어를 Clusterware라고 합니다.
@@ -42,7 +42,7 @@ OCI는 공유 볼륨은다음과 같은 3개 Clusterware를 지원합니다.
 
 
 > 제약사항
-![](/assets/img/infrastructure/shared-blockvolume/7.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/7.png)
 
 
 
@@ -51,19 +51,19 @@ OCI는 공유 볼륨은다음과 같은 3개 Clusterware를 지원합니다.
 
 
 
-![](/assets/img/infrastructure/shared-blockvolume/1.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/1.png)
 
 블록볼륨을 생성합니다.
-![](/assets/img/infrastructure/shared-blockvolume/2.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/2.png)
 
 Compute 내 shared blockstorage 설정 및 iSCSI 정보 확인
 - 위 앞에서 생성된 compute의 상세 정보를 확인하여 위해서 아래 compute 를 클릭합니다.
-![](/assets/img/infrastructure/shared-blockvolume/3.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/3.png)
 각 compute 의 세부 정보가 보여집니다. 아래 리소스 항목 중에서 연결된 블록볼륨 클릭
 
-![](/assets/img/infrastructure/shared-blockvolume/4.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/4.png)
 연결된 블록볼륨에 현재 연결된 블록볼륨이 없으므로 아래와 같이 블록볼륨 연결 이후 아래 셋팅값으로 연결하시 이후에 iSCSI 정보 확인이 가능합니다. 나머지 script 명령어는 아래 링크 확인 부탁 드립니다.
-![](/assets/img/infrastructure/shared-blockvolume/5.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/shared-blockvolume/5.png)
 
 ```
 OCFS2 cluster nodes and open ports 7777 and 3260 in the security list for the virtual cloud network (VCN).

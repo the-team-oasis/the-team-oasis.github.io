@@ -53,4 +53,4 @@ OCI ( Oracle Cloud Infrastructure ) Cloud Shell은 Oracle Cloud Console 에서 �
     csruntimectl java set oraclejdk-11
 ```
 
-![](/assets/img/infrastructure/2022/11/SCR-20230116-j96.png)
+![]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2022/11/SCR-20230116-j96.png)

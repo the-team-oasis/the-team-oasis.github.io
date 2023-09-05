@@ -45,7 +45,7 @@ Storage Gateway 는 On-Premise 의 Application 서버와 Oracle Cloud Infrastruc
       - Storage Gateway는 데이터 마이그레이션에 이상적이며 On-Premise 데이터 센터에서 클라우드로 데이터를 이동하기 위한 효율적인 도구를 제공합니다. Storage Gateway를 통해 콜드 데이터 및 핫 데이터를 클라우드로 비동기식으로 이동하여 데이터를 계층화할 수 있습니다.
 
 - Storage Gateway Architecture
- ![python](/assets/img/infrastructure/2023/storage_gateway/01_oci_storage_gateway_architecture.png " ")
+ ![python]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/01_oci_storage_gateway_architecture.png " ")
 
 
 - 주요 제약 사항 (limitations)
@@ -70,34 +70,34 @@ Storage Gateway 는 On-Premise 의 Application 서버와 Oracle Cloud Infrastruc
 
 - OCI Console 의 **Block Storage**-**Block Volumes** 메뉴에서 아래 화면과 같이 최소 600 GB 사이즈의 Block Volume 을 생성합니다. Block Volume 이름만 입력 후 **Create Block Volume** 버튼을 클릭하여 생성합니다.
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/05_oci_storage_gateway_block_volume_create.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/05_oci_storage_gateway_block_volume_create.png " ")
 
 - 아래는 1,024 GB 사이즈로 생성한 Block Volume 화면입니다.
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/02_oci_storage_gateway_block_volume_01.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/02_oci_storage_gateway_block_volume_01.png " ")
 
 - Block Volume Detail 화면의 하단의 **Attach to Instance** 버튼을 클릭하면 Block Volume Attach 화면이 나타나며 아래 화면과 같이 Attachment Type 과 Access Type 을 선택 후 화면 아래로 스크롤 다운 합니다.
   - Attachement Type : iSCSI
   - Access Type : Read/Write
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/03_oci_storage_gateway_block_volume_attach.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/03_oci_storage_gateway_block_volume_attach.png " ")
 
 
 - Block Volume 을 Attach 할 Instance 를 선택하고 Device Path 를 선택 후 **Attach** 버튼을 클릭합니다.
   - Instance : **앞에 사전 준비 단계에서 생성했던 Storage Gateway 설치를 위해 생성한 Instance 선택**
   - Device Path : /dev/oracleoci/oraclevdb 선택
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/04_oci_storage_gateway_block_volume_attach_02.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/04_oci_storage_gateway_block_volume_attach_02.png " ")
 
 - Attach 후 OS 에서 해줘야할 작업 명령을 알려주는 창이 나타나면 Close 버튼을 클릭하여 닫아 줍니다.
 
 - Block Volume Detail 화면의 하단에 Attached Instances 목록에 Attach 되어 있는 서버 목록들의 제일 우측의 메뉴를 클릭하면 팝업 메뉴가 나타나면 그 중에서 **iSCSI Commands & Information** 버튼을 클릭합니다.
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/06_oci_storage_gateway_block_volume_menu.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/06_oci_storage_gateway_block_volume_menu.png " ")
 
 - 팝업창으로 **iSCSI Commands & Information** 이 나타나며 Attach Command 를 Copy 후 Close 버튼을 클릭합니다.
 
- ![SGW](/assets/img/infrastructure/2023/storage_gateway/07_oci_storage_gateway_block_volume_attach_command.png " ")
+ ![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/07_oci_storage_gateway_block_volume_attach_command.png " ")
 
 - Storage Gateway 를 설치하기 위해 미리 준비된 Instance 에 접속하여 복사한 Attach Command 를 붙여넣고 실행합니다.
 
@@ -113,7 +113,7 @@ sudo iscsiadm -m node -T iqn.2015-12.com.oracleiaas:fe88519b-cdfa-4601-b3b0-93f8
 $ sudo fdisk -l
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/08_oci_storage_gateway_block_volume_attach_command_02.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/08_oci_storage_gateway_block_volume_attach_command_02.png " ")
 
 
 ### STEP.2 : Storage Gateway 설치를 위한 File System 구성
@@ -128,7 +128,7 @@ $ sudo vgcreate <volume_group> <device>
 ```terminal
 $ sudo vgcreate sg_vg /dev/sdb
 ```
-![SGW](/assets/img/infrastructure/2023/storage_gateway/10_oci_storage_gateway_create_volume_group.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/10_oci_storage_gateway_create_volume_group.png " ")
 
 - 다음은 다음의 명령을 이용하여 logical volume 을 생성합니다.
 
@@ -141,7 +141,7 @@ $ sudo lvcreate -l 100%FREE -n <logical_volume> <volume_group>
 ```terminal
 $ sudo lvcreate -l 100%FREE -n sg_lv sg_vg
 ```
-![SGW](/assets/img/infrastructure/2023/storage_gateway/11_oci_storage_gateway_create_logical_volume.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/11_oci_storage_gateway_create_logical_volume.png " ")
 
 - 다음은 XFS File System 을 아래의 명령을 이용하여 만들어 줍니다.
 
@@ -154,7 +154,7 @@ sudo mkfs.xfs /dev/<volume_group>/<logical_volume>
 ```terminal
 $ sudo mkfs.xfs /dev/sg_vg/sg_lv
 ```
-![SGW](/assets/img/infrastructure/2023/storage_gateway/12_oci_storage_gateway_create_xfs_fs.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/12_oci_storage_gateway_create_xfs_fs.png " ")
 
 - 다음은 만든 파일 시스템을 Mount 해서 사용하게될 **/ocisg** 라는 폴더를 생성합니다. (폴더명은 다른 이름을 사용하실 수 없습니다.)
 
@@ -175,17 +175,17 @@ $ sudo mount /dev/sg_vg/sg_lv /ocisg
 $ df -h
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/13_oci_storage_gateway_mount.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/13_oci_storage_gateway_mount.png " ")
 
 ### STEP.3 : Storage Gateway 다운로드 및 설치
 
 - Storage Gateway 설치 파일을 [다운로드](https://www.oracle.com/downloads/cloud/oci-storage-gateway-downloads.html) 주소에서 설치 파일을 다운로드 받습니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/14_oci_storage_gateway_download.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/14_oci_storage_gateway_download.png " ")
 
 - 다운로드 받은 Filezilla 와 같은 FTP 프로그램을 이용하여 storage gateway 서버 instance 의 /tmp 디렉토리로 전송해 줍니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/15_oci_storage_gateway_upload.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/15_oci_storage_gateway_upload.png " ")
 
 - 아래의 command 를 이용하여 압축을 해제하여 줍니다.
 
@@ -194,7 +194,7 @@ $ cd /tmp
 $ sudo tar xvzf ocisg-1.4.tar.gz
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/16_oci_storage_gateway_unzip.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/16_oci_storage_gateway_unzip.png " ")
 
 - ocisg-1.4 폴더로 이동하여 설치 프로그램을 실행합니다.
 
@@ -209,9 +209,9 @@ $ sudo ./ocisg-install.sh
 Docker does not appear to be installed. Do you want to install docker engine with yum? [y/N] y
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/17_oci_storage_gateway_install_01.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/17_oci_storage_gateway_install_01.png " ")
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/18_oci_storage_gateway_install_02.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/18_oci_storage_gateway_install_02.png " ")
 
 - 설치 과정 중에 NFS 사용을 Enable 할 것인지 물어보게 되는데 "Y" 를 입력 후 설치를 계속 진행합니다.
 
@@ -232,7 +232,7 @@ Enter the install location press enter for default (/opt/ocisg/) : <Enter>
 Enter the install location press enter for default (/opt/ocisg/) : /ocisg/sg/cache
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/19_oci_storage_gateway_install_03.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/19_oci_storage_gateway_install_03.png " ")
 
 - metadata 의 위치도 아래와 같이 입력합니다.
 
@@ -242,7 +242,7 @@ Enter the path for OCISG metadata storage : /ocisg/sg/metadata
 
 - 동일한 Volume 에 metadata 와 cache 위치를 설정했다고 Warning 이 나타나는데 동일한 Volume 설정했기 때문에 "Y" 를 입력하고 설치를 진행합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/20_oci_storage_gateway_install_04.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/20_oci_storage_gateway_install_04.png " ")
 
 - log 스토리지의 위치도 아래와 같이 입력합니다.
 
@@ -250,17 +250,17 @@ Enter the path for OCISG metadata storage : /ocisg/sg/metadata
 Enter the path for OCISG log storage : /ocisg/sg/log
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/21_oci_storage_gateway_install_05.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/21_oci_storage_gateway_install_05.png " ")
 
 - 마찬가지로 동일한 Volume 에 log 위치를 설정했다고 Warning 이 나타나는데 동일한 Volume 설정했기 때문에 "Y" 를 입력하고 설치를 진행합니다.
 
 - Docker Image 를 Loading 하면서 설치가 진행됩니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/22_oci_storage_gateway_install_06.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/22_oci_storage_gateway_install_06.png " ")
 
 - 설치가 완료되면 아래와 같이 Storage Gateway Management Console 주소와 Port (32770) 정보 그리고 NFS 가 사용하는 Port (32771) 정보가 나타나며 Example Mount command 정보가 나타납니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/23_oci_storage_gateway_install_07.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/23_oci_storage_gateway_install_07.png " ")
 
 - Console Port (32770) 와 NFS 가 사용하는 Port (32771) 는 VCN 의 Security List 에 Open 이 되어야 합니다.
 
@@ -273,19 +273,19 @@ Storage Gateway 설치가 완료되면 Storage Gateway Management Console 로 �
 
 - 안전하지 않은 웹사이트 페이지가 나오면 중간의 **고급** 버튼을 클릭한 후 "<public_ip> (안전하지 않음)(으)로 계속하기" 버튼을 클릭하여 웹사이트로 접근을 시도합니다. 
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/24_oci_storage_gateway_admin_01.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/24_oci_storage_gateway_admin_01.png " ")
 
 - Storage Gateway Management Console 의 Default 사용자는 **admin** 으로 최초 접속 시 Password Reset 을 해야합니다. 아래 화면과 같이 신규 Password 를 생성해 줍니다. 
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/25_oci_storage_gateway_admin_02.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/25_oci_storage_gateway_admin_02.png " ")
 
 - 앞서 생성한 Password 를 이용하여 로그인을 해 줍니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/26_oci_storage_gateway_admin_03.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/26_oci_storage_gateway_admin_03.png " ")
 
 - 로그인 후엔 File System 이 아직 생성되어 있지 않기 때문에 "No File Systems are created yet." 이라는 창이 나타납니다. **Create a File System** 버튼을 클릭합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/27_oci_storage_gateway_admin_04.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/27_oci_storage_gateway_admin_04.png " ")
 
 - File System 생성 화면에서 아래와 같은 창이 나타납니다. 각 항목에 맞는 이름 및 항목을 선택합니다.
   - File System Name : 파일 시스템명을 입력합니다. (추후 Object Storage Bucket 으로 생성됨)
@@ -295,60 +295,60 @@ Storage Gateway 설치가 완료되면 Storage Gateway Management Console 로 �
   - Object Storage API Endpoint : Object Storage 를 접근하기 위한 Region 별 Endpoint 를 말하며, 아래의 링크에서 사용할 Object Storage 의 Endpoint 를 찾아 입력
   - [API Endpoints](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/) 
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/28_oci_storage_gateway_admin_05.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/28_oci_storage_gateway_admin_05.png " ")
 
 - [API Endpoints](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/) 를 찾아 입력하면 아래와 같이 화면이 전환됩니다. (입력 예 : 호주 Melbourne 리젼)
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/29_oci_storage_gateway_admin_06.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/29_oci_storage_gateway_admin_06.png " ")
 
 - 상기 입력 화면에 각각의 항목들을 입력합니다.
   - Compartment OCID : OCI Console 의 **Identity & Security** -> **Identity** -> **Compartments** 메뉴에서 bucket 을 위치시킬 Comparment 상세 화면에서 OCID 를 찾아 복사 후 붙여넣기 합니다.
   - Tenant OCID : [Oracle Linux 이나 CentOS 에서 OCI CLI 도구 설치 및 설정하기](/getting-started/oracle-linux-ocicli-config/) 를 찾조하여 Tenant OCID 정보를 찾아 복사 후 붙여넣기 합니다.
   - User OCID : [Oracle Linux 이나 CentOS 에서 OCI CLI 도구 설치 및 설정하기](/getting-started/oracle-linux-ocicli-config/) 를 찾조하여 User OCID 정보를 찾아 복사 후 붙여넣기 합니다. 
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/30_oci_storage_gateway_admin_07.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/30_oci_storage_gateway_admin_07.png " ")
 
 - 입력 화면의 Public Key's Finger Print, Private Key 항목 입력을 위해서는 Public Key 를 OCI 의 사용자 Profile 화면에서 Key 를 다운로드 받아 입력합니다. (기존 Key 파일이 있을 시 기존 Key 활용)
 
 - OCI Console 에서 우측 상단의 사용자 아이콘을 클릭 후 **My Profile** 메뉴로 이동 후 아래로 스크롤 다운하여 좌측 Resource 메뉴 중에서 **API Keys** 를 선택 후 **Add API Key** 버튼을 클릭합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/31_oci_storage_gateway_my_profile.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/31_oci_storage_gateway_my_profile.png " ")
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/32_oci_storage_gateway_add_api_key.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/32_oci_storage_gateway_add_api_key.png " ")
 
 - "Add API Key" 창이 나타나면 **Generate API Key Pair** 를 선택 후 private key 와 public key 를 다운로드 받고 **Add** 버튼을 클릭합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/33_oci_storage_gateway_download_key.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/33_oci_storage_gateway_download_key.png " ")
 
 - API Key 가 추가되고 "Configuration file preview" 창이 나타나며 생성된 Fingerprint 정보를 Storage Gateway Management Console 의 File System 성성 화면의 Fingerprint 정보에 아래 화면과 같이 복사 후 붙여넣기를 해 줍니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/34_oci_storage_gateway_finger_print.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/34_oci_storage_gateway_finger_print.png " ")
 
 - 다음은 Private Key 를 입력해야 합니다. API Key 추가할 때 다운로드 받은 Private Key 를 아래 그림과 같이 메모장과 같은 편집기를 이용하여 Open 하여 내용을 선택하여 복사합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/35_oci_storage_gateway_private_key.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/35_oci_storage_gateway_private_key.png " ")
 
 - Storage Gateway Management Console 화면의 File System 생성화면의 Private Key 항목에 아래 그림처럼 붙여넣기로 입력합니다.
 
 - Private Key Passphrase 항목은 비밀번호를 설정할 수 있으나 화면처럼 빈칸으로 두어 설정하지 않고 **Save** 버튼을 클릭하여 File System 을 생성합니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/36_oci_storage_gateway_private_key.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/36_oci_storage_gateway_private_key.png " ")
 
 - 입력된 정보가 모두 올바르면 아래와 같이 File System 이 정상적으로 생성이 됩니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/37_oci_storage_gateway_file_system_create_result.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/37_oci_storage_gateway_file_system_create_result.png " ")
 
 - 생성된 File System 의 **Connect** 버튼을 클릭하면 OCI 의 Object Storage 에 File System 과 동일한 Bucket 이 생성됩니다. File System 이 이상없이 연결되면 아래 그림처럼 녹색 아이콘으로 이미지가 변경됩니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/38_oci_storage_gateway_file_system_connect.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/38_oci_storage_gateway_file_system_connect.png " ")
 
 - OCI Console 의 Object Storage 로 접속하게 되면 생성한 File System 과 동일한 이름의 Bucket 이 생성된 것을 확인할 수 있습니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/39_oci_storage_gateway_object_storage.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/39_oci_storage_gateway_object_storage.png " ")
 
 - Object Storage 의 상세 화면을 아래로 스크롤 다운하면 아래쪽에 Object 목록이 나타나며 아직 아무것도 입력이 되지 않은 것을 볼 수 있습니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/40_oci_storage_gateway_object_storage_obj.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/40_oci_storage_gateway_object_storage_obj.png " ")
 
 
 ### STEP.5 : 다른 Host 에서 NFS 로 Mount 하여 Object Storage 에 파일 쓰기
@@ -357,11 +357,11 @@ Storage Gateway 설치가 완료되면 Storage Gateway Management Console 로 �
 
 - 먼저, Storage Gateway 를 통해 Mount 를 설정할 Host 로 로그인 후 root 에 Storage Gateway 와 공유할 Folder 를 생성해 줍니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/42_oci_storage_gateway_host.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/42_oci_storage_gateway_host.png " ")
 
 - Storage Gateway Management 화면에서 File System 을 클릭하면 Mount 할 수 있는 명령이 나타납니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/41_oci_storage_gateway_mount_01.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/41_oci_storage_gateway_mount_01.png " ")
 
 - Mount 명령의 Example 에 환경에 맞게 수정하여 Mount 할 Host 에 접속하여 명령을 수행합니다.
 
@@ -375,7 +375,7 @@ $ mount -t nfs -o vers=4,port=<nfs_mount_port> <sgw-instance-pub-ip>:/sg_bucket 
 $ sudo mount -t nfs -o vers=4,port=32771 152.70.90.133:/sg_bucket /sgw-fs
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/43_oci_storage_gateway_mount.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/43_oci_storage_gateway_mount.png " ")
 
 - df 명령으로 디스크를 확인해보면 NFS 로 sg_bucket 명이 Mount 된 것을 확인할 수 있습니다.
 
@@ -383,7 +383,7 @@ $ sudo mount -t nfs -o vers=4,port=32771 152.70.90.133:/sg_bucket /sgw-fs
 $ df -h
 ```
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/44_oci_storage_gateway_mount_result.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/44_oci_storage_gateway_mount_result.png " ")
 
 - 이제 해당 파일시스템에 파일을 기록하고 저장하면 Object Storage 로 자동으로 동기화가 됩니다. 아래의 명령으로 파일을 기록해 봅니다.
 
@@ -395,11 +395,11 @@ $ touch sgw-test-3
 $ touch sgw-test-4
 $ touch sgw-test-5
 ```
-![SGW](/assets/img/infrastructure/2023/storage_gateway/45_oci_storage_gateway_file_write.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/45_oci_storage_gateway_file_write.png " ")
 
 - Object Storage 의 Objects 목록을 확인하시면 생성한 파일들이 동기화되어 스토리지에 올라온 것을 확인하실 수 있습니다.
 
-![SGW](/assets/img/infrastructure/2023/storage_gateway/46_oci_storage_gateway_objects.png " ")
+![SGW]({{site.urlblogimg2022_2023}}/assets/img/infrastructure/2023/storage_gateway/46_oci_storage_gateway_objects.png " ")
 
 - Object Storage Objecs 화면에서 파일을 삭제하면 동기화되어 연결되어 있는 호스트의 Mount Folder 에서도 파일이 삭제가 됩니다.
 
