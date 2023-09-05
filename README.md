@@ -48,6 +48,7 @@ Click the image to [watch the YouTube-Video-Tutorial][4].
 [![Start Video](https://github.com/Phlow/feeling-responsive/blob/gh-pages/images/video-feeling-responsive-tutorial-frontpage.jpg)](https://www.youtube.com/watch?v=rLS-BEvlEyY)
 
 
+....
 
 
 
