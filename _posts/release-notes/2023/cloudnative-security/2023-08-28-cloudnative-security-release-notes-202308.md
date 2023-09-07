@@ -104,5 +104,5 @@ OKE에 Kubernetes 1.27.2 버전이 추가되었습니다. 이로써 기존 **1.2
 
 ### 릴리즈 내용
 Cloud Guard Activity Detector에 **Local user authenticated without MFA** 규칙이 새로 추가되었습니다. 이 규칙은 MFA(다단계 인증)가 활성화되지 않은 로컬 사용자가 인증할 경우 경고를 발생시킵니다.
-
+ 
 ![](/assets/img/cloudnative-security/2023/2023-08-28-cloudnative-security-release-notes-4.png)
