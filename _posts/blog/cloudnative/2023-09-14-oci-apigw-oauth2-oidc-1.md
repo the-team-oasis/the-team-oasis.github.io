@@ -79,7 +79,11 @@ Routes에서 다음과 같이 Route를 등록합니다.
 ### OCI API Gateway에서 OAuth2을 구성하는 방법
 이제 생성한 API에 OAuth2 보안을 적용해 보도록 하겠습니다.
 
-#### OCI Identity Domain에서 Resource Server Application 구성
+#### Access signing certificate 사용 설정
+클라이언트가 OCI Identity Domain에 로그인하지 않고도 Tenancy 서명 인증서에 액세스할 수 있도록 설정합니다.
+ ![](/assets/img/cloudnative-security/2023/oci-apigw-oauth2-oidc-0-5.png " ")
+
+#### OCI Identity Domain의 Resource Server Application 구성
 다음과 같이 OCI Console ***메뉴 > Identity & Security > Domains*** 클릭 후 적용 할 도메인을 선택(여기서는 Default)합니다.
  ![](/assets/img/cloudnative-security/2023/oci-apigw-oauth2-oidc-1.png " ")
 
@@ -98,7 +102,7 @@ Configure OAuth에서 다음과 같이 Resource Server 구성을 합니다.
 
 ![](/assets/img/cloudnative-security/2023/oci-apigw-oauth2-oidc-3.png " ")
 
-#### OCI Identity Domain에서 Client 구성
+#### OCI Identity Domain의 Client 구성
 Resource Server 구성에 이어서 Client Configuration 구성을 합니다.
 
 * **Configure this application as a client now:** 선택
