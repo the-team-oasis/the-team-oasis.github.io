@@ -36,6 +36,9 @@ header: no
 ### GitOps란
 여기서 다루는 ArgoCD를 흔히 GitOps의 구현체라 부릅니다. 그럼 먼저 GitOps가 무엇인지 간략히 살펴보겠습니다. GitOps는 2017년 위브웍스(Weaveworks Inc.)에서 처음 사용한 용어로 프로젝트에 데브옵스를 적용하는 실천 방법으로 정의합니다. 일반적으로 Cloud Native 애플리케이션을 대상(일반적으로 쿠버네티스 환경)으로 한 지속적 배포(Continuous Deployment)에 초점을 두고 있습니다.
 
+![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt5011b7706b99630a/6388867529632c37569f030f/Guide-To-GitOps-Diagrams4.png)
+<div style="text-align:right"><small markdown="1" style="text-align:right">source: https://www.weave.works/technologies/gitops/</small></div>
+
 #### GitOps의 핵심 개념들
 1. 선언형 모델(Declarative Model)
   * 일반적으로 익숙한 방식인 명령형 모델(Imperative model)은 배포 환경을 위해 제공되는 다양한 명령어를 기반으로 단계적으로 실행하는 방식으로 모든 배포 과정을 작성합니다. 명령 순서나 내용에 대한 관리를 해줘야 하며, 다양한 예외 상황을 관리해야 합니다. 반면에 선언형 모델(Declarative Model)은 인프라를 포함해서 애플리케이션의 배포 및 운영과 관련된 모든 것을 선언적 코드형태로 관리하고 운영 환경간의 상태 차이가 없도록 동기화하여 유지하는 방식으로 복잡하게 순서를 정의할 필요 없으며, 상대적으로 예외 상황 관리가 용이합니다. Kubernetes와 같이 Manifest(Kubernetes YAML)로 작성한 선언적 코드를 운영환경과 동기화하는 방식이 대표적인 경우라 볼 수 있습니다.
@@ -49,9 +52,6 @@ header: no
   * Push 유형: 저장소의 Manifest가 변경되었을 때 배포 파이프라인을 실행 (Jenkins, CircleCI 등)
   * Pull 유형: 저장소의 Manifest와 배포환경을 지속적으로 비교하다가 차이가 발생할 경우 저장소의 Manifest 기준으로 배포환경 유지 (ArgoCD, JenkinsX, Flux 등)
 3. Push 혹은 Pull 모두 상관 없으나 GitOps는 보안상의 이유로 풀 타입 배포 전략을 권장합니다. Pull방식의 경우 자격 증명을 운영환경 외부 도구에 공개하지 않고 배포할 수 있는 보안상 이점이 있습니다.
-
-![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt5011b7706b99630a/6388867529632c37569f030f/Guide-To-GitOps-Diagrams4.png)
-<div style="text-align:right"><small markdown="1" style="text-align:right">source: https://www.weave.works/technologies/gitops/</small></div>
 
 ### Github Actions와 ArgoCD를 활용한 GitOps 프로세스
 다음 그림은 GitHub Actions, ArgoCD, OKE, OCIR을 이용해서 GitOps를 구현하는 그림입니다.
