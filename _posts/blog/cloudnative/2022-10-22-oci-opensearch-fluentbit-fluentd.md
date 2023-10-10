@@ -70,7 +70,7 @@ $ helm repo add fluent https://fluent.github.io/helm-charts
 
 Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일은 아래 Github 저장소에서 다운받을 수 있습니다.
 
-[Fluentbit_values.yaml](https://github.com/PA2702/OpenSearch-Log-Ingestion/blob/Fluentd%2BFluentbit/Fluentbit_values.yaml)
+[Fluentbit_values.yaml](https://github.com/donghukim2023/OpenSearch-Log-Ingestion/blob/main/Fluentbit_values.yaml)
 
 Fluent Bit Helm Chart를 활용하여 OKE 배포합니다.
 ```
@@ -98,7 +98,7 @@ Fluent Bit와 마찬가지로 Fluentd도 Helm Chart가 제공됩니다. Helm 레
 
 Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일은 아래 Github 저장소에서 다운받을 수 있습니다.
 
-[Fluentd_values.yaml](https://github.com/PA2702/OpenSearch-Log-Ingestion/blob/Fluentd%2BFluentbit/Fluentd_values.yaml)
+[Fluentd_values.yaml](https://github.com/donghukim2023/OpenSearch-Log-Ingestion/blob/main/Fluentd_values.yaml)
 
 Fluentd_values.yaml 파일내의 `<OPENSEARCH URL>`을 OCI OpenSearch URL로 변경합니다. OpenSearch URL은 생성한 OCI OpenSearch Cluster 상세 페이지에서 확인할 수 있습니다.
 
