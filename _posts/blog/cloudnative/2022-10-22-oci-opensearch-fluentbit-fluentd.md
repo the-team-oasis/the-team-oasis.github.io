@@ -74,8 +74,8 @@ Fluentbit Helm Chart에서 사용할 values.yaml을 준비합니다. yaml 파일
 
 Fluent Bit Helm Chart를 활용하여 OKE 배포합니다.
 ```
-$ helm upgrade --install fluent-bit fluent/fluent-bit -f Fluentbit_values.yaml
-```
+$ helm install fluent-bit fluent/fluent-bit -f Fluentbit_values.yaml
+```h
 
 배포된 Fluent Bit을 확인합니다.
 ```terminal
@@ -126,7 +126,7 @@ Fluentd_values.yaml 파일내의 `<OPENSEARCH URL>`을 OCI OpenSearch URL로 변
 
 이제 Fluentd Helm Chart를 활용하여 OKE 배포합니다.
 ```terminal
-$ helm upgrade --install fluentd fluent/fluentd -f Fluentd_values.yaml
+$ helm install fluentd fluent/fluentd -f Fluentd_values.yaml
 ```
 
 배포된 Fluentd를 확인합니다.
