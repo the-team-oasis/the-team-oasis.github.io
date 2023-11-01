@@ -6,9 +6,9 @@
 #
 # Resource › http://blog.sorryapp.com/blogging-with-jekyll/2014/02/06/adding-authors-to-your-jekyll-site.html
 dankim: # replace this with your info
-  name: "DanKim"
+  name: "Donghu Kim"
   siterole: "Cloud Engineer"
-  uri: http://github.com/mangdan
+  uri: https://github.com/donghukim2023
   email:
 
 lim: # replace this with your info
@@ -24,7 +24,7 @@ kskim: # replace this with your info
   email:
 
 yhcho: # replace this with your info
-  name: "Young Hwan"
+  name: "Younghwan Jo"
   siterole: "Cloud Engineer"
   uri: 
   email:
