@@ -54,36 +54,40 @@ OCI Generative AI 서비스 에는 다음과 같은 기본 모델이 포함되�
 
 #### 생성(Generation) 모델
 + `cohere.command`
-  + A highly performant generation model. Use this model when you're optimizing for accuracy such as text extraction and sentiment analysis. Use this high performant model to draft your marketing copies, emails, blog posts, product descriptions, and then review and use them.
+  + 강력한 성능의 생성(generation) 모델로 텍스트 추출 및 감정 분석과 같은 정확성이 요구되는 작업에 이 모델을 사용합니다.
+  + 이 모델을 사용하여 마케팅 Copy, 이메일, 블로그 포스트, 제품 설명의 초안을 작성하여 검토하고 사용할 수 있습니다.
 + `cohere.command-light`
-  + A quick and light generation model. Use this model when speed and cost is important. Because this model is light, for best results give the model clear instructions. The more specific your prompt, the better this model performs. For example, instead of the prompt, "What is the tone of this product review?", write, "What is the tone of this product review? Answer with either the word positive or negative.".
+  + 빠르고 가벼운 생성(generation) 모델로, 속도와 비용이 중요할 때 이 모델을 사용합니다.
+  + 이 모델은 가벼운 모델이기 때문에 최상의 결과물을 도출하기 위해서는 모델에 명확한 프롬프트를 제공해야 하며, 더 구체적일수록 이 모델의 성능을 더 잘 활용할 수 있습니다.
+  + 예를 들어, "이 제품 리뷰의 톤은 무엇입니까?"라는 프롬프트 대신 "이 제품 리뷰의 톤은 무엇입니까? 좋다 또는 싫다라는 단어로 대답하십시오."라고 적습니다.
 + 예시 (Examples)
-  + Copy generation : Draft marketing copies, emails, blog posts, product descriptions, documents, and so on.
-  + Chat : Create chatbots that can brainstorm, solve problems, and answer questions or integrate with search systems to create a grounded information retrieval.
-  + Stylistic Conversion : Rewrite content in a different style or language.
+  + Copy 생성(generation) : 마케팅 Copy 초안, 이메일, 블로그 포스트, 제품 설명서, 문서 등을 생성합니다.
+  + 채팅 : 브레인스토밍, 문제 해결, 질문에 대답할 수 있는 챗봇을 만들거나 검색 시스템과 통합하여 자료에 기초를 둔 정보 검색을 시스템을 만듭니다.
+  + 스타일 변환 : 입력한 컨텐츠를 다른 스타일이나 언어로 다시 작성합니다.
 
 #### 요약(Summarization) 모델
-The `cohere.command` pretrained model is available in the playground for text summarization. This model is the same as one of the pretrained text generation models, but it has parameters that you can specify for text summarization. Use the summarization model for any text that you would like to see a summary of. Input text and get important information out of that text.
+사전에 학습된 `cohere.command`  모델은 텍스트 요약을 위해 특별히 매개변수를 지정할 수 있는 텍스트 생성 모델 중 하나로, 플레이그라운드에서 이용 가능합니다. 
+이 모델은 아래와 같은 다양한 텍스트에서 중요 정보를 추출하고자 할 때 유용하게 활용할 수 있습니다.
 
-The following categories are ideal text sources for summarization:
-+ News articles
-+ Blogs
-+ Chat transcripts
-+ Scientific articles
-+ Meeting notes
-+ Product reviews
++ 뉴스 기사
++ 블로그 글
++ 채팅 대화 기록
++ 과학 논문
++ 회의록
++ 제품 리뷰
 
 #### Embedding 모델
-A numeric representation of a piece of text. This text can be a phrase, a sentence, or one or more paragraphs. The Generative AI embedding model transforms each phrase, sentence, or paragraph that you input, into an array with 1024 numbers. You can use these embeddings for finding similarity in your input text such as finding phrases that are similar in context or category. Embeddings are mostly used for semantic searches where the search function focuses on the meaning of the text that it's searching through rather than finding results based on keywords. The following pretrained model is available for creating text embeddings:
+텍스트의 숫자 표현은 텍스트 조각, 문장 또는 하나 이상의 단락일 수 있는 텍스트를 숫자로 변환한 것입니다. Generative AI 임베딩 모델은 입력한 각 구절, 문장 또는 단락을 1024개의 숫자로 이루어진 배열로 변환합니다. 이러한 임베딩은 입력 텍스트 내에서 의미나 맥락이 유사한 구문을 찾는 데 사용할 수 있으며, 주로 키워드가 아닌 텍스트의 의미에 중점을 둔 의미 검색에 사용됩니다. 다음 미리 학습된 모델은 텍스트 임베딩을 생성하기 위해 사용할 수 있습니다:
 + `embed-english-light-v2.0`
 
-To visualize the outputs with embeddings, output vectors are projected into two dimensions and plotted as points in the Console. Points that are close together correspond to phrases that the model considers similar. Click **Export output** to get an array of 1024 vectors for each embedding saved in a json file.
+임베딩 출력을 시각화하려면 출력 벡터를 두 차원으로 투영하고 콘솔에서 점으로 표시됩니다. 서로 가까이 있는 점들은 모델이 유사한 것으로 간주하는 구문을 나타냅니다. "출력 내보내기"를 클릭하여 각 임베딩에 대한 1024개의 벡터 배열을 JSON 파일로 저장할 수 있습니다.
 
-The following categories are ideal uses cases for text embeddings.
-+ Semantic search : Search over call transcripts, internal knowledge sources, and so on.
-+ Text classification : Use the text embeddings for classifying intent in customer chat logs and support tickets.
-+ Text clustering : Identifying salient topics in customer reviews or new data.
-+ Recommendation systems : For example, represent podcast descriptions as a numerical feature to use in a recommendation model.
+다음과 같은 사용 사례에 대해 텍스트 임베딩이 이상적으로 활용됩니다:
+
++ 의미 검색: 통화 트랜스크립트, 내부 지식 소스 등을 검색합니다.
++ 텍스트 분류: 고객 채팅 로그와 지원 티켓에서 의도를 분류하는 데 텍스트 임베딩을 사용합니다.
++ 텍스트 클러스터링: 고객 리뷰나 새로운 데이터에서 중요한 주제를 식별합니다.
++ 추천 시스템: 예를 들어 팟캐스트 설명을 숫자 특징으로 나타내어 추천 모델에서 사용합니다.
 
 ### OCI 콘솔 살펴보기
 

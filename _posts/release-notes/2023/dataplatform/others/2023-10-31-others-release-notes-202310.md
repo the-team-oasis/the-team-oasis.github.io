@@ -14,6 +14,8 @@ tags:
   - oci-release-notes-2023
   - Oct-2023
   - Others
+  - Redis
+  - OCI Cache with Redis
 #
 # Styling
 #
