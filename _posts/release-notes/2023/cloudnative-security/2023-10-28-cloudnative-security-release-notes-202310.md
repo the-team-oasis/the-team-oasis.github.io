@@ -140,3 +140,16 @@ Network Firewall의 새로운 기능들이 추가되었습니다.
 * runAsGroup
 * readOnlyRootFilesystem
 * allowPrivilegeEscalation=false
+
+runAsUser 예시
+```
+...
+    spec:
+      containers:
+        - name: testcontainer
+          image: busybox:1.28
+          command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+          securityContext:
+            runAsUser: 2000
+...
+```
