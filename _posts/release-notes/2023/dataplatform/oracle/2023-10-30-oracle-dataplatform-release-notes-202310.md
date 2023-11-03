@@ -140,7 +140,7 @@ Migration 을 생성할 때 "Use Online Replication" 옵션을 선택하기만 �
 CreateProtectedDatabase API의 시험 실행을 수행하여 보호된 데이터베이스를 생성하기 전에 모든 전제 조건을 충족하는지 확인할 수 있습니다. 테스트 실행 요청 (Dry-Run Request)은 누락된 요구 사항을 식별하는 오류 메시지를 반환하고 각 요구 사항을 충족하기 위한 권장 작업도 나타냅니다.
 
 - Autonomous Recovery Service 생성 시 요구되는 사전 요구 사항 체크 오류 메시지 (Dry-Run API  제공)
-  ![OCI OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202309/oci_mgmt_pdb_clone.png)
+  ![OCI OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202309/oci_autonomous_recovery_svc.png)
 
 - 사전 설정 필요 Policy
   ![OCI OCI GoldenGate](/assets/img/dataplatform/2023/release_note/202309/oci_db_backup_recovery_svc_policy.png)
