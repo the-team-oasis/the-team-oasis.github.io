@@ -37,7 +37,7 @@ header: no
 ## GoldenGate now supports IAM with Identity Domains 
 * **Services:** GoldenGate
 * **Release Date:** Oct. 3, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/25347051-3cbe-4f37-98a0-98c6cfd1fb7f/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/25347051-3cbe-4f37-98a0-98c6cfd1fb7f/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/25347051-3cbe-4f37-98a0-98c6cfd1fb7f/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/25347051-3cbe-4f37-98a0-98c6cfd1fb7f/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원합니다. 새로운 OCI GoldenGate 배포를 생성하기 전에 적절한 정책을 추가하고 Vault를 생성해야 합니다.
@@ -49,7 +49,7 @@ GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원�
 ## Operations Insights Full Autonomous Database Support
 * **Services:** GoldenGate
 * **Release Date:** Oct. 6, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/02919997-4465-465b-8afb-71a5e9006abe/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/02919997-4465-465b-8afb-71a5e9006abe/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/02919997-4465-465b-8afb-71a5e9006abe/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/02919997-4465-465b-8afb-71a5e9006abe/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 이제 Operations Insights 전체 기능을 모든 ADB(Autonomous Database) 유형에 사용할 수 있습니다. 전체 기능 컬렉션에는 모든 ADB 서버리스 및 ADB 전용 데이터베이스를 위한 SQL 탐색기 및 ADDM Spotlight가 포함됩니다.
@@ -66,7 +66,7 @@ GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원�
 ## Set Up Alarm Definitions in Database Management
 * **Services:** Database Management
 * **Release Date:** Oct. 10, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/55bfcae8-116a-4d16-83a4-bb78fccab368/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/55bfcae8-116a-4d16-83a4-bb78fccab368/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/55bfcae8-116a-4d16-83a4-bb78fccab368/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/55bfcae8-116a-4d16-83a4-bb78fccab368/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 이제 Database Management 에서 Alarm 정의를 설정하여 경보 생성 및 관리 프로세스를 단순화할 수 있습니다.
@@ -83,7 +83,7 @@ GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원�
 ## New release for Data Integration
 * **Services:** Data Integration, Oracle Cloud Infrastructure
 * **Release Date:** Oct. 11, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/695ee996-bc57-4b4d-9853-5e57da5d4610/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/695ee996-bc57-4b4d-9853-5e57da5d4610/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/695ee996-bc57-4b4d-9853-5e57da5d4610/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/695ee996-bc57-4b4d-9853-5e57da5d4610/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
@@ -99,7 +99,7 @@ GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원�
 ## Base Database: Enhancements to Pluggable Database (PDB) management
 * **Services:** Database
 * **Release Date:** Oct. 11, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/44e0303a-6812-495e-af9e-ce7de130d3f3/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/44e0303a-6812-495e-af9e-ce7de130d3f3/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/44e0303a-6812-495e-af9e-ce7de130d3f3/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/44e0303a-6812-495e-af9e-ce7de130d3f3/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
@@ -112,7 +112,7 @@ GoldenGate는 이제 ID 도메인을 통해 ID 액세스 관리(IAM)를 지원�
 ## Database Migration introduces GoldenGate Service Integration for replication
 * **Services:** Database Migration, Oracle Cloud Infrastructure
 * **Release Date:** Oct. 17, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/9cd07bac-08ab-43a5-bd0f-094d9efa8c96/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/9cd07bac-08ab-43a5-bd0f-094d9efa8c96/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/9cd07bac-08ab-43a5-bd0f-094d9efa8c96/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/9cd07bac-08ab-43a5-bd0f-094d9efa8c96/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
@@ -122,7 +122,7 @@ Migration 을 생성할 때 "Use Online Replication" 옵션을 선택하기만 �
 ## Delayed Deletion of Protected Database Resources and Database Backups
 * **Services:** Oracle Cloud Infrastructure, Oracle Database Autonomous Recovery Service
 * **Release Date:** Oct. 18, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/e64e477d-7d24-4ca8-954e-ff6465644e04/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/e64e477d-7d24-4ca8-954e-ff6465644e04/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/e64e477d-7d24-4ca8-954e-ff6465644e04/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/e64e477d-7d24-4ca8-954e-ff6465644e04/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
@@ -133,7 +133,7 @@ Migration 을 생성할 때 "Use Online Replication" 옵션을 선택하기만 �
 ## Create a Protected Database in a Dry-Run Mode
 * **Services:** Oracle Cloud Infrastructure, Oracle Database Autonomous Recovery Service
 * **Release Date:** Oct. 18, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/a4603149-8eb5-403a-98c2-ebb31e1aff84/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/a4603149-8eb5-403a-98c2-ebb31e1aff84/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/a4603149-8eb5-403a-98c2-ebb31e1aff84/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/a4603149-8eb5-403a-98c2-ebb31e1aff84/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
@@ -148,7 +148,7 @@ CreateProtectedDatabase API의 시험 실행을 수행하여 보호된 데이터
 ## GoldenGate adds support for new connection types
 * **Services:** GoldenGate
 * **Release Date:** Oct. 24, 2023
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/8f44460a-fd34-4f78-8afc-8d2d9313cadf/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/8f44460a-fd34-4f78-8afc-8d2d9313cadf/{:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/8f44460a-fd34-4f78-8afc-8d2d9313cadf/](https://docs.oracle.com/en-us/iaas/releasenotes/changes/8f44460a-fd34-4f78-8afc-8d2d9313cadf/){:target="_blank" rel="noopener"}
 
 ### 릴리즈 내용
 
