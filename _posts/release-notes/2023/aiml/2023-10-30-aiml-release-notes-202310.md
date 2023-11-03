@@ -60,6 +60,70 @@ Private Endpoint를 사용하여 접근하도록 구성할 경우, 노트북 세
 - Deactivate
 - Delete
 
+#### Notebook session Lifecycle 스크립트 관련 사용자 정의 환경 변수 목록
+<table class="table" id="notebook-runtime__table_ser-env-vars" summary="Describes the service managed environment variable keys by name and description."><caption></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="notebook-runtime__table_ser-env-vars__entry__1">
+<p class="p">Variable Key Name</p>
+</th>
+<th class="entry" id="notebook-runtime__table_ser-env-vars__entry__2">
+<p class="p">Description</p>
+</th>
+<th class="entry" id="notebook-runtime__table_ser-env-vars__entry__3">Specified By</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__1">
+<p class="p"><code class="ph codeph">NB_ONCREATE_SCRIPT_URL</code></p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__2">
+<p class="p">Notebook session lifecycle script URL to run when creating.</p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__3">
+<p class="p">User specified.</p>
+</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__1">
+<p class="p"><code class="ph codeph">NB_ONACTIVATE_SCRIPT_URL</code></p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__2">
+<p class="p">Notebook session lifecycle script URL to run when activating.</p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__3">
+<p class="p">User specified.</p>
+</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__1">
+<p class="p"><code class="ph codeph">NB_ONDEACTIVATE_SCRIPT_URL</code></p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__2">
+<p class="p">Notebook session lifecycle script URL to run when deactivating.</p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__3">
+<p class="p">User specified.</p>
+</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__1">
+<p class="p"><code class="ph codeph">NB_ONDELETE_SCRIPT_URL</code></p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__2">
+<p class="p">Notebook session lifecycle script URL to run when deleting.</p>
+</td>
+<td class="entry" headers="notebook-runtime__table_ser-env-vars__entry__3">
+<p class="p">User specified.</p>
+</td>
+</tr>
+</tbody></table>
+
+#### Lifecycle 스크립트 사용 방법 
++ 노트북 세션 생성 단계에서 "런타임 구성" 섹션에 관련 환경 변수키를 제공합니다. URL값은 Lifecycle 스크립트 파일이 업로드 된 OCI Object Storage의 URL을 입력합니다.
+  ![](/assets/img/aiml/2023/releasenote/notebook-lifecycle-script-1.png " ")
++ URI 형식 예시 입니다. `https://objectstorage.region.oraclecloud.com/n/object-storage-namespace/b/bucket/o/filename`
++ Lifecycle Script 샘플 소스코드는 [oracle-sample 깃헙](https://github.com/oracle-samples/oci-data-science-ai-samples/tree/main/notebook_lifecycle_scripts_examples){:target="_blank" rel="noopener"}를 참고하세요.
++ Lifecycle Script 관련 더 자세한 설명은 [Using Custom Environment Variable Keys to Manage Notebook Session Lifecycle Scripts](https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/data-science/using/notebook-runtime.htm){:target="_blank" rel="noopener"} 문서를 참고하세요.
 
 ## Storage mounts are introduced.
 * **Services:** Data Science
