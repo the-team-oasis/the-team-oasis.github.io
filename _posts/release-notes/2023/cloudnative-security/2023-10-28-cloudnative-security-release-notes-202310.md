@@ -141,7 +141,7 @@ Network Firewall의 새로운 기능들이 추가되었습니다.
 * readOnlyRootFilesystem
 * allowPrivilegeEscalation=false
 
-runAsUser 예시
+**runAsUser 예시**
 ```
 ...
     spec:
