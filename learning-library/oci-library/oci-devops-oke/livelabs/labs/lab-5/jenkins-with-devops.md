@@ -243,7 +243,7 @@ NOTE: Consider using a custom image with pre-installed plugins
 - 명령어 예시
     ````shell
     <copy>
-    kubectl create secret docker-registry regcred-yhcho --docker-server=ap-chuncheon-1.ocir.io --docker-username='axiffngjdqvm/devops' --docker-password='XVCZUDG<.........' --docker-email='young.hwan.cho@oracle.com' -n jenkins
+    kubectl create secret docker-registry regcred-yhcho --docker-server=ap-chuncheon-1.ocir.io --docker-username='axwawciiyibv/devops' --docker-password='XVCZUDG<.........' --docker-email='young.hwan.cho@oracle.com' -n jenkins
     </copy>
     ````
 
@@ -251,7 +251,7 @@ NOTE: Consider using a custom image with pre-installed plugins
 1. pipeline 아이템 생성
    ![Jenkins Pipeline Create #2](images/jenkins-pipeline-create-1.png " ")
 2. **이 빌드에 매개변수 있음** 체크 후 다음과 같이 매개변수를 입력합니다.
-   - DOCKER_REGISTRY : yny.ocir.io , ap-chuncheon-1.ocir.io
+   - DOCKER_REGISTRY : icn.ocir.io , ap-chuncheon-1.ocir.io
    - APPLICATION : OCIR Repository 이름 입력 (예, devops-handson-yhcho/spring-boot-docker)
    - NAMESPACE : 테넌시 namespace 입력
    
@@ -306,7 +306,7 @@ podTemplate(yaml: '''
     ) {
       node(POD_LABEL) {
             stage('Git Process') {
-              checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'credForOCICodeRepo_yhcho', url: 'https://devops.scmservice.ap-chuncheon-1.oci.oraclecloud.com/namespaces/axiffngjdqvm/projects/DevOpsHandsOn_yhcho/repositories/spring-boot-docker']])
+              checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'credForOCICodeRepo_yhcho', url: 'https://devops.scmservice.ap-chuncheon-1.oci.oraclecloud.com/namespaces/axwawciiyibv/projects/DevOpsHandsOn_yhcho/repositories/spring-boot-docker']])
             }
             stage('build maven project'){
               container('maven') {

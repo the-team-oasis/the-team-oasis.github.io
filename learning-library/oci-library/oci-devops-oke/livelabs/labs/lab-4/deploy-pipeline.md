@@ -110,7 +110,7 @@ OCIR 에 생성한 Repository가 Private으로 생성되어 있기 때문에 배
 - 명령어 예시
     ````shell
     <copy>
-    kubectl create secret docker-registry regcred-yhcho --docker-server=ap-chuncheon-1.ocir.io --docker-username='axiffngjdqvm/devops' --docker-password='XVCZUDG<.........' --docker-email='young.hwan.cho@oracle.com' -n demo-yhcho
+    kubectl create secret docker-registry regcred-yhcho --docker-server=ap-chuncheon-1.ocir.io --docker-username='axwawciiyibv/devops' --docker-password='XVCZUDG<.........' --docker-email='young.hwan.cho@oracle.com' -n demo-yhcho
     </copy>
     ````
 

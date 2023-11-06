@@ -45,7 +45,7 @@ podTemplate(yaml: '''
     node(POD_LABEL) {
         stage('Git Process') {
             
-            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'credForOCICodeRepo_yhcho', url: 'https://devops.scmservice.ap-chuncheon-1.oci.oraclecloud.com/namespaces/axiffngjdqvm/projects/DevOpsHandsOn_yhcho/repositories/spring-boot-docker']])
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'credForOCICodeRepo_yhcho', url: 'https://devops.scmservice.ap-chuncheon-1.oci.oraclecloud.com/namespaces/axwawciiyibv/projects/DevOpsHandsOn_yhcho/repositories/spring-boot-docker']])
             
         }
         stage('build maven project'){

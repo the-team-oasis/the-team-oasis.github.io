@@ -36,16 +36,16 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     OCIR에 이미지를 푸시하기 위해서는 다음과 같은 이미지 태그 네이밍 규칙을 따라야 합니다.
     > {Region Key}.ocir.io/{Object Storage Namespace}/{레파지토리명}/{이미지명}:{태그}
 
-    Region Key는 [Regions and Availability Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) 에서 확인 가능합니다. 춘천의 Region Key는 **yny**, 서울의 Region Key는 **icn**입니다. 본 실습에서는 **춘천 리전(yny)**을 사용하도록 합니다.
+    Region Key는 [Regions and Availability Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) 에서 확인 가능합니다. 서울의 Region Key는 **icn**, 춘천의 Region Key는 **yny**입니다. 본 실습에서는 **서울 리전(icn)**을 사용하도록 합니다.
 
     Object Storage Namespace는 Tenancy Detail 화면에서 확인할 수 있습니다. 본 실습에서 사용하는 Namespace는 다음과 같습니다.
-    > axiffngjdqvm
+    > axwawciiyibv
 
     ![OCI Tenancy Namespace](images/oci-tenancy-namespace.png)
     
     Sample Tag Namespace:  
     **[중요]** 여러 사람이 같이 실습을 하므로, 레파지토리 이름이 겹치지 않게 하기 위해 애플리케이션 태그에 실습자의 이니셜을 붙여서 진행합니다.  
-    > yny.ocir.io/axiffngjdqvm/movie/helidon-movie-api-mp:{이니셜}
+    > icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:{이니셜}
 
     이미지 빌드 예시(Microprofile):
     ````shell
@@ -53,7 +53,7 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     ````
 
     ````shell
-    docker build -t yny.ocir.io/axiffngjdqvm/movie/helidon-movie-api-mp:dankim .
+    docker build -t icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:dankim .
     ````
 
     이미지 빌드 예시(SpringBoot):
@@ -62,21 +62,20 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     ````
 
     ````shell
-    docker build -t yny.ocir.io/axiffngjdqvm/movie/springboot-movie-people-api:dankim .
+    docker build -t icn.ocir.io/axwawciiyibv/movie/springboot-movie-people-api:dankim .
     ````
 
 1. OCIR 로그인
 
-    OCIR 로그인을 위해서는 Username과 Password가 필요합니다. Username은 IDCS(Old IAM)인 경우 {Object Storage Namespace}/oracleidentitycloudservice/{OCI 로그인 아이디}, Identity Domain(New IAM)인 경우 {Object Storage Namespace}/{OCI 로그인 아이디}이며, Password는 Auth Token값입니다.
-
-    IDCS인 경우(Old IAM) OCIR Username 예시:
-    > axiffngjdqvm/oracleidentitycloudservice/oci.dan.kim@gmail.com
+    OCIR 로그인을 위해서는 Username과 Password가 필요합니다. Identity Domain(New IAM)인 경우 {Object Storage Namespace}/{OCI 로그인 아이디}, Username은 IDCS(Old IAM)인 경우 {Object Storage Namespace}/oracleidentitycloudservice/{OCI 로그인 아이디}이며, Password는 Auth Token값입니다.
 
     Identity Domain인 경우(New IAM) OCIR Username 예시: 
-    > axiffngjdqvm/oci.dan.kim@gmail.com
+    > axwawciiyibv/oci.dan.kim@gmail.com
 
+    IDCS인 경우(Old IAM) OCIR Username 예시:
+    > axwawciiyibv/oracleidentitycloudservice/oci.dan.kim@gmail.com
 
-    * **본 실습에서는 IDCS를 사용한 환경에서 진행합니다.**
+    * **본 실습에서는 Identity Domain을 사용한 환경에서 진행합니다.**
 
     OCIR Password (Auth Token) 생성 (My Profile > Auth tokens > Generate token):
     > **Note**: Auth Token은 한번 생성 후 다시 확인이 불가능하기 때문에 복사해서 기록해놔야 합니다.
@@ -84,19 +83,19 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     
     OCIR 로그인 예시:
     ````shell
-    docker login yny.ocir.io -u axiffngjdqvm/oracleidentitycloudservice/oci.dan.kim@gmail.com
+    docker login icn.ocir.io -u axwawciiyibv/oci.dan.kim@gmail.com
     ````
 
 1. OCIR에 이미지 푸시
 
     OCIR에 이미지 푸시 예시(Microprofile):
     ````shell
-    docker push yny.ocir.io/axiffngjdqvm/movie/helidon-movie-api-mp:dankim
+    docker push icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:dankim
     ````
 
     OCIR에 이미지 푸시 예시(SpringBoot):
     ````shell
-    docker push yny.ocir.io/axiffngjdqvm/movie/springboot-movie-people-api:dankim
+    docker push icn.ocir.io/axwawciiyibv/movie/springboot-movie-people-api:dankim
     ````
 
     이미지 확인
@@ -128,13 +127,13 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
 
     ````shell
     <copy>
-    kubectl create secret docker-registry ocirsecret --docker-server=yny.ocir.io --docker-username={Object Storage Namespace}/oracleidentitycloudservice/{OCI Username} --docker-password='{Auth Token}' --docker-email={이메일}
+    kubectl create secret docker-registry ocirsecret --docker-server=icn.ocir.io --docker-username={Object Storage Namespace}/{OCI Username} --docker-password='{Auth Token}' --docker-email={이메일}
     </copy>
     ````
 
     Secret 생성 예시:
     ````shell
-    kubectl create secret docker-registry ocirsecret --docker-server=yny.ocir.io --docker-username=axiffngjdqvm/oracleidentitycloudservice/oci.dan.kim@gmail.com --docker-password='c}d>02vJiom[g{wPO9kr' --docker-email=oci.dan.kim@gmail.com
+    kubectl create secret docker-registry ocirsecret --docker-server=icn.ocir.io --docker-username=axwawciiyibv/oci.dan.kim@gmail.com --docker-password='c}d>02vJiom[g{wPO9kr' --docker-email=oci.dan.kim@gmail.com
     ````
 
 1. Persistent Volume 생성
