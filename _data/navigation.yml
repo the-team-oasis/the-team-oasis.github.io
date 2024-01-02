@@ -23,20 +23,22 @@
   - title: "Security"
     url: "/security/"
 
-- title: "Release Notes (2023)"
-  url: "/release-notes-2023/"
+- title: "Release Notes (2024)"
+  url: "/release-notes-2024/"
   side: left
   dropdown:
     - title: "Infrastructure"
-      url: "/release-notes-2023-infrastructure/"
+      url: "/release-notes-2024-infrastructure/"
     - title: "Cloud Native & Security"
-      url: "/release-notes-2023-cloudnative-security/"
+      url: "/release-notes-2024-cloudnative-security/"
     - title: "Data Platform"
-      url: "/release-notes-2023-dataplatform"
+      url: "/release-notes-2024-dataplatform"
     - title: "AI/ML"
-      url: "/release-notes-2023-aiml/"
+      url: "/release-notes-2024-aiml/"
     - title: "2022"
       url: "/release-notes-2022/"
+    - title: "2023"
+      url: "/release-notes-2023/"
 
 - title: "Learning"
   url: "/learning/"
