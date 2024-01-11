@@ -183,7 +183,9 @@ AWR Hub Explorer 를 사용하면 직관적인 시각화가 생성될 수 있는
 - 일반적인 AWR Report 분석에서는 시계열 분석이 어려움
   ![AWR Report](/assets/img/dataplatform/2023/release_note/202312/17_awr_report_analysis.jpg)
 
-- AWR 데이터를 시각화 (AWR Hub Explorer)
+- AWR 데이터를 시각화 (AWR Hub Explorer 화면 샘플)
+  ![AWR Report](/assets/img/dataplatform/2023/release_note/202312/18_oci_awr_hub_explorer.png)
+
 
 
 
