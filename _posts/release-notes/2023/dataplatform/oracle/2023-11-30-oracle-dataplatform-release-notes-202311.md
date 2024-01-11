@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Release Notes 2023"
-title: "10월 OCI Oracle Data Platform 업데이트 소식"
+title: "11월 OCI Oracle Data Platform 업데이트 소식"
 teaser: "2023년 11월 OCI Oracle Data Platform 업데이트 소식입니다."
 author: lim
 breadcrumb: true
