@@ -130,7 +130,7 @@ header: no
 * **Release Date:** Dec. 13, 2023
 * **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/9efd2543-fcdc-4d09-93de-08d02fe47cb1/](https://docs.oracle.com/iaas/releasenotes/changes/9efd2543-fcdc-4d09-93de-08d02fe47cb1/){:target="_blank" rel="noopener"}
 
-## 릴리즈 내용
+### 릴리즈 내용
 이제 콘솔에서 플러그형 데이터베이스용 SQL Worksheet 를 시작하고 사용할 수 있습니다. 이 기능 지원으로 DB 가 위치하는 Private Network 으로의 연결 및 SQL Developer 툴 설치와 같은 작업들이 필요없이 Cloud Console 에서 데이터 베이스의 내용을 바로 확인할 수 있습니다.
 
 - PDB 상세 화면에서의 SQL Worksheet 기능
@@ -148,7 +148,7 @@ header: no
 * **Release Date:** Dec. 13, 2023
 * **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/5ec69089-ecdb-4437-a7ac-479f1f871959/](https://docs.oracle.com/iaas/releasenotes/changes/5ec69089-ecdb-4437-a7ac-479f1f871959/){:target="_blank" rel="noopener"}
 
-## 릴리즈 내용
+### 릴리즈 내용
 Oracle Database@Azure는 Azure에서 Oracle 데이터베이스 워크로드를 실행하는 Oracle Cloud 데이터베이스 서비스입니다. Oracle Database@Azure용 모든 하드웨어는 Azure의 데이터 센터에 함께 배치되어 Azure에 있는 애플리케이션에 단순성, 보안 및 짧은 대기 시간을 제공합니다.
 
 - 참고 사이트 : [Oracle Database@Azure 소개](https://learn.microsoft.com/ko-kr/azure/oracle/oracle-db/database-overview){:target="_blank" rel="noopener"}
@@ -160,7 +160,7 @@ Oracle Database@Azure는 Azure에서 Oracle 데이터베이스 워크로드를 �
 * **Release Date:** Dec. 20, 2023
 * **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/9814ab60-7e17-4194-b698-9fbfb60cb9ab/](https://docs.oracle.com/iaas/releasenotes/changes/9814ab60-7e17-4194-b698-9fbfb60cb9ab/){:target="_blank" rel="noopener"}
 
-## 릴리즈 내용
+### 릴리즈 내용
 Database Migration Service 에 대한 Policy 설정이 간편해졌습니다. Policy 작성기(정책 생성) 섹션에 Database Migration 과 관련된 새 Policy Template 들이 추가되었습니다. 이를 통해 테넌트 관리자는 필요한 모든 정책(다른 종속 OCI 서비스에 대한 정책 포함)을 한 번에 프로비저닝하고 사용자가 Migration 을 설정하고 사용할 수 있습니다.
 
 - Policy Builder 에서 Database Migration 관련 Policy 설정
@@ -172,7 +172,7 @@ Database Migration Service 에 대한 Policy 설정이 간편해졌습니다. Po
 * **Release Date:** Dec. 20, 2023
 * **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/39da14f9-8c60-4840-9309-6001d6a6ea7b/](https://docs.oracle.com/iaas/releasenotes/changes/39da14f9-8c60-4840-9309-6001d6a6ea7b/){:target="_blank" rel="noopener"}
 
-## 릴리즈 내용
+### 릴리즈 내용
 
 AWR Hub Explorer 를 사용하면 직관적인 시각화가 생성될 수 있는 데이터를 추출하는 SQL 쿼리를 통해 AWR 의 성능 통계를 탐색할 수 있습니다. 쿼리는 이 경우 단순히 DBA_HIST_* 뷰인 데이터 개체를 활용합니다. AWR Hub Explorer 의 시각화 View 에는 AWR Hub 내에 저장된 AWR Snapshot 도 포함되어 있습니다. ( * 현재는 Autonomous Database 만 지원 )
 
