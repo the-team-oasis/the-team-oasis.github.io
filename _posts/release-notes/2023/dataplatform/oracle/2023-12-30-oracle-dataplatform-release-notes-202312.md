@@ -174,6 +174,17 @@ Database Migration Service 에 대한 Policy 설정이 간편해졌습니다. Po
 
 ## 릴리즈 내용
 
-AWR Hub Explorer 를 사용하면 직관적인 시각화가 생성될 수 있는 데이터를 추출하는 SQL 쿼리를 통해 AWR 의 성능 통계를 탐색할 수 있습니다. 쿼리는 이 경우 단순히 DBA_HIST_* 뷰인 데이터 개체를 활용합니다. AWR Hub Explorer 의 시각화 View 에는 AWR Hub 내에 저장된 AWR 스냅샷도 포함되어 있습니다. ( * 현재는 Autonomous Database 만 지원 )
+AWR Hub Explorer 를 사용하면 직관적인 시각화가 생성될 수 있는 데이터를 추출하는 SQL 쿼리를 통해 AWR 의 성능 통계를 탐색할 수 있습니다. 쿼리는 이 경우 단순히 DBA_HIST_* 뷰인 데이터 개체를 활용합니다. AWR Hub Explorer 의 시각화 View 에는 AWR Hub 내에 저장된 AWR Snapshot 도 포함되어 있습니다. ( * 현재는 Autonomous Database 만 지원 )
+
+- AWR Hub Explorer 는 AWR Hub 저장소의 Data 를 시각화하는 역할을 담당합니다.
+
+  ![OCI_AWR_Hub_Explorer](/assets/img/dataplatform/2023/release_note/202312/16_oci_awr_hub_explorer.png)
+
+- 일반적인 AWR Report 분석에서는 시계열 분석이 어려움
+  ![AWR Report](/assets/img/dataplatform/2023/release_note/202312/17_awr_report_analysis.jpg)
+
+- AWR 데이터를 시각화 (AWR Hub Explorer)
+
+
 
 ---
