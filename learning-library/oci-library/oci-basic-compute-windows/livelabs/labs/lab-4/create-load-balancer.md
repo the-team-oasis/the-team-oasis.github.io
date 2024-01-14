@@ -172,9 +172,9 @@ Network Load Balancer는 OCI 에서 무료로 사용 가능하며, TCP 또는 UD
 3. 백엔드 집한 건정성 검사가 실패하고 알람 트리거 조건이 되었음을 확인합니다.
    ![](images/create-lb-alarm-11.png " ")
 4. 이메일 수신을 확인합니다.
-   ![](images/create-lb-alarm-12.png " ")
-5. 건정성 검사 포트를 **8080** 에서 **80**으로 다시 변경합니다.
    ![](images/create-lb-alarm-13.png " ")
+5. 건정성 검사 포트를 **8080** 에서 **80**으로 다시 변경합니다.
+   ![](images/create-lb-alarm-12.png " ")
 6. 알람 트리거 조건에서 해제 되었음을 확인합니다.
    ![](images/create-lb-alarm-14.png " ")
 7. 정상화 메일을 수신합니다.

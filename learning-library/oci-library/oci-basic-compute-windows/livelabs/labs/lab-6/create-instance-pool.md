@@ -102,7 +102,7 @@ OCI의 컴퓨트 리소스를 관리할 수 있는 서비스인 인스턴스 구
    - _CPUSTRES64_
 3. 인스턴스 풀에서 자동으로 프로비전된 서버에 접속하여 아래와 같이 조작하여 CPU 부하를 설정합니다.
    - 1번째 쓰레드에 Activity Level을 Maximum (100%)으로 설정합니다.
-     ![](images/create-autoscale-7 .png " ")
+     ![](images/create-autoscale-7.png " ")
    - 2번째 쓰레드에 Activity Level을 Maximum (100%)으로 설정합니다.
      ![](images/create-autoscale-8.png " ")
    - 2번째 쓰레드를 활성화 합니다.
@@ -124,5 +124,7 @@ OCI의 컴퓨트 리소스를 관리할 수 있는 서비스인 인스턴스 구
    ![](images/create-autoscale-17.png " ")
 9. 스케일 조정되어 다시 1개로 조정된 것을 확인할 수 있습니다.
    ![](images/create-autoscale-18.png " ")
+
+> 스케일 조정으로 인스턴스가 종료되는 경우 먼저 생성된 인스턴스 부터 종료됩니다. 종료 시 함께 프로비전된 부트,블록 볼륨은 모두 삭제되기 때문에 보관이 필요한 데이터는 별도의 저장소에 저장되도록 고려해야 합니다.
 
 [다음 랩으로 이동](#next)
