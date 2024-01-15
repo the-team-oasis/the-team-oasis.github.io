@@ -19,10 +19,10 @@ PostgreSQL을 완전 관리형 서비스로 사용할 수 있는 OCI의 PostgreS
 
 1. 윈도우 서버에서 pgAdmin을 검색하여 검색된 프로그램을 실행합니다.
    ![](images/compute-install-pgadmin-11.png " ")
+   ![](images/compute-install-pgadmin-12.png " ")
 2. 실행된 pgAdmin 에서 새로운 서버를 등록하기 위해 아래와 같이 실행합니다.
    - Servers에서 마우스 오른쪽 버튼 클릭
    - Register 메뉴 하위에 Server... 메뉴를 클릭
-     ![](images/compute-install-pgadmin-12.png " ")
      ![](images/compute-install-pgadmin-13.png " ")
 3. "General" 탭에서 Server의 이름을 입력합니다.
 4. "Connection" 탭에서 연결 정보를 아래와 같이 입력합니다.
