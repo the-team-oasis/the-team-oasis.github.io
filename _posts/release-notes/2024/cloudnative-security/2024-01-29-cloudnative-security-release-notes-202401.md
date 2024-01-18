@@ -39,4 +39,4 @@ header: no
 * **Release Date:** Jan. 9, 2023
 * **Documentation:** [https://cloudmarketplace.oracle.com/marketplace/listing/136942717](https://cloudmarketplace.oracle.com/marketplace/listing/136942717){:target="_blank" rel="noopener"}
 
-### 업데이트 소개
+### 업데이트 내용
