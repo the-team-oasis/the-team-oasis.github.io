@@ -20,13 +20,12 @@ lim: # replace this with your info
 kskim: # replace this with your info
   name: "Kisu Kim"
   siterole: "Cloud Engineer"
-  uri: 
+  uri:
   email:
 
 yhcho: # replace this with your info
-  name: "Younghwan Jo"
+  name: "Younghwan Cho"
   siterole: "Cloud Engineer"
-  uri: 
+  uri:
   email:
-
 # you can add more authors here
