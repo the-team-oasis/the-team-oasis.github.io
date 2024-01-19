@@ -96,15 +96,6 @@ GPU & RDMA 모니터링
 - RDMA 및 GPU 성능 지표를 확인 할 수 있습니다. 
 
 
-## Automatic Workload Repository (AWR) Hub
-* **Services:** Operations Insights
-* **Release Date:** Nov. 21, 2023
-* **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/d96df03a-80c5-4428-822e-6ec75c4ed736/](https://docs.oracle.com/iaas/releasenotes/changes/d96df03a-80c5-4428-822e-6ec75c4ed736/){:target="_blank" rel="noopener"}
-
-### 릴리즈 내용
-중요한 Oracle Autonomous Databases의 자동 작업 로드 저장소에서 자세한 성능 데이터를 통합하고 저장할 수 있습니다. 새로운 AWR Hub 온보딩 절차를 통해 웨어하우스와 허브를 루트가 아닌 다른 구획에 배치할 수 있으며 이제 하위 구획에 정책을 생성할 수 있습니다.
-
-
 ## New Release of Secure Desktops
 * **Services:** Secure Desktops
 * **Release Date:** Nov. 20, 2023
@@ -125,6 +116,8 @@ GPU & RDMA 모니터링
 
 ### 릴리즈 내용
 완전 관리형 PostgreSQL 호환 서비스는 엔터프라이즈, SMB 또는 개발 및 테스트 환경을 위한 가격 대비 성능, 지능형 크기 조정 및 조정, 높은 내구성을 제공합니다.
+
+자세한 사항은 [OCI PostgreSQL Database System 서비스 살펴보기](https://the-team-oasis.github.io/dataplatform/oci-postgresql-overview/) 포스팅 되었습니다.
 
 - 최대 3배 향상된 성능 : Database Optimized Storage 덕분에 스토리지 계층에서 SQL 트랜잭션 처리 엔진을 분리하면 표준 PostgreSQL 구성에 비해 성능이 크게 향상되었습니다.
 - AWS 2의 절반 이하 비용 : 아마존 웹 서비스(AWS)의 동급 서비스인 아마존 오로라 PostgreSQL은 OCI보다 2.5배 더 비쌉니다.
