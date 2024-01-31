@@ -3,7 +3,7 @@ layout: page-fullwidth
 #
 # Content
 #
-subheadline: "Network"
+subheadline: "Cost"
 title: "OCI 전일 비용 관리 소개"
 teaser: "OCI 전날 비용에 관해서 임계치 이상의 경우 이메일로 통보받을 수 있는 부분에 대해서 알아봅니다."
 author: kisukim
