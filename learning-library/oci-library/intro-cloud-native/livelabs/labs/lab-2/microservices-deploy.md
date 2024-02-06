@@ -142,6 +142,12 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     PVC 생성:
     ```shell
     <copy>
+    cd movie
+    </copy>
+    ```
+
+    ```shell
+    <copy>
     kubectl create -f csi-bvs-pvc.yaml
     </copy>
     ```
@@ -169,6 +175,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
 
     ```shell
     <copy>
+    cd movie/helidon-movie-api-mp
+
     vi kube-helidon-movie-api-mp-config.yml
     </copy>
     ```
@@ -178,6 +186,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     동일하게 SpringBoot Manifest 파일의 내용도 수정합니다.
     ```shell
     <copy>
+    cd movie/springboot-movie-people-api
+
     vi kube-springboot-movie-people-api-config.yml
     </copy>
     ```
@@ -186,6 +196,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     Microprofile: 
     ```shell
     <copy>
+    cd movie/helidon-movie-api-mp
+
     kubectl apply -f kube-helidon-movie-api-mp-config.yml
     </copy>
     ```
@@ -193,6 +205,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     SpringBoot: 
     ```shell
     <copy>
+    cd movie/springboot-movie-people-api
+
     kubectl apply -f kube-springboot-movie-people-api-config.yml
     </copy>
     ```
