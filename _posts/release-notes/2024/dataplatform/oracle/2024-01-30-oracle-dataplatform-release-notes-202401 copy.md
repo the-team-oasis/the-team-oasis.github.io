@@ -34,6 +34,20 @@ header: no
 {:toc}
 </div>
 
+## Database Management Support for PDBs on the Base Database Service and Exadata Cloud Infrastructure
+* **Services:** Database Management
+* **Release Date:** Jan 11, 2022
+* **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/5c451419-aa5f-4440-976f-9fa1c01019f3/](ttps://docs.oracle.com/iaas/releasenotes/changes/5c451419-aa5f-4440-976f-9fa1c01019f3/){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+이제 Oracle Cloud Pluggable Databases(기본 데이터베이스 서비스의 PDB 및 전용 인프라의 Exadata 데이터베이스 서비스)에 대한 데이터베이스 관리를 활성화하고 모니터링, 성능 관리, 튜닝 및 관리를 위해 데이터베이스 관리 기능을 사용할 수 있습니다. 
+
+- Database Management PDB 관리
+  ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/03_oci_database_management_pdb.png)
+
+
+
 ##  You can now view the top five security assessment findings in Oracle Data Safe
 * **Services:** Data Safe
 * **Release Date:** Jan 17, 2024
