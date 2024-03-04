@@ -39,13 +39,13 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     Region Key는 [Regions and Availability Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) 에서 확인 가능합니다. 서울의 Region Key는 **icn**, 춘천의 Region Key는 **yny**입니다. 본 실습에서는 **서울 리전(icn)**을 사용하도록 합니다.
 
     Object Storage Namespace는 Tenancy Detail 화면에서 확인할 수 있습니다. 본 실습에서 사용하는 Namespace는 다음과 같습니다.
-    > axwawciiyibv
+    > cnsrxemtrab8
 
     ![OCI Tenancy Namespace](images/oci-tenancy-namespace.png)
     
     Sample Tag Namespace:  
     **[중요]** 여러 사람이 같이 실습을 하므로, 레파지토리 이름이 겹치지 않게 하기 위해 애플리케이션 태그에 실습자의 이니셜을 붙여서 진행합니다.  
-    > icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:{이니셜}
+    > icn.ocir.io/cnsrxemtrab8/movie/helidon-movie-api-mp:{이니셜}
 
     이미지 빌드 예시(Microprofile):
     ````shell
@@ -53,7 +53,7 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     ````
 
     ````shell
-    docker build -t icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:dankim .
+    docker build -t icn.ocir.io/cnsrxemtrab8/movie/helidon-movie-api-mp:dankim .
     ````
 
     이미지 빌드 예시(SpringBoot):
@@ -62,7 +62,7 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     ````
 
     ````shell
-    docker build -t icn.ocir.io/axwawciiyibv/movie/springboot-movie-people-api:dankim .
+    docker build -t icn.ocir.io/cnsrxemtrab8/movie/springboot-movie-people-api:dankim .
     ````
 
 1. OCIR 로그인
@@ -70,10 +70,10 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     OCIR 로그인을 위해서는 Username과 Password가 필요합니다. Identity Domain(New IAM)인 경우 {Object Storage Namespace}/{OCI 로그인 아이디}, Username은 IDCS(Old IAM)인 경우 {Object Storage Namespace}/oracleidentitycloudservice/{OCI 로그인 아이디}이며, Password는 Auth Token값입니다.
 
     Identity Domain인 경우(New IAM) OCIR Username 예시: 
-    > axwawciiyibv/oci.dan.kim@gmail.com
+    > cnsrxemtrab8/oci.dan.kim@gmail.com
 
     IDCS인 경우(Old IAM) OCIR Username 예시:
-    > axwawciiyibv/oracleidentitycloudservice/oci.dan.kim@gmail.com
+    > cnsrxemtrab8/oracleidentitycloudservice/oci.dan.kim@gmail.com
 
     * **본 실습에서는 Identity Domain을 사용한 환경에서 진행합니다.**
 
@@ -83,19 +83,19 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     
     OCIR 로그인 예시:
     ````shell
-    docker login icn.ocir.io -u axwawciiyibv/oci.dan.kim@gmail.com
+    docker login icn.ocir.io -u cnsrxemtrab8/oci.dan.kim@gmail.com
     ````
 
 1. OCIR에 이미지 푸시
 
     OCIR에 이미지 푸시 예시(Microprofile):
     ````shell
-    docker push icn.ocir.io/axwawciiyibv/movie/helidon-movie-api-mp:dankim
+    docker push icn.ocir.io/cnsrxemtrab8/movie/helidon-movie-api-mp:dankim
     ````
 
     OCIR에 이미지 푸시 예시(SpringBoot):
     ````shell
-    docker push icn.ocir.io/axwawciiyibv/movie/springboot-movie-people-api:dankim
+    docker push icn.ocir.io/cnsrxemtrab8/movie/springboot-movie-people-api:dankim
     ````
 
     이미지 확인
@@ -133,13 +133,19 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
 
     Secret 생성 예시:
     ````shell
-    kubectl create secret docker-registry ocirsecret --docker-server=icn.ocir.io --docker-username=axwawciiyibv/oci.dan.kim@gmail.com --docker-password='c}d>02vJiom[g{wPO9kr' --docker-email=oci.dan.kim@gmail.com
+    kubectl create secret docker-registry ocirsecret --docker-server=icn.ocir.io --docker-username=cnsrxemtrab8/oci.dan.kim@gmail.com --docker-password='c}d>02vJiom[g{wPO9kr' --docker-email=oci.dan.kim@gmail.com
     ````
 
 1. Persistent Volume 생성
     Pod내의 컨테이너에서 사용할 Persistent Volume Claim (PVC)을 생성합니다. Pod 생성 시 PVC를 활용하면 OCI의 Block Storage를 Persistent Volume으로 사용하여 마운트할 수 있습니다. 
 
     PVC 생성:
+    ```shell
+    <copy>
+    cd movie
+    </copy>
+    ```
+
     ```shell
     <copy>
     kubectl create -f csi-bvs-pvc.yaml
@@ -169,6 +175,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
 
     ```shell
     <copy>
+    cd movie/helidon-movie-api-mp
+
     vi kube-helidon-movie-api-mp-config.yml
     </copy>
     ```
@@ -178,6 +186,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     동일하게 SpringBoot Manifest 파일의 내용도 수정합니다.
     ```shell
     <copy>
+    cd movie/springboot-movie-people-api
+
     vi kube-springboot-movie-people-api-config.yml
     </copy>
     ```
@@ -186,6 +196,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     Microprofile: 
     ```shell
     <copy>
+    cd movie/helidon-movie-api-mp
+
     kubectl apply -f kube-helidon-movie-api-mp-config.yml
     </copy>
     ```
@@ -193,6 +205,8 @@ Spring Boot 및 Microprofile 기반 (Oracle Helidon Framework)의 REST 서비스
     SpringBoot: 
     ```shell
     <copy>
+    cd movie/springboot-movie-people-api
+
     kubectl apply -f kube-springboot-movie-people-api-config.yml
     </copy>
     ```

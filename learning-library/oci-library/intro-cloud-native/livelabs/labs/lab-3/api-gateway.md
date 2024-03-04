@@ -159,7 +159,7 @@ SpringBoot REST (moviepeople) 예시
     <copy>
     cd movie/jet-movie-msa-ui
 
-    docker build -t icn.ocir.io/axwawciiyibv/movie/jet-movie-msa-ui:dankim .
+    docker build -t icn.ocir.io/cnsrxemtrab8/movie/jet-movie-msa-ui:dankim .
     </copy>
     ```
 
@@ -167,7 +167,7 @@ SpringBoot REST (moviepeople) 예시
 
     ```shell
     <copy>
-    docker push icn.ocir.io/axwawciiyibv/movie/jet-movie-msa-ui:dankim
+    docker push icn.ocir.io/cnsrxemtrab8/movie/jet-movie-msa-ui:dankim
     </copy>
     ```
 
