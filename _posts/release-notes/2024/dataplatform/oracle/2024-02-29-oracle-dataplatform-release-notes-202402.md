@@ -4,15 +4,15 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Release Notes 2024"
-title: "1월 OCI Oracle Data Platform 업데이트 소식"
-teaser: "2024년 1월 OCI Oracle Data Platform 업데이트 소식입니다."
+title: "2월 OCI Oracle Data Platform 업데이트 소식"
+teaser: "2024년 2월 OCI Oracle Data Platform 업데이트 소식입니다."
 author: lim
 breadcrumb: true
 categories:
   - release-notes-2024-dataplatform
 tags:
   - oci-release-notes-2024
-  - Jan-2024
+  - Feb-2024
   - DATAPLATFORM, DATABASE, BIGDATA, DATAFLOW, SPARK, ORACLE
 #
 # Styling
@@ -34,10 +34,10 @@ header: no
 {:toc}
 </div>
 
-##  You can now view the top five security assessment findings in Oracle Data Safe
-* **Services:** Data Safe
-* **Release Date:** Jan 17, 2024
-* **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/f5a674da-0d11-4d0f-8b2f-a00e4cabe01a/](https://docs.oracle.com/iaas/releasenotes/changes/f5a674da-0d11-4d0f-8b2f-a00e4cabe01a/){:target="_blank" rel="noopener"}
+##  New release for Data Integration
+* **Services:** Data Integration, Oracle Cloud Infrastructure
+* **Release Date:** Feb 17, 2024
+* **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/2049c802-ec91-4e33-8071-8f7bd0eb58cd/](https://docs.oracle.com/iaas/releasenotes/changes/2049c802-ec91-4e33-8071-8f7bd0eb58cd/){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
 
@@ -51,5 +51,10 @@ header: no
 
 
 - Data Safe 화면
-  ![DMS Policy Builder](/assets/img/dataplatform/2023/release_note/202312/15_oci_database_migration_policy_builder.png)
+ ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/02_oci_data_safe_02.png)
+<br>
+
+  ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/01_oci_data_safe.png)
+
+
 ---
