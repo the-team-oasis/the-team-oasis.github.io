@@ -41,20 +41,20 @@ header: no
 
 ### 업데이트 내용
 
-- 이제 보고서 상단에 강조 표시된 보안 평가의 상위 5개 보안 결과를 찾아 세부 정보를 쉽게 드릴다운할 수 있습니다. 보안 평가 보고서에는 이러한 5가지 제어 각각이 평가된 위험 수준이 표시됩니다.
 
-- Oracle Data Safe now supports Active Data Guard associated target databases - 이제 Active Data Guard 관련 데이터베이스를 Oracle Data Safe 대상 데이터베이스로 등록할 수 있습니다. 대상 등록 중에 기본 데이터베이스에 등록할 Standby 데이터베이스를 선택할 수 있습니다. 활동 감사에서는 이제 기본 및 대기 데이터베이스에서도 감사 레코드를 수집할 수 있습니다. 
+새로이 Release 된 Data Integration 을 통해 이제 다음을 수행할 수 있습니다.
 
-- Oracle Data Safe now allows you to configure and defer risk findings- 이제 보안 평가에서 위험 결과의 위험 수준을 무기한으로 또는 설정된 시간 동안 수동으로 조정할 수 있습니다. 또한 새로운 위험 수준인 연기됨을 사용하면 결과를 검토했으며 나중에 작업할 것임을 나타내므로 후속 보고서에서 위험으로 다시 표시되지 않습니다. 
+- Snowflake를 소스로 연결합니다.
+- 일반 REST 소스에 연결할 때 OAUTH 2.0 인증을 사용합니다.
+- 작업공간을 내보내고 가져옵니다.
+- 개체를 가져올 때 기존 데이터 자산을 제외합니다(사용자 정의 라이브러리 및 함수 제외).
 
-- Oracle Data Safe now allows you to view user schema access details - 이제 사용자 평가에서는 사용자가 액세스할 수 있는 스키마 및 테이블에 대한 세부 정보를 볼 수 있는 기능을 제공합니다. 또한 이러한 스키마와 테이블에 대해 사용자에게 부여된 권한도 확인할 수 있습니다.
+Oracle 데이터 소스(ADW/ATP 제외) 및 Fusion 애플리케이션 소스에 제약이 없는 숫자 열이 있는 경우 이제 다음 조건이 충족되면 숫자 데이터 유형으로 정밀도 없이 숫자를 유지할 수 있습니다.
 
+- 정밀도와 배율이 없는 숫자를 varchar로 처리하는 옵션을 사용합니다(데이터 자산 생성).
+- 대상에 새 데이터 엔터티 만들기(데이터 흐름 만들기)
 
-- Data Safe 화면
- ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/02_oci_data_safe_02.png)
-<br>
-
-  ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/01_oci_data_safe.png)
-
+- Data Asset 에 추가된 Data Source
+  ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/04_oci_database_integration_01.png)
 
 ---
