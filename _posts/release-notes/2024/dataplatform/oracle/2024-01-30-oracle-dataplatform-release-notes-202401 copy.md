@@ -47,7 +47,6 @@ header: no
   ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/03_oci_database_management_pdb.png)
 
 
-
 ##  You can now view the top five security assessment findings in Oracle Data Safe
 * **Services:** Data Safe
 * **Release Date:** Jan 17, 2024

@@ -128,6 +128,6 @@ Oracle 데이터 소스(ADW/ATP 제외) 및 Fusion 애플리케이션 소스에 
 - Data Integration 변환 (ETL) 설계 - 변환 샘플 데이터 조회
   ![DI](/assets/img/dataplatform/2024/release_note/202402/09_oci_data_integration_03.png)
 
-
+ 
 
 ---
