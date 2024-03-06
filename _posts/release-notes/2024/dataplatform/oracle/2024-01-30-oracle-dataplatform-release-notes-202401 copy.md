@@ -69,5 +69,7 @@ header: no
 
   ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/01_oci_data_safe.png)
 
+- Data Safe - Security Assessment 보고서 예
+ ![Data Safe](/assets/img/dataplatform/2024/release_note/202402/11_oci_data_safe_sec_assess_example.png)
 
 ---
