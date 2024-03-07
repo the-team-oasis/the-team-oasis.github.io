@@ -154,3 +154,11 @@ if(total_compute_amount > 5600000):
 
 ### 참고
 * https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.37.6/oci_cli_docs/cmdref/usage-api/usage-summary/request-summarized-usages.html
+
+### 트러블 슈팅
+- 아래와 같이 에러가 발생하는 경우
+![](/images/infrastructure/trouble-1.png " ")
+
+- python 관련 oci 모듈이 설치되지 않아 발생하는 에러입니다. 아래 두 가지 옵션을 통해서 패키지 설치 부탁 드립니다. 
+``
+![](/images/infrastructure/trouble-2.png " ")
