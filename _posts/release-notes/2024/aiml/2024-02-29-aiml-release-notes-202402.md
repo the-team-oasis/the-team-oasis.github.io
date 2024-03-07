@@ -4,15 +4,15 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Release Notes 2024"
-title: "1월 OCI AI/ML 업데이트 소식"
-teaser: "2024년 1월 OCI AI/ML 업데이트 소식입니다."
+title: "2월 OCI AI/ML 업데이트 소식"
+teaser: "2024년 2월 OCI AI/ML 업데이트 소식입니다."
 author: yhcho
 breadcrumb: true
 categories:
   - release-notes-2024-aiml
 tags:
   - oci-release-notes-2024
-  - Jan-2024
+  - Feb-2024
   - AI/ML
   - Gen AI
 #
