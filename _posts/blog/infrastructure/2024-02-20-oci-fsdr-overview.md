@@ -35,20 +35,20 @@ header: no
 </div>
 
 ### Disaster Recovery란?
-Disaster Recovery(DR)은 지진, 태풍, 홍수 같은 천재지변부터 전쟁, 해킹, 갑작스러운 시스템 오류 등 예상치 못한 재해 속에서도 서비스가 계속 운영될 수 있도록 하는 것을 말합니다. 재해 복구 목표는 Recovery Point Objective(RPO) 및 Recovery Time Objective(RTO)로 측정됩니다. RPO는 목표 복구 시점으로 "장애 발생 시 비즈니스 연속을 위해 어느 시점으로 백업할지 결정하게 될 지표"를 의미하며, RTO는 목표 복구 시간으로 "장애 발생 시 시스템을 원 상태로 복원하는데 소요되는 시간"을 의미합니다. 일반적으로 RPO와 RTO 값을 작게 가져가는 것이 좋지만, 이러한 요구사항을 충족하는데 들어가는 비용은 증가하게 됩니다.
+Disaster Recovery(DR)은 지진이나 태풍, 홍수와 같은 천재지변부터 전쟁, 해킹, 갑작스러운 시스템 오류 등의 예상치 못한 재해 속에서도 시스템 및 서비스가 계속 운영될 수 있도록 하는 것을 말합니다. 재해 복구 목표는 Recovery Point Objective(RPO: 목표 복구 시점) 및 Recovery Time Objective(RTO: 목표 복구 시간)로 측정됩니다. RPO는 "장애 발생 시 비즈니스 연속을 위해 어느 시점으로 백업할지 결정하게 될 지표"를 의미하며, RTO는 "장애 발생 시 시스템을 원 상태로 복원하는데 소요되는 시간"을 의미합니다. 일반적으로 RPO와 RTO 값을 작게 가져가는 것이 좋지만, 이러한 요구사항을 충족하는데 들어가는 비용은 증가하게 됩니다.
 
-DR 구성은 일반적으로 실 운영환경인 Primary Data Center (주 데이터센터)에 대한 DR (or Secondary, Standby) Data Center (부 데이터 센터)로 구성하며, Failover(장애 조치), Switchover(역할 전환)와 같은 프로세스를 통해서 실행합니다.
+DR 구성은 일반적으로 실 운영환경인 Primary Data Center (주 데이터센터)에 대한 DR (or Secondary, Standby) Data Center (부 데이터 센터)로 구성하며, Failover(장애 조치), Switchover(역할 전환)와 같은 워크플로우를 통해서 실행합니다.
 
 ### OCI Full Stack Disaster Recovery Service란?
-OCI Full Stack Disaster Recovery Service(이하 FSDR)은 OCI의 DRaaS(Disaster Recovery-as-a-Service) 서비스로서, 인프라, 미들웨어, 데이터베이스 및 애플리케이션을 포함하여 애플리케이션 스택의 모든 계층에 대한 포괄적인 재해 복구 기능을 제공하는 서비스입니다. OCI FSDR에서는 DR 작업을 위한 심플하고 일관된 인터페이스를 제공함으로써, 사용자는 장애 조치(Failover) 및 전환(Switchover)을 쉽게 구성하고 실행할 수 있습니다.
+OCI Full Stack Disaster Recovery Service(이하 FSDR)은 OCI의 DRaaS(Disaster Recovery-as-a-Service) 서비스로서, 인프라, 미들웨어, 데이터베이스 및 애플리케이션을 포함한 애플리케이션 스택의 모든 계층에 대한 포괄적인 재해 복구 기능을 제공하는 서비스입니다. OCI FSDR에서는 DR 작업을 위한 심플하고 일관된 인터페이스를 제공함으로써, 사용자는 장애 조치(Failover) 및 전환(Switchover)을 쉽게 구성하고 실행할 수 있습니다.
 
 ![](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT4CEE0E1B6C454B19B1A4FCA9F21F012E/Medium?cb=_cache_d840&format=jpg&channelToken=c0ac9bfde37248f38e73686663696424 " ")
 
 ### FSDR을 사용하는 이유?
-일반적으로 한두 개의 애플리케이션에 대한 복구의 경우 짧은 시간 내에 복구가 가능하겠지만, 수많은 애플리케이션에 대한 대규모 복구를 필요로 하는 상황이라면? 클라우드 환경에서 엔터프라이즈 기업은 미션 크리티컬, 비즈니스 크리티컬한 애플리케이션들을 운영하고 있으며, 이러한 시스템의 수가 수십 개에서 많게는 수백 개 이상으로 확장될 수 있습니다. 또한 각 애플리케이션 시스템은 개별 RPO와 RTO를 충족하기 위해 서로 다른 복구 프로세스를 갖는 서로 다른 배포 아키텍처를 가질 수 있습니다. FSDR은 여러 시스템을 동시에 복구해야 하는 경우, 이러한 작업 처리를 위한 대규모 재해 복구 워크플로우를 처리하도록 설계되었습니다. 단순한 사용자 액션으로 애플리케이션 스택의 한 부분만 복구하거나, 전체 애플리케이션 스택을 복구할 수 있습니다.
+일반적으로 한두 개의 애플리케이션에 대한 복구의 경우 짧은 시간 내에 복구가 가능하겠지만, 수많은 애플리케이션에 대한 대규모 복구를 필요로 하는 상황이라면 복잡한 설계 및 구축과 실행에 많은 시간이 소요될 수 있습니다. 클라우드 환경에서 엔터프라이즈 기업은 미션 크리티컬, 비즈니스 크리티컬한 애플리케이션들을 운영하고 있으며, 이러한 시스템의 수가 수십 개에서 많게는 수백 개 이상으로 확장될 수 있습니다. 또한 각 애플리케이션 시스템은 개별 RPO와 RTO를 충족하기 위해 서로 다른 복구 프로세스를 갖는 서로 다른 배포 아키텍처를 가질 수 있습니다. FSDR은 여러 시스템을 동시에 복구해야 하는 경우, 이러한 작업 처리를 위한 대규모 재해 복구 워크플로우를 처리하도록 설계되었습니다. 단순한 사용자 액션으로 애플리케이션 스택의 한 부분만 복구하거나, 전체 애플리케이션 스택을 복구할 수 있습니다.
 
 ### FSDR 주요 용어 및 개념
-* **Full Stack** - Business System, Application, Software Service의 모든 기능 계층을 집합적으로 지칭하는 데 사용하는 용어로, 일반적으로 Application은 Application Tier, Middleware Tier, Database Tier 및 Infrastructure Tier로 구성될 수 있는데, 이러한 전체 계층(Tier)를 Full Stack이라고 부릅니다.
+* **Full Stack** - Business System, Application, Software Service의 모든 기능 계층을 집합적으로 지칭하는 데 사용하는 용어로, 일반적으로 Application은 Application Tier, Middleware Tier, Database Tier 및 Infrastructure Tier로 구성될 수 있는데, 이러한 전체 계층(Tier)을 Full Stack이라고 부릅니다.
 * **Primary** - 일반적으로 애플리케이션 또는 서비스의 Production Version과 Production Version이 위치한 환경을 지칭합니다. OCI Full Stack DR에서도 Primary Role, Primary Version과 같은 용어와 함께 사용됩니다.
 * **Standby** - Primary Version 복구를 위한 Standby(대기) Version과 Standby Version이 위치한 환경입니다. Standby는 애플리케이션이나 서비스가 복원될 지역을 나타내는 이름으로도 사용됩니다. OCI Full Stack DR에서도 Standby Role, Standby Version과 같은 용어와 함께 사용됩니다.
 * **Warm Standby** - DR을 위한 Application 또는 Service의 일부 또는 전체 구성 요소가 Standby 지역에 사전 배포되어 있는 DR 모델입니다. DR 지역에 미리 배포해 놓기 때문에 운영 비용은 더 높아질 수 있지만, RTO (복구 시간)는 더 낮게 가져갈 수 있습니다.
