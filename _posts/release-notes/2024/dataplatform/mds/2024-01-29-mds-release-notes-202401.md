@@ -53,4 +53,4 @@ MySQL HeatWave 에서 백업 및 복원 작업 요청 진행 상황 모니터링
 
 아래 그림은 백업 정보에 관련된 내용입니다.
 
-![](/images/infrastructure/SCR-20240307-nitd.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240307-nitd.png " ")
