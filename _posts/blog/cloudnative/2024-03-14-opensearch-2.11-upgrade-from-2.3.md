@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "CloudNative"
 title: "OCI OpenSearch 2.3 버전에서 2.11 버전으로 업그레이드 하기"
 teaser: "OCI OpenSearch 에 새롭게 출시된 2.11 버전을 사용하기 위해서 2.3 버전에서 2.11 로 업그레이드 하는 방법에 대해 소개합니다."
-author: dankim
+author: yhcho
 breadcrumb: true
 categories:
   - cloudnative
