@@ -51,7 +51,7 @@ OCI에 프로비저닝 리소스들은 다음과 같습니다.
 
 ### OCI용 테라폼 파일 다운로드
 테라폼 프로젝트는 아래 깃헙 저장소를 통해서 제공합니다.
-[https://github.com/the-team-oasis/Infrastructure-as-Code/tree/master/oci/terraform](https://github.com/the-team-oasis/Infrastructure-as-Code/tree/master/oci/terraform)
+[https://github.com/the-team-oasis/Infrastructure-as-Code/tree/main/terraform](https://github.com/the-team-oasis/Infrastructure-as-Code/tree/main/terraform)
 
 다운로드 받은 OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 ```
