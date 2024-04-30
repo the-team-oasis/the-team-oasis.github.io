@@ -85,7 +85,7 @@ allow group <your_admin_group> to read compartments in TENANCY
 ```
 
 1. Terraform 스크립트 다운로드
-테라폼 구성파일 [oci-ods-aqua-orm.zip](./oci-ods-aqua-orm.zip) 을 다운로드 받습니다.
+테라폼 구성파일 [oci-ods-aqua-orm.zip](/assets/files/aqua/oci-ods-aqua-orm.zip) 을 다운로드 받습니다.
 2. 리소스 매니저(Resource Manager) - 스택(Stacks) 메뉴로 이동합니다.
    ![](/assets/img/aiml/2024/aqua/policy-stack-1.png " ")
 3. 실습을 진행할 구획을 선택한 후 스택 생성을 클릭하고, 다운로드 받은 zip 파일을 업로드 합니다.
