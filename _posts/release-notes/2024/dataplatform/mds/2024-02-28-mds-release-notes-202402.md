@@ -40,5 +40,4 @@ header: no
 * **Documentation:** [https://docs.oracle.com/iaas/releasenotes/changes/7de8a1af-9c71-4909-8ebc-1dfbbd009e5f/](https://docs.oracle.com/iaas/releasenotes/changes/7de8a1af-9c71-4909-8ebc-1dfbbd009e5f/){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
-MySQL HeatWave now allows you to use your own security certificates for encrypted connections. You can choose to use a …
-
+MySQL HeatWave에서 암호화된 연결에 자체 보안 인증서를 사용할 수 있습니다. DB 생성할때, 인증서를 오라클에서 제공되는 인증서를 선택 할 수 있으며, 추후 필요에 따라서 인증서를 변경할 수 있습니다. 

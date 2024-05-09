@@ -69,11 +69,11 @@ header: no
 - x86_64 
 - No Preference
 
-![](/images/infrastructure/SCR-20240306-jwag.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jwag.png " ")
 
 
 
-![](/images/infrastructure/SCR-20240306-jwbh.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jwbh.png " ")
 
 
 
@@ -89,11 +89,11 @@ header: no
 ### 업데이트 내용
 큐 서비스의 메시지를 커넥터를 통해서 Functions, Notifications, Object Storage, and Streaming 서비스에 메시지를 이동 할 수 있는 기능이 추가 되었습니다.
 
-![](/images/infrastructure/SCR-20240306-jyoe.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jyoe.png " ")
 
 아래 화면과 같이 Queue 서비스에 Target을 Functions, Notifications, Object Storage, Streaming을 선택 할 수 있습니다.
 
-![](/images/infrastructure/SCR-20240306-jyys.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jyys.png " ")
 
 
 
@@ -107,7 +107,7 @@ header: no
 - 가상머신에 대해서 멀티쓰레드 비활성화를 지원합니다. 아래 가성머신 생성시 "Advanced OCPU Settings"에서 활성화 여부를 선택할 수 있습니다. 기본적으로 활성화 되어 있습니다.
 
 
-![](/images/infrastructure/SCR-20240306-kaas.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-kaas.png " ")
 
 ### 참고
 * https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/disablesmt.htm
@@ -134,7 +134,7 @@ Secure Desktops 버그 수정 및 기능이 추가 되었습니다.
 ### 업데이트 내용
 오퍼레이션 인사이트에 활성화된 데이터베이스의 사용하지 않은 CPU 활용률 확인 할 수 있습니다.
 
-![](/images/infrastructure/SCR-20240306-jbar.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jbar.png " ")
 
 
 
@@ -166,7 +166,7 @@ Logging Analytics에서 아래 6가지 서비스에 대해서 로그 수집을 �
 
 아래 화면에서 악의적인 사용자가 웹콘솔로 접근시 토픽을 통해서 임의 메시지를 전달 할 수 있습니다. 보안상의 변조 방지를 위해서 토픽에 대해서 lock과 unlock을 설정 할 수 있습니다.
 
-![](/images/infrastructure/SCR-20240306-ncwu.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-ncwu.png " ")
 
 ### 참조
 [Adding a Topic Lock](https://docs.oracle.com/en-us/iaas/Content/Notification/Tasks/add-topic-lock.htm){:target="_blank" rel="noopener"}
@@ -183,7 +183,7 @@ Logging Analytics에서 아래 6가지 서비스에 대해서 로그 수집을 �
 로깅분석툴은 새로운 명령어(' sequence ')를 지원하게 되었습니다.
 - **"sequence"는 link 명령어에 의해서 그룹화된 레코드의 검색을 위한 명령어입니다.**
 
-![](/images/infrastructure/SCR-20240306-nfrz.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-nfrz.png " ")
 
 
 ## Logging Analytics: New workflow to ingest OCI Audit Logs from the console

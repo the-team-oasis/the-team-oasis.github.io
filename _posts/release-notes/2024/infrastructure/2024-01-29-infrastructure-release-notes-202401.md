@@ -44,7 +44,7 @@ header: no
 
 Operations Insights 새로운 대시 보드가 추가되었습니다. 새로운 대시보드는 Operations Insights 등록된 Exadata , 호스트 및 데이터 베이스에 데이터 수집에 문제가 없는지 확인 할 수 있습니다.
 
-![](/images/infrastructure/SCR-20240306-jnmq.png " ")
+![](/assets/img/infrastructure/2024/SCR-20240306-jnmq.png " ")
 
 
 
