@@ -112,6 +112,46 @@ Autoscaling 구성과 함께 모델 배치하면 얻을 수 있는 몇 가지 �
   - ![](/assets/img/aiml/2024/release/202403-speech-2.png " ")
   - ![](/assets/img/aiml/2024/release/202403-speech-3.png " ")
 
+### Oracle 모델과 OpenAI Whisper 모델 기능 비교
+
+<table class="table vl-table-bordered vl-table-divider-col" summary="Whisper model vs Oracle ASR model comparison"><caption></caption><colgroup><col style="width:1%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="compare-models__entry__1">Feature</th>
+<th class="entry" id="compare-models__entry__2">Oracle ASR model</th>
+<th class="entry" id="compare-models__entry__3">Whisper Model in Oracle Speech Service</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">Real time transcriptions</td>
+<td class="entry" headers="compare-models__entry__2">Supported</td>
+<td class="entry" headers="compare-models__entry__3">Not supported</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">Large file size </td>
+<td class="entry" headers="compare-models__entry__2">Up to 2 GB</td>
+<td class="entry" headers="compare-models__entry__3">Up to 2 GB</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">Word level timestamp</td>
+<td class="entry" headers="compare-models__entry__2">Supported</td>
+<td class="entry" headers="compare-models__entry__3">Supported</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">File format</td>
+<td class="entry" headers="compare-models__entry__2">AAC, AC3, AMR, AU, FLAC, M4A, MKV, MP3, MP4, OGA, OGG, WAV, WEBM</td>
+<td class="entry" headers="compare-models__entry__3">AAC, AC3, AMR, AU, FLAC, M4A, MKV, MP3, MP4, OGA, OGG, WAV, WEBM</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">Multilingual support</td>
+<td class="entry" headers="compare-models__entry__2">English, Spanish, French, German, Italian, Portuguese, and Hindi</td>
+<td class="entry" headers="compare-models__entry__3">Same as Oracle ASR model plus 50 other languages* </td>
+</tr>
+<tr class="row">
+<td class="entry" headers="compare-models__entry__1">Diarization</td>
+<td class="entry" headers="compare-models__entry__2">Supported</td>
+<td class="entry" headers="compare-models__entry__3">Supported</td>
+</tr>
+</tbody></table>
 
 ### OpenAI Whisper 모델
 OpenAI에서 개발한 자동 음성 인식(Automatic Speech Recognition, ASR) 모델로 2022년 9월에 오픈 소스로 공개했으며, 2022년 12월에는 기존 large 모델에서 더욱 개선된 large-v2 모델을 출시했습니다.
