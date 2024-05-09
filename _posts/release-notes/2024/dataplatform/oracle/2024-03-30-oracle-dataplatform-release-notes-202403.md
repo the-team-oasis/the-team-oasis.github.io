@@ -92,9 +92,6 @@ Oracle Globally Distributed Autonomous Database는 높은 수준의 성능과 �
 - OCI GoldenGate Data Transforms Data Flow 설계
 ![OCIGGDT](/assets/img/dataplatform/2024/release_note/202404/03_oci_goldengate_odi_03.png)
 
-- OCI GoldenGate Data Transforms 와 OCI Data Integration Use Case 에 따른 Positioning
-![OCIGGDT](/assets/img/dataplatform/2024/release_note/202404/04_oci_goldengate_odi_vs_ocidi.png)
-
 - OCI Data Integration 과 Oracle Data Integrator 의 Use Case 에 따른 Positioning
 ![OCIGGDT](/assets/img/dataplatform/2024/release_note/202404/04_oci_odi_vs_oracle_di_02.png)
 
