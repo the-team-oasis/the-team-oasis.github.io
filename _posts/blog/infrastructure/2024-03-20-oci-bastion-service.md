@@ -189,4 +189,5 @@ ssh -i <privateKey> -N -D 127.0.0.1:<localPort> -p 22 ocid1.bastionsession.oc1.a
 
 2) SOCKS5 접속
 SOCKS5 접속을 위해서는 SOCKS5 지원 클라이언트를 사용하여야 합니다. Putty 및 다양한 웹 브라우저가 SOCKS5 프로토콜을 지원합니다.  
-SOCKS5 연결은 아래 포스팅을 참고하시기 바랍니다. (Firefox 및 Putty)
+SOCKS5 연결은 아래 포스팅을 참고하시기 바랍니다. (Firefox 및 Putty)  
+[New SOCKS support for Bastion Service](https://www.ateam-oracle.com/post/new-socks-support-for-bastion-service)
