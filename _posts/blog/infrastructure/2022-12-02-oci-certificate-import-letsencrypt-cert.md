@@ -9,7 +9,7 @@ teaser: "무료로 SSL 인증서 생성이 가능한 Let's Encrypt를 활용하�
 author: yhcho
 breadcrumb: true
 categories:
-  - cloudnative
+  - infrastructure
 tags:
   - [oci, certificates, CA, lets encrypt, certbot]
 #
@@ -35,7 +35,7 @@ header: no
 
 ### OCI Certificates 소개
 OCI Certificates 서비스를 처음 접하시거나 자세한 내용이 궁금하신 경우 아래 포스팅을 통해 서비스 내용을 확인해보세요.
-> [OCI Certificates 서비스 살펴보기](/cloudnative/oci-certificate-overview/){:target="_blank" rel="noopener"}
+> [OCI Certificates 서비스 살펴보기](/infrastructure/oci-certificate-overview/){:target="_blank" rel="noopener"}
 
 ### Let's Encrypt 서비스란?
 Let’s Encrypt는 공공의 이익을 위해 ISRG(Internet Security Research Group)에서 제공하는 무료, 자동화된 개방형 CA 서비스 입니다.
@@ -231,6 +231,6 @@ certbot 프로그램에서 OCI DNS 서비스 접근을 위한 별도의 플러�
 - [https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/](https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/){:target="_blank" rel="noopener"}
 
 #### 인증서 서비스관련 포스팅
-- [OCI 인증서를 Load Balancer에 적용하기](/cloudnative/oci-certificate-with-lb/){:target="_blank" rel="noopener"}
+- [OCI 인증서를 Load Balancer에 적용하기](/infrastructure/oci-certificate-with-lb/){:target="_blank" rel="noopener"}
 - OCI 인증서를 API Gateway에 적용하기
 - OCI 인증서 서비스의 인증기관 생성 및 Load Balancer 적용하기

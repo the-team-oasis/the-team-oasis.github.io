@@ -9,7 +9,7 @@ teaser: "OCI 인증서 서비스에 등록된 인증서를 Application Load Bala
 author: yhcho
 breadcrumb: true
 categories:
-  - cloudnative
+  - infrastructure
 tags:
   - [oci, certificates, load balancer, lb, application load balancer, ssl, l7, oci certificate, oci loadbalancer, loadbalancer]
 #
@@ -35,11 +35,11 @@ header: no
 
 ### OCI Certificates 소개
 OCI Certificates 서비스를 처음 접하시거나 자세한 내용이 궁금하신 경우 아래 포스팅을 통해 서비스 내용을 확인해보세요.
-> [OCI Certificates 서비스 살펴보기](/cloudnative/oci-certificate-overview/){:target="_blank" rel="noopener"}
+> [OCI Certificates 서비스 살펴보기](/infrastructure/oci-certificate-overview/){:target="_blank" rel="noopener"}
 
 ### Let's Encrypt 인증서 발급 안내
 Let's Encrypt 인증서 발급 방법 및 OCI 인증서 서비스에 등록하기 위한 자세한 내용이 궁금하신 경우 아래 포스팅을 통해 서비스 내용을 확인해보세요.
-> [OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기](/cloudnative/oci-certificate-import-letsencrypt-cert/){:target="_blank" rel="noopener"}
+> [OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기](/infrastructure/oci-certificate-import-letsencrypt-cert/){:target="_blank" rel="noopener"}
 
 ### OCI 인증서를 OCI Load Balancer(Application)에 적용 실습 안내
 이전 포스팅 (Let's Encrypt)의 내용을 성공적으로 진행하셨다면, 등록한 인증서를 OCI 서비스중 LB에 연결하기 위한 과정을 소개하기 위한 내용을 준비하였습니다.
@@ -323,6 +323,6 @@ OCI 인증서 서비스를 사용하면 OCI 로드밸런서, API Gateway 서비�
 - [https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/](https://www.oracle.com/security/cloud-security/ssl-tls-certificates/faq/){:target="_blank" rel="noopener"}
 
 #### 인증서 서비스관련 포스팅
-- [OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기](/cloudnative/oci-certificate-import-letsencrypt-cert/){:target="_blank" rel="noopener"}
+- [OCI Certificates - Let’s Encrypt로 생성한 인증서를 OCI 인증서 서비스에 Import 하기](/infrastructure/oci-certificate-import-letsencrypt-cert/){:target="_blank" rel="noopener"}
 - OCI 인증서를 API Gateway에 적용하기
 - OCI 인증서 서비스의 인증기관 생성 및 Load Balancer 적용하기
