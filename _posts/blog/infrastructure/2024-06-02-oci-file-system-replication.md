@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Storage"
-title: "OCI File Storage 서비스에 복제 (Replication) 구성하기"
+title: "OCI File Storage 서비스의 복제 (Replication) 구성하기"
 teaser: "OCI에서 제공하는 네트워크 파일시스템 File Storage 서비스의 복재 (Replication) 구성 방법에 대해 알아봅니다."
 author: "yhcho"
 breadcrumb: true
