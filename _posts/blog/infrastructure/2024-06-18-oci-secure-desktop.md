@@ -215,3 +215,8 @@ https://published.desktops.<region-id>.oci.oraclecloud.com/client
 
 # 마무리하며...
 이렇게 Secure Desktops 관해서 알아 보았습니다. 윈도우 환경에서의 테스트는 라이센스 정책의 종류에 따라 다름을 다시 이야기 드리며, 마무리 하겠습니다.
+
+# 참고-(윈도우 이미지 빌더)
+윈도우 10, 11의 경우, 라이센스를 가지고 있는 경우, OCI에서 사용하기 위해서 패키지 및 이미지 빌더를 통해서 Secure Desktops 맞게 수정해야 합니다. 아래 링크를 통해서 필요한 정보를 확인해 주세요.
+
+    https://www.youtube.com/watch?v=QumOEIf0R3w
