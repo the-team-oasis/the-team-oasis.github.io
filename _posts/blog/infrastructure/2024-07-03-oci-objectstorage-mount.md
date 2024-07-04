@@ -4,8 +4,8 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Object Storage"
-title: "OCI Object Storage 활용하기"
-teaser: "OCI에서 Object Storage를 오픈소스를 통한 마운트 및 백업을 위한 벌크 다운로드 실습해 보겠습니다."
+title: "s3fs 이용한 OCI Object Storage Mount 방법"
+teaser: "OCI에서 Object Storage를 오픈소스를 통해 VM에 마운트해 보도록 하겠습니다."
 author: "kisukim"
 breadcrumb: true
 categories:
@@ -33,68 +33,30 @@ header: no
 {:toc}
 </div>
 
+# 1. 소개
 
-# 1.Object Storage 소개
+OCI Object Storage를 지원하는 Fuse 모듈을 리눅스 운영체제에 설치하면, OCI Object Storage 버킷을 파일 시스템의 디렉터리로 마운트할 수 있습니다. 
 
-오늘은 클라우드 스토리지 솔루션의 강자로 자리 잡은 **Oracle Cloud Infrastructure (OCI) Object Storage**에 대해 활용에 대해서 설명 하고자 합니다. 대규모 데이터를 안전하고 경제적으로 저장, 관리 및 검색할 수 있는 이 고가용성, 고성능 저장소 서비스를 통해 클라우드 환경을 어떻게 최적화할 수 있는지 함께 알아보겠습니다.
+이중 s3fs-fuse 이용한 마운트 방법에 대해서 소개 하고자 합니다.
 
-OCI Object Storage는 Oracle의 클라우드 인프라스트럭처에서 제공하는 서비스로, 다양한 유형의 비정형 데이터를 저장하는 데 최적화된 스토리지입니다. 이는 무한 확장성이 가능하며, 클라우드 네이티브 애플리케이션, 데이터 분석, 백업 및 복구 등의 용도로 사용할 수 있습니다. 간단히 말해, 모든 종류의 데이터를 손쉽게 저장하고 관리할 수 있는 만능 저장소라 할 수 있습니다.
-
-이번 포스트에서는 OCI Object Storage를 이용한 마운트 및 CLI 이용한  벌크 다운로드 그리고 rclone 사용에 대해서 확인해 보겠습니다.
-
-## 1-1.Object Storage 주요 특징
-
-- **고가용성 및 내구성**: 데이터는 여러 가용 영역에 걸쳐 복제되어 높은 내구성과 가용성을 보장합니다. 이는 데이터를 잃어버릴 걱정 없이 안전하게 보관할 수 있음을 의미합니다.
-- **무한 확장성**: 데이터 사용량이 늘어나면 자동으로 확장되어 필요할 때마다 저장소를 추가할 수 있습니다.
-- **강력한 보안**: 데이터 암호화, IAM(Identity and Access Management), VCN(Virtual Cloud Network)과 통합된 네트워크 보안 기능을 제공합니다. 이로써 데이터 접근을 철저히 통제할 수 있습니다.
-- **유연한 데이터 관리**: 라이프사이클 정책을 통해 데이터의 자동 이동, 보관 및 삭제를 관리할 수 있습니다.
-- **S3 호환성**: AWS S3 API와 호환되어 다양한 툴 및 애플리케이션과 쉽게 통합할 수 있습니다.
-
-## 1-2.Object Storage 사용 사례
-
-- **백업 및 복구**: 중요한 데이터를 백업하고 필요할 때 신속하게 복구할 수 있습니다.
-- **빅데이터 분석**: 대규모 데이터셋을 저장하고 분석 작업을 효율적으로 처리할 수 있습니다.
-- **콘텐츠 저장 및 배포**: 비디오, 이미지, 로그 파일 등 다양한 콘텐츠를 저장하고 배포하는 데 유용합니다.
-- **데이터 아카이빙**: 장기 보관이 필요한 데이터를 안전하게 아카이빙할 수 있습니다.
-
-## 1-3.Oracle Cloud Infrastructure(OCI) Object Storage 주요 기능
-
-- **라이프사이클 관리**: 특정 조건에 따라 오브젝트를 자동으로 아카이브하거나 삭제할 수 있습니다.
-- **액세스 제어**: 버킷과 오브젝트에 대한 세부적인 권한 설정을 통해 접근을 철저히 관리할 수 있습니다.
-- **데이터 암호화**: 저장 및 전송 중 데이터를 암호화하여 보안을 강화합니다.
-- **버전 관리**: 오브젝트의 여러 버전을 저장하여 필요시 이전 버전으로 복원할 수 있습니다.
-- **미터링 및 로깅**: 사용량과 접근 로그를 통해 데이터를 모니터링하고 관리할 수 있습니다.
-
-# 2. 테스트 종류
-
-## 2-1. OCI CLI 을 통한 bulk download
-
-OCI CLI(Oracle Cloud Infrastructure Command Line Interface)는 Oracle Cloud Infrastructure(OCI)의 리소스를 관리하고 자동화할 수 있는 강력한 명령줄 도구입니다.  Object Storage 저장된 데이터를 로컬 혹은 다른 환경에 저장하기 위해서 사용되는 벌크 명령어입니다.
-OCI CLI를 사용하면 다양한 OCI 서비스에 대해 명령어를 실행하여 인스턴스 생성, 네트워크 구성, 스토리지 관리 등 다양한 작업을 수행할 수 있습니다. 아래  CLI를 통한 제어를 하기 위해서는 CLI 설치해야 합니다. 아래 링크 참조하여 환경에 맞는 설치를 진행하시면 됩니다.
-
-- OCI-CLI 설치 방법 ([https://the-team-oasis.github.io/getting-started/oracle-linux-ocicli-config/](https://the-team-oasis.github.io/getting-started/oracle-linux-ocicli-config/))
-
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-0.png)
-
-- 위 화면에 리스트에 있는 파일을 아래 명령어를 통해서 한꺼번에 다운로드 받을 수 있습니다. (bulk-downlaod 관련 참고 링크 입니다. [https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.44.1/oci_cli_docs/cmdref/os/object/bulk-download.html](https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.44.1/oci_cli_docs/cmdref/os/object/bulk-download.html))
-
-```bash
-
-oci os object bulk-download -ns [네임스페이스] -bn [버켓이름] --download-dir [다운로드 저장위치]
-```
-
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-1.png)
-
-## 2-2. s3fs-fuse 이용한 마운트 활용 방법
-
-s3fs는 Amazon S3(Simple Storage Service)를 파일 시스템처럼 사용할 수 있게 해주는 FUSE(Filesystem in Userspace) 모듈입니다. s3fs를 사용하면 Amazon S3 버킷을 로컬 디렉토리로 마운트하여 마치 로컬 파일 시스템처럼 접근할 수 있습니다. 이를 통해 S3 버킷에 저장된 데이터를 쉽게 읽고 쓸 수 있습니다. 아래는 제약 사항입니다.
+s3fs-fuse 는 아래와 같은 한계를 가지고 있습니다.
 
 - Hard Link를 만들 수 없습니다.
 - 하나의 파일에 대한 동시에 여러 클라이언트의 동시 접근을 방지하지 못합니다.
 
-OCI 상에서 s3fs-fuse 사용하기 위해서는 먼저, 컴퓨트→ 인스턴스 생성 하고 아래와 같이 터미널로 접속하여 s3fs-fuse 패키지를 설치 하여야 합니다. (테스트에서는 오라클 리눅스8 버전으로 테스트 하였습니다.)
+# 2. s3fs 이용한 OCI Object Storage Mount 방법
 
-아래는 Oracle Linux 버전에 맞는 설치 명령어 입니다.
+OCI 에서 s3fs-fuse 테스트를 하기 위해서 하나의 인스터를 생성하고 생성된 인스턴스에 s3fs-fuse 설치하고 OCI Object Storage 마운트 하는 방법에 대해서 설명 하고자 합니다. 테스트 환경은 오라클 리눅스 최신 버전을 사용 하였습니다. 
+
+## 2-1. 준비사항 
+
+- 신규 혹은 기존에 만들어진 테넌시에서 OCI Object Storage 생성되어 있어야 합니다.
+- Object Storage 마운트 할 수 있도록 인스턴스가 있어야 합니다.  
+
+
+## 2-2. s3fs 패키지 설치
+
+인스턴스에 터미널로 접속하여 패키지를 설치하도록 합니다. 아래는 Oracle Linux 7, 8 에 맞는 패키지 설치 명령어 입니다.  
 
 ```bash
 ## Oracle Linux 8
@@ -111,121 +73,66 @@ sudo yum update
 sudo yum install s3fs-fuse
 ```
 
-- 설치가 정상적으로 이루어지면 아래와 같이 화면에 출력됩니다.
+- 설치가 정상적으로 이루어지면 아래와 같은 화면이 출력되며, 정상적으로 설치가 이루어집니다. 
 
 ![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-2.png)
 
-- 위 화면과 같이 Oracle Linux 8의 경우 위 shell 명령어를 통해서 설치 하여야 합니다.
+## 2-2. s3fs-fuse 환경 설정을 위한 OCI 정보 확인
+앞에서 인스턴스에 정상적으로 설치가 이루어지면 s3fs-fuse 셋팅을 위한 정보가 필요합니다. 아래는 필요한 정보를 확인하고 설정하는 방법에 대해서 확인 하도록 하겠습니다.
 
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-3.png)
+- 아래 화면에서 “**내프로파일**” 클릭하여 s3fs 설치 후 접속을 위한 키 등록을 위하여 아래와 같이 접근 합니다.
+    ![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-3.png)
 
-- 위 화면에서 s3fs-fuse 설정을 위한 “**내프로파일**” 클릭하여 키를 등록하기 위해서 이동 합니다.
+- **내프로파일** 이동하여 왼쪽 아래 리소스에 "**고객 암호 키**" 클릭 합니다.
+    ![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-4.png)
 
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-4.png)
+- 고객 암호 키를 생성 합니다. (**한번 생성된 암호키는 추후 화인이 불가하므로 따로 보관해 두도록 합니다!**)
+    ![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-5.png)
 
-- “리소스→ 고객 암호 키” 클릭하여, 고객 암호 키를 생성 합니다.
+## 2-3. 인스턴스 내 s3fs 셋팅
+s3fs 패키지 설치 및 환경 셋팅을 위한 정보를 앞에서 확인 하였습니다. 확인된 정보를 가지고 인스턴스에서 셋팅하기 위한 방법에 대해서 확인해 보도록 하겠습니다.
 
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-5.png)
+- 아래와 같이 s3fs 사용할 키 등록을 위한 정보를 아래의 경로에 만들어 줍니다. (테스트에서는 root 권한으로 테스트 하였습니다.) 또한 파일의 권한을 설정 하였습니다.
 
-- 생성된 키의 경우 다시 표시되지 않기 때문에 사용하기 위해서 따로 카피해서 보관해 둡니다.
+    ```bash
+    echo Access_key:Secret_key > ${HOME}/.passwd-s3fs chmod 600 .passwd-s3fs
+    ```
 
-```bash
-echo Access_key:Secret_key > ${HOME}/.passwd-s3fs chmod 600 .passwd-test_mount
-```
+- 생성된 passwd-s3fs 파일을 열어 OCI 확인한 **ACCESS_KEY** 와 **SECRET_KEY** 을 아래와 같이 수정하고 파일을 저장합니다. 
 
-- 접속을 위한 키 생성 및 권한을 부여해 줍니다, 위 .passwd-s3fs 파일 내용은 위 화면과 같이 생성된 키와 생성된 키 이후에 리스트에서 보여지는 접근 키 두 개의 값을 입력 해야합니다.
+    ```bash
+    ##ACCESS_KEY:SECRET_KEY 이렇게 입력해야 합니다.
+    d50db9932d2e9c9f7f4aaab8e5daae94741427af2ab:I2/In5SdddddzUUnJESJkshZVUU40NCkZYqt2QpZx8/hS+M=
+    ```
 
-```bash
-##ACCESS_KEY:SECRET_KEY 이렇게 입력해야 합니다.
-d50db9932d2e9c9f7f4aaab8e5daae94741427af2ab:I2/In5SdddddzUUnJESJkshZVUU40NCkZYqt2QpZx8/hS+M=
-```
+- 마운트할 디렉토리를 생성합니다. 아래의 경우 /mnt/objectstorage 경로에 만들도록 합니다.
+    ```bash
+    mkdir /mnt/objectstorage
+    ```
 
-```bash
-mkdir /mnt/objectstorage
-```
+- passwd-s3fs 키 정보 , 마운트 할 디렉토리까지 완료가 되면 아래 명령어를 통해서 마운트를 진행하게 됩니다. 
+    
+    ```bash
+    s3fs <BUCKET_NAME> <MOUNT_POINT> -o url=https://<NAMESPACE_NAME>.compat.objectstorage.<REGION>.oraclecloud.com -o nomultipart -o use_path_request_style -o endpoint=<REGION_CODE>
+    ```
+  
+  
+  1. <**_BUCK_NAME_**> : 생성된 오브젝트 스토리지 혹은 사용하고 계시는 오브젝트 스토리지 이름입니다.
+  2. <**_MOUNT_POINT_**> : 앞서 마운트 할 디렉토리 경로입니다.
+  3. <**_NAMESPACE_NAME_**> : 테넌시 정보에서의 네임 스페이스 이름이며, 고유 값입니다.
+  4. <**_REGION_CODE_**> : 리전 코드는 아래 링크에서 해당 되는 아래 링크 통해서 확인 할 수 있습니다.
 
-- 마운트 할 디렉토리 및 권한을 줍니다.
 
-```bash
-s3fs <BUCKET_NAME> <mount_point> -o url=https://<namespace_name>.compat.objectstorage.<REGION>.oraclecloud.com -o nomultipart -o use_path_request_style -o endpoint=<REGION>
-```
+## 2-4. 마운트 확인
+앞에서 마운트 명령어를 실행하고 정상적으로 마운트된 경우라면 아래와 같이 df 명령어를 통해서 마운트가 정상인 것을 확인 할 수 있습니다.
 
-- 오브젝트 스토리지 마운트를 위한 명령어를 실행 합니다.
-- <BUCK_NAME> : 생성된 오브젝트 스토리지 혹은 사용하고 계시는 오브젝트 스토리지 이름 입니다.
-- <mount_point> : 앞서 마운트 할 디렉토리 경로 입니다.
-- <namespace_name> : 테넌시 정보에서의 네임 스페이스 이름이며, 고유 값 입니다.
-- <REGON> : 리전 코드는 아래 링크에서 해당 되는 코드를 확인 할 수 있습니다. ([https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm))
+![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-8.png)
 
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-6.png)
-
-- 위 화면과 같이 해당 오브젝트 스토리지가 마운트 된 것을 확인 할 수 있습니다.
-
+마운트된 디렉토리를 unmount 하기 위해서는 아래 명령어를 실행 하시면 됩니다.
 ```bash
 #unmount 명령어
 fusermount -u /mnt/objectstorage
 ```
 
-## 2-3. Rclone 이용한 마운트 활용 방법 (참고)
-
-Rclone은 다양한 클라우드 저장소 서비스를 효율적으로 관리하고 동기화할 수 있는 오픈 소스 커맨드라인 툴입니다. 주로 백업 및 파일 전송에 사용되며, 여러 클라우드 스토리지 서비스를 지원합니다. 다음은 Rclone의 주요 특징과 사용법입니다.
-
-1.	**다양한 클라우드 스토리지 지원**: Amazon S3, Google Drive, Dropbox, OneDrive 등 다수의 클라우드 스토리지 서비스를 지원합니다.
-
-2.	**강력한 동기화 기능**: 로컬 파일 시스템과 클라우드 스토리지 간의 양방향 동기화가 가능합니다.
-
-3.	**암호화**: 파일과 디렉토리를 암호화하여 안전하게 클라우드에 저장할 수 있습니다.
-
-4.	**유연한 구성**: 다양한 옵션과 플래그를 통해 세부적인 설정이 가능합니다.
-
-5.	**자동화 및 스케줄링**: 크론 작업과 함께 사용하여 자동화된 백업 및 동기화 작업을 수행할 수 있습니다.
-
-- 아래 명령어는 Oracle Linux 8 버전에서 테스트를 진행하였으며, rclone 패키지 설치를 위한 명령어입니다. (**root 권한으로 실행합니다.**)
-
-```bash
-## Oracle Linux 8 버전으로 테스트 진행했습니다.
-curl https://rclone.org/install.sh | bash
-```
-
-![](/assets/img/infrastructure/2024/obsmount/objectstorage-mount-7.png)
-
-- 설치가 정상적으로 이루어지면 “rclone config” 명렁어를 실행하거나, 혹은 아래 rclone 경로에 config 파일을 만들어서 사용하면 됩니다.
-
-- rclone conifg 설정 파일 (/root/.config/rclone/rclone.conf)
-
-```jsx
-[oci]
-type = s3
-provider = Other
-env_auth = true
-access_key_id = d50db9932d2e9cadad9f7f4b8e5daae94741427affd2ab -- 샘플입니다.
-secret_access_key = I2/In5SdzUUnJESJddaakshZVUU40NCkZYqt2QpZx8a/hS+M= -- 샘플입니다.
-region = ap-tokyo-1
-acl = bucket-owner-full-control
-endpoint = https://axlpeslmb1ng.compat.objectstorage.ap-tokyo-1.oraclecloud.com -- endpoint는 앞에서 설명한 s3fs endpoint 참고 하시면 됩니다. 
-```
-
-- 위 화면에서 필요한 **access_key** 및 **secret_access_key**는 앞장에서 설명 되었던 “**고객 암호 키**” 참고 하시면 됩니다.
-
-```bash
-
-rclone ls [config 설명 이름]:[버켓이름] // oci는 config 설정에 명시된 부분이며, 이후 이름은 버켓이름 입니다. 
-rclone ls oci:bucket-20240614-1338 
-```
-
-- 위 명령어는 Rclone 통해서 디렉토리 조회하는 명령어 입니다.
-
-```bash
-rclone copy /path/to/local/folder remote:bucket/folder
-```
-
-- 클라우드 스토리지로 파일 복사 명령어 입니다.
-
-```bash
-rclone sync /path/to/local/folder remote:bucket/folder
-```
-
-- 클라우드 스토리지와 로컬 디렉터리 동기화
-
-# 마무리
-
-지금까지 오브젝트 스토리지를 활용하기 위한 여러가지 툴에 대해서 확인 하였습니다. 워크로드에 맞는 적합한 툴을 사용하여 보다 다양한 환경에서 OCI 사용 할 수 있었습니다. 감사합니다.
+# 출처 및 정보 URL
+**리전코드** : [https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm){:target="_blank" rel="noopener"}
