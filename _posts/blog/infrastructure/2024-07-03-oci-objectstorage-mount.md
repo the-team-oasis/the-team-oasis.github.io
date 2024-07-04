@@ -50,8 +50,8 @@ OCI 에서 s3fs-fuse 테스트를 하기 위해서 하나의 인스터를 생성
 
 ## 2-1. 준비사항 
 
-- 신규 혹은 기존에 만들어진 테넌시에서 OCI Object Storage 생성되어 있어야 합니다.
-- Object Storage 마운트 할 수 있도록 인스턴스가 있어야 합니다.  
+- 신규 혹은 기존에 만들어진 테넌시에서 OCI Object Storage 생성되어 있어야 합니다. (아래 출처 및 정보 URL 참고 하시면 됩니다.) 
+- Object Storage 마운트 할 수 있도록 인스턴스가 있어야 합니다. (아래 출처 및 정보 URL 참고 하시면 됩니다.)
 
 
 ## 2-2. s3fs 패키지 설치
@@ -135,4 +135,8 @@ fusermount -u /mnt/objectstorage
 ```
 
 # 출처 및 정보 URL
-**리전코드** : [https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm){:target="_blank" rel="noopener"}
+- **리전코드** : [https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm){:target="_blank" rel="noopener"}
+- **인스턴스 만들기** : [https://the-team-oasis.github.io/learning-library/oci-library/oci-basic-compute/livelabs/index.html?lab=create-compute-instance](https://the-team-oasis.github.io/learning-library/oci-library/oci-basic-compute/livelabs/index.html?lab=create-compute-instance){:target="_blank" rel="noopener"} 
+- **Object Storage 공식 문서** : [https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm){:target="_blank" rel="noopener"}
+- **Object Storage 생성 참고** : [https://the-team-oasis.github.io/infrastructure/oci-sdk-objectstorage-java/#2-object-storage-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0](https://the-team-oasis.github.io/infrastructure/oci-sdk-objectstorage-java/#2-object-storage-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0){:target="_blank" rel="noopener"}
+
