@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "OCI Object Storage"
 title: "OCI Object Storage 활용하기"
 teaser: "OCI에서 Object Storage를 오픈소스를 통한 마운트 및 백업을 위한 벌크 다운로드 실습해 보겠습니다."
-author: "kisukim"
+author: "kskim"
 breadcrumb: true
 categories:
   - infrastructure

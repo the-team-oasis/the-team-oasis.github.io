@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Scheduler"
 title: "OCI 리소스 스케줄러 이용하기"
 teaser: "OCI에서 리소스 스케줄러를 이용해서 리소스의 시작/중지를 자동화하기 위한 포스트입니다.."
-author: "kisukim"
+author: "kskim"
 breadcrumb: true
 categories:
   - infrastructure

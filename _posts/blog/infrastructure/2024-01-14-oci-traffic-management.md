@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Network"
 title: "OCI Traffic Management 소개"
 teaser: "OCI Traffic Management의 기능 중 지리적 위치 기반 트래픽 분산에 대해서 알아봅니다."
-author: kisukim
+author: kskim
 breadcrumb: true
 categories:
   - infrastructure

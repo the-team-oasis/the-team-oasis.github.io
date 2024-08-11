@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "OCI Object Storage"
 title: "s3fs 이용한 OCI Object Storage Mount 방법"
 teaser: "OCI에서 Object Storage를 오픈소스를 통해 VM에 마운트해 보도록 하겠습니다."
-author: "kisukim"
+author: "kskim"
 breadcrumb: true
 categories:
   - infrastructure

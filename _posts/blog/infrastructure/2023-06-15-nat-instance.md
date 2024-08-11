@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "Storage"
 title: "[Hands-On] NAT 컴퓨트 구성하여 트래픽 제어하기"
 teaser: "NAT 인스턴스를 통해서 NAT Gateways 역할을 대신 할 수 있습니다. "
-author: kisu.kim
+author: kskim
 date: 2023-06-15 00:00:00
 breadcrumb: true
 categories:

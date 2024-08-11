@@ -6,7 +6,7 @@ layout: page-fullwidth
 subheadline: "OCI Secure Desktops"
 title: "OCI Secure Desktops 사용하기"
 teaser: "OCI에서 Secure Desktops 방법에 대해서 실습해 보았습니다."
-author: "kisukim"
+author: "kskim"
 breadcrumb: true
 categories:
   - infrastructure
