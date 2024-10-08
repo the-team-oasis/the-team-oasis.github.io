@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Migration"
-title: "2세대 Shape 인스턴스(구세대)를 다른 리전에 3세대 Shape 인스턴스로 마이그레이션하기"
+title: "2세대 Shape 인스턴스(구세대)를 다른 리전에 3세대 Shape 인스턴스로 마이그레이션하기 Part1: Compute Instance"
 teaser: "2세대 Shape 인스턴스(구세대)를 다른 리전에 3세대 Shape 인스턴스로 마이그레이션하는 방법을 설명합니다."
 author: "dankim"
 breadcrumb: true
@@ -33,7 +33,7 @@ header: no
 {:toc}
 </div>
 
-### 개요
+### 배경
 OCI의 2세대 Shape (Standard2.x, Standard.E2.x)에서는 주로 Oracle Linux 7.6~7.8 버전을 사용하였습니다. 현재 3세대 Shape(Standard3.Flex, Standard.E3.Flex +) 이상에서는 Oracle Linux 7.9(최신 패치) 이상만 호환되기 때문에, 2세대 Shape을 3세대 Shape으로 변경이 바로 되지 않습니다. 이 포스팅을 통해서 기존 2세대 Shape 인스턴스를 다른 리전에 3세대 이상 Shape 인스턴스로 마이그레이션 하는 방법을 설명합니다.
 
 ### 시나리오
@@ -63,7 +63,7 @@ ocid1.image.oc1.ap-seoul-1.aaaaaaaai233ko3wxveyibsjf5oew4njzhmk34e42maetaynhbljb
 
 3. 인스턴스를 생성합니다.
 
-3. Nginx를 설치합니다. (선택)  
+4. Nginx를 설치합니다. (선택)  
 <img src = "/assets/img/infrastructure/2024/oci-region-migration-part1-3.png" width="70%" height="70%">
 
 ### Custom Image 생성
@@ -115,7 +115,7 @@ Pre-Authenticated Request URL을 복사합니다.
     "shapeConfig": {
     ```
 
-8. Nginx 서비스 확인  
+9. Nginx 서비스 확인  
 <img src = "/assets/img/infrastructure/2024/oci-region-migration-part1-14.png" width="70%" height="70%">
 
 
