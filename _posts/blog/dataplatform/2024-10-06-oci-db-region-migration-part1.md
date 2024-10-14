@@ -40,7 +40,7 @@ header: no
 
 [2세대 Shape 인스턴스(구세대)를 다른 리전에 3세대 Shape 인스턴스로 마이그레이션하기 Part2: WebLogic for OCI](https://the-team-oasis.github.io/infrastructure/oci-region-migration-part2/)
 
-이번 포스팅에서는 구세대 Shape에 구성된 Oracle Database 19.17 이하 버전을 다른 리전에 최신 세대 Shape으로 마이그레이션 하는 방법을 설명합니다. 여기서는 Data Guard를 활용하는 방법과 Oracle Golden Gate를 활용하는 방법 두 가지를 Part1, Part2로 나누어 설명 드립니다.
+이번 포스팅에서는 구세대 Shape에 구성된 Oracle Database 19.17 이하 버전을 다른 리전에 최신 세대 Shape으로 마이그레이션 하는 방법을 설명합니다. 여기서는 Data Guard를 활용하여 마이그레이션 하는 방법에 대해서 설명합니다.
 
 Compute 인스턴스와 유사하게 Oracle Database도 최선 Shape으로 변경할 때 다음과 같은 제약이 있습니다.  
 참고: [https://docs.oracle.com/en-us/iaas/base-database/doc/virtual-machine-db-systems.html](https://docs.oracle.com/en-us/iaas/base-database/doc/virtual-machine-db-systems.html)
