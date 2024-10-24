@@ -132,7 +132,7 @@ END;
 
 먼저 SH.CUSTOMERS 테이블 데이터 건수를 조회해 보겠습니다.
 ```sql
-SELECT COUNT(*) FROM SH.CUSTOMERS;
+SQL> SELECT COUNT(*) FROM SH.CUSTOMERS;
 
 COUNT(*)
 --------
@@ -141,7 +141,7 @@ COUNT(*)
 
 SELECT AI를 사용해보겠습니다. 먼저 **SELECT AI NARRATE**를 사용하여 자연어로 질문 및 답변을 받아보겠습니다.
 ```sql
-SELECT AI NARRATE How many customers exist;
+SQL> SELECT AI NARRATE How many customers exist;
 
 RESPONSE
 --------------------------------------------
@@ -150,7 +150,7 @@ There are 55,500 customers in the database.
 
 **SELECT AI SHOWSQL**을 사용하면 사용된 SQL을 확인할 수 있습니다.
 ```sql
-SELECT AI SHOWSQL How many customers exist;
+SQL> SELECT AI SHOWSQL How many customers exist;
 
 RESPONSE
 -------------------------------------------------------------------------
@@ -159,7 +159,7 @@ SELECT COUNT(DISTINCT "CUST_ID") AS customer_count FROM "SH"."CUSTOMERS"
 
 **SELECT AI RUNSQL**을 통해서 위 SQL을 그대로 실행한 결과를 확인합니다.
 ```sql
-SELECT AI RUNSQL How many customers exist;
+SQL> SELECT AI RUNSQL How many customers exist;
 
 CUSTOMER_COUNT
 --------------

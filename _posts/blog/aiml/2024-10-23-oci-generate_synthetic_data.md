@@ -267,7 +267,7 @@ CREATE TABLE SELECT_AI_USER.TRANSACTION_RECORD (
 
 3건의 샘플 데이터를 추가합니다.
 ```sql
-INSERT INTO select_ai_user.transaction_record (
+SQL> INSERT INTO select_ai_user.transaction_record (
     transaction_id, customer_id, transaction_amount, transaction_date, 
     payment_method, product_category, quantity, customer_age, customer_location, 
     device_used, ip_address, shipping_address, billing_address, is_fraudulent, 
@@ -282,8 +282,8 @@ INSERT INTO select_ai_user.transaction_record (
     1, 30, 20
 );
 
--- 두 번째 레코드 (잘못된 데이터 수정: customer_id, transaction_amount, customer_age, is_fraudulent)
-INSERT INTO select_ai_user.transaction_record (
+-- 두 번째 레코드
+SQL> INSERT INTO select_ai_user.transaction_record (
     transaction_id, customer_id, transaction_amount, transaction_date, 
     payment_method, product_category, quantity, customer_age, customer_location, 
     device_used, ip_address, shipping_address, billing_address, is_fraudulent, 
@@ -298,8 +298,8 @@ INSERT INTO select_ai_user.transaction_record (
     0, 16, 16
 );
 
--- 세 번째 레코드 (잘못된 데이터 수정: customer_id, transaction_amount, customer_age, is_fraudulent)
-INSERT INTO select_ai_user.transaction_record (
+-- 세 번째 레코드
+SQL> INSERT INTO select_ai_user.transaction_record (
     transaction_id, customer_id, transaction_amount, transaction_date, 
     payment_method, product_category, quantity, customer_age, customer_location, 
     device_used, ip_address, shipping_address, billing_address, is_fraudulent, 
@@ -332,7 +332,7 @@ END;
 
 TRANSACTION_RECORD 테이블을 조회해 보면 10건의 합성 데이터가 생성된 것을 확인할 수 있습니다.
 ```sql
-SELECT * FROM SELECT_AI_USER.TRANSACTION_RECORD;
+SQL> SELECT * FROM SELECT_AI_USER.TRANSACTION_RECORD;
 
 TRANSACTION_ID                       CUSTOMER_ID TRANSACTION_AMOUNT TRANSACTION_DATE    PAYMENT_METHOD PRODUCT_CATEGORY   QUANTITY CUSTOMER_AGE  CUSTOMER_LOCATION DEVICE_USED IP_ADDRESS      SHIPPING_ADDRESS                                     BILLING_ADDRESS                                     IS_FRAUDULENT ACCOUNT_AGE_DAYS TRANSACTION_HOUR
 ------------------------------------ ----------- ------------------ ------------------- -------------- ------------------ -------- ------------- ----------------- ----------- --------------- ---------------------------------------------------- --------------------------------------------------- ------------- ---------------- ----------------
@@ -350,6 +350,46 @@ c5f3928c-4066-432a-9484-14266444646f          21              98.01 2024-09-29 1
 2c966248-2050-442a-8182-164664446473          28               8.25 2024-09-19 18:27    credit card    electronics               1            19 Brookside         laptop      198.51.100.22   1122 Elm Street, Denver, CO 80201                    1122 Elm Street, Denver, CO 80201                               0               12               18
 2c966248-2051-442a-8182-164664446474          29               46.1 2024-11-04 12:06    PayPal         toys                      3            33 Riverside         mobile      172.16.254.2    5678 Oak Avenue, Greenville, NY 12345                5678 Oak Avenue, Greenville, NY 12345                           1               54               12
 ```
+
+### 합성 데이터 생성 4: table_statistics 파라미터 사용
+table_statistics 파라미터는 테이블 통계를 사용할지 여부를 결정하는 옵션입니다. 예를 들어 위 TRANSACTION_RECORD 테이블에 있는 PAYMENT_METHOD에 기본 샘플 데이터로 'debit card',  'bank transfer', 'PayPal'의 고유의 값들이 있다고 가정하면, table_statistics 값이 true일 경우 합성 데이터 생성 시 이 고유의 값을 그대로 사용하겠다는 의미가 됩니다. 만약 table_statistics 값을 false로 지정한다면 고유 값이나 데이터 분포와는 상관없이 무작위로 데이터를 생성할 수 있습니다. 이 경우 PAYMENT_METHOD에 'debit card',  'bank transfer', 'PayPal' 값이 아닌 다른 값이 생성될 수 있습니다. table_statistics의 기본값은 true 입니다.
+
+**table_statistics 값이 false인 경우**
+```sql
+BEGIN
+  DBMS_CLOUD_AI.GENERATE_SYNTHETIC_DATA(
+    profile_name      => 'GENAI',
+    object_name       => 'TRANSACTION_RECORD',
+    owner_name        => 'SELECT_AI_USER',
+    record_count      => 10,
+    user_prompt       => 'Using varchar2 type for tansaction_date and the string format is ''YYYY-MM-DD HH24:MI'' (e.g., ''2024-10-01 20:08'')',
+    params            => '{"sample_rows":3, ,"table_statistics":false}'
+  );
+END;
+/
+```
+
+TRANSACTION_RECORD 테이블의 TRANSACTION_METHOD 값을 조회해 보면, 기존의 'debit card',  'bank transfer', 'PayPal' 값 외에도 다른 값(Apple Pay, cash, credit card)이 나오는 것을 확인할 수 있습니다.
+```sql
+SQL> SELECT TRANSACTION_METHOD FROM SELECT_AI_USER.TRANSACTION_RECORD;
+
+TRANSACTION_METHOD
+------------------
+debit card
+bank transfer
+PayPal
+credit card
+bank transfer
+Apple Pay
+PayPal
+credit card
+cash
+debit card
+PayPal
+bank transfer
+cash
+```
+
 
 ## 참고
 * https://blogs.oracle.com/database/post/announcing-select-ai-for-synthetic-data-generation

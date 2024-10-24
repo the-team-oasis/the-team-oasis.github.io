@@ -90,7 +90,7 @@ END;
 
 아래 예시 명령어를 통해서 업로드 한 파일이 잘 조회되는지 확인합니다.
 ```sql
-SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_CRED','https://objectstorage.ap-seoul-1.oraclecloud.com/n/myobjectstoragenamespace/b/mybucket/o/');
+SQL> SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_CRED','https://objectstorage.ap-seoul-1.oraclecloud.com/n/myobjectstoragenamespace/b/mybucket/o/');
 ```
 
 ### Profile 생성
@@ -138,7 +138,7 @@ END;
 이제 실행해 보도록 하겠습니다. rocket.txt 파일내에서 설명하는 OraBooster는 실제하지 않는 가상의 로켓 엔진입니다. 먼저 **SELECT AI CHAT** 명령어를 통해서 RAG를 사용하지 않고 LLM만을 통해서 질문을 해보도록 합니다.
 
 ```sql
-SELECT AI CHAT 'OraBooster는 무엇인가요?'; -- without RAG
+SQL> SELECT AI CHAT 'OraBooster는 무엇인가요?'; -- without RAG
 ```
 
 ```
@@ -162,7 +162,7 @@ LLM이 존재하지 않는 OraBooster가 마치 존재하는 것처럼 환각(Ha
 
 이제 **SELECT AI NARRATE** 명령어를 사용하여 RAG를 사용하도록 해보겠습니다.
 ```sql
-SELECT AI NARRATE 'OraBooster란 무엇인가요?'; -- with RAG
+SQL> SELECT AI NARRATE 'OraBooster란 무엇인가요?'; -- with RAG
 ```
 
 ```
@@ -186,7 +186,7 @@ Sources:
 Vector Index 생성 시 **refresh_rate** 값이 1로 지정되어 있는데, 이는 1분 단위로 데이터 소스(Object Storage)의 데이터를 자동 색인합니다. 우선 다음 쿼리를 실행해 봅니다.
 
 ```sql
-SELECT AI narrate '클린에어의 전력 요금은 어느 정도입니까?';
+SQL> SELECT AI narrate '클린에어의 전력 요금은 어느 정도입니까?';
 ```
 
 ```
@@ -207,7 +207,7 @@ Sorry, unfortunately the response for your natural language prompt was not gener
 이제 위에서 다운로드 받은 sample_calllog.csv 파일을 Bucket에 업로드한 후 다시 조회해봅니다.
 
 ```sql
-SELECT AI narrate '클린에어의 전력 요금은 어느 정도입니까?';
+SQL> SELECT AI narrate '클린에어의 전력 요금은 어느 정도입니까?';
 ```
 
 ```
