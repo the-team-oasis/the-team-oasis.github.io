@@ -98,8 +98,6 @@ spring:
 ```
 
 ## 소스 설명
-소스 안에는 SELECT_AI_USER 스키마의 MOVIE 테이블 조회하는 부분도 포함되어 있지만, 여기서는 Select AI 실행을 위한 부분만 살펴보겠습니다. SELECT_AI_USER 스키마의 MOVIE 테이블 조회는 Oracle 23ai Synthetic Data (합성 데이터)편에서 테이블 생성하면 조회할 수 있습니다.
-
 **SelectAIController.java**에는 **narrate**, **showsql**, **runsql**을 수행하는 함수가 작성되어 있습니다.
 
 **narrate 함수**
