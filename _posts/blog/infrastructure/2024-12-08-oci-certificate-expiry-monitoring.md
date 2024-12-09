@@ -234,7 +234,7 @@ Email Delivery 구성이 완료되면 SMTP Credential 생성을 위해 OCI Conso
 * **Secret Contents:** 앞서 생성한 SMTP Credential의 Password
 
 #### Function Configuration에서 필요한 환경 변수 등록, Function Log 활성화
-이제 Function 코드 내에서 사용하기 위한 환경 변수를 설정합니다. 앞서 생성한 Function Application으로 이동한 후 왼족 **Configuration**을 선택합니다. 다음과 같이 키와 값을 입력하고 추가합니다.
+이제 Function 코드 내에서 사용하기 위한 환경 변수를 설정합니다. 앞서 생성한 Function Application으로 이동한 후 왼족 **Configuration**을 선택합니다. 다음과 같이 키와 값을 입력하고 추가합니다. Let’s Encrypt 인증서는 일반적으로 3개월이므로, 테스트를 위해 EXPIRY_CRITICAL_DAYS 값과 EXPIRY_WARNING_DAYS 값을 100일로 설정하였습니다.
 - OCI_TENANCY_OCID (값: Tenancy OCID)
 - EXPIRY_CRITICAL_DAYS (값: 이메일 만료 전 **Critial** 이메일 및 로그로 받기 시작하고 싶은 날 (e.g. 100 (일)))
 - EXPIRY_WARNING_DAYS (값: 이메일 만료 전 **Warning** 이메일 및 로그로 받기 시작하고 싶은 날 (e.g. 100 (일)))
