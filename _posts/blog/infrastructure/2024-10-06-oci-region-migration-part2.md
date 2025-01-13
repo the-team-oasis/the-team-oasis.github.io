@@ -63,10 +63,10 @@ header: no
 #### 1. 서울 리전 준비 (소스)
 구세대 Shape 기반의 WebLogic for OCI는 테라폼 0.1 버전으로 작성되어 있으며, 일반적으로 12.2.1.3 버전을 사용하며, 하나의 블록 볼륨으로만 구성됩니다. (현재는 2개(mw, data)) 해당 테라폼 구성은 현재 구할수가 없어서(구하더라도 현재 OCI Resource Manager에서는 테라폼 0.1은 지원하지 않아 실행 불가능), 현재 마켓 플레이스에서 제공되는 테라폼 스택에 12.2.1.3 설치가 되도록 수정한 버전을 사용하도록 합니다.
 
-[WebLogic_EE_12.2.1.3_BYOL.zip](/assets/files/infrastructure/2024/WebLogic_EE_12.2.1.3_BYOL.zip)
+[WebLogic_EE_12.2.1.3_UCM_Stack.zip](/assets/files/infrastructure/2024/WebLogic_EE_12.2.1.3_UCM_Stack.zip)
 
 1.1. 위 테라폼 구성 파일을 다운로드 받습니다.  
-1.2. ***메뉴 > Developer Serices > Resource Manager > Stacks*** 선택 후 **Create Stack**을 클릭합니다. Stack Configuration에서 **.Zip** 파일을 선택한 후 위에서 다운로드 받은 **WebLogic_EE_12.2.1.3_BYOL.zip** 파일을 업로드 한 후 **Next**를 선택합니다.  
+1.2. ***메뉴 > Developer Serices > Resource Manager > Stacks*** 선택 후 **Create Stack**을 클릭합니다. Stack Configuration에서 **.Zip** 파일을 선택한 후 위에서 다운로드 받은 **WebLogic_EE_12.2.1.3_UCM_Stack.zip** 파일을 업로드 한 후 **Next**를 선택합니다.  
 1.3. **Stack Configuration** 구성에서 다음과 같이 구성합니다.
   * **Resource Name Prefix:** 모든 리소스명 앞에 붙게됩니다. (e.g. wls12)
   * **SSH Public Key:** 인스턴스에 접속할 때 사용할 SSH 키
