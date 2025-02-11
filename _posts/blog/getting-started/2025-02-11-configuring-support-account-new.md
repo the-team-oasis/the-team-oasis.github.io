@@ -73,6 +73,7 @@ header: no
 
 아래와 같이 신규 사용자를 추가하고 해당 사용자를 MOS에 등록하는 절차는 아래와 같습니다.
 
+
 ![](/assets/img/getting-started/2025/mos_new_image8.png " ")
 
 - 신규 사용자를 생성하고 MOS 등록 절차를 이전과 같이 동일하게 진행하면 SR 생성이 가능합니다.
