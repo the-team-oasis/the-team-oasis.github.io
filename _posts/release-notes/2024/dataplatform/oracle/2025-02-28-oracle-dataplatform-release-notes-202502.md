@@ -85,6 +85,10 @@ GoldenGate 23ai는 사용성, 성능, 보안, 거버넌스 및 개발자 API를 
   ![OCIGG23AICON](/assets/img/dataplatform/2024/release_note/202502/07_oci_goldengate_old_ui.png)
   - 신규 버전 GUI
   ![OCIGG23AICON](/assets/img/dataplatform/2024/release_note/202502/08_oci_goldengate_new_ui.png)
- 
+
+- 손쉬운 GoldenGate Console UI Public Access 설정
+  - 기존 버전에서는 Public Access 를 제공하지 않아 Private 통신을 위해 별도의 Windows Instance 를 통해 GoldenGate Console 액세스를 했었으나 손쉽게 Public Access 를 설정할 수 있게 변경되었습니다.
+  - Puublic Access 를 Enable 하게 되면 Public Subnet 에 별도의 Load Balancer 가 자동으로 설정이 됩니다.
+  ![OCIGG23AICON](/assets/img/dataplatform/2024/release_note/202502/09_oci_goldengate_public_access.png) 
 
 ---
