@@ -37,6 +37,8 @@ header: no
 
 # Data Science
 
+---
+
 ## Data Science now Supports Text Embeddings Inference (TEI) Framework
 * **Services:** Data Science
 * **Release Date:** January 10, 2025
@@ -72,6 +74,8 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 ![](/assets/img/aiml/2025/release/202501-ds-ui-1.png " ")
 ![](/assets/img/aiml/2025/release/202501-ds-ui.png " ")
 
+---
+
 ## Data Science AI Quick Actions v 1.0.6a
 * **Services:** Data Science
 * **Release Date:** January 30, 2025
@@ -105,9 +109,25 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
   - **더 정확하고 컨텍스트(Context)에 맞는 응답**을 제공할 수 있습니다.
 
 
+---
 
 # Generative AI
 
+---
+## Use Meta Llama 3.2 90B Vision and 11B Vision in all OCI Generative AI regions
+* **Services:** Generative AI
+* **Release Date:** Jan 2, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/data-science/scheduler.htm](https://docs.oracle.com/en-us/iaas/releasenotes/data-science/scheduler.htm){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+2025년 1월 2일부터 Meta Llama 3.2 90B Vision 및 11B Vision 모델이 모든 OCI Generative AI 리전에서 사용 가능해 졌습니다.
+
+#### **추가 정보**
+- **[OCI Generative AI에서 제공하는 사전 학습 모델 목록](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm)**
+- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**
+
+
+---
 ## Use the seed parameter in OCI Generative AI
 * **Services:** Generative AI
 * **Release Date:** Jan 30, 2025
@@ -139,3 +159,34 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 - **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**  
 
 ![](/assets/img/aiml/2025/release/202501-genai-seed-param.png " ")
+
+
+---
+
+## View code samples for LangChain and LlamaIndex in OCI Generative AI
+* **Services:** Generative AI
+* **Release Date:** Jan 30, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/generative-ai/view-code.htm](https://docs.oracle.com/en-us/iaas/releasenotes/generative-ai/view-code.htm){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+이제 **OCI 생성형 AI (OCI Generative AI)**는 **LangChain** 및 **LlamaIndex** 코드 샘플을  
+**OCI 생성형 AI 플레이그라운드 (OCI Generative AI Playground)**에서 지원합니다.
+
+#### **LangChain 및 LlamaIndex 통합**
+**OCI 생성형 AI**는 **대형 언어 모델(LLMs, Large Language Models)**을 제공하는 플랫폼으로,  
+**LangChain** 및 **LlamaIndex**와의 **통합(Integration)**을 지원합니다.
+
+- **플레이그라운드에서 채팅(Chat) 또는 텍스트 임베딩(Text Embeddings)을 생성할 때**,
+  - **OCI 생성형 AI**가 **LangChain 및 LlamaIndex용 코드 샘플**을 자동으로 생성합니다.
+  - 생성된 코드 샘플에는 **사용자의 프롬프트 및 임베딩 정보**가 포함됩니다.
+- 이를 활용하여 **자신의 애플리케이션(Application)**에서 직접 실행할 수 있습니다.
+
+#### **추가 정보**
+OCI 생성형 AI의 **LangChain 및 LlamaIndex 통합**에 대한 자세한 내용은 아래 문서를 참고하세요:
+
+- [**LangChain 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/langchain.htm)
+- [**LlamaIndex 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/llama-index.htm#llama-index)
+
+![](/assets/img/aiml/2025/release/202501-genai-code.png " ")
+
