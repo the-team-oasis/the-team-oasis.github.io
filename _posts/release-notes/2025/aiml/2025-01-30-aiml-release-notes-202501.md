@@ -3,16 +3,16 @@ layout: page-fullwidth
 #
 # Content
 #
-subheadline: "OCI Release Notes 2024"
-title: "7월 OCI AI/ML 업데이트 소식"
-teaser: "2024년 7월 OCI AI/ML 업데이트 소식입니다."
+subheadline: "OCI Release Notes 2025"
+title: "1월 OCI AI/ML 업데이트 소식"
+teaser: "2025년 1월 OCI AI/ML 업데이트 소식입니다."
 author: yhcho
 breadcrumb: true
 categories:
-  - release-notes-2024-aiml
+  - release-notes-2025-aiml
 tags:
-  - oci-release-notes-2024
-  - July-2024
+  - oci-release-notes-2025
+  - Jan-2025
   - AI/ML
   - Gen AI
 #
@@ -35,13 +35,107 @@ header: no
 {:toc}
 </div>
 
-## Fine-tune the Cohere Command R model in OCI Generative AI
-* **Services:** Generative AI
-* **Release Date:** July 17, 2024
-* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/changes/545be91d-23e5-47ce-8979-72006d0ec410/index.htm](https://docs.oracle.com/en-us/iaas/releasenotes/changes/545be91d-23e5-47ce-8979-72006d0ec410/index.htm){:target="_blank" rel="noopener"}
+# Data Science
+
+## Data Science now Supports Text Embeddings Inference (TEI) Framework
+* **Services:** Data Science
+* **Release Date:** January 10, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/data-science/aqua-105.htm](https://docs.oracle.com/en-us/iaas/releasenotes/data-science/aqua-105.htm){:target="_blank" rel="noopener"}
+ 
+### 업데이트 내용
+
+#### 데이터 사이언스 AI 퀵 액션(Quick Actions) 기능 업데이트
+
+1. TEI (Text Embeddings Inference) 프레임워크 지원
+데이터 사이언스 AI 퀵 액션에서 **TEI (Text Embeddings Inference) 프레임워크**를 지원합니다.  
+BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
+
+- 컨테이너 이미지를 **OCIR(Oracle Cloud Infrastructure Registry)**에 푸시
+- 추론(Inference) 컨테이너로 **TEI 선택**
+- 모델 등록 시 **이미지 URI 지정**
+  ![](/assets/img/aiml/2025/release/202501-ds-tei.png " ")
+2. 서비스 검증 모델 추가
+- **[e5-mistral-7b-instruct](https://huggingface.co/intfloat/e5-mistral-7b-instruct/tree/main)** 모델이 **서비스 검증 모델**로 추가되었습니다.
+
+3. 환경 탐색기(Environment Explorer) 개선
+- **탭 수가 두 개로 단순화**되었습니다:
+    - **기본 모델(Base models)**
+    - **미세 조정된 모델(Fine-tuned models)**
+
+  - **기본 모델(Base models) 탭**에서는 다음을 확인할 수 있습니다:
+      - 서비스에서 **캐시된 모델**
+      - **서비스 검증 모델**, 등록 후 AI Quick Actions에서 사용 가능
+      - 사용자가 직접 등록한 **맞춤형 모델**
+
+  - 각각의 모델에는 **"Ready to Deploy"(배포 준비 완료)**, **"Ready to Register"(등록 준비 완료)** 등의 태그가 포함된 **모델 카드**가 있어 쉽게 구분할 수 있습니다.
+
+![](/assets/img/aiml/2025/release/202501-ds-ui-1.png " ")
+![](/assets/img/aiml/2025/release/202501-ds-ui.png " ")
+
+## Data Science AI Quick Actions v 1.0.6a
+* **Services:** Data Science
+* **Release Date:** January 30, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/data-science/aqua-106-a.htm](https://docs.oracle.com/en-us/iaas/releasenotes/data-science/aqua-106-a.htm){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
-OCI 생성 AI는 이제 사전 학습된 Cohere Command R 모델의 파인튜닝을 지원합니다. Command R은 코드 생성, 검색 기반 생성(RAG), 도구 사용, 에이전트와 같은 복잡한 워크플로를 처리하는 지시를 따르는 대화형 모델입니다.
-T-Few 방법을 사용하여 사용자 고유의 데이터셋으로 Command R 모델을 파인튜닝하여 AI 기능을 향상시킬 수 있습니다. 파인튜닝에 대한 자세한 내용은 [fine-tuning the base models](https://docs.oracle.com/iaas/Content/generative-ai/fine-tune-models.htm)을 참조하세요.
+#### 데이터 사이언스 AI 퀵 액션 v1.0.6a 업데이트 사항
 
-![](/assets/img/aiml/2024/release/202407-genai-finetune-r.png " ")
+1. 다중 추론 엔드포인트 지원 확대 (Expanded Multiple Inference Endpoint Support)
+- 이제 **추론 플레이그라운드 (Inference Playground)**에서 **채팅 완성 (Chat Completion) 엔드포인트**를 사용할 수 있습니다.
+- **`Copy payload`** 기능을 선택하면,
+  - **모델 엔드포인트 (Model Endpoint) 정보**를 확인할 수 있으며,
+  - **완성 (Completion) 또는 채팅 완성 (Chat Completion) 추론 형식에 맞는 CLI 호출 코드 샘플**을 얻을 수 있습니다.
+
+2. 모델 등록 시 특정 파일 제외 기능 추가 (Exclusion of Files During Model Registration)
+- 모델 등록 과정에서 **파일 형식(File Format)**에 따라 특정 파일을 제외할 수 있습니다.
+- 예를 들어, **Hugging Face에서 AI 퀵 액션 (AI Quick Actions)**으로 모델을 가져올 때,
+  - `.txt` 및 `.pdf` 같은 특정 파일을 다운로드하지 않도록 설정할 수 있습니다.
+
+3. 모델 상세 페이지에서 모델 OCID 복사 기능 추가 (Addition of Copy Model OCID Feature in Model Details Page)
+- 모델 등록 후, **콘솔(Console)**을 직접 이동하지 않아도,
+  - **모델 상세 페이지 (Model Details Page)**에서 **모델 OCID**를 확인하고 복사할 수 있습니다.
+
+4. 모델 상세 페이지 UI 변경 (Model Details Actions Button UI Changes)
+- 모델 상세 페이지의 **작업 버튼 UI(User Interface)**가 개선되었습니다.
+
+5. 툴 콜링 지원 (Tool Calling Support)
+- **AI 퀵 액션 (AI Quick Actions)**는 이제 **툴 콜링 (Tool Calling) 기능을 지원하는 vLLM 컨테이너**를 제공합니다.
+- **툴 콜링 (Tool Calling)** 기능을 활용하면,
+  - 모델이 **추론(Inference) 과정에서 외부 함수(External Functions)**를 호출할 수 있어,
+  - **더 정확하고 컨텍스트(Context)에 맞는 응답**을 제공할 수 있습니다.
+
+
+
+# Generative AI
+
+## Use the seed parameter in OCI Generative AI
+* **Services:** Generative AI
+* **Release Date:** Jan 30, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/generative-ai/seed-parameter.htm](https://docs.oracle.com/en-us/iaas/releasenotes/generative-ai/seed-parameter.htm){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+이제 **OCI 생성형 AI (OCI Generative AI)**는 **시드(Seed) 파라미터**를  
+**OCI 생성형 AI 플레이그라운드(Playground), CLI, API**에서 지원합니다.
+
+#### **시드(Seed) 파라미터란?**
+- **시드 파라미터를 설정하면, 모델이 가능한 한 동일한 토큰을 결정론적으로 샘플링**합니다.
+- 동일한 **시드 값과 동일한 요청 파라미터**를 사용할 경우,
+  - 모델이 **일관된 결과**를 반환하도록 동작합니다.
+
+#### **지원 모델**
+이 기능은 **OCI 생성형 AI 서비스에서 지원하는 모든 Meta Llama 및 Cohere Command 모델**에서 사용 가능합니다.
+
+#### **시드 파라미터 사용 방법**
+- **API에서 사용하기**
+  - **Cohere 모델**의 경우: [CohereChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/CohereChatRequest)
+  - **Meta Llama 모델**의 경우: [GenericChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/GenericChatRequest)
+
+- **플레이그라운드에서 사용하기**
+  - 자세한 내용은 [콘솔에서 채팅 사용하기](https://docs.oracle.com/iaas/Content/generative-ai/use-playground-chat.htm#chat) 문서를 참고하세요.
+
+#### **추가 정보**
+- **[시드(Seed) 파라미터 정의](https://docs.oracle.com/iaas/Content/generative-ai/chat-models.htm#parameters-chat)**
+- **[OCI 생성형 AI에서 지원하는 사전 학습 모델](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm)**
+- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**  
+
+![](/assets/img/aiml/2025/release/202501-genai-seed-param.png " ")
