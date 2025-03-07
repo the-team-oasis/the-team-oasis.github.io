@@ -57,7 +57,7 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 - 모델 등록 시 **이미지 URI 지정**
   ![](/assets/img/aiml/2025/release/202501-ds-tei.png " ")
 2. 서비스 검증 모델 추가
-- **[e5-mistral-7b-instruct](https://huggingface.co/intfloat/e5-mistral-7b-instruct/tree/main)** 모델이 **서비스 검증 모델**로 추가되었습니다.
+- **[e5-mistral-7b-instruct](https://huggingface.co/intfloat/e5-mistral-7b-instruct/tree/main){:target="_blank" rel="noopener"}** 모델이 **서비스 검증 모델**로 추가되었습니다.
 
 3. 환경 탐색기(Environment Explorer) 개선
 - **탭 수가 두 개로 단순화**되었습니다:
@@ -123,8 +123,8 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 2025년 1월 2일부터 Meta Llama 3.2 90B Vision 및 11B Vision 모델이 모든 OCI Generative AI 리전에서 사용 가능해 졌습니다.
 
 #### **추가 정보**
-- **[OCI Generative AI에서 제공하는 사전 학습 모델 목록](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm)**
-- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**
+- **[OCI Generative AI에서 제공하는 사전 학습 모델 목록](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm){:target="_blank" rel="noopener"}**
+- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm){:target="_blank" rel="noopener"}**
 
 
 ---
@@ -147,16 +147,16 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 
 #### **시드 파라미터 사용 방법**
 - **API에서 사용하기**
-  - **Cohere 모델**의 경우: [CohereChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/CohereChatRequest)
-  - **Meta Llama 모델**의 경우: [GenericChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/GenericChatRequest)
+  - **Cohere 모델**의 경우: [CohereChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/CohereChatRequest){:target="_blank" rel="noopener"}
+  - **Meta Llama 모델**의 경우: [GenericChatRequest](https://docs.oracle.com/iaas/api/#/en/generative-ai-inference/latest/datatypes/GenericChatRequest){:target="_blank" rel="noopener"}
 
 - **플레이그라운드에서 사용하기**
-  - 자세한 내용은 [콘솔에서 채팅 사용하기](https://docs.oracle.com/iaas/Content/generative-ai/use-playground-chat.htm#chat) 문서를 참고하세요.
+  - 자세한 내용은 [콘솔에서 채팅 사용하기](https://docs.oracle.com/iaas/Content/generative-ai/use-playground-chat.htm#chat){:target="_blank" rel="noopener"} 문서를 참고하세요.
 
 #### **추가 정보**
-- **[시드(Seed) 파라미터 정의](https://docs.oracle.com/iaas/Content/generative-ai/chat-models.htm#parameters-chat)**
-- **[OCI 생성형 AI에서 지원하는 사전 학습 모델](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm)**
-- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**  
+- **[시드(Seed) 파라미터 정의](https://docs.oracle.com/iaas/Content/generative-ai/chat-models.htm#parameters-chat){:target="_blank" rel="noopener"}**
+- **[OCI 생성형 AI에서 지원하는 사전 학습 모델](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm){:target="_blank" rel="noopener"}**
+- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm){:target="_blank" rel="noopener"}**  
 
 ![](/assets/img/aiml/2025/release/202501-genai-seed-param.png " ")
 
@@ -185,8 +185,8 @@ BYOC(Bring Your Own Container) 방식으로 TEI를 사용할 수 있습니다:
 #### **추가 정보**
 OCI 생성형 AI의 **LangChain 및 LlamaIndex 통합**에 대한 자세한 내용은 아래 문서를 참고하세요:
 
-- [**LangChain 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/langchain.htm)
-- [**LlamaIndex 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/llama-index.htm#llama-index)
+- [**LangChain 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/langchain.htm){:target="_blank" rel="noopener"}
+- [**LlamaIndex 통합 가이드**](https://docs.oracle.com/iaas/Content/generative-ai/llama-index.htm#llama-index){:target="_blank" rel="noopener"}
 
 ![](/assets/img/aiml/2025/release/202501-genai-code.png " ")
 

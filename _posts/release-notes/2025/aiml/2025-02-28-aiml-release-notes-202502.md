@@ -58,11 +58,6 @@ header: no
 - **ML 모니터링 작업 (ML Monitoring Job)**을 **매일 실행**
 - **배치 추론 작업 (Batch Inference Job)**을 **4시간마다 실행**
 
-**추가 정보**
-더 자세한 정보는 다음 문서를 참고하세요:
-- [**Jobs**](#)
-- [**Pipelines**](#)
-
 
 ---
 
@@ -91,7 +86,7 @@ OCI 콘솔(Chat 인터페이스), API, 전용 엔드포인트를 통해 모델�
     - **128,000 토큰 컨텍스트 길이 유지**
 - **Llama 3.1 70B 대비 개선된 성능**
     - **추론(Reasoning), 코딩(Coding), 수학(Math), 지시 사항 준수(Instruction-Following) 성능 향상**
-    - 자세한 내용은 **[Llama 3.3 모델 카드](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/MODEL_CARD.md)** 참고
+    - 자세한 내용은 **[Llama 3.3 모델 카드](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/MODEL_CARD.md){:target="_blank" rel="noopener"}** 참고
 - **온디맨드 추론(On-Demand Inferencing) 및 전용 호스팅(Dedicated Hosting) 지원**
 
 ---
@@ -106,13 +101,13 @@ OCI 콘솔(Chat 인터페이스), API, 전용 엔드포인트를 통해 모델�
 ---
 
 #### **중요한 안내 (Important Note)**
-- 이 모델을 사용하기 전에 **Meta의 [Llama 3.3 허용 사용 정책(Acceptable Use Policy)](https://www.llama.com/llama3_3/use-policy/)**을 반드시 검토하세요.
+- 이 모델을 사용하기 전에 **Meta의 [Llama 3.3 허용 사용 정책(Acceptable Use Policy)](https://www.llama.com/llama3_3/use-policy/){:target="_blank" rel="noopener"}**을 반드시 검토하세요.
 
 ---
 
 #### **추가 정보**
-- **[OCI Generative AI에서 제공하는 사전 학습 모델 목록](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm)**
-- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm)**
+- **[OCI Generative AI에서 제공하는 사전 학습 모델 목록](https://docs.oracle.com/iaas/Content/generative-ai/pretrained-models.htm){:target="_blank" rel="noopener"}**
+- **[OCI Generative AI 공식 문서](https://docs.oracle.com/iaas/Content/generative-ai/home.htm){:target="_blank" rel="noopener"}**
 
 
 
