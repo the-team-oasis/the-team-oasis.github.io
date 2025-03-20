@@ -193,26 +193,33 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 ```terminal
 $ vi /etc/sysctl.conf
 
-Kernel.unknown_nmi_panic = 1
+kernel.unknown_nmi_panic = 1
 net.ipv4.ip_forward = 1
 net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
-net.ipv4.conf.ens3.send_redirects = 0
+net.ipv4.conf.enp0s5.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
-net.ipv4.conf.ens3.accept_redirects = 0
+net.ipv4.conf.enp0s5.accept_redirects = 0
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.enp0s5.rp_filter=0
 ```
 
 적용을 위해 다음 명령어를 실행합니다.
 ```terminal
 [root@onpremise-cpe-libreswan ~]# sysctl -p
+kernel.unknown_nmi_panic = 1
 net.ipv4.ip_forward = 1
 net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
-net.ipv4.conf.ens3.send_redirects = 0
+net.ipv4.conf.enp0s5.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
-net.ipv4.conf.ens3.accept_redirects = 0
+net.ipv4.conf.enp0s5.accept_redirects = 0
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.enp0s5.rp_filter=0
 ```
 
 CPE(Libreswan)와 통신을 위해서는 OS에서 udp 500, udp 4500 포트를 오픈해야 합니다. 다음 명령어로 포트를 오픈합니다.
@@ -279,7 +286,7 @@ conn Tunnel-2
 
 ipsec을 위한 secret을 생성하여 오픈합니다.
 ```terminal
-$ vi /etc/ipsec.d/oci-ipsec.secret
+$ vi /etc/ipsec.d/oci-ipsec.secrets
 ```
 
 다음과 같은 형식으로 입력합니다. 앞의 IP는 CPE(Libreswan)의 Public IP, 뒤의 IP는 Oracle VPN IP, PSK 이후는 공유 암호(Shared Secret)로 CPE 구성 정보 혹은 앞서 생성한 IPSec Connection 정보에서 확인할 수 있습니다
