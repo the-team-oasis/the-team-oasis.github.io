@@ -225,9 +225,9 @@ CPE 설정에서는 새로 CPE를 생성합니다. **새로 만들기**를 클�
       </tr>
       </thead><tbody class="tbody">
       <tr class="row">
-      <td class="entry" headers="About__entry__1"><span class="ph">CPE-Libreswan-Primary</span>
+      <td class="entry" headers="About__entry__1"><span class="ph">Libreswan-Primary</span>
       </td>
-      <td class="entry" headers="About__entry__2"><span class="ph">152.67.203.251(CPE-Libreswan-Primary 인스턴스의 Public IP)</span>
+      <td class="entry" headers="About__entry__2"><span class="ph">152.67.203.251(Libreswan-Primary 인스턴스의 Public IP)</span>
       </td>
       <td class="entry" headers="About__entry__3"><span class="ph">Libreswan</span>
       </td>
@@ -320,9 +320,9 @@ CPE 설정에서는 새로 CPE를 생성합니다. **새로 만들기**를 클�
       </tr>
       </thead><tbody class="tbody">
       <tr class="row">
-      <td class="entry" headers="About__entry__1"><span class="ph">CPE-Libreswan-Redundant</span>
+      <td class="entry" headers="About__entry__1"><span class="ph">Libreswan-Redundant</span>
       </td>
-      <td class="entry" headers="About__entry__2"><span class="ph">134.185.112.58(CPE-Libreswan-Redundant 인스턴스의 Public IP)</span>
+      <td class="entry" headers="About__entry__2"><span class="ph">134.185.112.58(Libreswan-Redundant 인스턴스의 Public IP)</span>
       </td>
       <td class="entry" headers="About__entry__3"><span class="ph">Libreswan</span>
       </td>
@@ -342,7 +342,7 @@ CPE 설정에서는 새로 CPE를 생성합니다. **새로 만들기**를 클�
 ![](/assets/img/infrastructure/2025/oci-ipsec-vpn-redundant-with-libreswans-5.png " ")
 
 ### CPE(Libreswan) 설치 및 구성 (Primary)
-CPE 구성을 위해 Libreswan을 설치하도록 합니다. 앞서 Libreswan을 위해 생성한 인스턴스(CPE-Libreswan-Primary)로 접속합니다.
+CPE 구성을 위해 Libreswan을 설치하도록 합니다. 앞서 Libreswan을 위해 생성한 인스턴스(Libreswan-Primary)로 접속합니다.
 ```
 $ ssh -i {ssh key} opc@152.67.203.251
 ```
@@ -557,7 +557,7 @@ vti2: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 8980
 ```
 
 ### CPE(Libreswan) 설치 및 구성 (Redundant)
-Primary와 마찬가지로 Redundant CPE 구성을 위해 Libreswan을 설치하도록 합니다. 앞서 Libreswan을 위해 생성한 인스턴스(CPE-Libreswan-Redundant)로 접속합니다.
+Primary와 마찬가지로 Redundant CPE 구성을 위해 Libreswan을 설치하도록 합니다. 앞서 Libreswan을 위해 생성한 인스턴스(Libreswan-Redundant)로 접속합니다.
 ```
 $ ssh -i {ssh key} opc@134.185.112.58
 ```
@@ -709,7 +709,7 @@ BGP(Boarder Gateway Protocol)은 다른 AS(Autonomous System) 사이의 경로 �
 
 [FRR Overview](https://docs.frrouting.org/en/latest/overview.html)
 
-CPE-Libreswan-Primary, CPE-Libreswan-Redundant 인스턴스에서 다음 명령어로 FRR을 설치합니다.
+Libreswan-Primary, Libreswan-Redundant 인스턴스에서 다음 명령어로 FRR을 설치합니다.
 ```
 $ yum install frr -y
 ```
@@ -755,10 +755,16 @@ route-map BGP-ADVERTISE-OUT permit 10
  match ip address prefix-list BGP-OUT
 route-map OUTGOING_TUNNEL_1 permit 100
  match ip address prefix-list BGP-IN_1
- set local-preference 200
-route-map OUTGOING_TUNNEL_2 permit 100
+ set local-preference 400
+route-map OUTGOING_TUNNEL_1 permit 110
  match ip address prefix-list BGP-IN_2
- set local-preference 200
+ set local-preference 400
+route-map OUTGOING_TUNNEL_2 permit 100
+ match ip address prefix-list BGP-IN_1
+ set local-preference 300
+route-map OUTGOING_TUNNEL_2 permit 110
+ match ip address prefix-list BGP-IN_2
+ set local-preference 300
 ```
 
 **Redundant**
@@ -798,8 +804,14 @@ route-map BGP-ADVERTISE-OUT permit 10
  set as-path prepend 65500 65500
 route-map OUTGOING_TUNNEL_1 permit 100
  match ip address prefix-list BGP-IN_1
- set local-preference 100
+ set local-preference 200
+route-map OUTGOING_TUNNEL_1 permit 110
+ match ip address prefix-list BGP-IN_2
+ set local-preference 200
 route-map OUTGOING_TUNNEL_2 permit 100
+ match ip address prefix-list BGP-IN_1
+ set local-preference 100
+route-map OUTGOING_TUNNEL_2 permit 110
  match ip address prefix-list BGP-IN_2
  set local-preference 100
 ```
@@ -808,7 +820,13 @@ bgpd.conf 내용에서 핵심이 되는 몇 가지 내용에 대해서 설명합
 1. BGP에서 10.0.0.0/16(춘천: 온프레미스) 네트워크를 다른 라우터들에게 광고하기 위해 ``network 10.0.0.0/16``을 설정하였습니다.
 2. BGP Prefix로 BGP-OUT, BGP-IN_1, BGP-IN_2를 구성하였습니다. BGP-OUT은 BGP 프로토콜에서 아웃바운드(보내는) 경로를 필터링하기 위한 목적으로 사용됩니다. BGP-IN_1은 172.16.0.0/24 (Oracle Cloud Public Subnet) 인바운드 경로 필터링을 위해 사용되고, BGP-IN_2는 172.16.1.0/24 (Oracle Cloud Private Subnet) 인바운드 경로 필터링을 위해 사용됩니다.
 3. ``route-map BGP-ADVERTISE-OUT permit 10``에서는 BGP-OUT prefix-list에 정의된 IP 주소 목록과 일치하는 경로에 대해 이 route-map을 허용하는 필터링을 설정하였습니다. 또한 Primary와 다르게 Redundant의 경우에는 ``set as-path prepend 65500 65500`` 값을 설정하였습니다. AS Path Prepending은 BGP에서 경로를 우선순위가 낮은 경로로 설정하는 기법으로, 아웃바운드 경로, 즉 자신의 AS에서 외부로 나가는 BGP 경로에 영향을 미칩니다. 방법은 BGP 경로에 인위적으로 더 많은 AS 번호를 추가하여, 특정 경로가 다른 경로보다 덜 선호되도록 만듭니다. 여기서는 65500이라는 AS Path를 두 번 추가하여 Primary CPE가 Redundant CPE의 아웃바운드 경로 우선순위가 더 높도록 설정하였습니다. 이를 통해서 아웃바운드 경로에 대한 Failover, Failback을 수행할 수 있습니다.
-4. ``route-map OUTGOING_TUNNEL_1 permit 100``과 ``route-map OUTGOING_TUNNEL_2 permit 100``에서는 BGP-IN_1과 BGP-IN_2 prefix-list에 정의된 IP 주소 목록과 일치하는 경로에 대해 이 route-map을 허용하는 필터링을 설정하였습니다. 또한 Primary CPE의 local-preference 값(200)을 Redundant CPE의 local-preference 값(100)보다 높게 설정하였습니다. Local Preference는 BGP 경로 선택 과정에서 자신의 AS 내에서 우선적으로 선택할 경로를 지정하는 데 사용되는 값으로, 인바운드 경로, 즉 자신의 AS로 들어오는 BGP 경로에 영향을 미칩니다. Local Preference 값이 높을수록 그 경로는 선호되는 경로로 간주됩니다. 이를 통해서 인바운드 경로에 대한 Failover, Failback을 수행할 수 있습니다.
+4. ``route-map``으로 BGP-IN_1과 BGP-IN_2 prefix-list에 정의된 IP 주소 목록과 일치하는 경로에 대해 route-map을 허용하는 필터링을 설정하였습니다. 또한 Primary CPE에서는 Redundant CPE보다 더 높은 Local Preference 값을 설정하여 우선순위를 높였습니다. 그리고 각 IPSec Connection Tunnel에서도 터널1에 더 높은 Local Preference 값을 설정하여 우선순의를 높였습니다. Local Preference는 BGP 경로 선택 과정에서 자신의 AS 내에서 우선적으로 선택할 경로를 지정하는 데 사용되는 값으로, 인바운드 경로, 즉 자신의 AS로 들어오는 BGP 경로에 영향을 미칩니다. Local Preference 값이 높을수록 그 경로는 선호되는 경로로 간주됩니다. 이를 통해서 인바운드 경로에 대한 Failover, Failback을 수행할 수 있습니다.
+* Primary CPE 
+  * Tunnel 1: Local Preference 400
+  * Tunnel 2: Local Preference 300
+* Redundant CPE
+  * Tunnel 1: Local Preference 200
+  * Tunnel 2: Local Preference 100
 
 이제 BGP가 자동으로 실행되도록 BGP Daemon을 활성화합니다. bgpd=yes로 변경합니다. (Primary, Redundant 모두 설정)
 ```
@@ -898,6 +916,17 @@ PING 10.0.187.121 (10.0.187.121) 56(84) bytes of data.
 64 bytes from 10.0.187.121: icmp_seq=2 ttl=61 time=3.14 ms
 ```
 
+Traceroute 결과입니다. Redundant CPE 터널1의 끝점(10.10.11.1)이 보입니다.
+```
+[opc@oci-vm-instance-1 ~]$ traceroute 10.0.187.121
+traceroute to 10.0.187.121 (10.0.187.121), 30 hops max, 60 byte packets
+ 1  140.91.214.47 (140.91.214.47)  0.111 ms 140.91.214.43 (140.91.214.43)  0.103 ms 140.91.214.44 (140.91.214.44)  0.079 ms
+ 2  * * *
+ 3  * * *
+ 4  10.10.11.1 (10.10.11.1)  2.955 ms  2.934 ms  2.914 ms
+ 5  10.0.187.121 (10.0.187.121)  3.138 ms  3.117 ms  3.070 ms
+```
+
 #### Failback 테스트
 다시 Libreswan_Primary (152.67.203.251) 인스턴스에 접속하여 frr 서비스를 시작합니다.
 ```
@@ -930,7 +959,21 @@ PING 10.0.187.121 (10.0.187.121) 56(84) bytes of data.
 64 bytes from 10.0.187.121: icmp_seq=2 ttl=61 time=3.16 ms
 ```
 
+Traceroute 결과입니다. Primary CPE 터널1의 끝점(10.10.10.1)이 보입니다.
+[opc@oci-vm-instance-1 ~]$ traceroute 10.0.187.121
+traceroute to 10.0.187.121 (10.0.187.121), 30 hops max, 60 byte packets
+ 1  140.91.214.43 (140.91.214.43)  0.153 ms 140.91.214.45 (140.91.214.45)  0.105 ms  0.083 ms
+ 2  * * *
+ 3  * * *
+ 4  10.10.10.1 (10.10.10.1)  2.964 ms  2.945 ms  2.924 ms
+ 5  10.0.187.121 (10.0.187.121)  3.080 ms  3.075 ms  3.056 ms
+
 ### 참고
 * [Connectivity Redundancy Guide](https://docs.oracle.com/en-us/iaas/Content/Resources/Assets/whitepapers/connectivity-redundancy-guide.pdf)
 * [Connectivity Redundancy Guide - FastConnect & VPN Connect](https://www.ateam-oracle.com/post/connectivity-redundancy-guide-fastconnect-vpn-connect)
 * [Multi Region FastConnect/VPN Redundancy](https://www.ateam-oracle.com/post/multi-region-fastconnectvpn-redundancy)
+
+
+
+
+-- 4번 항목 내용 수정하고, bgpd에서 Local Preference 변경에 따른 Traceroute를 찍은 결과까지 보여주는걸로 업데이트 필요
