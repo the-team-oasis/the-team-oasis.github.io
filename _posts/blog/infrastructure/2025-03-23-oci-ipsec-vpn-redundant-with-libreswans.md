@@ -42,8 +42,8 @@ header: no
 전체 구성도는 다음과 같습니다. 춘천 리전을 On-Premise 환경, 서울 리전을 Oracle Cloud 환경이라 가정합니다. 
 ![](/assets/img/infrastructure/2025/oci-ipsec-vpn-redundant-with-libreswans-1.png " ")
 
-### 환경 구성
-춘천 리전과 서울 리전에 필요한 VCN과 VM 인스턴스를 생성합니다. VCN과 VM 인스턴스 생성 가이드는 다음 포스트를 참고 합니다.
+### VCN 및 VM 인스턴스 생성
+춘천 리전과 서울 리전에 필요한 VCN과 VM 인스턴스를 생성합니다. Public IP와 Private IP는 동적으로 할당되므로 다르게 여기서의 구성과 다를 수 있습니다. VCN과 VM 인스턴스 생성 가이드는 다음 포스트를 참고 합니다.
 
 [OCI에서 VCN Wizard를 활용하여 빠르게 VCN 생성하기](https://the-team-oasis.github.io/getting-started/create-vcn/)
 
@@ -960,20 +960,18 @@ PING 10.0.187.121 (10.0.187.121) 56(84) bytes of data.
 ```
 
 Traceroute 결과입니다. Primary CPE 터널1의 끝점(10.10.10.1)이 보입니다.
+```
 [opc@oci-vm-instance-1 ~]$ traceroute 10.0.187.121
+
 traceroute to 10.0.187.121 (10.0.187.121), 30 hops max, 60 byte packets
  1  140.91.214.43 (140.91.214.43)  0.153 ms 140.91.214.45 (140.91.214.45)  0.105 ms  0.083 ms
  2  * * *
  3  * * *
  4  10.10.10.1 (10.10.10.1)  2.964 ms  2.945 ms  2.924 ms
  5  10.0.187.121 (10.0.187.121)  3.080 ms  3.075 ms  3.056 ms
+```
 
 ### 참고
 * [Connectivity Redundancy Guide](https://docs.oracle.com/en-us/iaas/Content/Resources/Assets/whitepapers/connectivity-redundancy-guide.pdf)
 * [Connectivity Redundancy Guide - FastConnect & VPN Connect](https://www.ateam-oracle.com/post/connectivity-redundancy-guide-fastconnect-vpn-connect)
 * [Multi Region FastConnect/VPN Redundancy](https://www.ateam-oracle.com/post/multi-region-fastconnectvpn-redundancy)
-
-
-
-
--- 4번 항목 내용 수정하고, bgpd에서 Local Preference 변경에 따른 Traceroute를 찍은 결과까지 보여주는걸로 업데이트 필요
