@@ -40,13 +40,7 @@ header: no
 ### 배경
 OCI Network Load Balancer에는 BackendSet 설정 시 **Preserve source IP**라는 옵션이 있습니다. 이 옵션을 사용하면 Client의 실제 IP 주소를 Backend Server로 전달이 가능합니다. 하지만, 이 옵션은 로컬 네트워크 트래픽에서만 유효하여, 동일한 VCN내 혹은 Local Peering(VCN간 라우팅 변경 없이 직접 전달하여 로컬 네트워크 트래픽처럼 처리)으로 연결된 VCN간에만 실제 IP 주소를 Backend Server로 전달할 수 있습니다. 만약 IPSec이나 Remote Peering등을 위해 DRG(Dynamic Routing Gateway)를 사용하고 있는 환경에서 Clinet 실제 IP를 다른 VCN내의 Backend Server로 전달하려면 Local Peering Gateway를 추가로 사용하여야 합니다.
 
-**BackendSet에서 Preserve source IP 설정**
-![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-1.png " ")
-
- PPv2는 DRG를 사용하는 환경(동일 리전에 여러개의 VCN을 DRG로 연결, 다른 리전 VCN과 Remote Peering으로 연결)에서도 DRG 연결을 통해 VCN 간 트래픽이 소스 IP를 보존하면서 전달될 수 있습니다. PPv2는 VCN 간에 프라이빗 연결을 제공합니다. 이 경우, 트래픽은 소스 IP를 유지한 채 다른 VCN으로 전달됩니다. 이는 Local Peering과 유사하게 작동하지만, DRG를 통한 프라이빗 연결을 사용할 수 있는 장점이 있습니다.
-
- **Listener에서 PPv2 설정**
-![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-2.png " ")
+PPv2는 DRG를 사용하는 환경(동일 리전에 여러개의 VCN을 DRG로 연결, 다른 리전 VCN과 Remote Peering으로 연결)에서도 DRG 연결을 통해 VCN 간 트래픽이 소스 IP를 보존하면서 전달될 수 있습니다. PPv2는 VCN 간에 프라이빗 연결을 제공합니다. 이 경우, 트래픽은 소스 IP를 유지한 채 다른 VCN으로 전달됩니다. 이는 Local Peering과 유사하게 작동하지만, DRG를 통한 프라이빗 연결을 사용할 수 있는 장점이 있습니다.
 
 이번 포스팅에서는 OCI Network Load Balancer에서 PPv2를 구성하는 방법에 대해서 설명합니다.
 
@@ -138,11 +132,26 @@ OCI Network Load Balancer에는 BackendSet 설정 시 **Preserve source IP**라�
 
 DRG에 앞서 생성한 두 개의 VCN을 붙입니다. 생성한 DRG를 클릭하면 왼쪽 **VCN attachments**라는 Resources를 볼 수 있습니다. **VCN attachments**를 선택한 후 **Create virtual cloud network attachment** 버튼을 클릭한 후 다음과 같이 두 개의 VCN Attachment를 생성합니다.
 
-* **Attachment name:** VCN-SEOUL-HUB-DRG-ATT
-* **Virtual cloud network:** VCN-SEOUL-HUB
-
-* **Attachment name:** VCN-SEOUL-SPOKE-1-DRG-ATT
-* **Virtual cloud network:** VCN-SEOUL-SPOKE-1
+<table class="table vl-table-bordered vl-table-divider-col" summary="This table summarizes basic information about each region"><caption></caption><colgroup><col><col><col><col><col><col></colgroup><thead class="thead">
+      <tr class="row">
+      <th class="entry" id="About__entry__1">Attachment name</th>
+      <th class="entry" id="About__entry__2">Virtual cloud network</th>
+      </tr>
+      </thead><tbody class="tbody">
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">VCN-SEOUL-HUB-DRG-ATT</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">VCN-SEOUL-HUB</span>
+      </td>
+      </tr>
+      <tr class="row">
+      <td class="entry" headers="About__entry__1"><span class="ph">VCN-SEOUL-SPOKE-1-DRG-ATT</span>
+      </td>
+      <td class="entry" headers="About__entry__2"><span class="ph">VCN-SEOUL-SPOKE-1</span>
+      </td>
+      </tr>
+      </tbody>
+</table>
 
 두 개의 VCN Attachment가 추가되었습니다.
 ![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-4.png " ")
@@ -313,7 +322,7 @@ Network Load Balancer 생성을 위해 ***OCI Console 메뉴 > Networking > Load
 ### 테스트
 두 가지 시나리오로 테스트를 해보겠습니다.
 
-#### Haproxy access log with PPv2 enabled
+#### HAProxy access log with PPv2 enabled
 현재 Network Load Balancer Listner에 PPv2가 Enable된 상태입니다. 바로 Network Load Balancer Public IP로 접속해봅니다.
 
 **http://132.226.175.83/**
@@ -330,7 +339,7 @@ Mar 31 12:48:13 localhost haproxy[102136]: 211.207.67.71:41366 [31/Mar/2025:12:4
 
 Client 실제 IP (211.207.67.71)가 확인됩니다.
 
-#### Haproxy access log without PPv2 enabled
+#### HAProxy access log without PPv2 enabled
 이제 Network Load Balancer Listner에서 PPv2를 Diable 합니다. 생성한 **NLB_FOR_PPv2**를 클릭한 후 **Listeners**에서 생성한 Listner를 Edit합니다. 그리고 **Enable proxy protocol V2**은 체크해제한 후 저장합니다.
 ![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-8.png " ")
 
@@ -363,11 +372,28 @@ Mar 31 13:04:16 localhost haproxy[118722]: 172.16.0.230:21411 [31/Mar/2025:13:04
 
 Client 실제 IP (211.207.67.71)가 아닌 Network Load Balancer의 Private IP(172.16.0.230)가 출력되는 것을 확인할 수 있습니다.
 
-#### Haproxy access log without PPv2 enabled and with Preserve source IP
+#### HAProxy access log without PPv2 enabled and with Preserve source IP
 이번에는 PPv2를 사용하지 않고 Network Load Balancer의 Backend sets에서 **Preserve source IP**옵션을 활성화 해보도록 하겠습니다. 생성한 **NLB_FOR_PPv2**를 클릭한 후 **Listeners**에서 생성한 Backend sets를 Edit합니다. 그리고 **Preserve source IP**은 체크한 후 저장합니다.
 ![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-9.png " ")
 
 다시 Network Load Balancer Public IP로 접속해봅니다. 연결이 안되는 것을 확인할 수 있고, HAProxy에도 어떤 Access 로그도 남지 않는 것을 확인할 수 있습니다. **Local Peering Gateway**를 사용하는 환경이라면 전달이 되겠지만, DRG를 사용할 경우 패킷이 DRG를 거쳐 Backend까지 도달되지 않는 문제가 생기게 되며, 이로 인해 HAProxy에 연결이 되지 않는 현상이 발생합니다.
+
+#### Cross-region HAProxy access logs with PPv2 over Remote Peering
+다른 리전과 Remote Peering으로 구성한 경우에도 PPv2 Header가 다른 리전의 HAProxy로 전달이 되는지도 확인해보았습니다. 구성도는 다음과 같습니다.
+
+![](/assets/img/infrastructure/2025/oci-nlb-with-ppv2-10.png " ")
+
+마찬가지로 Network Load Balancer Public IP로 접속해보고, 도쿄 리전에 있는 HAProxy 로그를 확인합니다.
+```
+$ [opc@haproxy ~] sudo tail -f /var/log/haproxy.log
+
+Apr  1 06:23:30 localhost haproxy[75798]: 211.207.67.71:5442 [01/Apr/2025:06:23:30.809] main app/app2 0/0/0/1/1 403 3823 - - ---- 1/1/0/0/0 0/0 "GET / HTTP/1.1"
+Apr  1 06:23:30 localhost haproxy[75798]: 211.207.67.71:5442 [01/Apr/2025:06:23:30.866] main static/<NOSRV> 0/-1/-1/-1/0 503 212 - - SC-- 2/2/0/0/0 0/0 "GET /icons/apache_pb2.gif HTTP/1.1"
+Apr  1 06:23:30 localhost haproxy[75798]: 211.207.67.71:6083 [01/Apr/2025:06:23:30.950] main app/app2 0/0/0/1/1 404 389 - - ---- 1/1/0/0/0 0/0 "GET /favicon.ico HTTP/1.1"
+Apr  1 06:31:17 localhost haproxy[75798]: 80.82.77.202:60000 [01/Apr/2025:06:31:15.084] main/2: Received something which does not look like a PROXY protocol header
+```
+
+Remote Peering을 통해서 다른 리전에 있는 HAProxy 서버에서도 Client 실제 IP (211.207.67.71)가 출력되는 것을 확인할 수 있습니다.
 
 ### 참고
 * [Network Load Balancer Management](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/NetworkLoadBalancers/network-load-balancer-management.htm)
