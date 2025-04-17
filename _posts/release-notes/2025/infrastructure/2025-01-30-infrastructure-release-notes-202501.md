@@ -5,7 +5,7 @@ layout: page-fullwidth
 #
 subheadline: "OCI Release Notes 2025"
 title: "1월 OCI Infrastructure 업데이트 소식"
-teaser: "2024년 1월 OCI Infrastructure 업데이트 소식입니다."
+teaser: "2025년 1월 OCI Infrastructure 업데이트 소식입니다."
 author: kskim
 breadcrumb: true
 categories:
