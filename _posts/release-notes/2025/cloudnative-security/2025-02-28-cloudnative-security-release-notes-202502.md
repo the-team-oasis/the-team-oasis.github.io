@@ -11,7 +11,7 @@ breadcrumb: true
 categories:
   - release-notes-2025-cloudnative-security
 tags:
-  - oci-release-notes-2024
+  - oci-release-notes-2025
   - Jan-2025
   - cloudnative
 #
