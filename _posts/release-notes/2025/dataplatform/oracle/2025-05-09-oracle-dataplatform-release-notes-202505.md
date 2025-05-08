@@ -4,15 +4,15 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Release Notes 2025"
-title: "5월 OCI Oracle Data Platform 업데이트 소식"
-teaser: "2025년 5월 OCI Oracle Data Platform 업데이트 소식입니다."
+title: "4월 OCI Oracle Data Platform 업데이트 소식"
+teaser: "2025년 4월 OCI Oracle Data Platform 업데이트 소식입니다."
 author: lim
 breadcrumb: true
 categories:
   - release-notes-2025-dataplatform
 tags:
   - oci-release-notes-2025
-  - May-2025
+  - Apr-2025
   - DATAPLATFORM, DATABASE, BIGDATA, DATAFLOW, SPARK, ORACLE
 #
 # Styling
