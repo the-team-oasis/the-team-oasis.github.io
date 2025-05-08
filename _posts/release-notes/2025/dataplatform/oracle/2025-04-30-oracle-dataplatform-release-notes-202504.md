@@ -57,13 +57,13 @@ File Storage with Lustre는 배포, 확장 및 유지 관리 작업을 자동화
 
 - Lustre Managed 서비스를 출시하게 됨 배경에는 본사에서도 LLM 모델이나 GenAI 어플리케이션의 파일 공유 시스템으로 고가의 FSS 대신 Lustre 를 권고하고 있고, Kubernetes 환경도 지원하고 4가지의 Performance Level 선택할 수 있다는 특징이 있습니다.
 
-- 자세한 사항 본사 블로그 아래 참고 
+- 자세한 사항은 본사 블로그 아래 참고 
   - [https://blogs.oracle.com/cloud-infrastructure/post/fully-managed-lustre-file-storage-in-the-cloud](https://blogs.oracle.com/cloud-infrastructure/post/fully-managed-lustre-file-storage-in-the-cloud){:target="_blank" rel="noopener"}
 
 - Lustre 는 아래 그림처럼 File Storage Service 와 유사하게 OCI 에서 Fully Managed Service 로 제공하고 있고 있습니다.
   ![LustreFS](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_managed_svc_01.png)
 
-- 생성된 Lustre 의 상세 보기 화면에서는 사용하고자 하는 컴퓨트 노드에서 Lustre FS 를 Mount 하기 위한 Mount 명령어가 표시되어 FSS 서비스와 유사하게 손쉽게 공유 스토리지를 구성할 수 있게 됩니다. 이 마운트 정보를 이용하여 Linux, Windows, Kubernes 등 다양한 클라이언트에서 접근할 수 있습니다.
+- 생성된 Lustre 의 상세 보기 화면에서는 사용하고자 하는 컴퓨트 노드에서 Lustre FS 를 Mount 하기 위한 Mount 명령어가 표시되어 FSS 서비스와 유사하게 손쉽게 공유 스토리지를 구성할 수 있게 됩니다. 이 마운트 정보를 이용하여 Linux OS, Kubernes 등 다양한 클라이언트에서 접근할 수 있습니다.
 
   ![LustreFSMount](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_managed_svc_02.png)
 
@@ -75,6 +75,12 @@ File Storage with Lustre는 배포, 확장 및 유지 관리 작업을 자동화
   2. HPC Cluster 와 같이 Workload 를 처리할 Instance client 들과 Lustre 간 독립성을 가져야 할 경우 (Local Peering Gateway 설정을 통해 네트워크 구성)
 
       ![LustreFSConn](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_connectivity_02.png)  
+
+- For more information
+  - [File Storage with Lustre web page](https://www.oracle.com/cloud/storage/file-storage-with-lustre){:target="_blank" rel="noopener"}
+  - [File Storage with Lustre recorded demo](https://videohub.oracle.com/media/OCI%20File%20Storage%20with%20Lustre%20Demo/1_60xzt8kv){:target="_blank" rel="noopener"}
+  - [Solutions Brief: Lustre Installation and Configuration](https://docs.oracle.com/en/solutions/deploy-lustre-file-systems/index.html){:target="_blank" rel="noopener"}
+  - [Oracle Cloud Pricing web page](https://www.oracle.com/cloud/pricing/){:target="_blank" rel="noopener"}
 
 
 ---
