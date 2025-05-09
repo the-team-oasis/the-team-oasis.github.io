@@ -73,7 +73,7 @@ File Storage with Lustre는 배포, 확장 및 유지 관리 작업을 자동화
 
   ![LustreFSMount](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_managed_svc_02.png)
 
-- Lustre 를 위한 네트워크 구성
+## Lustre 를 위한 네트워크 구성
   1. Lustre FS 와 Workload 를 처리할 Instance 를 동일한 VCN, 동일한 Subnet 에 구성하는 경우
 
       ![LustreFSConn](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_connectivity_01.png)
@@ -82,7 +82,7 @@ File Storage with Lustre는 배포, 확장 및 유지 관리 작업을 자동화
 
       ![LustreFSConn](/assets/img/dataplatform/2025/release_note/202505/oci_lustre_fs_connectivity_02.png) 
 
-- 고객 활용 사례
+## 고객 활용 사례
 
   - OCI 고객들은 LLM 교육 및 엔지니어링 시뮬레이션 모델과 같은 활용 사례에서 이미 Lustre 서비스의 이점을 활용하고 있습니다.
 
@@ -92,7 +92,7 @@ File Storage with Lustre는 배포, 확장 및 유지 관리 작업을 자동화
 
     - 물리 시뮬레이션: Emmi AI는 전기 시스템, 열 시뮬레이션 및 항공우주 엔지니어링 분야에서 실시간 상호작용을 구현하는 물리 아키텍처와 모델을 구동하며, Lustre와 함께 OCI 파일 스토리지를 활용하여 시뮬레이션 시간을 단축합니다.
 
-- For more information
+## For more information
   - [File Storage with Lustre web page](https://www.oracle.com/cloud/storage/file-storage-with-lustre){:target="_blank" rel="noopener"}
   - [Generally Available: Fully Managed Lustre File Storage in the Cloud](https://blogs.oracle.com/cloud-infrastructure/post/fully-managed-lustre-file-storage-in-the-cloud){:target="_blank" rel="noopener"}
   - [File Storage with Lustre recorded demo](https://videohub.oracle.com/media/OCI%20File%20Storage%20with%20Lustre%20Demo/1_60xzt8kv){:target="_blank" rel="noopener"}
