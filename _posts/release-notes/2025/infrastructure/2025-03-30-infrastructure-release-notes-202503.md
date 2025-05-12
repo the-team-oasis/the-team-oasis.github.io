@@ -79,3 +79,30 @@ quota -u opc
 - NFS v3 마운트 환경에서만 지원
 - Snapshot에는 quota 적용되지 않음
 - 잘못 설정하면 저장 실패나 서비스 장애로 이어질 수 있으니 테스트 환경에서 먼저 적용 권장
+
+
+## New Release of Secure Desktops
+* **Services**: Secure Desktops
+* **Release Date**: March 18, 2025
+* **Documentation:** [https://docs.oracle.com/en-us/iaas/releasenotes/secure-desktops/js-1086.htm](https://docs.oracle.com/en-us/iaas/releasenotes/secure-desktops/js-1086.htm){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+Oracle Cloud의 Secure Desktops 서비스는 원격 가상 데스크탑 환경을 제공하는 솔루션으로, 보안성과 편의성을 동시에 고려한 인프라 서비스입니다. 이번 JS-1086 릴리스를 통해 관리자가 사용자 클라이언트 장치 정보를 확인할 수 있는 기능이 추가되었습니다!
+- 접속한 클라이언트 장치의 정보가 기록됨
+- 정보는 세션이 활성화될 때 자동 수집
+- OCI 콘솔 또는 API를 통해 조회 가능
+
+### 관리자가 확인 할 수 있는 정보 
+장치 유형 : 예: Windows, Mac, Linux 등
+접속 위치 : 접속한 네트워크의 IP 주소
+접속 시간 : 세션 활성화 시점 기준
+접속 방법 : 웹 브라우저, 전용 클라이언트 등
+
+### 추가된 기능
+보안 강화 : 비인가 장치에서의 접근 여부 모니터링 가능
+운영 편의성 : 사용자 환경 분석 및 문제 해결에 유리
+컴플라이언스 대응 : 감사 로그 기반의 기록 확보 가능
+
+
+이번 업데이트를 통해 OCI Secure Desktops는
+단순한 가상 데스크탑을 넘어, 더 강력한 보안 관리와 감사 기능을 갖추게 되었습니다.
