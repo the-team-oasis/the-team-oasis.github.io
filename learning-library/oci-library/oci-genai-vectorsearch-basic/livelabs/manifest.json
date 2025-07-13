@@ -1,0 +1,33 @@
+{
+  "workshoptitle": "OCI GenAI & Vector Search Basic",
+  "tutorials": [
+    {
+      "title": "소개",
+      "filename": "labs/introduction/intro.md"
+    },
+    {
+      "title": "Free Trial 계정으로 시작하기",
+      "filename": "labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+      "title": "Lab 1 : OCI 클라우드 리소스 생성 및 설정",
+      "filename": "labs/lab-1/oci-cloud-resource-setup.md"
+    },
+    {
+      "title": "Lab 2 : VM 환경 패키지 설치 및 설정",
+      "filename": "labs/lab-2/vm-package-setup.md"
+    },
+    {
+      "title": "Lab 3 : 실습 코드 준비",
+      "filename": "labs/lab-3/prepare-source-code.md"
+    },
+    {
+      "title": "Lab 4 : GenAI & Vector Search 실습",
+      "filename": "labs/lab-4/genai-vectorsearch-lab.md"
+    },
+    {
+      "title": "실습 리소스 정리하기",
+      "filename": "labs/clean/clean-resource.md"
+    }
+  ]
+}

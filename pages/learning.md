@@ -18,5 +18,6 @@ permalink: "/learning/"
 | [OCI DevOps Service with OKE](https://the-team-oasis.github.io/learning-library/oci-library/oci-devops-oke/livelabs/index.html){:target="\_blank"} | OCI DevOps Service with OKE 실습     |  4 시간  | 2023-07-18 |
 | [OCI Basic Service - Compute](/learning-library/oci-library/oci-basic-compute/livelabs/index.html){:target="\_blank"}                              | OCI Basic Service - Compute 실습     |  2 시간  | 2022-09-06 |
 | [OCI Basic Service - Windows](/learning-library/oci-library/oci-basic-compute-windows/livelabs/index.html){:target="\_blank"}                      | OCI Basic Service - Windows 실습     | 2.5 시간 | 2024-01-14 |
+| [OCI GenAI & Vector Search Basic](/learning-library/oci-library/oci-genai-vectorsearch-basic/livelabs/index.html){:target="\_blank"}               | OCI GenAI & Vector Search Basic 실습 |  2 시간  | 2025-07-14 |
 
 {:.styled-table}
