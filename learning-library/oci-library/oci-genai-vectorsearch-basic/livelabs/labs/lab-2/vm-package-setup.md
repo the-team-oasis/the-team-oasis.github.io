@@ -51,7 +51,33 @@ SHOW PARAMETER VECTOR MEMORY_SIZE;
 
 ![Oracle DBCS Reboot](images/oci-dbcs-reboot.png " ")
 
-## Task 2: 컴퓨트 인스턴스 패키지 설치
+## Task 2: 컴퓨트 인스턴스 접속
+
+### 인스턴스 접속
+
+- Windows 사용자 (PuttyGen , Putty 사용)
+  - PuTTYgen을 실행합니다
+  - **Load** 를 클릭 하고 인스턴스를 생성할 때 생성된 프라이빗 키를 선택합니다. 키 파일의 확장자는 **.key**
+  - **Save Private Key** 를 클릭 합니다.
+  - 키파일의 이름을 지정 합니다. (개인 키의 확장자는 **.ppk**로 저장합니다)
+  - **Save** 를 클릭합니다.
+  - 새로운 키 파일을 이용하여 인스턴스에 접속 합니다.
+  - 상세내용은 링크를 통해 확인 가능 합니다. [접속 가이드 링크](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/accessinginstance.htm#linux__putty)
+- MacOS 사용자
+  - 다운로드 받은 키파일의 권한을 조정합니다.
+    ```shell
+      <copy>
+       chmod 400 <private_key_file> #엑세스 하려는 키 파일의 전체 경로 와 이름을 입력합니다.
+      </copy>
+    ```
+  - 다음 명령어를 입력하여 인스턴스에 접속합니다.
+    ```shell
+      <copy>
+       ssh -i <private_key_file> opc@<public-ip-address>
+      </copy>
+    ```
+
+## Task 3: 컴퓨트 인스턴스 패키지 설치
 
 ### conda 가상환경 패키지 설치
 
