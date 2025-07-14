@@ -19,4 +19,17 @@
 
 준비중
 
+단계별 실습
+
+1. LangChain + 기본 GenAI 활용 방법 (파라미터 조정 방법)
+2. LangChain + Embedding 활용 방법 (Oracle Document loader)
+
+- DB 설정파일
+- Embedding 설정파일
+
+3. LangChain + RAG (Vector Search) 활용 방법
+
+- DB 설정 파일
+- 파라미터 설정 (프롬프트)
+
 [다음 랩으로 이동](#next)
