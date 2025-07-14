@@ -2,13 +2,13 @@
 
 ## 소개
 
-작성중
+이 단계에서는 실습에 필요한 코드를 다운로드하고, Conda 가상환경을 생성 및 활성화하는 방법을 설명합니다.
 
 소요시간: 10 minutes
 
 ### 목표
 
-- OCI 사용자정의 이미지에 대한 이해
+- 실습코드 다운로드 및 Conda 환경 생성
 
 ### 사전 준비사항
 
@@ -34,8 +34,6 @@ sudo yum install -y git
 
 ```shell
 <copy>
-# (선택) conda 환경 활성화
-# conda activate genai
 
 # 작업 디렉터리 이동
 cd ~

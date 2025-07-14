@@ -2,22 +2,20 @@
 
 ## 소개
 
-작성중
+이 단계에서는 OCI GenAI & Vector Search 실습에 필요한 DBCS 및 VM 설정, 그리고 패키지 설치 방법을 설명합니다.
+VM에서는 Python 3.12와 Conda 가상환경을 사용하여 실습을 진행할 예정입니다.
 
 소요시간: 20 minutes
 
 ### 목표
 
-- Windows 용 Apache httpd 서버 설치
-- Windows 방화벽 설정
-- 클라두으 방화벽 설정 (NSG)
+- GenAI & Vector Search 실습을 위한 VM 설정
+- Vector Search 실습을 위한 DBCS 설정
 
 ### 사전 준비사항
 
 1. 실습을 위한 노트북 (Windows, MacOS)
 1. Oracle Free Tier 계정
-
-ㅈ
 
 ## Task 1: Oracle Database 23c AI 벡터 메모리 설정
 

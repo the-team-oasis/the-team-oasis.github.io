@@ -6,6 +6,8 @@
 
 이 실습에서는 OCI의 Generative AI 서비스의 기본 기능과 Oracle Database 23c의 AI Vector Search 기능을 LangChain 프레임워크를 통해 손쉽게 사용하는 방법을 알아봅니다.
 
+현재 OCI Generative AI를 사용할 수 있는 OCI 리전은 [공식문서](https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm#regions) 에서 확인하실 수 있습니다.
+
 ### TODO - Architecture Diagram
 
 주요 실습 내용:

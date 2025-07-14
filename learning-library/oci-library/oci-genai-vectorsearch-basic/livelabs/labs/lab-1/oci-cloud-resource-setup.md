@@ -2,12 +2,18 @@
 
 ## 소개
 
+이 단계에서는 OCI GenAI & Vector Search 실습에 필요한 OCI 리소스를 생성하는 방법을 설명합니다.
+OCI 서비스를 CLI, SDK로 사용할 때 사용하는 인증방식은 대표적으로 API_KEY 방식이 있지만, 이번 실습에서는 INSTANCE PRINCIPAL 방식을 이용하여 진행합니다.
+
 소요시간:
 
 ### 목표
 
+- OCI Compartments 에 대한 이해
+- OCI Domain, Dynamic Group, Policy 에 대한 이해
 - OCI Compute Instance 서비스에 대한 이해
 - OCI VCN Security 서비스에 대한 이해
+- OCI Base Database 서비스에 대한 이해
 
 ### 사전 준비사항
 
