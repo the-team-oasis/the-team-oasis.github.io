@@ -8,7 +8,7 @@
 
 현재 OCI Generative AI를 사용할 수 있는 OCI 리전은 [공식문서](https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm#regions) 에서 확인하실 수 있습니다.
 
-### TODO - Architecture Diagram
+![Landing Screen](images/architecture-ocigenai.png " ")
 
 주요 실습 내용:
 
