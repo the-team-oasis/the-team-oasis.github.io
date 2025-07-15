@@ -68,8 +68,3 @@ Oracle Cloud Infrastructure(OCI)의 Resource Scheduler는 2025년 4월 29일에 
 
 - 리소스별 추가 파라미터 설정
   - 일부 리소스 유형에 대해 스케줄에 추가할 때 추가 파라미터를 설정할 수 있습니다. 예를 들어, 특정 인스턴스의 시작 또는 중지 시점에 맞춰 세부적인 동작을 정의할 수 있어, 보다 정밀한 리소스 제어가 가능합니다.
-
-
-
-
-![](/assets/img/infrastructure/2025/architecture.png " ")
