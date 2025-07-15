@@ -3,9 +3,9 @@
 ## 소개
 
 이 단계에서는 OCI GenAI & Vector Search 실습에 필요한 OCI 리소스를 생성하는 방법을 설명합니다.
-OCI 서비스를 CLI, SDK로 사용할 때 사용하는 인증방식은 대표적으로 API_KEY 방식이 있지만, 이번 실습에서는 INSTANCE PRINCIPAL 방식을 이용하여 진행합니다.
+OCI 서비스를 CLI나 SDK로 사용할 때는 일반적으로 API Key 방식 등의 인증 방법을 사용하지만, 이번 실습에서는 Instance Principal 방식을 사용하여 진행합니다.
 
-소요시간:
+소요시간: 40분
 
 ### 목표
 
@@ -266,14 +266,14 @@ OCI에 로그인합니다.
    - Public IP address : **공용 IPv4 주소 지정**
      ![Compute Create #3](images/oci-compute-instance-create-8.png " ")
 
-8. Boot volume 관련 옵션은 기본 설정을 유지 합니다.
-
-   ![Compute Create #3](images/oci-compute-instance-create-9.png " ")
-
-9. VM에 접속할때 사용할 SSH Keys 추가 합니다.
+8. VM에 접속할때 사용할 SSH Keys 추가 합니다.
 
    - 이번 실습에서는 **자동으로 키 쌍 생성** 를 선택 후 전용 키, 공용 키를 다운받아 잘 보관 합니다.
      ![Compute Create #4](images/oci-compute-instance-create-10.png " ")
+
+9. Boot volume 관련 옵션은 기본 설정을 유지 합니다.
+
+   ![Compute Create #3](images/oci-compute-instance-create-9.png " ")
 
 10. 입력한 정보를 확인한 후 **생성(Create)** 버튼을 클릭합니다.
     ![Compute Create #6](images/oci-compute-instance-create-11.png " ")

@@ -86,10 +86,24 @@ SHOW PARAMETER VECTOR MEMORY_SIZE;
   ```shell
   <copy>
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
   chmod +x Miniconda3-latest-Linux-x86_64.sh
+
   ./Miniconda3-latest-Linux-x86_64.sh
   </copy>
   ```
+
+  1. Conda 패키지 설치 명령어 실행 후 아래와 같은 화면 출력시 **ENTER** 키를 입력합니다.
+     ![Install conda 1](images/install-conda-1.png " ")
+
+  1. 라이센스 동의를 위해 **yes** 를 입력 후 **ENTER** 키를 입력합니다.
+     ![Install conda 2](images/install-conda-2.png " ")
+
+  1. 설치 위치는 기본값을 유지하기 위해 아무것도 입력하지 않고 **ENTER** 키를 입력합니다.
+     ![Install conda 3](images/install-conda-3.png " ")
+
+  1. 자동으로 conda init 세팅을 위해 **yes** 를 입력 후 **ENTER** 키를 입력합니다.
+     ![Install conda 4](images/install-conda-4.png " ")
 
 - 환경변수 적용
 
@@ -112,11 +126,23 @@ SHOW PARAMETER VECTOR MEMORY_SIZE;
 ### oracle instantclient 설치
 
 - 파일 다운로드 및 설치
+
   ```shell
   <copy>
-      wget https://download.oracle.com/otn_software/linux/instantclient/2380000/oracle-instantclient-basic-23.8.0.25.04-1.el9. x86_64.rpm
-      sudo yum install oracle-instantclient-basic-23.8.0.25.04-1.el9.x86_64.rpm
+  wget https://download.oracle.com/otn_software/linux/instantclient/2380000/oracle-instantclient-basic-23.8.0.25.04-1.el9.x86_64.rpm
+
+  sudo yum install -y oracle-instantclient-basic-23.8.0.25.04-1.el9.x86_64.rpm
   </copy>
   ```
+
+### git 패키지 설치
+
+- Oracle Linux 9 환경에서 `git`을 설치합니다.
+
+```shell
+<copy>
+sudo yum install -y git
+</copy>
+```
 
 [다음 랩으로 이동](#next)
