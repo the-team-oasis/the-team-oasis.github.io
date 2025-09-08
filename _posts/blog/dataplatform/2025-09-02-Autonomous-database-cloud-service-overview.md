@@ -101,7 +101,7 @@ Autonomous Database 내부적으로는 Exadata 기술이 활용되고 있어서 
 Auto Scaling 기능을 통해서 CPU 를 탄력적으로 확장, 축소가 가능하기 때문에 비용 효율적으로 사용이 가능하고 어플리케이션 개발에 많은 도움을 줄 수 있는 서비스입니다.
 
 ### 추가 참고 자료
-- [Autonomous Database Cloud Service Hands-On - Provisioning, Object Storage Parquet Data Load 하기](https://the-team-oasis.github.io/dataplatform/Autonomous-database-cloud-service-overview/)
+- [Autonomous Database Cloud Service Hands-On - Provisioning, Object Storage Parquet Data Load 하기](https://the-team-oasis.github.io/dataplatform/oci-adb-hands-on-provisioning-data-load/)
 
 ---
 
