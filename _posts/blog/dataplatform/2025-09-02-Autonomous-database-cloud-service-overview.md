@@ -35,7 +35,7 @@ header: no
 
 ### 서비스 소개
 OCI 에는 오라클 데이터베이스 서비스를 사용할 수 있는 방법이 두가지가 있습니다. 하나는 오라클 데이터베이스를 On-Premise 에서 운영하는 형태와 동일하게 DBA 및 인프라 관리자의 도움을 받아 운영하는 형태의 Oracle Base Database Cloud 서비스와 Exadata Cloud Service 가 하나의 형태이고, DBA 나 인프라 운영 관리자의 도움없이도 완전하게 자동적으로 운영이 가능한 Autonomous Database 서비스가 바로 두번째 형태입니다. 이번 블로그에서는 완전 자동적으로 운영되는 Autonomous Database 에 대해 살펴보기로 합니다.
-완전자동화된 클라우드 전용의 오라클 데이터베이스 서비스를 많이 저렴하게 사용할 수 있습니다.
+Autonomous Database 는 완전 자동화된 클라우드 전용의 오라클 데이터베이스 서비스로써 보다 저렴하게 데이터베이스에 대한 관리 부담없이 사용하실 수가 있습니다.
 
 #### Autonomous Database 란?
 Autonomous Database 는 오라클 데이터베이스 소프트웨어하고 고성능의 데이터베이스 전용의 Exadata 하드웨어 그리고 오라클의 오랜 노하우인 Best Practice 들이 함께 접목이된 완전 자동화된 클라우드 서비스입니다.
@@ -98,7 +98,10 @@ Autonomous Database 는 워크로드의 형태에 따라 세가지 형태의 Dep
 
 ### 마무리
 Autonomous Database 내부적으로는 Exadata 기술이 활용되고 있어서 매우 빠른 성능을 보장하고, 데이터베이스 운영과 관련해서 완전 자동화가 되어 있고, 빠르게 Deploy 해서 저렴한 비용으로 사용이 가능한 오라클 데이터베이스 PaaS 서비스라고 보시면 되겠고 AI 개발을 위한 많은 기능과 ML 모델들이 내장되어 있습니다. 또한, 
-Auto Scaling 기능을 통해서 최소 2개의 CPU 로부터 CPU 를 탄력적으로 확장, 축소가 가능하기 때문에 비용 효율적으로 사용이 가능하기 때문에 어플리케이션 개발에 많은 도움을 줄 수 있는 서비스입니다.
+Auto Scaling 기능을 통해서 CPU 를 탄력적으로 확장, 축소가 가능하기 때문에 비용 효율적으로 사용이 가능하고 어플리케이션 개발에 많은 도움을 줄 수 있는 서비스입니다.
+
+### 추가 참고 자료
+- [Autonomous Database Cloud Service Hands-On - Provisioning, Object Storage Parquet Data Load 하기](https://the-team-oasis.github.io/dataplatform/Autonomous-database-cloud-service-overview/)
 
 ---
 
