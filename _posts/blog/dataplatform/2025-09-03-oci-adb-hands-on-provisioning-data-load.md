@@ -164,10 +164,10 @@ Autonomous Database 에서는 사용자 관리, SQL Developer, Data Loader 등 �
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb//oci_adb_handson_oss_data_load_41.png " ")  
 
     - 객체 정보의 샘플 형식은 아래와 같이 객체를 뜻하는 '/o' 까지의 위치 정보를 복사해 클립보드나 메모장에 복사하여 둡니다.
-  ```
-  https://objectstorage.<region>.oraclecloud.com/n/<namespace>/b/<bucket>/o
   
-  ```
+    ```
+    https://objectstorage.<region>.oraclecloud.com/n/<namespace>/b/<bucket>/o
+    ```
 
  6. 로컬 파일 업로드와 동일하게 Database Actions 의 Data Load 툴을 이용하여 Object Storage 의 Parquet 파일을 Loading 할 수 있습니다. 먼저, 아래의 화면에서 Data Studio 의 데이터 로드 메뉴를 선택합니다. 전환된 데이터 로드 화면에서 데이터 로드 타일을 선택하고 전환된 화면에서 상단 탭의 클라우드 저장소를 클릭하시고 클라우드 저장소 위치 생성 버튼을 클릭합니다.
     <br>
@@ -185,7 +185,7 @@ Autonomous Database 에서는 사용자 관리, SQL Developer, Data Loader 등 �
     <br>
   ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_43.png " ")
 
-9. 좌측의 Object Storage 내의 파일 목록에서 데이터 로드를 수행할 파일을 선택하고 우측의 창에 Drag 를 하여 놓으면 아래 화면 처럼 데이터 로드가 준비됩니다. 시작 버튼을 클릭하여 데이터 로드를 시작합니다. 업로드가 완료되면 아래 그림과 같이 결과 보고서를 확인하실 수 있습니다. 여러개의 Parquet 파일이 있다면 반복적으로 수행하실 수 있습니다.
+9. 좌측의 Object Storage 내의 파일 목록에서 데이터 로드를 수행할 파일을 선택하고 우측의 창에 Drag & Drop 을 해 놓으면 아래 화면 처럼 데이터 로드가 준비됩니다. 시작 버튼을 클릭하여 데이터 로드를 시작합니다. 업로드가 완료되면 아래 그림과 같이 결과 보고서를 확인하실 수 있습니다. 여러개의 Parquet 파일이 있다면 반복적으로 수행하실 수 있습니다.
   ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_44.png " ")
   <br>
   ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_45.png " ")
@@ -198,7 +198,7 @@ Autonomous Database 에서는 사용자 관리, SQL Developer, Data Loader 등 �
   ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_47.png " ")
 
 ### 마무리
-지금까지 Autonomous Database 에 Local Disk 와 Object Storage 에 저장된 CSV 파일, Parquet 파일을 Autonomous Database 에 기본적으로 탑재되어 있는 Data Loading 툴을 이용하여 손쉽게 Load 를 해 보았습니다. Autonomous Database 에 저장된 데이터를 조회할 수 있는 프로그램 개발 방법도 다루도록 하겠습니다. 아래 참고 자료 링크를 참조하세요.
+지금까지 Autonomous Database 에 Local Disk 와 Object Storage 에 저장된 CSV 파일, Parquet 파일을 Autonomous Database 에 기본적으로 탑재되어 있는 Data Loading 툴을 이용하여 손쉽게 Load 를 해 보았습니다. Autonomous Database 에 저장된 데이터를 조회할 수 있는 Python, Java, Node.js 어플리케이션 프로그램 개발 방법도 다루도록 하겠습니다. 아래 참고 자료 링크를 참조하세요.
 
 ### 추가 참고 자료
 - [Autonomous Database 서비스 살펴 보기](https://the-team-oasis.github.io/dataplatform/Autonomous-database-cloud-service-overview/)
