@@ -220,23 +220,21 @@ Autonomous Database 에서는 사용자 관리, SQL Developer, Data Loader 등 �
     <br>
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb//oci_adb_handson_oss_data_load_41.png " ")  
     <br>
-    - 객체 정보의 샘플 형식은 아래와 같이 객체를 뜻하는 '/o' 까지의 위치 정보를 복사해 클립보드나 메모장에 복사하여 둡니다. <mark> 끝에 "/" 가 붙지 않도록 주의합니다.</mark><br>
+    - 객체 정보의 샘플 형식은 아래와 같이 객체를 뜻하는 '/o' 까지의 위치 정보를 복사해 클립보드나 메모장에 복사하여 둡니다. <mark> 끝에 "/" 가 붙지 않도록 주의합니다.</mark>
 
       ```
       https://objectstorage.<region>.oraclecloud.com/n/<namespace>/b/<bucket>/o
       ```
-    
-<br>
-    - URI 정보를 아래 그림과 같이 입력하고 다음 버튼을 클릭합니다.<br>
 
-  ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb//oci_adb_handson_oss_data_load_63.png " ")  
+  12. URI 정보를 아래 그림과 같이 입력하고 다음 버튼을 클릭합니다.<br>
+      ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb//oci_adb_handson_oss_data_load_63.png " ")  
 
-  12. 인증서 정보가 옳바르고 입력한 URI 정보가 올바르면 다음과 같이 Object Storage 에 저장된 파일의 목록이 나타납니다.
+  13. 인증서 정보가 옳바르고 입력한 URI 정보가 올바르면 다음과 같이 Object Storage 에 저장된 파일의 목록이 나타납니다.
     - Object Storage 의 파일 목록 조회
       ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb//oci_adb_handson_oss_data_load_64.png " ")    
     - 파일 목록이 나타나면 "생성" 버튼을 클릭하여 저장소 위치 추가 절차를 마무리 합니다. 
 
-  13. 데이터 로더의 클라우드 저장소 메뉴로 접근하면 생성된 인증서 기반으로 연결된 Object Storage 의 파일 내용을 조회하실 수 있습니다. <br>
+  14. 데이터 로더의 클라우드 저장소 메뉴로 접근하면 생성된 인증서 기반으로 연결된 Object Storage 의 파일 내용을 조회하실 수 있습니다. <br>
     - Object Storage 의 파일 목록 조회 - Object Storage 에 업로드했던 Parquet 파일들이 있는지 확인합니다.
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_43.png " ")
     <br>
@@ -248,7 +246,7 @@ Autonomous Database 에서는 사용자 관리, SQL Developer, Data Loader 등 �
     <br>
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_46.png " ")
 
-  14. Object Storage 로부터 로딩된 Parquet 데이터 결과를 확인하기 위해서 Database Actions 툴에서 제공하는 SQL Developer 를 통해 확인할 수 있습니다. SQL Developer 의 좌측 네비게이터 목록에 테이블들이 추가된 것을 확인할 수 있고, 우측의 쿼리 결과 데이터가 성공적으로 로드가 된 것을 확인할 수 있습니다.
+  15. Object Storage 로부터 로딩된 Parquet 데이터 결과를 확인하기 위해서 Database Actions 툴에서 제공하는 SQL Developer 를 통해 확인할 수 있습니다. SQL Developer 의 좌측 네비게이터 목록에 테이블들이 추가된 것을 확인할 수 있고, 우측의 쿼리 결과 데이터가 성공적으로 로드가 된 것을 확인할 수 있습니다.
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_add_user_15.png " ")
       <br>
     ![ADB Data Load](/assets/img/dataplatform/2025/blog/adb/oci_adb_handson_oss_data_load_47.png " ")
