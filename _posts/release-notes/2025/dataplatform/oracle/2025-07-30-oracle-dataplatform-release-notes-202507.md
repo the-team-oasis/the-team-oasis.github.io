@@ -45,6 +45,7 @@ Autonomous Database 의 Data Studio 가 새로운 기능과 변경 사항으로 
 
 - Autonomous Database Data Studio 작업 기능
 <BR>
+
   ![ADBDS](/assets/img/dataplatform/2025/release_note/202510/oci_adb_data_studio.png)
 
 - Data Studio 의 작업 기능을 사용하면 작업을 자동화하여 실행할 수 있습니다. 정해진 일정에 따라 프로세스를 실행하거나 특정 이벤트에 따라 프로세스를 트리거할 수 있습니다.
