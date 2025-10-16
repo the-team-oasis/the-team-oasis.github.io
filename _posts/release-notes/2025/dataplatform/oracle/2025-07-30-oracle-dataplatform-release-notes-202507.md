@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "OCI Release Notes 2025"
-title: "4월 OCI Oracle Data Platform 업데이트 소식"
+title: "7월 OCI Oracle Data Platform 업데이트 소식"
 teaser: "2025년 7월 OCI Oracle Data Platform 업데이트 소식입니다."
 author: lim
 breadcrumb: true
