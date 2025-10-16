@@ -66,13 +66,13 @@ Autonomous Database 에서 제공되는 Data Transforms 에는 다음과 같은 
 - Google Analytics 4 지원
   - 이 릴리스에는 Google 애널리틱스 4 애플리케이션 연결 유형이 지원됩니다.
 
-- Data Transforms 구성 예제
+- Data Transforms 구성 예제 <br>
   ![Data Transforms](/assets/img/dataplatform/2025/release_note/202510/oci_adb_data_integrator_01.png)
 
-- Data Transforms 지원 Connections
+- Data Transforms 지원 Connections <br>
   ![Data Transforms](/assets/img/dataplatform/2025/release_note/202510/oci_adb_data_integrator_02.png)
 
-- 폴더 수준의 내보내기 및 가져오기 기능
+- 폴더 수준의 내보내기 및 가져오기 기능 <br>
   ![Data Transforms](/assets/img/dataplatform/2025/release_note/202510/oci_adb_data_transform_03.png)
 
 
@@ -171,7 +171,7 @@ Autonomous AI 데이터베이스의 데이터에 액세스하기 위해 테이�
 
 새로운 기능으로 Cloud Table 기능이 생겼습니다. Oracle 관리형 Cloud Storage (일반적인 Object Storage 와 다르게 Access 불가) 에 테이블 데이터가 저장되고 데이터베이스 저장소를 사용하지 않는 클라우드 테이블을 만들 수 있습니다. 이러한 테이블은 애플리케이션 로그나 진단 정보와 같이 자주 액세스하지 않는 데이터를 저장하는 데 유용합니다.
 
-- Cloud Table 사용 예
+- Cloud Table 사용 예 <br>
   ![CloudTable](/assets/img/dataplatform/2025/release_note/202510/oci_adb_cloud_table.png)
 
 ## Refreshable Metadata Clones
@@ -183,7 +183,7 @@ Autonomous AI 데이터베이스의 데이터에 액세스하기 위해 테이�
 
 Autonomous Database 는 Active 인스턴스의 전체 복제본, 메타데이터 복제본, Refreshable 복제본, 또는 Refreshable 메타데이터 복제본을 생성할 수 있는 복제 기능을 제공합니다. Refreshable 메타데이터 복제본을 사용하면 시스템은 소스 데이터베이스의 메타데이터만 포함하는 복제본을 생성하며, 소스 데이터베이스의 변경 사항을 쉽게 업데이트할 수 있습니다.
 
-- Autonomous Database Metadata Clone 기능
+- Autonomous Database Metadata Clone 기능 <br>
   ![ADBCLONE](/assets/img/dataplatform/2025/release_note/202510/oci_adb_metadata_clone.png)
 
 ## Select AI Summarize, Feedback, Conversations
