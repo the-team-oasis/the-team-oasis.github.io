@@ -91,3 +91,4 @@ GenAI 및 AutoML 기능에서 다중 세션 쿼리를 동시에 처리할 수 �
     - OKE (Oracle Kubernetes Engine) 클러스터의 네임스페이스(namespace) 단위로 백업 대상을 지정할 수 있는 기능이 추가되었습니다 (OKE 클러스터를 DR 그룹에 추가할 때)
 
 * **참고 사이트:** [공식 블로그](https://docs.oracle.com/ko/learn/full-stack-dr-mysql-heatwave/index.html#introduction){:target="_blank" rel="noopener"}
+

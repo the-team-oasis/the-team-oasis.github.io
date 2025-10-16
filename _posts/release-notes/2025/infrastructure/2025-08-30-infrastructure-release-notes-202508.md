@@ -45,7 +45,7 @@ header: no
 
 Oracle이 자체 관리형 Kafka 서비스인 OCI Streaming with Apache Kafka 를 공식 출시하였습니다. 이 서비스는 오픈소스 Kafka와의 호환성을 유지하면서, 분산 스트리밍 파이프라인을 손쉽게 구축하고 운영할 수 있습니다.
 
-![OCIGG23AICON](/assets/img/infrastructure/2025/kafka.png)
+![OCIGG23AICON](/assets/img/infrastructure/2025/kafka12.png)
 
 - 완전 관리형 Kafka 서비스 제공
   - 스트리밍 클러스터의 설치, 구성, 업그레이드, 운영 부담을 OCI 쪽에서 처리하며, 사용자는 스트림 설계와 데이터 흐름에 집중할 수 있습니다.
