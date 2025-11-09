@@ -69,10 +69,24 @@ header: no
 
 - 개인 정보 현행화 이후 위 화면과 같이 SR을 생성 할 수 있는 화면이 보여집니다. 이후 사용자가 원하는 SR을 생성하면 됩니다.
 
-# MOS에 사용자 추가
+# MOS에 사용자 추가 (상업용 클라우드 계정 사용)
 
 아래와 같이 신규 사용자를 추가하고 해당 사용자를 MOS에 등록하는 절차는 아래와 같습니다.
 
 ![](/assets/img/getting-started/2025/mos_new_image8.png " ")
 
 - 신규 사용자를 생성하고 MOS 등록 절차를 이전과 같이 동일하게 진행하면 SR 생성이 가능합니다.
+
+# MOS에 사용자 추가 (오라클 계정 사용)
+
+오라클 계정으로 MOS에 로그인한 사용자가 특정 사용자 그룹(테넌시)에 권한을 신청하는 방법입니다.
+
+- 로그인 후 우측 상단 "계정" 메뉴에서 "환경설정" 메뉴를 클릭합니다
+  ![](/assets/img/getting-started/2025/mos_new_adduser-1.png " ")
+
+- 이동한 화면에서 "사용자 그룹" 탭을 클릭 후 "사용자 그룹에 대한 접근 요청" 을 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_adduser-2.png " ")
+
+- 요청하고자 하는 그룹의 사용자 그룹 ID와 테넌시 명을 입력합니다. (해당 정보는 테넌시 관리자를 통해 확인 할 수 있습니다.)
+  ![](/assets/img/getting-started/2025/mos_new_adduser-3.png " ")
+  ![](/assets/img/getting-started/2025/mos_new_adduser-4.png " ")
