@@ -1,0 +1,254 @@
+{% comment %}
+OCI Policy Generator - 재사용 가능한 범용 Policy 생성기
+
+사용 예시:
+{% capture policy_config %}
+{
+"title": "GenAI Agent Policy 생성기",
+"description": "Dynamic Group과 Compartment 정보를 입력하면 필요한 Policy를 자동으로 생성합니다.",
+"fields": [
+{
+"id": "dynamicGroup",
+"label": "Dynamic Group 이름",
+"placeholder": "예: genai-agent-dg"
+},
+{
+"id": "databaseComp",
+"label": "Database Connection Compartment",
+"placeholder": "예: database-compartment"
+}
+],
+"policies": [
+"Allow dynamic-group {{dynamicGroup}} to read database-tools-family in compartment {{databaseComp}}",
+"Allow any-user to use database-tools-connections in compartment {{databaseComp}} where any
+{request.principal.type='genaiagent'}"
+]
+}
+{% endcapture %}
+{% include oci-policy-generator.html config=policy_config %}
+{% endcomment %}
+
+{% assign generator_id = include.id | default: "default" %}
+{% assign config_json = include.config | strip %}
+
+<div class="oci-policy-generator" id="generator-{{ generator_id }}" data-config="{{ config_json | escape }}"
+    style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+    <div class="generator-content">
+        <div class="generator-header" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0; display: flex; align-items: center;">
+                <span style="margin-right: 8px;">🔧</span>
+                <span class="generator-title">OCI Policy 생성기</span>
+            </h3>
+            <p class="generator-description" style="color: #666; font-size: 0.9em; margin-bottom: 0;">
+                필요한 정보를 입력하면 Policy를 자동으로 생성합니다.
+            </p>
+        </div>
+
+        <div class="generator-form"></div>
+
+        <button class="btn-generate"
+            style="background-color: #0066cc; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; margin: 15px 0;">
+            Policy 생성
+        </button>
+
+        <div class="policy-output" style="display: none; margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h4 style="margin: 0;">생성된 Policy:</h4>
+                <button class="btn-copy"
+                    style="background-color: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9em;">
+                    📋 복사하기
+                </button>
+            </div>
+            <pre class="generated-policy"
+                style="background-color: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"></pre>
+            <div class="copy-message" style="color: #28a745; font-weight: bold; margin-top: 10px; display: none;">
+                ✓ 클립보드에 복사되었습니다!
+            </div>
+            <div
+                style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 10px 12px; margin-top: 15px; border-radius: 4px;">
+                <div style="font-size: 0.85em; color: #856404;">
+                    <strong>💡 Compartment 표기 주의:</strong> 루트 구획에서 Policy 생성 시 전체 경로 입력 필요 (예: root:parent:child)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .oci-policy-generator .form-group {
+        margin-bottom: 15px;
+    }
+
+    .oci-policy-generator .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .oci-policy-generator .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: monospace;
+        box-sizing: border-box;
+    }
+
+    .oci-policy-generator input:focus {
+        outline: none;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+
+    .oci-policy-generator button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        transition: all 0.2s;
+    }
+
+    .oci-policy-generator button:active {
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    (function () {
+        // 각 생성기 인스턴스를 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            const generators = document.querySelectorAll('.oci-policy-generator');
+
+            generators.forEach(function (generator) {
+                const configData = generator.getAttribute('data-config');
+                let config;
+
+                try {
+                    config = JSON.parse(configData);
+                    console.log('Parsed config:', config);
+                    console.log('Policies:', config.policies);
+                } catch (e) {
+                    console.error('Policy Generator Config Parse Error:', e);
+                    console.error('Config Data:', configData);
+                    generator.innerHTML = '<p style="color: red;">설정 오류: JSON 형식이 올바르지 않습니다.</p>';
+                    return;
+                }
+
+                // 제목과 설명 설정
+                if (config.title) {
+                    generator.querySelector('.generator-title').textContent = config.title;
+                }
+                if (config.description) {
+                    generator.querySelector('.generator-description').textContent = config.description;
+                }
+
+                // 폼 필드 생성
+                const formContainer = generator.querySelector('.generator-form');
+                const generatorId = generator.getAttribute('id');
+                config.fields.forEach(function (field) {
+                    const formGroup = document.createElement('div');
+                    formGroup.className = 'form-group';
+
+                    const label = document.createElement('label');
+                    const uniqueId = generatorId + '-' + field.id;
+                    label.setAttribute('for', uniqueId);
+                    label.textContent = field.label + ':';
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.id = uniqueId;
+                    input.setAttribute('data-field-id', field.id);
+                    input.placeholder = field.placeholder || '';
+
+                    // Enter 키로 생성
+                    input.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') {
+                            generatePolicy(generator, config);
+                        }
+                    });
+
+                    formGroup.appendChild(label);
+                    formGroup.appendChild(input);
+                    formContainer.appendChild(formGroup);
+                });
+
+                // 생성 버튼 이벤트
+                generator.querySelector('.btn-generate').addEventListener('click', function () {
+                    generatePolicy(generator, config);
+                });
+
+                // 복사 버튼 이벤트
+                generator.querySelector('.btn-copy').addEventListener('click', function () {
+                    copyPolicy(generator);
+                });
+            });
+        });
+
+        function generatePolicy(generator, config) {
+            // 입력값 수집
+            const values = {};
+            let hasEmptyField = false;
+
+            config.fields.forEach(function (field) {
+                const input = generator.querySelector('[data-field-id="' + field.id + '"]');
+                if (!input) {
+                    console.error('Input not found for field:', field.id);
+                    return;
+                }
+                const value = input.value.trim();
+
+                if (!value) {
+                    hasEmptyField = true;
+                }
+                values[field.id] = value;
+            });
+
+            console.log('Collected values:', values);
+
+            if (hasEmptyField) {
+                alert('모든 필드를 입력해주세요!');
+                return;
+            }
+
+            // Policy 생성 (템플릿 변수 치환)
+            console.log('Original policies:', config.policies);
+            const policies = config.policies.map(function (template) {
+                console.log('Processing template:', template);
+                let policy = template;
+                Object.keys(values).forEach(function (key) {
+                    // {{key}} 또는 [[key]] 형태 모두 지원
+                    const regex1 = new RegExp('\\{\\{\\s*' + key + '\\s*\\}\\}', 'g');
+                    const regex2 = new RegExp('\\[\\[\\s*' + key + '\\s*\\]\\]', 'g');
+                    console.log('Replacing', key, 'with', values[key]);
+                    policy = policy.replace(regex1, values[key]);
+                    policy = policy.replace(regex2, values[key]);
+                });
+                console.log('Result policy:', policy);
+                return policy;
+            });
+
+            const policyText = policies.join('\n');
+            console.log('Final policy text:', policyText);
+
+            // 결과 표시
+            generator.querySelector('.generated-policy').textContent = policyText;
+            generator.querySelector('.policy-output').style.display = 'block';
+            generator.querySelector('.copy-message').style.display = 'none';
+
+            // 결과로 스크롤
+            generator.querySelector('.policy-output').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyPolicy(generator) {
+            const policyText = generator.querySelector('.generated-policy').textContent;
+
+            navigator.clipboard.writeText(policyText).then(function () {
+                const message = generator.querySelector('.copy-message');
+                message.style.display = 'block';
+                setTimeout(function () {
+                    message.style.display = 'none';
+                }, 3000);
+            }).catch(function (err) {
+                alert('복사 실패: ' + err);
+            });
+        }
+    })();
+</script>
