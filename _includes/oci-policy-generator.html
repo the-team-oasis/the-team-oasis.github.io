@@ -118,10 +118,15 @@ OCI Policy Generator - 재사용 가능한 범용 Policy 생성기
             const generators = document.querySelectorAll('.oci-policy-generator');
 
             generators.forEach(function (generator) {
-                const configData = generator.getAttribute('data-config');
+                let configData = generator.getAttribute('data-config');
                 let config;
 
                 try {
+                    // HTML 엔티티 디코딩
+                    const textarea = document.createElement('textarea');
+                    textarea.innerHTML = configData;
+                    configData = textarea.value;
+
                     config = JSON.parse(configData);
                     console.log('Parsed config:', config);
                     console.log('Policies:', config.policies);
