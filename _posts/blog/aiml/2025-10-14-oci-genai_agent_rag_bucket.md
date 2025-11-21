@@ -102,37 +102,7 @@ all {resource.type='genaiagent'}
 
 **Policy 자동 생성기를 사용하여 필요한 Policy를 쉽게 생성할 수 있습니다:**
 
-{% capture rag_bucket_policy %}
-{% raw %}{
-"title": "GenAI Agent RAG Bucket Policy 생성기",
-"description": "그룹과 Dynamic Group 정보를 입력하면 필요한 Policy를 자동으로 생성합니다.",
-"fields": [
-{
-"id": "dynamicGroup",
-"label": "Dynamic Group 이름",
-"placeholder": "예: genai-agent-dg"
-},
-{
-"id": "objectComp",
-"label": "Object Storage의 구획(Compartment)",
-"placeholder": "예: object-compartment"
-},
-{
-"id": "genaiComp",
-"label": "OCI GenAI 서비스를 사용할 구획(Compartment)",
-"placeholder": "예: genai-compartment"
-}
-],
-"policies": [
-"전체 테넌시에 정책을 적용하는 경우 (Root 구획에 작성)",
-"Allow dynamic-group {{dynamicGroup}} to manage object-family in tenancy",
-"Allow dynamic-group {{dynamicGroup}} to manage genai-agent-family in tenancy",
-"특정 구획에 정책을 적용하는 경우 (해당 구획에 작성)",
-"Allow dynamic-group {{dynamicGroup}} to manage object-family in compartment {{objectComp}}",
-"Allow dynamic-group {{dynamicGroup}} to manage genai-agent-family in compartment {{genaiComp}}"
-]
-}{% endraw %}
-{% endcapture %}
+{% capture rag_bucket_policy %}{"title": "GenAI Agent RAG Bucket Policy 생성기","description": "그룹과 Dynamic Group 정보를 입력하면 필요한 Policy를 자동으로 생성합니다.","fields": [{"id": "dynamicGroup","label": "Dynamic Group 이름","placeholder": "예: genai-agent-dg"},{"id": "objectComp","label": "Object Storage의 구획(Compartment)","placeholder": "예: object-compartment"},{"id": "genaiComp","label": "OCI GenAI 서비스를 사용할 구획(Compartment)","placeholder": "예: genai-compartment"}],"policies": ["전체 테넌시에 정책을 적용하는 경우 (Root 구획에 작성)","Allow dynamic-group {{dynamicGroup}} to manage object-family in tenancy","Allow dynamic-group {{dynamicGroup}} to manage genai-agent-family in tenancy","특정 구획에 정책을 적용하는 경우 (해당 구획에 작성)","Allow dynamic-group {{dynamicGroup}} to manage object-family in compartment {{objectComp}}","Allow dynamic-group {{dynamicGroup}} to manage genai-agent-family in compartment {{genaiComp}}"]}{% endcapture %}
 {% include oci-policy-generator.html config=rag_bucket_policy id="rag-bucket" %}
 
 **또는 수동으로 작성할 경우 다음 Policy 템플릿을 참고하세요:**

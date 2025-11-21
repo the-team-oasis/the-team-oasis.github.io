@@ -108,36 +108,7 @@ ALL {resource.type='genaiagent'}
 
 **Policy 자동 생성기를 사용하여 필요한 Policy를 쉽게 생성할 수 있습니다:**
 
-{% capture sql_tool_policy %}
-{% raw %}{
-"title": "GenAI Agent SQL Tool Policy 생성기",
-"description": "Dynamic Group과 Compartment 정보를 입력하면 필요한 Policy를 자동으로 생성합니다.",
-"fields": [
-{
-"id": "dynamicGroup",
-"label": "Dynamic Group 이름",
-"placeholder": "예: genai-agent-dg"
-},
-{
-"id": "databaseComp",
-"label": "Database Connection Compartment",
-"placeholder": "예: database-compartment"
-},
-{
-"id": "vaultComp",
-"label": "Vault Secret Compartment",
-"placeholder": "예: vault-compartment"
-}
-],
-"policies": [
-"Allow dynamic-group {{dynamicGroup}} to read database-tools-family in compartment {{databaseComp}}",
-"Allow dynamic-group {{dynamicGroup}} to read secret-bundle in compartment {{vaultComp}}",
-"Allow any-user to read database-tools-family in compartment {{databaseComp}} where any {request.principal.type='genaiagent'}",
-"Allow any-user to read secret-bundle in compartment {{vaultComp}} where any {request.principal.type='genaiagent'}",
-"Allow any-user to use database-tools-connections in compartment {{databaseComp}} where any {request.principal.type='genaiagent'}"
-]
-}{% endraw %}
-{% endcapture %}
+{% capture sql_tool_policy %}{"title": "GenAI Agent SQL Tool Policy 생성기","description": "Dynamic Group과 Compartment 정보를 입력하면 필요한 Policy를 자동으로 생성합니다.","fields": [{"id": "dynamicGroup","label": "Dynamic Group 이름","placeholder": "예: genai-agent-dg"},{"id": "databaseComp","label": "Database Connection Compartment","placeholder": "예: database-compartment"},{"id": "vaultComp","label": "Vault Secret Compartment","placeholder": "예: vault-compartment"}],"policies": ["Allow dynamic-group {{dynamicGroup}} to read database-tools-family in compartment {{databaseComp}}","Allow dynamic-group {{dynamicGroup}} to read secret-bundle in compartment {{vaultComp}}","Allow any-user to read database-tools-family in compartment {{databaseComp}} where any {{ '{' }}request.principal.type='genaiagent'{{ '}' }}","Allow any-user to read secret-bundle in compartment {{vaultComp}} where any {{ '{' }}request.principal.type='genaiagent'{{ '}' }}","Allow any-user to use database-tools-connections in compartment {{databaseComp}} where any {{ '{' }}request.principal.type='genaiagent'{{ '}' }}"]}{% endcapture %}
 {% include oci-policy-generator.html config=sql_tool_policy id="sql-tool" %}
 
 **또는 수동으로 작성할 경우 다음 Policy 템플릿을 참고하세요:**
