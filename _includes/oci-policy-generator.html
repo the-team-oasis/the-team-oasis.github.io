@@ -29,7 +29,7 @@ OCI Policy Generator - 재사용 가능한 범용 Policy 생성기
 {% endcomment %}
 
 {% assign generator_id = include.id | default: "default" %}
-{% assign config_json = include.config | strip %}
+{% assign config_json = include.config | strip | strip_newlines %}
 
 <div class="oci-policy-generator" id="generator-{{ generator_id }}" data-config="{{ config_json | escape }}"
     style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
