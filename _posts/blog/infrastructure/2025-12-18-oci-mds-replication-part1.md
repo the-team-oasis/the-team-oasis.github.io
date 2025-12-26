@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "Networking"
-title: "Cross-Region Oracle Heatwave MySQL Disaster Recovery"
+title: "Cross-Region Oracle Heatwave MySQL Disaster Recovery (Part.1)"
 teaser: "Cross-Region Oracle Heatwave MySQL Disaster Recovery 설정하는 방법 소개합니다."
 author: "kisukim"
 breadcrumb: true
@@ -63,6 +63,8 @@ OCI에서는 HeatWave MySQL DR Copy를 구성하는 두 가지 방법을 제공�
 위 아키텍처를 구현하기 위해서 아래의 선행 작업이 필요합니다. 
 - <strong style="color: red;">각(서울, 싱가포르) 리전간 DRG(Dynatmic Routing Gateway) 구성</strong>
 [참조 : OCI Remote Peering - 서로 다른 리전간의 VCN 연결하기](https://the-team-oasis.github.io/infrastructure/oci-remote-peering/)
+
+- <strong style="color: red;">기본 binlog_expire_logs_seconds 값을 최소 3일로 늘리기 위해 맞춤 구성을 만들고 이를 Primary 데이터베이스 시스템에 적용하여야 합니다.</strong>
 
 ## 작업 순서 
 
