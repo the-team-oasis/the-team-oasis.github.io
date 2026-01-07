@@ -709,7 +709,7 @@ ALTER DATABASE CLEAR LOGFILE GROUP 7;
 shutdown immediate;
 -- 중요 : 반드시 mount 모드로 시작
 startup mount;
-
+-- FLASHBACK 을 ON
 ALTER DATABASE FLASHBACK ON;
 
 exit
@@ -856,9 +856,21 @@ SHOW CONFIGURATION VERBOSE;
 
 ## STEP-10. Data Guard 전환 테스트
 
-Data Guard 구성이 완료되었습니다. PROD DB → STADNBY DB → STANDBY DR DB 또는 STANDBY DR DB → PROD DB 로 Switch Over 를 수행하여 원활히 전환이 되는지 검증합니다.
+Data Guard 구성이 완료되었습니다. 
+Switcho Over 를 수행하지 않고, STANDBY DR 쪽에 운영 DB 의 변경 사항이 적용되고 있는지 확인합니다.
+PROD DB → STADNBY DB → STANDBY DR DB 또는 STANDBY DR DB → PROD DB 로 Switch Over 를 수행하여 원활히 전환이 되는지 검증합니다.
 
-### 10-1 Switch Over 수행
+### 10-1 STAND BY DR DB 에 대해 Read Only 로 Open
+
+STANDBY DR DB 의 Database 를 Read Only 로 Open 하고 운영 Database 에 변경을 수행 후, STANDBY DR DB 쪽에 반영이 되는지 확인합니다.
+
+```sql
+-- Active Data Gaurd 활성화
+-- STANDBY DR 쪽에 수행하고, 운영 DB 에 CRUD 를 수행 후 변경이 반영되었는지 확인
+ALTER DATABASE OPEN READ ONLY;
+```
+
+### 10-2 Switch Over 수행
 
 ```bash
 sudo su - oracle
