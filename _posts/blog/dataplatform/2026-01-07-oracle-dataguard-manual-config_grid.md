@@ -4,8 +4,8 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "DataPlatform"
-title: "OCI Base Database 에 Data Guard Manual 추가 구성 방법"
-teaser: "OCI Base Database Service 의 대해 Data Guard를 Manual 하게 구성하는 방법을 소개합니다. OCI 에서 기본 제공되는 Data Guard 구성 후 STANDBY DB 를 한대 더 추가하여 Data Guard 를 구성하는 경우에 해당하는 Manual 구성 절차입니다."
+title: "OCI Base Database 에 Data Guard Manual 로 STANDBY DB 추가 구성 방법"
+teaser: "OCI Base Database Service 에서는 STANDBY DB 를 한대만 추가할 수 있습니다. OCI 에서 기본 제공되는 Data Guard 구성 후 STANDBY DB 를 한대 더 추가하여 멀티로 STANDBY DB 들을 Data Guard 로 구성하고자 하는 경우에 해당하는 Manual 구성 절차입니다."
 author: lim
 breadcrumb: true
 categories:
