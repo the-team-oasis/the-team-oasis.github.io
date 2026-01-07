@@ -36,11 +36,11 @@ header: no
 
 ### 들어가며
 
-OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을 제공합니다. OCI Console 에서 제공되는 기본 Data Guard 는 Primary, Secondary 각각 1개씩의 DB들로만 Data Guard 를 구성할 수 있기 때문에 추가적인 STANDBY DB 를 구성할 수가 없습니다.
+OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을 제공합니다. OCI Console 에서 제공되는 OCI Base Database 의 Data Guard 기능에서는 Primary, Secondary 를 각각 1개만 Data Guard 로 Association 할 수 있기 때문에 추가적인 STANDBY DB 를 구성할 수가 없습니다.
 
-추가적인 STANDBY DB가 필요한 경우에는 Oracle Database 가 제공하는 Data Guard Broker / Manager 를 통해서 Manual 하게 여러대의 STAMDBY DB 구성할 수가 있습니다.
+이에 추가적인 STANDBY DB가 필요한 경우에는 OCI Console 에서는 구성할 수가 없고, Oracle Database 가 제공하는 Data Guard Broker / Manager 를 이용하여 Manual 하게 여러대의 STAMDBY DB 를 구성하실 수가 있습니다.
 
-이번 블로그에서는 수동으로 Data Guard 를 통해 추가적으로 STANDBY DB 를 Manual하게 구성하는 절차를 정리했습니다. STANDBY DB 는 동일한 Region 에 있을 수도 있고, 다른 Region 에 구성하실 수도 있습니다.
+이번 블로그에서는 OCI Console 에서 구성한 Data Guard 에 추가적으로 STANDBY DB 를 Manual하게 구성하는 절차를 정리했습니다. 추가적으로 추가할 DB 는 편의상 <mark> STANDARD DR DB</mark> 라고 칭하도록 하겠습니다. STANDBY DR DB 는 동일한 Region 에 있을 수도 있고, 다른 Region 에 구성하실 수도 있습니다.
 
 구성을 위한 아키텍쳐 및 시나리오는 아래와 같습니다.
 
