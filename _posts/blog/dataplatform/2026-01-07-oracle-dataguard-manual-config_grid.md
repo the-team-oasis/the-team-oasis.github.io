@@ -438,7 +438,6 @@ exit
 ```
 
 * 참고 : "ASMCMD-9453: failed to register password file as a CRS resource" 오류가 발생하더라도 무시합니다.
-<BR>
 
 앞서 ASMCMD 를 통해 나온 Password 파일의 위치를 아래 위치에 업데이트하여 DB 서비스를 수정해 줍니다.
 
