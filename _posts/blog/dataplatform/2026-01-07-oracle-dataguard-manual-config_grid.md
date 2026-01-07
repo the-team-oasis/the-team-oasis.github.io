@@ -55,7 +55,7 @@ OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을
 - STANDBY : db19c_b48_kix (OCI Console 에서 DataGuard 구성시 DB Unique Name 자동 부여) (IP:10.0.0.243)
 - STANDBY DR (REMOTE) : db19c_stbdr19c (Manual 구성할 DB) (IP:10.0.0.22)
 
-주의
+<mark>주의</mark>
 
 - 본 문서는 Oracle Database 19c 기준 예시입니다.
 - 환경(LVM/ASM, Single/RAC, CDB/Non-CDB)에 따라 경로와 파라미터가 달라질 수 있습니다.
@@ -169,13 +169,16 @@ SQL> select member from v$logfile;
 
 - 운영과 동일한 DB_NAME으로 생성합니다.
 - DB_UNIQUE_NAME은 운영과 다르게 설정, 본 문서 예제에서는 STANDBY DR 을 의미하는 DB19C_STBDR19C 로 설정하였습니다.
-- 주의 : CDB/Non-CDB, ASM/FS 레이아웃이 운영과 상이하면 DB_FILE_NAME_CONVERT, LOG_FILE_NAME_CONVERT 매핑을 정확히 설정해야 합니다.
+
+<mark>주의</mark>
+
+- CDB/Non-CDB, ASM/FS 레이아웃이 운영과 상이하면 DB_FILE_NAME_CONVERT, LOG_FILE_NAME_CONVERT 매핑을 정확히 설정해야 합니다.
 
 ---
 
 ### STEP-3. 운영과 STANDBY, STANDBY DR 서버들의 hosts 파일 등록과 TNS 설정
 
-이 STEP 은 매우 중요합니다.
+<mark>이 STEP 은 매우 중요합니다.</mark>
 
 많은 오류가 hosts 파일에 DB 서버 상호간 host 들이 등록이 되지 않아 통신이 안되거나 TNS 설정이 잘못되어 발생하는 경우가 많습니다.
 DB 서버 상호간 통신이 되어야 하며, TNS 설정을 올바르게 해 주어야 합니다.
@@ -346,7 +349,7 @@ sudo su - grid
 [grid@stbdr19c ~]$ 
 ```
 
-주의
+<mark>주의</mark>
 
 - 파일 제거는 복구 불가입니다. 정확하게 Manual 하게 DG 에 추가할 STANDBY DR DB인지 재확인 바랍니다.
 
@@ -540,7 +543,7 @@ exit
 ### STEP-7. STANDBY DR DB 의 Data File 확인 및 Redo Log 재조정 
 
 RMAN 복구 작업 후 Data File 이 운영 DB 의 Data file 위치와 비교하여 ASM 의 Convert Rule 에 따라 복제가 되었는지 확인합니다.
-Redo Log 의 경우, RMAN 복구 후 logdata file 운영의 Log file 위치와 상이하게 생성되는데, Log file 의 재성성 및 Clear 작업 등 재조정 작업이 필요합니다.
+Redo Log 의 경우, RMAN 복구 후 logdata file 들이 운영의 Log file 위치와 상이하게 생성되는데, Log file 의 재성성 및 Clear 작업 등 재조정 작업이 필요합니다.
 
 #### 7-1 Data File 에 대한 비교
 
@@ -631,8 +634,11 @@ select group#, member from v$logfile;
 ![REDO Log Files](/assets/img/dataplatform/2025/blog/dg/12.dg-stbdr_redo_log_rename_files.png " ")
 
 - 상기 화면처럼 '+RECO/MUST_RENAME_THIS_LOGFILE_#/' 위치에 있는 Logfile 들은 삭제 후, 재생성이 필요합니다.
-- Logfile 삭제를 위해 아래와 같이 Logfile 의 group 수 만큼 logfile DROP script 를 작성하여 수행합니다. 
-- 주의 : STANDBY DR DB 인지 반드시 확인하고 수행 바랍니다.
+- Logfile 삭제를 위해 아래와 같이 Logfile 의 group 수 만큼 logfile DROP script 를 작성하여 수행합니다.
+
+<mark>주의</mark>
+
+- STANDBY DR DB 인지 반드시 확인하고 수행 바랍니다.
 
 ```sql
 ALTER DATABASE DROP STANDBY LOGFILE GROUP 1;
@@ -761,7 +767,7 @@ select CON_ID, WRL_PARAMETER, WRL_TYPE, STATUS, WALLET_TYPE from V$ENCRYPTION_WA
 
 ```
 
-주의
+<mark>주의</mark>
 
 - 디렉토리 권한과 소유자(oracle/grid)를 확인하세요.
 - 경로 오타(대상 디렉토리 슬래시 누락 등)에 유의하세요.
