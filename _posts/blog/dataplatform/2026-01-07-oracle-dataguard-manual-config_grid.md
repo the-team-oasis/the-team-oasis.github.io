@@ -614,11 +614,11 @@ select group#, member from v$logfile;
 <mark>중요</mark>
 
 Redo Log 파일들은 상기 화면들과 같이 운영(PROD) DB 와 STANDBY DR DB 의 저장 위치가 상이하게 생성된 것을 확인할 수 있습니다.
-Redo Log 파일들이 STANDBY DR DB 의 저장 위치처럼 '+RECO/DB-Unique-Name/' 위치에 저장되지 않고 '+RECO/MUST_RENAME_THIS_LOGFILE_#/' 위치에 저장되어 있다면 Redo Log 를 삭제하고 재생성하는 단계인 다음 단계를 진행합니다.
+Redo Log 파일들이 STANDBY DR DB 의 저장 위치처럼 <mark>'+RECO/DB-Unique-Name/'</mark> 위치에 저장되지 않고 <mark>'+RECO/MUST_RENAME_THIS_LOGFILE_#/'</mark> 위치에 저장되어 있다면 Redo Log 를 삭제하고 재생성하는 단계인 다음 단계를 진행합니다.
 
 #### 7-3 잘못 생성된 Redo Log 파일 삭제
 
-'+RECO/MUST_RENAME_THIS_LOGFILE_#/' 위치에 저장된 파일에 대한 삭제 작업을 수행합니다.
+<mark>'+RECO/MUST_RENAME_THIS_LOGFILE_#/'</mark> 위치에 저장된 파일에 대한 삭제 작업을 수행합니다.
 
 주의
 
