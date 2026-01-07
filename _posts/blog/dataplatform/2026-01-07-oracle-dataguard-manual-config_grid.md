@@ -506,18 +506,22 @@ SELECT file#, name, bytes/1024/1024 AS size_mb FROM v$datafile ORDER BY file#;
 
 <mark>반드시 STANDBY DR DB 서버인지 확인합니다.</mark>
 
-```RMAN
+```sql
 sudo su - oracle
 -- RMAN
 rman target /
 
 shutdown immediate;
+
 -- RMAN 복제 작업을 위해 반드시 Nomount 로 시작
 startup nomount;
+
 -- 운영 (PROD) DB 서버로 부터 Control 파일 Restore
 RESTORE STANDBY CONTROLFILE FROM SERVICE 'db19c_prod19c';
+
 -- Mount 로 전환
 ALTER DATABASE MOUNT;
+
 -- 운영 (PROD) DB 서버로 부터 데이터 파일 Restore
 RUN {
   ALLOCATE CHANNEL c1 DEVICE TYPE DISK;
@@ -534,7 +538,7 @@ RUN {
 
 - RMAN 명령창에서 DB 서비스를 내렸다가 mount 모드로 시작합니다.
 
-```RMAN
+```sql
 shutdown immediate;
 startup mount;
 
