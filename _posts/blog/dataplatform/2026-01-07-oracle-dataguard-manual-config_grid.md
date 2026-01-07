@@ -189,7 +189,7 @@ SQL> select member from v$logfile;
 
 ---
 
-### STEP-3. 운영과 STANDBY, STANDBY DR 서버들의 hosts 파일 등록과 TNS 설정
+### STEP-3. 운영(PROD)과 STANDBY, STANDBY DR 서버들의 hosts 파일 등록과 TNS 설정
 
 <mark>이 STEP 은 매우 중요합니다.</mark>
 
