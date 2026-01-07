@@ -4,7 +4,7 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "DataPlatform"
-title: "OCI Base Database 의 Data Guard 에 STANDBY DB 를 Manual 하게 추가로 구성하는 방법"
+title: "OCI Base Database 의 Data Guard 에 STANDBY DB 를 Manual 로 추가 구성하는 방법"
 teaser: "OCI Base Database Service 에서 제공하는 Data Guard Association 기능은 STANDBY DB 를 한대만 추가할 수 있습니다. 이 가이드 문서에서는 OCI 에서 기본적으로 제공되는 Data Guard 로 STANDBY 를 구성한 후 추가적으로 STANDBY DB 를 한대 더 추가하여 멀티로 STANDBY DB 들을 운영하고자 하는 경우를 위해 수동으로 Manual 하게 STANDBY DB 를 Data Guard 에 추가하는 절차를 정리했습니다."
 author: lim
 breadcrumb: true
