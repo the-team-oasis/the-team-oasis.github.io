@@ -526,7 +526,6 @@ RUN {
   SWITCH DATAFILE ALL;
   SWITCH TEMPFILE ALL;
 }
-
 ```
 
 - RMAN 수행 결과 아래와 같이 오류없이 Restore 가 잘 되어야 합니다.
