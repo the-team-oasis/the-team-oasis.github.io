@@ -122,8 +122,12 @@ GRANT UNLIMITED TABLESPACE TO SRC_OCIGGLL;
 --------------------------------------------------------
 --  DDL for Table SRC_CITY
 --------------------------------------------------------
-CREATE TABLE "SRC_OCIGGLL"."SRC_CITY" (	"CITY_ID" NUMBER(10,0), "CITY" VARCHAR2(50 BYTE), "REGION_ID" NUMBER(10,0), 
-"POPULATION" NUMBER(10,0)
+
+CREATE TABLE "SRC_OCIGGLL"."SRC_CITY" (	
+  "CITY_ID" NUMBER(10,0), 
+  "CITY" VARCHAR2(50 BYTE), 
+  "REGION_ID" NUMBER(10,0), 
+  "POPULATION" NUMBER(10,0)
 ) 
 ;
 ..... 중략
