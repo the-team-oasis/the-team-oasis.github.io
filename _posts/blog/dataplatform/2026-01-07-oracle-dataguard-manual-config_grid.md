@@ -504,8 +504,9 @@ SELECT file#, name, bytes/1024/1024 AS size_mb FROM v$datafile ORDER BY file#;
 
 운영 (PROD) DB 로부터 데이터 파일을 복구하는 중요한 단계입니다. STANBY DR DB (stbdr19c) 서버에 접속하여 RMAN 을 수행하여 운영 DB (db19c_prod19c) 로부터 데이터 복구를 수행합니다.
 
-반드시 STANDBY DR DB 서버인지 확인합니다.
-```sql
+<mark>반드시 STANDBY DR DB 서버인지 확인합니다.</mark>
+
+```RMAN
 sudo su - oracle
 -- RMAN
 rman target /
