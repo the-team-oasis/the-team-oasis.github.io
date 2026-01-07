@@ -50,7 +50,9 @@ OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을
 
 상기 아키텍쳐에서 좌측의 운영 (PROD) DB 와 STANDBY DB 는 OCI 에서 제공하는 DataGuard Association 기능을 사용하여 구성을 해 놓고, 우축의 추가적인 STANDBY DR DB 를 Manual 하게 구성해 보도록 하겠습니다.
 
-추가적으로 구성하는 STANDBY DR DB 는 편의상 동일한 Remote Peering Gateway 가 구성이 되어 네트워크 통신이 원활하게 되고 있음을 가정하여 동일한 Region, 동일한 VCN 에 구성하도록 하겠습니다.
+추가적으로 구성하는 STANDBY DR DB 는 편의상 동일한 Region 의 동일한 VCN 에 구성하도록 하겠습니다.
+
+Remote Region 에 구성하는 경우는 Remote Peering Gateway 같은 네트워크를 사전에 구성하여 통신이 원활하게 이루어져야 합니다. Remote Region 구성에 관해서는 아래 사전 준비 사항을 참고 바랍니다.
 
 아키텍쳐에서 각각의 DB 서버의 DB Unique Name 과 IP 를 다음과 같이 가정하여 구성하도록 하겠습니다. 
 
