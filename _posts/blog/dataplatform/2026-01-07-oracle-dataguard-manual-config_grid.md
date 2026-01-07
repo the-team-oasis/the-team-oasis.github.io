@@ -595,7 +595,7 @@ select group#, member from v$logfile;
 
 ![REDOLOGFILES](/assets/img/dataplatform/2025/blog/dg/10.dg-stbdr_redolog_files.png " ")
 
-중요
+<mark>중요</mark>
 
 Redo Log 파일들은 상기 화면들과 같이 운영(PROD) DB 와 STANDBY DR DB 의 저장 위치가 상이하게 생성된 것을 확인할 수 있습니다.
 Redo Log 파일들이 STANDBY DR DB 의 저장 위치처럼 '+RECO/DB-Unique-Name/' 위치에 저장되지 않고 '+RECO/MUST_RENAME_THIS_LOGFILE_#/' 위치에 저장되어 있다면 Redo Log 를 삭제하고 재생성하는 단계인 다음 단계를 진행합니다.
