@@ -56,6 +56,8 @@ Remote Region 에 구성하는 경우는 Remote Peering Gateway 같은 네트워
 
 아키텍쳐에서 각각의 DB 서버의 DB Unique Name 과 IP 를 다음과 같이 가정하여 구성하도록 하겠습니다. Data Guard 구성시에는 DB 의 Unique Name 의 구분이 상당히 중요합니다.
 
+DB Unique Name 은 뒤에서 나오는 TNSNAME 의 Service 명으로 매핑됩니다.
+
 - PROD : <mark>db19c_prod19c</mark> (IP : 10.0.0.138)
 - STANDBY : <mark>db19c_b48_kix</mark> (OCI Console 에서 DataGuard 구성시 DB Unique Name 자동 부여) (IP:10.0.0.243)
 - STANDBY DR (REMOTE) : <mark>db19c_stbdr19c</mark> (Manual 구성할 DB) (IP:10.0.0.22)
