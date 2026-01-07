@@ -41,7 +41,7 @@ OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을
 
 구성을 위한 아키텍쳐 및 시나리오는 아래와 같습니다.
 
-<DR 매뉴얼 구성을 위한 아키텍쳐>
+- DR 매뉴얼 구성을 위한 아키텍쳐
 
 ![DB_Architecture](/assets/img/dataplatform/2025/blog/dg/oci_dg_manual_config_archi.png " ")
 
