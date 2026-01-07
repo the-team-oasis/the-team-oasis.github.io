@@ -137,7 +137,7 @@ CREATE TABLE "SRC_OCIGGLL"."SRC_CITY" (
 
 ```sql
 sqlplus / as sysdba
-set heading off linesize 999 pagesize 0
+set heading off linesize 999 pagesize 0;
 select name from v$datafile;
 select member from v$logfile;
 ```
