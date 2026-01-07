@@ -43,7 +43,7 @@ OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을
 
 - DR 매뉴얼 구성을 위한 아키텍쳐
 
-![DB_Architecture](/assets/img/dataplatform/2025/blog/dg/oci_dg_manual_config_archi.png)
+![DB_Architecture](/assets/img/dataplatform/2025/blog/dg/oci_dg_manual_config_archi.png " ")
 
 상기 아키텍쳐에서 좌측의 운영 (PROD) DB 와 STANDBY DB 는 OCI 에서 제공하는 DataGuard Association 기능을 사용하여 구성을 해 놓고, 우축의 추가적인 STANDBY DR DB 를 Manual 하게 구성해 보도록 하겠습니다.
 
@@ -163,18 +163,13 @@ SQL> select member from v$logfile;
 7 rows selected.
 ```
 
-- 참고로 상기 예제에서 확인한 운영 DB 가 가지고 있는 데이터 파일 11개와 Redo Log 7개가 Manual 하게 추가할 STANDBY DR DB 에 동일하게 생성되어 있어야 합니다.
-
 ---
 
 ### STEP-2. STANDBY DR DB 생성 (OCI Console)
 
-- 운영과 동일한 DB_NAME으로 생성
+- 운영과 동일한 DB_NAME으로 생성합니다.
 - DB_UNIQUE_NAME은 운영과 다르게 설정, 본 문서 예제에서는 STANDBY DR 을 의미하는 DB19C_STBDR19C 로 설정하였습니다.
-
-주의
-
-- CDB/Non-CDB, ASM/FS 레이아웃이 운영과 상이하면 DB_FILE_NAME_CONVERT, LOG_FILE_NAME_CONVERT 매핑을 정확히 설정해야 합니다.
+- 주의 : CDB/Non-CDB, ASM/FS 레이아웃이 운영과 상이하면 DB_FILE_NAME_CONVERT, LOG_FILE_NAME_CONVERT 매핑을 정확히 설정해야 합니다.
 
 ---
 
@@ -190,7 +185,7 @@ DB 서버 상호간 통신이 되어야 하며, TNS 설정을 올바르게 해 �
 Hosts 파일에 모든 DB 서버들의 Host 명을 등록해 줍니다. 
 OCI Console 을 통해 Data Guard 를 구성했을 경우, PROD DB와 STANDBY DB 는 Hosts 파일에 이미 Host 들이 자동으로 등록이 되어 있습니다.
 
-추가적으로 DR 사이트의 STANDBY DR DB 서버 (gstbdr19c) 에 대한 IP 와 Host 명을 PROD, STANDBY 쪽으로도 추가하고 STANDBY DR 쪽에서는 PROD 와 STANDBY 의 IP 와 호스트명을 상호 등록해 줍니다. (Data Guard 로 구성되는 모든 서버들은 모두 hosts 파일에 상호간 등록이 되어 있어야 합니다.)
+추가적으로 DR 사이트의 STANDBY DR DB 서버 (stbdr19c) 에 대한 IP 와 Host 명을 PROD, STANDBY 쪽으로도 추가하고 STANDBY DR 쪽에서는 PROD 와 STANDBY 의 IP 와 호스트명을 상호 등록해 줍니다. (Data Guard 로 구성되는 모든 서버들은 모두 hosts 파일에 상호간 등록이 되어 있어야 합니다.)
 
 ```bash
 # opc 사용자로 전환
@@ -264,7 +259,7 @@ tnsping db19c_b48_kix
 tnsping db19c_stbdr19c
 ```
 
-- 각각의 DB 호스트들에서 아래와 같이 동일한 연결 가능한 결과가 나오는지 체크해야 합니다.
+- 각각의 DB 호스트들에서 아래와 같이 TNSPING 결과로 OK가 나오는지 체크해야 합니다.
 
 ![TNSPING](/assets/img/dataplatform/2025/blog/dg/06.dg-tnsping.png " ")
 
@@ -383,7 +378,7 @@ exit
 
 ```bash
 sudo su - oracle
-## STANDBY DR 서버 (gstbdr19c) 로 접속 시도
+## STANDBY DR 서버 (stbdr19c) 로 접속 시도
 ssh -i ~/.ssh/ssh-key.key opc@10.0.0.22
 TThe authenticity of host '10.0.0.22 (10.0.0.22)' can't be established.
 ECDSA key fingerprint is SHA256:fponsJyr3FDnQAp9zTzqwaOV0a1p1KBOzVmmlc2g1Ak.
@@ -495,11 +490,11 @@ alter system set standby_file_management=auto scope=both sid='*';
 
 ```sql
 -- 운영 DB
-set heading off linesize 999 pagesize 0 
+set heading off linesize 999 pagesize 0; 
 SELECT file#, name, bytes/1024/1024 AS size_mb FROM v$datafile ORDER BY file#;
 ```
 
-#### 6-4. STADBY DR (gstbdr19c) 서버에서 RMAN으로 데이터 복제 (From PROD DB)
+#### 6-4. STADBY DR (stbdr19c) 서버에서 RMAN으로 데이터 복제 (From PROD DB)
 
 운영 (PROD) DB 로부터 데이터 파일을 복구하는 중요한 단계입니다. STANBY DR DB (stbdr19c) 서버에 접속하여 RMAN 을 수행하여 운영 DB (db19c_prod19c) 로부터 데이터 복구를 수행합니다.
 
@@ -554,7 +549,7 @@ Redo Log 의 경우, RMAN 복구 후 logdata file 운영의 Log file 위치와 �
 ```sql
 -- 운영 DB (oracle 사용자)
 sqlplus / as sysdba
-set heading off linesize 999 pagesize 0
+set heading off linesize 999 pagesize 0;
 SELECT file#, name FROM v$datafile ORDER BY file#;
 ```
 
@@ -565,7 +560,7 @@ SELECT file#, name FROM v$datafile ORDER BY file#;
 ```sql
 -- STANDBY DR DB (oracle 사용자)
 sqlplus / as sysdba
-set heading off linesize 999 pagesize 0
+set heading off linesize 999 pagesize 0;
 SELECT file#, name FROM v$datafile ORDER BY file#;
 ```
 
@@ -821,9 +816,9 @@ dgmgrl sys/<SYS_PASSWORD>@db19c_prod19c
 
 --- 아래 주석 부분은 DG 를 처음 구성할때 필요, 이미 구성된 환경이므로 수행 불필요
 
--- CREATE CONFIGURATION grdb19c AS
---  PRIMARY DATABASE IS grdb19c_gprod19c
---  CONNECT IDENTIFIER IS grdb19c_gprod19c;
+-- CREATE CONFIGURATION db19c AS
+--  PRIMARY DATABASE IS db19c_prod19c
+--  CONNECT IDENTIFIER IS db19c_prod19c;
 
 SHOW CONFIGURATION VERBOSE;
 
@@ -914,7 +909,7 @@ SHOW CONFIGURATION;
   - `SHOW CONFIGURATION`, `VALIDATE DATABASE VERBOSE`로 점검
   - `dg_broker_start`, config file 경로 ASM/FS 혼동 주의
   - DG 제거 시 DG Broker 에서 다음 명령으로 제거 
-  - REMOVE DATABASE grdb19c_gstbdr19c;
+  - REMOVE DATABASE db19c_stbdr19c;
 
 - TDE
   - ORA-28365: wallet 상태/경로/권한 확인, AUTOLOGIN 키 유무 점검
