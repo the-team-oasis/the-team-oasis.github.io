@@ -178,8 +178,10 @@ SQL> select member from v$logfile;
 
 ### STEP-2. STANDBY DR DB 생성 (OCI Console)
 
-- 운영과 동일한 DB_NAME으로 생성합니다.
-- DB_UNIQUE_NAME은 운영과 다르게 설정, 본 문서 예제에서는 STANDBY DR 을 의미하는 DB19C_STBDR19C 로 설정하였습니다.
+- OCI Console 을 통해 STANDBY DR 을 위치시킬 Region 에 DB 를 생성합니다.
+- 운영과 동일한 DB_NAME 으로 생성합니다. 본 문서 예에서는 DB19C 로 입력하였습니다.
+- DB_UNIQUE_NAME 에 들어갈 접미사에 운영 DB와 구분지을 수 있는 Unique Name 접미사를 부여하여 생성합니다. 본 문서 예에서는 STBDR19c 라고 부여하였습니다.
+- 최종적으로 Manual 로 DR 에 추가할 DB 의 DB_UNIQUE_NAME 은 'DBNAME_DBUNIQUENAME접미사' 의 조합으로 <mark>DB19C_STBDR19C</mark> 로 생성하였습니다.
 
 <mark>주의</mark>
 
