@@ -316,7 +316,7 @@ Default 로 생성된 데이터 파일들을 삭제하기 위해 STANDBY DR DB H
 vi /home/oracle/rm_dbfiles.sql
 ```
 
-- /home/oracle/rm_dbfiles.sql 파일 내용
+- /home/oracle/rm_dbfiles.sql 파일 내용으로 아래 내용을 복사하여 붙여넣고 파일을 저장합니다.
 
 ```sql
 set heading off linesize 999 pagesize 0 feedback off trimspool on
