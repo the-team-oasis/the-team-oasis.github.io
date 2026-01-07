@@ -46,7 +46,7 @@ OCI Base Database 에서는 기본적인 Data Guard Association 구성 기능을
 
 - DR 매뉴얼 구성을 위한 아키텍쳐
 
-![DB_Architecture](/assets/img/dataplatform/2025/blog/dg/oci_dg_manual_config_archi.png " ")
+![DB_Architecture](/assets/img/dataplatform/2025/blog/dg/01.oci_dg_manual_config_archi.png " ")
 
 상기 아키텍쳐에서 좌측의 운영 (PROD) DB 와 STANDBY DB 는 OCI 에서 제공하는 DataGuard Association 기능을 사용하여 구성을 해 놓고, 우축의 추가적인 STANDBY DR DB 를 Manual 하게 구성해 보도록 하겠습니다.
 
