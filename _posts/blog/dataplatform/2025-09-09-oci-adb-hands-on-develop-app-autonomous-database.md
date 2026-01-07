@@ -55,7 +55,7 @@ header: no
 python-oracledb 드라이버를 사용하면 Python 3 애플리케이션이 Oracle Database에 연결할 수 있습니다. Autonomous Database 에서도 동일한 Oracle Driver 를 사용하여 연결을 합니다. Python-oracledb는 과거 Python cx_Oracle 드라이버의 새 이름입니다.
 
 1. Python 설치 - 
-python-oracledb 을 사용하기 위해서는 Python 3.8, 3.9, 3.10, 3.11, 3.12 나 3.13 을 설치하여야 합니다.
+python-oracledb 을 사용하기 위해서는 Python 3.8, 3.9, 3.10, 3.11, 3.12 나 3.13 을 설치해야 합니다.
   - Python version 체크
     
     ```
