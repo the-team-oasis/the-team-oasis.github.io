@@ -11,7 +11,7 @@ breadcrumb: true
 categories:
   - dataplatform
 tags:
-  - [oci, base-database, DataGuard, Manul, dgbroker]
+  - [oci, base-database, DataGuard, Manual, dgbroker]
 #
 # Styling
 #
