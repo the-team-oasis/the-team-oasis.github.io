@@ -289,7 +289,7 @@ tnsping db19c_stbdr19c
 
 ### STEP-4. STANDBY DR DB (db19c_stbdr19c) 의 데이터 삭제 
 
-운영 DB 복제 전 추가 구상할 STANDBY DR DB 의 기존 데이터를 모두 삭제하는 단계입니다.
+운영 DB 복제 전 추가 구성할 STANDBY DR DB 의 기존 데이터를 모두 삭제하는 단계입니다.
 
 #### 4-1. STANDBY DR DB 구성 체크 (참고용)
 
