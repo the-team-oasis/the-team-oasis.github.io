@@ -131,7 +131,7 @@ Oracle Autonomous Database Serverless의 Data Transforms는 데이터 통합 및
         - 복잡한 변환 결과를 사전 계산·저장하여 성능 개선
         - 동일한 변환 식을 여러 흐름에서 재사용
         - 변환 결과를 물리화된 형태로 보존해 비용 절감 및 응답 속도 향상
-    - JetStream 데이터 허브나 Analytics 데이터 마트 등에서 자주 볼 수 있는 패턴입니다.  ￼
+    - JetStream 데이터 허브나 Analytics 데이터 마트 등에서 자주 볼 수 있는 패턴입니다.
 
 
 ---
@@ -150,7 +150,7 @@ Autonomous Database Serverless의 Oracle Machine Learning UI가 한 단계 강�
     * GitHub에 있는 OML 노트북을 클론(복제)·가져오기를 할 수 있습니다.
     * 원본 저장소와 브랜치 구조를 유지하면서, 노트북을 Autonomous Database 환경으로 로컬 복사본으로 생성할 수 있습니다.
     * 단순 파일 다운로드가 아니라 Git 브랜치 메커니즘을 활용한 통합 방식입니다.  ￼
-    * 개발 중인 분석 노트북을 중앙 GitHub 저장소에 관리하면서, Autonomous Database에서도 공유·재사용·버전 관리가 쉬워졌습니다.  ￼
+    * 개발 중인 분석 노트북을 중앙 GitHub 저장소에 관리하면서, Autonomous Database에서도 공유·재사용·버전 관리가 쉬워졌습니다.
 
 
 
@@ -165,7 +165,7 @@ Autonomous Database Serverless의 Oracle Machine Learning UI가 한 단계 강�
 3. GitHub 인증 정보 관리
     * GitHub 저장소와 상호 작용하려면 별도의 GitHub 자격 증명이 필요합니다.
       * 자격 증명은 Autonomous AI Database 내부에 생성·안전 저장됩니다.
-      * 이를 통해 보안 위험을 줄이면서 GitHub과의 연동을 사용할 수 있습니다.  ￼
+      * 이를 통해 보안 위험을 줄이면서 GitHub과의 연동을 사용할 수 있습니다.
 
 3. 업데이트를 통한 장점
     * 코드/노트북 버전 관리의 통합 - GitHub에 저장된 노트북을 별도 저장소에서 다시 업로드할 필요 없이 OML UI에서 바로 가져오고 커밋할 수 있습니다.
@@ -269,20 +269,20 @@ Autonomous Database Serverless의 Table Hyperlinks 차트 보기 기능을 통�
 
 ### 업데이트 내용
 
-Oracle GoldenGate는 클라우드 네이티브 실시간 데이터 복제 및 스트리밍 서비스로, 다양한 데이터 소스 간 실시간 동기화를 지원해 데이터 통합, 고가용성 구성, 분석용 데이터 파이프라인 등을 구축할 수 있는 서비스입니다.  ￼
+Oracle GoldenGate는 클라우드 네이티브 실시간 데이터 복제 및 스트리밍 서비스로, 다양한 데이터 소스 간 실시간 동기화를 지원해 데이터 통합, 고가용성 구성, 분석용 데이터 파이프라인 등을 구축할 수 있는 서비스입니다.
 
-이번 2025년 11월 업데이트에서는 특히 분산 고가용성 강화, 운영 편의성 향상, 콘솔 기반 가이드 학습 등 고객이 실전 환경에서 안정적이고 쉽게 GoldenGate를 운용할 수 있도록 하는 기능 개선들이 포함되었습니다.  ￼
+이번 2025년 11월 업데이트에서는 특히 분산 고가용성 강화, 운영 편의성 향상, 콘솔 기반 가이드 학습 등 고객이 실전 환경에서 안정적이고 쉽게 GoldenGate를 운용할 수 있도록 하는 기능 개선들이 포함되었습니다.
 
 ### 주요 기능 개선
 
 1. Cross-Region Disaster Recovery 지원 - Cross-Region Disaster Recovery(크로스 리전 재해 복구) 를 공식 지원합니다.
     * 다른 리전 간 Peer Deployment 생성 가능 - 기존에는 단일 리전 내에서만 GoldenGate 배포 간 재해 복구 구성이 가능했으나, 이제는 주 리전 이외의 리전에서도 동등한 레벨의 복구 배포를 만들 수 있습니다.
-    * 높은 장애 내성 구축 - 리전 전체 장애 상황에서도 다른 리전이 자동으로 대응할 수 있어 서비스 연속성과 복원력이 더욱 강화되었습니다.  ￼
+    * 높은 장애 내성 구축 - 리전 전체 장애 상황에서도 다른 리전이 자동으로 대응할 수 있어 서비스 연속성과 복원력이 더욱 강화되었습니다.
 
 2. 운영 편의성 & 리소스 관리 향상
-    * 이번 업데이트는 관리 포털과 운용 경험을 개선해 운영자가 GoldenGate를 더 직관적으로 관리할 수 있도록 Guided Learning 기능을 제공합니다.  ￼
+    * 이번 업데이트는 관리 포털과 운용 경험을 개선해 운영자가 GoldenGate를 더 직관적으로 관리할 수 있도록 Guided Learning 기능을 제공합니다.
 
-3. Guided Learning (가이드 학습 기능) - OCI GoldenGate 콘솔에 Guided Learning(가이드 학습) 체험이 추가되었습니다.  ￼
+3. Guided Learning (가이드 학습 기능) - OCI GoldenGate 콘솔에 Guided Learning(가이드 학습) 체험이 추가되었습니다.
     * GoldenGate 서비스 개요 페이지와 배포 상세 페이지에 교육용 안내가 포함
     * 시작 단계에서 필수 설정 또는 최적 구성에 대한 설명을 바로 확인 가능
     * 콘솔 내에서 필요한 절차를 빠르게 파악할 수 있어 러닝 커브(Learning Curve) 감소
