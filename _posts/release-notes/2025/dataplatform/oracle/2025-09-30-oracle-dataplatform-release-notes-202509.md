@@ -12,7 +12,7 @@ categories:
   - release-notes-2025-dataplatform
 tags:
   - oci-release-notes-2025
-  - Jul-2025
+  - Sept-2025
   - DATAPLATFORM, DATABASE, BIGDATA, DATAFLOW, SPARK, ORACLE
 #
 # Styling
