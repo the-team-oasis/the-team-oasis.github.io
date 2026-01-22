@@ -51,10 +51,10 @@ Autonomous AI Database Serverless에 Database Resource Manager(DBRM) API 및 서
 * 워크로드 우선순위 설정
 * 세분화된 리소스 할당 규칙 적용
 
-즉, 단순한 인스턴스 수준 리소스 관리가 아니라 쿼리/사용자/세션 단위로 세밀한 제어가 가능한 리소스 정책 설계가 가능해졌습니다.  ￼
+즉, 단순한 인스턴스 수준 리소스 관리가 아니라 쿼리/사용자/세션 단위로 세밀한 제어가 가능한 리소스 정책 설계가 가능해졌습니다.
 
 * Database Resource Manager란?
-  * Database Resource Manager(DBRM)는 Oracle Database의 내장 워크로드 리소스 제어 엔진입니다. 원래는 온프레미스나 전통적 Oracle Cloud DB에서 쿼리 우선순위, CPU/메모리 분배 정책 등을 통제하는 수단으로 쓰였습니다. Autonomous AI Database Serverless에 도입되면서 Cloud 네이티브 환경에서도 동일한 리소스 관리 패턴을 활용할 수 있게 되었습니다.  ￼
+  * Database Resource Manager(DBRM)는 Oracle Database의 내장 워크로드 리소스 제어 엔진입니다. 원래는 온프레미스나 전통적 Oracle Cloud DB에서 쿼리 우선순위, CPU/메모리 분배 정책 등을 통제하는 수단으로 쓰였습니다. Autonomous AI Database Serverless에 도입되면서 Cloud 네이티브 환경에서도 동일한 리소스 관리 패턴을 활용할 수 있게 되었습니다.
   * 이 기능은 특히 다음과 같은 상황에서 효과가 큽니다.
     * 테이블 간 대규모 데이터 스캔 작업과 사용자 쿼리 혼재
     * 비즈니스 크리티컬 vs 배치 분석 같은 우선순위가 명확히 다른 워크로드 동시 실행
@@ -63,7 +63,7 @@ Autonomous AI Database Serverless에 Database Resource Manager(DBRM) API 및 서
 ### 주요 기능
 
 1. cs_resource_manager API
-    * cs_resource_manager 패키지를 통해 DBRM 정책을 생성/수정하고 활성화할 수 있습니다.  ￼
+    * cs_resource_manager 패키지를 통해 DBRM 정책을 생성/수정하고 활성화할 수 있습니다.
     * 예시:
 
         ```sql
@@ -124,11 +124,11 @@ Autonomous AI Database Serverless에 Database Resource Manager(DBRM) API 및 서
 
 ### 업데이트 내용
 
-Autonomous Database Serverless 에서 제공하는 Table Hyperlink 기능은 생성자가 직접 링크를 만들어 공유하는 방식이었는데, 이제 Provider Scoped Table Hyperlink를 통해 권한 있는 주체(Provider)가 일정 범위(scope)를 선언함으로써 소비자(사용자/시스템)가 임의로 하이퍼링크를 생성할 수 있도록 허용할 수 있습니다.  ￼
+Autonomous Database Serverless 에서 제공하는 Table Hyperlink 기능은 생성자가 직접 링크를 만들어 공유하는 방식이었는데, 이제 Provider Scoped Table Hyperlink를 통해 권한 있는 주체(Provider)가 일정 범위(scope)를 선언함으로써 소비자(사용자/시스템)가 임의로 하이퍼링크를 생성할 수 있도록 허용할 수 있습니다.
 
 즉, 수동으로 링크를 배포하지 않아도 권한이 부여된 범위(scope) 내에서 소비자가 직접 Table Hyperlink를 생성할 수 있게 되어, 협업/공유가 훨씬 간편하고 안전해졌습니다.
 
-Provider가 다음과 같은 Scope 를 정의할 수 있습니다:  ￼
+Provider가 다음과 같은 Scope 를 정의할 수 있습니다.
 
 * 테넌시(Tenancy) 수준
 * 컴파트먼트(Compartment) 수준
@@ -268,14 +268,14 @@ Transportable Tablespaces는 Oracle Database의 전통적인 기능으로, 전�
 
 * 전체 흐름 요약
     * Source DB(온프레/DBCS)
-	    * self-contained 체크 (DBMS_TTS.TRANSPORT_SET_CHECK)  ￼
+	    * self-contained 체크 (DBMS_TTS.TRANSPORT_SET_CHECK)
         * (최종) tablespace READ ONLY
-        * Oracle 제공 Python 백업 유틸리티 실행 -> Data Pump로 메타데이터 export + RMAN tablespace 백업 + (필요 시 TDE wallet 포함) -> Object Storage에 “metadata bundle(.tar)” 업로드  ￼
+        * Oracle 제공 Python 백업 유틸리티 실행 -> Data Pump로 메타데이터 export + RMAN tablespace 백업 + (필요 시 TDE wallet 포함) -> Object Storage에 metadata bundle(.tar) 업로드
     * Target ADB(Serverless)
         * 신규 ADB 프로비저닝 시 Transportable Tablespace metadata bundle URL(Object Storage URI) 입력하여 import
-        * (Incremental인 경우: level 0는 프로비저닝 때만 적용, 이후 level 1은 “Migrate Data” 화면에서 순서대로 적용)  ￼
+        * (Incremental인 경우: level 0는 프로비저닝 때만 적용, 이후 level 1은 “Migrate Data” 화면에서 순서대로 적용)
 
-    * 제약 사항 : Target ADB로 TTS 반입은 신규 ADB 프로비저닝 시에만 지원  
+    * 제약 사항 : Target ADB로 TTS 반입은 신규 ADB 프로비저닝 시에만 지원
 
 
 ---
@@ -297,7 +297,7 @@ Transportable Tablespaces는 Oracle Database의 전통적인 기능으로, 전�
     * Connections(연결) - 이 연결에 연계된 모든 데이터 엔티티도 함께 파악/삭제 가능
 	* Schemas(스키마) - 해당 스키마와 연계된 모든 엔티티 일괄 처리
 	* Data Loads - 로드 구성과 관련된 워크플로우 단계도 함께 삭제
-	* Data Entities / Data Flows / Workflows - 참조 관계 기반 영향 객체 식별 및 삭제 -> 데이터 변환 설계 중 불필요 객체를 안전하게 제거하고, 의도치 않은 영향 발생을 예방할 수 있습니다. 
+	* Data Entities / Data Flows / Workflows - 참조 관계 기반 영향 객체 식별 및 삭제 -> 데이터 변환 설계 중 불필요 객체를 안전하게 제거하고, 의도치 않은 영향 발생을 예방할 수 있습니다.
     * 기존에는 객체 삭제 시 종속성 확인이 어렵고 오류가 발생하기도 했는데, 삭제 대상의 의존성과 영향 범위를 미리 확인해 주는 기능이 도입된 것입니다.
 2. Oracle Financials Cloud 커넥터 확장
     * REST 기반 Financials Cloud API 방식 추가 -> Financials Cloud 연계 데이터 파이프라인 구축 시 보다 유연하고 표준화된 연결 옵션을 활용할 수 있습니다.
