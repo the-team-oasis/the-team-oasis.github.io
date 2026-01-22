@@ -43,37 +43,37 @@ header: no
 
 ### 업데이트 내용
 
-Oracle은 2025년 Oracle AI World에서 최신 데이터베이스 릴리스인 Oracle AI Database 26ai를 발표했습니다. 본 버전은 기존 Oracle Database 23ai를 대체하는 장기 지원(Long-Term Support) 버전으로, AI 기능을 데이터베이스 코어에 깊숙이 통합해 AI-for-Data 혁신을 실현하는 데 초점을 맞췄습니다.  ￼
+Oracle은 2025년 Oracle AI World에서 최신 데이터베이스 릴리스인 Oracle AI Database 26ai를 발표했습니다. 본 버전은 기존 Oracle Database 23ai를 대체하는 장기 지원(Long-Term Support) 버전으로, AI 기능을 데이터베이스 코어에 깊숙이 통합해 AI-for-Data 혁신을 실현하는 데 초점을 맞췄습니다.
 
 ### 핵심 업데이트 포인트
 
-* AI를 코어로 내장한 데이터베이스: AI 기능이 단순한 애드온이 아닌 데이터 관리 코어에 설계됨.  ￼
-* Oracle Database 23ai 대체: 23ai에서 쉽게 전환 가능하며 별도의 업그레이드나 애플리케이션 재인증이 필요 없음.  ￼
-* AI 기능 포함 비용 없음: AI Vector Search 등 주요 AI 기능이 추가 비용 없이 제공됨.  ￼
-* 멀티클라우드 & 온프레미스 지원: Oracle Cloud, AWS, Azure, Google Cloud 및 온프레미스 환경에서 사용 가능.  ￼
+* AI를 코어로 내장한 데이터베이스: AI 기능이 단순한 애드온이 아닌 데이터 관리 코어에 설계됨.
+* Oracle Database 23ai 대체: 23ai에서 쉽게 전환 가능하며 별도의 업그레이드나 애플리케이션 재인증이 필요 없음.
+* AI 기능 포함 비용 없음: AI Vector Search 등 주요 AI 기능이 추가 비용 없이 제공됨.
+* 멀티클라우드 & 온프레미스 지원: Oracle Cloud, AWS, Azure, Google Cloud 및 온프레미스 환경에서 사용 가능.
 
 ### 주요 기능
 
 1. AI-for-Data 통합 플랫폼
-    * AI Vector Search: 벡터 기반 검색을 통합해 구조화/비구조화 데이터를 넘나드는 검색 및 분석 지원.  ￼
-    * Agentic AI 내장: 사전 구성된 AI 에이전트 및 노코드 시각 플랫폼 제공으로 AI 워크플로우 구축과 자동화가 쉬움.  ￼
-    * AI 워크플로우: 데이터베이스 내에서 프라이빗 데이터 + 공개 정보 결합 AI 분석 가능.  ￼
+    * AI Vector Search: 벡터 기반 검색을 통합해 구조화/비구조화 데이터를 넘나드는 검색 및 분석 지원.
+    * Agentic AI 내장: 사전 구성된 AI 에이전트 및 노코드 시각 플랫폼 제공으로 AI 워크플로우 구축과 자동화가 쉬움.
+    * AI 워크플로우: 데이터베이스 내에서 프라이빗 데이터 + 공개 정보 결합 AI 분석 가능.
     * 고급 보안: NIST 표준의 양자 내성 암호화로 데이터 보호를 강화.
 
 2. Enterprise Level 확장 기능
-    * Oracle Autonomous AI Lakehouse: Apache Iceberg 기반 데이터 레이크 + 분석을 결합, 대규모 AI/분석 워크로드 실행.  ￼
+    * Oracle Autonomous AI Lakehouse: Apache Iceberg 기반 데이터 레이크 + 분석을 결합, 대규모 AI/분석 워크로드 실행.
     * 하이브리드 벡터 검색: 텍스트, 이미지, 구조화 데이터 등 다양한 데이터 유형을 결합한 AI 검색.
-    * 데이터 프라이버시 및 거버넌스: 데이터 접근 정책, 마스킹, 셀 수준 보호 등 프라이버시 기능 포함.  ￼
+    * 데이터 프라이버시 및 거버넌스: 데이터 접근 정책, 마스킹, 셀 수준 보호 등 프라이버시 기능 포함.
 
 3. 애플리케이션 및 개발자 생산성 기능
-    * 데이터 주석(Annotations): AI가 데이터 의미를 이해하도록 돕는 메타데이터 추가 지원.  
-    * 통합 데이터 모델: 관계형, JSON, 그래프 모델을 단일 플랫폼에서 다룸.  ￼
+    * 데이터 주석(Annotations): AI가 데이터 의미를 이해하도록 돕는 메타데이터 추가 지원.
+    * 통합 데이터 모델: 관계형, JSON, 그래프 모델을 단일 플랫폼에서 다룸.
     * Select AI Agent / APEX AI Application Generator: 애플리케이션 개발 가속 및 자연어 기반 앱 생성 도구 제공.
 
 4. 성능 및 운영 혁신
     * Exadata for AI: Exadata 플랫폼을 통한 AI 쿼리 가속 및 고성능 실행.
-    * AI-Accelerated Workloads: NVIDIA 통합 지원으로 RAG 및 벡터 처리 가속화.  ￼
-    * Zero-ETL + 글로벌 분산: 데이터 이동 없이 AI 적용, 다중 지역/다중 환경에서 동작.  ￼
+    * AI-Accelerated Workloads: NVIDIA 통합 지원으로 RAG 및 벡터 처리 가속화.
+    * Zero-ETL + 글로벌 분산: 데이터 이동 없이 AI 적용, 다중 지역/다중 환경에서 동작.
 
 Oracle AI Database 26ai는 AI와 데이터가 완전히 결합된 차세대 데이터베이스입니다.
 기존 Oracle Database의 안정성과 성능을 유지하면서, AI 기능을 데이터베이스 코어에 통합하여 AI 분석, 에이전트 자동화, 멀티클라우드 운영, 데이터 거버넌스까지 아우르는 AI-for-Data 플랫폼으로 진화했습니다.
