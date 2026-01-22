@@ -143,6 +143,28 @@ Full Stack Disaster Recovery는 다음 리전에서 사용 가능합니다:
 
 Oracle Cloud Infrastructure (OCI) Batch는 컴퓨팅 집약적인 배치 워크로드를 오케스트레이션하기 위해 구축된 멀티테넌트 클라우드 네이티브 서비스로, 이제 사용 가능합니다.
 
+OCI Batch는 클라우드 네이티브 환경에서 대규모 배치 작업을 자동화·오케스트레이션하는 완전관리형(multitenant) 서비스이며, 미디어·VFX·애니메이션 스튜디오의 렌더링·트랜스코딩·시뮬레이션 등 연산 집중형 워크로드에 적합합니다.
+
+핵심 기능:
+
+- **Autoscaling + 실시간 Priority Queue**: 필요 시 컴퓨트 자원을 자동 확장하며, 우선순위 기반 큐로 긴급 작업을 빠르게 처리합니다.
+- **BYOI(Bring Your Own Image)**: 사용자가 만든 컨테이너 이미지를 OCIR에 업로드해 그대로 실행할 수 있습니다.
+- **Pay Only What You Run**: 실행 시간만 과금하며 VM 프로비저닝/부팅 시간은 과금하지 않습니다.
+- **OCI Native Integration**: OCI Object Storage, File Storage(FSS), Logging, Notifications 등과 자연스럽게 연동됩니다.
+
+대표 활용 사례:
+
+- **렌더링**: DCC(RenderMan, Blender 등) 프레임 배치 제출, GPU 렌더링 노드 자동 확장, 우선순위 조정으로 긴급 씬 처리.
+- **대량 비디오 트랜스코딩**: FFmpeg 컨테이너 기반으로 Object Storage 데이터를 병렬 처리.
+- **엔드-투-엔드 자동화 파이프라인**: CI/CD 연동, 렌더링 → 후처리 → AI 보정 파이프라인 구성, 알림/로깅 자동화.
+- **VFX 시뮬레이션 및 HPC 작업**: 물리 시뮬레이션, AI 추론 배치 등 대규모 병렬 작업에 활용.
+
+![](/assets/img/infrastructure/2025/batchservice.png)
+
+현재 26년 1월 지원 가능한 리전은 madrid, ashburn 리전에서 사용 가능합니다. 
+
+연관된 API 정보: [Batch API Reference](https://docs.oracle.com/en-us/iaas/api/#/en/batch/20251031/)
+
 <!--
 ## Optimize costs with dedicated elastic pools in Autonomous AI Database
 * **Services**: Autonomous Database Serverless
