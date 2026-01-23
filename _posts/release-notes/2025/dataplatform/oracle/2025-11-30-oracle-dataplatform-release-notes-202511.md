@@ -121,7 +121,7 @@ Oracle Autonomous Database Serverless의 Data Transforms는 데이터 통합 및
         PRODUCTS.PROD_SUBCATEGORY  
         ```
 
-    * OML 메인 화면
+    * 생성된 Data Flow
         ![OML-GIT](/assets/img/dataplatform/2025/release_note/202512/05.oci_data_transform_sql_flow.png)
 
 
