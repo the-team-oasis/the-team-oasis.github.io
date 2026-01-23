@@ -248,7 +248,7 @@ DECLARE
 
 * Data Accss 화면
 
-![Data_Access](/assets/img/dataplatform/2025/release_note/202512/01.oci_ad%20_data_access_01.png)
+![Data_Access](/assets/img/dataplatform/2025/release_note/202512/07.oci_data_access_table_view.png)
 
 
 ### 유용한 Case
