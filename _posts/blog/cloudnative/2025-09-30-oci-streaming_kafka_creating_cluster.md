@@ -149,6 +149,8 @@ Vault 및 Secret 생성을 위해 *** OCI Console 메뉴 > Identity and Security
 이제 앞서 생성한 Kafka Cluster를 클릭하여 상세 화면으로 이동합니다. 우측 상단의 **Actions** 드롭다운 버튼을 클릭한 후 **Update SASL SCRAM**을 클릭합니다. 앞서 생성한 Vault와 Secret을 선택한 후 **Update** 버튼을 클릭합니다. 업데이트가 완료되면 다시 앞서 생성한 Vault Secret으로 이동합니다. 위 **Versions** 탭 선택하면 한 개의 버전이 추가된 것을 확인할 수 있습니다. 
 ![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_3.png " ")
 
+> 만약 Secret을 수동으로 Rotation 했을 경우 Kafka 클러스터의 SASL SCRAM 정보도 함께 업데이트(Update SASL SCRAM)해야 합니다. 그렇지 않으면 Kafka Cluster는 새로운 Secret 버전을 자동으로 인식하거나 동기화하지 못하고 기존 Secret을 계속 사용하게 되어 Authentication failure가 발생할 수 있습니다.
+
 오른쪽 버튼을 클릭한 후 **View Secret Contents**를 클릭합니다. 그리고 **Show decoded Base64 digit**을 Disable하면 `{"username": "super-user-xxxxxxxxx", "password": "2a984e42-4533-4b60-b1f0-xxxxxxxxxxx"}`와 같은 Secret을 확인할 수 있습니다. ***이 부분을 메모합니다.**
 ![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_4.png " ")
 
