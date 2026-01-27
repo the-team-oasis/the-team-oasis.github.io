@@ -69,15 +69,16 @@ header: no
 
 - 개인 정보 현행화 이후 위 화면과 같이 SR을 생성 할 수 있는 화면이 보여집니다. 이후 사용자가 원하는 SR을 생성하면 됩니다.
 
-# MOS에 사용자 추가 (상업용 클라우드 계정 사용)
+# My Oracle Support의 사용자 그룹에 대한 접근 요청 (상업용 클라우드 계정 사용)
 
-아래와 같이 신규 사용자를 추가하고 해당 사용자를 MOS에 등록하는 절차는 아래와 같습니다.
+상업용 클라우드 계정을 사용하기 위해서는 먼저 OCI Console에서 사용자를 추가해야 합니다.
+아래와 같이 신규 사용자를 추가하고 해당 사용자를 MOS에 등록하는 절차는 [신규 사용자 MOS 등록 절차](#신규-사용자-mos-등록-절차)와 같습니다.
 
 ![](/assets/img/getting-started/2025/mos_new_image8.png " ")
 
 - 신규 사용자를 생성하고 MOS 등록 절차를 이전과 같이 동일하게 진행하면 SR 생성이 가능합니다.
 
-# MOS에 사용자 추가 (오라클 계정 사용)
+# My Oracle Support의 사용자 그룹에 대한 접근 요청 (오라클 계정 사용)
 
 오라클 계정으로 MOS에 로그인한 사용자가 특정 사용자 그룹(테넌시)에 권한을 신청하는 방법입니다.
 
@@ -90,3 +91,65 @@ header: no
 - 요청하고자 하는 그룹의 사용자 그룹 ID와 테넌시 명을 입력합니다. (해당 정보는 테넌시 관리자를 통해 확인 할 수 있습니다.)
   ![](/assets/img/getting-started/2025/mos_new_adduser-3.png " ")
   ![](/assets/img/getting-started/2025/mos_new_adduser-4.png " ")
+
+# My Oracle Support의 사용자 그룹에 대한 접근 요청 관리하기
+
+사용자 그룹의 관리자인 경우 다른 사용자가 요청한 접근 요청을 승인하거나 거절, 관리할 수 있습니다.
+
+- My Oracle Support 포털에 로그인된 상태에서 우측 상단의 "계정" 메뉴에서 "관리" 메뉴를 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-1.png " ")
+
+- 이동한 화면에서 "사용자 그룹" 탭을 클릭하면 관리자 권한을 가지고 있는 사용자 그룹 List가 보여집니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-2.png " ")
+
+- 만약 아직 처리하지 않은 접근 요청이 있다면 아래와 같이 보여집니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-3.png " ")
+
+## 접근 요청 승인하기
+
+- 접근 요청을 신청한 사용자를 선택한 후 "승인(Approve)"를 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-4.png " ")
+
+- 접근 요청을 승인하면서 사용자에게 어떤 권한을 부여할 지 선택할 수 있습니다. (User / Admin)
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-5.png " ")
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-6.png " ")
+
+- Admin 권한으로 접근 요청을 승인한 결과는 아래와 같이 확인하실 수 있습니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-7.png " ")
+
+## 접근 요청 거절하기
+
+- 접근 요청을 신청한 사용자를 선택한 후 "거절(Deny)"을 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-15.png " ")
+
+- 접근 요청이 거절되었는지 확인합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-16.png " ")
+
+## 사용자 권한 수정하기
+
+MOS 사용자 그룹의 사용자 권한을 수정하는 방법입니다.
+
+- 권한을 수정하고자 하는 사용자를 선택하고 "권한 수정(Edit Privileges)"을 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-8.png " ")
+
+- 권한 수정 화면에서 수정하고자 하는 Fields를 선택합니다
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-9.png " ")
+
+- 기존 Admin 권한을 User 권한으로 수정합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-10.png " ")
+
+- 수정된 권한을 확인합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-11.png " ")
+
+## 사용자 그룹에서 사용자 삭제하기
+
+MOS 사용자 그룹의 사용자를 삭제하는 방법입니다
+
+- 삭제하고자 하는 사용자를 선택하고 "삭제(Remove)"를 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-12.png " ")
+
+- 삭제 확인 팝업이 뜨면 "확인(Confirm)"을 클릭합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-13.png " ")
+
+- 사용자가 삭제되었는지 확인합니다.
+  ![](/assets/img/getting-started/2025/mos_new_manageuser-14.png " ")
