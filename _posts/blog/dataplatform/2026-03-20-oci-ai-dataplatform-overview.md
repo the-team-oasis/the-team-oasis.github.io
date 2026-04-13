@@ -11,7 +11,7 @@ breadcrumb: true
 categories:
   - dataplatform
 tags:
-  - [oci, databricks, AIDP, datapipeline, dataplatform]
+  - [oci, AIDP, datapipeline, AI data platform, databricks]
 #
 # Styling
 #
