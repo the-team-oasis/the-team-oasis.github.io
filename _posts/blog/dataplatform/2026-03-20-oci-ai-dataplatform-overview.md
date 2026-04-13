@@ -203,5 +203,6 @@ download_unzip_save("https://github.com/oracle-samples/oracle-aidp-samples/archi
 이제 데이터와 AI 가 분리된 시대는 끝났습니다. 데이터에서 AI, AI 에서 비즈니스 가치 창출까지 이어지는 완전한 AI 데이터 파이프라인이 필요합니다.
 OCI AIDP는 데이터와 AI를 하나의 플랫폼에서 통합 운영하여, 기업이 빠르게 AI 기반 서비스를 구축할 수 있도록 지원하는 클라우드 데이터 플랫폼입니다.
 
+
 ---
 
