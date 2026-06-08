@@ -35,11 +35,11 @@ header: no
 
 ### Autonomous Recovery Service 소개
 
-**Oracle Database Autonomous Recovery Service**는 OCI Database의 백업을 전용 복구 서비스에 저장하고 관리할 수 있도록 제공되는 완전 관리형 Backup/Recovery 서비스입니다. Oracle Zero Data Loss Recovery Appliance 기술을 기반으로 하며, Object Storage 기반 Backup과 동일한 비용 구조를 유지하면서 더 빠른 Backup, 낮은 데이터베이스 부하, 안정적인 Recovery, Backup 보호 상태에 대한 가시성을 제공하는 것이 특징입니다.
+**Oracle Database Autonomous Recovery Service**는 OCI Database의 백업을 전용 복구 서비스에 저장하고 관리할 수 있도록 제공되는 완전 관리형 Backup/Recovery 서비스입니다. Oracle Zero Data Loss Recovery Appliance 기술을 기반으로 하며, Object Storage 기반 Backup과 동일한 비용 구조에 더 빠른 Backup과 낮은 데이터베이스 부하, 안정적인 Recovery, Backup 보호 상태에 대한 가시성을 제공하는 것이 특징입니다.
 
 Oracle 공식 튜토리얼에서는 Autonomous Recovery Service를 통해 Automatic Backup을 구성하고, Real-Time Data Protection, Backup 모니터링, 기존 Backup을 이용한 Recovery까지 수행할 수 있는 절차를 소개하고 있습니다.
 
-이번 포스팅에서는 OCI **Base Database Service**를 생성할 때 Backup Destination을 **Autonomous Recovery Service**로 설정하기 위해 필요한 사전 네트워크 구성과 콘솔 설정 절차를 정리합니다.
+이번 포스팅에서는 OCI **Base Database Service**를 생성할 때 Backup Destination을 **Autonomous Recovery Service**로 설정하기 위해 필요한 네트워크 구성과 설정 절차를 정리합니다.
 
 ### 목적
 * Recovery Service에서 사용할 전용 Subnet 생성
@@ -56,19 +56,18 @@ Oracle 공식 튜토리얼에서는 Autonomous Recovery Service를 통해 Automa
 * Database와 Recovery Service 사이의 백업 네트워크 통신을 위해 TCP 2484, TCP 8005 포트가 허용되어야 합니다.
 * 운영 환경에서는 Security List보다 NSG(Network Security Group)를 사용하여 Database VNIC의 egress rule을 더 세밀하게 제어하는 구성을 권장합니다.
 
-### Autonomous Recovery Service 백업 대상 기본 적용 관련
-2025년 8월 6일부터 OCI Console에서 Automatic Backup을 활성화할 경우, 특정 조건을 만족하는 환경에서는 Autonomous Recovery Service 만 백업 대상으로 선택할 수 있습니다.  
-
+### OCI Base Database에서 Backup Destination으로 Object Storage 지원 관련
+2025년 8월 6일부터 OCI Console에서 Automatic Backup을 활성화할 경우, 다음과 같은 특정 조건의 환경에서는 Autonomous Recovery Service 만 백업 대상으로 선택할 수 있습니다.  
 - Tenancy가 2025년 8월 6일 이후 생성된 경우
-- 데이터베이스가 다음 OCI 리전에 배포된 경우
+- Database가 다음 OCI 리전에 배포된 경우
   - Germany Central (Frankfurt, FRA)
   - US West (Phoenix, PHX)
   - Japan East (Tokyo, NRT)
 - Oracle Database 버전이 19.18 또는 23.4 이후 버전인 경우
 
-**참고:** [Back Up a Database Using the Console](https://docs.oracle.com/en/cloud/paas/base-database/backup-db/#GUID-50F982DF-DC21-42FA-B16B-DB6D9A5F7282)
+**참고 문서:** [Back Up a Database Using the Console](https://docs.oracle.com/en/cloud/paas/base-database/backup-db/#GUID-50F982DF-DC21-42FA-B16B-DB6D9A5F7282)
 
-위 조건 중 하나라도 만족하는 경우에는 OCI Object Storage를 Backup 대상으로 사용할 수 없습니다. 따라서 신규 환경을 구축하는 경우에는 Automatic Backup 구성은 Autonomous Recovery Service 기반으로만 구성할 수 있습니다.
+위 조건 중 하나라도 만족하는 경우라면 OCI Object Storage를 Backup 대상으로 사용할 수 없습니다. 따라서 신규 환경을 구축하는 경우에는 Automatic Backup 구성은 Autonomous Recovery Service 기반으로만 구성할 수 있습니다.
 
 ### 구성 환경
 이번 예시에서는 다음과 같은 네트워크 구성을 사용합니다.
@@ -147,7 +146,7 @@ Recovery Service Subnet에 연결된 Security List의 **Ingress Rules**에 다�
 > Security List 대신 NSG를 사용하는 경우에는 Database VNIC 또는 관련 NSG에 TCP 2484, TCP 8005 egress rule을 함께 검토합니다.
 
 ### 3. Recovery Service Subnet 등록
-Subnet과 보안 규칙을 준비한 후에는 해당 Subnet을 Recovery Service Subnet으로 등록해야 합니다.
+Subnet과 Security List Rule을 설정한 후에는 해당 Subnet을 Recovery Service Subnet으로 등록해야 합니다.
 
 OCI Console에서 **Oracle Database > Database Backups > Recovery Service Subnets** 메뉴로 이동한 후 **Add Recovery Service subnet** 버튼을 클릭합니다. 앞에서 생성한 VCN과 Subnet을 선택하여 등록합니다.
 
@@ -226,10 +225,11 @@ Autonomous Recovery Service에 저장된 Automatic Backup은 Database 복구 시
 운영 환경에서는 Backup이 Active 상태인지만 확인하는 것에 그치지 않고, 필요한 Recovery Window와 실제 복구 요구사항(RPO/RTO)에 맞는 Protection Policy를 선택했는지 함께 검토하는 것이 중요합니다.
 
 ### 마무리
+OCI Base Database Service는 Object Storage를 Destination으로 하는 Automatic Backup 방식을 기본 구성으로 사용했지만, 현재는 Autonomous Recovery Service만 지원합니다.([Object Storage 지원 관련 내용 보기](#oci-base-database에서-backup-destination으로-object-storage-지원-관련)) 따라서 OCI Base Database Service에서 Automatic Backup을 위한 Autonomous Recovery Service 구성은 필수적입니다.
 
-Autonomous Recovery Service를 사용하면 Base Database의 Automatic Backup을 OCI의 전용 복구 서비스로 저장하고, Backup 상태와 Recovery 지점을 더 체계적으로 관리할 수 있습니다. 구성의 핵심은 Database가 위치한 VCN 안에 Recovery Service Subnet을 준비하고, Database Subnet CIDR에서 TCP 2484 및 8005 포트가 허용되도록 네트워크 규칙을 구성한 뒤, Database Backup 메뉴에서 해당 Subnet을 등록하는 것입니다.
+Autonomous Recovery Service를 사용하면 Base Database의 Automatic Backup 대상을 OCI의 전용 복구 서비스로 지정할 수 있으며, 백업 상태와 복구 지점을 보다 체계적으로 관리할 수 있습니다. 이를 위해서는 먼저 Database가 위치한 VCN 내에 Recovery Service용 Subnet을 준비하고, Database Subnet CIDR에서 TCP 2484 및 8005 포트에 대한 통신이 허용되도록 네트워크 규칙을 구성해야 합니다. 이후 Database Backup 메뉴에서 해당 Subnet을 등록하면 Autonomous Recovery Service 사용을 위한 기본 구성이 완료됩니다.
 
-Base Database 생성 시 Backup destination을 **Autonomous Recovery Service (Recommended)**로 선택하고 Protection Policy를 지정하면, 이후 Backups 탭에서 Automatic Backup의 State가 **Active**인지 확인하여 구성이 완료되었는지 검증할 수 있습니다.
+이후 Base Database 생성 과정에서 Backup Destination으로 Autonomous Recovery Service (Recommended)를 선택하고 적절한 Protection Policy를 지정합니다. 구성이 완료되면 Backups 탭에서 Automatic Backup의 상태(State)가 Active로 표시되는지 확인하여 백업이 정상적으로 활성화되었는지 검증할 수 있습니다.
 
 ### 참고 문서
 
