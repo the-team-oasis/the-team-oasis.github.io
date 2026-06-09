@@ -60,10 +60,10 @@ OKE 클러스터를 업그레이드할 때는 Control Plane을 먼저 업그레�
 
 OKE Node Pool에 여러 개의 Secondary VNIC를 연결하고, 각 Secondary VNIC Profile을 Subnet, NSG, IP allocation 설정별로 독립적으로 구성할 수 있게 되었습니다.
 
-대표 시나리오는 다음과 같습니다.
+대표적인 시나리오는 다음과 같습니다.
 
 * **Workload isolation:** Pod 그룹별로 서로 다른 VNIC Profile과 Subnet/NSG를 사용해 네트워크 격리를 구성합니다.
-* **Pod density 증가:** VCN IP Enhancements와 함께 사용하면 Node당 최대 256개 Pod까지 확장할 수 있습니다.
+* **Pod density 증가:** [VCN IP Enhancements](https://docs.oracle.com/en-us/iaas/releasenotes/network/vcn-ip-enhancements.htm)와 함께 사용하면 Node당 최대 256개 Pod까지 확장할 수 있습니다. (타사 비교: EKS 110개~250개, AKS 250개, GKE 256개)
 * **Multi-interface pod networking:** Multus, NetworkAttachmentDefinition, OCI IPAM plugin과 함께 multi-interface pod 구성을 지원합니다.
 
 ### 사용 조건
@@ -78,7 +78,7 @@ Multiple Secondary VNIC Attachment는 OCI VCN-Native Pod Networking CNI plugin�
 
 ### 업데이트 내용
 
-Oracle Functions에서 **Node 24**와 **Java 21**로 작성된 function을 build 및 deploy할 수 있게 되었습니다.
+Functions에서 **Node 24**와 **Java 21**로 작성된 function을 build 및 deploy할 수 있게 되었습니다.
 
 OCI Functions는 Fn Project Function Development Kit (FDK)를 사용해 Java, Node.js, Python, Go, Ruby, C# 같은 언어별 function runtime을 지원합니다. FDK는 build-time base image, runtime base image, FDK library로 구성되며, 언어 버전별로 적합한 base image를 사용합니다.
 
