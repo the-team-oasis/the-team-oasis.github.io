@@ -60,9 +60,7 @@ Oracle 공식 튜토리얼에서는 Autonomous Recovery Service를 통해 Automa
 2025년 8월 6일부터 OCI Console에서 Automatic Backup을 활성화할 경우, 다음과 같은 특정 조건의 환경에서는 Autonomous Recovery Service 만 백업 대상으로 선택할 수 있습니다.  
 - Tenancy가 2025년 8월 6일 이후 생성된 경우
 - Database가 다음 OCI 리전에 배포된 경우
-  - Germany Central (Frankfurt, FRA)
-  - US West (Phoenix, PHX)
-  - Japan East (Tokyo, NRT)
+  - Sweden Central (Stockholm) ARN, UAE Central (Abu Dhabi) AUH, India West (Mumbai) BOM, France Central (Paris) CDG, UK West (Newport) CWL, UAE East (Dubai) DXB, South Africa Central (Johannesburg) JNB, Japan Central (Osaka) KIX, Australia Southeast (Melbourne) MEL, France South (Marseille) MRS, Mexico Northeast (Monterrey) MTY, US Midwest (Chicago) ORD, Mexico Central (Queretaro) QRO, Saudi Arabia Central (Riyadh) RUH, US West (San Jose) SJC, Singapore (Singapore) SIN, Australia East (Sydney) SYD, Singapore West (Singapore) XSP, South Korea North (Chuncheon) YNY, or Switzerland North (Zurich) ZRH, Germany Central (Frankfurt) FRA, US West (Phoenix) PHX, or Japan East (Tokyo) NRT
 - Oracle Database 버전이 19.18 또는 23.4 이후 버전인 경우
 
 **참고 문서:** [Back Up a Database Using the Console](https://docs.oracle.com/en/cloud/paas/base-database/backup-db/#GUID-50F982DF-DC21-42FA-B16B-DB6D9A5F7282)
