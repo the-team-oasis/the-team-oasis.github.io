@@ -67,7 +67,7 @@ Oracle 공식 튜토리얼에서는 Autonomous Recovery Service를 통해 Automa
 
 **참고 문서:** [Back Up a Database Using the Console](https://docs.oracle.com/en/cloud/paas/base-database/backup-db/#GUID-50F982DF-DC21-42FA-B16B-DB6D9A5F7282)
 
-위 조건 중 하나라도 만족하는 경우라면 OCI Object Storage를 Backup 대상으로 사용할 수 없습니다. 따라서 신규 환경을 구축하는 경우에는 Automatic Backup 구성은 Autonomous Recovery Service 기반으로만 구성할 수 있습니다.
+위 조건을 모두 만족하는 경우, OCI Console에서 Automatic Backup의 대상은 Autonomous Recovery Service만 선택할 수 있으며 OCI Object Storage는 선택할 수 없습니다.
 
 ### 구성 환경
 이번 예시에서는 다음과 같은 네트워크 구성을 사용합니다.
