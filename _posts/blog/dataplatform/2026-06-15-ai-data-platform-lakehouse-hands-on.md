@@ -5,7 +5,7 @@ layout: page-fullwidth
 #
 subheadline: "DataPlatform"
 title: "AI Data Platform 을 이용한 Lakehouse 분석 Hands-on"
-teaser: "Oracle AI Data Platform(AIDP), Autonomous AI Lakehouse, Oracle Analytics Cloud(OAC)를 이용하여 항공 운항 데이터를 Bronze/Silver/Gold 레이어로 정제하고, Lakehouse 분석 대시보드와 자연어 Assistant까지 구성하는 Hands-on 절차를 정리했습니다."
+teaser: "Oracle AI Data Platform(AIDP), Autonomous AI Lakehouse, Oracle Analytics Cloud(OAC)를 이용하여 항공 운항 데이터를 Bronze/Silver/Gold 레이어로 정제하고, Lakehouse 분석 대시보드와 자연어 Assistant까지 구성하는 Hands-on 절차를 정리했습니다. Oracle AI Data Platform 에 대해 좀더 쉽게 이해하실 수 있는 핸즈온 과정입니다."
 author: lim
 breadcrumb: true
 categories:
@@ -64,18 +64,17 @@ Oracle AI Data Platform(AIDP)은 다양한 데이터 소스를 연결하고, Spa
 
 ### 참고 문서
 
-- Oracle LiveLabs - Accelerate Analytics on OAC with Generative AI, AIDP Data Platform, and Autonomous AI Lakehouse  
-  https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4278
-- Oracle LiveLabs GitHub - analytics-ai / aidp-lakehouse  
-  https://github.com/oracle-livelabs/analytics-ai/tree/main/aidp-lakehouse
-- Oracle AI Data Platform 문서  
-  https://docs.oracle.com/en/cloud/paas/ai-data-platform/aidug/introduction-oracle-ai-data-platform.html
-- Oracle Analytics Cloud 문서  
-  https://docs.oracle.com/en/cloud/paas/analytics-cloud/
-- Apache Spark SQL 문서  
-  https://spark.apache.org/docs/latest/sql-ref-syntax.html
-- Delta Lake 문서  
-  https://docs.delta.io/latest/delta-update.html
+- [Apache Spark SQL 문서](https://spark.apache.org/docs/latest/sql-ref-syntax.html)
+
+- [Delta Lake 문서](https://docs.delta.io/latest/delta-update.html)
+
+- [Oracle AI Data Platform 문서](https://docs.oracle.com/en/cloud/paas/ai-data-platform/aidug/introduction-oracle-ai-data-platform.html)
+
+- [Oracle Analytics Cloud 문서](https://docs.oracle.com/en/cloud/paas/analytics-cloud/)
+
+- [Oracle LiveLabs - Accelerate Analytics on OAC with Generative AI, AIDP Data Platform, and Autonomous AI Lakehouse](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4278)
+
+- [Oracle LiveLabs GitHub - analytics-ai / aidp-lakehouse](https://github.com/oracle-livelabs/analytics-ai/tree/main/aidp-lakehouse)
 
 ---
 
