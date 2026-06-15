@@ -756,9 +756,6 @@ OAC 의 `Console` -> `Generative AI` 메뉴에서 Assistant 관련 기능이 활
 
 ![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/32-aidp-oac-genai-svc.png " ")
 
-Workbook 의 Present 설정에서 `Workbook Assistant` 를 켜고 `aidp_gold_xx_dataset` 이 선택되어 있는지 확인합니다. 선택이 되어 있지 않을 경우 Workbook Assistant 의 해당 데이터 셋을 체크합니다.
-
-![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/35-aidp-oac-workbook-assistant.png " ")
 
 
 이후 `Data` 메뉴에서 Dataset 을 Inspect 하고, `Search` 설정에서 Assistant 와 Homepage Search 를 위한 Index 를 생성합니다.
@@ -767,7 +764,13 @@ Workbook 의 Present 설정에서 `Workbook Assistant` 를 켜고 `aidp_gold_xx_
 
 ![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/37-aidp-oac-data-inspect-run.png " ")
 
-Indexing 이 완료되면 Workbook 에서 아래 화면과 같이 Assistant 를 열고 자연어로 질문할 수 있습니다.
+Indexing 이 완료되면 자연어로 질의가 가능하게 됩니다.
+
+Workbook 의 Present 설정에서 `Workbook Assistant` 를 켜고 `aidp_gold_xx_dataset` 이 선택되어 있는지 확인합니다. 선택이 되어 있지 않을 경우 Workbook Assistant 의 해당 데이터 셋을 체크합니다.
+
+![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/35-aidp-oac-workbook-assistant.png " ")
+
+이제 상단의 자동 인사이트 버튼을 클릭하면 Workbook 에서 아래 화면과 같이 Assistant 를 열고 자연어로 질문할 수 있습니다.
 
 예시 질문:
 
