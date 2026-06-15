@@ -654,7 +654,9 @@ CREATE TABLE airline_sample_gold (
 );
 ```
 
-테이블 생성 후 AIDP 의 `airlines_external_adb_gold_xx` External Catalog 를 Refresh 하여 새 테이블이 보이도록 합니다.
+테이블 생성 후 반드시 AIDP 의 `airlines_external_adb_gold_xx` External Catalog 를 Refresh 하여 새 테이블이 보이도록 합니다.
+
+![AIDP Gold Delta Result](/assets/img/dataplatform/2026/blog/aidp-lakehouse/41-aidp-adb-gold-refresh.png " ")
 
 #### 7-5. Gold 데이터를 Lakehouse Table 에 Insert
 
