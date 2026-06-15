@@ -82,7 +82,7 @@ Oracle AI Data Platform(AIDP)은 다양한 데이터 소스를 연결하고, Spa
 
 본 Hands-on 을 수행하기 위해서는 아래 OCI 서비스에 접근할 수 있어야 합니다.
 
-- Oracle Cloud 계정 또는 LiveLabs Sandbox 계정
+- Oracle Cloud 계정
 - Autonomous Transaction Processing(ATP)
 - Autonomous AI Lakehouse
 - Oracle AI Data Platform(AIDP)
@@ -750,7 +750,9 @@ OAC 에서 `Create` -> `Workbook` 을 선택하고 방금 만든 Dataset 을 추
 
 OAC 의 `Console` -> `Generative AI` 메뉴에서 Assistant 관련 기능이 활성화되어 있는지 확인합니다.
 
-![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/07-oac-workbook-kor.png " ")
+![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/40-aidp-oac-genai-setting.png " ")
+
+![OAC Workbook](/assets/img/dataplatform/2026/blog/aidp-lakehouse/32-aidp-oac-genai-svc.png " ")
 
 Workbook 의 Present 설정에서 `Workbook Assistant` 를 켜고 `aidp_gold_xx_dataset` 이 선택되어 있는지 확인합니다. 선택이 되어 있지 않을 경우 Workbook Assistant 의 해당 데이터 셋을 체크합니다.
 
