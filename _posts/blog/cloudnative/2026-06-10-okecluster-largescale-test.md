@@ -4,14 +4,14 @@ layout: page-fullwidth
 # Content
 #
 subheadline: "CloudNative"
-title: "OCI Streaming with Apache Kafka Cluster 생성하기"
-teaser: "OCI에서 제공하는 관리형 Apache Kafka 서비스인 Streaming with Apache Kafka 서비스에 대해서 알아보고 Cluster를 생성하는 방법에 대해서 소개합니다."
+title: "OKE Generic VNIC Attachment로 Pod Density 테스트"
+teaser: "OKE의 Generic VNIC Attachment(GVA) 기능을 사용하여 Worker Node 한 대에서 최대 256개 Pod를 수용하도록 구성하고, 실제 Pause Pod 배포로 Pod Density를 검증합니다."
 author: dankim
 breadcrumb: true
 categories:
   - cloudnative
 tags:
-  - [oci, kafka]
+  - [oci, oke, kubernetes, vcn-native-cni, generic-vnic-attachment, gva, pod-density]
 #
 # Styling
 #
@@ -33,208 +33,283 @@ header: no
 {:toc}
 </div>
 
-### OCI Streaming with Apache Kafka 서비스는?
-OCI의 Streaming with Apache Kafka는 완전 관리형서비스로, 사용자가 직접 관리할 필요 없이 Kafka 클러스터를 생성하고 운영할 수 있게 해 줍니다. 기본적으로 Apache Kafka에서 제공하는 이벤트 스트림 쓰기/읽기, 스트림 저장, 실시간 및 배치 스트림 처리를 그대로 제공합니다.
+### 소개
 
-#### 주요 특징
-몇 가지 주요 특징은 다음과 같습니다.
+OKE(Oracle Kubernetes Engine)는 OCI VCN-Native Pod Networking CNI를 통해 Pod가 OCI VCN의 IP를 직접 사용할 수 있습니다. 이 방식은 Pod IP가 VCN 네트워크 안에서 직접 라우팅되기 때문에 OCI Load Balancer, Security List, NSG, Route Table 같은 네트워크 기능과 자연스럽게 연동되는 장점이 있습니다.
 
-1. **완전 관리형:** 패치, 업그레이드, 백업, 고가용성, 복제, 확장, 성능 관리 등의 자동화를 지원합니다.
-2. **내구성과 가용성:**
-  - 클러스터는 여러 가용성 도메인(Availability Domains) 또는 오류 도메인(Fault Domains)에 걸쳐 고가용성 및 스토리지를 여러 곳에 저장하여 장애가 발생해도 안전하도록 구성됩니다.
-  - 브로커 장애를 자동으로 감지하고 복구하거나 대체하며, 가능한 경우 기존 저장소를 재사용하여 데이터 복제를 최소화할 수 있습니다.
-3. **Kafka API 호환성:** Kafka 애플리케이션 코드를 거의 바꾸지 않고 그대로 쓸 수 있도록 100프로 호환성을 제공합니다.
-4. **OCI 생태계 통합:**
-  - OCI Vault: Superu ser 자격증명 관리
-  - OCI Monitoring: 클러스터 메트릭 모니터링
-  - OCI Logging: 클러스터 로그 관리
+하지만 대규모 Pod를 한 노드에 배치하려는 경우에는 Worker Node가 확보할 수 있는 Pod IP 수가 중요한 제약이 됩니다. 기존 OKE VCN-Native Pod Networking에서는 Pod 네트워킹이 사실상 단일 Secondary VNIC 중심이었고, 노드당 가능한 Pod 수는 110개였습니다. 더 많은 Pod를 수용하기 위해서는 노드 수를 늘리는 방법을 사용해야 했는데, 이는 노드 관리 비용, 시스템 Pod 오버헤드, 업그레이드/패치 범위, IP 운영 복잡도도 함께 증가했습니다.
 
-### Cluster 생성을 위해 필요한 Policy
-Cluster를 생성하기 위해 필요한 Policy입니다. 
+2026년 5월 발표된 OKE의 **Generic VNIC Attachment(GVA)** 기능은 하나의 Node Pool에 여러 Secondary VNIC Profile을 연결할 수 있게 해주는 기능입니다. 각 Secondary VNIC Profile은 독립적인 Subnet, NSG, IP Count를 가질 수 있고, 노드당 최대 256개의 Pod를 수용할 수 있어 적은 노드로도 더 많은 Pod를 운영할 수 있습니다. 또한 Application Resource를 활용하면 Kubernetes Scheduler 단계에서 특정 Pod가 특정 Secondary VNIC Profile을 사용하도록 제어할 수도 있습니다.
 
-**User Permission**
-그룹에 속한 사용자에게 Kafka Cluster에 대한 다양한 Action을 수행할 수 있는 권한을 부여합니다.
-```
-allow group <kafka_admin_group_name> to 
-{KAFKA_CLUSTER_INSPECT, KAFKA_CLUSTER_READ,KAFKA_CLUSTER_CREATE, 
-KAFKA_CLUSTER_DELETE, KAFKA_CLUSTER_UPDATE, KAFKA_CLUSTER_CONFIG_READ, 
-KAFKA_CLUSTER_CONFIG_INSPECT, KAFKA_CLUSTER_CONFIG_CREATE, KAFKA_CLUSTER_CONFIG_UPDATE, 
-KAFKA_CLUSTER_CONFIG_DELETE } in compartment <compartment-name> | tenancy
-```
+이번 포스팅에서는 OKE Cluster를 구성하고, Worker Node 한 대에 8개의 Secondary VNIC를 연결한 뒤, 각 VNIC마다 32개 IP를 할당하여 총 256개 Pod Capacity를 확보하는 과정을 테스트합니다. 마지막으로 Pause Pod 252개(System Pod 4개)를 실제 배포하여 노드당 Pod 수용량을 확인합니다.
 
-**Service Permission**
-Kafka 서비스(Policy에서는 rawfka로 정의)가 vnics를 use할 수 있는 권한 부여
-```
-allow service rawfka to use vnics in compartment <compartment-name>
-```
+> GVA는 OCI VCN-Native Pod Networking CNI에서 지원됩니다. Flannel CNI 기반 Cluster에서는 여러 Secondary VNIC을 Pod Networking 용도로 사용할 수 없습니다. 또한 Worker Node Shape의 VNIC 한계, Subnet의 가용 IP, NSG/Security List Rule도 함께 확인해야 합니다.
 
-Kafka서비스가 subnets를 use할 수 있는 권한 부여
-```
-allow service rawfka to use subnets in compartment <compartment-name>
-```
+### 테스트 구성
 
-Kafka서비스가 network-security-groups를 use할 수 있는 권한 부여
-```
-allow service rawfka to use network-security-groups in compartment <compartment>
-```
+이번 테스트의 주요 구성은 다음과 같습니다.
 
-SASL_SCRAM 인증을 사용하는 경우 Vault Secret에 접근할 수 있는 권한 부여
-```
-allow service rawfka to read secrets in compartment <compartment-name>
-```
+| 항목 | 값 |
+| --- | --- |
+| Cluster type | OKE Cluster, VCN-Native Pod Networking |
+| System Node Pool | `system-pool` |
+| Application Node Pool | `largescale-pool1` |
+| Worker Shape | `VM.Standard.E5.Flex` |
+| Application Node Pool OCPU / Memory | 12 OCPU / 24 GB |
+| Application Node Count | 1 |
+| GVA Secondary VNIC Profile Count | 8 |
+| IP Count per VNIC Profile | 32 |
+| Application Resource | `pause` |
+| Target Pod Capacity | 256 |
+| Test Deployment Replicas | 252 |
 
-### Cluster 생성
-OCI Streaming with Apache Kafka 서비스에서 Cluster 생성을 위해 ***OCI Console 메뉴 > Developer Services > Application Integration > OCI Streaming with Apache Kafka***를 순서로 클릭하여 이동합니다. 이제 **Create cluster** 버튼을 클릭한 후 다음과 같이 입력하여 Cluster를 생성합니다.
+### 1. Resource Manager로 기본 네트워크 구성
 
-1. **Cluster name:** <<Cluster 이름>>
-  - ***예시: kafka_cluster_1***
-2. **Compartment:** <<Kafka Cluster 생성할 구획>>
-3. **Apache Kafka version:** 3.5.0, 3.6.0, 3.7.0 버전 중 선택 (2025년 9월 30일 기준)
-4. Cluster type: Starter Cluster, High Availability Cluster 중 선택
-  - Starter Cluster: 개발 및 테스트용도 (1-24 Broker 까지 생성 가능)
-  - High Availability Cluster: 운영 환경을 위한 용도 (3-24 Broker까지 생성 가능)
-5. Broker setup
-  - Number of brokers: <<브로커 개수>> # Starter일 경우 Default 1
-  - CPU per broker: <<각 브로커별 OCPU 수>> # Starter일 경우 Default 2
-6. Storage
-  - Storage per broker (GB): <<브로커별 스토리지 사이즈>>
-7. Cluster Configuration
-  - Cluster Configuration은 Broker와 Topic이 어떻게 설정되는지를 정의하는 매개변수입니다. Cluster 생성 시 기본 구성이 자동으로 생성됩니다. 만약 다른 구성이 필요한 경우 여기서 추가 및 수정합니다. Cluster를 생성한 후에는  CLI 또는 SDK를 사용해야만 구성을 변경할 수 있습니다.
-8. Mutual TLS (mTLS)
-  -  Mutual TLS(mTLS)를 사용할 경우 CA 인증서를 PEM 형식으로 입력합니다. Cluster 생성한 후에도 Console UI에서 CA 인증서를 추가 제공할 수 있습니다.
-9. Choose VCN and subnet
-  - Virtual cloud network: <<Cluster를 생성할 VCN 선택>>
-  - Subnet: <<Cluster에서 사용할 Subnet 선택>>
-10. Review and create
-  - 마지막으로 전체 내용을 리뷰한 후에 **Create**버튼을 눌러 생성합니다.
+OKE Large Cluster 테스트를 위해 먼저 VCN, Subnet, Route Table, Security Rule 등 기본 네트워크 리소스를 구성합니다. 여기서는 테스트 편의를 위해 Resource Manager Stack 파일을 사용합니다.
 
-생성이 완료되어 **Active** 상태가 되면 다음과 같이 Cluster 상세 화면에서 Cluster 정보를 확인할 수 있습니다.  
-***SASL-SCRAM의 Bootstrap URL을 메모합니다.**
-![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_1.png " ")
+Stack 파일은 아래 링크에서 다운로드할 수 있습니다.
 
-### SASL-SCRAM 인증 설정
-OCI Streaming with Apache Kafka는 **SASL-SCRAM** 방식과 **mTLS** 방식의 인증을 제공합니다. 여기서는 **SASL-SCRAM** 방식의 인증 설정하는 방법을 설명합니다. SASL-SCRAM 방식의 인증을 사용하기 위해서는 다음 두 가지가 필요합니다.
-1. Kafka Cluster에서 사용하는 Subnet의 Security List에 Ingress TCP 9092 포트 오픈
-2. Vault Secret 생성
+[oke-vcn-stack.zip](/assets/files/cloudnative/oke-vcn-stack.zip)
 
-#### Kafka Cluster에서 사용하는 Subnet의 Security List에 Ingress TCP 9092 포트 오픈
-우선 Kafka Cluster에서 사용하는 Subnet의 Security List로 이동해서 Security Rule에 9092 포트를 추가합니다. (참고: mTLS의 경우 9093포트 사용) 아래 그림에서는 어디에서든 Kafka Client로 접속할 수 있도록 Source CIDR를 **0.0.0.0/0**으로 지정하였습니다. 그 외 IP Protocol은 **TCP**, Destination Port Range는 **9092**로 설정하고 추가합니다.
-![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_2.png " ")
+OCI Console에서 **Developer Services > Resource Manager > Stacks**로 이동한 후 **Create stack**을 클릭합니다. Terraform configuration source는 **.Zip file**을 선택하고, 앞에서 다운로드한 `oke-vcn-stack.zip` 파일을 업로드합니다.
 
-#### Vault Secret 생성
-Vault 및 Secret 생성을 위해 *** OCI Console 메뉴 > Identity and Security > Key Management & Secret Management > Vault***를 차례로 클릭한 후 **Create Vault** 버튼을 클릭합니다. Vault Name (예. MyVault)을 입력한 후 **Create** 버튼을 클릭합니다.
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-1.png " ")
 
-생성된 Vault를 클릭한 후 **Master encryption keys** 탭을 클릭합니다. **Create key** 버튼을 클릭한 후 다음과 같이 입력하고 생성합니다.
-1. Protection Mode: {HSM, Software 중 선택}
-  - Software protected Keys는 무료
-  - HSM protected Keys는 첫 20개 키 버전까지만 무료
-2. Name: {키 이름 입력}
-  - 예시: MyKey
-3. Key Shape: 
-  - Algorithm: <<AES, RSA, ECDSA 중 선택>> (Default: AES)
-  - Length: <<알고리즘에 따른 Length 선택>> (Default: 256 bits)
+Stack 생성과 함께 바로 실행을 위해 Review 단계 하단에서 **Run apply**를 체크한 후 **Create**를 클릭합니다.
 
-**Secrets** 탭을 클릭한 후 **Create secret** 버튼을 클릭합니다. 다음과 같이 입력하고 생성합니다.
-1. Name: <<Secret 이름>>
-  - 예시: kafka_secret
-2. Encryption Key: <<앞에서 생성한 Master Encryption Key 선택>>
-3. Secret generation
-  - Kafka Cluster는 수동 Secret Generation만 지원하므로 **Manual secret generation** 선택
-4. Secret Type Template: <<Plan-Text와 Base64 선택>>
-  - **Plan-Text** 선택하여 진행
-5. Secret contents: <<패스워드>>
-그외 나머지는 Default로 설정한 후 생성합니다.
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-2.png " ")
 
-#### SASL/SCRAM 업데이트
-이제 앞서 생성한 Kafka Cluster를 클릭하여 상세 화면으로 이동합니다. 우측 상단의 **Actions** 드롭다운 버튼을 클릭한 후 **Update SASL SCRAM**을 클릭합니다. 앞서 생성한 Vault와 Secret을 선택한 후 **Update** 버튼을 클릭합니다. 업데이트가 완료되면 다시 앞서 생성한 Vault Secret으로 이동합니다. 위 **Versions** 탭 선택하면 한 개의 버전이 추가된 것을 확인할 수 있습니다. 
-![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_3.png " ")
+Apply Job의 **Logs** 탭에서 VCN 리소스가 정상 생성되었는지 확인합니다.
 
-> 만약 Secret을 수동으로 Rotation 했을 경우 Kafka 클러스터의 SASL SCRAM 정보도 함께 업데이트(Update SASL SCRAM)해야 합니다. 그렇지 않으면 Kafka Cluster는 새로운 Secret 버전을 자동으로 인식하거나 동기화하지 못하고 기존 Secret을 계속 사용하게 되어 Authentication failure가 발생할 수 있습니다.
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-3.png " ")
 
-오른쪽 버튼을 클릭한 후 **View Secret Contents**를 클릭합니다. 그리고 **Show decoded Base64 digit**을 Disable하면 `{"username": "super-user-xxxxxxxxx", "password": "2a984e42-4533-4b60-b1f0-xxxxxxxxxxx"}`와 같은 Secret을 확인할 수 있습니다. ***이 부분을 메모합니다.**
-![](/assets/img/cloudnative-security/2025/oci-streaming_kafka_creating_cluster_4.png " ")
+배포가 끝난 뒤 VCN의 **Subnets** 탭에서 생성된 Subnet을 확인합니다.
 
-### Kafka Client 구성
-Kafka Client는 Kafka Cluster의 Subnet에 하나의 VM 인스턴스를 생성하여 구성해 보도록 합니다. 준비된 인스턴스에 접속한 후에 OpenJDK를 설치합니다.
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-4.png " ")
 
-```
-$ sudo yum install java-11-openjdk -y
+**Routing** 탭에서는 각 Subnet에 연결될 Route Table이 생성된 것을 확인합니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-5.png " ")
+
+마지막으로 **Security** 탭의 Security List가 생성된 것을 확인합니다. 여기까지 확인되면 OKE Cluster 생성을 위한 기본 네트워크 준비가 끝납니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-6.png " ")
+
+### 2. OKE Cluster와 system-pool 생성
+
+이제 OKE Cluster를 생성합니다. 앞서 생성한 VCN을 활용할 것이기 때문에 `Custom Create` 방식으로 생성합니다. Cluster 생성 시 Network Type은 **VCN-native pod networking**을 사용합니다. 기본 Node Pool은 `system-pool`이라는 이름으로 생성합니다.
+
+이번 테스트에서 `system-pool`은 CoreDNS, kube-dns-autoscaler 같은 Cluster System Pod가 배포될 전용 Node Pool 역할을 합니다. 뒤에서 생성할 `largescale-pool1`은 Application Resource가 설정된 Node Pool이며, 해당 노드에는 `oci.oraclecloud.com/application-resource-only:NoSchedule` 계열의 Taint가 적용됩니다. 따라서 일반 System Pod(특히 CoreDNS)가 `largescale-pool1`에 스케줄링되지 않도록 `system-pool`을 분리해서 구성합니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-7.png " ")
+
+`system-pool` 노드는 System 용도로만 사용하기 위해 Cloud-init Script에 Label과 Taint를 추가합니다.
+
+```bash
+#!/bin/bash
+curl --fail -H "Authorization: Bearer Oracle" -L0 http://169.254.169.254/opc/v2/instance/metadata/oke_init_script | base64 --decode >/var/run/oke-init.sh
+bash /var/run/oke-init.sh --kubelet-extra-args "--node-labels=node-role=system --register-with-taints=node-role.kubernetes.io/system=true:NoSchedule"
 ```
 
-Apache Kafka를 설치합니다. 여기서는 3.8.0 버전으로 접속 테스트를 진행합니다.
-```
-$ wget https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-8.png " ")
+
+### 3. CoreDNS Pending 상태 해결
+
+Cluster 생성 직후 `kube-system` Namespace의 Pod 상태를 확인하면 CoreDNS 관련 Pod가 Pending 상태인 것을 볼 수 있습니다.
+
+```bash
+kubectl get po -n kube-system
 ```
 
-압축을 해제합니다.
-```
-$ tar -xzf kafka_2.13-3.8.0.tgz
-```
-
-client.properties 파일을 생성을 위해 config 디렉토리로 이동합니다.
-```
-$ cd kafka_2.13-3.8.0/config
-```
-
-client.properties 파일을 생성합니다. username과 password는 앞서 Valut Secret에서 메모한 username과 password 값을 참고하여 수정한 후 저장합니다.
-```
-$ vi client.properties
-
-## For SASL_SCRAM authentication  - add the following (replace OCI Secret name and password)
-security.protocol=SASL_SSL 
-sasl.mechanism=SCRAM-SHA-512 
-sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="<user name from OCI Secret>" password="<password from OCI Secret>";
+```text
+NAME                                  READY   STATUS    RESTARTS   AGE
+coredns-7949666f46-frvx4              0/1     Pending   0          6m35s
+csi-oci-node-shmgq                    1/1     Running   0          5m20s
+kube-dns-autoscaler-9b5569b69-ddqbr   0/1     Pending   0          6m35s
+kube-proxy-bxb2r                      1/1     Running   0          5m20s
+proxymux-client-rhn65                 1/1     Running   0          5m20s
+vcn-native-ip-cni-5tpzp               2/2     Running   0          5m20s
 ```
 
-### Kafka CLI를 사용해서 Topic Create/Update/Delete 하기
-환경 변수 (앞서 메모한 SASL-SCRAM Bootstrap URL 필요)
-```
-$ BOOTSTRAP_URL=<앞서 메모한 SASL-SCRAM Bootstrap URL>
-$ TOPIC=topic1
+앞에서 `system-pool`에 `node-role.kubernetes.io/system=true:NoSchedule` Taint를 설정했기 때문에 CoreDNS가 해당 노드에 배포되려면 Toleration이 필요합니다. 또한 CoreDNS가 Application Resource 전용 Node Pool이 아니라 `system-pool`에 배포되도록 Node Selector도 함께 설정합니다.
+
+OCI Console에서 Cluster 상세 화면으로 이동한 후 **Add-ons** 탭을 클릭합니다. **Manage add-ons**에서 **CoreDNS**를 선택하고 **Edit**을 클릭합니다. **Add configuration**을 통해 다음 값을 추가합니다.
+
+| 항목 | 값 |
+| --- | --- |
+| tolerations | `[{"key": "node-role.kubernetes.io/system","operator": "Exists","effect": "NoSchedule"}]` |
+| node selectors | `{"name": "system-pool"}` |
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-9.png " ")
+
+설정 변경 후 다시 `kube-system` Pod 상태를 확인하면 CoreDNS와 kube-dns-autoscaler가 Running 상태로 변경됩니다.
+
+```bash
+kubectl get po -n kube-system
 ```
 
-**Topic 생성**
-```
-$ ./bin/kafka-topics.sh --create --bootstrap-server $BOOTSTRAP_URL --replication-factor 1 --partitions 1 --topic $TOPIC --command-config ./config/client.properties
-Created topic topic1.
-```
-
-**Topic 목록**
-```
-$ ./bin/kafka-topics.sh --list --bootstrap-server=$BOOTSTRAP_URL --command-config ./config/client.properties
-topic1
+```text
+NAME                                  READY   STATUS    RESTARTS   AGE
+coredns-58975fffdb-f6x8f              1/1     Running   0          13s
+csi-oci-node-shmgq                    1/1     Running   0          10m
+kube-dns-autoscaler-f5ff6c8d4-9g97r   1/1     Running   0          13s
+kube-proxy-bxb2r                      1/1     Running   0          10m
+proxymux-client-rhn65                 1/1     Running   0          10m
+vcn-native-ip-cni-5tpzp               2/2     Running   0          10m
 ```
 
-**Topic 상세 정보**
-```
-$ ./bin/kafka-topics.sh --bootstrap-server=$BOOTSTRAP_URL --describe --topic $TOPIC --command-config ./config/client.properties
-./bin/kafka-topics.sh --bootstrap-server=$BOOTSTRAP_URL --describe --t
-opic $TOPIC --command-config ./config/client.properties
-[2025-09-30 08:49:43,137] WARN [AdminClient clientId=adminclient-1] The DescribeTopicPartitions API is not supported, using Metadata API to describe topics. (org.apache.kafka.clients.admin.KafkaAdminClient)
-Topic: topic1	TopicId: 6TBOlsQLRdyYaLJbB4CiYA	PartitionCount: 1	ReplicationFactor: 1	Configs: min.insync.replicas=1,message.format.version=3.0-IV1
-	Topic: topic1	Partition: 0	Leader: 0	Replicas: 0	Isr: 0	Elr: N/A	LastKnownElr: N/A
+### 4. GVA Application Node Pool 생성
+
+이제 실제 테스트 Pod가 배포될 Application Node Pool을 생성합니다. Node Pool 이름은 `largescale-pool1`입니다.
+
+주요 설정은 다음과 같습니다.
+
+| 항목 | 값 |
+| --- | --- |
+| Node Pool name | `largescale-pool1` |
+| Shape | `VM.Standard.E5.Flex` |
+| OCPU / Memory | 12 OCPU / 24 GB |
+| Node count | 1 |
+| GVA Secondary VNIC Profile count | 8 |
+| IP count per VNIC | 32 |
+| Application Resource | `pause` |
+
+Node Pool 생성 화면에서 **Configure Secondary VNICs for nodes**를 Enable하고, GVA에서 사용할 8개의 Secondary VNIC Profile을 추가합니다.
+
+각 VNIC Profile은 다음과 같은 형식으로 입력합니다.
+
+| 항목 | 값 |
+| --- | --- |
+| VNIC Attachment Display Name | `largescale-pool1-vnic-attach-01` ~ `largescale-pool1-vnic-attach-08` |
+| VNIC Display Name | `largescale-pool1-vnic-01` ~ `largescale-pool1-vnic-08` |
+| VNIC Subnet | `pod_private_subnet` |
+| # of IP addresses | `32` |
+| Application Resources | `pause` |
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-10.png " ")
+
+> Oracle 문서에서는 **VNIC Display Name**이 Optional로 표시되지만, 이번 테스트에서는 이 값을 입력하지 않으면 노드 생성 과정에서 Attach 대상 VNIC를 찾지 못하는 문제가 발생했습니다. 따라서 Node Pool 생성 시 **VNIC Attachment Display Name**뿐 아니라 **VNIC Display Name**도 명시적으로 입력하는 것을 권장합니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-11.png " ")
+
+생성된 Node Pool 정보입니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-12.png " ")
+
+VNIC 목록에서도 `largescale-pool1-vnic-01`부터 `largescale-pool1-vnic-08`까지 생성된 것을 확인할 수 있습니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-13.png " ")
+
+Worker Node 상세 화면에서도 GVA에서 정의한 Secondary VNIC들이 정상적으로 Attach된 것을 확인할 수 있습니다.
+
+![](/assets/img/cloudnative-security/2026/okecluster-largescale-test-14.png " ")
+
+Node에서 Capacity를 확인하면 `pause` Application Resource와 Pod Capacity가 256으로 표시됩니다.
+
+```bash
+$ kubectl describe node 10.0.1.17
+
+Capacity:
+  cpu:                                                 24
+  ephemeral-storage:                                   37206272Ki
+  hugepages-1Gi:                                       0
+  hugepages-2Mi:                                       0
+  memory:                                              24298008Ki
+  oke-application-resource.oci.oraclecloud.com/pause:  256
+  pods:                                                256
+Allocatable:
+  cpu:                                                 23763m
+  ephemeral-storage:                                   34289300219
+  hugepages-1Gi:                                       0
+  hugepages-2Mi:                                       0
+  memory:                                              20947480Ki
+  oke-application-resource.oci.oraclecloud.com/pause:  256
+  pods:                                                256
 ```
 
-**Topic 업데이트: Partition 수 3개로 변경**
-```
-$ ./bin/kafka-topics.sh --bootstrap-server=$BOOTSTRAP_URL --alter --topic $TOPIC --partitions 3 --command-config ./config/client.properties
+8개의 Secondary VNIC에 각각 32개의 IP를 할당했으므로 Application Resource `pause` 기준으로 총 256개 Capacity가 노드에 노출됩니다.
+
+### 5. Pause Pod 배포 테스트
+
+이제 실제 Pod를 배포하여 Pod Density를 확인합니다. 노드마다 기본 System Pod가 일부 배포되므로, 이번 테스트에서는 Pause Pod를 252개 배포합니다.
+
+아래 내용을 `pause-for-256ip-test.yaml` 파일로 저장합니다. 참고로 Application Resource는 Pod를 특정 Secondary VNIC Profile에 스케쥴러 수준에서 연결하는데 이때 이 리소스가 노출된 노드에는 `oci.oraclecloud.com/application-resource-only:NoSchedule` Taint가 설정됩니다. 따라서 해당 노드에 배치될 Pod는 이를 위한 toleration이 필요합니다. 또한 `oke-application-resource.oci.oraclecloud.com/pause`에 대한 request, limit을 1로 설정함으로서 Pod가 해당 Application Resource 1개를 사용하도록 예약할 수 있습니다. (다만 여기서는 8개의 VNIC 모두 Application Resource를 `pause`로 적용했기 때문에 특정 VNIC Profile로의 고정 효과는 크지 않습니다.)
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pause-for-256ip-test
+spec:
+  replicas: 252
+  selector:
+    matchLabels:
+      app: pause-for-256ip-test
+  template:
+    metadata:
+      labels:
+        app: pause-for-256ip-test
+    spec:
+      nodeSelector:
+        name: largescale-pool1
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.10
+          resources:
+            requests:
+              oke-application-resource.oci.oraclecloud.com/pause: "1"
+            limits:
+              oke-application-resource.oci.oraclecloud.com/pause: "1"
+      tolerations:
+        - key: "oci.oraclecloud.com/application-resource-only"
+          operator: "Exists"
+          effect: "NoSchedule"
 ```
 
-**Topic 삭제**
-```
-$ ./bin/kafka-topics.sh --delete --topic $TOPIC --bootstrap-server=$BOOTSTRAP_URL --command-config ./config/client.properties
+이제 Deployment를 생성합니다.
+
+```bash
+kubectl apply -f pause-for-256ip-test.yaml
 ```
 
-### Kafka CLI를 사용해서 Message Produce, Consume 하기
-**Produce**
-```
-./bin/kafka-console-producer.sh --bootstrap-server=$BOOTSTRAP_URL --topic $TOPIC --producer.config ./config/client.properties
-> Hello Kafka
+`largescale-pool1`의 Worker Node에서 Running 상태인 Pause Pod 수를 확인합니다.
+
+```bash
+kubectl get pods \
+  -l app=pause-for-256ip-test \
+  -o wide \
+  --field-selector spec.nodeName=10.0.1.17,status.phase=Running \
+  --no-headers \
+| wc -l
+
+     252
 ```
 
-**Consume**
+총 252개의 Pause Pod가 정상적으로 Running 상태인 것을 확인할 수 있습니다.
+
+이번에는 Replica 수를 253개로 늘려 봅니다.
+
+```bash
+kubectl scale deployment pause-for-256ip-test --replicas=253
 ```
-./bin/kafka-console-consumer.sh --bootstrap-server=$BOOTSTRAP_URL --to
-pic $TOPIC --consumer.config ./config/client.properties
-Hello Kafka
+
+이 경우 추가 Pod는 Pending 상태가 되며, Scheduler Event에서 다음과 같이 `Too many pods` 문제가 발생합니다.
+
+```text
+Warning  FailedScheduling  3m53s  default-scheduler  0/2 nodes are available: 1 Too many pods, 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/2 nodes are available: 1 No preemption victims found for incoming pod, 1 Preemption is not helpful for scheduling.
 ```
+
+이 결과는 `largescale-pool1` Worker Node의 Pod Capacity가 256이고, 해당 노드에 이미 System Pod가 일부 배포되어 있기 때문에 Application Pod를 253개까지 수용할 수 없다는 것을 보여줍니다. 반면 `system-pool`은 System Node Pool Taint가 설정되어 있어 Pause Pod가 스케줄링되지 않습니다.
+
+### 마무리
+
+OKE의 Generic VNIC Attachment 기능을 사용하면 하나의 Worker Node에 여러 Secondary VNIC Profile을 연결하고, 각 Profile별로 Pod IP 수를 제어할 수 있습니다. 이번 테스트에서는 Worker Node 한 대에 8개의 Secondary VNIC를 연결하고 각 VNIC마다 32개 IP를 할당하여, Kubernetes Node Capacity 기준 256 Pod를 확인했습니다.
+
+기존에는 더 많은 Pod를 수용하기 위해 노드를 늘리는 방식이 일반적이었지만, 이 방식은 노드 운영 비용과 시스템 오버헤드를 함께 증가시킵니다. GVA를 사용하면 노드당 Pod Density를 높일 수 있고, Application Resource를 통해 특정 워크로드가 특정 VNIC Profile을 사용하도록 제어할 수 있습니다.
+
+### 참고 문서
+
+* [OCI Kubernetes Engine (OKE) support for multiple secondary VNIC attachments](https://docs.oracle.com/en-us/iaas/releasenotes/conteng/conteng-Generic-VNIC-attachments.htm)
+* [Attaching Multiple Secondary VNICs for Pod Networking](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengAttaching_Multiple_VNICs.htm)
+* [Generic VNIC Attachment for OKE Is Now Generally Available](https://blogs.oracle.com/cloud-infrastructure/gva-ga)
+* [Large Cluster Best Practices](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengbestpractices_topic-Large-Scale-Clusters-best-practices.htm)
