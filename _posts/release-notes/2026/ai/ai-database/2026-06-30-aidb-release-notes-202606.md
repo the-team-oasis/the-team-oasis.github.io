@@ -34,6 +34,7 @@ header: no
 * **Services:** Autonomous Database Serverless
 * **Release Date:** June 30, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-data-science-agent.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-data-science-agent.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [About Data Science Agent](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/oracle/machine-learning/data-science-agent/dsaug&id=DSAUG-GUID-B12538C2-773F-4AF4-8ED2-0DC139E18A82){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
 
@@ -41,4 +42,12 @@ Oracle Data Science Agent는 Oracle Autonomous AI Database Serverless 26ai에서
 
 핵심 영향은 데이터가 있는 database 안에서 machine learning workflow를 진행할 수 있다는 점입니다. 데이터 이동을 줄이고 governance를 단순화하면서, 분석 담당자가 자연어 기반 안내를 통해 feature 준비부터 inference SQL 생성까지 이어갈 수 있습니다.
 
-활용 시나리오는 ADB에 저장된 업무 데이터를 기반으로 빠르게 모델 후보를 만들고, 평가 결과를 확인한 뒤 SQL 기반 inference 흐름으로 운영화하는 것입니다. 적용 전에는 Autonomous AI Database Serverless 26ai 사용 여부, OML 권한, 데이터 접근 정책을 확인하고, 검증 시에는 생성된 feature/model/inference SQL이 데이터 권한과 성능 기준을 만족하는지 확인해야 합니다.
+### 주요 변경 포인트
+
+* 공식 릴리즈 노트 기준으로 서비스의 사용 방식 또는 운영 옵션이 확장되었습니다.
+* 기존 운영 절차와 자동화 스크립트에 영향을 줄 수 있는 설정 항목을 먼저 확인하는 것이 좋습니다.
+* Console, API, CLI 중 실제 운영에서 사용하는 경로 기준으로 적용 가능 여부를 검증해야 합니다.
+
+### 적용 및 검증 포인트
+
+운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
