@@ -9,13 +9,13 @@ teaser: "2026년 6월 OCI AI/ML 업데이트 소식입니다."
 author: yhcho
 breadcrumb: true
 categories:
-  - release-notes-2026-aiml
+ - release-notes-2026-aiml
 
 tags:
-  - oci-release-notes-2026
-  - Jun-2026
-  - AI/ML
-  - Gen AI
+ - oci-release-notes-2026
+ - Jun-2026
+ - AI/ML
+ - Gen AI
 
 #
 # Styling
@@ -26,7 +26,7 @@ header: no
 <div class="panel radius" markdown="1">
 **Table of Contents**
 {: #toc }
-*  TOC
+* TOC
 {:toc}
 </div>
 
@@ -52,7 +52,7 @@ OCI Generative AI에서 imported model에 private endpoint를 생성할 수 있�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 네트워크 조건
+### 네트워크 조건
 
 Generative AI private endpoint는 VCN 안의 private IP로 OCI Generative AI model에 접근하게 해주는 리소스입니다. Dedicated AI cluster endpoint에 attach해 hosted model을 private endpoint로 접근하거나, Allow Usage In On-Demand Mode를 enable해 on-demand model 접근에도 사용할 수 있습니다.
 
@@ -80,11 +80,11 @@ OCI Generative AI에서 MiniMax, Mistral, Moonshot AI Kimi, Z.ai GLM 계열 신�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Schedule Randomization for Data Science Scheduler
 * **Services:** Data Science
@@ -100,7 +100,7 @@ Data Science Scheduler에서 interval-based schedule의 randomized start window�
 
 ### 주요 변경 포인트
 
-* 공식 릴리즈 노트 기준으로 서비스의 사용 방식 또는 운영 옵션이 확장되었습니다.
+* 서비스의 사용 방식 또는 운영 옵션이 확장되었습니다.
 * 기존 운영 절차와 자동화 스크립트에 영향을 줄 수 있는 설정 항목을 먼저 확인하는 것이 좋습니다.
 * Console, API, CLI 중 실제 운영에서 사용하는 경로 기준으로 적용 가능 여부를 검증해야 합니다.
 
@@ -108,11 +108,11 @@ Data Science Scheduler에서 interval-based schedule의 randomized start window�
 
 운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
 
-### 공식 문서 기반 동작 방식
+### 동작 방식
 
 Data Science Scheduler의 randomized start window는 interval-based schedule에서 실행 시작 시간이 한 시점에 몰리지 않도록 분산하는 기능입니다. 예를 들어 start time이 09:10 UTC이고 random window duration이 30분이면 첫 실행은 09:10~09:40 UTC 사이에서 무작위로 선택됩니다.
 
-공식 문서 기준으로 random window duration의 최소값은 30분이며, 설정한 schedule interval을 초과할 수 없습니다. random start를 enable했지만 duration을 지정하지 않으면 service가 configured interval의 절반을 기본 duration으로 사용합니다. 생성 또는 업데이트 전에는 next five executions preview로 실제 실행 window를 확인하는 것이 좋습니다.
+random window duration의 최소값은 30분이며, 설정한 schedule interval을 초과할 수 없습니다. random start를 enable했지만 duration을 지정하지 않으면 service가 configured interval의 절반을 기본 duration으로 사용합니다. 생성 또는 업데이트 전에는 next five executions preview로 실제 실행 window를 확인하는 것이 좋습니다.
 
 ## Import DeepSeek V4 Flash and DeepSeek V4 Pro in OCI Generative AI
 * **Services:** Generative AI
@@ -136,11 +136,11 @@ DeepSeek V4 Flash와 DeepSeek V4 Pro 모델을 OCI Generative AI로 import할 �
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import Qwen 3 Next 80B A3B Instruct in OCI Generative AI
 * **Services:** Generative AI
@@ -164,11 +164,11 @@ Qwen3 Next 80B A3B Instruct 모델을 OCI Generative AI로 import할 수 있습�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import Google MedGemma 27B Text IT in OCI Generative AI
 * **Services:** Generative AI
@@ -192,11 +192,11 @@ Google MedGemma 27B Text IT 모델을 OCI Generative AI로 import할 수 있습�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import OpenAI Whisper Large V3 Turbo in OCI Generative AI
 * **Services:** Generative AI
@@ -220,11 +220,11 @@ OpenAI Whisper Large V3 Turbo 모델을 OCI Generative AI로 import할 수 있�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import NVIDIA Nemotron 3 Ultra in OCI Generative AI
 * **Services:** Generative AI
@@ -248,11 +248,11 @@ NVIDIA Nemotron 3 Ultra 모델을 OCI Generative AI로 import할 수 있습니�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 import 조건
+### Import 조건
 
 OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
 
-Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, import 성공을 위해 configuration file 이름은 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## OpenAI gpt-oss Models Available on B200 Dedicated AI Clusters in Abu Dhabi
 * **Services:** Generative AI
@@ -276,7 +276,7 @@ UAE Central(Abu Dhabi) region에서 B200 GPU shape 기반 dedicated AI cluster�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
-### 공식 문서 기반 cluster 생성 주의사항
+### Cluster 생성 주의사항
 
 Dedicated AI cluster에서 imported model 또는 base model을 hosting하려면 cluster type을 `Hosting`으로 선택하고 base model 또는 imported model을 지정합니다. Imported model을 선택한 경우에는 해당 model의 recommended unit size를 선택해야 하며, unit shape는 생성 후 변경할 수 없습니다.
 
