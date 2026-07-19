@@ -37,6 +37,8 @@ header: no
 
 ### 업데이트 내용
 
-Oracle Data Science Agent는 Autonomous Database Serverless에서 데이터 분석과 AI 기반 작업을 더 쉽게 수행하도록 지원하는 기능입니다. 데이터베이스 환경 안에서 자연어 기반 지원과 작업 자동화를 활용해 데이터 탐색, 분석 흐름 구성, 개발 생산성을 높일 수 있습니다.
+Oracle Data Science Agent는 Oracle Autonomous AI Database Serverless 26ai에서 지원됩니다. Oracle Machine Learning 안의 guided chat experience를 통해 data profiling, feature preparation, model training, result evaluation, inference SQL generation을 수행할 수 있습니다.
 
-ADB 기반으로 데이터와 AI 기능을 함께 다루는 조직은 별도 ML 작업 환경으로 이동하지 않고 데이터베이스 중심의 분석·자동화 경험을 확장할 수 있습니다. 적용 전에는 사용 가능한 리전, 권한, 데이터 접근 정책을 함께 확인해야 합니다.
+핵심 영향은 데이터가 있는 database 안에서 machine learning workflow를 진행할 수 있다는 점입니다. 데이터 이동을 줄이고 governance를 단순화하면서, 분석 담당자가 자연어 기반 안내를 통해 feature 준비부터 inference SQL 생성까지 이어갈 수 있습니다.
+
+활용 시나리오는 ADB에 저장된 업무 데이터를 기반으로 빠르게 모델 후보를 만들고, 평가 결과를 확인한 뒤 SQL 기반 inference 흐름으로 운영화하는 것입니다. 적용 전에는 Autonomous AI Database Serverless 26ai 사용 여부, OML 권한, 데이터 접근 정책을 확인하고, 검증 시에는 생성된 feature/model/inference SQL이 데이터 권한과 성능 기준을 만족하는지 확인해야 합니다.
