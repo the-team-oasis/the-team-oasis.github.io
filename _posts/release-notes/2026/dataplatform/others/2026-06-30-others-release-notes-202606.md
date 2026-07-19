@@ -45,12 +45,21 @@ OCI Search with OpenSearch가 OpenSearch 3.6을 지원합니다. 신규 cluster 
 
 운영 영향은 검색·로그 분석·벡터 검색 workload의 기능 선택지가 넓어진다는 점입니다. 기존 cluster를 업그레이드할 때는 plugin compatibility, index format, snapshot/backup, maintenance window를 먼저 확인해야 합니다.
 
-검증은 staging cluster에서 upgrade path를 확인하고, 주요 query latency, dashboard, ingestion pipeline, vector search 결과가 기존과 호환되는지 비교하는 방식이 적절합니다.
+### 주요 확인 포인트
+
+* 새 버전 또는 지원 범위가 실제 생성·업그레이드 화면에서 선택 가능한지 확인해야 합니다.
+* 기존 운영 버전과의 호환성, 패치 정책, 롤백 가능성을 함께 검토하는 것이 좋습니다.
+* 운영 반영 전에는 테스트 환경에서 연결, 모니터링, 백업 또는 복구 절차가 기존과 동일하게 동작하는지 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+버전 업데이트 성격의 항목은 기능 자체보다 적용 시점과 호환성 확인이 중요합니다. Console/API에서 대상 버전이 보이는지, 기존 클라이언트와 드라이버가 영향을 받지 않는지, 업그레이드 후 주요 metric과 log에 이상이 없는지 점검하는 방식으로 검증하면 좋습니다.
 
 ## Dedicated Coordinator Nodes for OCI Search with OpenSearch
 * **Services:** Search with OpenSearch
 * **Release Date:** June 23, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/search-opensearch/coordinator-nodes.htm](https://docs.oracle.com/iaas/releasenotes/search-opensearch/coordinator-nodes.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [Coordinator Nodes](https://docs.oracle.com/iaas/Content/search-opensearch/Tasks/creatingsearchclusters.htm#config-coord-nodes){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
 
@@ -58,7 +67,15 @@ OCI Search with OpenSearch cluster에서 dedicated coordinator node를 사용할
 
 production cluster에서는 data node가 storage, indexing, search operation에 집중할 수 있어 workload isolation과 전반적인 성능 안정성에 도움이 됩니다. 검색 요청이 많거나 Dashboards 사용량이 높은 환경에서는 coordinator node 도입을 통해 data node resource pressure를 줄일 수 있습니다.
 
-적용 전에는 현재 cluster의 query load, dashboard 사용 패턴, data node CPU/memory pressure를 확인해야 합니다. 적용 후에는 search latency, data node resource 사용률, coordinator node 병목 여부를 함께 모니터링하는 것이 좋습니다.
+### 주요 변경 포인트
+
+* 데이터 서비스의 운영, 성능 분석, 접속 방식, 가용성 옵션을 보완하는 업데이트입니다.
+* 새 기능을 적용하면 성능 병목 분석, 인증 통합, 클라이언트 접근 경로, 버전 선택 같은 운영 선택지가 늘어납니다.
+* 기존 cluster 또는 DB system에 적용할 때는 서비스별 prerequisites와 network/security 설정을 같이 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+테스트 환경에서 새 옵션을 활성화한 뒤 metric, log, client connection, failover 또는 stop/start 동작을 확인하는 것이 좋습니다. 운영 반영 시에는 지원 region과 version, endpoint 접근 정책, 백업/복구 계획을 함께 점검해야 합니다.
 
 ## Use Query Insights to Understand OCI Database with PostgreSQL Performance
 * **Services:** OCI Database with PostgreSQL
@@ -72,7 +89,15 @@ OCI Database with PostgreSQL에서 Query Insights를 사용해 query performance
 
 운영 활용은 병목 SQL 탐지와 용량 계획입니다. 애플리케이션 성능 저하가 발생했을 때 CPU/IO 사용량이 높은 쿼리를 확인하고, 최근 activity trend를 기준으로 scaling 또는 data model 조정 필요성을 판단할 수 있습니다.
 
-검증 시에는 대표 workload 실행 후 Query Insights에 주요 SQL이 수집되는지, resource usage 지표가 실제 DB 부하와 맞는지, tuning 전후 latency와 실행 계획 변화가 확인되는지 살펴보면 됩니다.
+### 주요 변경 포인트
+
+* 데이터 서비스의 운영, 성능 분석, 접속 방식, 가용성 옵션을 보완하는 업데이트입니다.
+* 새 기능을 적용하면 성능 병목 분석, 인증 통합, 클라이언트 접근 경로, 버전 선택 같은 운영 선택지가 늘어납니다.
+* 기존 cluster 또는 DB system에 적용할 때는 서비스별 prerequisites와 network/security 설정을 같이 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+테스트 환경에서 새 옵션을 활성화한 뒤 metric, log, client connection, failover 또는 stop/start 동작을 확인하는 것이 좋습니다. 운영 반영 시에는 지원 region과 version, endpoint 접근 정책, 백업/복구 계획을 함께 점검해야 합니다.
 
 ## Kerberos Authentication
 * **Services:** OCI Database with PostgreSQL
@@ -86,7 +111,15 @@ OCI Database with PostgreSQL에서 Kerberos authentication을 enable/manage할 �
 
 활용 시나리오는 기업 표준 인증 체계를 PostgreSQL database 접근에 적용하고, 사용자의 DB password 관리를 줄이는 것입니다. 적용 전에는 Kerberos realm, principal, keytab, client 환경, DB user mapping을 정리해야 합니다.
 
-검증은 Kerberos ticket 발급, PostgreSQL 접속, 권한 매핑, password fallback 차단 여부를 순서대로 확인하는 것이 좋습니다.
+### 주요 변경 포인트
+
+* 공식 릴리즈 노트 기준으로 서비스의 사용 방식 또는 운영 옵션이 확장되었습니다.
+* 기존 운영 절차와 자동화 스크립트에 영향을 줄 수 있는 설정 항목을 먼저 확인하는 것이 좋습니다.
+* Console, API, CLI 중 실제 운영에서 사용하는 경로 기준으로 적용 가능 여부를 검증해야 합니다.
+
+### 적용 및 검증 포인트
+
+운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
 
 ## New Features in OCI Database with PostgreSQL
 * **Services:** OCI Database with PostgreSQL
@@ -100,7 +133,15 @@ OCI Database with PostgreSQL에 database system stop/start와 replication with w
 
 Replication with warm standby는 같은 region 또는 cross-region에 continuously updated standby database system을 유지해 RPO SLO 기반 DR 구성을 지원합니다. 장애나 region 이슈에 대비해 recovery time을 줄이고, 같은 region에서는 8-node 제한을 넘어서는 horizontal scaling 시나리오도 검토할 수 있습니다.
 
-적용 시에는 업무 시간/비업무 시간에 따른 stop/start 정책, standby region, replication lag, failover 절차를 함께 설계해야 합니다. 검증은 중지/시작 후 endpoint와 connection 복구, warm standby 동기화 상태, DR 전환 리허설로 진행하는 것이 좋습니다.
+### 주요 변경 포인트
+
+* 데이터 서비스의 운영, 성능 분석, 접속 방식, 가용성 옵션을 보완하는 업데이트입니다.
+* 새 기능을 적용하면 성능 병목 분석, 인증 통합, 클라이언트 접근 경로, 버전 선택 같은 운영 선택지가 늘어납니다.
+* 기존 cluster 또는 DB system에 적용할 때는 서비스별 prerequisites와 network/security 설정을 같이 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+테스트 환경에서 새 옵션을 활성화한 뒤 metric, log, client connection, failover 또는 stop/start 동작을 확인하는 것이 좋습니다. 운영 반영 시에는 지원 region과 version, endpoint 접근 정책, 백업/복구 계획을 함께 점검해야 합니다.
 
 ## Public connectivity for Kafka clusters
 * **Services:** Kafka
@@ -114,7 +155,15 @@ OCI Streaming with Apache Kafka cluster는 기본적으로 private connectivity�
 
 활용 시나리오는 on-premises나 다른 cloud에서 Kafka cluster로 연결해야 하는 migration, hybrid integration, 외부 producer/consumer 연동입니다. 단, public endpoint는 노출 범위가 커지므로 인증, network allowlist, client certificate/credential 관리, audit를 함께 설계해야 합니다.
 
-검증은 add-on 설치 후 외부 client bootstrap 연결, 인증 실패/성공 케이스, private client 영향 여부, 보안 정책과 logging을 확인하는 방식이 적절합니다.
+### 주요 변경 포인트
+
+* 데이터 서비스의 운영, 성능 분석, 접속 방식, 가용성 옵션을 보완하는 업데이트입니다.
+* 새 기능을 적용하면 성능 병목 분석, 인증 통합, 클라이언트 접근 경로, 버전 선택 같은 운영 선택지가 늘어납니다.
+* 기존 cluster 또는 DB system에 적용할 때는 서비스별 prerequisites와 network/security 설정을 같이 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+테스트 환경에서 새 옵션을 활성화한 뒤 metric, log, client connection, failover 또는 stop/start 동작을 확인하는 것이 좋습니다. 운영 반영 시에는 지원 region과 version, endpoint 접근 정책, 백업/복구 계획을 함께 점검해야 합니다.
 
 ## Streaming with Apache Kafka support for Apache Kafka 4.0.0
 * **Services:** Kafka
@@ -127,3 +176,13 @@ OCI Streaming with Apache Kafka cluster는 기본적으로 private connectivity�
 OCI Streaming with Apache Kafka가 Apache Kafka 4.0.0을 지원합니다. Kafka 4.0.0부터는 supported coordination mode가 KRaft뿐이며 ZooKeeper는 지원되지 않습니다.
 
 신규 cluster나 업그레이드 계획이 있는 고객은 ZooKeeper 기반 운영 절차, monitoring, backup/restore, client compatibility를 KRaft 기준으로 재검토해야 합니다. 적용 전에는 Kafka client library와 connector가 4.0.0 및 KRaft 환경을 지원하는지 확인하는 것이 좋습니다.
+
+### 주요 확인 포인트
+
+* 새 버전 또는 지원 범위가 실제 생성·업그레이드 화면에서 선택 가능한지 확인해야 합니다.
+* 기존 운영 버전과의 호환성, 패치 정책, 롤백 가능성을 함께 검토하는 것이 좋습니다.
+* 운영 반영 전에는 테스트 환경에서 연결, 모니터링, 백업 또는 복구 절차가 기존과 동일하게 동작하는지 확인해야 합니다.
+
+### 적용 및 검증 포인트
+
+버전 업데이트 성격의 항목은 기능 자체보다 적용 시점과 호환성 확인이 중요합니다. Console/API에서 대상 버전이 보이는지, 기존 클라이언트와 드라이버가 영향을 받지 않는지, 업그레이드 후 주요 metric과 log에 이상이 없는지 점검하는 방식으로 검증하면 좋습니다.
