@@ -73,6 +73,12 @@ MySQL HeatWave의 near-zero downtime maintenance가 eligible standalone DB syste
 
 운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
 
+### 공식 문서 기반 제약 조건
+
+공식 문서에 따르면 near-zero downtime maintenance는 MySQL server를 중지하지 않고 새 system으로 data를 replicate한 뒤, 마지막 전환 시점에 짧은 downtime을 두는 방식입니다. 반면 offline maintenance는 MySQL server를 중지하고 storage clone으로 일관성을 확보하므로 read/write 불가 시간이 더 길 수 있습니다.
+
+Near-zero downtime maintenance는 모든 경우에 적용되는 것은 아닙니다. 요청한 MySQL upgrade가 major version upgrade가 아니어야 하고, DB system에 HeatWave cluster, Read Replica, Read Endpoint가 없어야 하며, binary log 보존 설정 등 prerequisites를 만족해야 합니다. 오류가 발생하면 maintenance process는 중단되고 old DB system으로 rollback된 뒤 connection이 재개됩니다.
+
 ## HeatWave: IPv6 Support
 * **Services:** MySQL HeatWave
 * **Release Date:** June 09, 2026
@@ -94,3 +100,9 @@ MySQL HeatWave DB system을 IPv6 address로 생성할 수 있게 되었습니다
 ### 적용 및 검증 포인트
 
 운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
+
+### 공식 문서 기반 설정 위치
+
+IPv6 관련 연결 설정은 HeatWave DB system 생성·clone·edit·restore 화면의 Advanced options 중 **Connections** 영역에서 확인하는 흐름입니다. 이 영역은 DB system의 endpoint와 접속 방식을 정하는 설정이므로, IPv6를 사용할 때는 VCN/subnet의 IPv6 구성과 client 접근 경로를 함께 확인해야 합니다.
+
+운영 검증은 IPv4 client와 IPv6 client의 접속 테스트를 분리해 수행하는 것이 좋습니다. 보안 목록, NSG, route rule, DNS 이름 해석이 IPv6 경로에서도 동일하게 맞는지 확인하지 않으면 DB system은 지원하더라도 실제 애플리케이션 연결이 실패할 수 있습니다.

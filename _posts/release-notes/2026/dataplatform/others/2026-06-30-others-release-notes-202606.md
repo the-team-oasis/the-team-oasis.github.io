@@ -121,6 +121,12 @@ OCI Database with PostgreSQL에서 Kerberos authentication을 enable/manage할 �
 
 운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
 
+### 공식 문서 기반 사전 조건과 절차
+
+OCI Database with PostgreSQL의 Kerberos authentication은 PostgreSQL의 GSSAPI를 사용하며, Active Directory나 MIT Kerberos 같은 KDC 기반 중앙 인증 환경을 전제로 합니다. 사전 조건에는 운영 중인 Kerberos infrastructure, OCI Vault 접근 및 권한, KDC와 OCI resource에 대한 privileged access, PostgreSQL role 관리 이해가 포함됩니다.
+
+설정은 KDC에서 PostgreSQL endpoint FQDN에 대한 service principal과 keytab을 만들고, keytab을 안전하게 저장한 뒤 DB system에서 Kerberos authentication을 enable하는 흐름입니다. 예시로 문서에서는 `ktpass`를 사용해 `postgres/<database_fqdn>@realm` 형식의 principal을 keytab으로 생성하는 절차를 제시합니다.
+
 ## New Features in OCI Database with PostgreSQL
 * **Services:** OCI Database with PostgreSQL
 * **Release Date:** June 16, 2026
@@ -164,6 +170,12 @@ OCI Streaming with Apache Kafka cluster는 기본적으로 private connectivity�
 ### 적용 및 검증 포인트
 
 테스트 환경에서 새 옵션을 활성화한 뒤 metric, log, client connection, failover 또는 stop/start 동작을 확인하는 것이 좋습니다. 운영 반영 시에는 지원 region과 version, endpoint 접근 정책, 백업/복구 계획을 함께 점검해야 합니다.
+
+### 공식 문서 기반 보안 조건
+
+OCI Streaming with Apache Kafka cluster는 기본적으로 private connectivity로 생성되며, public connectivity는 add-on으로 설치합니다. 공식 문서에서는 public connectivity add-on을 설치하기 전에 먼저 Apache Kafka ACL을 만들고, cluster configuration의 `allow.everyone.if.no.acl.found` 값을 `false`로 바꾸라고 강조합니다.
+
+Add-on 설정 시에는 SASL/SCRAM 또는 mTLS 같은 Kafka 내장 인증 방식을 유지하고, 접근을 허용할 Network CIDR range를 지정합니다. Public endpoint는 hybrid workload와 migration에 유용하지만, CIDR 제한·ACL·인증을 함께 적용하지 않으면 외부 노출면이 커지므로 운영 전 보안 검토가 필수입니다.
 
 ## Streaming with Apache Kafka support for Apache Kafka 4.0.0
 * **Services:** Kafka

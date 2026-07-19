@@ -51,6 +51,12 @@ Ops Insights News Reports에 Database Management report type이 추가되었습�
 
 적용 전에는 대상 database 또는 service instance가 지원 조건을 만족하는지 확인해야 합니다. 적용 후에는 연결, 권한, 성능, 감사 로그, 보고서 또는 replication 상태를 실제 workload 기준으로 검증하는 것이 좋습니다.
 
+### 공식 문서 기반 사전 조건
+
+News Reports는 Capacity Planning, Database Management, SQL Insights report를 email로 보내는 기능입니다. Database Management report type을 사용하려면 database가 Database Management와 Ops Insights 양쪽 모두에 enable되어 있어야 합니다.
+
+문서에서는 prerequisite policy로 ONS topic inspect, Operations Insights service의 ONS topic 사용, `opsinewsreport` principal의 alarm/metric/database management resource read 권한을 제시합니다. 보고서를 만들 때는 Ops Insights Administration의 News reports에서 report type을 선택하고, Database Management의 경우 DB fleet health summary를 선택해 health alert 중심 보고서를 받을 수 있습니다.
+
 ## Cross-region Support in SQL Insights - Fleet Analysis
 * **Services:** Ops Insights
 * **Release Date:** June 30, 2026
@@ -72,6 +78,12 @@ SQL Insights - Fleet Analysis dashboard에서 multiple regions 데이터를 한 
 ### 적용 및 검증 포인트
 
 적용 전에는 대상 database 또는 service instance가 지원 조건을 만족하는지 확인해야 합니다. 적용 후에는 연결, 권한, 성능, 감사 로그, 보고서 또는 replication 상태를 실제 workload 기준으로 검증하는 것이 좋습니다.
+
+### 공식 문서 기반 활용 방법
+
+SQL Insights Fleet Analysis dashboard는 Ops Insights-enabled database fleet을 상위 수준에서 분석하는 화면입니다. 공식 문서 기준으로 Region filter에서 하나 이상의 region을 선택하면 여러 region의 SQL Insights data를 하나의 fleet view로 집계해 볼 수 있습니다.
+
+여러 region을 선택하면 Top databases table의 Region column으로 각 database 위치를 확인할 수 있습니다. 운영에서는 current console region만 보는 기본 동작과 cross-region filter 적용 결과를 비교해, 누락된 region이나 Ops Insights 미활성 database가 없는지 확인하는 것이 좋습니다.
 
 ## Use Deep Data Security in Autonomous AI Database
 * **Services:** Autonomous Database Serverless
@@ -95,6 +107,12 @@ Autonomous AI Database에서 Oracle Deep Data Security를 사용할 수 있게 �
 
 적용 전에는 대상 database 또는 service instance가 지원 조건을 만족하는지 확인해야 합니다. 적용 후에는 연결, 권한, 성능, 감사 로그, 보고서 또는 replication 상태를 실제 workload 기준으로 검증하는 것이 좋습니다.
 
+### 공식 문서 기반 제약 및 적용 방식
+
+Oracle Deep Data Security는 Oracle AI Database 26ai에서만 지원됩니다. 문서에서는 인증된 end-user identity를 기준으로 row-level 및 column-level authorization을 database 내부에서 enforcement한다고 설명합니다.
+
+특히 AI assistant, copilot, agentic AI application이 동적으로 SQL을 생성하는 환경에서는 애플리케이션 계층의 필터링만으로 일관된 권한 통제를 유지하기 어렵습니다. Deep Data Security는 application, reporting tool, REST API, SQL client, AI agent 등 접근 경로가 달라도 같은 database policy를 적용한다는 점이 핵심입니다.
+
 ## Iceberg REST Catalog Integration with DBMS_DCAT
 * **Services:** Autonomous Database Serverless
 * **Release Date:** June 23, 2026
@@ -117,6 +135,12 @@ Autonomous AI Database의 DBMS_DCAT PL/SQL 26ai package가 Iceberg REST-compatib
 
 적용 전에는 대상 database 또는 service instance가 지원 조건을 만족하는지 확인해야 합니다. 적용 후에는 연결, 권한, 성능, 감사 로그, 보고서 또는 replication 상태를 실제 workload 기준으로 검증하는 것이 좋습니다.
 
+### 공식 문서 기반 권한 및 동작 방식
+
+DBMS_DCAT는 OCI Data Catalog의 metadata를 Autonomous AI Database와 동기화해 protected schema와 external table을 만드는 package입니다. 공식 문서 기준으로 이 package를 사용하려면 `dcat_sync` role이 필요하며, 동기화된 schema는 no authentication user로 생성되고 local user가 직접 변경할 수 없도록 protected clause로 만들어집니다.
+
+동기화 후 기본적으로 synced external table에 접근할 수 있는 사용자는 `dcat_admin`과 `ADMIN`입니다. 실제 분석 사용자는 `dcat_admin` 또는 `ADMIN`이 READ privilege를 명시적으로 부여해야 하므로, catalog 연결 자체뿐 아니라 권한 부여와 SQL 조회 테스트까지 검증해야 합니다.
+
 ## Lake Cache for Mounted Catalog Tables
 * **Services:** Autonomous Database Serverless
 * **Release Date:** June 17, 2026
@@ -138,6 +162,12 @@ Autonomous AI Database의 Lake Cache가 mounted catalog table을 지원합니다
 ### 적용 및 검증 포인트
 
 적용 전에는 대상 database 또는 service instance가 지원 조건을 만족하는지 확인해야 합니다. 적용 후에는 연결, 권한, 성능, 감사 로그, 보고서 또는 replication 상태를 실제 workload 기준으로 검증하는 것이 좋습니다.
+
+### 공식 문서 기반 적용 방식
+
+Lake Cache는 Oracle AI Database 26ai에서만 지원되며, external table 또는 mounted catalog table의 자주 접근하는 데이터를 Autonomous AI Database 내부에 cache하는 기능입니다. Mounted catalog table은 `[schema].object@catalog_name` 또는 default schema가 설정된 경우 `object@catalog_name` 형태로 query할 수 있습니다.
+
+공식 문서에 따르면 Lake Cache는 애플리케이션 SQL을 바꾸지 않고도 cache된 데이터를 사용하도록 투명하게 동작합니다. Cache 생성/refresh 시 resource group을 지정해 caching operation에 사용할 자원을 제어할 수 있고, 전체 table이 아니라 일부 column만 cache하는 선택도 가능합니다.
 
 ## Oracle Data Safe Promotion for On-Premises Databases, Databases on Compute, and Amazon RDS for Oracle
 * **Services:** Data Safe
