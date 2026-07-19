@@ -9,12 +9,12 @@ teaser: "2026년 6월 OCI Cloud Native & Security 업데이트 소식입니다."
 author: dankim
 breadcrumb: true
 categories:
-  - release-notes-2026-cloudnative-security
+ - release-notes-2026-cloudnative-security
 
 tags:
-  - oci-release-notes-2026
-  - Jun-2026
-  - cloudnative
+ - oci-release-notes-2026
+ - Jun-2026
+ - cloudnative
 
 #
 # Styling
@@ -25,7 +25,7 @@ header: no
 <div class="panel radius" markdown="1">
 **Table of Contents**
 {: #toc }
-*  TOC
+* TOC
 {:toc}
 </div>
 
@@ -51,11 +51,11 @@ API Gateway 배포 사양에서 OAuth 2.0 토큰 인증 정책과 함께 사용�
 
 배포 전에는 IdP redirect URI, API Gateway route, validation failure policy의 static login redirect path가 같은 인증 흐름을 바라보는지 확인해야 합니다. 인증되지 않은 요청, 인증 성공 후 원래 API route 접근, 잘못된 redirect path 입력 시 실패 동작을 각각 테스트하면 운영 전 검증이 더 안전합니다.
 
-### 공식 문서 기반 적용 예시
+### 적용 예시
 
-공식 문서에서는 static login redirect path를 예로 들며, 여러 route나 path parameter, wildcard route를 가진 애플리케이션에서 IdP에 모든 redirect URI를 등록하기 어려운 경우 `/auth/callback` 같은 단일 callback path를 두는 방식을 설명합니다. 이 path는 OAuth 2.0 validation failure policy의 static login redirect path와 API deployment specification의 route path가 서로 일치해야 합니다.
+여러 route, path parameter, wildcard route를 가진 애플리케이션에서는 IdP에 모든 redirect URI를 등록하기보다 `/auth/callback` 같은 단일 callback path를 두는 방식이 적합합니다. 이 path는 OAuth 2.0 validation failure policy의 static login redirect path와 API deployment specification의 route path가 서로 일치해야 합니다.
 
-주의할 점은 login back end route가 일반 API client가 직접 호출하는 용도가 아니라 IdP redirect를 받기 위한 예약 route라는 점입니다. 문서 기준으로 이 route는 `GET` method를 지원해야 하고, path parameter나 wildcard가 없는 static path여야 하며, 직접 호출하면 `400 Bad Request`가 발생할 수 있습니다.
+주의할 점은 login back end route가 일반 API client가 직접 호출하는 용도가 아니라 IdP redirect를 받기 위한 예약 route라는 점입니다. 이 route는 `GET` method를 지원해야 하고, path parameter나 wildcard가 없는 static path여야 하며, 직접 호출하면 `400 Bad Request`가 발생할 수 있습니다.
 
 ## Expanded OCI Functions support in Fn Project CLI now available
 * **Services:** Functions
@@ -101,11 +101,11 @@ OKE managed node pool에서 worker node 인스턴스를 배치할 때 Compute Ho
 
 Compute Host Group은 node pool placement configuration에서 선택하기 전에 미리 생성되어 있고 active 상태여야 합니다. Compute Cluster를 지정한 node pool은 RDMA-capable network path와 managed node pool의 scale, upgrade, replacement 동작을 함께 확인해야 합니다.
 
-### 공식 문서 기반 사전 조건
+### 사전 조건
 
 Compute Host Group은 Compute 서비스에서 먼저 생성·구성해야 하며, OKE가 host group 생성이나 recycle level 구성을 대신하지 않습니다. Host Group 변경은 새 worker node instance에만 적용되므로 기존 node를 같은 배치 정책으로 옮기려면 worker node를 terminate/replace해 replacement instance가 새 host group에 배치되도록 해야 합니다.
 
-Compute Cluster는 RDMA-capable bare metal shape가 필요한 workload에 사용하는 옵션입니다. 공식 문서 기준으로 enhanced cluster가 필요하고, Compute Cluster는 `ACTIVE` 상태여야 하며, 기존 managed node pool에는 compute cluster를 나중에 추가·변경·제거할 수 없습니다. 다른 compute cluster를 쓰려면 새 managed node pool을 만들어야 합니다.
+Compute Cluster는 RDMA-capable bare metal shape가 필요한 workload에 사용하는 옵션입니다. OKE enhanced cluster가 필요하고, Compute Cluster는 `ACTIVE` 상태여야 하며, 기존 managed node pool에는 compute cluster를 나중에 추가·변경·제거할 수 없습니다. 다른 compute cluster를 쓰려면 새 managed node pool을 만들어야 합니다.
 
 ## Document Generator pre-built function version 26.4 now available
 * **Services:** Functions
@@ -145,7 +145,7 @@ Oracle Cloud Console의 새 UI 경험이 적용되었습니다. resource list pa
 
 * Resource list page, resource details page, resource creation workflow의 화면 구성이 새 Console Experience 기준으로 바뀔 수 있습니다.
 * 기능 변경보다는 운영 문서, 실습 자료, 화면 캡처, 사용자의 작업 경로에 영향을 주는 업데이트입니다.
-* 공식 문서의 스크린샷보다 Console 변경이 먼저 적용될 수 있다는 점을 고려해야 합니다.
+* 스크린샷보다 Console 변경이 먼저 적용될 수 있다는 점을 고려해야 합니다.
 
 ### 운영 시 참고 사항
 
