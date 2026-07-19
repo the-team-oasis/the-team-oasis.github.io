@@ -63,16 +63,6 @@ Data Science Scheduler에서 interval 기반 스케줄의 시작 시간을 무�
 
 무작위 시작 창은 많은 작업이 동시에 시작되어 리소스가 몰리는 문제를 줄입니다. 대규모 ML 배치 작업이나 정기 모델 재학습 환경에서 안정적인 리소스 사용에 도움이 됩니다.
 
-## Oracle Data Science Agent
-* **Services:** Autonomous Database Serverless
-* **Release Date:** June 30, 2026
-* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-data-science-agent.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-serverless/2026-06-data-science-agent.htm){:target="_blank" rel="noopener"}
-
-### 업데이트 내용
-
-Oracle Data Science Agent는 이번 기준에서 `ai-database`가 아니라 `aiml-oci`로 분류합니다. ADB Serverless의 Select AI 직접 연계 기능이 아니라 Data Science/Agent 성격의 OCI AI/ML 기능으로 보기 때문입니다.
-
-AI Agent는 사용자의 목표를 이해하고 도구나 모델을 조합해 작업을 수행하는 소프트웨어 구성입니다. ADB 내부 Select AI Agent가 아닌 일반 Agent/Assistant는 모두 `aiml-oci`에 배치합니다.
 
 ## Import DeepSeek V4 Flash and DeepSeek V4 Pro in OCI Generative AI
 * **Services:** Generative AI
