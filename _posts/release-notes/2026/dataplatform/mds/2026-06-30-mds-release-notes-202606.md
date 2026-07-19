@@ -36,9 +36,9 @@ header: no
 
 ### 업데이트 내용
 
-MySQL HeatWave가 MySQL 9.7.1과 8.4.10 버전을 지원합니다. Oracle 원문은 이 릴리스가 Critical Security Patch Update임을 명시합니다.
+MySQL HeatWave가 MySQL database version 9.7.1과 8.4.10을 지원합니다. 공식 릴리스 노트에 따르면 두 릴리스는 Critical Security Patch Update입니다.
 
-Critical Security Patch Update는 보안 취약점 수정이 포함된 중요 패치입니다. 운영팀은 호환성 테스트 후 업그레이드 계획을 세우고, 애플리케이션 드라이버와 SQL 동작 차이를 함께 검증하는 것이 좋습니다.
+보안 패치 성격이 강하므로 신규 DB system 생성 기준 버전과 기존 운영 DB의 패치 계획을 함께 검토해야 합니다. 업그레이드 전에는 애플리케이션 호환성, maintenance window, rollback 계획을 확인하는 것이 좋습니다.
 
 ## HeatWave: Near-Zero Downtime Maintenance Available for All Eligible DB Systems
 * **Services:** MySQL HeatWave
@@ -47,9 +47,9 @@ Critical Security Patch Update는 보안 취약점 수정이 포함된 중요 �
 
 ### 업데이트 내용
 
-모든 적격 standalone DB system에서 Near-Zero Downtime Maintenance를 사용할 수 있게 되었습니다. 이는 유지보수 중 서비스 중단 시간을 최소화하는 방식입니다.
+MySQL HeatWave의 near-zero downtime maintenance가 eligible standalone DB system 전체로 확대되었습니다. 유지보수 중 서비스 중단 시간을 줄일 수 있어 운영 DB의 정기 패치 부담을 낮추는 데 도움이 됩니다.
 
-운영 관점에서는 보안 패치와 버전 유지보수를 더 자주, 더 낮은 위험으로 수행할 수 있다는 점이 중요합니다. 다만 실제 무중단 여부는 애플리케이션 연결 방식, 장애 조치 설정, 유지보수 창에 따라 달라질 수 있으므로 사전 테스트가 필요합니다.
+적용 전에는 대상 DB system이 eligible 상태인지 확인하고, maintenance window와 애플리케이션 connection retry 정책을 함께 점검해야 합니다. 실제 운영에서는 패치 전후 복제/백업 상태와 애플리케이션 에러율을 비교해 near-zero downtime 효과를 확인하는 것이 좋습니다.
 
 ## HeatWave: IPv6 Support
 * **Services:** MySQL HeatWave
@@ -58,6 +58,6 @@ Critical Security Patch Update는 보안 취약점 수정이 포함된 중요 �
 
 ### 업데이트 내용
 
-MySQL HeatWave DB system을 IPv6 주소로 생성할 수 있게 되었습니다. IPv6는 더 넓은 주소 공간을 제공하는 인터넷 프로토콜로, 대규모 네트워크와 최신 클라우드 네트워크 설계에서 중요성이 커지고 있습니다.
+MySQL HeatWave DB system을 IPv6 address로 생성할 수 있게 되었습니다. IPv6 기반 VCN 설계나 dual-stack 네트워크 전략을 사용하는 환경에서 HeatWave 연결 옵션이 넓어집니다.
 
-IPv6 지원은 네트워크 주소 설계, 보안 규칙, 애플리케이션 접속 문자열에 영향을 줄 수 있습니다. 신규 시스템에서는 IPv4/IPv6 정책을 함께 정의하고 방화벽·보안 목록을 점검해야 합니다.
+적용 시에는 subnet, security list/NSG, client driver, DNS, 방화벽 정책이 IPv6 경로를 지원하는지 확인해야 합니다. 신규 DB system 생성 옵션이므로 기존 IPv4 기반 접속 경로와 병행 검증하는 것이 안전합니다.
