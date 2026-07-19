@@ -52,6 +52,12 @@ OCI Generative AI에서 imported model에 private endpoint를 생성할 수 있�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
+### 공식 문서 기반 네트워크 조건
+
+Generative AI private endpoint는 VCN 안의 private IP로 OCI Generative AI model에 접근하게 해주는 리소스입니다. Dedicated AI cluster endpoint에 attach해 hosted model을 private endpoint로 접근하거나, Allow Usage In On-Demand Mode를 enable해 on-demand model 접근에도 사용할 수 있습니다.
+
+접근 client는 private endpoint subnet에 private connectivity가 있어야 하며, 같은 VCN, peered VCN, DRG/IPSec VPN/FastConnect로 연결된 on-premises network, Bastion을 통한 private host 접근 같은 경로가 가능합니다. 운영 검증에서는 private endpoint FQDN이 private IP로 resolve되는지 반드시 확인해야 합니다.
+
 ## Import New Compatible Models in OCI Generative AI
 * **Services:** Generative AI
 * **Release Date:** June 30, 2026
@@ -73,6 +79,12 @@ OCI Generative AI에서 MiniMax, Mistral, Moonshot AI Kimi, Z.ai GLM 계열 신�
 ### 적용 및 검증 포인트
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
+
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Schedule Randomization for Data Science Scheduler
 * **Services:** Data Science
@@ -96,6 +108,12 @@ Data Science Scheduler에서 interval-based schedule의 randomized start window�
 
 운영 반영 전에는 테스트 환경에서 생성·수정·조회·삭제 흐름을 확인하고, 관련 IAM policy, network path, logging/monitoring 지표를 함께 점검하는 것이 좋습니다.
 
+### 공식 문서 기반 동작 방식
+
+Data Science Scheduler의 randomized start window는 interval-based schedule에서 실행 시작 시간이 한 시점에 몰리지 않도록 분산하는 기능입니다. 예를 들어 start time이 09:10 UTC이고 random window duration이 30분이면 첫 실행은 09:10~09:40 UTC 사이에서 무작위로 선택됩니다.
+
+공식 문서 기준으로 random window duration의 최소값은 30분이며, 설정한 schedule interval을 초과할 수 없습니다. random start를 enable했지만 duration을 지정하지 않으면 service가 configured interval의 절반을 기본 duration으로 사용합니다. 생성 또는 업데이트 전에는 next five executions preview로 실제 실행 window를 확인하는 것이 좋습니다.
+
 ## Import DeepSeek V4 Flash and DeepSeek V4 Pro in OCI Generative AI
 * **Services:** Generative AI
 * **Release Date:** June 15, 2026
@@ -117,6 +135,12 @@ DeepSeek V4 Flash와 DeepSeek V4 Pro 모델을 OCI Generative AI로 import할 �
 ### 적용 및 검증 포인트
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
+
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import Qwen 3 Next 80B A3B Instruct in OCI Generative AI
 * **Services:** Generative AI
@@ -140,6 +164,12 @@ Qwen3 Next 80B A3B Instruct 모델을 OCI Generative AI로 import할 수 있습�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+
 ## Import Google MedGemma 27B Text IT in OCI Generative AI
 * **Services:** Generative AI
 * **Release Date:** June 15, 2026
@@ -161,6 +191,12 @@ Google MedGemma 27B Text IT 모델을 OCI Generative AI로 import할 수 있습�
 ### 적용 및 검증 포인트
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
+
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
 
 ## Import OpenAI Whisper Large V3 Turbo in OCI Generative AI
 * **Services:** Generative AI
@@ -184,6 +220,12 @@ OpenAI Whisper Large V3 Turbo 모델을 OCI Generative AI로 import할 수 있�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+
 ## Import NVIDIA Nemotron 3 Ultra in OCI Generative AI
 * **Services:** Generative AI
 * **Release Date:** June 05, 2026
@@ -206,6 +248,12 @@ NVIDIA Nemotron 3 Ultra 모델을 OCI Generative AI로 import할 수 있습니�
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
 
+### 공식 문서 기반 import 조건
+
+OCI Generative AI imported model은 Hugging Face 또는 OCI Object Storage bucket의 validated open-source/third-party model을 가져와 dedicated AI cluster에 host하고 endpoint로 사용할 수 있는 방식입니다. Hugging Face에서 가져오는 경우 gated model은 read 권한이 있는 Hugging Face token이 필요할 수 있습니다.
+
+Object Storage에서 가져오는 경우에는 model artifact를 bucket에 저장해야 하며, 공식 문서 기준으로 import 성공을 위해 configuration file 이름이 `config.json`이어야 합니다. 또한 Object Storage import 대상 model은 `/v1/chat/completions` endpoint와 호환되고, TEXT_TO_TEXT, IMAGE_TEXT_TO_TEXT, AUDIO_TO_TEXT, EMBEDDING, RERANK 중 하나의 capability만 지원해야 합니다.
+
 ## OpenAI gpt-oss Models Available on B200 Dedicated AI Clusters in Abu Dhabi
 * **Services:** Generative AI
 * **Release Date:** June 01, 2026
@@ -227,3 +275,9 @@ UAE Central(Abu Dhabi) region에서 B200 GPU shape 기반 dedicated AI cluster�
 ### 적용 및 검증 포인트
 
 모델 import 후에는 dedicated AI cluster 상태, model lifecycle, endpoint 생성 가능 여부, inference 테스트를 순서대로 확인해야 합니다. 운영 적용 전에는 대표 prompt 또는 샘플 입력으로 품질과 응답 시간, 실패 시 retry 정책을 점검하는 것이 안전합니다.
+
+### 공식 문서 기반 cluster 생성 주의사항
+
+Dedicated AI cluster에서 imported model 또는 base model을 hosting하려면 cluster type을 `Hosting`으로 선택하고 base model 또는 imported model을 지정합니다. Imported model을 선택한 경우에는 해당 model의 recommended unit size를 선택해야 하며, unit shape는 생성 후 변경할 수 없습니다.
+
+Hosting cluster는 기본적으로 선택한 model을 위한 unit 하나를 생성하며, 필요 시 model replica 수를 늘릴 수 있습니다. B200 dedicated AI cluster와 region availability가 결합된 항목이므로, Abu Dhabi region에서 model 지원 여부와 endpoint 생성 가능 여부를 먼저 확인한 뒤 테스트 prompt로 latency와 응답 품질을 검증하는 흐름이 적절합니다.
