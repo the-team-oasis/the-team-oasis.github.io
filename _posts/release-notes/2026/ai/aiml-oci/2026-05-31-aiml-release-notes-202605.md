@@ -155,7 +155,7 @@ OCI Generative AI에서 xAI Voice를 사용한 **Text to Speech** 기능을 지�
 
 ### 활용 포인트
 
-OpenAI-compatible Audio Speech API는 batch-style 음성 생성이나 파일 응답이 필요한 워크로드에 적합하고, WebSocket streaming은 interactive voice UX처럼 낮은 지연 시간이 중요한 워크로드에 적합합니다. 언어, audio format, sample rate, bit rate 같은 출력 옵션은 API 방식에 맞게 설정합니다.
+OpenAI-compatible Audio Speech API는 batch-style 음성 생성이나 파일 응답이 필요한 워크로드에 적합하고, WebSocket streaming은 점진적으로 생성되는 text를 낮은 지연으로 음성 재생해야 하는 워크로드에 적합합니다. 두 방식 모두 text를 audio로 변환하는 Text to Speech 기능이며, 언어, audio format, sample rate, bit rate 같은 출력 옵션은 API 방식에 맞게 설정합니다.
 
 ## Pin a Guardrails Version in OCI Generative AI
 
@@ -166,7 +166,9 @@ OpenAI-compatible Audio Speech API는 batch-style 음성 생성이나 파일 응
 
 ### 업데이트 내용
 
-OCI Generative AI에서 `ApplyGuardrails` API를 사용할 때 특정 **Guardrails Version**을 선택할 수 있게 되었습니다. Guardrails version은 `1.0.0` 같은 semantic versioning 형식으로 관리되며, content moderation, prompt injection, personally identifiable information detection의 동작 버전을 의미합니다.
+OCI Generative AI에서 `ApplyGuardrails` API를 사용할 때 특정 **Guardrails Version**을 선택할 수 있게 되었습니다. Guardrails는 foundation model 자체를 변경하는 기능이 아니라, model에 전달할 input이나 생성된 output을 content moderation, prompt injection, personally identifiable information detection 관점에서 별도로 평가하는 safety and compliance layer입니다.
+
+Guardrails version은 `1.0.0` 같은 semantic versioning 형식으로 관리됩니다. 각 version은 Oracle이 제공하는 보호 기능과 내부 model, prompt, threshold 설정의 조합을 나타냅니다. 사용자는 Oracle이 제공하는 version과 적용할 보호 기능을 선택할 수 있지만, guardrail의 내부 system prompt나 탐지 model, threshold를 직접 정의하는 방식은 아닙니다.
 
 새 기능은 다음과 같습니다.
 
@@ -187,7 +189,9 @@ OCI Generative AI에서 `ApplyGuardrails` API를 사용할 때 특정 **Guardrai
 
 ### 활용 포인트
 
-Guardrails는 시간이 지나면서 모델, prompt, threshold, 탐지 정책이 개선될 수 있습니다. 운영 환경에서는 자동 변경보다 재현 가능한 정책 동작이 더 중요할 수 있으므로, 특정 version을 pinning하고 변경 검토 후 새 version으로 전환하는 운영 절차를 만들 수 있습니다.
+On-demand model에서는 guardrail이 기본으로 자동 적용되지 않으므로, application이 inference 전후에 `ApplyGuardrails` API를 호출하고 반환된 탐지 결과에 따라 logging, warning, blocking 같은 동작을 결정합니다. 지원되는 dedicated AI cluster endpoint에서는 guardrail을 endpoint에 연결하고 Inform 또는 Block mode로 적용할 수도 있습니다.
+
+Guardrails의 내부 model, prompt, threshold는 Oracle이 version별로 관리하고 개선합니다. 운영 환경에서는 `ListGuardrailVersions`로 사용 가능한 version을 확인하고 특정 version을 pinning한 뒤, 변경 내용을 검토하여 새 version으로 전환하는 방식으로 동작의 일관성을 유지할 수 있습니다.
 
 ## Add xAI Tools to OCI Responses API
 
