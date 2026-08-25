@@ -396,7 +396,7 @@ Apr  1 06:31:17 localhost haproxy[75798]: 80.82.77.202:60000 [01/Apr/2025:06:31:
 Remote Peering을 통해서 다른 리전에 있는 HAProxy 서버에서도 Client 실제 IP (211.207.67.71)가 출력되는 것을 확인할 수 있습니다.
 
 ### 부록: 다른 Web/Proxy Server에서 PPv2 로그 확인
-HAProxy 외에도 Network Load Balancer Listener에서 **Enable proxy protocol V2**를 활성화하고, 백엔드 서비스가 PPv2 헤더를 수신하도록 구성하면 Client 실제 IP를 로그에서 확인할 수 있습니다. 아래 예시는 기존 HAProxy 테스트와 동일하게 Client IP를 **211.207.67.71**로 표기했습니다.
+HAProxy 외에도 Network Load Balancer Listener에서 **Enable proxy protocol V2**를 활성화하고, 백엔드 서비스가 PPv2 헤더를 수신하도록 구성하면 Client 실제 IP를 로그에서 확인할 수 있습니다.
 
 > 각 서비스의 Listener 포트와 OCI Network Load Balancer의 Backend Port는 동일하게 맞춰야 합니다. PPv2가 활성화된 Listener에는 PPv2를 해석하도록 구성된 백엔드만 연결해야 합니다.
 
@@ -442,7 +442,15 @@ $ sudo tail -f /var/log/nginx/access.log
 ```
 
 #### Envoy
-Envoy는 Container로 간단하게 설치할 수 있습니다. `/opt/envoy/envoy.yaml`에 Listener를 정의하고 `proxy_protocol` Listener Filter를 추가합니다. 아래 블록은 기존 HTTP Connection Manager 구성 앞에 추가하는 PPv2 수신 부분입니다.
+Envoy는 Container로 간단하게 설치할 수 있습니다. Docker Engine이 설치되어 있고 실행 중인 서버에서 먼저 Envoy 이미지를 내려받습니다.
+```
+$ docker pull envoyproxy/envoy:latest
+$ docker image ls envoyproxy/envoy
+REPOSITORY          TAG      IMAGE ID       CREATED       SIZE
+envoyproxy/envoy    latest   <IMAGE_ID>     <CREATED>     <SIZE>
+```
+
+`/opt/envoy/envoy.yaml`에 Listener를 정의하고 `proxy_protocol` Listener Filter를 추가합니다. 아래 블록은 기존 HTTP Connection Manager 구성 앞에 추가하는 PPv2 수신 부분입니다.
 ```
 static_resources:
   listeners:
@@ -477,7 +485,15 @@ $ docker logs -f envoy
 `envoy.filters.listener.proxy_protocol`이 PPv2 헤더를 먼저 처리하므로, HTTP 필터에서는 원래 Client IP를 사용할 수 있습니다.
 
 #### Traefik
-Traefik도 Container 환경에서 간단히 테스트할 수 있습니다. `/opt/traefik/traefik.yml`의 EntryPoint에 `proxyProtocol`을 추가합니다.
+Traefik도 Container 환경에서 간단히 테스트할 수 있습니다. Docker Engine이 설치되어 있고 실행 중인 서버에서 Traefik 이미지를 내려받습니다.
+```
+$ docker pull traefik:latest
+$ docker image ls traefik
+REPOSITORY   TAG      IMAGE ID       CREATED       SIZE
+traefik      latest   <IMAGE_ID>     <CREATED>     <SIZE>
+```
+
+`/opt/traefik/traefik.yml`의 EntryPoint에 `proxyProtocol`을 추가합니다.
 ```
 entryPoints:
   web:
