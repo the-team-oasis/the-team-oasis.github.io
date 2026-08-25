@@ -395,6 +395,161 @@ Apr  1 06:31:17 localhost haproxy[75798]: 80.82.77.202:60000 [01/Apr/2025:06:31:
 
 Remote Peering을 통해서 다른 리전에 있는 HAProxy 서버에서도 Client 실제 IP (211.207.67.71)가 출력되는 것을 확인할 수 있습니다.
 
+### 부록: 다른 Web/Proxy Server에서 PPv2 로그 확인
+HAProxy 외에도 Network Load Balancer Listener에서 **Enable proxy protocol V2**를 활성화하고, 백엔드 서비스가 PPv2 헤더를 수신하도록 구성하면 Client 실제 IP를 로그에서 확인할 수 있습니다. 아래 예시는 기존 HAProxy 테스트와 동일하게 Client IP를 **211.207.67.71**로 표기했습니다.
+
+> 각 서비스의 Listener 포트와 OCI Network Load Balancer의 Backend Port는 동일하게 맞춰야 합니다. PPv2가 활성화된 Listener에는 PPv2를 해석하도록 구성된 백엔드만 연결해야 합니다.
+
+#### NGINX
+NGINX를 설치합니다.
+```
+$ sudo dnf install -y nginx
+```
+
+`/etc/nginx/nginx.conf`의 `http` 블록에 PPv2 기반 로그 포맷을 추가하고, `server` 블록의 Listener에 `proxy_protocol`을 지정합니다.
+```
+http {
+    log_format ppv2 '$proxy_protocol_addr - $remote_user [$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_referer" "$http_user_agent"';
+
+    access_log /var/log/nginx/access.log ppv2;
+
+    server {
+        listen 80 proxy_protocol;
+        listen [::]:80 proxy_protocol;
+        server_name _;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+    }
+}
+```
+
+설정 문법을 확인한 후 NGINX를 시작합니다.
+```
+$ sudo nginx -t
+$ sudo systemctl enable --now nginx
+```
+
+Access Log에서 `$proxy_protocol_addr`에 Client 실제 IP가 기록되는 것을 확인할 수 있습니다.
+```
+$ sudo tail -f /var/log/nginx/access.log
+211.207.67.71 - - [19/Aug/2026:07:34:39 +0000] "GET / HTTP/1.1" 200 4395 "-" "Mozilla/5.0 (...) Chrome/151.0.0.0 Safari/537.36"
+211.207.67.71 - - [19/Aug/2026:07:34:39 +0000] "GET /favicon.ico HTTP/1.1" 404 3368 "http://140.238.0.161/" "Mozilla/5.0 (...) Chrome/151.0.0.0 Safari/537.36"
+```
+
+#### Envoy
+Envoy는 Container로 간단하게 설치할 수 있습니다. `/opt/envoy/envoy.yaml`에 Listener를 정의하고 `proxy_protocol` Listener Filter를 추가합니다. 아래 블록은 기존 HTTP Connection Manager 구성 앞에 추가하는 PPv2 수신 부분입니다.
+```
+static_resources:
+  listeners:
+  - name: ingress
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 8080
+    listener_filters:
+    - name: envoy.filters.listener.proxy_protocol
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.listener.proxy_protocol.v3.ProxyProtocol
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          # 기존 HTTP Connection Manager 설정
+```
+
+설정 파일을 마운트하여 Envoy를 기동하고 로그를 확인합니다.
+```
+$ sudo mkdir -p /opt/envoy
+$ docker run -d --name envoy --network host \
+  -v /opt/envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro \
+  envoyproxy/envoy:latest -c /etc/envoy/envoy.yaml
+$ docker logs -f envoy
+
+[2026-08-19T08:17:40.540Z] client=211.207.67.71:59357 method=GET path=/ status=200
+[2026-08-19T08:17:40.675Z] client=211.207.67.71:59357 method=GET path=/favicon.ico status=200
+```
+
+`envoy.filters.listener.proxy_protocol`이 PPv2 헤더를 먼저 처리하므로, HTTP 필터에서는 원래 Client IP를 사용할 수 있습니다.
+
+#### Traefik
+Traefik도 Container 환경에서 간단히 테스트할 수 있습니다. `/opt/traefik/traefik.yml`의 EntryPoint에 `proxyProtocol`을 추가합니다.
+```
+entryPoints:
+  web:
+    address: ":80"
+    proxyProtocol:
+      insecure: true
+
+providers:
+  file:
+    filename: /etc/traefik/dynamic.yml
+    watch: true
+
+log:
+  level: DEBUG
+
+accessLog: {}
+```
+
+`insecure: true`는 PPv2 헤더를 보내는 모든 연결을 신뢰하는 테스트용 설정입니다. NLB 이외에서 직접 접근할 수 있는 환경에서는 신뢰 가능한 Proxy IP를 명시하는 방식으로 제한해야 합니다.
+
+설정 파일을 마운트하여 기동한 후 Access Log를 확인합니다.
+```
+$ sudo mkdir -p /opt/traefik
+$ docker run -d --name traefik --network host \
+  -v /opt/traefik/traefik.yml:/etc/traefik/traefik.yml:ro \
+  -v /etc/traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro \
+  traefik:latest
+$ docker logs -f traefik
+
+211.207.67.71 - - [19/Aug/2026:08:45:42 +0000] "GET / HTTP/1.1" 200 718 "-" "-" 1 "whoami@file" "http://whoami:80" 3ms
+211.207.67.71 - - [19/Aug/2026:08:45:42 +0000] "GET /favicon.ico HTTP/1.1" 200 634 "-" "-" 2 "whoami@file" "http://whoami:80" 0ms
+```
+
+#### Apache HTTP Server
+Apache HTTP Server에서는 `mod_remoteip`의 `RemoteIPProxyProtocol` 지시어를 사용합니다.
+```
+$ sudo dnf install -y httpd
+$ httpd -M | grep remoteip
+ remoteip_module (shared)
+```
+
+`/etc/httpd/conf.d/remoteip.conf`를 생성하고 다음을 추가합니다.
+```
+RemoteIPProxyProtocol On
+```
+
+설정 검증 및 서비스를 시작합니다.
+```
+$ httpd -t -D DUMP_RUN_CFG 2>&1 | grep -i RemoteIPProxyProtocol
+$ sudo apachectl configtest
+$ sudo systemctl enable --now httpd
+```
+
+`/var/log/httpd/access_log`에서 NLB Private IP가 아닌 Client 실제 IP가 기록되는 것을 확인할 수 있습니다.
+```
+$ sudo tail -f /var/log/httpd/access_log
+211.207.67.71 - - [24/Aug/2026:08:05:40 +0000] "GET / HTTP/1.1" 403 3539 "-" "Mozilla/5.0 (...) Chrome/151.0.0.0 Safari/537.36"
+211.207.67.71 - - [24/Aug/2026:08:05:40 +0000] "GET /icons/apache_pb2.gif HTTP/1.1" 200 4234 "http://140.238.0.161/" "Mozilla/5.0 (...) Chrome/151.0.0.0 Safari/537.36"
+```
+
+#### UDP Listener에서 Source IP 확인
+UDP Listener는 PPv2를 사용할 수 없습니다. 대신 Network Load Balancer의 UDP Backend Set에서 **Preserve source IP**를 활성화합니다. DRG는 기본적으로 VCN 간 패킷을 라우팅할 뿐 Source NAT를 수행하지 않으므로, Source Preservation이 활성화된 UDP 요청은 DRG를 통과해도 백엔드에서 원래 Source IP로 확인됩니다.
+
+예를 들어 UDP 서버의 로그에서 다음과 같이 Client 실제 IP를 확인할 수 있습니다.
+```
+$ tail -f /var/log/nginx/udp_access.log
+211.207.67.71:56858 bytes_received=12 bytes_sent=12
+```
+
+### 마무리
+DRG만으로 연결된 구성에서도 Client Source IP를 백엔드에서 모니터링할 수 있습니다. **TCP는 Network Load Balancer의 PPv2와 백엔드의 PPv2 수신 설정을 함께 사용**하고, **UDP는 Backend Set의 Preserve source IP를 활성화**합니다. 즉, 이 용도에서는 LPG를 별도로 구성하지 않아도 DRG 기반 연결에서 TCP와 UDP 모두 각 프로토콜에 맞는 방식으로 Source IP를 확인할 수 있습니다.
+
 ### 참고
 * [Network Load Balancer Management](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/NetworkLoadBalancers/network-load-balancer-management.htm)
 * [OCI Load Balancers - Logging the real source IP](https://www.ateam-oracle.com/post/oci-load-balancers-logging-the-real-source-ip)
