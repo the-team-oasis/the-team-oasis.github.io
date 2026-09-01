@@ -35,7 +35,7 @@ header: no
 
 ### 업데이트 내용
 
-Oracle Cloud Agent용 Management Agent Plugin이 JDK 8 Update 501로 갱신되었고, Kubernetes용 OCI Management Agent container image 1.14.0에는 JDK 관련 중요 보안 수정이 포함되었습니다. REST collection을 사용하는 Oracle Log Analytics 개선, TLS 1.3 지원, 자동 업그레이드 개선과 기타 bug 및 security fix도 함께 제공됩니다.
+Oracle Cloud Agent용 Management Agent Plugin이 JDK 8 Update 501로 갱신되었고, Kubernetes용 OCI Management Agent container image 1.14.0에는 JDK 관련 중요 보안 수정이 포함되었습니다. REST collection을 사용하는 Oracle Log Analytics 개선, TLS 1.3 지원, 자동 업그레이드 개선과 기타 bug 및 security fix도 함께 제공됩니다. Container image 1.14.0과 JDK 보안 수정 내용은 이 항목의 Oracle Release Note에 명시되어 있으며, 현재 연결된 추가 Documentation은 Compute instance에서 Management Agent Plugin을 활성화하는 절차입니다.
 
 ### 설정과 운영 영향
 
@@ -53,7 +53,17 @@ Agent 또는 container image 변경은 수집 중단을 피할 수 있도록 mai
 
 ### 업데이트 내용
 
-Object Storage에 IPv6와 IPv4를 모두 처리하는 dual-stack endpoint가 추가되어 동일한 hostname을 두 주소 체계에서 사용할 수 있습니다. Dual-stack 주소는 Dedicated Endpoint 형식을 사용하며 hostname 앞에 tenancy namespace를 포함하므로 기존 IPv4 endpoint를 단순 치환하지 말고 공식 URI 구성 규칙을 따라야 합니다. 적용 전 DNS와 client의 IPv6 지원을 확인하고, IPv6 및 IPv4 경로에서 동일한 bucket 작업이 정상인지 점검합니다. Dual-stack 전환은 별도 IPv4·IPv6 endpoint 운영 부담을 줄이지만 DNS, 경로 및 보안 정책에 영향을 주므로 변경 범위를 함께 관리해야 합니다.
+Object Storage에 IPv6와 IPv4를 모두 처리하는 dual-stack endpoint가 추가되어 동일한 hostname이 두 주소 체계 중 하나로 해석될 수 있습니다. 기존 IPv4-only endpoint도 계속 사용할 수 있으므로 dual-stack endpoint로의 전환은 IPv6 접근이 필요한 경우 선택하는 변경입니다.
+
+### 전환 시 확인 사항
+
+Dual-stack 주소는 Dedicated Endpoint 형식을 사용하며 hostname 앞에 tenancy namespace와 적용 region을 포함합니다. V2, Swift, S3 API별 IPv4-only 및 dual-stack URI 형식이 다르므로 공식 구성 표에 따라 client endpoint를 설정해야 합니다.
+
+> **운영 권고:** 전환 범위의 DNS 해석, client IPv6 지원, IPv6 route와 보안 규칙을 사전에 점검하고 기존 IPv4-only endpoint를 즉시 제거하지 말고 단계적으로 적용합니다.
+
+### 검증
+
+Dual-stack hostname이 환경에 따라 AAAA와 A record로 해석되는지 확인하고, IPv6와 IPv4 경로에서 같은 bucket의 list, upload, download 작업이 정상인지 검증합니다. 전환하지 않는 client는 기존 IPv4-only endpoint로 동일 작업이 계속 가능한지도 함께 확인합니다.
 
 ## OCI Block Storage Adds Ransomware-Resilient Backup Protection
 * **Services:** Block Volume
@@ -83,18 +93,35 @@ Backup의 업무 목적에 따라 장기 보존, 삭제 방지, 강제 불변성
 
 ### 업데이트 내용
 
-Resource Manager에서 drift detection과 기존 compartment 기반 stack 생성 등 지원되는 work request의 상세 log를 볼 수 있게 되었습니다. Console에서 log 검색, timestamp 숨김, 출력 다운로드를 사용할 수 있고 API와 CLI로 log entry 및 raw content를 가져올 수도 있어 실패 원인 분석이 쉬워집니다. 문제 발생 시 work request OCID와 log를 함께 보존하고, 민감한 변수나 resource 정보가 포함되지 않았는지 확인한 뒤 공유합니다.
+Resource Manager에서 drift detection과 기존 compartment 기반 stack 생성 등 지원되는 work request의 상세 log를 볼 수 있게 되었습니다. Console에서 log 검색, timestamp 숨김, 출력 다운로드를 사용할 수 있고 API와 CLI로 log entry 및 raw content를 가져올 수 있습니다. Raw log content 응답은 최대 100,000개 log entry를 포함합니다.
+
+### 운영 및 보안 확인
+
+지원되는 work request의 **Logs** 화면에서 상세 entry를 확인하고, 필요한 경우 **Download logs** 또는 Resource Manager API·CLI로 raw content를 내려받아 실패 원인을 분석합니다.
+
+> **운영 권고:** 장애 추적에 사용할 work request OCID와 필요한 log만 내부 보관 기준에 따라 보존하고, 내려받은 파일의 접근 권한과 공유 범위를 제한합니다. 외부 공유 전에는 log에 변수 값, resource 식별자 또는 기타 민감 정보가 포함되었는지 점검하고 필요한 부분을 제거합니다. 기능 확인 시 Console 조회·검색과 다운로드가 동작하는지, 같은 work request를 API 또는 CLI로 조회할 수 있는지 검증합니다.
 
 ## IPv6 support for Search API
 * **Services:** Search
 * **Release Date:** August 13, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/search/search-api-ipv6.htm](https://docs.oracle.com/iaas/releasenotes/search/search-api-ipv6.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/iaas/api/#/en/search/latest/](https://docs.oracle.com/iaas/api/#/en/search/latest/){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/Search/Tasks/dual-stack-endpoints.htm](https://docs.oracle.com/iaas/Content/Search/Tasks/dual-stack-endpoints.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/Search/home.htm](https://docs.oracle.com/iaas/Content/Search/home.htm){:target="_blank" rel="noopener"}
 
 ### 업데이트 내용
 
-Search API가 IPv6와 IPv4를 모두 지원하는 dual-stack endpoint를 제공하며 기존 IPv4 전용 endpoint도 계속 사용할 수 있습니다. Dual-stack hostname에는 region 뒤에 `.ds`가 포함되므로 application의 endpoint 설정, DNS 해석, outbound 보안 규칙을 함께 변경해야 합니다. 전환 전후에 IPv6와 IPv4 client에서 동일한 resource search 결과와 오류 처리 동작을 확인합니다. 이 변경은 IPv6 client의 검색 접근성을 높이지만 application network 경로와 보안 규칙에 영향을 주므로 전환 계획을 함께 관리해야 합니다.
+Search API가 IPv6와 IPv4를 모두 지원하는 dual-stack endpoint를 제공합니다. 기존 IPv4-only endpoint는 계속 지원되므로 IPv6 연결이 필요한 client만 dual-stack endpoint를 선택할 수 있습니다.
+
+### Endpoint 변경 영향
+
+IPv4-only endpoint는 `https://query.<region>.oci.oraclecloud.com`, dual-stack endpoint는 region 뒤에 `.ds`를 넣은 `https://query.<region>.ds.oci.oraclecloud.com` 형식입니다. 공식 Search API endpoints 목록에서 대상 region의 endpoint를 확인하고 client 설정을 변경해야 합니다.
+
+> **운영 권고:** endpoint 변경 전에 DNS, IPv6 route, outbound 보안 규칙과 client의 IPv6 지원을 확인하고, 기존 IPv4-only 경로를 유지한 상태에서 단계적으로 전환합니다.
+
+### 검증
+
+Dual-stack endpoint가 IPv6와 IPv4 주소로 해석되는지 확인하고, 두 경로에서 동일한 resource search query의 결과와 인증·오류 처리 동작이 일치하는지 검증합니다. 전환하지 않은 client가 기존 IPv4-only endpoint로 계속 조회할 수 있는지도 확인합니다.
 
 ## OCI Logging supports dual-stack endpoints for IPv6
 * **Services:** Logging
@@ -104,7 +131,17 @@ Search API가 IPv6와 IPv4를 모두 지원하는 dual-stack endpoint를 제공�
 
 ### 업데이트 내용
 
-모든 OCI Logging API가 IPv6와 IPv4를 함께 지원하는 dual-stack endpoint를 사용할 수 있게 되었습니다. IPv4는 기본 지원되지만 IPv6는 별도로 활성화해야 하므로 log producer와 수집 client의 endpoint, DNS, network egress 구성을 먼저 확인해야 합니다. 전환 후 log ingest와 query를 두 주소 체계에서 시험하고 누락이나 지연이 없는지 점검합니다. 이 변경은 IPv6 기반 workload의 log 연계를 단순화하지만 수집 경로와 network policy에 영향을 주므로 단계적으로 적용해야 합니다.
+모든 OCI Logging API가 IPv6와 IPv4를 함께 지원하는 dual-stack API endpoint를 사용할 수 있게 되었습니다. Dual-stack endpoint는 IPv6 또는 IPv4 주소로 해석되어 IPv6 연결을 제공하면서 IPv4 호환성을 유지합니다.
+
+### IPv6 활성화 및 영향
+
+IPv4 지원은 기본으로 제공되지만 IPv6 지원은 별도로 활성화해야 합니다. 따라서 IPv6를 사용하지 않는 기존 Logging client의 기본 동작과 IPv6 활성화·endpoint 전환을 구분해 계획해야 합니다.
+
+> **운영 권고:** IPv6를 활성화하기 전에 log producer와 조회 client의 endpoint 설정, DNS, IPv6 route 및 network egress 정책을 확인하고 일부 workload부터 단계적으로 적용합니다.
+
+### 검증
+
+IPv6 활성화 후 dual-stack endpoint의 DNS 해석과 연결을 확인하고, IPv6 및 IPv4 경로에서 대표 log ingest와 query를 실행해 event 수, timestamp, 조회 결과에 누락이나 비정상 지연이 없는지 비교합니다. IPv4-only client의 기존 수집·조회도 계속 정상인지 확인합니다.
 
 ## Use BFD and BGP authentication with Google Cloud
 * **Services:** Multicloud
@@ -155,7 +192,9 @@ OCI Console에서 Network Firewall 생성 시 firewall shape를 선택하고, po
 
 ### 설정과 운영 영향
 
-신규 firewall은 기본 4 Gbps shape 또는 tenancy에 허용된 경우 25 Gbps shape를 선택하고, policy object에는 운영 목적이 드러나는 description을 기록하는 것이 좋습니다. 여러 mapped secret과 새 health·metric 표시는 decryption policy 관리와 capacity 관측을 개선하지만, shape 선택은 예상 traffic과 기존 routing 설계를 기준으로 결정해야 합니다.
+신규 firewall은 기본 4 Gbps shape 또는 tenancy에 허용된 경우 25 Gbps shape를 선택할 수 있습니다. 여러 mapped secret과 새 health·metric 표시는 decryption policy 관리와 capacity 관측을 개선하지만, shape 선택은 예상 traffic과 기존 routing 설계를 기준으로 결정해야 합니다.
+
+> **운영 권고:** policy object에는 운영 목적이 드러나는 description을 기록하는 것이 좋습니다.
 
 ### 제약 및 검증
 
@@ -207,4 +246,14 @@ Release Note 기준으로 이 기능은 US East (Ashburn)를 제외한 commercia
 
 ### 업데이트 내용
 
-OCI technical support request를 처음 생성하는 단계에서 관련 파일을 바로 첨부할 수 있게 되었습니다. 문제 화면, 진단 결과, 재현 자료를 최초 요청과 함께 제공하면 지원 담당자가 초기 상황을 파악하는 데 도움이 됩니다. 첨부 전에는 credential, token, 개인 정보와 불필요한 운영 데이터가 포함되지 않았는지 확인하고, 생성된 요청에서 파일이 정상 등록되었는지 점검합니다.
+OCI technical support request를 생성할 때 관련 파일을 최초 요청에 바로 첨부할 수 있게 되었습니다. Console의 technical support request 생성 절차에서 문제 설명과 함께 진단 자료를 제출할 수 있습니다.
+
+### 첨부 전 확인 사항
+
+요청 유형과 문제 설명에 필요한 파일을 선택하고, 지원 요청을 생성하기 전에 첨부 대상이 올바른지 확인합니다.
+
+> **운영 권고:** 첨부 파일에서 credential, token, 개인 정보와 지원 분석에 불필요한 운영 데이터를 제거하고, 조직의 승인·공유 기준에 맞는 자료만 제출합니다.
+
+### 검증
+
+요청 생성 완료 후 support request 세부 화면에서 의도한 파일명과 첨부가 정상 등록되었는지 확인하고, 지원 담당자가 열람할 수 없는 형식 또는 손상된 파일이 아닌지 점검합니다.

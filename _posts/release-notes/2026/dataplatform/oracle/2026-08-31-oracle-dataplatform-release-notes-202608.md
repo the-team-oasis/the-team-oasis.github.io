@@ -71,7 +71,15 @@ Autonomous AI Database의 `DBMS_CLOUD.SEND_REQUEST`에 요청별 HTTP 재시도 
 
 ### 업데이트 내용
 
-Database Tools의 SQL Worksheet에서 SQL statement와 script를 background job으로 실행할 수 있어, 긴 작업이 활성 session과 독립적으로 계속 실행됩니다. 기본 `Run Statement`와 `Run Script`는 동기 실행이고, 비동기 실행은 `Run in Background` 또는 `Run Script in Background`를 선택합니다. 결과는 OCI Object Storage에 저장되므로 출력 pane의 **Background Executions** 탭에서 상태를 추적하고 완료 결과를 확인해야 합니다.
+Database Tools의 SQL Worksheet에서 SQL statement와 script를 background job으로 실행할 수 있어 긴 작업이 활성 session과 독립적으로 계속 실행됩니다. Background execution은 작업을 비동기로 수행해 실행 중에도 다른 작업을 계속할 수 있게 합니다.
+
+### 실행·결과 확인
+
+기본 **Run Statement**와 **Run Script**는 동기 실행이고, **Run in Background**와 **Run Script in Background**는 비동기 실행입니다. Background execution 결과는 OCI Object Storage에 저장되며, output pane의 **Background Executions** 탭에서 실행 상태를 모니터링하고 완료된 결과를 확인합니다. 완료와 실패 상태를 구분해 확인하고, 실패한 실행은 표시된 오류와 결과 출력을 바탕으로 원인을 조사합니다.
+
+### 운영 시 유의사항
+
+> **운영 권고:** 장시간 SQL을 background로 전환하기 전에 사용 권한, 예상 실행 시간과 database 부하를 확인합니다. Object Storage에 저장되는 결과의 접근 권한과 보존·삭제 기준을 정하고, 완료·실패 알림 또는 정기 확인 절차를 마련해 session과 독립적으로 실행되는 작업을 놓치지 않도록 관리합니다.
 
 ## Database Tools MCP Server Enhancements
 * **Services:** Database Tools
@@ -155,7 +163,15 @@ Replay 대상은 source와 논리적으로 일관된 상태의 full clone 또는
 
 ### 업데이트 내용
 
-Database Tools MCP server 작업에 OCI Logging service log를 수집해 호출 활동을 조사하고 장애를 분석할 수 있습니다. **Monitoring** 탭의 `MCP Invocation Logs`는 기본적으로 비활성화되어 있으므로 log group을 선택하거나 생성한 뒤 명시적으로 활성화해야 합니다. 상태가 `Active`로 바뀐 것을 확인하고, MCP client가 반환한 `opc-request-id`로 **Explore log**에서 해당 호출 기록을 검색해 수집 여부를 검증합니다.
+Database Tools MCP server 작업에 OCI Logging service log를 수집해 호출 활동을 조사하고 장애를 분석할 수 있습니다. `MCP Invocation Logs`는 기본적으로 비활성화되어 있으므로 필요한 MCP server에서 명시적으로 활성화해야 합니다.
+
+### 활성화 및 확인
+
+MCP server의 **Monitoring** 탭에서 `MCP Invocation Logs`의 **Enable log**를 선택하고 기존 log group을 지정하거나 새 log group을 생성합니다. 작업 완료 후 상태가 `Active`로 바뀌었는지 확인합니다. 이어서 log name의 **Explore log**에서 MCP client가 반환한 `opc-request-id`를 검색해 해당 호출 기록이 수집되었는지 검증합니다.
+
+### 운영 시 유의사항
+
+> **운영 권고:** Log group과 MCP invocation log에 대한 IAM 접근 권한은 조사 담당자에게 필요한 범위로 제한하고, 호출 기록의 업무·감사 요구사항에 맞춰 보존 및 삭제 기준을 설정합니다. 대표 성공·실패 호출의 `opc-request-id`가 각각 검색되는지 정기적으로 확인하고, 조사 자료를 공유할 때는 log에 포함된 식별자와 민감한 요청 정보의 노출 여부를 점검합니다.
 
 ## Maintenance Schedule Selection in OCI
 * **Services:** Autonomous Database Serverless

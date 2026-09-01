@@ -59,7 +59,9 @@ OKE cluster add-on에 WebLogic Kubernetes Operator 4.3.10, Istio 1.29.5, Native 
 
 ### 설정과 영향
 
-Gateway API를 사용하는 인증서 발급 흐름, observability agent의 scheduling 우선순위, gRPC용 OCI Load Balancer listener, TLS policy를 각각 해당 add-on 설정에 반영할 수 있습니다. 특히 ingress 변경은 외부 트래픽의 protocol 처리와 TLS 호환성에 직접 영향을 주므로, 현재 사용 중인 listener와 backend set 구성을 기준으로 필요한 기능만 단계적으로 활성화하는 것이 좋습니다.
+Gateway API를 사용하는 인증서 발급 흐름, observability agent의 scheduling 우선순위, gRPC용 OCI Load Balancer listener, TLS policy를 각각 해당 add-on 설정에 반영할 수 있습니다.
+
+> **운영 권고:** 특히 ingress 변경은 외부 트래픽의 protocol 처리와 TLS 호환성에 직접 영향을 주므로, 현재 사용 중인 listener와 backend set 구성을 기준으로 필요한 기능만 단계적으로 활성화하는 것이 좋습니다.
 
 ### 제약 및 검증
 
@@ -77,7 +79,9 @@ OKE managed node pool에서 더 이전의 Kubernetes version을 지정한 뒤 �
 
 ### 설정과 운영 영향
 
-Rollback 대상 node pool에 현재 제공되는 이전 Kubernetes version을 지정하고, 공식 절차에 따라 기존 node를 교체해야 합니다. Node 교체 과정은 pod 재배치와 일시적인 capacity 변화로 이어질 수 있으므로 replica, disruption budget, node별 workload 특성을 확인하고 영향이 낮은 node pool부터 진행하는 것이 안전합니다.
+Rollback 대상 node pool에 현재 제공되는 이전 Kubernetes version을 지정하고, 공식 절차에 따라 기존 node를 교체해야 합니다.
+
+> **운영 권고:** Node 교체 과정은 pod 재배치와 일시적인 capacity 변화로 이어질 수 있으므로 replica, disruption budget, node별 workload 특성을 확인하고 영향이 낮은 node pool부터 진행하는 것이 안전합니다.
 
 ### 제약 및 검증
 
@@ -97,7 +101,7 @@ OKE가 Kubernetes 1.34.10을 지원하며, 기존 1.35.2와 1.36.1도 계속 지
 
 ### 업그레이드 설정과 영향
 
-Minor version 업그레이드는 control plane을 먼저 올린 뒤 node pool의 worker node를 업그레이드하는 순서로 진행합니다. Upgrade 과정에서는 node 교체와 workload 재배치가 발생할 수 있으므로, 사전에 application API 호환성, cluster add-on, ingress, CNI·CSI 구성과 유지보수 시간대를 함께 점검해야 합니다.
+Kubernetes 버전 업그레이드는 control plane을 먼저 올린 뒤 node pool의 worker node를 업그레이드하는 순서로 진행합니다. 1.34.2에서 1.34.10으로의 변경은 같은 minor 계열의 patch version 업데이트이며, 1.35.2 또는 1.36.1로 이동하는 경우에는 대상 Kubernetes 버전에 맞는 API 호환성도 확인해야 합니다. Upgrade 과정에서는 node 교체와 workload 재배치가 발생할 수 있으므로, 사전에 cluster add-on, ingress, CNI·CSI 구성과 유지보수 시간대를 함께 점검해야 합니다.
 
 ### 제약 및 검증
 
