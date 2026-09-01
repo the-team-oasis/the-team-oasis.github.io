@@ -119,7 +119,7 @@ Iceberg time travel 지원 catalog는 Databricks, AWS Glue, OCI Object Storage�
 
 ### 기존 export 호환성
 
-NLS format의 두 자리 연도 `RR` mask는 Parquet export에서 지원되지 않아 application error가 발생하므로 `YYYY` 기반 형식으로 변경해야 합니다. `BFILE`, `BLOB`, `LONG`, `LONG RAW`, object type은 지원되지 않고, `DATE`는 Parquet export에서 시·분·초를 지원하지 않는 등 type별 제한이 있습니다.
+NLS format의 두 자리 연도 `RR` mask는 Parquet export에서 지원되지 않으므로, 지원되는 NLS date/timestamp format으로 변경해야 합니다. `BFILE`, `BLOB`, `LONG`, `LONG RAW`, object type은 지원되지 않고, `DATE`는 Parquet export에서 시·분·초를 지원하지 않는 등 type별 제한이 있습니다.
 
 ## External File System Support for Workload Capture and Replay
 * **Services:** Autonomous Database Serverless
