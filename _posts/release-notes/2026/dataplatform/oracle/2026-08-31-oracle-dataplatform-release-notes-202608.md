@@ -165,8 +165,8 @@ MCP server의 **Monitoring** 탭에서 `MCP Invocation Logs`의 **Enable log**�
 
 ### 업데이트 내용
 
-OCI Console에서 Autonomous Database의 maintenance schedule을 `Regular`, `Early`, `Late` 중 선택할 수 있습니다. 기본값은 `Regular`입니다.
+OCI Console에서 기존 Autonomous AI Database instance의 maintenance window를 변경할 수 있습니다.
 
 ### Maintenance window 선택
 
-Maintenance schedule을 변경하면 시스템이 다음 maintenance date를 계산해 Database Notifications에 표시합니다. `Early`는 기본 일정 전에, `Late`는 기본 일정 뒤에 maintenance가 적용되도록 선택합니다.
+업무 요구에 가장 편리한 maintenance window를 선택할 수 있습니다.
