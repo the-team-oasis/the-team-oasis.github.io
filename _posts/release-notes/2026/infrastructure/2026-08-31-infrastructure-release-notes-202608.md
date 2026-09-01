@@ -183,15 +183,15 @@ Security attribute만 추가해서는 접근이 허용되지 않으며, ZPR poli
 
 ### 업데이트 내용
 
-Network Firewall을 Virtual Test Access Point(VTAP) source로 선택해 firewall에 연결된 VNIC의 packet을 capture할 수 있게 되었습니다. 운영자는 이 traffic mirror를 monitoring, troubleshooting, compliance 분석에 활용할 수 있으며, 암호화된 traffic은 capture 이후에도 암호화 상태로 유지됩니다.
+OCI Network Firewall을 VTAP(Virtual Test Access Point)의 traffic mirror source로 사용하여 firewall traffic을 mirror target으로 복제할 수 있습니다.
 
 ### VTAP source 구성
 
-VTAP 생성 시 Network Firewall을 source로 선택하고 traffic filter와 target을 관측 목적에 맞게 구성해야 합니다. Firewall 통과 traffic을 별도 분석 대상으로 전달할 수 있어 장애 분석과 보안 가시성이 높아지지만, capture 범위와 target 처리 용량을 관리하지 않으면 불필요한 packet 수집과 분석 부하가 커질 수 있습니다.
+Capture filter는 mirror할 traffic을 선택하며, 선택된 traffic은 지정한 target으로 복제됩니다.
 
 ### 방화벽 트래픽 복제 확인
 
-Release Note 기준으로 이 기능은 US East (Ashburn)를 제외한 commercial region에서 제공되며, packet capture가 암호화를 해제하지는 않습니다. 적용 후 의도한 firewall VNIC traffic만 target에 도달하는지, filter가 제외 대상 traffic을 차단하는지, target의 packet 처리와 보관 정책이 정상인지 확인합니다.
+Packet capture는 traffic 암호화를 해제하지 않습니다.
 
 ## Attach a file when creating a technical support request
 * **Services:** Support Management
