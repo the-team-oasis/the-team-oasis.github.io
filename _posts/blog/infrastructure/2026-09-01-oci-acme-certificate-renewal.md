@@ -121,134 +121,318 @@ Certbot의 `certonly`는 인증서만 발급하고 웹 서버 설정은 변경�
 ```bash
 sudo install -d -m 700 /etc/oci-certificate-renew
 sudo tee /etc/oci-certificate-renew/renew-oci-certificate.conf >/dev/null <<'EOF'
+# Copy to renew-oci-certificate.conf and restrict it to the account that runs
+# the timer: chmod 600 renew-oci-certificate.conf
 CERTIFICATE_OCID="ocid1.certificate.oc1.<region>.<unique_id>"
+
 LOAD_BALANCER_OCID="ocid1.loadbalancer.oc1.<region>.<unique_id>"
 
-# Certbot live 디렉터리 이름. 보통 최초 도메인 이름입니다.
+# The Certbot certificate name is normally the directory name under
+# /etc/letsencrypt/live (often the primary domain name).
 CERTBOT_CERT_NAME="example.com"
-CERTBOT_BIN="/opt/certbot-venv311/bin/certbot"
-OCI_BIN="/usr/bin/oci"
+CERTBOT_CONFIG_DIR="/home/opc/certbot-venv311/config"
 
-# 자동 탐지가 불가능하거나 여러 Listener가 같은 certificate를 쓸 때 지정합니다.
-LISTENER_NAME="https-443"
+# Certbot installed in a Python virtual environment must use its absolute
+# executable path. Examples: /opt/certbot-venv311/bin/certbot or
+# /home/oci-renew/certbot-venv311/bin/certbot
+CERTBOT_BIN="/home/opc/certbot-venv311/bin/certbot"
+
+# Set an absolute path as well if OCI CLI is installed only for the opc user.
+OCI_BIN="oci"
+
+# Leave empty to auto-detect the single listener currently using CERTIFICATE_OCID.
+# Set it explicitly if multiple listeners use the certificate.
+LISTENER_NAME=""
+
+# 30 days is recommended for Let's Encrypt's 90-day certificates.
 RENEW_BEFORE_DAYS=30
+
+# Keep 0 for the daily timer. Set to 1 only in a one-off command when testing
+# a real end-to-end renewal; do not save 1 here.
 FORCE_RENEWAL=0
 
-# root timer에서 일반 사용자 OCI 프로파일을 읽어야 하는 경우에만 지정합니다.
+# Set only when the configured OCI CLI profile is not DEFAULT.
 OCI_CLI_PROFILE="DEFAULT"
+
+# Required when this script runs as root but OCI CLI is configured for another
+# user (for example, opc). Root can read a private key protected by mode 600.
 OCI_CLI_CONFIG_FILE="/home/opc/.oci/config"
 
-CERTBOT_CONFIG_DIR="/opt/certbot-venv311/config"
-CERTBOT_WORK_DIR="/opt/certbot-venv311/work"
-CERTBOT_LOGS_DIR="/opt/certbot-venv311/logs"
-LE_LIVE_DIR="/opt/certbot-venv311/config/live"
+# Usually leave unchanged. Override only if Certbot's live directory differs.
+LE_LIVE_DIR="/home/opc/certbot-venv311/config/live"
 OCI_WAIT_SECONDS=1200
+
+CERTBOT_WORK_DIR="/home/opc/certbot-venv311/work"
+CERTBOT_LOGS_DIR="/home/opc/certbot-venv311/logs"
+
+OCI_CERT_CHAIN_PEM="/home/opc/certbot-venv311/config/live/example.com/chain.pem"
+OCI_CHAIN_EXTRA_CERT_PEM="/etc/oci-certificate-renew/isrg-root-x1.pem"
 EOF
 sudo chmod 600 /etc/oci-certificate-renew/renew-oci-certificate.conf
 ```
 
-OCI import에는 leaf certificate, certificate chain, private key가 필요합니다. OCI CLI의 `update-certificate-by-importing-config-details`는 이 세 PEM을 인수로 받아 imported certificate를 업데이트합니다.[1] 일반적으로 `cert.pem`, `chain.pem`, `privkey.pem`을 사용하며, 특정 체인 구성이 이미 성공한 환경에서만 `fullchain.pem` 또는 별도 intermediate chain을 사용하도록 명시적으로 관리합니다. CA chain은 변경될 수 있으므로 특정 root를 무조건 덧붙이지 않습니다.
+OCI import에는 leaf certificate, certificate chain, private key가 필요합니다. OCI CLI의 `update-certificate-by-importing-config-details`는 이 세 PEM을 인수로 받아 imported certificate를 업데이트합니다.[1] 최신 설정은 기본적으로 `chain.pem`을 사용하며, 이미 성공한 import 형식과 맞춰야 할 때만 `OCI_CERT_CHAIN_PEM`으로 `fullchain.pem` 등을 명시합니다. `OCI_CHAIN_EXTRA_CERT_PEM`은 필요한 추가 CA PEM을 임시 chain에 결합하는 선택값입니다. CA chain은 변경될 수 있으므로 특정 root를 모든 환경에 일괄 추가하지 말고, 성공한 import 및 클라이언트 검증 결과를 기준으로 적용하세요.
 
 ## 4. 갱신·import·Listener refresh 스크립트
 
-아래 스크립트의 핵심은 **OCI의 실제 `CURRENT` certificate version**을 갱신 판단 기준으로 사용한다는 점입니다. 로컬 파일만 보고 판단하면 OCI 반영 실패 상태를 놓칠 수 있습니다.
+아래는 원문의 최신 스크립트를 반영한 버전입니다. 스크립트와 같은 디렉터리의 `renew-oci-certificate.conf`를 기본으로 읽고, 없으면 `/etc/oci-certificate-renew/renew-oci-certificate.conf`를 사용합니다. 단발성 `FORCE_RENEWAL`·`SKIP_CERTBOT_RENEWAL` 환경변수는 설정 파일보다 우선합니다. 핵심은 **OCI의 실제 `CURRENT` certificate version**을 갱신 판단 기준으로 사용한다는 점입니다. 로컬 파일만 보고 판단하면 OCI 반영 실패 상태를 놓칠 수 있습니다.
 
 ```bash
 #!/usr/bin/env bash
-# /usr/local/sbin/renew-oci-certificate.sh
+# Let's Encrypt 인증서를 갱신하고, 새 PEM을 OCI Certificates Service에 import한 뒤
+# OCI Load Balancer Listener에 반영한다.
 set -Eeuo pipefail
 
-CONFIG_FILE=/etc/oci-certificate-renew/renew-oci-certificate.conf
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# CONFIG_FILE을 직접 넘기지 않으면 스크립트와 같은 디렉터리의 설정을 우선 사용한다.
+CONFIG_FILE="${CONFIG_FILE:-${SCRIPT_DIR}/renew-oci-certificate.conf}"
+# source 이후 설정 파일 값으로 덮어써지지 않도록 일회성 환경 변수 값을 미리 보관한다.
+FORCE_RENEWAL_FROM_ENV="${FORCE_RENEWAL:-}"
+SKIP_CERTBOT_RENEWAL_FROM_ENV="${SKIP_CERTBOT_RENEWAL:-}"
+# systemd 배포 시에는 /etc의 root 전용 설정 파일을 자동으로 찾는다.
+if [[ ! -r "$CONFIG_FILE" && -r /etc/oci-certificate-renew/renew-oci-certificate.conf ]]; then
+  CONFIG_FILE=/etc/oci-certificate-renew/renew-oci-certificate.conf
+fi
+
+if [[ ! -r "$CONFIG_FILE" ]]; then
+  echo "Configuration file not found: $CONFIG_FILE" >&2
+  exit 1
+fi
+# shellcheck은 아래 설정 파일 예시를 기준으로 변수 정의를 확인한다.
 source "$CONFIG_FILE"
+# 일회성 환경 변수는 영구 설정 파일보다 우선한다. 따라서 일일 타이머는
+# FORCE_RENEWAL=0을 안전하게 유지하면서 필요할 때만 강제 실행할 수 있다.
+[[ -n "$FORCE_RENEWAL_FROM_ENV" ]] && FORCE_RENEWAL="$FORCE_RENEWAL_FROM_ENV"
+[[ -n "$SKIP_CERTBOT_RENEWAL_FROM_ENV" ]] && SKIP_CERTBOT_RENEWAL="$SKIP_CERTBOT_RENEWAL_FROM_ENV"
 
 : "${CERTIFICATE_OCID:?CERTIFICATE_OCID is required}"
 : "${LOAD_BALANCER_OCID:?LOAD_BALANCER_OCID is required}"
 : "${CERTBOT_CERT_NAME:?CERTBOT_CERT_NAME is required}"
 
 RENEW_BEFORE_DAYS="${RENEW_BEFORE_DAYS:-30}"
+# 실제 갱신을 일회성으로 시험할 때만 1로 설정한다. 일일 타이머 설정에 남기면
+# 매일 새 인증서를 요청하므로 항상 0으로 유지한다.
 FORCE_RENEWAL="${FORCE_RENEWAL:-0}"
+# 이미 갱신된 로컬 인증서로 OCI import/LB 적용만 재시도할 때 1로 설정한다.
+# 불필요한 두 번째 ACME 인증서 발급을 막는다.
 SKIP_CERTBOT_RENEWAL="${SKIP_CERTBOT_RENEWAL:-0}"
-OCI_ARGS=(--profile "$OCI_CLI_PROFILE" --config-file "$OCI_CLI_CONFIG_FILE")
-CERTBOT_ARGS=(--config-dir "$CERTBOT_CONFIG_DIR" --work-dir "$CERTBOT_WORK_DIR" --logs-dir "$CERTBOT_LOGS_DIR")
+CERTBOT_BIN="${CERTBOT_BIN:-certbot}"
+OCI_BIN="${OCI_BIN:-oci}"
+# OCI CLI의 선택 옵션은 배열로 구성해 공백이 있는 경로도 하나의 인자로 안전하게 전달한다.
+OCI_PROFILE_ARGS=()
+[[ -n "${OCI_CLI_PROFILE:-}" ]] && OCI_PROFILE_ARGS+=(--profile "$OCI_CLI_PROFILE")
+[[ -n "${OCI_CLI_CONFIG_FILE:-}" ]] && OCI_PROFILE_ARGS+=(--config-file "$OCI_CLI_CONFIG_FILE")
+# Certbot 최초 발급 시 사용한 상태 디렉터리를 renew에도 동일하게 전달한다.
+CERTBOT_DIR_ARGS=()
+[[ -n "${CERTBOT_CONFIG_DIR:-}" ]] && CERTBOT_DIR_ARGS+=(--config-dir "$CERTBOT_CONFIG_DIR")
+[[ -n "${CERTBOT_WORK_DIR:-}" ]] && CERTBOT_DIR_ARGS+=(--work-dir "$CERTBOT_WORK_DIR")
+[[ -n "${CERTBOT_LOGS_DIR:-}" ]] && CERTBOT_DIR_ARGS+=(--logs-dir "$CERTBOT_LOGS_DIR")
+LE_LIVE_DIR="${LE_LIVE_DIR:-/etc/letsencrypt/live}"
 CERT_DIR="${LE_LIVE_DIR}/${CERTBOT_CERT_NAME}"
-CERT_PEM="$CERT_DIR/cert.pem"
-CHAIN_PEM="$CERT_DIR/chain.pem"
-KEY_PEM="$CERT_DIR/privkey.pem"
-FULLCHAIN_PEM="$CERT_DIR/fullchain.pem"
+CERT_PEM="${CERT_DIR}/cert.pem"
+CHAIN_PEM="${CERT_DIR}/chain.pem"
+PRIVATE_KEY_PEM="${CERT_DIR}/privkey.pem"
+FULLCHAIN_PEM="${CERT_DIR}/fullchain.pem"
+# 일반적으로 chain.pem을 사용한다. 기존 OCI import가 fullchain.pem 형식을
+# 요구한 것이 확인된 경우에만 OCI_CERT_CHAIN_PEM을 fullchain.pem으로 지정한다.
+OCI_CERT_CHAIN_PEM="${OCI_CERT_CHAIN_PEM:-$CHAIN_PEM}"
+OCI_CHAIN_EXTRA_CERT_PEM="${OCI_CHAIN_EXTRA_CERT_PEM:-}"
+LOCK_FILE="${LOCK_FILE:-/tmp/oci-certificate-renew.lock}"
 
-for cmd in openssl jq flock "$OCI_BIN" "$CERTBOT_BIN"; do
-  command -v "$cmd" >/dev/null 2>&1 || { echo "missing: $cmd" >&2; exit 1; }
+log() { printf '%s %s\n' "$(date -Is)" "$*"; }
+die() { log "ERROR: $*" >&2; exit 1; }
+
+# 실행에 필요한 명령이 없으면 OCI 변경 전 즉시 중단한다.
+for command in openssl jq flock; do
+  command -v "$command" >/dev/null 2>&1 || die "Required command is missing: $command"
 done
+[[ -x "$OCI_BIN" ]] || command -v "$OCI_BIN" >/dev/null 2>&1 \
+  || die "OCI CLI executable is not available: $OCI_BIN"
+[[ -x "$CERTBOT_BIN" ]] || command -v "$CERTBOT_BIN" >/dev/null 2>&1 \
+  || die "Certbot executable is not available: $CERTBOT_BIN"
 umask 077
-exec 9>/tmp/oci-certificate-renew.lock
-flock -n 9 || { echo "another renewal is running"; exit 0; }
+# flock의 파일 디스크립터를 열어, 동시에 실행된 타이머가 인증서를 중복 갱신하지 못하게 한다.
+exec 9>"$LOCK_FILE"
+flock -n 9 || { log "Another renewal process is already running; exiting."; exit 0; }
 
-versions="$("$OCI_BIN" certs-mgmt certificate-version list \
-  --certificate-id "$CERTIFICATE_OCID" --all "${OCI_ARGS[@]}")"
-current="$(jq -ce '[.data.items[] | select(.stages | index("CURRENT"))] | if length == 1 then .[0] else error("CURRENT version") end' <<<"$versions")"
-not_after="$(jq -er '.validity["time-of-validity-not-after"]' <<<"$current")"
-expiry_epoch="$(date -d "$not_after" +%s)"
-days_left=$(( (expiry_epoch - $(date +%s)) / 86400 ))
-echo "OCI CURRENT expires at ${not_after} (${days_left} day(s) remaining)."
+# 로컬 파일이 아닌 OCI의 CURRENT 버전 만료일을 갱신 기준으로 사용한다.
+certificate_versions_json="$("$OCI_BIN" certs-mgmt certificate-version list \
+  --certificate-id "$CERTIFICATE_OCID" \
+  --all \
+  "${OCI_PROFILE_ARGS[@]}")"
+# OCI CLI 버전에 따라 data가 배열이거나 data.items 객체일 수 있어 두 형식을 모두 처리한다.
+# 정확히 하나의 CURRENT 버전만 존재해야 안전하게 자동화할 수 있다.
+current_version_json="$(jq -ce '
+  [(.data | if type == "object" then (.items // []) else . end)[]
+   | select((.stages // []) | index("CURRENT"))]
+  | if length == 1 then .[0] else error("expected exactly one CURRENT certificate version") end
+' <<<"$certificate_versions_json")" \
+  || die "Could not determine the CURRENT OCI certificate version."
+not_after="$(jq -er '.validity["time-of-validity-not-after"]' <<<"$current_version_json")" \
+  || die "OCI CURRENT certificate version has no validity end date."
+current_version_number="$(jq -er '."version-number"' <<<"$current_version_json")"
+expiry_epoch="$(date -d "$not_after" +%s)" \
+  || die "Could not parse OCI certificate expiry: $not_after"
+now_epoch="$(date +%s)"
+# 소수점 시간은 버리고 남은 일수 단위로 비교한다.
+days_left=$(( (expiry_epoch - now_epoch) / 86400 ))
+log "OCI CURRENT certificate version ${current_version_number} expires at ${not_after} (${days_left} day(s) remaining). Renewal threshold: ${RENEW_BEFORE_DAYS} day(s)."
+
+if [[ "$FORCE_RENEWAL" != "0" && "$FORCE_RENEWAL" != "1" ]]; then
+  die "FORCE_RENEWAL must be 0 or 1."
+fi
+if [[ "$SKIP_CERTBOT_RENEWAL" != "0" && "$SKIP_CERTBOT_RENEWAL" != "1" ]]; then
+  die "SKIP_CERTBOT_RENEWAL must be 0 or 1."
+fi
 
 if (( FORCE_RENEWAL == 0 && days_left > RENEW_BEFORE_DAYS )); then
-  echo "No renewal needed."
+  log "No renewal needed."
   exit 0
 fi
 
-for file in "$CERT_PEM" "$CHAIN_PEM" "$KEY_PEM" "$FULLCHAIN_PEM"; do
-  [[ -r "$file" ]] || { echo "cannot read $file" >&2; exit 1; }
-done
-openssl x509 -in "$CERT_PEM" -noout >/dev/null
-openssl pkey -in "$KEY_PEM" -noout >/dev/null
-cmp -s <(openssl x509 -in "$CERT_PEM" -pubkey -noout) \
-        <(openssl pkey -in "$KEY_PEM" -pubout) \
-  || { echo "certificate and private key do not match" >&2; exit 1; }
-
-if (( SKIP_CERTBOT_RENEWAL == 0 )); then
-  "$CERTBOT_BIN" renew --cert-name "$CERTBOT_CERT_NAME" --force-renewal \
-    --non-interactive "${CERTBOT_ARGS[@]}"
-else
-  echo "SKIP_CERTBOT_RENEWAL=1: reusing existing local certificate."
+if (( FORCE_RENEWAL == 1 )); then
+  log "FORCE_RENEWAL=1: bypassing the expiry threshold for this run."
 fi
 
-new_expiry_epoch="$(openssl x509 -in "$FULLCHAIN_PEM" -noout -enddate | cut -d= -f2- | xargs -I{} date -d '{}' +%s)"
-(( new_expiry_epoch > expiry_epoch )) || { echo "expiry did not advance; OCI unchanged" >&2; exit 1; }
+# 실제 OCI import에 필요한 PEM 파일과 만료일 확인용 fullchain.pem의 읽기 권한을 확인한다.
+for file in "$CERT_PEM" "$OCI_CERT_CHAIN_PEM" "$PRIVATE_KEY_PEM" "$FULLCHAIN_PEM"; do
+  [[ -r "$file" ]] || die "Cannot read $file"
+done
+IMPORT_CHAIN_PEM="$OCI_CERT_CHAIN_PEM"
+TEMP_CHAIN_PEM=""
+IMPORT_REQUEST_JSON=""
+cleanup() {
+  # 공개 체인 임시 파일과 private key를 포함하는 JSON은 성공·실패 모두에서 제거한다.
+  [[ -n "${TEMP_CHAIN_PEM:-}" ]] && rm -f -- "$TEMP_CHAIN_PEM"
+  [[ -n "${IMPORT_REQUEST_JSON:-}" ]] && rm -f -- "$IMPORT_REQUEST_JSON"
+}
+trap cleanup EXIT
+if [[ -n "$OCI_CHAIN_EXTRA_CERT_PEM" ]]; then
+  [[ -r "$OCI_CHAIN_EXTRA_CERT_PEM" ]] || die "Cannot read $OCI_CHAIN_EXTRA_CERT_PEM"
+  TEMP_CHAIN_PEM="$(mktemp "${TMPDIR:-/tmp}/oci-certificate-chain.XXXXXX.pem")"
+  # OCI가 요구하는 경우에만 기본 chain 뒤에 추가 Root PEM을 붙여 임시 체인을 만든다.
+  awk '1' "$OCI_CERT_CHAIN_PEM" "$OCI_CHAIN_EXTRA_CERT_PEM" > "$TEMP_CHAIN_PEM"
+  IMPORT_CHAIN_PEM="$TEMP_CHAIN_PEM"
+fi
+openssl x509 -in "$CERT_PEM" -noout >/dev/null \
+  || die "Leaf certificate is not a readable PEM: $CERT_PEM"
+openssl pkey -in "$PRIVATE_KEY_PEM" -noout >/dev/null \
+  || die "Private key is not a readable PEM: $PRIVATE_KEY_PEM"
+# 인증서 공개키와 private key에서 추출한 공개키를 비교해 잘못된 키 쌍 업로드를 막는다.
+if ! cmp -s \
+  <(openssl x509 -in "$CERT_PEM" -pubkey -noout) \
+  <(openssl pkey -in "$PRIVATE_KEY_PEM" -pubout); then
+  die "Leaf certificate and private key do not match."
+fi
 
-request="$(mktemp /tmp/oci-certificate-import.XXXXXX.json)"
-trap 'rm -f "$request"' EXIT
-jq -n --arg certificateId "$CERTIFICATE_OCID" \
-  --rawfile certificatePem "$CERT_PEM" \
-  --rawfile certChainPem "$CHAIN_PEM" \
-  --rawfile privateKeyPem "$KEY_PEM" \
-  '{certificateId: $certificateId, certificatePem: $certificatePem, certChainPem: $certChainPem, privateKeyPem: $privateKeyPem, stage: "CURRENT"}' > "$request"
+# 로컬 인증서가 OCI CURRENT보다 새로우면 이전 실행의 OCI 단계만 실패한 것으로 간주한다.
+local_expiry_epoch="$(openssl x509 -in "$FULLCHAIN_PEM" -noout -enddate | cut -d= -f2- | xargs -I{} date -d '{}' +%s)"
+if (( SKIP_CERTBOT_RENEWAL == 0 && local_expiry_epoch > expiry_epoch )); then
+  # 이전 실행에서 ACME 발급은 성공했지만 OCI import가 실패했을 수 있다.
+  # 새 인증서를 다시 요청하지 않고, 더 최신인 로컬 인증서를 재사용한다.
+  SKIP_CERTBOT_RENEWAL=1
+  log "A local certificate newer than the OCI CURRENT version already exists; skipping Certbot and retrying OCI import."
+fi
 
+if (( SKIP_CERTBOT_RENEWAL == 0 )); then
+  CERTBOT_WAS_RUN=1
+  log "Renewing Let's Encrypt certificate '${CERTBOT_CERT_NAME}'."
+  # 일반 실행은 앞선 만료일 확인으로 시점이 제한된다. FORCE_RENEWAL=1은
+  # 이 제한을 의도적으로 우회하는 일회성 운영자 명령이다.
+  "$CERTBOT_BIN" renew --cert-name "$CERTBOT_CERT_NAME" --force-renewal --non-interactive \
+    "${CERTBOT_DIR_ARGS[@]}"
+else
+  CERTBOT_WAS_RUN=0
+  log "SKIP_CERTBOT_RENEWAL=1: using the existing local certificate for OCI retry."
+fi
+
+if (( CERTBOT_WAS_RUN == 1 )); then
+  # Certbot이 새 파일을 교체했으므로 갱신 후 만료일을 다시 읽는다.
+  new_expiry_epoch="$(openssl x509 -in "$FULLCHAIN_PEM" -noout -enddate | cut -d= -f2- | xargs -I{} date -d '{}' +%s)"
+else
+  new_expiry_epoch="$local_expiry_epoch"
+fi
+if (( new_expiry_epoch <= expiry_epoch )); then
+  die "Certbot completed but the certificate expiry did not advance; OCI was not changed."
+fi
+log "Importing the local certificate into OCI Certificates Service (certificate: ${CERT_PEM}, chain: ${IMPORT_CHAIN_PEM})."
+IMPORT_REQUEST_JSON="$(mktemp "${TMPDIR:-/tmp}/oci-certificate-import.XXXXXX.json")"
+# --from-json을 사용하면 PEM 내용이 프로세스 인자 목록에 노출되지 않는다.
+# jq --rawfile은 PEM의 줄바꿈을 보존해 OCI API가 기대하는 문자열을 만든다.
+jq -n \
+  --arg certificate_id "$CERTIFICATE_OCID" \
+  --rawfile certificate_pem "$CERT_PEM" \
+  --rawfile cert_chain_pem "$IMPORT_CHAIN_PEM" \
+  --rawfile private_key_pem "$PRIVATE_KEY_PEM" \
+  '{
+    certificateId: $certificate_id,
+    certificatePem: $certificate_pem,
+    certChainPem: $cert_chain_pem,
+    privateKeyPem: $private_key_pem,
+    stage: "CURRENT"
+  }' > "$IMPORT_REQUEST_JSON"
+
+# import 완료 후 ACTIVE 상태까지 대기한다. 실패하면 set -e로 Listener 갱신을 수행하지 않는다.
 "$OCI_BIN" certs-mgmt certificate update-certificate-by-importing-config-details \
-  --from-json "file://${request}" --wait-for-state ACTIVE \
-  --max-wait-seconds "$OCI_WAIT_SECONDS" --force "${OCI_ARGS[@]}" >/dev/null
+  --from-json "file://${IMPORT_REQUEST_JSON}" \
+  --wait-for-state ACTIVE \
+  --max-wait-seconds "${OCI_WAIT_SECONDS:-1200}" \
+  --force \
+  "${OCI_PROFILE_ARGS[@]}" >/dev/null
 
-echo "OCI certificate version is ACTIVE."
-lb_json="$("$OCI_BIN" lb load-balancer get --load-balancer-id "$LOAD_BALANCER_OCID" "${OCI_ARGS[@]}")"
-listener="$(jq -ce --arg name "$LISTENER_NAME" '.data.listeners[$name]' <<<"$lb_json")"
+log "OCI certificate version is ACTIVE. Resolving the Load Balancer listener."
+# Listener 갱신에 필요한 backend set, port, protocol은 현재 LB 설정에서 읽어 보존한다.
+lb_json="$("$OCI_BIN" lb load-balancer get --load-balancer-id "$LOAD_BALANCER_OCID" "${OCI_PROFILE_ARGS[@]}")"
+if [[ -z "${LISTENER_NAME:-}" ]]; then
+  # Listener 이름을 비워 둔 경우에는 이 Certificate OCID를 참조하는 Listener를 자동 탐색한다.
+  mapfile -t matching_listeners < <(
+    jq -r --arg certificate_id "$CERTIFICATE_OCID" '
+      .data.listeners | to_entries[]
+      | select((.value["ssl-configuration"]["certificate-ids"] // []) | index($certificate_id))
+      | .key
+    ' <<<"$lb_json"
+  )
+  if (( ${#matching_listeners[@]} != 1 )); then
+    die "Could not uniquely find the listener using this certificate. Set LISTENER_NAME in $CONFIG_FILE."
+  fi
+  LISTENER_NAME="${matching_listeners[0]}"
+fi
+
+listener_json="$(jq -ce --arg listener "$LISTENER_NAME" '.data.listeners[$listener]' <<<"$lb_json")" \
+  || die "Listener '$LISTENER_NAME' was not found on the specified Load Balancer."
+backend_set="$(jq -er '.["default-backend-set-name"]' <<<"$listener_json")"
+port="$(jq -er '.port' <<<"$listener_json")"
+protocol="$(jq -er '.protocol' <<<"$listener_json")"
+
+log "Refreshing listener '${LISTENER_NAME}' with the current OCI certificate version."
+# 기존 Listener 속성은 유지하고, 같은 Certificate OCID의 새 CURRENT 버전을 다시 적용한다.
 "$OCI_BIN" lb listener update \
-  --load-balancer-id "$LOAD_BALANCER_OCID" --listener-name "$LISTENER_NAME" \
-  --default-backend-set-name "$(jq -er '.["default-backend-set-name"]' <<<"$listener")" \
-  --port "$(jq -er '.port' <<<"$listener")" \
-  --protocol "$(jq -er '.protocol' <<<"$listener")" \
+  --load-balancer-id "$LOAD_BALANCER_OCID" \
+  --listener-name "$LISTENER_NAME" \
+  --default-backend-set-name "$backend_set" \
+  --port "$port" \
+  --protocol "$protocol" \
   --ssl-certificate-ids "[\"${CERTIFICATE_OCID}\"]" \
-  --wait-for-state SUCCEEDED --max-wait-seconds "$OCI_WAIT_SECONDS" \
-  --force "${OCI_ARGS[@]}" >/dev/null
+  --wait-for-state SUCCEEDED \
+  --max-wait-seconds "${OCI_WAIT_SECONDS:-1200}" \
+  --force \
+  "${OCI_PROFILE_ARGS[@]}" >/dev/null
 
-echo "SUCCESS: certificate renewed, imported to OCI, and listener updated."
+log "SUCCESS: certificate imported to OCI and listener '${LISTENER_NAME}' updated."
 ```
 
 ```bash
 sudo install -o root -g root -m 700 \
   renew-oci-certificate.sh /usr/local/sbin/renew-oci-certificate.sh
+# 설정 파일은 스크립트 디렉터리 또는 /etc/oci-certificate-renew/에 둡니다.
 sudo /usr/local/sbin/renew-oci-certificate.sh
+
+# 다른 경로의 설정 파일을 일회성으로 사용하려면
+sudo CONFIG_FILE=/secure/path/renew-oci-certificate.conf \
+  /usr/local/sbin/renew-oci-certificate.sh
 ```
 
-이 구현은 PEM 형식·certificate/private key 공개키 일치 여부를 먼저 확인합니다. Certbot 성공 뒤 로컬 인증서의 만료일이 늘어나지 않았으면 OCI를 바꾸지 않으므로, 잘못된 파일을 서비스 인증서로 적용하는 것을 방지합니다. OCI API 호출은 `ACTIVE`, Load Balancer 호출은 `SUCCEEDED`를 기다립니다.
+이 구현은 설정 파일 탐색 실패, 필수 값, 실행 파일, PEM 형식·certificate/private key 공개키 일치를 모두 먼저 확인합니다. `flock`으로 동시 실행을 막고, `FORCE_RENEWAL`과 `SKIP_CERTBOT_RENEWAL`에는 `0` 또는 `1`만 허용합니다. Certbot 성공 뒤 로컬 인증서의 만료일이 늘어나지 않았으면 OCI를 바꾸지 않으므로, 잘못된 파일을 서비스 인증서로 적용하는 것을 방지합니다. OCI API 호출은 `ACTIVE`, Load Balancer 호출은 `SUCCEEDED`를 기다립니다. `LISTENER_NAME`을 비워 두면 이 certificate OCID를 사용하는 Listener가 정확히 하나일 때 자동으로 찾아 갱신하고, 0개 또는 여러 개면 안전하게 중단합니다.
 
 ## 5. 실제 실행 결과와 검증
 
@@ -259,11 +443,11 @@ sudo /usr/local/sbin/renew-oci-certificate.sh
 실행 로그는 다음 순서가 정상입니다.
 
 ```text
-OCI CURRENT certificate version ... expires at ... (.. day(s) remaining).
-Renewing Let's Encrypt certificate 'example.com'.
-OCI certificate version is ACTIVE.
-Refreshing listener 'https-443' with the current OCI certificate version.
-SUCCESS: certificate renewed, imported to OCI, and listener updated.
+2026-..-..T..:..:..+..:.. OCI CURRENT certificate version ... expires at ... (.. day(s) remaining). Renewal threshold: 30 day(s).
+2026-..-..T..:..:..+..:.. Renewing Let's Encrypt certificate 'example.com'.
+2026-..-..T..:..:..+..:.. OCI certificate version is ACTIVE. Resolving the Load Balancer listener.
+2026-..-..T..:..:..+..:.. Refreshing listener 'https-443' with the current OCI certificate version.
+2026-..-..T..:..:..+..:.. SUCCESS: certificate renewed, imported to OCI, and listener 'https-443' updated.
 ```
 
 Listener에는 Certificates Service의 certificate가 연결되어 있으며, TLS 1.2와 1.3을 허용하는 구성을 확인했습니다.
