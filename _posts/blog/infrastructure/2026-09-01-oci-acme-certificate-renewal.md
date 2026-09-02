@@ -1,8 +1,8 @@
 ---
 layout: page-fullwidth
 subheadline: "Security & Automation"
-title: "OCI Certificates와 Load Balancer를 위한 ACME 인증서 갱신 자동화"
-teaser: "Certbot DNS-01과 OCI Certificates Service를 연결해 와일드카드 인증서의 발급·가져오기·Listener 반영을 하나의 안전한 운영 흐름으로 자동화합니다."
+title: "OCI Certificates와 Load Balancer를 위한 Let’s Encrypt 인증서 발급·갱신 자동화"
+teaser: "Let’s Encrypt 와일드카드 인증서를 Certbot DNS-01으로 발급·갱신하고 OCI Certificates Service import와 Load Balancer Listener 반영까지 안전하게 자동화합니다."
 author: dankim
 date: 2026-09-01 00:00:00
 breadcrumb: true
