@@ -74,6 +74,15 @@ article a {
     overflow-wrap: anywhere;
     word-break: break-word;
 }
+
+/* API identifiers can be long, too; keep headings within the reading column. */
+article h1,
+article h2,
+article h3,
+article h4 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
 p a.button,
 .button,
 .button:hover {
