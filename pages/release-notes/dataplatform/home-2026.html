@@ -1,17 +1,54 @@
 ---
 layout: default
-title: "Database Release Notes - 2026"
-teaser: "Oracle Data Platform, MDS, Database Service - Others의 2026년 업데이트를 독립 목록으로 제공합니다."
+title: "OCI Data Platform Release Notes - 2026"
+teaser: "2026년 OCI Data Platform 부분 업데이트 소식입니다."
 breadcrumb: true
 header:
    image_fullwidth: release-notes/release-notes-header_2.png
 permalink: "release-notes-2026-dataplatform/"
 ---
-<div id="blog-index" class="row"><div class="small-12 columns t30">
-<h1>{{ page.title }}</h1><p class="teaser">{{ page.teaser }}</p>
-<ul>
-<li><a href="{{ '/release-notes-2026-oracle-dataplatform/' | relative_url }}">Oracle Data Platform</a></li>
-<li><a href="{{ '/release-notes-2026-mds/' | relative_url }}">MDS</a></li>
-<li><a href="{{ '/release-notes-2026-others/' | relative_url }}">Database Service - Others</a></li>
-</ul>
-</div></div>
+<div id="blog-index" class="row">
+	<div class="small-12 columns t30">
+		<h1>{{ page.title }}</h1>
+		{% if page.teaser %}<p class="teaser">{{ page.teaser }}</p>{% endif %}
+
+		<h2>Oracle Database</h2>
+		<dl class="accordion" data-accordion>
+			{% for post in site.categories.release-notes-2026-oracle-dataplatform limit:1000 %}
+			<dd class="accordion-navigation">
+				<a href="#oracle-panel{{ forloop.index }}"><span class="iconfont"></span> {% if post.subheadline %}{{ post.subheadline }} › {% endif %}<strong>{{ post.title }}</strong></a>
+				<div id="oracle-panel{{ forloop.index }}" class="content">
+					{% if post.meta_description %}{{ post.meta_description | strip_html | escape }}{% elsif post.teaser %}{{ post.teaser | strip_html | escape }}{% endif %}
+					<a href="{{ post.url | relative_url }}" title="Read {{ post.title | escape_once }}"><strong>{{ site.data.language.read_more }}</strong></a><br><br>
+				</div>
+			</dd>
+			{% endfor %}
+		</dl>
+
+		<h2>MySQL Database Service (MDS)</h2>
+		<dl class="accordion" data-accordion>
+			{% for post in site.categories.release-notes-2026-mds limit:1000 %}
+			<dd class="accordion-navigation">
+				<a href="#mds-panel{{ forloop.index }}"><span class="iconfont"></span> {% if post.subheadline %}{{ post.subheadline }} › {% endif %}<strong>{{ post.title }}</strong></a>
+				<div id="mds-panel{{ forloop.index }}" class="content">
+					{% if post.meta_description %}{{ post.meta_description | strip_html | escape }}{% elsif post.teaser %}{{ post.teaser | strip_html | escape }}{% endif %}
+					<a href="{{ post.url | relative_url }}" title="Read {{ post.title | escape_once }}"><strong>{{ site.data.language.read_more }}</strong></a><br><br>
+				</div>
+			</dd>
+			{% endfor %}
+		</dl>
+
+		<h2>Database Service - Others</h2>
+		<dl class="accordion" data-accordion>
+			{% for post in site.categories.release-notes-2026-others limit:1000 %}
+			<dd class="accordion-navigation">
+				<a href="#others-panel{{ forloop.index }}"><span class="iconfont"></span> {% if post.subheadline %}{{ post.subheadline }} › {% endif %}<strong>{{ post.title }}</strong></a>
+				<div id="others-panel{{ forloop.index }}" class="content">
+					{% if post.meta_description %}{{ post.meta_description | strip_html | escape }}{% elsif post.teaser %}{{ post.teaser | strip_html | escape }}{% endif %}
+					<a href="{{ post.url | relative_url }}" title="Read {{ post.title | escape_once }}"><strong>{{ site.data.language.read_more }}</strong></a><br><br>
+				</div>
+			</dd>
+			{% endfor %}
+		</dl>
+	</div><!-- /.small-12.columns -->
+</div><!-- /.row -->
