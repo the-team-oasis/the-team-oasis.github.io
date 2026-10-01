@@ -77,3 +77,46 @@ Team 정의를 파일이나 CLOB으로 다룰 수 있어 동일한 구성을 다
 ### 가져온 Team 확인
 
 Export 결과를 보관한 뒤 대상 환경에서 필요한 profile과 user-created function이 존재하는지 확인합니다. Import 후에는 team metadata와 구성 요소가 예상대로 생성됐는지 확인하고, Select AI Agent team을 실행해 tool 연결과 응답이 정상인지 검증합니다.
+
+## Autonomous Container Database (ACD) cloning enhancements
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure, Autonomous Database on Exadata Cloud@Customer
+* **Release Date:** August 18, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-acd-cloning-enh.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-acd-cloning-enh.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/about-cloning-autonomous-container-database-on-dedicated.html](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/about-cloning-autonomous-container-database-on-dedicated.html){:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/clone-an-autonomous-container-database.html](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/clone-an-autonomous-container-database.html){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+Dedicated Exadata Infrastructure와 Exadata Cloud@Customer에서 Autonomous Container Database(ACD) clone 기능이 확장되었습니다. ACD는 여러 Autonomous AI Database를 담는 컨테이너 데이터베이스이므로, clone은 개별 database 복제가 아니라 해당 컨테이너 범위의 데이터·메타데이터 복제 계획으로 검토해야 합니다.
+
+### 적용 전 확인
+
+Full clone과 metadata-only clone의 목적을 구분하고, 대상의 네트워크·backup·키 관리 구성과 필요한 용량을 먼저 확인합니다. clone 뒤에는 대상 ACD와 포함된 Autonomous AI Database의 상태, 연결 정보, 애플리케이션 접근 경로를 검증한 뒤 전환합니다.
+
+## View total backup storage for an Autonomous Container Database (ACD)
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure, Autonomous Database on Exadata Cloud@Customer
+* **Release Date:** August 11, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-view-backup-storage.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-view-backup-storage.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/view-details-of-an-autonomous-container-database.html](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/view-details-of-an-autonomous-container-database.html){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+ACD Details 페이지에서 전체 backup storage 사용량을 확인할 수 있습니다. Exadata 기반 Autonomous 환경의 backup 용량을 컨테이너 단위로 파악해 용량 계획과 비용 점검에 활용할 수 있습니다.
+
+### 운영 시 확인
+
+표시된 전체 사용량을 개별 Autonomous AI Database의 backup 정책, 보존 기간, 예정된 clone 작업과 함께 검토합니다. 사용량 증가가 확인되면 backup 보존 정책을 바꾸기 전에 복구 요구사항과 규정 준수 조건을 확인해야 합니다.
+
+## Use a Cross-Tenancy OCI Vault and Master Encryption Key for an Autonomous Container Database (ACD)
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure
+* **Release Date:** August 04, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-crosstenancy-ocivault.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-crosstenancy-ocivault.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/master-encryption-keys-in-autonomous-ai-database-on.html#GUID-2A922508-9B7B-4972-968A-A82D92C249BB](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/master-encryption-keys-in-autonomous-ai-database-on.html#GUID-2A922508-9B7B-4972-968A-A82D92C249BB){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+Oracle Public Cloud의 Autonomous Container Database에서 다른 tenancy OCI Vault의 customer-managed master encryption key를 사용할 수 있습니다. 보안 관리 tenancy와 database 운영 tenancy를 분리해야 하는 환경에서 키 소유권과 database 운영 책임을 분리할 수 있습니다.
+
+### 권한과 복구 계획
+
+두 tenancy 사이의 Vault·key 접근 권한과 key lifecycle을 먼저 검토해야 합니다. 키를 disable·delete·rotate하는 절차는 database 복구 가능성에 영향을 줄 수 있으므로, 적용 전에 권한 검증과 key 접근 실패 시 복구 절차를 시험 환경에서 확인하는 것이 필요합니다.

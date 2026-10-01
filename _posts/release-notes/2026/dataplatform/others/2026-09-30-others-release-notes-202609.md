@@ -34,9 +34,14 @@ header: no
 * **Release Date:** September 15, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/postgresql/byok.htm](https://docs.oracle.com/iaas/releasenotes/postgresql/byok.htm){:target="_blank" rel="noopener"}
 
+* **Documentation:** [https://docs.oracle.com/iaas/Content/postgresql/using-own-key.htm](https://docs.oracle.com/iaas/Content/postgresql/using-own-key.htm){:target="_blank" rel="noopener"}
 ### 업데이트 내용
 
 OCI Database with PostgreSQL에서 고객 관리 encryption key를 사용할 수 있습니다. key lifecycle·access policy·복구 절차를 database 운영 기준에 함께 반영해야 합니다.
+
+### 키 수명주기
+
+고객 관리 key를 사용할 때는 Vault 권한, key rotation, key disable·삭제 시 복구 영향까지 database 운영 절차에 포함해야 합니다. 적용 전에는 관리자가 key에 접근할 수 있는지와 장애 시 복구 시나리오를 검증합니다.
 
 ## ODH-Based Versioning in OCI Big Data Service
 * **Services:** Big Data
