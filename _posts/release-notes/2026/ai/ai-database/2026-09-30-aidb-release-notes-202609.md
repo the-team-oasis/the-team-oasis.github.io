@@ -65,11 +65,11 @@ Java 애플리케이션에서 Select AI를 호출할 때는 database 연결과 A
 * **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/master-encryption-keys-in-autonomous-ai-database-on.html](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/master-encryption-keys-in-autonomous-ai-database-on.html){:target="_blank" rel="noopener"}
 ### 업데이트 내용
 
-Oracle Database@Azure의 Autonomous AI Database on Dedicated Exadata Infrastructure에서 Azure KMS로 master encryption key를 관리할 수 있습니다. Azure key 권한과 database encryption 운영 책임을 함께 검토해야 합니다.
+Oracle Database@Azure의 Autonomous AI Database on Dedicated Exadata Infrastructure에서 Azure KMS로 Azure 내 master encryption key를 관리할 수 있습니다.
 
-### 키 관리 전 확인
+### 적용 범위
 
-Azure Key Vault의 key 접근 권한과 key lifecycle 책임을 database 운영 절차에 연결해야 합니다. 적용 전에는 key rotation·disable 상황에서 database 접근과 복구 절차가 어떻게 동작하는지 시험 환경에서 검증합니다.
+이 항목은 Oracle Database@Azure의 해당 Autonomous AI Database 배포 범위에 관한 지원 추가입니다. key rotation·disable·복구 또는 세부 권한 동작은 이 Release Note와 연결 문서에서 확인한 범위를 넘어 단정하지 않고, 실제 도입 전에는 Azure KMS와 database 운영 절차의 지원 범위를 공식 문서로 별도 확인합니다.
 
 ## Additional Profile Attributes for the DBMS_CLOUD_AI Package
 * **Services:** Autonomous Database on Dedicated Exadata Infrastructure , Autonomous Database on Exadata Cloud@Customer

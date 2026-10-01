@@ -170,3 +170,46 @@ OCI Console에서 기존 Autonomous AI Database instance의 maintenance window�
 ### Maintenance window 선택
 
 업무 요구에 가장 편리한 maintenance window를 선택할 수 있습니다.
+
+## Autonomous Container Database (ACD) cloning enhancements
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure, Autonomous Database on Exadata Cloud@Customer
+* **Release Date:** August 18, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-acd-cloning-enh.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-acd-cloning-enh.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [About cloning an Autonomous Container Database](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/about-cloning-autonomous-container-database-on-dedicated.html){:target="_blank" rel="noopener"}
+* **Documentation:** [Clone an Autonomous Container Database](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/clone-an-autonomous-container-database.html){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+Dedicated Exadata Infrastructure와 Exadata Cloud@Customer에서 Autonomous Container Database(ACD)의 full clone과 partial clone을 사용할 수 있습니다. full clone은 source container와 포함된 Autonomous AI Database의 metadata·data를 복제하고, partial clone은 선택한 Autonomous AI Database만 복제합니다.
+
+### 적용 전 확인
+
+원격 backup에서 clone할 때는 partial clone을 사용할 수 없으며, ACD는 clone 중 `PROVISIONING` 상태가 됩니다. 동시에 하나의 clone만 실행할 수 있으므로, 대규모 복제는 AVMC 가용 리소스와 운영 창을 함께 검토한 뒤 실행합니다. clone 후에는 대상 ACD와 포함 database의 상태·연결 정보·애플리케이션 접근을 검증합니다.
+
+## View total backup storage for an Autonomous Container Database (ACD)
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure, Autonomous Database on Exadata Cloud@Customer
+* **Release Date:** August 11, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-view-backup-storage.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-view-backup-storage.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [View details of an Autonomous Container Database](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/view-details-of-an-autonomous-container-database.html){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+ACD Details 페이지에서 ACD 전체 backup storage 사용량을 확인할 수 있습니다. Exadata 기반 Autonomous 환경의 backup 용량을 컨테이너 단위로 파악해 보존 정책과 용량 계획을 검토하는 데 활용할 수 있습니다.
+
+### 운영 시 확인
+
+표시된 사용량을 장기 backup과 예정된 clone 작업의 용량 요구사항과 함께 확인합니다. 이 기능은 별도 설정이 아니라 가시성 개선이므로, 사용량 증가가 확인되면 backup 보존 요건과 스토리지 비용을 함께 검토합니다.
+
+## Use a Cross-Tenancy OCI Vault and Master Encryption Key for an Autonomous Container Database (ACD)
+* **Services:** Autonomous Database on Dedicated Exadata Infrastructure
+* **Release Date:** August 04, 2026
+* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-crosstenancy-ocivault.htm](https://docs.oracle.com/iaas/releasenotes/autonomous-database-dedicated/adbd-crosstenancy-ocivault.htm){:target="_blank" rel="noopener"}
+* **Documentation:** [Master encryption keys in Autonomous AI Database](https://docs.oracle.com/en/cloud/paas/autonomous-database/dedicated/adbaa/master-encryption-keys-in-autonomous-ai-database-on.html#GUID-2A922508-9B7B-4972-968A-A82D92C249BB){:target="_blank" rel="noopener"}
+
+### 업데이트 내용
+
+Oracle Public Cloud에서 **새 ACD를 프로비저닝할 때** 다른 tenancy OCI Vault의 customer-managed master encryption key를 사용할 수 있습니다. 기존 ACD에는 이 구성을 적용할 수 없습니다.
+
+### 권한과 Data Guard 조건
+
+이 구성의 ACD에 Autonomous Data Guard standby를 추가할 때 primary와 standby 모두 같은 Vault와 key에 접근할 수 있어야 합니다. standby가 다른 region에 있으면 해당 region에서 Vault 접근에 필요한 dynamic group과 cross-tenancy IAM policy를 먼저 구성하고, 양쪽 tenancy의 key 접근 범위를 검증합니다.
