@@ -50,10 +50,18 @@ OCI Networking의 FastConnect는 FastConnect partner, FastConnect direct, Oracle
 
 traffic draining을 사용할 private virtual circuit과 해당 FastConnect 연결 방식을 먼저 구분합니다. direct cross-connect 또는 cross-connect group을 운영하는 경우에는 minimum links와 interface hold timer 설정이 기존 이중화·장애 전환 설계와 일치하는지 확인한 뒤 변경 창에 적용합니다.
 
+![FastConnect colocation 환경에서 private virtual circuit을 사용하는 연결 구성](https://docs.oracle.com/iaas/Content/Network/Images/network_fc_colo_vc.svg)
+
+*그림: FastConnect colocation 환경에서 private virtual circuit이 연결되는 기본 토폴로지. 이번 traffic draining 적용 대상을 public virtual circuit과 구분할 때 참고합니다. [Oracle Documentation: FastConnect overview](https://docs.oracle.com/iaas/Content/Network/Concepts/fastconnectoverview.htm){:target="_blank" rel="noopener"}*
+
 ### 동작 범위
 
 traffic draining의 대상은 private virtual circuit이며, public virtual circuit까지 포함하는 기능으로 해석하면 안 됩니다. 이번 minimum links·hold timer·LOA 개선의 적용 범위도 FastConnect direct cross-connect와 cross-connect group으로 한정됩니다.
 
+
+### Traffic draining과 link 상태 확인
+
+planned maintenance에서 private virtual circuit을 drain하면 OCI는 BGP graceful-shutdown community `65535:0`과 AS-path prepending으로 route를 비선호하게 합니다. cross-connect group이 provision된 뒤에는 minimum links를 group width 범위(1 이상)에서 조정할 수 있습니다. interface hold timer는 설정 interval 동안 flap을 무시하고, 만료 시에도 down이면 interface를 down으로 표시합니다.
 
 ### 참고
 
@@ -83,6 +91,10 @@ Oracle Cloud Migrations가 ARM architecture를 사용하는 지원 AWS EC2 insta
 
 AWS EC2 ARM workload를 옮기기 전 OCI Compute shape, 운영체제 이미지, application binary의 ARM 호환성을 확인해야 합니다. migration test로 boot·network·애플리케이션 기동을 검증하고, unsupported dependency는 전환 계획에서 분리합니다.
 
+### ARM migration preflight
+
+AWS asset discovery로 source architecture를 수집하면 migration plan이 asset별 compatible shape·image를 추천합니다. ARM 대상은 supported source OS, `VM.Standard.A1.Flex`·`VM.Standard.A2.Flex`·`VM.Standard.A4.Flex` 중 compatible destination shape, target-region capacity와 Compute quota를 먼저 확인합니다.
+
 ### 참고
 
 - [Release Note: Oracle Cloud Migrations supports ARM migrations for AWS EC2 instances](https://docs.oracle.com/iaas/releasenotes/cloud-migration/ocm_aws_ec2_instance_migration-arm.htm){:target="_blank" rel="noopener"}
@@ -99,6 +111,10 @@ Oracle Cloud VMware Solution은 single AD SDDC와 cluster에서 fault domain hos
 ### 적용 및 검증 포인트
 
 Fault domain host balancing은 VMware workload의 host placement와 가용성 설계에 영향을 줍니다. 적용 전 cluster의 fault domain 정책과 workload 분산 요구사항을 확인하고, 변경 뒤 VM 배치와 장애 시 동작을 검증합니다.
+
+### 적용 범위와 확인
+
+이 옵션은 single-availability-domain SDDC와 cluster만 지원합니다. SDDC·cluster 생성 또는 host add·replace·upgrade 중 fault-domain capacity가 필요할 때만 balancing을 해제합니다. 이후 Console 또는 API에서 host fault-domain detail과 cluster balance 상태를 확인합니다. 해제는 availability를 낮출 수 있습니다.
 
 ### 참고
 
@@ -126,6 +142,10 @@ OS Management Hub API가 IPv4와 IPv6 연결을 지원합니다. IPv6 사용 환
 ### 적용 및 검증 포인트
 
 OS Management Hub를 IPv6 환경에서 사용할 때는 management endpoint 접근 경로와 instance network policy가 IPv6를 허용하는지 확인해야 합니다. 관리 대상 instance에서 registration·patch·inventory 동작을 검증합니다.
+
+### IPv6 client enablement
+
+API는 `osmh.<region>.ds.oci.<secondLevelDomain>` dual-stack endpoint를 사용합니다. SDK client는 `OCI_DUAL_STACK_ENDPOINT_ENABLE=true`, OCI CLI는 `--enable-dual-stack`을 지정합니다. IPv4는 기본값으로 유지됩니다.
 
 ### 참고
 
@@ -157,6 +177,10 @@ Monitoring API의 dual-stack endpoint를 사용할 경우 metric 조회 client�
 ### 업데이트 내용
 Resource Analytics의 Compute·Networking·Bastion·GoldenGate data model이 확장되었습니다. resource analytics report와 운영 dashboard의 새 데이터 항목을 확인해야 합니다.
 
+### 데이터 freshness 확인
+
+`ENTITY_LAST_REFRESH_V`를 조회해 최근 3시간 내 successful 또는 skipped ingestion이 없는 supported dimension-entity view를 찾습니다. 새 Compute maintenance event, network security-rule·subnet/security-list·DHCP option, Bastion client CIDR, GoldenGate connection 데이터도 dashboard 검증 대상에 포함합니다.
+
 ### 참고
 
 - [Release Note: Resource Analytics - September 2026](https://docs.oracle.com/iaas/releasenotes/resource-analytics/resource-analytics-v2-7.htm){:target="_blank" rel="noopener"}
@@ -173,6 +197,14 @@ IoT Flow Runtime은 통합 Node-RED editor로 integration flow를 build·deploy�
 Flow Runtime은 Node-RED editor로 integration flow를 build·deploy·run하는 managed 환경입니다. flow가 필요한 network access와 File Storage mount를 구성한 뒤, 로그·metrics·events를 확인해 배포된 flow의 오류와 처리 상태를 운영 절차에 포함합니다.
 
 > **Node-RED:** 이벤트 기반 흐름을 시각적으로 조합하는 오픈소스 프로그래밍 도구입니다. 이 업데이트에서는 Flow Runtime의 통합 editor로 사용됩니다. [Node-RED 공식 문서](https://nodered.org/docs/){:target="_blank" rel="noopener"}
+
+### Editor 접근과 배포 검증
+
+Flow Runtime detail page에서 managed Node-RED editor를 열면 Console SSO로 인증되며 IAM이 Viewer·Editor 권한을 결정합니다. OCI node에는 stored user credential 대신 Resource Principal을 사용하고, Flow Runtime dynamic group에 target resource 최소 권한을 부여합니다. 변경 후 **Update**와 **Deploy**를 실행하고 **Test Connection**으로 연결을 확인합니다.
+
+### 업데이트 전 보존 절차
+
+local file system은 ephemeral이므로 update 전 필요한 파일을 Autonomous Database·mounted File Storage 등 persistent store로 옮기고 flow JSON을 백업합니다. deactivate하여 **Inactive**를 확인한 뒤 activate해 **Active** 상태를 확인하고, editor에서 flow·Oracle node·허용 module과 log를 검증합니다.
 
 ### 참고
 

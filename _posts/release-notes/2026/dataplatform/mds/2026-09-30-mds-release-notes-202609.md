@@ -8,8 +8,9 @@ title: "9월 OCI MDS (MySQL Database Service) 업데이트 소식"
 teaser: "2026년 9월 OCI MDS (MySQL Database Service) 업데이트 소식입니다."
 author: lim
 breadcrumb: true
+permalink: "release-notes-2026-dataplatform/mds-release-notes-202609/"
 categories:
-  - release-notes-2026-dataplatform
+  - release-notes-2026-mds
 tags:
   - oci-release-notes-2026
   - Sep-2026

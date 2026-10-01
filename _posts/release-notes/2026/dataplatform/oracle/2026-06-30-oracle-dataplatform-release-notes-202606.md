@@ -8,8 +8,9 @@ title: "6월 OCI Oracle Data Platform 업데이트 소식"
 teaser: "2026년 6월 OCI Oracle Data Platform 업데이트 소식입니다."
 author: lim
 breadcrumb: true
+permalink: "release-notes-2026-dataplatform/oracle-dataplatform-release-notes-202606/"
 categories:
-  - release-notes-2026-dataplatform
+  - release-notes-2026-oracle-dataplatform
 
 tags:
   - oci-release-notes-2026

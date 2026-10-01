@@ -52,6 +52,10 @@ zai-org/GLM-5.3-Flash 모델을 OCI Generative AI에 import하고 endpoint로 �
 Imported model 배포 전에는 해당 모델의 capability, 지원 hardware shape, 배포 가능 리전을 함께 확인해야 합니다. endpoint를 만든 뒤에는 대표 요청으로 입력·출력 형식과 응답을 검증하고, 모델별 제한을 workload 설계에 반영합니다.
 
 
+### 배포 전 호환성 확인
+
+`zai-org/GLM-5.3-Flash`는 `IMAGE_TEXT_TO_TEXT` capability를 지원하며, 최소 Dedicated AI Cluster unit shape는 `H100_X8` 또는 `H200_X4`입니다. target region에서 해당 shape의 capacity를 확인한 뒤 import와 endpoint 배포를 진행합니다.
+
 ### 참고
 
 - [Release Note: Import Z.ai GLM-5.3-Flash into OCI Generative AI](https://docs.oracle.com/iaas/releasenotes/generative-ai/zai-glm-5-3-flash.htm){:target="_blank" rel="noopener"}
@@ -69,6 +73,10 @@ Imported model 배포 전에는 해당 모델의 capability, 지원 hardware sha
 
 Data Science가 지원하는 notebook session·job·model deployment resource에만 기존 Compute capacity reservation을 연결할 수 있습니다. 예약을 지정하기 전에는 workload shape·가용 domain·예약 잔여 용량을 확인하고, 실제 실행이 예약 용량을 소비하는지 job run으로 검증합니다.
 
+### 사전 조건과 지정 방법
+
+대상 compartment에 Compute Capacity Reservation과 reservable capacity limit, Data Science resource 생성·관리 권한, 사용할 reservation OCID가 필요합니다. tenancy와 target region의 BYOR enablement도 Oracle에 요청합니다. workload를 생성·갱신할 때 API의 capacity reservation OCID field에 해당 reservation OCID를 지정하고, 예약 capacity가 실제로 할당되는지 확인합니다.
+
 ### 참고
 
 - [Release Note: Bring Your Own Reservations for Data Science](https://docs.oracle.com/iaas/releasenotes/data-science/bring_your_own_reservations.htm){:target="_blank" rel="noopener"}
@@ -84,6 +92,17 @@ Model discovery로 지정 region의 모델과 capability, input/output type 같�
 ### 모델 선택 확인
 
 Model discovery는 리전별 model capability와 input/output type을 확인하는 API·CLI 기반 조회 기능입니다. endpoint를 만들기 전 target region에서 필요한 model과 capability가 반환되는지 확인해 지원하지 않는 조합의 배포를 방지합니다.
+
+### CLI로 대상 리전 모델 확인
+
+OCI CLI 설정과 모델 조회 권한을 준비한 뒤 목록에서 model capability와 target region 제공 여부를 확인합니다.
+
+```bash
+export compartment_id=<compartment-id>
+oci generative-ai model-discovery-collection list-model-discovery   --compartment-id "$compartment_id"
+```
+
+반환 결과를 확인한 뒤 endpoint 또는 integration을 생성합니다.
 
 ### 참고
 
@@ -102,6 +121,14 @@ Smart model router는 사용자가 정한 regional scope 안에서 on-demand inf
 
 Routing profile에 사용할 model과 허용 리전 범위를 정한 뒤, 데이터 처리 지역 정책과 서비스 연속성 요구사항을 함께 검토해야 합니다. profile을 적용한 요청이 허용된 리전 범위에서 처리되는지, 관측·비용 관리 기준이 맞는지 검증합니다.
 
+
+### Routing profile 생성
+
+Console의 **Routing profiles**에서 profile 이름·compartment·on-demand model을 지정하고, 해당 model이 제공되는 target region을 하나 이상 선택합니다. CLI 사용 시 routing policy JSON은 문서의 `--model-routing-policy`, `--region-routing-policy` 형식에 맞춰 별도 파일 또는 문자열로 제공합니다.
+
+```bash
+oci generative-ai routing-profile create   --compartment-id <compartment-ocid>   --display-name "<routing-profile-name>"   --model-routing-policy file://<model-policy.json>   --region-routing-policy file://<region-policy.json>
+```
 
 ### 참고
 
@@ -271,6 +298,10 @@ OCI Responses API에서 지정된 imported model을 호출할 수 있습니다. 
 Responses API를 지원하는 imported model과 endpoint 구성을 먼저 확인해야 합니다. model capability·hardware shape·agentic region 조건이 맞지 않으면 endpoint를 만들 수 없으므로, 개발 환경에서 API 호출과 응답 형식을 확인한 뒤 통합합니다.
 
 
+### 호출 전 준비
+
+지원 모델을 import하고 hosting Dedicated AI Cluster에 endpoint를 만든 뒤 OCI Responses API로 호출합니다. endpoint 생성 전에 model compatibility table의 capability와 minimum unit shape, target region availability를 확인합니다.
+
 ### 참고
 
 - [Release Note: Use Imported Models with the OCI Responses API in OCI Generative AI](https://docs.oracle.com/iaas/releasenotes/generative-ai/responses-api-for-imported-models-september-06-2026.htm){:target="_blank" rel="noopener"}
@@ -287,6 +318,15 @@ IAM policy의 target.model.id 조건으로 group이 사용할 Generative AI mode
 ### 최소 권한 적용
 
 target.model.id 조건은 group이 사용할 수 있는 model ID를 제한하는 IAM policy 조건입니다. allow·pattern·exclude 규칙을 적용하기 전 허용할 model ID 목록과 기존 application dependency를 확인하고, 제한된 사용자로 inference 요청을 시험해 접근 제어를 검증합니다.
+
+### 최소 권한 정책
+
+Console에서 model을 선택하려면 `inspect generative-ai-model` 권한이 필요합니다. inference 제한은 model ID 조건을 둔 `use generative-ai-family` 정책으로 설정하며, 같은 group에 조건 없는 더 넓은 Generative AI inference 권한이 남아 있지 않은지 함께 확인합니다.
+
+```text
+allow group <group-name> to use generative-ai-family in tenancy
+where target.model.id = 'google.gemini-2.5-flash'
+```
 
 ### 참고
 

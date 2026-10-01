@@ -52,6 +52,10 @@ Object Storage에 IPv6와 IPv4를 모두 처리하는 dual-stack endpoint가 추
 Dual-stack 주소는 Dedicated Endpoint 형식을 사용하며 hostname 앞에 tenancy namespace와 적용 region을 포함합니다. V2, Swift, S3 API별 URI가 다르므로 공식 구성 표에 따라 client endpoint를 설정합니다. DNS의 A·AAAA record, client IPv6 지원, route와 security rule을 확인한 뒤 같은 bucket의 list·upload·download를 IPv4와 IPv6 경로에서 비교하고, 미전환 client는 기존 IPv4-only endpoint로 계속 동작하는지 확인합니다.
 
 
+### SDK 적용
+
+지원 SDK client는 `OCI_DUAL_STACK_ENDPOINT_ENABLED=true`로 dual-stack endpoint를 사용합니다. Python SDK는 client 생성 시 `client_level_dualstack_endpoints_enabled=True`와 `client_level_realm_specific_endpoint_template_enabled=True`도 설정합니다. application DNS·egress가 AAAA record와 IPv6 path를 사용 가능한지 확인합니다.
+
 ### 참고
 
 - [Release Note: Object Storage supports dual-stack endpoints for IPv6](https://docs.oracle.com/iaas/releasenotes/objectstorage/ipv6-support.htm){:target="_blank" rel="noopener"}
@@ -91,10 +95,13 @@ Resource Manager에서 drift detection과 기존 compartment 기반 stack 생성
 자동화된 장애 분석에는 work request OCID를 사용해 목록·구조화 entry·raw content를 구분해 호출합니다.
 
 ```bash
-oci resource-manager work-request list-work-request-logs \\
+oci resource-manager work-request list-work-request-logs \
   --work-request-id <work_request_OCID>
 
-oci resource-manager work-request get-work-request-log-entries-content \\
+oci resource-manager work-request get-work-request-log-entries \
+  --work-request-id <work_request_OCID>
+
+oci resource-manager work-request get-work-request-log-entries-content \
   --work-request-id <work_request_OCID>
 ```
 
@@ -136,6 +143,10 @@ IPv4-only endpoint는 `https://query.<region>.oci.oraclecloud.com`, dual-stack e
 
 Log producer와 조회 client의 endpoint, DNS, IPv6 route와 network egress policy를 확인한 뒤 일부 workload부터 IPv6를 활성화합니다. Dual-stack DNS와 연결을 확인하고 IPv4·IPv6 경로에서 대표 log를 ingest·query해 event 수, timestamp와 조회 결과를 비교합니다. IPv4-only client의 기존 수집과 조회도 계속 정상인지 함께 확인합니다.
 
+
+### API·CLI client 전환
+
+Logging API endpoint는 `https://logging.<region>.ds.oci.<secondLevelDomain>`이고 ingestion endpoint는 `https://ingestion.logging.<region>.ds.oci.<secondLevelDomain>`입니다. SDK에서는 `OCI_DUAL_STACK_ENDPOINT_ENABLE=true`, OCI CLI에서는 `--enable-dual-stack`을 사용하며 기존 IPv4 endpoint와 호출 결과를 비교 검증합니다.
 
 ### 참고
 
@@ -230,6 +241,10 @@ Capture filter는 mirror할 traffic을 선택하며, 선택된 traffic은 지정
 
 Packet capture는 traffic 암호화를 해제하지 않습니다.
 
+
+### VTAP 구성 순서
+
+network firewall OCID를 source로 지정하고 같은 VCN의 Network Load Balancer를 target으로 선택합니다. 하나 이상의 rule이 있는 capture filter를 연결한 뒤, 새 VTAP은 기본적으로 stopped 상태이므로 **Start VTAP**을 명시적으로 실행합니다. 시작 후 target 수집과 filter rule 일치를 확인합니다.
 
 ### 참고
 

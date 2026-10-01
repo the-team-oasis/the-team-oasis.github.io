@@ -65,6 +65,8 @@ Gateway API를 사용하는 인증서 발급 흐름, observability agent의 sche
 
 Native Ingress Controller 1.4.5를 사용하는 cluster에서 gRPC listener를 만들 때에는 listener TLS를 먼저 구성하고 `GRPC` protocol annotation을 지정합니다. 아래 예시는 기존 Kubernetes TLS secret과 backend Service가 준비된 경우의 최소 Ingress resource입니다. `<grpc-host>`, `<tls-secret>`, `<grpc-service>`는 실제 환경 값으로 바꾸고, 같은 IngressClass에서 동일 listener port에 서로 다른 protocol을 지정하지 않습니다.
 
+`<tls-secret>`은 `kubernetes.io/tls` Secret으로 `tls.crt`와 `tls.key`를 포함해야 합니다. Backend TLS 검증에 별도 CA chain을 사용하면 `ca.crt`도 제공하고, `ca.crt`를 제공하지 않으면 backend certificate의 전체 chain을 `tls.crt`에 포함합니다.
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -87,10 +89,10 @@ spec:
               service:
                 name: <grpc-service>
                 port:
-                  number: 443
+                  name: grpc
 ```
 
-적용 후에는 `kubectl apply -f <manifest>.yaml`로 resource를 생성하고 gRPC 요청, TLS handshake, controller event를 확인합니다. Backend TLS는 기본적으로 활성화되며, backend pod에 평문 전송이 필요한 경우에만 별도 annotation을 검토합니다.
+`port.name: grpc`는 listener port가 아니라 Kubernetes Service의 **named port**입니다. 따라서 `<grpc-service>`는 `grpc`라는 이름의 Service port를 실제로 노출해야 합니다. 적용 후에는 `kubectl apply -f <manifest>.yaml`로 resource를 생성하고 gRPC 요청, TLS handshake, controller event를 확인합니다. Backend TLS는 기본적으로 활성화되며, backend pod에 평문 전송이 필요한 경우에만 별도 annotation을 검토합니다.
 
 ### 기존 cluster에서 확인할 상태
 
@@ -145,14 +147,14 @@ OKE virtual node에서도 File Storage service를 기반으로 하는 Persistent
 
 ### 동적 File Storage 프로비저닝 예시
 
-여기서는 **새 File Storage file system을 CSI volume plugin이 동적으로 만드는 방식**만 사용합니다. 이미 존재하는 file system에 연결하는 방식과 한 manifest에 섞지 않습니다. 먼저 cluster principal이 대상 compartment에서 File Storage resource와 network resource를 관리할 수 있어야 합니다.
+여기서는 **새 File Storage file system을 CSI volume plugin이 동적으로 만드는 방식**만 사용합니다. 이미 존재하는 file system에 연결하는 방식과 한 manifest에 섞지 않습니다. 이 방식은 Kubernetes 1.22 이상 cluster가 필요합니다. 먼저 cluster principal에 대상 File Storage compartment의 `manage file-family` 권한과 mount target subnet이 있는 network compartment의 `use virtual-network-family` 권한이 있어야 합니다. 두 resource가 다른 compartment에 있으면 각 policy의 compartment 범위도 해당 resource 위치와 일치시킵니다.
 
 ```text
 ALLOW any-user to manage file-family in compartment <compartment-name> where request.principal.type = 'cluster'
 ALLOW any-user to use virtual-network-family in compartment <compartment-name> where request.principal.type = 'cluster'
 ```
 
-다음은 새 mount target을 만들 subnet을 지정하는 최소 StorageClass와 PVC 예시입니다. 기존 active mount target을 사용한다면 `mountTargetSubnetOcid` 대신 `mountTargetOcid` 하나만 지정합니다. 두 방식을 같은 StorageClass에 함께 넣지 않습니다.
+다음은 새 mount target을 만들 subnet을 지정하는 최소 StorageClass와 PVC 예시입니다. 기존 active mount target을 사용한다면 `mountTargetSubnetOcid` 대신 `mountTargetOcid` 하나만 지정합니다. 두 방식을 같은 StorageClass에 함께 넣지 않습니다. `exportPath`는 선택 parameter이므로 이 최소 예시에서 제외하며, CSI plugin이 export path를 생성하도록 합니다.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -164,7 +166,7 @@ parameters:
   availabilityDomain: <availability-domain>
   mountTargetSubnetOcid: <mount-target-subnet-ocid>
   compartmentOcid: <compartment-ocid>
-  exportPath: <export-path>
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

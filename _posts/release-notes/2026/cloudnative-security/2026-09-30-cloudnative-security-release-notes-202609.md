@@ -51,15 +51,39 @@ OCI Cache API endpoint와 cache cluster private endpoint에 IPv6 지원이 추�
 ### 업데이트 내용
 OCI Functions는 지원 runtime에서 container image를 직접 build·publish하지 않고 function archive로 배포하는 code-only deployment를 지원합니다. archive에는 ZIP file을 사용하며 Java의 경우 uber JAR도 지원합니다.
 
-### 배포 방식 선택
+### archive 준비와 적용 조건
 
-Console 또는 API에서 지원 runtime을 선택하고 archive를 제공하는 흐름입니다. Oracle 문서는 runtime별·architecture별 packaging rule을 별도로 두므로, archive 생성 전에 handler와 dependency가 선택한 runtime의 packaging requirement를 충족하는지 확인해야 합니다. 이후 archive 교체, handler 변경, runtime setting 변경은 code-only function update 절차를 사용하며, custom OS package 또는 container build 제어가 필요한 function은 image-based deployment를 유지합니다.
+Code-only function은 container image가 아니라 archive에서 배포합니다. 지원 managed runtime은 Go, Java, Node.js, Python이며, 선택한 runtime과 application architecture에 맞는 source·dependency archive를 먼저 준비합니다. Java·Python·Node.js는 생성 시 handler가 필요하고, Go archive에는 지정 위치의 Linux executable `func`가 있어야 하므로 별도 handler를 지정하지 않습니다. 대상 region에서 기능이 제공되고, 기존 Functions application 및 Functions resource 생성·갱신 권한이 있어야 합니다.
 
+### Fn Project CLI 사용 흐름
+
+아래 명령은 **새 local function directory에서**, 원하는 compartment·region으로 설정된 Fn Project CLI context를 사용해 실행합니다. `fn init` 뒤에는 runtime별 source 파일과 dependency를 해당 directory에 준비합니다. `<runtime-name>`은 `fn list runtimes`와 `fn list runtime-versions --runtime-name <runtime-name>`로 확인한 지원 runtime/version으로, `<app-name>`은 미리 만든 OCI Functions application으로 바꿉니다.
+
+```bash
+fn init --code-only --runtime-name <runtime-name> --runtime-config-type function-update
+# 생성된 func.yaml 및 runtime별 source·dependency를 준비
+fn build
+fn deploy --app <app-name>
+fn invoke <app-name> <function-name>
+```
+
+`fn build`는 local directory의 `func.yaml`과 active context를 사용해 archive를 만들고, `fn deploy --app`은 archive를 배포합니다. `fn invoke`는 개발 환경의 동기 호출 확인에 사용합니다. Oracle은 production system에서 Fn Project CLI 호출을 권장하지 않으므로 운영 호출은 OCI CLI·SDK 또는 signed invoke endpoint 방식을 사용합니다.
+
+archive를 Object Storage에서 관리하려면 `fn build` 또는 `fn deploy` 전에 active context에 source bucket과 namespace를 지정합니다. 이 경우 application resource principal이 archive object를 읽을 IAM 권한도 필요합니다. context에 이 값이 있으면 `fn deploy`가 archive build·Object Storage upload·배포를 수행하며, `fn push`는 배포 없이 archive만 upload합니다.
+
+```bash
+fn update context object_storage_bucket_name <source-bucket-name>
+fn update context object_storage_namespace <object-storage-namespace>
+fn deploy --app <app-name>
+```
+
+이 흐름은 image build·registry push 기반 deployment를 대체하는 **archive 기반 code-only** 경로입니다. custom OS package 또는 container build 제어가 필요한 경우에는 기존 image-based deployment를 사용합니다.
 
 ### 참고
 
 - [Release Note: Code-only deployment for OCI Functions is now available](https://docs.oracle.com/iaas/releasenotes/functions/functions-code-only-functions.htm){:target="_blank" rel="noopener"}
-- [Oracle Documentation: Creating Functions from Archives (Code-only Functions)](https://docs.oracle.com/iaas/Content/Functions/Tasks/functions_creating-code-only.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Creating Code-only Functions](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functions-codeonly-creating.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Invoking Functions](https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionsinvokingfunctions.htm){:target="_blank" rel="noopener"}
 
 ## Client ID Metadata Document Support for OAuth Clients
 * **Services:** IAM
@@ -72,6 +96,18 @@ IAM identity domain의 OAuth client가 안정된 HTTPS URL의 Client ID Metadata
 
 Client ID Metadata Document(CIMD)는 client가 호스팅하는 stable HTTPS URL을 OAuth `client_id`로 사용합니다. 문서에는 redirect URI, grant type, response type, token endpoint authentication method 같은 OAuth 설정을 둡니다. identity domain은 metadata location의 신뢰 여부와 retrieved metadata를 검증하지만, 보호 자원 접근 권한을 자동으로 부여하지는 않습니다. resource application의 별도 authorization, redirect URI validation, scope·token validation은 계속 적용됩니다.
 
+
+### 신뢰 도메인과 resource allowlist
+
+먼저 identity domain에서 full HTTPS client-metadata document URL을 domain allowlist에 추가하고, 보호 resource application에도 같은 full URL을 OAuth `client_id`로 allowlist에 추가합니다. domain trust만으로 resource access가 허용되지는 않습니다. `redirect_uris`는 metadata document에 선언하며 HTTPS URI는 정확히 일치해야 합니다.
+
+```http
+PATCH https://<idcs-stripe-url>/admin/v1/Settings/Settings
+{
+  "schemas": ["urn:ietf:params:scim:api:messages:2.0:PatchOp"],
+  "Operations": [{"op":"add","path":"allowedCimdDomains","value":[{"domainUri":"https://client.example.com/oauth/client-metadata.json"}]}]
+}
+```
 
 ### 참고
 

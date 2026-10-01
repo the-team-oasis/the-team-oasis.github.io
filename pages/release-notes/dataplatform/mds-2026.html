@@ -1,0 +1,8 @@
+---
+layout: default
+title: "MDS Release Notes - 2026"
+teaser: "2026년 MDS 업데이트 소식입니다."
+breadcrumb: true
+permalink: "release-notes-2026-mds/"
+---
+<div id="blog-index" class="row"><div class="small-12 columns t30"><h1>{{ page.title }}</h1><p class="teaser">{{ page.teaser }}</p><dl class="accordion" data-accordion>{% assign counter = 1 %}{% for post in site.categories.release-notes-2026-mds limit:1000 %}<dd class="accordion-navigation"><a href="#panel{{ counter }}"><strong>{{ post.title }}</strong></a><div id="panel{{ counter }}" class="content">{{ post.teaser | strip_html | escape }}<a href="{{ post.url | relative_url }}"><strong>{{ site.data.language.read_more }}</strong></a></div></dd>{% assign counter=counter | plus:1 %}{% endfor %}</dl></div></div>
