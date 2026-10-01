@@ -35,8 +35,7 @@ header: no
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI가 다음 9개 모델의 import를 지원합니다: `aisingapore/Qwen-SEA-LION-v4-32B-IT`, `mistralai/Magistral-Small-2509`, `google/gemma-4-12B-it`, `google/gemma-4-26B-A4B`, `Qwen/Qwen3.5-397B-A17B`, `k2-fsa/OmniVoice`, `nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4`, `deepseek-ai/DeepSeek-V4-Pro`, `zai-org/GLM-5.2-FP8`입니다. 이는 공식 Release Note에 열거된 모델 ID이며, 개별 모델의 capability와 최소 hardware unit shape는 Models for Import 문서에서 확인해야 합니다.
 
 ## Import Moonshot AI Kimi K3 into OCI Generative AI
@@ -46,8 +45,7 @@ OCI Generative AI가 다음 9개 모델의 import를 지원합니다: `aisingapo
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-moonshot-ai-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-moonshot-ai-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI에 `moonshotai/Kimi-K3`를 import하고 endpoint로 배포할 수 있습니다. 공식 Release Note에 명시된 capability는 `IMAGE_TEXT_TO_TEXT`이고, 최소 Dedicated AI Cluster unit shape는 `B300_X8`, `B200_X16`, `H100_X32`입니다.
 
 ### Kimi K3 배포 조건
@@ -61,8 +59,7 @@ OCI Generative AI에 `moonshotai/Kimi-K3`를 import하고 endpoint로 배포할 
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI가 `nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`과 `nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4`의 import와 endpoint 배포를 지원합니다. 두 모델의 공식 capability는 모두 `TEXT_TO_TEXT`입니다.
 
 ### BF16·NVFP4 배포 선택
@@ -73,8 +70,7 @@ BF16 모델의 최소 Dedicated AI Cluster unit shape는 `A100_40G_X2`, `A100_80
 * **Services:** Generative AI, Oracle Cloud Infrastructure Government Cloud
 * **Release Date:** August 11, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/generative-ai/generative-ai-government.htm](https://docs.oracle.com/iaas/releasenotes/generative-ai/generative-ai-government.htm){:target="_blank" rel="noopener"}
-### 업데이트 내용
-
+### 지원 범위와 적용 대상
 OCI Generative AI가 Oracle US Government Cloud의 US Gov West(Phoenix)와 Oracle US Defense Cloud의 US DoD West(Phoenix) region에서 제공됩니다. 두 region에서는 일부 foundation model을 hosting하기 위한 B300 hardware unit shape도 사용할 수 있습니다.
 
 ## Import DeepSeek V4 Flash 0731 into OCI Generative AI
@@ -84,8 +80,7 @@ OCI Generative AI가 Oracle US Government Cloud의 US Gov West(Phoenix)와 Oracl
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-deepseek-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-deepseek-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI에 `deepseek-ai/DeepSeek-V4-Flash-0731`을 import하고 endpoint로 배포할 수 있습니다. 공식 Release Note는 이 모델을 DeepSeek-V4-Flash preview를 대체하는 정식 릴리스로 설명하며, 향상된 agentic capability, speculative decoding module, low·high·max reasoning-effort 수준을 명시합니다. capability는 `TEXT_TO_TEXT`이고 최소 shape는 `H100_X4`, `H200_X4`, `B200_X2`, `B300_X2`입니다.
 
 ### Preview 교체와 호환성
@@ -99,8 +94,7 @@ OCI Generative AI에 `deepseek-ai/DeepSeek-V4-Flash-0731`을 import하고 endpoi
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-alibaba-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-alibaba-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI에 FP8 Mixture-of-Experts 모델 `Qwen/Qwen3.8-2.4T-A95B-FP8`을 import하고 endpoint로 배포할 수 있습니다. 공식 사양은 총 2.4조 parameter 중 950억 parameter를 활성화하며, capability는 `TEXT_TO_TEXT`, 최소 Dedicated AI Cluster unit shape는 `B200_X16`입니다.
 
 ### Context·B200_X16 전제
@@ -114,8 +108,7 @@ Native context length는 262,144 token이고 최대 1,010,000 token까지 확장
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/imported-xiaomi-models.htm](https://docs.oracle.com/iaas/Content/generative-ai/imported-xiaomi-models.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models](https://docs.oracle.com/iaas/Content/generative-ai/manage-imported-models.htm#imported-models){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 OCI Generative AI에 `XiaomiMiMo/MiMo-V2.5-Pro`를 import하고 endpoint로 배포할 수 있습니다. 공식 Release Note에 따르면 이 모델은 총 1.02조 parameter 중 420억 parameter를 활성화하는 open source Mixture-of-Experts(MoE) 모델이며, capability는 `TEXT_TO_TEXT`, 지원 context length는 최대 100만 token입니다.
 
 ### MiMo 배포 리소스
@@ -129,8 +122,7 @@ OCI Generative AI에 `XiaomiMiMo/MiMo-V2.5-Pro`를 import하고 endpoint로 배�
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/nl2sql.htm](https://docs.oracle.com/iaas/Content/generative-ai/nl2sql.htm){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/generative-ai/model-endpoint-regions.htm](https://docs.oracle.com/iaas/Content/generative-ai/model-endpoint-regions.htm){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 지원 범위와 적용 대상
 Enterprise AI NL2SQL에 enrichment용 모델 선택, semantic store의 정기 enrichment, SQL 생성 요청의 background 처리가 추가되었습니다. enrichment와 SQL 생성의 모델·실행 시점을 workload에 맞게 제어하고, client timeout을 넘길 수 있는 요청을 비동기 job으로 처리할 수 있습니다.
 
 ### 기능별 활성화 지점
@@ -144,3 +136,8 @@ Semantic store를 enrich할 Generative AI 모델을 선택하며, API에서는 �
 ### 적용 전 점검
 
 예약 간격이 6시간 이상인지와 enrichment job의 완료 상태를 확인하고, 변경된 schema metadata가 delta refresh 결과에 반영됐는지 점검합니다. Background 요청은 `GetGenerateSqlFromNlJob`을 최종 상태와 결과의 기준으로 삼고, 성공 시 `jobOutput`에서 생성된 SQL을 확인합니다.
+
+## 용어 주석
+
+- **NL2SQL**: 자연어 질의를 SQL로 변환하는 방식입니다. 생성된 SQL은 실행 전 대상 데이터와 권한 범위를 검토해야 합니다. [Oracle Autonomous Database Select AI 문서](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-about.html){:target="_blank" rel="noopener"}
+- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델마다 지원 capability·shape·리전이 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}

@@ -35,8 +35,7 @@ header: no
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/postgresql/byok.htm](https://docs.oracle.com/iaas/releasenotes/postgresql/byok.htm){:target="_blank" rel="noopener"}
 
 * **Documentation:** [https://docs.oracle.com/iaas/Content/postgresql/using-own-key.htm](https://docs.oracle.com/iaas/Content/postgresql/using-own-key.htm){:target="_blank" rel="noopener"}
-### 업데이트 내용
-
+### 암호화 키 관리 범위
 OCI Database with PostgreSQL에서 고객 관리 encryption key를 사용할 수 있습니다. key lifecycle·access policy·복구 절차를 database 운영 기준에 함께 반영해야 합니다.
 
 ### 키 수명주기
@@ -48,6 +47,9 @@ OCI Database with PostgreSQL에서 고객 관리 encryption key를 사용할 수
 * **Release Date:** September 01, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/big-data/odh-based-versioning.htm](https://docs.oracle.com/iaas/releasenotes/big-data/odh-based-versioning.htm){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 버전 변경 범위
 OCI Big Data Service가 cluster 생성·Console 표기·release documentation에서 ODH version을 기본 version 기준으로 사용합니다. 기존 BDS version 기준의 운영 문서와 automation을 점검해야 합니다.
+
+## 용어 주석
+
+- **BYOK (Bring Your Own Key)**: 서비스 제공 키 대신 고객이 관리하는 암호화 키를 사용하는 방식입니다. 이 글에서는 OCI Database with PostgreSQL의 encryption key 선택 기능을 가리킵니다. [OCI Database with PostgreSQL 문서](https://docs.oracle.com/iaas/Content/postgresql/home.htm){:target="_blank" rel="noopener"}

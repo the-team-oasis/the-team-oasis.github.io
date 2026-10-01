@@ -33,8 +33,7 @@ header: no
 * **Release Date:** September 29, 2026
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/mysql-database/heatwave-97x-default-track.htm](https://docs.oracle.com/iaas/releasenotes/mysql-database/heatwave-97x-default-track.htm){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 버전 변경 범위
 새 HeatWave DB System의 기본 MySQL 버전이 8.4 LTS에서 9.7 LTS로 변경됩니다. 신규 생성 표준과 기존 환경의 버전 정책을 구분해 검증해야 합니다.
 
 ## HeatWave: Automatic Storage Expansion Enhanced
@@ -43,8 +42,7 @@ header: no
 * **Release Note:** [https://docs.oracle.com/iaas/releasenotes/mysql-database/heatwave-automatic-storage-expansion-enhanced.htm](https://docs.oracle.com/iaas/releasenotes/mysql-database/heatwave-automatic-storage-expansion-enhanced.htm){:target="_blank" rel="noopener"}
 
 * **Documentation:** [https://docs.oracle.com/iaas/mysql-database/doc/managing-db-system.html](https://docs.oracle.com/iaas/mysql-database/doc/managing-db-system.html){:target="_blank" rel="noopener"}
-### 업데이트 내용
-
+### 저장소 동작과 운영 영향
 HeatWave DB System은 남은 저장 공간이 10% 이하일 때 자동 storage expansion을 수행합니다. 용량 경보와 비용 관리 기준은 자동 확장 동작을 반영해 점검해야 합니다.
 
 ### 용량·비용 점검

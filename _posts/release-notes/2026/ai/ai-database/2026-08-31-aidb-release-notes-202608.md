@@ -37,8 +37,7 @@ header: no
 * **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/autonomous-pipeline.html#GUID-6B8D7F24-9C31-4A56-B2E7-5D0F8C6A1E93](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/autonomous-pipeline.html#GUID-6B8D7F24-9C31-4A56-B2E7-5D0F8C6A1E93){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html#GUID-2F7A9C41-6D3E-4B85-A0F2-8C5D1E7B9A63](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html#GUID-2F7A9C41-6D3E-4B85-A0F2-8C5D1E7B9A63){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 기능 변경과 적용 범위
 Autonomous Database Serverless에서 `DBMS_CLOUD_AI`, `DBMS_CLOUD_AI_AGENT`, `DBMS_CLOUD_PIPELINE`, `DBMS_CLOUD`로 만든 지원 object의 실행 가능한 PL/SQL 정의를 `GET_DEFINITION` 함수로 반환할 수 있습니다. 반환값은 package별 public create procedure를 호출하는 canonical CLOB이며, object 정의의 조회·비교·재생성에 사용할 수 있어 환경 이관과 변경 관리 방식에 영향을 줍니다.
 
 ### Package별 반환 범위
@@ -62,8 +61,7 @@ Autonomous Database Serverless에서 `DBMS_CLOUD_AI`, `DBMS_CLOUD_AI_AGENT`, `DB
 * **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html#GUID-5F998FB4-B247-483E-A030-DF5C44F68ECC](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html#GUID-5F998FB4-B247-483E-A030-DF5C44F68ECC){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html#GUID-2894BE6C-9D15-4594-9EA8-9B963121D80C](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html#GUID-2894BE6C-9D15-4594-9EA8-9B963121D80C){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 모델 등록과 제공 방식
 Autonomous Database Serverless의 Select AI Agent team 정의를 `DBMS_CLOUD_AI_AGENT.IMPORT_TEAM`과 `DBMS_CLOUD_AI_AGENT.EXPORT_TEAM` API로 가져오고 내보낼 수 있습니다. Agent team 구성을 migration·backup·version control·환경 간 공유에 사용할 수 있는 공식 인터페이스가 제공됩니다.
 
 ### Agent Team 이동 절차

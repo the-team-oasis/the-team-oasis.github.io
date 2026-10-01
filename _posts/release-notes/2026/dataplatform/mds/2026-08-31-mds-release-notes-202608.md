@@ -34,8 +34,7 @@ header: no
 * **Documentation:** [https://docs.oracle.com/iaas/mysql-database/doc/blue-green-deployments.html](https://docs.oracle.com/iaas/mysql-database/doc/blue-green-deployments.html){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/mysql-database/doc/switching-over-blue-green-deployment.html](https://docs.oracle.com/iaas/mysql-database/doc/switching-over-blue-green-deployment.html){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 전환 방식과 검증 흐름
 MySQL HeatWave에서 standalone DB system의 upgrade와 infrastructure 변경을 위한 blue/green deployment를 지원합니다. 현재 운영 중인 blue source와 별도로 green target DB system을 준비하고 검증한 뒤 client connection을 전환하므로 변경 작업의 downtime을 줄일 수 있습니다.
 
 ### Blue/Green 전환 흐름

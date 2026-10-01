@@ -36,8 +36,7 @@ header: no
 * **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/overview.htm#bds-versions](https://docs.oracle.com/iaas/Content/bigdata/overview.htm#bds-versions){:target="_blank" rel="noopener"}
 * **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-node-replace.htm](https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-node-replace.htm){:target="_blank" rel="noopener"}
 
-### 업데이트 내용
-
+### 기능 변경과 적용 범위
 Big Data Service 3.4.0은 보안 인증서 관리, cluster lifecycle, Java runtime, 장애 복구와 운영 가시성을 함께 개선한 릴리스입니다. Hive metadata migration용 export script, 실패 원인을 구체적으로 표시하는 work request log, OCI Certificates Service 연동, 일부 Generic shape 지원, Ambari 3, component별 JDK 선택, 종료된 master·utility node 교체, cluster 검색·정렬과 Usersync 활성화가 포함됩니다.
 
 ### 3.4.0 기능별 변경
