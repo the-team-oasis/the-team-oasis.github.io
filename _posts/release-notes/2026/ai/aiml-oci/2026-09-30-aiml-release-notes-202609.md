@@ -51,9 +51,6 @@ zai-org/GLM-5.3-Flash 모델을 OCI Generative AI에 import하고 endpoint로 �
 
 Imported model 배포 전에는 해당 모델의 capability, 지원 hardware shape, 배포 가능 리전을 함께 확인해야 합니다. endpoint를 만든 뒤에는 대표 요청으로 입력·출력 형식과 응답을 검증하고, 모델별 제한을 workload 설계에 반영합니다.
 
-### 용어 주석
-
-- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델별 capability·shape·리전 조건은 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -105,9 +102,6 @@ Smart model router는 사용자가 정한 regional scope 안에서 on-demand inf
 
 Routing profile에 사용할 model과 허용 리전 범위를 정한 뒤, 데이터 처리 지역 정책과 서비스 연속성 요구사항을 함께 검토해야 합니다. profile을 적용한 요청이 허용된 리전 범위에서 처리되는지, 관측·비용 관리 기준이 맞는지 검증합니다.
 
-### 용어 주석
-
-- **Routing profile**: on-demand inference 요청을 허용된 리전 범위에서 라우팅하기 위한 OCI Generative AI 구성입니다. [Routing profile 생성](https://docs.oracle.com/iaas/Content/generative-ai/create-routing-profile.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -171,9 +165,6 @@ UAE Central(Abu Dhabi) region에서 zai-org/GLM-5.3을 import해 endpoint로 배
 
 이 모델은 제공 리전과 dedicated AI cluster 조건을 확인해야 합니다. cluster와 endpoint를 준비한 뒤 model deployment 상태와 대표 inference 요청을 검증합니다.
 
-### 용어 주석
-
-- **Dedicated AI cluster**: imported model deployment에 사용하는 OCI Generative AI의 전용 실행 자원입니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -188,9 +179,6 @@ UAE Central(Abu Dhabi) region에서 zai-org/GLM-5.3을 import해 endpoint로 배
 ### 업데이트 내용
 Cohere Command A Vision과 Cohere Embed 4가 UAE East(Dubai)에서 on-demand로 제공됩니다. 두 모델은 Dubai dedicated AI cluster에서도 사용할 수 있습니다.
 
-### 용어 주석
-
-- **Dedicated AI cluster**: imported model deployment에 사용하는 OCI Generative AI의 전용 실행 자원입니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -203,9 +191,6 @@ Cohere Command A Vision과 Cohere Embed 4가 UAE East(Dubai)에서 on-demand로 
 ### 업데이트 내용
 Abu Dhabi에서 Cohere Command A Vision과 Cohere Embed 4의 on-demand serving이 deprecated 되었으며 2026년 10월 21일 종료됩니다. 운영 endpoint는 대체 모델 또는 dedicated AI cluster 전환을 준비해야 합니다.
 
-### 용어 주석
-
-- **Dedicated AI cluster**: imported model deployment에 사용하는 OCI Generative AI의 전용 실행 자원입니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -250,9 +235,6 @@ deepseek-ai/DeepSeek-V4-Pro-0813을 OCI Generative AI에 import해 endpoint로 �
 
 import 전에 모델이 지원하는 capability와 dedicated AI cluster 요구사항을 확인합니다. endpoint 배포 뒤에는 입력 형식, 응답, quota 사용량을 시험 workload로 검증합니다.
 
-### 용어 주석
-
-- **Dedicated AI cluster**: imported model deployment에 사용하는 OCI Generative AI의 전용 실행 자원입니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -288,9 +270,6 @@ OCI Responses API에서 지정된 imported model을 호출할 수 있습니다. 
 
 Responses API를 지원하는 imported model과 endpoint 구성을 먼저 확인해야 합니다. model capability·hardware shape·agentic region 조건이 맞지 않으면 endpoint를 만들 수 없으므로, 개발 환경에서 API 호출과 응답 형식을 확인한 뒤 통합합니다.
 
-### 용어 주석
-
-- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델별 capability·shape·리전 조건은 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 

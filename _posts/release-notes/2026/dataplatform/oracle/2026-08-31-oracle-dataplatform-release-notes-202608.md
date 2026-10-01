@@ -89,9 +89,7 @@ Database Tools MCP server에서 현재 구성에 필요한 OCI IAM policy statem
 
 Token 인증의 on-behalf-of 연결에 필요한 `database-tools-db-connect-obo` 권한은 현재 특정 database나 compartment로 제한할 수 없어 tenancy 수준에서 부여됩니다. MCP server와 connection의 runtime identity가 모두 Authenticated Principal이면 asynchronous request가 지원되지 않습니다.
 
-### 용어 주석
-
-- **MCP (Model Context Protocol)**: AI 애플리케이션이 외부 도구·데이터 소스와 문맥을 교환하기 위한 공개 프로토콜입니다. Database Tools MCP Server를 운영할 때는 서버 로그와 도구 권한을 함께 관리합니다. [Model Context Protocol](https://modelcontextprotocol.io/introduction){:target="_blank" rel="noopener"}
+> **MCP (Model Context Protocol):** AI 애플리케이션이 외부 도구·데이터 소스와 문맥을 교환하기 위한 공개 프로토콜입니다. [MCP 소개](https://modelcontextprotocol.io/introduction){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -112,9 +110,7 @@ Catalog-managed external table은 catalog가 현재 metadata와 snapshot을 해�
 
 Iceberg time travel 지원 catalog는 Databricks, AWS Glue, OCI Object Storage의 Hadoop Catalog이며, partitioned Iceberg table과 merge-on-read delete file은 지원되지 않습니다. Fixed external table의 schema가 Iceberg metadata의 schema version과 달라지면 table을 다시 생성해야 하고, metadata 파일을 직접 지정한 external table은 새 snapshot을 자동으로 반영하지 않습니다.
 
-### 용어 주석
-
-- **Apache Iceberg**: 대규모 분석 테이블의 snapshot·schema evolution 등을 지원하는 오픈소스 table format입니다. [Apache Iceberg](https://iceberg.apache.org/){:target="_blank" rel="noopener"}
+> **Apache Iceberg:** 대규모 분석 테이블의 snapshot과 schema evolution을 지원하는 오픈소스 table format입니다. [Apache Iceberg](https://iceberg.apache.org/){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -177,9 +173,6 @@ MCP server의 **Monitoring** 탭에서 `MCP Invocation Logs`의 **Enable log**�
 
 > **편집자 권고:** Log group과 invocation log의 접근, 보존·삭제 및 조사 자료 공유 범위는 조직의 IAM·감사 정책에 따라 별도로 정하십시오.
 
-### 용어 주석
-
-- **MCP (Model Context Protocol)**: AI 애플리케이션이 외부 도구·데이터 소스와 문맥을 교환하기 위한 공개 프로토콜입니다. Database Tools MCP Server를 운영할 때는 서버 로그와 도구 권한을 함께 관리합니다. [Model Context Protocol](https://modelcontextprotocol.io/introduction){:target="_blank" rel="noopener"}
 
 ### 참고
 

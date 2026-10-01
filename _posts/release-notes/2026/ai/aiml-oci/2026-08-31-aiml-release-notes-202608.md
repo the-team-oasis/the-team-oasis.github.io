@@ -53,9 +53,6 @@ OCI Generative AI에 `moonshotai/Kimi-K3`를 import하고 endpoint로 배포할 
 
 모델 ID와 세 최소 shape 중 배포 region에서 제공되는 구성을 Models for Import에서 확인합니다. Hugging Face에서 직접 가져오는 경우에는 해당 모델 접근 요건을 확인하고, Object Storage에서 가져오는 경우에는 Managing Imported Models 문서에 따라 model artifact를 bucket에 저장하며 구성 파일 이름을 `config.json`으로 준비해야 합니다. 운영 배포 전에는 선택한 import 경로의 artifact와 shape 조건을 각각 검증합니다.
 
-### 용어 주석
-
-- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델마다 지원 capability·shape·리전이 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -119,9 +116,6 @@ OCI Generative AI에 FP8 Mixture-of-Experts 모델 `Qwen/Qwen3.8-2.4T-A95B-FP8`�
 
 Native context length는 262,144 token이고 최대 1,010,000 token까지 확장할 수 있습니다. 다만 imported model 문서는 실제 최대 context가 hosting cluster의 hardware 구성에 의해 제한될 수 있다고 명시하므로, `B200_X16` 제공 여부를 확인한 후 목표 context 길이로 endpoint를 검증해야 합니다. 이 hardware 전제와 context 상한은 endpoint 수용량 및 장문 요청의 운영 설계에 직접 영향을 줍니다. 1,010,000 token을 모든 배포에서 자동 보장되는 값으로 간주하지 않습니다.
 
-### 용어 주석
-
-- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델마다 지원 capability·shape·리전이 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -140,9 +134,6 @@ OCI Generative AI에 `XiaomiMiMo/MiMo-V2.5-Pro`를 import하고 endpoint로 배�
 
 최소 Dedicated AI Cluster unit shape는 `B200_X8` 또는 `B300_X8`입니다. 운영 배포 전 Models for Import에서 모델 ID와 shape 조건을 확인하고, 실제 배포 region에서 두 shape 중 사용할 구성이 제공되는지 확인합니다. Imported model의 유효 최대 context는 선택한 hardware 구성에 의해 제한될 수 있으므로 목표 context 길이로 endpoint를 별도 검증합니다.
 
-### 용어 주석
-
-- **Imported model**: OCI Generative AI에 가져온 모델을 endpoint로 배포해 사용하는 방식입니다. 모델마다 지원 capability·shape·리전이 다를 수 있습니다. [OCI Generative AI imported models](https://docs.oracle.com/iaas/Content/generative-ai/imported-models.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -169,9 +160,6 @@ Semantic store를 enrich할 Generative AI 모델을 선택하며, API에서는 �
 
 예약 간격이 6시간 이상인지와 enrichment job의 완료 상태를 확인하고, 변경된 schema metadata가 delta refresh 결과에 반영됐는지 점검합니다. Background 요청은 `GetGenerateSqlFromNlJob`을 최종 상태와 결과의 기준으로 삼고, 성공 시 `jobOutput`에서 생성된 SQL을 확인합니다.
 
-### 용어 주석
-
-- **NL2SQL**: 자연어 질의를 SQL로 변환하는 방식입니다. 생성된 SQL은 실행 전 대상 데이터와 권한 범위를 검토해야 합니다. [Oracle Autonomous Database Select AI 문서](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-about.html){:target="_blank" rel="noopener"}
 
 ### 참고
 

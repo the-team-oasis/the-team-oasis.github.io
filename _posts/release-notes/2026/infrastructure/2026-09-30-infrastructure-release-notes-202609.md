@@ -50,18 +50,10 @@ OCI Networking의 FastConnect는 FastConnect partner, FastConnect direct, Oracle
 
 traffic draining을 사용할 private virtual circuit과 해당 FastConnect 연결 방식을 먼저 구분합니다. direct cross-connect 또는 cross-connect group을 운영하는 경우에는 minimum links와 interface hold timer 설정이 기존 이중화·장애 전환 설계와 일치하는지 확인한 뒤 변경 창에 적용합니다.
 
-<figure>
-  <img src="https://docs.oracle.com/iaas/Content/Network/Images/network_fc_colo_vc.svg" alt="OCI FastConnect colocation 환경에서 private virtual circuit을 사용하는 연결 구성" loading="lazy">
-  <figcaption>FastConnect colocation 환경의 private virtual circuit 연결 예시. <a href="https://docs.oracle.com/iaas/Content/Network/Concepts/fastconnectoverview.htm" target="_blank" rel="noopener">Oracle Documentation: FastConnect overview</a></figcaption>
-</figure>
-
 ### 동작 범위
 
 traffic draining의 대상은 private virtual circuit이며, public virtual circuit까지 포함하는 기능으로 해석하면 안 됩니다. 이번 minimum links·hold timer·LOA 개선의 적용 범위도 FastConnect direct cross-connect와 cross-connect group으로 한정됩니다.
 
-### 용어 주석
-
-- **LOA (Letter of Authorization)**: FastConnect direct cross-connect를 위한 승인 문서입니다. [Oracle Documentation: FastConnect](https://docs.oracle.com/iaas/Content/Network/Concepts/fastconnect.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -152,9 +144,6 @@ OCI Monitoring API가 IPv4와 IPv6를 모두 처리하는 dual-stack endpoint를
 
 Monitoring API의 dual-stack endpoint를 사용할 경우 metric 조회 client가 IPv6 DNS 결과와 network egress를 처리할 수 있어야 합니다. 기존 monitoring integration을 IPv4와 IPv6 경로에서 모두 시험합니다.
 
-### 용어 주석
-
-- **Dual-stack**: IPv4와 IPv6 주소 체계를 함께 지원하는 네트워크 구성입니다. [OCI IPv6 개요](https://docs.oracle.com/iaas/Content/Object/Concepts/use-ipv6-urls.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -183,10 +172,7 @@ IoT Flow Runtime은 통합 Node-RED editor로 integration flow를 build·deploy�
 
 Flow Runtime은 Node-RED editor로 integration flow를 build·deploy·run하는 managed 환경입니다. flow가 필요한 network access와 File Storage mount를 구성한 뒤, 로그·metrics·events를 확인해 배포된 flow의 오류와 처리 상태를 운영 절차에 포함합니다.
 
-### 용어 주석
-
-- **Flow Runtime**: IoT Flow를 실행하는 런타임 구성 요소입니다. [OCI Internet of Things](https://docs.oracle.com/iaas/Content/internet-of-things/flow-runtimes.htm){:target="_blank" rel="noopener"}
-- **Node-RED**: 이벤트 기반 흐름을 시각적으로 조합하는 오픈소스 프로그래밍 도구입니다. 이 업데이트에서는 Flow Runtime의 통합 editor로 사용됩니다. [Node-RED 공식 문서](https://nodered.org/docs/){:target="_blank" rel="noopener"}
+> **Node-RED:** 이벤트 기반 흐름을 시각적으로 조합하는 오픈소스 프로그래밍 도구입니다. 이 업데이트에서는 Flow Runtime의 통합 editor로 사용됩니다. [Node-RED 공식 문서](https://nodered.org/docs/){:target="_blank" rel="noopener"}
 
 ### 참고
 

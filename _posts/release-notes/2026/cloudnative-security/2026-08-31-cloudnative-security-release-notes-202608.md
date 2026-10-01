@@ -43,9 +43,6 @@ Cluster add-on을 활성화할 때는 공식 AMD GPU Operator configuration argu
 
 적용 범위는 AMD GPU workload를 실행하는 node pool을 중심으로 잡고, 사용 중인 OKE 및 add-on version에서 노출되는 configuration argument만 사용해야 합니다. 적용 후에는 add-on 상태와 관련 pod의 정상 기동 여부, AMD GPU resource와 node label의 노출 여부, test runner 및 metrics exporter의 결과를 순서대로 확인해 실제 workload가 GPU를 사용할 수 있는지 검증합니다.
 
-### 용어 주석
-
-- **Kubernetes add-on**: 클러스터 기능을 확장하는 OCI 관리형 구성 요소입니다. add-on의 버전·호환성은 클러스터 Kubernetes 버전과 함께 확인합니다. [OKE add-ons](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengintroducingclusteraddons.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -64,13 +61,41 @@ OKE cluster add-on에 WebLogic Kubernetes Operator 4.3.10, Istio 1.29.5, Native 
 
 Gateway API를 사용하는 인증서 발급 흐름, observability agent의 scheduling 우선순위, gRPC용 OCI Load Balancer listener, TLS policy를 각각 해당 add-on 설정에 반영할 수 있습니다. Ingress 변경은 외부 traffic의 protocol 처리와 TLS 호환성에 직접 영향을 주므로 현재 listener와 backend set을 기준으로 필요한 기능만 단계적으로 활성화합니다.
 
+### gRPC listener 최소 manifest
+
+Native Ingress Controller 1.4.5를 사용하는 cluster에서 gRPC listener를 만들 때에는 listener TLS를 먼저 구성하고 `GRPC` protocol annotation을 지정합니다. 아래 예시는 기존 Kubernetes TLS secret과 backend Service가 준비된 경우의 최소 Ingress resource입니다. `<grpc-host>`, `<tls-secret>`, `<grpc-service>`는 실제 환경 값으로 바꾸고, 같은 IngressClass에서 동일 listener port에 서로 다른 protocol을 지정하지 않습니다.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grpc-ingress
+  annotations:
+    oci-native-ingress.oraclecloud.com/protocol: GRPC
+spec:
+  tls:
+    - hosts:
+        - <grpc-host>
+      secretName: <tls-secret>
+  rules:
+    - host: <grpc-host>
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: <grpc-service>
+                port:
+                  number: 443
+```
+
+적용 후에는 `kubectl apply -f <manifest>.yaml`로 resource를 생성하고 gRPC 요청, TLS handshake, controller event를 확인합니다. Backend TLS는 기본적으로 활성화되며, backend pod에 평문 전송이 필요한 경우에만 별도 annotation을 검토합니다.
+
 ### 기존 cluster에서 확인할 상태
 
 새 기능은 Release Note에 명시된 add-on version과 실제 cluster에서 선택 가능한 version을 기준으로 적용해야 하며, TLS cipher와 protocol은 client 및 backend가 모두 지원하는 조합이어야 합니다. 변경 후 Gateway API certificate 상태, ObservabilityAgent pod의 priority class, gRPC 요청 성공 여부, TLS handshake와 기존 HTTP workload의 정상 동작을 함께 확인합니다.
 
-### 용어 주석
-
-- **Kubernetes add-on**: 클러스터 기능을 확장하는 OCI 관리형 구성 요소입니다. add-on의 버전·호환성은 클러스터 Kubernetes 버전과 함께 확인합니다. [OKE add-ons](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengintroducingclusteraddons.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -89,9 +114,6 @@ OKE managed node pool에서 더 이전의 Kubernetes version을 지정한 뒤 �
 
 Rollback 대상 node pool에서 사용할 수 있고 control plane과 호환되는 이전 Kubernetes version을 선택한 뒤 공식 절차에 따라 기존 node를 교체합니다. 선택 가능한 version은 tenancy에 따라 달라질 수 있습니다. 교체 과정의 pod 재배치와 capacity 변화를 고려해 replica, disruption budget, node별 workload를 먼저 확인하고, 작업 전후 node version·pod readiness·cluster add-on·storage와 network 연동 상태를 비교합니다.
 
-### 용어 주석
-
-- **Kubernetes add-on**: 클러스터 기능을 확장하는 OCI 관리형 구성 요소입니다. add-on의 버전·호환성은 클러스터 Kubernetes 버전과 함께 확인합니다. [OKE add-ons](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengintroducingclusteraddons.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -105,9 +127,6 @@ Rollback 대상 node pool에서 사용할 수 있고 control plane과 호환되�
 ### 업데이트 내용
 OKE가 Kubernetes 1.34.10을 지원하며, 기존 1.35.2와 1.36.1도 계속 지원합니다. Oracle은 1.34.2 지원을 2026년 9월 22일 종료할 예정이므로 1.34.10, 1.35.2 또는 1.36.1로 즉시 업그레이드할 것을 권고합니다.
 
-### 용어 주석
-
-- **Kubernetes add-on**: 클러스터 기능을 확장하는 OCI 관리형 구성 요소입니다. add-on의 버전·호환성은 클러스터 Kubernetes 버전과 함께 확인합니다. [OKE add-ons](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengintroducingclusteraddons.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -124,16 +143,51 @@ OKE virtual node에서도 File Storage service를 기반으로 하는 Persistent
 
 공식 File Storage PVC 절차에 따라 mount target과 network 접근 경로를 준비하고 PersistentVolume 또는 StorageClass, PersistentVolumeClaim을 workload에 연결합니다. Virtual node에 상태 저장 workload를 배치할 수 있는 범위가 넓어지지만, pod lifecycle과 별개로 File Storage의 가용성, 권한, 용량과 mount 경로를 운영해야 합니다.
 
+### 동적 File Storage 프로비저닝 예시
+
+여기서는 **새 File Storage file system을 CSI volume plugin이 동적으로 만드는 방식**만 사용합니다. 이미 존재하는 file system에 연결하는 방식과 한 manifest에 섞지 않습니다. 먼저 cluster principal이 대상 compartment에서 File Storage resource와 network resource를 관리할 수 있어야 합니다.
+
+```text
+ALLOW any-user to manage file-family in compartment <compartment-name> where request.principal.type = 'cluster'
+ALLOW any-user to use virtual-network-family in compartment <compartment-name> where request.principal.type = 'cluster'
+```
+
+다음은 새 mount target을 만들 subnet을 지정하는 최소 StorageClass와 PVC 예시입니다. 기존 active mount target을 사용한다면 `mountTargetSubnetOcid` 대신 `mountTargetOcid` 하나만 지정합니다. 두 방식을 같은 StorageClass에 함께 넣지 않습니다.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: <fss-dynamic-storage-class>
+provisioner: fss.csi.oraclecloud.com
+parameters:
+  availabilityDomain: <availability-domain>
+  mountTargetSubnetOcid: <mount-target-subnet-ocid>
+  compartmentOcid: <compartment-ocid>
+  exportPath: <export-path>
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <pvc-name>
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: <fss-dynamic-storage-class>
+  resources:
+    requests:
+      storage: 50Gi
+```
+
+`storage` 값은 Kubernetes에서 필수이지만 File Storage file system 크기를 지정하지 않으며, CSI plugin은 새 PV와 file system을 생성합니다. 적용 전 mount target의 network path와 security rule을 준비하고, 적용 후 `kubectl get pvc <pvc-name>`에서 `Bound` 상태와 pod mount·재기동 뒤 read/write를 검증합니다.
+
 ### Virtual node 적용 조건
 
 이 업데이트는 File Storage service가 지원하는 persistent volume에 대한 것이므로 다른 storage driver의 virtual node 지원으로 확대 해석해서는 안 됩니다. 배포 전 subnet과 보안 규칙, File Storage export 및 mount 권한을 확인하고, 배포 후 PVC가 정상 연결되는지와 pod 재생성 뒤에도 read/write 결과가 유지되는지를 검증합니다.
 
-### 용어 주석
-
-- **Kubernetes add-on**: 클러스터 기능을 확장하는 OCI 관리형 구성 요소입니다. add-on의 버전·호환성은 클러스터 Kubernetes 버전과 함께 확인합니다. [OKE add-ons](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengintroducingclusteraddons.htm){:target="_blank" rel="noopener"}
-- **Virtual node**: 사용자가 worker node의 운영을 직접 맡지 않고 Pod를 실행하는 OKE 실행 방식입니다. [OKE virtual nodes](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengworkingwithvirtualnodes.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
 - [Release Note: OCI Kubernetes Engine (OKE) support for virtual nodes using persistent volumes backed by File Storage service](https://docs.oracle.com/iaas/releasenotes/conteng/conteng_virtual-nodes-persistent-storage-support.htm){:target="_blank" rel="noopener"}
 - [Oracle Documentation: Provisioning PVCs on the File Storage Service](https://docs.oracle.com/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim_Provisioning_PVCs_on_FSS.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Policy Configuration for Cluster Access](https://docs.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm){:target="_blank" rel="noopener"}

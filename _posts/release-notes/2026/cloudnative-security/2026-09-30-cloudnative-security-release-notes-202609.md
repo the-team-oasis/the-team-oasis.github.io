@@ -55,9 +55,6 @@ OCI Functions는 지원 runtime에서 container image를 직접 build·publish�
 
 Console 또는 API에서 지원 runtime을 선택하고 archive를 제공하는 흐름입니다. Oracle 문서는 runtime별·architecture별 packaging rule을 별도로 두므로, archive 생성 전에 handler와 dependency가 선택한 runtime의 packaging requirement를 충족하는지 확인해야 합니다. 이후 archive 교체, handler 변경, runtime setting 변경은 code-only function update 절차를 사용하며, custom OS package 또는 container build 제어가 필요한 function은 image-based deployment를 유지합니다.
 
-### 용어 주석
-
-- **Code-only deployment**: OCI Functions의 managed runtime에서 container image를 직접 만들지 않고 ZIP archive 또는 Java uber JAR로 배포하는 방식입니다. [Creating Functions from Archives](https://docs.oracle.com/iaas/Content/Functions/Tasks/functions_creating-code-only.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -75,10 +72,6 @@ IAM identity domain의 OAuth client가 안정된 HTTPS URL의 Client ID Metadata
 
 Client ID Metadata Document(CIMD)는 client가 호스팅하는 stable HTTPS URL을 OAuth `client_id`로 사용합니다. 문서에는 redirect URI, grant type, response type, token endpoint authentication method 같은 OAuth 설정을 둡니다. identity domain은 metadata location의 신뢰 여부와 retrieved metadata를 검증하지만, 보호 자원 접근 권한을 자동으로 부여하지는 않습니다. resource application의 별도 authorization, redirect URI validation, scope·token validation은 계속 적용됩니다.
 
-### 용어 주석
-
-- **OAuth client**: OAuth 흐름에서 client identifier와 redirect·metadata 설정을 사용하는 애플리케이션 등록 단위입니다. [Client ID Metadata Documents](https://docs.oracle.com/iaas/Content/Identity/applications/client-id-metadata-documents.htm){:target="_blank" rel="noopener"}
-- **CIMD (Client ID Metadata Document)**: stable HTTPS URL에 client metadata를 게시하고 그 URL을 OAuth `client_id`로 쓰는 방식입니다. [Client ID Metadata Documents](https://docs.oracle.com/iaas/Content/Identity/applications/client-id-metadata-documents.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -96,9 +89,6 @@ OCI Cache가 primary cache cluster에서 다른 OCI region의 secondary cache cl
 
 primary·secondary는 서로 다른 region에 있어야 하며, cache engine version, cluster mode, node당 memory가 일치해야 합니다. 두 cluster는 최소 8 GB/node의 non-sharded cluster여야 하고, custom configuration set의 `reserved-memory-percentage`, `maxmemory-policy`, 필요 시 `databases` 값을 맞춥니다. 설정·ACL user는 자동 복제되지 않으므로 두 region에 각각 준비합니다. planned switchover에는 두 region과 두 cluster가 모두 가용해야 하며, 시작 전 application write를 중지합니다. primary region 장애 시에는 automatic failover가 없으므로 secondary를 standalone으로 전환하고 application endpoint를 갱신하는 절차를 runbook에 둡니다.
 
-### 용어 주석
-
-- **Cross-region replication**: primary cache cluster의 데이터를 다른 리전 secondary cluster로 복제하는 OCI Cache 기능입니다. [OCI Cache Cross-Region Replication](https://docs.oracle.com/iaas/Content/ocicache/cross-region-replication.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 

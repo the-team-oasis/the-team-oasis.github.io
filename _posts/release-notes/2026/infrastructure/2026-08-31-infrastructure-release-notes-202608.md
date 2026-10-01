@@ -51,9 +51,6 @@ Object Storage에 IPv6와 IPv4를 모두 처리하는 dual-stack endpoint가 추
 
 Dual-stack 주소는 Dedicated Endpoint 형식을 사용하며 hostname 앞에 tenancy namespace와 적용 region을 포함합니다. V2, Swift, S3 API별 URI가 다르므로 공식 구성 표에 따라 client endpoint를 설정합니다. DNS의 A·AAAA record, client IPv6 지원, route와 security rule을 확인한 뒤 같은 bucket의 list·upload·download를 IPv4와 IPv6 경로에서 비교하고, 미전환 client는 기존 IPv4-only endpoint로 계속 동작하는지 확인합니다.
 
-### 용어 주석
-
-- **Dual-stack**: IPv4와 IPv6 주소 체계를 함께 지원하는 네트워크 구성입니다. endpoint·DNS·클라이언트 경로가 모두 IPv6 준비 상태인지 별도로 확인해야 합니다. [OCI IPv6 개요](https://docs.oracle.com/iaas/Content/Object/Concepts/use-ipv6-urls.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -120,9 +117,6 @@ Search API가 IPv6와 IPv4를 모두 지원하는 dual-stack endpoint를 제공�
 
 IPv4-only endpoint는 `https://query.<region>.oci.oraclecloud.com`, dual-stack endpoint는 region 뒤에 `.ds`를 넣은 `https://query.<region>.ds.oci.oraclecloud.com` 형식입니다. 공식 endpoint 목록에서 대상 region 값을 확인한 뒤 DNS, IPv6 route, outbound security rule과 client 지원 여부를 점검합니다. 두 주소 체계에서 같은 resource search query의 결과와 인증·오류 처리가 일치하는지 비교하고, 기존 endpoint 조회도 유지되는지 확인합니다.
 
-### 용어 주석
-
-- **Dual-stack**: IPv4와 IPv6 주소 체계를 함께 지원하는 네트워크 구성입니다. endpoint·DNS·클라이언트 경로가 모두 IPv6 준비 상태인지 별도로 확인해야 합니다. [OCI IPv6 개요](https://docs.oracle.com/iaas/Content/Object/Concepts/use-ipv6-urls.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -142,9 +136,6 @@ IPv4-only endpoint는 `https://query.<region>.oci.oraclecloud.com`, dual-stack e
 
 Log producer와 조회 client의 endpoint, DNS, IPv6 route와 network egress policy를 확인한 뒤 일부 workload부터 IPv6를 활성화합니다. Dual-stack DNS와 연결을 확인하고 IPv4·IPv6 경로에서 대표 log를 ingest·query해 event 수, timestamp와 조회 결과를 비교합니다. IPv4-only client의 기존 수집과 조회도 계속 정상인지 함께 확인합니다.
 
-### 용어 주석
-
-- **Dual-stack**: IPv4와 IPv6 주소 체계를 함께 지원하는 네트워크 구성입니다. endpoint·DNS·클라이언트 경로가 모두 IPv6 준비 상태인지 별도로 확인해야 합니다. [OCI IPv6 개요](https://docs.oracle.com/iaas/Content/Object/Concepts/use-ipv6-urls.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -217,9 +208,6 @@ Recovery Service subnet에 업무 역할을 나타내는 security attribute를 �
 
 Security attribute만 추가해서는 접근이 허용되지 않으며, ZPR policy가 의도한 source와 destination 속성을 정확히 참조해야 합니다. 테스트 subnet에서 허용된 backup·recovery 흐름과 허용하지 않은 흐름을 각각 확인하고, 변경 후 backup 수행과 recovery 관련 연결 상태가 정상인지 검증합니다.
 
-### 용어 주석
-
-- **ZPR (Zero Trust Packet Routing)**: security attribute와 policy로 네트워크 통신을 명시적으로 허용하는 OCI 제어 방식입니다. [OCI ZPR](https://docs.oracle.com/iaas/Content/zero-trust-packet-routing/home.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
@@ -242,9 +230,6 @@ Capture filter는 mirror할 traffic을 선택하며, 선택된 traffic은 지정
 
 Packet capture는 traffic 암호화를 해제하지 않습니다.
 
-### 용어 주석
-
-- **VTAP (Virtual Test Access Point)**: 지정한 소스 트래픽을 mirror target으로 복제해 분석 도구에 전달하는 OCI 기능입니다. [OCI VTAP](https://docs.oracle.com/iaas/Content/Network/Tasks/vtap.htm){:target="_blank" rel="noopener"}
 
 ### 참고
 
