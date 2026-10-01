@@ -68,6 +68,12 @@ p a:hover,
 article a:hover {
     border-bottom: 2px solid;
 }
+
+/* Keep long external documentation links inside the reading column. */
+article a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
 p a.button,
 .button,
 .button:hover {
@@ -122,13 +128,17 @@ h5 {
 /* Images
 ------------------------------------------------------------------- */
 
-img { border-radius: $global-radius;}
-    img.alignleft,
-    img.left        { float: left; margin:5px 15px 5px 0; }
-    img.alignright,
-    img.right       { float: right; margin:5px 0 5px 15px; }
-    img.aligncenter,
-    img.center      { display: block; margin:0 auto 10px; }
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $global-radius;
+}
+img.alignleft,
+img.left        { float: left; margin:5px 15px 5px 0; }
+img.alignright,
+img.right       { float: right; margin:5px 0 5px 15px; }
+img.aligncenter,
+img.center      { display: block; margin:0 auto 10px; }
 
 figure {
     margin: 0 0 rem-calc(30) 0;
@@ -183,6 +193,10 @@ code {
   }
 
   pre {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
     padding: 0.8rem;
     margin-top: 0;
     margin-bottom: 1rem;

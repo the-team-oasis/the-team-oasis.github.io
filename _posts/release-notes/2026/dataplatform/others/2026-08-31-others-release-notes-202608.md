@@ -27,16 +27,12 @@ header: no
 {:toc}
 </div>
 
+
 ## Big Data Service 3.4.0 new features and updates
 * **Services:** Big Data
 * **Release Date:** August 05, 2026
-* **Release Note:** [https://docs.oracle.com/iaas/releasenotes/big-data/v3-4-0.htm](https://docs.oracle.com/iaas/releasenotes/big-data/v3-4-0.htm){:target="_blank" rel="noopener"}
-* **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-list-work-request-log.htm](https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-list-work-request-log.htm){:target="_blank" rel="noopener"}
-* **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/security-odh-ssl-enable-ss.htm](https://docs.oracle.com/iaas/Content/bigdata/security-odh-ssl-enable-ss.htm){:target="_blank" rel="noopener"}
-* **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/overview.htm#bds-versions](https://docs.oracle.com/iaas/Content/bigdata/overview.htm#bds-versions){:target="_blank" rel="noopener"}
-* **Documentation:** [https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-node-replace.htm](https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-node-replace.htm){:target="_blank" rel="noopener"}
 
-### 기능 변경과 적용 범위
+### 업데이트 내용
 Big Data Service 3.4.0은 보안 인증서 관리, cluster lifecycle, Java runtime, 장애 복구와 운영 가시성을 함께 개선한 릴리스입니다. Hive metadata migration용 export script, 실패 원인을 구체적으로 표시하는 work request log, OCI Certificates Service 연동, 일부 Generic shape 지원, Ambari 3, component별 JDK 선택, 종료된 master·utility node 교체, cluster 검색·정렬과 Usersync 활성화가 포함됩니다.
 
 ### 3.4.0 기능별 변경
@@ -46,3 +42,11 @@ ODH 기반 3.4.0에서는 Hive(Tez), Flink, Flume, Kafka, Spark 3, HBase의 기�
 ### Upgrade 전 호환성
 
 Hive metadata export script는 Oracle Support 요청을 통해 제공되며, node backup을 이용한 failed-node replacement는 master와 utility node에 적용되고 worker node 교체는 이번 릴리스 범위에 포함되지 않습니다. Generic shape도 모든 구성이 아니라 지원되는 일부 `VM.Standard.Generic`과 `VM.DenseIO.Generic` 구성에 한정됩니다. Java 8은 향후 지원 component 상황에 따라 폐기될 예정입니다.
+
+### 참고
+
+- [Release Note: Big Data Service 3.4.0 new features and updates](https://docs.oracle.com/iaas/releasenotes/big-data/v3-4-0.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Listing Work Request Logs for a Cluster](https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-list-work-request-log.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Enabling and Renewing SSL for Self-signed Certificates in ODH 3.4.0 and Later](https://docs.oracle.com/iaas/Content/bigdata/security-odh-ssl-enable-ss.htm){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Overview](https://docs.oracle.com/iaas/Content/bigdata/overview.htm#bds-versions){:target="_blank" rel="noopener"}
+- [Oracle Documentation: Replacing Cluster Nodes](https://docs.oracle.com/iaas/Content/bigdata/manage-cluster-node-replace.htm){:target="_blank" rel="noopener"}
