@@ -19,7 +19,7 @@
 ## Task 1: 블록 볼륨(Block Volume) 생성
 
 1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **스토리지**을 선택한 후 **블록 볼륨**을 클릭합니다.
-   ![Block Volume Menu](images/oci-console-bv.png " ")
+   ![Block Volume Menu](images2/oci-console-bv.png " ")
 2. 다음과 같이 입력 및 선택합니다.
    * 이름 (Name): my-block-volume-1
    * 구획에 생성 (Create In Compartment): oci-basic
@@ -39,15 +39,16 @@
    * 암호화 (Encryption): Encrypt using Oracle-managed keys (기본 설정 유지)
 
 미지막으로 **블록 볼륨 생성 버튼 (Create Block Volume)**을 클릭합니다.
-![Block Volume Create](images/oci-console-bv-create-1.png " ")
-![Block Volume Create](images/oci-console-bv-create-2.png " ")
-![Block Volume Create](images/oci-console-bv-create-3.png " ")
+![Block Volume Create](images2/oci-console-bv-create-1.png " ")
+![Block Volume Create](images2/oci-console-bv-create-2.png " ")
+
 
 
 ## Task 2: 인스턴스에 블록 볼륨 연결 (Attach & Connect)
 iSCSI 방식으로 볼륨을 인스턴스에 연결해보도록 하겠습니다. 메뉴에서 **컴퓨트 (Compute) > 인스턴스 (Instances)**를 차례로 선택한 후에 앞서 생성한 인스턴스를 선택합니다. 인스턴스 상세 페이지에서 아래와 같이 좌측 **리소스 (Resources)** 메뉴에서 **연결된 블록 볼륨 (Attached block volumes)**을 선택합니다.
 
-![](images/oci-bv-4.png " ")
+![](images2/oci-bv-4.png " ")
+![](images2/oci-bv-5.png " ")
 
 **블록 볼륨 연결 (Attach block volume)**버튼을 클릭하고 다음과 같이 입력/선택 합니다.
 * **블록 볼륨 선택 (Select volume):** 앞서 생성한 블록 볼륨을 선택합니다.
@@ -55,17 +56,17 @@ iSCSI 방식으로 볼륨을 인스턴스에 연결해보도록 하겠습니다.
 * **연결 유형 (Attachment type):** ISCSI
 * **액세스 (Access):** 읽기/쓰기(Read/write)
 
-![](images/oci-bv-5.png " ")
+![](images2/oci-bv-6.png " ")
 
 연결을 클릭합니다.
 
 이제 iSCSI 연결을 구성할 수 있습니다. 우선 **연결된 블록 볼륨** 메뉴에서 연결된 블록 볼륨의 우측 아이콘을 선택한 후 **iSCSI 명령 및 정보 (iSCSI commands and inforamtion)**를 선택합니다.
 
-![](images/oci-bv-6.png " ")
+![](images2/oci-bv-7.png " ")
 
 다음과 같이 **iSCSI 명령 및 정보** 대화창에서 접속 (Connect)에 있는 명령어를 복사합니다.
 
-![](images/oci-bv-7.png " ")
+![](images2/oci-bv-8.png " ")
 
 인스턴스에 SSH로 접속합니다.
 

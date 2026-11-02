@@ -19,35 +19,36 @@ OCI 기본서비스 중 하나인 Compute - Instance 서비스에 Apache httpd �
 ## Task 1: Compute Instance 생성
 
 1. 좌측 상단의 **햄버거 아이콘**을 클릭하고, **컴퓨트(Compute)**을 선택한 후 **인스턴스(Instances)**를 클릭합니다.
-   ![Compute Instances](images/oci-compute-instance.png " ")
+   ![Compute Instances](images2/oci-compute-instance.png " ")
 
 2. 왼쪽 하단에 구획을 확인하고 **인스턴스 생성(Create instance)**버튼을 클릭합니다.
-   ![Compute Instance Screen](images/oci-compute-instance-create-1.png " ")
+   ![Compute Instance Screen](images2/oci-compute-instance-create-1.png " ")
 
 3. 인스턴스 이름과 구획을 선택 합니다
     - 이름: Enter **instanceForDemoApp**
     - 구획에 생성: **oci-basic**
     - 가용성 도메인 : **AP-SEOUL-1-AD-1 (Seoul 리전 기준)**
-      ![Compute Create #1](images/oci-compute-instance-create-2.png " ")
+      ![Compute Create #1](images2/oci-compute-instance-create-2.png " ")
 
 4. 설치할 이미지와 Instance의 Shape을 선택 합니다.
-    - Image : **Oracle Linux8 - 2022.08.29-0**
+    - Image : **Oracle Linux 9 - 2026.10.16-0**
     - Shape : **VM.Standard.E4.Flex (1 OCPU, 16 GB Memory)**
-      ![Compute Create #2](images/oci-compute-instance-create-3.png " ")
+      ![Compute Create #2](images2/oci-compute-instance-create-3.png " ")
 
 5. 네트워크 관련 옵션을 선택 합니다
     - Virtual cloud network : **vcn-oci-basic**
     - Subnet : **공용 서브넷-vcn-oci-basic**
     - Public IP address : **공용 IPv4 주소 지정**
-      ![Compute Create #3](images/oci-compute-instance-create-4.png " ")
+      ![Compute Create #3](images2/oci-compute-instance-create-4.png " ")
 
 6. VM에 접속할때 사용할 SSH Keys 추가 합니다.
     - 이번 실습에서는 **자동으로 키 쌍 생성** 를 선택 후 전용 키, 공용 키를 다운받아 잘 보관 합니다.
     - Boot volume 관련 옵션은 기본 설정을 유지 합니다.
-      ![Compute Create #4](images/oci-compute-instance-create-5.png " ")
+      ![Compute Create #4-1](images2/oci-compute-instance-create-5-1.png " ")
+      ![Compute Create #4-2](images2/oci-compute-instance-create-5-2.png " ")
 7. **Create** 버튼을 클릭 후 생성
     - 생성 후 Running 상태를 확인 합니다
-      ![Compute Create #6](images/oci-compute-instance-create-6.png " ")
+      ![Compute Create #6](images2/oci-compute-instance-create-6.png " ")
 
 ## Task 2: Compute Instance 접속
 
@@ -77,16 +78,16 @@ OCI 기본서비스 중 하나인 Compute - Instance 서비스에 Apache httpd �
 ## Task 3: OCI 보안목록 (Security List) 설정
 
 1. VCN 목록에서 생성한 **vcn-oci-basic**을 클릭 상세보기 창으로 이동합니다.
-   ![VCN Screen](images/oci-vcn-security-list-create-1.png " ")
+   ![VCN Screen](images2/oci-vcn-security-list-create-1.png " ")
 
-2. VCN 상세보기 화면에서 하단 Subnet 목록중 **공용 서브넷-vcn-oci-basic**을 클릭 합니다.
-   ![VCN Screen](images/oci-vcn-security-list-create-2.png " ")
+2. VCN 상세보기 화면에서 하단 Subnet 목록중 **퍼블릭 서브넷-vcn-oci-basic**을 클릭 합니다.
+   ![VCN Screen](images2/oci-vcn-security-list-create-2.png " ")
 
 3. Subnet 상세보기 화면에서 하단 Security Lists 목록중 **Default Security List for vcn-oci-basic**을 클릭 합니다.
-   ![VCN Screen](images/oci-vcn-security-list-create-3.png " ")
+   ![VCN Screen](images2/oci-vcn-security-list-create-3.png " ")
 
 4. **수신 규칙 추가** 버튼을 클릭 합니다.
-   ![VCN Screen](images/oci-vcn-security-list-create-4.png " ")
+   ![VCN Screen](images2/oci-vcn-security-list-create-4.png " ")
 
 5. 다음과 같이 입력:
     - Source Type : **CIDR** (기본값)
@@ -95,7 +96,7 @@ OCI 기본서비스 중 하나인 Compute - Instance 서비스에 Apache httpd �
     - Destination Port Range : **80**
     - Description : **httpd 실습을 위한 http 서비스 Port 허용 정책**
     - **수신 규칙 추가** 클릭
-      ![VCN Screen](images/oci-vcn-security-list-create-5.png " ")
+      ![VCN Screen](images2/oci-vcn-security-list-create-5.png " ")
 
 ## Task 4: Apache httpd 서버 설치 및 접속 확인
 
