@@ -43,7 +43,9 @@ Select AI를 사용하려면 Autonomous AI Database 인스턴스, 지원되는 A
 
 ### 구성 방법
 
-AI 프로필은 `DBMS_CLOUD_AI.CREATE_PROFILE` 및 `DBMS_CLOUD_AI.SET_PROFILE`로 생성·구성합니다. Gemini Enterprise Agent Platform을 사용하는 경우 Google Cloud 인증을 구성하고, Select AI를 사용할 사용자에게 필요한 `DBMS_CLOUD_AI` 실행 권한을 부여해야 합니다.
+Gemini Enterprise Agent Platform은 Google Cloud OAuth 2.0 인증을 사용합니다. 먼저 Google Cloud 프로젝트를 준비하고 Gemini Enterprise Agent Platform API를 활성화한 뒤 Project ID와 OAuth 2.0 자격 증명을 준비합니다. Select AI 프로필에는 이 Project ID를 `vertexai_project_id` 속성으로 지정하고, 사용할 모델과 엔드포인트를 지원하는 Google Cloud 리전을 선택해야 합니다.
+
+AI 프로필은 `DBMS_CLOUD_AI.CREATE_PROFILE` 및 `DBMS_CLOUD_AI.SET_PROFILE`로 생성·구성합니다. Select AI는 `generateContent` API를 사용하는 공개 Gemini 모델과 `embedContent` API를 사용하는 공개 Gemini 임베딩 모델만 지원하며, 다른 모델·API는 지원하지 않습니다. Select AI를 사용할 사용자에게 필요한 `DBMS_CLOUD_AI` 실행 권한도 부여해야 합니다.
 
 ### 참고
 

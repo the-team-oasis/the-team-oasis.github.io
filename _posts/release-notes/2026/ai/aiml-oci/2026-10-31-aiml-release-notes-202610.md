@@ -119,6 +119,10 @@ OCI Generative AI에서 xAI Grok 4.20 Reasoning, Non-Reasoning, Multi-Agent 및 
 
 OCI Generative AI 모델 가져오기에 대한 하드웨어 지원이 확대되었습니다. Qwen3.8-Flash-Next는 기존 H100_X8 및 H200_X4 외에 A100_80G_X8을 지원하며, 여러 Qwen·NVIDIA·Z.ai·OpenAI 모델에 대한 하드웨어 계열별 최소 unit shape가 추가·정리되었습니다.
 
+### 지원 범위
+
+동일 날짜의 Qwen3.8-Flash-Next import 공지는 모델을 처음 가져올 때 필요한 최소 shape로 H100_X8 또는 H200_X4를 제시합니다. 이번 hardware 확대 공지는 여기에 A100_80G_X8을 추가합니다. 실제 배포 전에는 선택 리전에서 해당 unit shape를 사용할 수 있는지와 최신 모델별 최소 shape를 함께 확인해야 합니다.
+
 ### 참고
 
 - [Release Note: Expanded hardware support for imported models in OCI Generative AI](https://docs.oracle.com/en-us/iaas/releasenotes/generative-ai/expanded-hardware-support-imported-models.htm)

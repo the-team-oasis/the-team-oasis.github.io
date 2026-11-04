@@ -90,6 +90,35 @@ Autonomous AI Database가 Apache Iceberg 파티션 메타데이터를 이용해 
 
 <!-- depth: concise; rationale: 공식 변경점과 지원 범위를 업데이트 내용 한 절로 전달할 수 있다. optional_elements: YAML/IAM/CLI/SQL examples=omit(설명·공식 문서로 충분하며 실행 예제 추가 불필요); blockquote=omit(필수 일반 개념 정의 없음); images/architecture_diagram=omit(지원 범위 전달에 시각 자료 불필요). -->
 
+
+## Oracle Data Safe: Exadata Exascale 대상 자동 등록
+
+* **Services:** Data Safe
+* **Release Date:** October 07, 2026
+
+### 업데이트 내용
+
+Oracle Data Safe에서 Exadata Exascale(ExaDB-XS) 배포를 CDB 수준으로 자동 등록할 수 있습니다. PDB를 개별 등록하는 대신 기존 및 이후 생성되는 모든 PDB가 백그라운드에서 자동 등록되며, Data Safe가 필요한 서비스 계정과 권한을 관리합니다.
+
+### 참고
+
+- [Release Note: Automatic Target Registration for Exadata Exascale in Oracle Data Safe](https://docs.oracle.com/iaas/releasenotes/data-safe/auto-register-exascale.htm)
+- [Documentation: Automatically Register Target Databases](https://docs.oracle.com/iaas/data-safe/doc/automatic-registration.html)
+
+## Oracle Data Safe: Exadata Cloud@Customer 대상 자동 등록
+
+* **Services:** Data Safe
+* **Release Date:** October 19, 2026
+
+### 업데이트 내용
+
+Oracle Data Safe에서 Exadata Database Service on Cloud@Customer(ExaDB-C@C) 배포를 CDB 수준으로 자동 등록할 수 있습니다. 기존 및 이후 생성되는 PDB를 자동 등록하고, 필요한 Data Safe 서비스 계정과 권한을 관리합니다.
+
+### 참고
+
+- [Release Note: Automatic Target Registration for Exadata Database Service on Cloud@Customer in Oracle Data Safe](https://docs.oracle.com/iaas/releasenotes/data-safe/auto-register-exaCC.htm)
+- [Documentation: Automatically Register Target Databases](https://docs.oracle.com/iaas/data-safe/doc/automatic-registration.html)
+
 ## Oracle Data Safe: Crypto Posture Assessment 제공
 
 * **Services:** Oracle Data Safe

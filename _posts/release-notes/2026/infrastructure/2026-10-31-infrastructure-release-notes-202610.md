@@ -144,6 +144,25 @@ Overview 탭에서는 기록된 활동과 수집 상태를 확인하고, Traffic
 
 <!-- depth: concise; rationale: 공식 변경점과 지원 범위를 업데이트 내용 한 절로 전달할 수 있다. optional_elements: YAML/IAM/CLI/SQL examples=omit(설명·공식 문서로 충분하며 실행 예제 추가 불필요); blockquote=omit(필수 일반 개념 정의 없음); images/architecture_diagram=omit(지원 범위 전달에 시각 자료 불필요). -->
 
+
+## Log Analytics: ExaWatcher Overview 대시보드 추가
+
+* **Services:** Log Analytics
+* **Release Date:** October 19, 2026
+
+### 업데이트 내용
+
+OCI Log Analytics에 ExaWatcher 데이터를 사용해 Exadata 성능과 리소스 사용률을 모니터링하는 Oracle 제공 **ExaWatcher Overview** 대시보드가 추가되었습니다. 선택한 서버와 시간 범위에서 CPU 사용률, 프로세스 활동, 메모리 사용량, Capacity Flash 및 I/O 추세를 분석할 수 있습니다.
+
+### 동작과 지원 범위
+
+System, Processes, Memory, IO Stats 탭에서 수집된 ExaWatcher 데이터를 각각 분석합니다. 이 대시보드를 사용하려면 ExaWatcher 데이터가 Log Analytics에 수집되어 있어야 합니다.
+
+### 참고
+
+- [Release Note: Log Analytics: Oracle-defined ExaWatcher Overview dashboard](https://docs.oracle.com/iaas/releasenotes/log-analytics/oct26-exawatcher-overview-dashboard.htm)
+- [Documentation: Oracle-defined Dashboards for Log Analytics](https://docs.oracle.com/iaas/log-analytics/doc/oracle-defined-dashboards-logging-analytics.html)
+
 ## Full Stack Disaster Recovery introduces support for PostgreSQL DB System and enhancements to moving compute instances
 
 * **Services:** Full Stack Disaster Recovery

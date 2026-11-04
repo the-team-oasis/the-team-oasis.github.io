@@ -39,6 +39,10 @@ OCI Kubernetes Engine(OKE)이 Kubernetes 1.36.4를 지원합니다. OKE는 2026�
 
 관리형 Vault 마스터 암호화 키를 사용하는 기존 클러스터를 1.36.1 이상으로 업그레이드하면, 새로 생성되거나 이후 수정되는 Kubernetes Secret은 KMS provider v2를 사용합니다. 다만 기존에 변경되지 않은 Secret은 자동으로 일괄 재암호화되지 않으며 v1 읽기 폴백으로 계속 읽을 수 있습니다. 모든 기존 Secret을 v2로 재암호화하려면 StorageVersionMigration 기반의 별도 마이그레이션을 계획해야 합니다.
 
+### 워커 노드 이미지 조건
+
+Kubernetes 1.35 이상 클러스터에서는 OKE OL8 이미지와 OKE OL8 이미지 기반 custom image를 지원합니다. OL8 platform image 기반 custom image를 계속 사용할 경우에는 cgroups v2를 활성화해야 합니다. 신규 배포와 업그레이드에는 OKE 이미지를 사용하는 것이 권장되며, platform image를 유지해야 한다면 이를 기반으로 custom image를 만들고 node pool에 해당 image OCID를 지정해야 합니다.
+
 ### 참고
 
 - Release Note: https://docs.oracle.com/en-us/iaas/releasenotes/conteng/conteng-K8s-1-36-4-support.htm
